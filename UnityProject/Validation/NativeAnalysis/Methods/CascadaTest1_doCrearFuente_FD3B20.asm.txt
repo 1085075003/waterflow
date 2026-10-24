@@ -1,0 +1,95 @@
+// CascadaTest1$$doCrearFuente VA 0xFD3B20, inferred length 372
+void CascadaTest1__doCrearFuente (CascadaTest1_o* __this, const MethodInfo* method);
+00FD3B20  str      d12, [sp, #-0x50]!                    
+00FD3B24  stp      d11, d10, [sp, #0x10]                 
+00FD3B28  stp      d9, d8, [sp, #0x20]                   
+00FD3B2C  stp      x30, x21, [sp, #0x30]                 
+00FD3B30  stp      x20, x19, [sp, #0x40]                 
+00FD3B34  adrp     x20, #0x24fb000                       
+00FD3B38  ldrb     w8, [x20, #0xb61]                     
+00FD3B3C  mov      x19, x0                               
+00FD3B40  tbnz     w8, #0, #0xfd3b64                     
+00FD3B44  adrp     x0, #0x2368000                        
+00FD3B48  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FD3B4C  bl       #0xe61b78                             
+00FD3B50  adrp     x0, #0x2368000                        
+00FD3B54  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD3B58  bl       #0xe61b78                             
+00FD3B5C  mov      w8, #1                                
+00FD3B60  strb     w8, [x20, #0xb61]                     
+00FD3B64  ldrb     w8, [x19, #0x68]                       // self.instanciar
+00FD3B68  cbz      w8, #0xfd3c78                         
+00FD3B6C  ldr      w8, [x19, #0x60]                       // self.color
+00FD3B70  adrp     x21, #0x2368000                       
+00FD3B74  ldr      x21, [x21, #0x900]                     // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FD3B78  cmp      w8, #3                                
+00FD3B7C  b.eq     #0xfd3b98                             
+00FD3B80  cmp      w8, #2                                
+00FD3B84  b.eq     #0xfd3ba0                             
+00FD3B88  cmp      w8, #1                                
+00FD3B8C  b.ne     #0xfd3ba8                             
+00FD3B90  ldr      x20, [x19, #0x28]                      // self.prefabFuente1
+00FD3B94  b        #0xfd3bac                             
+00FD3B98  ldr      x20, [x19, #0x38]                      // self.prefabFuente3
+00FD3B9C  b        #0xfd3bac                             
+00FD3BA0  ldr      x20, [x19, #0x30]                      // self.prefabFuente2
+00FD3BA4  b        #0xfd3bac                             
+00FD3BA8  ldr      x20, [x19, #0x40]                      // self.prefabFuente4
+00FD3BAC  fmov     s0, wzr                               
+00FD3BB0  fmov     s1, wzr                               
+00FD3BB4  fmov     s2, wzr                               
+00FD3BB8  mov      x0, xzr                               
+00FD3BBC  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD3BC0  adrp     x8, #0x2368000                        
+00FD3BC4  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD3BC8  mov      v8.16b, v0.16b                        
+00FD3BCC  mov      v9.16b, v1.16b                        
+00FD3BD0  mov      v10.16b, v2.16b                       
+00FD3BD4  ldr      x0, [x8]                              
+00FD3BD8  mov      v11.16b, v3.16b                       
+00FD3BDC  ldr      w8, [x0, #0xe0]                       
+00FD3BE0  cbnz     w8, #0xfd3be8                         
+00FD3BE4  bl       #0xe61c80                             
+00FD3BE8  adrp     x8, #0x5ff000                         
+00FD3BEC  ldr      s12, [x8, #0xd78]                     
+00FD3BF0  ldr      x1, [x21]                             
+00FD3BF4  fmov     s0, wzr                               
+00FD3BF8  fmov     s2, wzr                               
+00FD3BFC  mov      x0, x20                               
+00FD3C00  mov      v1.16b, v12.16b                       
+00FD3C04  mov      v3.16b, v8.16b                        
+00FD3C08  mov      v4.16b, v9.16b                        
+00FD3C0C  mov      v5.16b, v10.16b                       
+00FD3C10  mov      v6.16b, v11.16b                       
+00FD3C14  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FD3C18  str      x0, [x19, #0x50]                       // self.fuente
+00FD3C1C  cbz      x0, #0xfd3c90                         
+00FD3C20  mov      x1, xzr                               
+00FD3C24  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD3C28  mov      x20, x0                               
+00FD3C2C  mov      x0, x19                               
+00FD3C30  mov      x1, xzr                               
+00FD3C34  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD3C38  cbz      x20, #0xfd3c90                        
+00FD3C3C  mov      x1, x0                                
+00FD3C40  mov      x0, x20                               
+00FD3C44  mov      x2, xzr                               
+00FD3C48  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+00FD3C4C  ldr      x0, [x19, #0x50]                       // self.fuente
+00FD3C50  cbz      x0, #0xfd3c90                         
+00FD3C54  mov      x1, xzr                               
+00FD3C58  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD3C5C  cbz      x0, #0xfd3c90                         
+00FD3C60  fmov     s0, wzr                               
+00FD3C64  fmov     s2, wzr                               
+00FD3C68  mov      v1.16b, v12.16b                       
+00FD3C6C  mov      x1, xzr                               
+00FD3C70  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD3C74  strb     wzr, [x19, #0x68]                      // self.instanciar
+00FD3C78  ldp      x20, x19, [sp, #0x40]                 
+00FD3C7C  ldp      x30, x21, [sp, #0x30]                 
+00FD3C80  ldp      d9, d8, [sp, #0x20]                   
+00FD3C84  ldp      d11, d10, [sp, #0x10]                 
+00FD3C88  ldr      d12, [sp], #0x50                      
+00FD3C8C  ret                                            
+00FD3C90  bl       #0xe61da0                             

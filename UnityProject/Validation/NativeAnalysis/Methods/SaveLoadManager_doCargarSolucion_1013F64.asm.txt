@@ -1,0 +1,47 @@
+// SaveLoadManager$$doCargarSolucion VA 0x1013F64, inferred length 180
+void SaveLoadManager__doCargarSolucion (SaveLoadManager_o* __this, const MethodInfo* method);
+01013F64  stp      x30, x21, [sp, #-0x20]!               
+01013F68  stp      x20, x19, [sp, #0x10]                 
+01013F6C  adrp     x20, #0x24fb000                       
+01013F70  adrp     x21, #0x236a000                       
+01013F74  ldrb     w8, [x20, #0xca5]                     
+01013F78  ldr      x21, [x21, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+01013F7C  mov      x19, x0                               
+01013F80  tbnz     w8, #0, #0x1013fa4                    
+01013F84  adrp     x0, #0x2368000                        
+01013F88  ldr      x0, [x0, #0x878]                       // [0x2368878] UnityEngine.Application_TypeInfo
+01013F8C  bl       #0xe61b78                             
+01013F90  adrp     x0, #0x236a000                        
+01013F94  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+01013F98  bl       #0xe61b78                             
+01013F9C  mov      w8, #1                                
+01013FA0  strb     w8, [x20, #0xca5]                     
+01013FA4  ldr      x8, [x21]                             
+01013FA8  ldr      x8, [x8, #0xb8]                       
+01013FAC  ldr      w8, [x8, #8]                          
+01013FB0  cbz      w8, #0x1013fc4                        
+01013FB4  mov      x0, x19                               
+01013FB8  ldp      x20, x19, [sp, #0x10]                 
+01013FBC  ldp      x30, x21, [sp], #0x20                 
+01013FC0  b        #0x101bd84                             // SaveLoadManager$$doCargarSolucionDesign
+01013FC4  adrp     x20, #0x2368000                       
+01013FC8  ldr      x20, [x20, #0x878]                     // [0x2368878] UnityEngine.Application_TypeInfo
+01013FCC  ldr      x0, [x20]                             
+01013FD0  ldr      w8, [x0, #0xe0]                       
+01013FD4  cbnz     w8, #0x1013fdc                        
+01013FD8  bl       #0xe61c80                             
+01013FDC  mov      x0, xzr                               
+01013FE0  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+01013FE4  cbz      w0, #0x1013fb4                        
+01013FE8  ldr      x0, [x20]                             
+01013FEC  ldr      w8, [x0, #0xe0]                       
+01013FF0  cbnz     w8, #0x1013ff8                        
+01013FF4  bl       #0xe61c80                             
+01013FF8  mov      x0, xzr                               
+01013FFC  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+01014000  cmp      w0, #7                                
+01014004  b.eq     #0x1013fb4                            
+01014008  mov      x0, x19                               
+0101400C  ldp      x20, x19, [sp, #0x10]                 
+01014010  ldp      x30, x21, [sp], #0x20                 
+01014014  b        #0x101c1ac                             // SaveLoadManager$$doCargarSolucionResources

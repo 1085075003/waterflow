@@ -1,0 +1,171 @@
+// CascadaTestE$$doAsignarValoresStart VA 0xFD9EC0, inferred length 676
+void CascadaTestE__doAsignarValoresStart (CascadaTestE_o* __this, const MethodInfo* method);
+00FD9EC0  stp      x30, x21, [sp, #-0x20]!               
+00FD9EC4  stp      x20, x19, [sp, #0x10]                 
+00FD9EC8  adrp     x20, #0x24fb000                       
+00FD9ECC  ldrb     w8, [x20, #0xb9a]                     
+00FD9ED0  mov      x19, x0                               
+00FD9ED4  tbnz     w8, #0, #0xfd9f28                     
+00FD9ED8  adrp     x0, #0x236a000                        
+00FD9EDC  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+00FD9EE0  bl       #0xe61b78                             
+00FD9EE4  adrp     x0, #0x236a000                        
+00FD9EE8  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+00FD9EEC  bl       #0xe61b78                             
+00FD9EF0  adrp     x0, #0x236a000                        
+00FD9EF4  ldr      x0, [x0, #0x6a0]                       // [0x236A6A0] '7'
+00FD9EF8  bl       #0xe61b78                             
+00FD9EFC  adrp     x0, #0x236a000                        
+00FD9F00  ldr      x0, [x0, #0x6a8]                       // [0x236A6A8] '4'
+00FD9F04  bl       #0xe61b78                             
+00FD9F08  adrp     x0, #0x2368000                        
+00FD9F0C  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+00FD9F10  bl       #0xe61b78                             
+00FD9F14  adrp     x0, #0x236a000                        
+00FD9F18  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FD9F1C  bl       #0xe61b78                             
+00FD9F20  mov      w8, #1                                
+00FD9F24  strb     w8, [x20, #0xb9a]                     
+00FD9F28  ldr      x0, [x19, #0x108]                      // self.esferaFiltrante
+00FD9F2C  cbz      x0, #0xfda160                         
+00FD9F30  mov      w1, wzr                               
+00FD9F34  mov      x2, xzr                               
+00FD9F38  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD9F3C  ldr      x0, [x19, #0x90]                       // self.esferaSalida1
+00FD9F40  cbz      x0, #0xfda160                         
+00FD9F44  mov      w1, wzr                               
+00FD9F48  mov      x2, xzr                               
+00FD9F4C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD9F50  ldr      x0, [x19, #0x98]                       // self.esferaSalida2
+00FD9F54  cbz      x0, #0xfda160                         
+00FD9F58  adrp     x21, #0x2368000                       
+00FD9F5C  ldr      x21, [x21, #0xf50]                     // [0x2368F50] ''
+00FD9F60  mov      w1, wzr                               
+00FD9F64  mov      x2, xzr                               
+00FD9F68  add      x20, x19, #0x11c                      
+00FD9F6C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD9F70  adrp     x8, #0x600000                         
+00FD9F74  ldr      d0, [x8, #0xba0]                      
+00FD9F78  fmov     v1.2s, #20.00000000                   
+00FD9F7C  mov      x2, xzr                               
+00FD9F80  str      d0, [x20]                             
+00FD9F84  strb     wzr, [x19, #0x1c1]                     // self.checkWater_old
+00FD9F88  strb     wzr, [x19, #0x191]                     // self.diagonal
+00FD9F8C  str      d1, [x20, #0x38]                      
+00FD9F90  str      xzr, [x20, #0xa8]                     
+00FD9F94  strb     wzr, [x19, #0x1d1]                     // self.hayResorte
+00FD9F98  ldr      x0, [x19, #0xb8]                       // self.conResorte1
+00FD9F9C  ldr      x1, [x21]                             
+00FD9FA0  bl       #0x1960c80                             // System.String$$op_Inequality
+00FD9FA4  tbz      w0, #0, #0xfda00c                     
+00FD9FA8  ldr      x0, [x19, #0xb8]                       // self.conResorte1
+00FD9FAC  mov      w8, #1                                
+00FD9FB0  strb     w8, [x19, #0x1d1]                      // self.hayResorte
+00FD9FB4  cbz      x0, #0xfda160                         
+00FD9FB8  mov      w2, #1                                
+00FD9FBC  mov      w1, wzr                               
+00FD9FC0  mov      x3, xzr                               
+00FD9FC4  bl       #0x196288c                             // System.String$$Substring
+00FD9FC8  ldr      x8, [x19, #0xb8]                       // self.conResorte1
+00FD9FCC  str      x0, [x19, #0xc8]                       // self.conResor1
+00FD9FD0  cbz      x8, #0xfda160                         
+00FD9FD4  mov      w1, #1                                
+00FD9FD8  mov      w2, #1                                
+00FD9FDC  mov      x0, x8                                
+00FD9FE0  mov      x3, xzr                               
+00FD9FE4  bl       #0x196288c                             // System.String$$Substring
+00FD9FE8  ldr      x8, [x19, #0xb8]                       // self.conResorte1
+00FD9FEC  str      x0, [x19, #0x60]                       // self.pitR1
+00FD9FF0  cbz      x8, #0xfda160                         
+00FD9FF4  mov      w1, #2                                
+00FD9FF8  mov      w2, #1                                
+00FD9FFC  mov      x0, x8                                
+00FDA000  mov      x3, xzr                               
+00FDA004  bl       #0x196288c                             // System.String$$Substring
+00FDA008  str      x0, [x19, #0x68]                       // self.pitR2
+00FDA00C  ldr      x0, [x19, #0x20]                       // self.pitValor
+00FDA010  cbz      x0, #0xfda160                         
+00FDA014  mov      w2, #1                                
+00FDA018  mov      w1, wzr                               
+00FDA01C  mov      x3, xzr                               
+00FDA020  bl       #0x196288c                             // System.String$$Substring
+00FDA024  ldr      x8, [x19, #0x20]                       // self.pitValor
+00FDA028  str      x0, [x19, #0x28]                       // self.pitValor1
+00FDA02C  cbz      x8, #0xfda160                         
+00FDA030  mov      w1, #1                                
+00FDA034  mov      w2, #1                                
+00FDA038  mov      x0, x8                                
+00FDA03C  mov      x3, xzr                               
+00FDA040  bl       #0x196288c                             // System.String$$Substring
+00FDA044  ldr      x8, [x19, #0x20]                       // self.pitValor
+00FDA048  str      x0, [x19, #0x30]                       // self.pitValor2
+00FDA04C  cbz      x8, #0xfda160                         
+00FDA050  adrp     x21, #0x236a000                       
+00FDA054  ldr      x21, [x21, #0x650]                     // [0x236A650] '3'
+00FDA058  mov      w1, #3                                
+00FDA05C  mov      w2, #1                                
+00FDA060  mov      x0, x8                                
+00FDA064  mov      x3, xzr                               
+00FDA068  bl       #0x196288c                             // System.String$$Substring
+00FDA06C  str      x0, [x19, #0x38]                       // self.pitValor4
+00FDA070  ldr      x20, [x19, #0x28]                      // self.pitValor1
+00FDA074  ldr      x1, [x21]                             
+00FDA078  mov      x2, xzr                               
+00FDA07C  mov      x0, x20                               
+00FDA080  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDA084  tbz      w0, #0, #0xfda094                     
+00FDA088  adrp     x8, #0x236a000                        
+00FDA08C  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+00FDA090  b        #0xfda0b8                             
+00FDA094  adrp     x8, #0x236a000                        
+00FDA098  ldr      x8, [x8, #0x6a8]                       // [0x236A6A8] '4'
+00FDA09C  mov      x0, x20                               
+00FDA0A0  mov      x2, xzr                               
+00FDA0A4  ldr      x1, [x8]                              
+00FDA0A8  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDA0AC  tbz      w0, #0, #0xfda104                     
+00FDA0B0  adrp     x8, #0x236a000                        
+00FDA0B4  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+00FDA0B8  ldr      x8, [x8]                              
+00FDA0BC  str      x8, [x19, #0x40]                       // self.pitIni1
+00FDA0C0  ldr      x9, [x19, #0x30]                       // self.pitValor2
+00FDA0C4  mov      x0, x19                               
+00FDA0C8  stp      x9, x8, [x19, #0x48]                   // self.pitIni2
+00FDA0CC  str      x9, [x19, #0x58]                       // self.pit2
+00FDA0D0  bl       #0xfdb0cc                              // CascadaTestE$$doAsignarValores
+00FDA0D4  ldr      w8, [x19, #0x110]                      // self.color
+00FDA0D8  sub      w8, w8, #1                            
+00FDA0DC  cmp      w8, #3                                
+00FDA0E0  b.hi     #0xfda144                             
+00FDA0E4  adrp     x9, #0x621000                         
+00FDA0E8  add      x9, x9, #0x18d                        
+00FDA0EC  adr      x10, #0xfda0fc                        
+00FDA0F0  ldrb     w11, [x9, x8]                         
+00FDA0F4  add      x10, x10, x11, lsl #2                 
+00FDA0F8  br       x10                                   
+00FDA0FC  add      x8, x19, #0xe0                        
+00FDA100  b        #0xfda13c                             
+00FDA104  adrp     x8, #0x236a000                        
+00FDA108  ldr      x8, [x8, #0x6a0]                       // [0x236A6A0] '7'
+00FDA10C  mov      x0, x20                               
+00FDA110  mov      x2, xzr                               
+00FDA114  ldr      x1, [x8]                              
+00FDA118  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDA11C  tbz      w0, #0, #0xfda158                     
+00FDA120  ldr      x8, [x21]                             
+00FDA124  b        #0xfda0bc                             
+00FDA128  add      x8, x19, #0xe8                        
+00FDA12C  b        #0xfda13c                             
+00FDA130  add      x8, x19, #0xf0                        
+00FDA134  b        #0xfda13c                             
+00FDA138  add      x8, x19, #0xf8                        
+00FDA13C  ldr      x8, [x8]                              
+00FDA140  str      x8, [x19, #0xd8]                       // self.ChorroLargo
+00FDA144  mov      w8, #2                                
+00FDA148  str      w8, [x19, #0x1a0]                      // self.estado
+00FDA14C  ldp      x20, x19, [sp, #0x10]                 
+00FDA150  ldp      x30, x21, [sp], #0x20                 
+00FDA154  ret                                            
+00FDA158  ldr      x8, [x19, #0x40]                       // self.pitIni1
+00FDA15C  b        #0xfda0c0                             
+00FDA160  bl       #0xe61da0                             

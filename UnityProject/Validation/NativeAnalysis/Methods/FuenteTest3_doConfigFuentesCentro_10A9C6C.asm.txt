@@ -1,0 +1,54 @@
+// FuenteTest3$$doConfigFuentesCentro VA 0x10A9C6C, inferred length 208
+void FuenteTest3__doConfigFuentesCentro (FuenteTest3_o* __this, const MethodInfo* method);
+010A9C6C  stp      x30, x21, [sp, #-0x20]!               
+010A9C70  stp      x20, x19, [sp, #0x10]                 
+010A9C74  adrp     x21, #0x24fb000                       
+010A9C78  adrp     x20, #0x2368000                       
+010A9C7C  ldrb     w8, [x21, #0xf72]                     
+010A9C80  ldr      x20, [x20, #0xf50]                     // [0x2368F50] ''
+010A9C84  mov      x19, x0                               
+010A9C88  tbnz     w8, #0, #0x10a9ca0                    
+010A9C8C  adrp     x0, #0x2368000                        
+010A9C90  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+010A9C94  bl       #0xe61b78                             
+010A9C98  mov      w8, #1                                
+010A9C9C  strb     w8, [x21, #0xf72]                     
+010A9CA0  movi     v0.2d, #0000000000000000              
+010A9CA4  str      wzr, [x19, #0x6b8]                     // self.valz3
+010A9CA8  str      xzr, [x19, #0x6b0]                     // self.valx3
+010A9CAC  str      q0, [x19, #0x6a0]                      // self.rot2
+010A9CB0  ldr      x0, [x19, #0x660]                      // self.configAnim
+010A9CB4  ldr      x1, [x20]                             
+010A9CB8  mov      x2, xzr                               
+010A9CBC  bl       #0x1960c7c                             // System.String$$op_Equality
+010A9CC0  ldr      w8, [x19, #0x618]                      // self.configFuenteCentro
+010A9CC4  tbz      w0, #0, #0x10a9d14                    
+010A9CC8  cmp      w8, #6                                
+010A9CCC  b.eq     #0x10a9cd8                            
+010A9CD0  cmp      w8, #1                                
+010A9CD4  b.ne     #0x10a9ce4                            
+010A9CD8  mov      x0, x19                               
+010A9CDC  bl       #0x10ad71c                             // FuenteTest3$$doFuente1Centro
+010A9CE0  ldr      w8, [x19, #0x618]                      // self.configFuenteCentro
+010A9CE4  cmp      w8, #2                                
+010A9CE8  b.ne     #0x10a9cf8                            
+010A9CEC  mov      x0, x19                               
+010A9CF0  bl       #0x10adb58                             // FuenteTest3$$doFuente2Centro
+010A9CF4  ldr      w8, [x19, #0x618]                      // self.configFuenteCentro
+010A9CF8  sub      w8, w8, #3                            
+010A9CFC  cmp      w8, #2                                
+010A9D00  b.hi     #0x10a9d30                            
+010A9D04  mov      x0, x19                               
+010A9D08  ldp      x20, x19, [sp, #0x10]                 
+010A9D0C  ldp      x30, x21, [sp], #0x20                 
+010A9D10  b        #0x10ade0c                             // FuenteTest3$$doFuente3Centro
+010A9D14  cmp      w8, #1                                
+010A9D18  b.ne     #0x10a9d28                            
+010A9D1C  mov      x0, x19                               
+010A9D20  bl       #0x10ad71c                             // FuenteTest3$$doFuente1Centro
+010A9D24  ldr      w8, [x19, #0x618]                      // self.configFuenteCentro
+010A9D28  cmp      w8, #2                                
+010A9D2C  b.eq     #0x10a9d04                            
+010A9D30  ldp      x20, x19, [sp, #0x10]                 
+010A9D34  ldp      x30, x21, [sp], #0x20                 
+010A9D38  ret                                            

@@ -1,0 +1,56 @@
+// UIManagerScript$$doMusica VA 0x1064FBC, inferred length 216
+void UIManagerScript__doMusica (UIManagerScript_o* __this, const MethodInfo* method);
+01064FBC  str      x30, [sp, #-0x30]!                    
+01064FC0  stp      x22, x21, [sp, #0x10]                 
+01064FC4  stp      x20, x19, [sp, #0x20]                 
+01064FC8  adrp     x21, #0x24fb000                       
+01064FCC  adrp     x22, #0x236b000                       
+01064FD0  adrp     x20, #0x236a000                       
+01064FD4  ldrb     w8, [x21, #0xe47]                     
+01064FD8  ldr      x22, [x22, #0x500]                     // [0x236B500] 'MusicaON'
+01064FDC  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+01064FE0  mov      x19, x0                               
+01064FE4  tbnz     w8, #0, #0x1065014                    
+01064FE8  adrp     x0, #0x236a000                        
+01064FEC  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+01064FF0  bl       #0xe61b78                             
+01064FF4  adrp     x0, #0x236d000                        
+01064FF8  ldr      x0, [x0, #0x1b0]                       // [0x236D1B0] 'doMusica1'
+01064FFC  bl       #0xe61b78                             
+01065000  adrp     x0, #0x236b000                        
+01065004  ldr      x0, [x0, #0x500]                       // [0x236B500] 'MusicaON'
+01065008  bl       #0xe61b78                             
+0106500C  mov      w8, #1                                
+01065010  strb     w8, [x21, #0xe47]                     
+01065014  ldr      x0, [x22]                             
+01065018  mov      w1, #1                                
+0106501C  mov      x2, xzr                               
+01065020  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+01065024  ldr      x8, [x20]                             
+01065028  ldr      x9, [x8, #0xb8]                       
+0106502C  mov      w8, w0                                
+01065030  str      w0, [x9, #8]                          
+01065034  ldr      x0, [x19, #0x90]                       // self.musicFuera
+01065038  cbz      x0, #0x1065090                        
+0106503C  cmp      w8, #1                                
+01065040  b.ne     #0x1065078                            
+01065044  mov      w1, wzr                               
+01065048  mov      x2, xzr                               
+0106504C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01065050  adrp     x8, #0x236d000                        
+01065054  ldr      x8, [x8, #0x1b0]                       // [0x236D1B0] 'doMusica1'
+01065058  mov      x0, x19                               
+0106505C  ldp      x20, x19, [sp, #0x20]                 
+01065060  ldp      x22, x21, [sp, #0x10]                 
+01065064  ldr      x1, [x8]                              
+01065068  fmov     s0, #1.00000000                       
+0106506C  mov      x2, xzr                               
+01065070  ldr      x30, [sp], #0x30                      
+01065074  b        #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01065078  ldp      x20, x19, [sp, #0x20]                 
+0106507C  ldp      x22, x21, [sp, #0x10]                 
+01065080  mov      w1, #1                                
+01065084  mov      x2, xzr                               
+01065088  ldr      x30, [sp], #0x30                      
+0106508C  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+01065090  bl       #0xe61da0                             

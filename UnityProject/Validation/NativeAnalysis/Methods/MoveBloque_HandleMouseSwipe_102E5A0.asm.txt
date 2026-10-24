@@ -1,0 +1,90 @@
+// MoveBloque$$HandleMouseSwipe VA 0x102E5A0, inferred length 352
+void MoveBloque__HandleMouseSwipe (MoveBloque_o* __this, const MethodInfo* method);
+0102E5A0  stp      x30, x21, [sp, #-0x20]!               
+0102E5A4  stp      x20, x19, [sp, #0x10]                 
+0102E5A8  adrp     x21, #0x24fb000                       
+0102E5AC  adrp     x20, #0x236a000                       
+0102E5B0  ldrb     w8, [x21, #0xd10]                     
+0102E5B4  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102E5B8  mov      x19, x0                               
+0102E5BC  tbnz     w8, #0, #0x102e5e0                    
+0102E5C0  adrp     x0, #0x236a000                        
+0102E5C4  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0102E5C8  bl       #0xe61b78                             
+0102E5CC  adrp     x0, #0x236b000                        
+0102E5D0  ldr      x0, [x0, #0x498]                       // [0x236B498] MoveBloque_TypeInfo
+0102E5D4  bl       #0xe61b78                             
+0102E5D8  mov      w8, #1                                
+0102E5DC  strb     w8, [x21, #0xd10]                     
+0102E5E0  ldr      x0, [x20]                             
+0102E5E4  ldr      w8, [x0, #0xe0]                       
+0102E5E8  cbnz     w8, #0x102e5f4                        
+0102E5EC  bl       #0xe61c80                             
+0102E5F0  ldr      x0, [x20]                             
+0102E5F4  ldr      x8, [x0, #0xb8]                       
+0102E5F8  ldrb     w8, [x8, #0x16]                       
+0102E5FC  cbz      w8, #0x102e6f4                        
+0102E600  adrp     x20, #0x236b000                       
+0102E604  ldr      x20, [x20, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+0102E608  ldr      x0, [x20]                             
+0102E60C  ldr      w8, [x0, #0xe0]                       
+0102E610  cbnz     w8, #0x102e61c                        
+0102E614  bl       #0xe61c80                             
+0102E618  ldr      x0, [x20]                             
+0102E61C  ldr      x8, [x0, #0xb8]                       
+0102E620  ldrb     w8, [x8, #0xb]                        
+0102E624  cbz      w8, #0x102e68c                        
+0102E628  ldr      w8, [x19, #0x28]                       // self.fijacionPieza
+0102E62C  cbz      w8, #0x102e6d4                        
+0102E630  ldrb     w8, [x19, #0x2c4]                      // self.moviendoRuta1
+0102E634  cbnz     w8, #0x102e680                        
+0102E638  ldrb     w8, [x19, #0x140]                      // self.procesoCheck
+0102E63C  cbz      w8, #0x102e678                        
+0102E640  ldr      d0, [x19, #0x1c8]                      // self.puntoFinal
+0102E644  add      x8, x19, #0x194                       
+0102E648  mov      x0, x19                               
+0102E64C  str      d0, [x8]                              
+0102E650  ldr      s0, [x19, #0x1d0]                     
+0102E654  str      s0, [x19, #0x19c]                      // self.valor3z
+0102E658  bl       #0x103288c                             // MoveBloque$$doCheckArribaFija
+0102E65C  ldrb     w8, [x19, #0x141]                      // self.checkFija
+0102E660  cbz      w8, #0x102e674                        
+0102E664  mov      w8, #2                                
+0102E668  mov      x0, x19                               
+0102E66C  str      w8, [x19, #0x350]                      // self.buscarC
+0102E670  bl       #0x102f428                             // MoveBloque$$doBuscarCamino
+0102E674  strb     wzr, [x19, #0x140]                     // self.procesoCheck
+0102E678  ldrb     w8, [x19, #0x141]                      // self.checkFija
+0102E67C  cbz      w8, #0x102e6d4                        
+0102E680  mov      x0, x19                               
+0102E684  bl       #0x102f2f8                             // MoveBloque$$DoMoverAbajo
+0102E688  b        #0x102e6dc                            
+0102E68C  mov      w0, wzr                               
+0102E690  mov      x1, xzr                               
+0102E694  bl       #0x203a7b8                             // UnityEngine.Input$$GetMouseButtonDown
+0102E698  tbz      w0, #0, #0x102e6ac                    
+0102E69C  mov      w8, #1                                
+0102E6A0  mov      x0, x19                               
+0102E6A4  strb     w8, [x19, #0x2f7]                      // self.downProcess
+0102E6A8  bl       #0x102ea6c                             // MoveBloque$$doProcess1
+0102E6AC  mov      w0, wzr                               
+0102E6B0  mov      x1, xzr                               
+0102E6B4  bl       #0x203a7f4                             // UnityEngine.Input$$GetMouseButtonUp
+0102E6B8  tbz      w0, #0, #0x102e6dc                    
+0102E6BC  ldrb     w8, [x19, #0x2f7]                      // self.downProcess
+0102E6C0  cbz      w8, #0x102e6dc                        
+0102E6C4  mov      x0, x19                               
+0102E6C8  strb     wzr, [x19, #0x2f7]                     // self.downProcess
+0102E6CC  bl       #0x102ec58                             // MoveBloque$$doEnd
+0102E6D0  b        #0x102e6dc                            
+0102E6D4  mov      x0, x19                               
+0102E6D8  bl       #0x102ee14                             // MoveBloque$$doFijarPieza
+0102E6DC  ldrb     w8, [x19, #0xa8]                       // self.isMouseDragging
+0102E6E0  cbz      w8, #0x102e6f4                        
+0102E6E4  mov      x0, x19                               
+0102E6E8  ldp      x20, x19, [sp, #0x10]                 
+0102E6EC  ldp      x30, x21, [sp], #0x20                 
+0102E6F0  b        #0x102fa9c                             // MoveBloque$$doProcessMove
+0102E6F4  ldp      x20, x19, [sp, #0x10]                 
+0102E6F8  ldp      x30, x21, [sp], #0x20                 
+0102E6FC  ret                                            

@@ -1,0 +1,91 @@
+// CascadaTest$$doProcess VA 0xFD04A8, inferred length 356
+void CascadaTest__doProcess (CascadaTest_o* __this, const MethodInfo* method);
+00FD04A8  stp      x30, x21, [sp, #-0x20]!               
+00FD04AC  stp      x20, x19, [sp, #0x10]                 
+00FD04B0  adrp     x20, #0x24fb000                       
+00FD04B4  adrp     x21, #0x2368000                       
+00FD04B8  ldrb     w8, [x20, #0xb51]                     
+00FD04BC  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD04C0  mov      x19, x0                               
+00FD04C4  tbnz     w8, #0, #0xfd04dc                     
+00FD04C8  adrp     x0, #0x2368000                        
+00FD04CC  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD04D0  bl       #0xe61b78                             
+00FD04D4  mov      w8, #1                                
+00FD04D8  strb     w8, [x20, #0xb51]                     
+00FD04DC  ldr      x0, [x21]                             
+00FD04E0  ldr      x20, [x19, #0x160]                     // self.cascada
+00FD04E4  ldr      w8, [x0, #0xe0]                       
+00FD04E8  cbnz     w8, #0xfd04f0                         
+00FD04EC  bl       #0xe61c80                             
+00FD04F0  mov      x0, x20                               
+00FD04F4  mov      x1, xzr                               
+00FD04F8  mov      x2, xzr                               
+00FD04FC  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FD0500  tbz      w0, #0, #0xfd050c                     
+00FD0504  mov      x0, x19                               
+00FD0508  bl       #0xfd060c                              // CascadaTest$$doDestroyCascada
+00FD050C  ldr      x0, [x21]                             
+00FD0510  ldr      x20, [x19, #0x168]                     // self.splash
+00FD0514  ldr      w8, [x0, #0xe0]                       
+00FD0518  cbnz     w8, #0xfd0520                         
+00FD051C  bl       #0xe61c80                             
+00FD0520  mov      x0, x20                               
+00FD0524  mov      x1, xzr                               
+00FD0528  mov      x2, xzr                               
+00FD052C  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FD0530  tbz      w0, #0, #0xfd0554                     
+00FD0534  ldr      x0, [x21]                             
+00FD0538  ldr      x20, [x19, #0x168]                     // self.splash
+00FD053C  ldr      w8, [x0, #0xe0]                       
+00FD0540  cbnz     w8, #0xfd0548                         
+00FD0544  bl       #0xe61c80                             
+00FD0548  mov      x0, x20                               
+00FD054C  mov      x1, xzr                               
+00FD0550  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FD0554  ldr      x0, [x21]                             
+00FD0558  ldr      x20, [x19, #0x230]                     // self.Agua2
+00FD055C  ldr      w8, [x0, #0xe0]                       
+00FD0560  cbnz     w8, #0xfd0568                         
+00FD0564  bl       #0xe61c80                             
+00FD0568  mov      x0, x20                               
+00FD056C  mov      x1, xzr                               
+00FD0570  mov      x2, xzr                               
+00FD0574  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FD0578  tbz      w0, #0, #0xfd059c                     
+00FD057C  ldr      x0, [x21]                             
+00FD0580  ldr      x20, [x19, #0x230]                     // self.Agua2
+00FD0584  ldr      w8, [x0, #0xe0]                       
+00FD0588  cbnz     w8, #0xfd0590                         
+00FD058C  bl       #0xe61c80                             
+00FD0590  mov      x0, x20                               
+00FD0594  mov      x1, xzr                               
+00FD0598  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FD059C  ldrb     w9, [x19, #0x10c]                      // self.cascada6
+00FD05A0  ldr      w8, [x19, #0x150]                      // self.altura
+00FD05A4  cbz      w9, #0xfd05c8                         
+00FD05A8  cmp      w8, #2                                
+00FD05AC  b.lt     #0xfd05f0                             
+00FD05B0  mov      w8, #1                                
+00FD05B4  strb     w8, [x19, #0x170]                      // self.instanciar
+00FD05B8  mov      x0, x19                               
+00FD05BC  ldp      x20, x19, [sp, #0x10]                 
+00FD05C0  ldp      x30, x21, [sp], #0x20                 
+00FD05C4  b        #0xfd09a0                              // CascadaTest$$doControlCascada6
+00FD05C8  cmp      w8, #1                                
+00FD05CC  b.lt     #0xfd05e8                             
+00FD05D0  mov      w8, #1                                
+00FD05D4  strb     w8, [x19, #0x170]                      // self.instanciar
+00FD05D8  mov      x0, x19                               
+00FD05DC  ldp      x20, x19, [sp, #0x10]                 
+00FD05E0  ldp      x30, x21, [sp], #0x20                 
+00FD05E4  b        #0xfd0d34                              // CascadaTest$$doControlCascada
+00FD05E8  ldrb     w8, [x19, #0x239]                      // self.swhayrebose
+00FD05EC  cbz      w8, #0xfd05fc                         
+00FD05F0  ldp      x20, x19, [sp, #0x10]                 
+00FD05F4  ldp      x30, x21, [sp], #0x20                 
+00FD05F8  ret                                            
+00FD05FC  mov      x0, x19                               
+00FD0600  ldp      x20, x19, [sp, #0x10]                 
+00FD0604  ldp      x30, x21, [sp], #0x20                 
+00FD0608  b        #0xfd1938                              // CascadaTest$$doCaminoBloqueado

@@ -1,0 +1,88 @@
+// UIManagerScript2$$Start VA 0x1067138, inferred length 344
+void UIManagerScript2__Start (UIManagerScript2_o* __this, const MethodInfo* method);
+01067138  stp      d11, d10, [sp, #-0x40]!               
+0106713C  stp      d9, d8, [sp, #0x10]                   
+01067140  stp      x30, x21, [sp, #0x20]                 
+01067144  stp      x20, x19, [sp, #0x30]                 
+01067148  adrp     x21, #0x24fb000                       
+0106714C  adrp     x20, #0x236a000                       
+01067150  ldrb     w8, [x21, #0xe5f]                     
+01067154  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01067158  mov      x19, x0                               
+0106715C  tbnz     w8, #0, #0x106718c                    
+01067160  adrp     x0, #0x236a000                        
+01067164  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+01067168  bl       #0xe61b78                             
+0106716C  adrp     x0, #0x2368000                        
+01067170  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+01067174  bl       #0xe61b78                             
+01067178  adrp     x0, #0x2368000                        
+0106717C  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+01067180  bl       #0xe61b78                             
+01067184  mov      w8, #1                                
+01067188  strb     w8, [x21, #0xe5f]                     
+0106718C  mov      w8, #1                                
+01067190  str      w8, [x19, #0x28]                       // self.nivel
+01067194  ldr      x0, [x20]                             
+01067198  ldr      w8, [x0, #0xe0]                       
+0106719C  cbnz     w8, #0x10671a8                        
+010671A0  bl       #0xe61c80                             
+010671A4  ldr      x0, [x20]                             
+010671A8  ldr      x8, [x0, #0xb8]                       
+010671AC  ldr      w8, [x8]                              
+010671B0  cbz      w8, #0x10671d8                        
+010671B4  ldr      w9, [x0, #0xe0]                       
+010671B8  cbnz     w9, #0x10671cc                        
+010671BC  bl       #0xe61c80                             
+010671C0  ldr      x8, [x20]                             
+010671C4  ldr      x8, [x8, #0xb8]                       
+010671C8  ldr      w8, [x8]                              
+010671CC  sub      w8, w8, #1                            
+010671D0  str      w8, [x19, #0x28]                       // self.nivel
+010671D4  b        #0x10671dc                            
+010671D8  ldr      w8, [x19, #0x28]                       // self.nivel
+010671DC  ldr      x9, [x19, #0x20]                       // self.prefabLevel
+010671E0  cbz      x9, #0x1067288                        
+010671E4  ldr      w10, [x9, #0x18]                      
+010671E8  cmp      w8, w10                               
+010671EC  b.hs     #0x106728c                            
+010671F0  add      x8, x9, w8, sxtw #3                   
+010671F4  adrp     x21, #0x24fb000                       
+010671F8  adrp     x20, #0x2368000                       
+010671FC  ldrb     w9, [x21, #0x92b]                     
+01067200  ldr      x19, [x8, #0x20]                      
+01067204  ldr      x20, [x20, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+01067208  cbnz     w9, #0x1067220                        
+0106720C  adrp     x0, #0x2368000                        
+01067210  ldr      x0, [x0, #0xb70]                       // [0x2368B70] UnityEngine.Quaternion_TypeInfo
+01067214  bl       #0xe61b78                             
+01067218  mov      w8, #1                                
+0106721C  strb     w8, [x21, #0x92b]                     
+01067220  adrp     x8, #0x2368000                        
+01067224  ldr      x8, [x8, #0xb70]                       // [0x2368B70] UnityEngine.Quaternion_TypeInfo
+01067228  ldr      x0, [x20]                             
+0106722C  adrp     x20, #0x2368000                       
+01067230  ldr      x8, [x8]                              
+01067234  ldr      w9, [x0, #0xe0]                       
+01067238  ldr      x8, [x8, #0xb8]                       
+0106723C  ldp      s11, s10, [x8]                        
+01067240  ldp      s9, s8, [x8, #8]                      
+01067244  ldr      x20, [x20, #0x900]                     // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+01067248  cbnz     w9, #0x1067250                        
+0106724C  bl       #0xe61c80                             
+01067250  ldr      x1, [x20]                             
+01067254  mov      x0, x19                               
+01067258  mov      v5.16b, v9.16b                        
+0106725C  mov      v6.16b, v8.16b                        
+01067260  ldp      x20, x19, [sp, #0x30]                 
+01067264  ldp      x30, x21, [sp, #0x20]                 
+01067268  ldp      d9, d8, [sp, #0x10]                   
+0106726C  fmov     s0, wzr                               
+01067270  fmov     s1, wzr                               
+01067274  fmov     s2, wzr                               
+01067278  mov      v3.16b, v11.16b                       
+0106727C  mov      v4.16b, v10.16b                       
+01067280  ldp      d11, d10, [sp], #0x40                 
+01067284  b        #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+01067288  bl       #0xe61da0                             
+0106728C  bl       #0xe61da8                             

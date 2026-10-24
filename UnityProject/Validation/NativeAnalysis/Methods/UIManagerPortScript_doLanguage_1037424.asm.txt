@@ -1,0 +1,25 @@
+// UIManagerPortScript$$doLanguage VA 0x1037424, inferred length 92
+void UIManagerPortScript__doLanguage (UIManagerPortScript_o* __this, const MethodInfo* method);
+01037424  stp      x30, x21, [sp, #-0x20]!               
+01037428  stp      x20, x19, [sp, #0x10]                 
+0103742C  adrp     x21, #0x24fb000                       
+01037430  adrp     x20, #0x236b000                       
+01037434  ldrb     w8, [x21, #0xd4a]                     
+01037438  ldr      x20, [x20, #0x208]                     // [0x236B208] 'language'
+0103743C  mov      x19, x0                               
+01037440  tbnz     w8, #0, #0x1037458                    
+01037444  adrp     x0, #0x236b000                        
+01037448  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+0103744C  bl       #0xe61b78                             
+01037450  mov      w8, #1                                
+01037454  strb     w8, [x21, #0xd4a]                     
+01037458  bl       #0x103819c                             // UIManagerPortScript$$ObtenerIdiomaDelSistema
+0103745C  str      x0, [x19, #0xc8]                       // self.idioma
+01037460  mov      x1, x0                                
+01037464  ldr      x0, [x20]                             
+01037468  mov      x2, xzr                               
+0103746C  bl       #0x20015b4                             // UnityEngine.PlayerPrefs$$SetString
+01037470  ldp      x20, x19, [sp, #0x10]                 
+01037474  mov      x0, xzr                               
+01037478  ldp      x30, x21, [sp], #0x20                 
+0103747C  b        #0x2001730                             // UnityEngine.PlayerPrefs$$Save

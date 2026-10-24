@@ -1,0 +1,273 @@
+// Resorte2b$$doConfigureColors VA 0x1011388, inferred length 1084
+void Resorte2b__doConfigureColors (Resorte2b_o* __this, const MethodInfo* method);
+01011388  str      x30, [sp, #-0x20]!                    
+0101138C  stp      x20, x19, [sp, #0x10]                 
+01011390  adrp     x20, #0x24fb000                       
+01011394  ldrb     w8, [x20, #0xc99]                     
+01011398  mov      x19, x0                               
+0101139C  tbnz     w8, #0, #0x10113fc                    
+010113A0  adrp     x0, #0x236a000                        
+010113A4  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010113A8  bl       #0xe61b78                             
+010113AC  adrp     x0, #0x236a000                        
+010113B0  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+010113B4  bl       #0xe61b78                             
+010113B8  adrp     x0, #0x236a000                        
+010113BC  ldr      x0, [x0, #0x7f8]                       // [0x236A7F8] '9'
+010113C0  bl       #0xe61b78                             
+010113C4  adrp     x0, #0x236a000                        
+010113C8  ldr      x0, [x0, #0x670]                       // [0x236A670] '6'
+010113CC  bl       #0xe61b78                             
+010113D0  adrp     x0, #0x236a000                        
+010113D4  ldr      x0, [x0, #0x6a0]                       // [0x236A6A0] '7'
+010113D8  bl       #0xe61b78                             
+010113DC  adrp     x0, #0x236a000                        
+010113E0  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+010113E4  bl       #0xe61b78                             
+010113E8  adrp     x0, #0x236a000                        
+010113EC  ldr      x0, [x0, #0x700]                       // [0x236A700] '0'
+010113F0  bl       #0xe61b78                             
+010113F4  mov      w8, #1                                
+010113F8  strb     w8, [x20, #0xc99]                     
+010113FC  ldr      w8, [x19, #0x2d0]                      // self.vez
+01011400  sub      w8, w8, #1                            
+01011404  cmp      w8, #2                                
+01011408  b.hi     #0x1011548                            
+0101140C  adrp     x10, #0x2253000                       
+01011410  adrp     x11, #0x621000                        
+01011414  add      x10, x10, #0x648                       // '7'
+01011418  add      x11, x11, #0x21c                      
+0101141C  adrp     x12, #0x621000                        
+01011420  adrp     x13, #0x621000                        
+01011424  add      x12, x12, #0x228                      
+01011428  add      x13, x13, #0x234                      
+0101142C  ldr      s0, [x11, w8, sxtw #2]                
+01011430  adrp     x11, #0x621000                        
+01011434  ldr      x10, [x10, w8, sxtw #3]                // [0x2253648] '7'
+01011438  add      x11, x11, #0x240                      
+0101143C  ldr      s1, [x12, w8, sxtw #2]                
+01011440  adrp     x12, #0x621000                        
+01011444  ldr      s2, [x13, w8, sxtw #2]                
+01011448  adrp     x13, #0x621000                        
+0101144C  add      x12, x12, #0x24c                      
+01011450  add      x13, x13, #0x258                      
+01011454  ldr      s3, [x11, w8, sxtw #2]                
+01011458  adrp     x11, #0x621000                        
+0101145C  adrp     x9, #0x236a000                        
+01011460  add      x11, x11, #0x264                      
+01011464  ldr      s4, [x12, w8, sxtw #2]                
+01011468  adrp     x12, #0x2253000                       
+0101146C  ldr      s5, [x13, w8, sxtw #2]                
+01011470  adrp     x13, #0x621000                        
+01011474  ldr      x9, [x9, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+01011478  add      x12, x12, #0x660                       // '0'
+0101147C  add      x13, x13, #0x27c                      
+01011480  ldr      s6, [x11, w8, sxtw #2]                
+01011484  ldr      x10, [x10]                            
+01011488  adrp     x11, #0x621000                        
+0101148C  ldr      s7, [x13, w8, sxtw #2]                
+01011490  adrp     x13, #0x621000                        
+01011494  ldr      x12, [x12, w8, sxtw #3]                // [0x2253660] '0'
+01011498  add      x11, x11, #0x288                      
+0101149C  add      x13, x13, #0x294                      
+010114A0  ldr      s16, [x11, w8, sxtw #2]               
+010114A4  adrp     x11, #0x621000                        
+010114A8  ldr      s17, [x13, w8, sxtw #2]               
+010114AC  mov      w13, #0x3f800000                      
+010114B0  add      x11, x11, #0x270                      
+010114B4  str      s0, [x19, #0x270]                      // self.color1
+010114B8  str      s1, [x19, #0x274]                     
+010114BC  str      s2, [x19, #0x278]                     
+010114C0  str      s3, [x19, #0x27c]                     
+010114C4  str      s4, [x19, #0x280]                      // self.color2
+010114C8  str      s5, [x19, #0x284]                     
+010114CC  str      s6, [x19, #0x288]                     
+010114D0  str      w13, [x19, #0x28c]                    
+010114D4  str      s4, [x19, #0x290]                      // self.color3
+010114D8  str      s5, [x19, #0x294]                     
+010114DC  str      s6, [x19, #0x298]                     
+010114E0  str      w13, [x19, #0x29c]                    
+010114E4  str      x10, [x19, #0x2d8]                     // self.confColor1
+010114E8  ldr      s18, [x11, w8, sxtw #2]               
+010114EC  ldr      x10, [x12]                            
+010114F0  str      s7, [x19, #0x2a0]                      // self.color1b
+010114F4  str      s16, [x19, #0x2a4]                    
+010114F8  str      s17, [x19, #0x2a8]                    
+010114FC  str      s18, [x19, #0x2ac]                    
+01011500  str      s7, [x19, #0x2b0]                      // self.color2b
+01011504  str      s16, [x19, #0x2b4]                    
+01011508  str      s17, [x19, #0x2b8]                    
+0101150C  str      w13, [x19, #0x2bc]                    
+01011510  str      s7, [x19, #0x2c0]                      // self.color3b
+01011514  str      s16, [x19, #0x2c4]                    
+01011518  str      s17, [x19, #0x2c8]                    
+0101151C  str      w13, [x19, #0x2cc]                    
+01011520  str      x10, [x19, #0x2e0]                     // self.confColor2
+01011524  ldr      x9, [x9]                              
+01011528  adrp     x10, #0x621000                        
+0101152C  adrp     x11, #0x621000                        
+01011530  add      x10, x10, #0x2a0                      
+01011534  add      x11, x11, #0x2ac                      
+01011538  ldr      w10, [x10, w8, sxtw #2]               
+0101153C  ldr      x9, [x9, #0xb8]                       
+01011540  ldr      w8, [x11, w8, sxtw #2]                
+01011544  stp      w10, w8, [x9, #0xc]                   
+01011548  ldr      x0, [x19, #0x50]                       // self.objeto7
+0101154C  cbz      x0, #0x10117c0                        
+01011550  mov      w1, wzr                               
+01011554  mov      x2, xzr                               
+01011558  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0101155C  ldr      x0, [x19, #0x58]                       // self.objeto8
+01011560  cbz      x0, #0x10117c0                        
+01011564  mov      w1, wzr                               
+01011568  mov      x2, xzr                               
+0101156C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01011570  ldr      x8, [x19, #0x2e8]                      // self.ctrlF7
+01011574  cbz      x8, #0x10117c0                        
+01011578  ldr      x9, [x19, #0x2d8]                      // self.confColor1
+0101157C  str      x9, [x8, #0xc8]                       
+01011580  ldr      x8, [x19, #0x2f0]                      // self.ctrlF8
+01011584  cbz      x8, #0x10117c0                        
+01011588  ldr      x9, [x19, #0x2e0]                      // self.confColor2
+0101158C  str      x9, [x8, #0xc8]                       
+01011590  ldr      x0, [x19, #0x1f0]                      // self.material1
+01011594  cbz      x0, #0x10117c0                        
+01011598  ldr      s3, [x19, #0x27c]                     
+0101159C  ldr      s2, [x19, #0x278]                     
+010115A0  ldr      s1, [x19, #0x274]                     
+010115A4  ldr      s0, [x19, #0x270]                      // self.color1
+010115A8  mov      x1, xzr                               
+010115AC  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+010115B0  ldr      x0, [x19, #0x1f8]                      // self.material2
+010115B4  cbz      x0, #0x10117c0                        
+010115B8  ldr      s3, [x19, #0x27c]                     
+010115BC  ldr      s2, [x19, #0x278]                     
+010115C0  ldr      s1, [x19, #0x274]                     
+010115C4  ldr      s0, [x19, #0x270]                      // self.color1
+010115C8  mov      x1, xzr                               
+010115CC  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+010115D0  ldr      x0, [x19, #0x200]                      // self.material3
+010115D4  cbz      x0, #0x10117c0                        
+010115D8  ldr      s3, [x19, #0x28c]                     
+010115DC  ldr      s2, [x19, #0x288]                     
+010115E0  ldr      s1, [x19, #0x284]                     
+010115E4  ldr      s0, [x19, #0x280]                      // self.color2
+010115E8  mov      x1, xzr                               
+010115EC  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+010115F0  ldr      x0, [x19, #0x208]                      // self.material4
+010115F4  cbz      x0, #0x10117c0                        
+010115F8  ldr      s3, [x19, #0x28c]                     
+010115FC  ldr      s2, [x19, #0x288]                     
+01011600  ldr      s1, [x19, #0x284]                     
+01011604  ldr      s0, [x19, #0x280]                      // self.color2
+01011608  mov      x1, xzr                               
+0101160C  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01011610  ldr      x0, [x19, #0x210]                      // self.material5
+01011614  cbz      x0, #0x10117c0                        
+01011618  ldr      s3, [x19, #0x27c]                     
+0101161C  ldr      s2, [x19, #0x278]                     
+01011620  ldr      s1, [x19, #0x274]                     
+01011624  ldr      s0, [x19, #0x270]                      // self.color1
+01011628  mov      x1, xzr                               
+0101162C  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01011630  ldr      x0, [x19, #0x218]                      // self.material6
+01011634  cbz      x0, #0x10117c0                        
+01011638  ldr      s3, [x19, #0x29c]                     
+0101163C  ldr      s2, [x19, #0x298]                     
+01011640  ldr      s1, [x19, #0x294]                     
+01011644  ldr      s0, [x19, #0x290]                      // self.color3
+01011648  mov      x1, xzr                               
+0101164C  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01011650  ldr      x0, [x19, #0x220]                      // self.material7
+01011654  cbz      x0, #0x10117c0                        
+01011658  ldr      s3, [x19, #0x28c]                     
+0101165C  ldr      s2, [x19, #0x288]                     
+01011660  ldr      s1, [x19, #0x284]                     
+01011664  ldr      s0, [x19, #0x280]                      // self.color2
+01011668  mov      x1, xzr                               
+0101166C  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01011670  ldr      x0, [x19, #0x228]                      // self.material8
+01011674  cbz      x0, #0x10117c0                        
+01011678  ldr      s3, [x19, #0x29c]                     
+0101167C  ldr      s2, [x19, #0x298]                     
+01011680  ldr      s1, [x19, #0x294]                     
+01011684  ldr      s0, [x19, #0x290]                      // self.color3
+01011688  mov      x1, xzr                               
+0101168C  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01011690  ldr      x0, [x19, #0x230]                      // self.material1b
+01011694  cbz      x0, #0x10117c0                        
+01011698  ldr      s3, [x19, #0x2ac]                     
+0101169C  ldr      s2, [x19, #0x2a8]                     
+010116A0  ldr      s1, [x19, #0x2a4]                     
+010116A4  ldr      s0, [x19, #0x2a0]                      // self.color1b
+010116A8  mov      x1, xzr                               
+010116AC  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+010116B0  ldr      x0, [x19, #0x238]                      // self.material2b
+010116B4  cbz      x0, #0x10117c0                        
+010116B8  ldr      s3, [x19, #0x2ac]                     
+010116BC  ldr      s2, [x19, #0x2a8]                     
+010116C0  ldr      s1, [x19, #0x2a4]                     
+010116C4  ldr      s0, [x19, #0x2a0]                      // self.color1b
+010116C8  mov      x1, xzr                               
+010116CC  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+010116D0  ldr      x0, [x19, #0x240]                      // self.material3b
+010116D4  cbz      x0, #0x10117c0                        
+010116D8  ldr      s3, [x19, #0x2bc]                     
+010116DC  ldr      s2, [x19, #0x2b8]                     
+010116E0  ldr      s1, [x19, #0x2b4]                     
+010116E4  ldr      s0, [x19, #0x2b0]                      // self.color2b
+010116E8  mov      x1, xzr                               
+010116EC  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+010116F0  ldr      x0, [x19, #0x248]                      // self.material4b
+010116F4  cbz      x0, #0x10117c0                        
+010116F8  ldr      s3, [x19, #0x2bc]                     
+010116FC  ldr      s2, [x19, #0x2b8]                     
+01011700  ldr      s1, [x19, #0x2b4]                     
+01011704  ldr      s0, [x19, #0x2b0]                      // self.color2b
+01011708  mov      x1, xzr                               
+0101170C  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01011710  ldr      x0, [x19, #0x250]                      // self.material5b
+01011714  cbz      x0, #0x10117c0                        
+01011718  ldr      s3, [x19, #0x2ac]                     
+0101171C  ldr      s2, [x19, #0x2a8]                     
+01011720  ldr      s1, [x19, #0x2a4]                     
+01011724  ldr      s0, [x19, #0x2a0]                      // self.color1b
+01011728  mov      x1, xzr                               
+0101172C  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01011730  ldr      x0, [x19, #0x258]                      // self.material6b
+01011734  cbz      x0, #0x10117c0                        
+01011738  ldr      s3, [x19, #0x2cc]                     
+0101173C  ldr      s2, [x19, #0x2c8]                     
+01011740  ldr      s1, [x19, #0x2c4]                     
+01011744  ldr      s0, [x19, #0x2c0]                      // self.color3b
+01011748  mov      x1, xzr                               
+0101174C  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01011750  ldr      x0, [x19, #0x260]                      // self.material7b
+01011754  cbz      x0, #0x10117c0                        
+01011758  ldr      s3, [x19, #0x2bc]                     
+0101175C  ldr      s2, [x19, #0x2b8]                     
+01011760  ldr      s1, [x19, #0x2b4]                     
+01011764  ldr      s0, [x19, #0x2b0]                      // self.color2b
+01011768  mov      x1, xzr                               
+0101176C  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01011770  ldr      x0, [x19, #0x268]                      // self.material8b
+01011774  cbz      x0, #0x10117c0                        
+01011778  ldr      s3, [x19, #0x2cc]                     
+0101177C  ldr      s2, [x19, #0x2c8]                     
+01011780  ldr      s1, [x19, #0x2c4]                     
+01011784  ldr      s0, [x19, #0x2c0]                      // self.color3b
+01011788  mov      x1, xzr                               
+0101178C  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01011790  ldr      x0, [x19, #0x50]                       // self.objeto7
+01011794  cbz      x0, #0x10117c0                        
+01011798  mov      w1, #1                                
+0101179C  mov      x2, xzr                               
+010117A0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010117A4  ldr      x0, [x19, #0x58]                       // self.objeto8
+010117A8  cbz      x0, #0x10117c0                        
+010117AC  ldp      x20, x19, [sp, #0x10]                 
+010117B0  mov      w1, #1                                
+010117B4  mov      x2, xzr                               
+010117B8  ldr      x30, [sp], #0x20                      
+010117BC  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+010117C0  bl       #0xe61da0                             

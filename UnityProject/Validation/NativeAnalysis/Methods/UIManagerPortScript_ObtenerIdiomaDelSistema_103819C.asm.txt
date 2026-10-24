@@ -1,0 +1,93 @@
+// UIManagerPortScript$$ObtenerIdiomaDelSistema VA 0x103819C, inferred length 364
+System_String_o* UIManagerPortScript__ObtenerIdiomaDelSistema (UIManagerPortScript_o* __this, const MethodInfo* method);
+0103819C  str      x30, [sp, #-0x20]!                    
+010381A0  stp      x20, x19, [sp, #0x10]                 
+010381A4  adrp     x19, #0x24fb000                       
+010381A8  adrp     x20, #0x2368000                       
+010381AC  ldrb     w8, [x19, #0xd4b]                     
+010381B0  ldr      x20, [x20, #0x878]                     // [0x2368878] UnityEngine.Application_TypeInfo
+010381B4  tbnz     w8, #0, #0x10382bc                    
+010381B8  adrp     x0, #0x2368000                        
+010381BC  ldr      x0, [x0, #0x878]                       // [0x2368878] UnityEngine.Application_TypeInfo
+010381C0  bl       #0xe61b78                             
+010381C4  adrp     x0, #0x236b000                        
+010381C8  ldr      x0, [x0, #0x220]                       // [0x236B220] 'ja'
+010381CC  bl       #0xe61b78                             
+010381D0  adrp     x0, #0x236b000                        
+010381D4  ldr      x0, [x0, #0x230]                       // [0x236B230] 'pt'
+010381D8  bl       #0xe61b78                             
+010381DC  adrp     x0, #0x236b000                        
+010381E0  ldr      x0, [x0, #0x238]                       // [0x236B238] 'it'
+010381E4  bl       #0xe61b78                             
+010381E8  adrp     x0, #0x236b000                        
+010381EC  ldr      x0, [x0, #0x248]                       // [0x236B248] 'fr'
+010381F0  bl       #0xe61b78                             
+010381F4  adrp     x0, #0x236b000                        
+010381F8  ldr      x0, [x0, #0x250]                       // [0x236B250] 'th'
+010381FC  bl       #0xe61b78                             
+01038200  adrp     x0, #0x236b000                        
+01038204  ldr      x0, [x0, #0x270]                       // [0x236B270] 'ko'
+01038208  bl       #0xe61b78                             
+0103820C  adrp     x0, #0x236b000                        
+01038210  ldr      x0, [x0, #0x278]                       // [0x236B278] 'tr'
+01038214  bl       #0xe61b78                             
+01038218  adrp     x0, #0x236b000                        
+0103821C  ldr      x0, [x0, #0x280]                       // [0x236B280] 'el'
+01038220  bl       #0xe61b78                             
+01038224  adrp     x0, #0x236b000                        
+01038228  ldr      x0, [x0, #0x298]                       // [0x236B298] 'nl'
+0103822C  bl       #0xe61b78                             
+01038230  adrp     x0, #0x236b000                        
+01038234  ldr      x0, [x0, #0x2a0]                       // [0x236B2A0] 'es'
+01038238  bl       #0xe61b78                             
+0103823C  adrp     x0, #0x236b000                        
+01038240  ldr      x0, [x0, #0x2b8]                       // [0x236B2B8] 'vi'
+01038244  bl       #0xe61b78                             
+01038248  adrp     x0, #0x2368000                        
+0103824C  ldr      x0, [x0, #0x278]                       // [0x2368278] 'id'
+01038250  bl       #0xe61b78                             
+01038254  adrp     x0, #0x236a000                        
+01038258  ldr      x0, [x0, #0xcd8]                       // [0x236ACD8] 'sv'
+0103825C  bl       #0xe61b78                             
+01038260  adrp     x0, #0x236b000                        
+01038264  ldr      x0, [x0, #0x2e8]                       // [0x236B2E8] 'zh-TW'
+01038268  bl       #0xe61b78                             
+0103826C  adrp     x0, #0x236b000                        
+01038270  ldr      x0, [x0, #0x2f0]                       // [0x236B2F0] 'ru'
+01038274  bl       #0xe61b78                             
+01038278  adrp     x0, #0x236b000                        
+0103827C  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+01038280  bl       #0xe61b78                             
+01038284  adrp     x0, #0x236b000                        
+01038288  ldr      x0, [x0, #0x308]                       // [0x236B308] 'pl'
+0103828C  bl       #0xe61b78                             
+01038290  adrp     x0, #0x236b000                        
+01038294  ldr      x0, [x0, #0x318]                       // [0x236B318] 'de'
+01038298  bl       #0xe61b78                             
+0103829C  adrp     x0, #0x236b000                        
+010382A0  ldr      x0, [x0, #0x320]                       // [0x236B320] 'zh'
+010382A4  bl       #0xe61b78                             
+010382A8  adrp     x0, #0x236b000                        
+010382AC  ldr      x0, [x0, #0x330]                       // [0x236B330] 'hi'
+010382B0  bl       #0xe61b78                             
+010382B4  mov      w8, #1                                
+010382B8  strb     w8, [x19, #0xd4b]                     
+010382BC  ldr      x0, [x20]                             
+010382C0  ldr      w8, [x0, #0xe0]                       
+010382C4  cbnz     w8, #0x10382cc                        
+010382C8  bl       #0xe61c80                             
+010382CC  mov      x0, xzr                               
+010382D0  bl       #0x1fe0094                             // UnityEngine.Application$$get_systemLanguage
+010382D4  sub      w8, w0, #6                            
+010382D8  cmp      w8, #0x24                             
+010382DC  b.hi     #0x10382f0                            
+010382E0  adrp     x9, #0x2253000                        
+010382E4  add      x9, x9, #0x7e0                         // 'zh'
+010382E8  ldr      x8, [x9, w8, sxtw #3]                  // [0x22537E0] 'zh'
+010382EC  b        #0x10382f8                            
+010382F0  adrp     x8, #0x236b000                        
+010382F4  ldr      x8, [x8, #0x210]                       // [0x236B210] 'en'
+010382F8  ldr      x0, [x8]                              
+010382FC  ldp      x20, x19, [sp, #0x10]                 
+01038300  ldr      x30, [sp], #0x20                      
+01038304  ret                                            

@@ -1,0 +1,55 @@
+// ObservadorResorte$$doCheckCollision2 VA 0x10CE604, inferred length 212
+void ObservadorResorte__doCheckCollision2 (ObservadorResorte_o* __this, float valorx, float valory, float valorz, const MethodInfo* method);
+010CE604  stp      d11, d10, [sp, #-0x40]!               
+010CE608  stp      d9, d8, [sp, #0x10]                   
+010CE60C  stp      x30, x21, [sp, #0x20]                 
+010CE610  stp      x20, x19, [sp, #0x30]                 
+010CE614  adrp     x21, #0x24fc000                       
+010CE618  adrp     x20, #0x2368000                       
+010CE61C  ldrb     w8, [x21, #7]                         
+010CE620  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+010CE624  mov      v8.16b, v2.16b                        
+010CE628  mov      v11.16b, v1.16b                       
+010CE62C  mov      v9.16b, v0.16b                        
+010CE630  mov      x19, x0                               
+010CE634  tbnz     w8, #0, #0x10ce64c                    
+010CE638  adrp     x0, #0x2368000                        
+010CE63C  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+010CE640  bl       #0xe61b78                             
+010CE644  mov      w8, #1                                
+010CE648  strb     w8, [x21, #7]                         
+010CE64C  adrp     x8, #0x5ff000                         
+010CE650  ldr      s0, [x8, #0xbd8]                      
+010CE654  ldr      w0, [x19, #0x1cc]                      // self.mascaraPlano
+010CE658  ldr      s10, [x19, #0x1b8]                     // self.sphereRadius
+010CE65C  mov      x1, xzr                               
+010CE660  fadd     s11, s11, s0                          
+010CE664  strb     wzr, [x19, #0x1a4]                     // self.checkCollision
+010CE668  str      s9, [x19, #0x1ac]                      // self.vector
+010CE66C  str      s11, [x19, #0x1b0]                    
+010CE670  str      s8, [x19, #0x1b4]                     
+010CE674  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+010CE678  ldr      x8, [x20]                             
+010CE67C  mov      w20, w0                               
+010CE680  ldr      w9, [x8, #0xe0]                       
+010CE684  cbnz     w9, #0x10ce690                        
+010CE688  mov      x0, x8                                
+010CE68C  bl       #0xe61c80                             
+010CE690  mov      v0.16b, v9.16b                        
+010CE694  mov      v1.16b, v11.16b                       
+010CE698  mov      v2.16b, v8.16b                        
+010CE69C  mov      v3.16b, v10.16b                       
+010CE6A0  mov      w0, w20                               
+010CE6A4  mov      x1, xzr                               
+010CE6A8  bl       #0x20406ec                             // UnityEngine.Physics$$OverlapSphere
+010CE6AC  cbz      x0, #0x10ce6d4                        
+010CE6B0  ldr      x8, [x0, #0x18]                       
+010CE6B4  cbz      x8, #0x10ce6c0                        
+010CE6B8  mov      w8, #1                                
+010CE6BC  strb     w8, [x19, #0x1a4]                      // self.checkCollision
+010CE6C0  ldp      x20, x19, [sp, #0x30]                 
+010CE6C4  ldp      x30, x21, [sp, #0x20]                 
+010CE6C8  ldp      d9, d8, [sp, #0x10]                   
+010CE6CC  ldp      d11, d10, [sp], #0x40                 
+010CE6D0  ret                                            
+010CE6D4  bl       #0xe61da0                             

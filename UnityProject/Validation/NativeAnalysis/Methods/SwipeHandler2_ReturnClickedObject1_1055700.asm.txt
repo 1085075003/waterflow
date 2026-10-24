@@ -1,0 +1,95 @@
+// SwipeHandler2$$ReturnClickedObject1 VA 0x1055700, inferred length 372
+UnityEngine_GameObject_o* SwipeHandler2__ReturnClickedObject1 (SwipeHandler2_o* __this, UnityEngine_RaycastHit_o* hit, const MethodInfo* method);
+01055700  sub      sp, sp, #0x80                         
+01055704  stp      d13, d12, [sp, #0x20]                 
+01055708  stp      d11, d10, [sp, #0x30]                 
+0105570C  stp      d9, d8, [sp, #0x40]                   
+01055710  str      x30, [sp, #0x50]                      
+01055714  stp      x22, x21, [sp, #0x60]                 
+01055718  stp      x20, x19, [sp, #0x70]                 
+0105571C  adrp     x21, #0x24fb000                       
+01055720  ldrb     w8, [x21, #0xdf6]                     
+01055724  mov      x19, x1                               
+01055728  mov      x20, x0                               
+0105572C  tbnz     w8, #0, #0x1055750                    
+01055730  adrp     x0, #0x2368000                        
+01055734  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+01055738  bl       #0xe61b78                             
+0105573C  adrp     x0, #0x236c000                        
+01055740  ldr      x0, [x0, #0x998]                       // [0x236C998] 'entrada'
+01055744  bl       #0xe61b78                             
+01055748  mov      w8, #1                                
+0105574C  strb     w8, [x21, #0xdf6]                     
+01055750  mov      x0, xzr                               
+01055754  bl       #0x1fe21ec                             // UnityEngine.Camera$$get_main
+01055758  mov      x21, x0                               
+0105575C  mov      x0, xzr                               
+01055760  bl       #0x203ab00                             // UnityEngine.Input$$get_mousePosition
+01055764  cbz      x21, #0x1055870                       
+01055768  adrp     x22, #0x2368000                       
+0105576C  ldr      x22, [x22, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+01055770  add      x8, sp, #8                            
+01055774  mov      x0, x21                               
+01055778  mov      x1, xzr                               
+0105577C  bl       #0x1fe21a8                             // UnityEngine.Camera$$ScreenPointToRay
+01055780  ldr      x0, [x22]                             
+01055784  ldp      s10, s0, [sp, #0x10]                  
+01055788  ldp      s1, s2, [sp, #0x18]                   
+0105578C  ldp      s8, s9, [sp, #8]                      
+01055790  ldr      w8, [x0, #0xe0]                       
+01055794  ldr      w20, [x20, #0x74]                     
+01055798  fmov     s3, #10.00000000                      
+0105579C  fmul     s13, s0, s3                           
+010557A0  fmul     s12, s1, s3                           
+010557A4  fmul     s11, s2, s3                           
+010557A8  cbnz     w8, #0x10557b0                        
+010557AC  bl       #0xe61c80                             
+010557B0  mov      w8, #0x447a0000                       
+010557B4  fmov     s6, w8                                
+010557B8  mov      v0.16b, v8.16b                        
+010557BC  mov      v1.16b, v9.16b                        
+010557C0  mov      v2.16b, v10.16b                       
+010557C4  mov      v3.16b, v13.16b                       
+010557C8  mov      v4.16b, v12.16b                       
+010557CC  mov      v5.16b, v11.16b                       
+010557D0  mov      x0, x19                               
+010557D4  mov      w1, w20                               
+010557D8  mov      x2, xzr                               
+010557DC  bl       #0x203e850                             // UnityEngine.Physics$$Raycast
+010557E0  mov      w8, w0                                
+010557E4  mov      x0, xzr                               
+010557E8  tbz      w8, #0, #0x1055850                    
+010557EC  mov      x0, x19                               
+010557F0  mov      x1, xzr                               
+010557F4  bl       #0x2041678                             // UnityEngine.RaycastHit$$get_collider
+010557F8  cbz      x0, #0x1055870                        
+010557FC  mov      x1, xzr                               
+01055800  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01055804  cbz      x0, #0x1055870                        
+01055808  mov      x1, xzr                               
+0105580C  bl       #0x2006314                             // UnityEngine.GameObject$$get_layer
+01055810  adrp     x8, #0x236c000                        
+01055814  ldr      x8, [x8, #0x998]                       // [0x236C998] 'entrada'
+01055818  mov      w20, w0                               
+0105581C  mov      x1, xzr                               
+01055820  ldr      x8, [x8]                              
+01055824  mov      x0, x8                                
+01055828  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+0105582C  cmp      w20, w0                               
+01055830  mov      x0, xzr                               
+01055834  b.ne     #0x1055850                            
+01055838  mov      x0, x19                               
+0105583C  mov      x1, xzr                               
+01055840  bl       #0x2041678                             // UnityEngine.RaycastHit$$get_collider
+01055844  cbz      x0, #0x1055870                        
+01055848  mov      x1, xzr                               
+0105584C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01055850  ldp      x20, x19, [sp, #0x70]                 
+01055854  ldp      x22, x21, [sp, #0x60]                 
+01055858  ldr      x30, [sp, #0x50]                      
+0105585C  ldp      d9, d8, [sp, #0x40]                   
+01055860  ldp      d11, d10, [sp, #0x30]                 
+01055864  ldp      d13, d12, [sp, #0x20]                 
+01055868  add      sp, sp, #0x80                         
+0105586C  ret                                            
+01055870  bl       #0xe61da0                             

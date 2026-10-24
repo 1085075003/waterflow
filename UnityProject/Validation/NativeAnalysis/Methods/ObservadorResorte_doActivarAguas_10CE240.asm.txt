@@ -1,0 +1,243 @@
+// ObservadorResorte$$doActivarAguas VA 0x10CE240, inferred length 964
+void ObservadorResorte__doActivarAguas (ObservadorResorte_o* __this, const MethodInfo* method);
+010CE240  stp      x30, x27, [sp, #-0x50]!               
+010CE244  stp      x26, x25, [sp, #0x10]                 
+010CE248  stp      x24, x23, [sp, #0x20]                 
+010CE24C  stp      x22, x21, [sp, #0x30]                 
+010CE250  stp      x20, x19, [sp, #0x40]                 
+010CE254  adrp     x19, #0x24fc000                       
+010CE258  ldrb     w8, [x19, #0xb]                       
+010CE25C  mov      x20, x0                               
+010CE260  tbnz     w8, #0, #0x10ce2a8                    
+010CE264  adrp     x0, #0x2368000                        
+010CE268  ldr      x0, [x0, #0x240]                       // [0x2368240] System.IDisposable_TypeInfo
+010CE26C  bl       #0xe61b78                             
+010CE270  adrp     x0, #0x2368000                        
+010CE274  ldr      x0, [x0, #0x248]                       // [0x2368248] System.Collections.IEnumerator_TypeInfo
+010CE278  bl       #0xe61b78                             
+010CE27C  adrp     x0, #0x2368000                        
+010CE280  ldr      x0, [x0, #0x2b8]                       // [0x23682B8] UnityEngine.Transform_TypeInfo
+010CE284  bl       #0xe61b78                             
+010CE288  adrp     x0, #0x236a000                        
+010CE28C  ldr      x0, [x0, #0x7d8]                       // [0x236A7D8] 'AguaControlChorro1'
+010CE290  bl       #0xe61b78                             
+010CE294  adrp     x0, #0x236a000                        
+010CE298  ldr      x0, [x0, #0x7e0]                       // [0x236A7E0] 'AguaControl5C'
+010CE29C  bl       #0xe61b78                             
+010CE2A0  mov      w8, #1                                
+010CE2A4  strb     w8, [x19, #0xb]                       
+010CE2A8  mov      x0, x20                               
+010CE2AC  mov      x1, xzr                               
+010CE2B0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010CE2B4  cbz      x0, #0x10ce508                        
+010CE2B8  mov      x1, xzr                               
+010CE2BC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CE2C0  cbz      x0, #0x10ce508                        
+010CE2C4  adrp     x23, #0x2368000                       
+010CE2C8  ldr      x23, [x23, #0x240]                     // [0x2368240] System.IDisposable_TypeInfo
+010CE2CC  mov      x1, xzr                               
+010CE2D0  bl       #0x2010228                             // UnityEngine.Transform$$GetEnumerator
+010CE2D4  mov      x19, x0                               
+010CE2D8  cbz      x0, #0x10ce50c                        
+010CE2DC  adrp     x24, #0x2368000                       
+010CE2E0  adrp     x25, #0x2368000                       
+010CE2E4  adrp     x26, #0x236a000                       
+010CE2E8  adrp     x27, #0x236a000                       
+010CE2EC  ldr      x24, [x24, #0x248]                     // [0x2368248] System.Collections.IEnumerator_TypeInfo
+010CE2F0  ldr      x25, [x25, #0x2b8]                     // [0x23682B8] UnityEngine.Transform_TypeInfo
+010CE2F4  ldr      x26, [x26, #0x7d8]                     // [0x236A7D8] 'AguaControlChorro1'
+010CE2F8  ldr      x27, [x27, #0x7e0]                     // [0x236A7E0] 'AguaControl5C'
+010CE2FC  ldr      x8, [x19]                             
+010CE300  ldr      x1, [x24]                             
+010CE304  ldrh     w9, [x8, #0x12e]                      
+010CE308  cbz      x9, #0x10ce32c                        
+010CE30C  ldr      x10, [x8, #0xb0]                      
+010CE310  add      x10, x10, #8                          
+010CE314  ldur     x11, [x10, #-8]                       
+010CE318  cmp      x11, x1                               
+010CE31C  b.eq     #0x10ce33c                            
+010CE320  subs     x9, x9, #1                            
+010CE324  add      x10, x10, #0x10                       
+010CE328  b.ne     #0x10ce314                            
+010CE32C  mov      x0, x19                               
+010CE330  mov      w2, wzr                               
+010CE334  bl       #0xea2528                             
+010CE338  b        #0x10ce348                            
+010CE33C  ldrsw    x9, [x10]                             
+010CE340  add      x8, x8, x9, lsl #4                    
+010CE344  add      x0, x8, #0x138                        
+010CE348  ldp      x8, x1, [x0]                          
+010CE34C  mov      x0, x19                               
+010CE350  blr      x8                                    
+010CE354  tbz      w0, #0, #0x10ce460                    
+010CE358  ldr      x8, [x19]                             
+010CE35C  ldr      x1, [x24]                             
+010CE360  ldrh     w9, [x8, #0x12e]                      
+010CE364  cbz      x9, #0x10ce388                        
+010CE368  ldr      x10, [x8, #0xb0]                      
+010CE36C  add      x10, x10, #8                          
+010CE370  ldur     x11, [x10, #-8]                       
+010CE374  cmp      x11, x1                               
+010CE378  b.eq     #0x10ce398                            
+010CE37C  subs     x9, x9, #1                            
+010CE380  add      x10, x10, #0x10                       
+010CE384  b.ne     #0x10ce370                            
+010CE388  mov      w2, #1                                
+010CE38C  mov      x0, x19                               
+010CE390  bl       #0xea2528                             
+010CE394  b        #0x10ce3a8                            
+010CE398  ldr      w9, [x10]                             
+010CE39C  add      w9, w9, #1                            
+010CE3A0  add      x8, x8, w9, sxtw #4                   
+010CE3A4  add      x0, x8, #0x138                        
+010CE3A8  ldp      x8, x1, [x0]                          
+010CE3AC  mov      x0, x19                               
+010CE3B0  blr      x8                                    
+010CE3B4  mov      x21, x0                               
+010CE3B8  cbz      x0, #0x10ce4f8                        
+010CE3BC  ldr      x8, [x21]                             
+010CE3C0  ldr      x1, [x25]                             
+010CE3C4  ldrb     w10, [x8, #0x130]                     
+010CE3C8  ldrb     w9, [x1, #0x130]                      
+010CE3CC  cmp      w10, w9                               
+010CE3D0  b.lo     #0x10ce4ec                            
+010CE3D4  ldr      x8, [x8, #0xc8]                       
+010CE3D8  add      x8, x8, x9, lsl #3                    
+010CE3DC  ldur     x8, [x8, #-8]                         
+010CE3E0  cmp      x8, x1                                
+010CE3E4  b.ne     #0x10ce4ec                            
+010CE3E8  mov      x0, x21                               
+010CE3EC  mov      x1, xzr                               
+010CE3F0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010CE3F4  cbz      x0, #0x10ce4fc                        
+010CE3F8  mov      x1, xzr                               
+010CE3FC  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CE400  mov      x22, x0                               
+010CE404  cbz      x0, #0x10ce4f4                        
+010CE408  ldr      x1, [x26]                             
+010CE40C  mov      x0, x22                               
+010CE410  mov      x2, xzr                               
+010CE414  bl       #0x19651dc                             // System.String$$Contains
+010CE418  tbnz     w0, #0, #0x10ce430                    
+010CE41C  ldr      x1, [x27]                             
+010CE420  mov      x0, x22                               
+010CE424  mov      x2, xzr                               
+010CE428  bl       #0x19651dc                             // System.String$$Contains
+010CE42C  tbz      w0, #0, #0x10ce2fc                    
+010CE430  mov      x0, x21                               
+010CE434  mov      x1, xzr                               
+010CE438  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010CE43C  cbz      x0, #0x10ce504                        
+010CE440  mov      x1, xzr                               
+010CE444  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CE448  str      x0, [x20, #0x1f8]                     
+010CE44C  cbz      x0, #0x10ce500                        
+010CE450  mov      w1, #1                                
+010CE454  mov      x2, xzr                               
+010CE458  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010CE45C  b        #0x10ce2fc                            
+010CE460  mov      x21, xzr                              
+010CE464  ldr      x1, [x23]                             
+010CE468  mov      x0, x19                               
+010CE46C  bl       #0xe61c84                             
+010CE470  cbz      x0, #0x10ce4d0                        
+010CE474  ldr      x8, [x0]                              
+010CE478  ldr      x1, [x23]                             
+010CE47C  mov      x19, x0                               
+010CE480  ldrh     w9, [x8, #0x12e]                      
+010CE484  cbz      x9, #0x10ce4a8                        
+010CE488  ldr      x10, [x8, #0xb0]                      
+010CE48C  add      x10, x10, #8                          
+010CE490  ldur     x11, [x10, #-8]                       
+010CE494  cmp      x11, x1                               
+010CE498  b.eq     #0x10ce4b8                            
+010CE49C  subs     x9, x9, #1                            
+010CE4A0  add      x10, x10, #0x10                       
+010CE4A4  b.ne     #0x10ce490                            
+010CE4A8  mov      x0, x19                               
+010CE4AC  mov      w2, wzr                               
+010CE4B0  bl       #0xea2528                             
+010CE4B4  b        #0x10ce4c4                            
+010CE4B8  ldrsw    x9, [x10]                             
+010CE4BC  add      x8, x8, x9, lsl #4                    
+010CE4C0  add      x0, x8, #0x138                        
+010CE4C4  ldp      x8, x1, [x0]                          
+010CE4C8  mov      x0, x19                               
+010CE4CC  blr      x8                                    
+010CE4D0  cbnz     x21, #0x10ce510                       
+010CE4D4  ldp      x20, x19, [sp, #0x40]                 
+010CE4D8  ldp      x22, x21, [sp, #0x30]                 
+010CE4DC  ldp      x24, x23, [sp, #0x20]                 
+010CE4E0  ldp      x26, x25, [sp, #0x10]                 
+010CE4E4  ldp      x30, x27, [sp], #0x50                 
+010CE4E8  ret                                            
+010CE4EC  mov      x0, x21                               
+010CE4F0  bl       #0xe6213c                             
+010CE4F4  bl       #0xe61da0                             
+010CE4F8  bl       #0xe61da0                             
+010CE4FC  bl       #0xe61da0                             
+010CE500  bl       #0xe61da0                             
+010CE504  bl       #0xe61da0                             
+010CE508  bl       #0xe61da0                             
+010CE50C  bl       #0xe61da0                             
+010CE510  mov      x0, x21                               
+010CE514  bl       #0xe61d98                             
+010CE518  b        #0x10ce554                            
+010CE51C  b        #0x10ce554                            
+010CE520  b        #0x10ce554                            
+010CE524  b        #0x10ce554                            
+010CE528  b        #0x10ce554                            
+010CE52C  b        #0x10ce554                            
+010CE530  b        #0x10ce554                            
+010CE534  b        #0x10ce554                            
+010CE538  b        #0x10ce554                            
+010CE53C  b        #0x10ce554                            
+010CE540  b        #0x10ce554                            
+010CE544  b        #0x10ce554                            
+010CE548  b        #0x10ce554                            
+010CE54C  b        #0x10ce554                            
+010CE550  b        #0x10ce554                            
+010CE554  mov      x20, x0                               
+010CE558  cmp      w1, #1                                
+010CE55C  b.ne     #0x10ce574                            
+010CE560  mov      x0, x20                               
+010CE564  bl       #0x224d2d0                            
+010CE568  ldr      x21, [x0]                             
+010CE56C  bl       #0x224d2e0                            
+010CE570  b        #0x10ce464                            
+010CE574  mov      x21, xzr                              
+010CE578  b        #0x10ce580                            
+010CE57C  mov      x20, x0                               
+010CE580  ldr      x1, [x23]                             
+010CE584  mov      x0, x19                               
+010CE588  bl       #0xe61c84                             
+010CE58C  mov      x19, x0                               
+010CE590  cbz      x0, #0x10ce5ec                        
+010CE594  ldr      x8, [x19]                             
+010CE598  ldr      x1, [x23]                             
+010CE59C  ldrh     w9, [x8, #0x12e]                      
+010CE5A0  cbz      x9, #0x10ce5c4                        
+010CE5A4  ldr      x10, [x8, #0xb0]                      
+010CE5A8  add      x10, x10, #8                          
+010CE5AC  ldur     x11, [x10, #-8]                       
+010CE5B0  cmp      x11, x1                               
+010CE5B4  b.eq     #0x10ce5d4                            
+010CE5B8  subs     x9, x9, #1                            
+010CE5BC  add      x10, x10, #0x10                       
+010CE5C0  b.ne     #0x10ce5ac                            
+010CE5C4  mov      x0, x19                               
+010CE5C8  mov      w2, wzr                               
+010CE5CC  bl       #0xea2528                             
+010CE5D0  b        #0x10ce5e0                            
+010CE5D4  ldrsw    x9, [x10]                             
+010CE5D8  add      x8, x8, x9, lsl #4                    
+010CE5DC  add      x0, x8, #0x138                        
+010CE5E0  ldp      x8, x1, [x0]                          
+010CE5E4  mov      x0, x19                               
+010CE5E8  blr      x8                                    
+010CE5EC  cbnz     x21, #0x10ce5f8                       
+010CE5F0  mov      x0, x20                               
+010CE5F4  bl       #0xf5dd7c                             
+010CE5F8  mov      x0, x21                               
+010CE5FC  bl       #0xe61d98                             
+010CE600  bl       #0xd2eb98                             

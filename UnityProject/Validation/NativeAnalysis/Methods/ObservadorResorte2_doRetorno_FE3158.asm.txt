@@ -1,0 +1,584 @@
+// ObservadorResorte2$$doRetorno VA 0xFE3158, inferred length 2328
+void ObservadorResorte2__doRetorno (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE3158  stp      d9, d8, [sp, #-0x30]!                 
+00FE315C  stp      x30, x21, [sp, #0x10]                 
+00FE3160  stp      x20, x19, [sp, #0x20]                 
+00FE3164  adrp     x21, #0x24fb000                       
+00FE3168  adrp     x20, #0x236a000                       
+00FE316C  ldrb     w8, [x21, #0xba8]                     
+00FE3170  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FE3174  mov      x19, x0                               
+00FE3178  tbnz     w8, #0, #0xfe31f0                     
+00FE317C  adrp     x0, #0x236a000                        
+00FE3180  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+00FE3184  bl       #0xe61b78                             
+00FE3188  adrp     x0, #0x236a000                        
+00FE318C  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+00FE3190  bl       #0xe61b78                             
+00FE3194  adrp     x0, #0x236a000                        
+00FE3198  ldr      x0, [x0, #0x7f8]                       // [0x236A7F8] '9'
+00FE319C  bl       #0xe61b78                             
+00FE31A0  adrp     x0, #0x236a000                        
+00FE31A4  ldr      x0, [x0, #0x670]                       // [0x236A670] '6'
+00FE31A8  bl       #0xe61b78                             
+00FE31AC  adrp     x0, #0x236a000                        
+00FE31B0  ldr      x0, [x0, #0x6a0]                       // [0x236A6A0] '7'
+00FE31B4  bl       #0xe61b78                             
+00FE31B8  adrp     x0, #0x236a000                        
+00FE31BC  ldr      x0, [x0, #0x6a8]                       // [0x236A6A8] '4'
+00FE31C0  bl       #0xe61b78                             
+00FE31C4  adrp     x0, #0x236a000                        
+00FE31C8  ldr      x0, [x0, #0x798]                       // [0x236A798] '8'
+00FE31CC  bl       #0xe61b78                             
+00FE31D0  adrp     x0, #0x236a000                        
+00FE31D4  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FE31D8  bl       #0xe61b78                             
+00FE31DC  adrp     x0, #0x236a000                        
+00FE31E0  ldr      x0, [x0, #0x6f8]                       // [0x236A6F8] '5'
+00FE31E4  bl       #0xe61b78                             
+00FE31E8  mov      w8, #1                                
+00FE31EC  strb     w8, [x21, #0xba8]                     
+00FE31F0  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE31F4  ldr      x1, [x20]                             
+00FE31F8  mov      x2, xzr                               
+00FE31FC  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE3200  tbnz     w0, #0, #0xfe323c                     
+00FE3204  adrp     x8, #0x236a000                        
+00FE3208  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE320C  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+00FE3210  mov      x2, xzr                               
+00FE3214  ldr      x1, [x8]                              
+00FE3218  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE321C  tbnz     w0, #0, #0xfe323c                     
+00FE3220  adrp     x8, #0x236a000                        
+00FE3224  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE3228  ldr      x8, [x8, #0x650]                       // [0x236A650] '3'
+00FE322C  mov      x2, xzr                               
+00FE3230  ldr      x1, [x8]                              
+00FE3234  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE3238  tbz      w0, #0, #0xfe3258                     
+00FE323C  str      wzr, [x19, #0x168]                     // self.angle
+00FE3240  mov      w8, #1                                
+00FE3244  strb     w8, [x19, #0x164]                      // self.activadoResorte
+00FE3248  ldp      x20, x19, [sp, #0x20]                 
+00FE324C  ldp      x30, x21, [sp, #0x10]                 
+00FE3250  ldp      d9, d8, [sp], #0x30                   
+00FE3254  ret                                            
+00FE3258  ldr      d0, [x19, #0x70]                       // self.inix
+00FE325C  ldr      s1, [x19, #0x78]                       // self.iniz
+00FE3260  adrp     x8, #0x236a000                        
+00FE3264  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE3268  str      d0, [x19, #0x128]                      // self.puntoFinal
+00FE326C  str      s1, [x19, #0x130]                     
+00FE3270  ldr      x8, [x8, #0x6a8]                       // [0x236A6A8] '4'
+00FE3274  mov      x2, xzr                               
+00FE3278  ldr      x1, [x8]                              
+00FE327C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE3280  tbz      w0, #0, #0xfe33bc                     
+00FE3284  ldrb     w8, [x19, #0x166]                      // self.sw_obj1
+00FE3288  cbz      w8, #0xfe3320                         
+00FE328C  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE3290  cbz      x0, #0xfe3a6c                         
+00FE3294  mov      x1, xzr                               
+00FE3298  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE329C  cbz      x0, #0xfe3a6c                         
+00FE32A0  mov      x1, xzr                               
+00FE32A4  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE32A8  cbz      x0, #0xfe3a6c                         
+00FE32AC  mov      x1, xzr                               
+00FE32B0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE32B4  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE32B8  cbz      x0, #0xfe3a6c                         
+00FE32BC  mov      x1, xzr                               
+00FE32C0  mov      v8.16b, v0.16b                        
+00FE32C4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE32C8  cbz      x0, #0xfe3a6c                         
+00FE32CC  mov      x1, xzr                               
+00FE32D0  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE32D4  cbz      x0, #0xfe3a6c                         
+00FE32D8  mov      x1, xzr                               
+00FE32DC  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE32E0  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE32E4  cbz      x0, #0xfe3a6c                         
+00FE32E8  mov      x1, xzr                               
+00FE32EC  mov      v9.16b, v1.16b                        
+00FE32F0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE32F4  cbz      x0, #0xfe3a6c                         
+00FE32F8  mov      x1, xzr                               
+00FE32FC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3300  cbz      x0, #0xfe3a6c                         
+00FE3304  mov      x1, xzr                               
+00FE3308  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE330C  fmov     s0, #20.00000000                      
+00FE3310  fadd     s0, s2, s0                            
+00FE3314  str      s8, [x19, #0x134]                      // self.puntoFinal1
+00FE3318  str      s9, [x19, #0x138]                     
+00FE331C  str      s0, [x19, #0x13c]                     
+00FE3320  ldrb     w8, [x19, #0x167]                      // self.sw_obj2
+00FE3324  cbz      w8, #0xfe33bc                         
+00FE3328  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE332C  cbz      x0, #0xfe3a6c                         
+00FE3330  mov      x1, xzr                               
+00FE3334  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3338  cbz      x0, #0xfe3a6c                         
+00FE333C  mov      x1, xzr                               
+00FE3340  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3344  cbz      x0, #0xfe3a6c                         
+00FE3348  mov      x1, xzr                               
+00FE334C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3350  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE3354  cbz      x0, #0xfe3a6c                         
+00FE3358  mov      x1, xzr                               
+00FE335C  mov      v8.16b, v0.16b                        
+00FE3360  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3364  cbz      x0, #0xfe3a6c                         
+00FE3368  mov      x1, xzr                               
+00FE336C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3370  cbz      x0, #0xfe3a6c                         
+00FE3374  mov      x1, xzr                               
+00FE3378  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE337C  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE3380  cbz      x0, #0xfe3a6c                         
+00FE3384  mov      x1, xzr                               
+00FE3388  mov      v9.16b, v1.16b                        
+00FE338C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3390  cbz      x0, #0xfe3a6c                         
+00FE3394  mov      x1, xzr                               
+00FE3398  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE339C  cbz      x0, #0xfe3a6c                         
+00FE33A0  mov      x1, xzr                               
+00FE33A4  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE33A8  fmov     s0, #20.00000000                      
+00FE33AC  fadd     s0, s2, s0                            
+00FE33B0  str      s8, [x19, #0x140]                      // self.puntoFinal2
+00FE33B4  str      s9, [x19, #0x144]                     
+00FE33B8  str      s0, [x19, #0x148]                     
+00FE33BC  adrp     x8, #0x236a000                        
+00FE33C0  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE33C4  ldr      x8, [x8, #0x6f8]                       // [0x236A6F8] '5'
+00FE33C8  mov      x2, xzr                               
+00FE33CC  ldr      x1, [x8]                              
+00FE33D0  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE33D4  tbz      w0, #0, #0xfe3510                     
+00FE33D8  ldrb     w8, [x19, #0x166]                      // self.sw_obj1
+00FE33DC  cbz      w8, #0xfe3474                         
+00FE33E0  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE33E4  cbz      x0, #0xfe3a6c                         
+00FE33E8  mov      x1, xzr                               
+00FE33EC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE33F0  cbz      x0, #0xfe3a6c                         
+00FE33F4  mov      x1, xzr                               
+00FE33F8  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE33FC  cbz      x0, #0xfe3a6c                         
+00FE3400  mov      x1, xzr                               
+00FE3404  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3408  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE340C  cbz      x0, #0xfe3a6c                         
+00FE3410  mov      x1, xzr                               
+00FE3414  mov      v8.16b, v0.16b                        
+00FE3418  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE341C  cbz      x0, #0xfe3a6c                         
+00FE3420  mov      x1, xzr                               
+00FE3424  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3428  cbz      x0, #0xfe3a6c                         
+00FE342C  mov      x1, xzr                               
+00FE3430  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3434  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE3438  cbz      x0, #0xfe3a6c                         
+00FE343C  mov      x1, xzr                               
+00FE3440  mov      v9.16b, v1.16b                        
+00FE3444  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3448  cbz      x0, #0xfe3a6c                         
+00FE344C  mov      x1, xzr                               
+00FE3450  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3454  cbz      x0, #0xfe3a6c                         
+00FE3458  mov      x1, xzr                               
+00FE345C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3460  fmov     s0, #-20.00000000                     
+00FE3464  fadd     s0, s2, s0                            
+00FE3468  str      s8, [x19, #0x134]                      // self.puntoFinal1
+00FE346C  str      s9, [x19, #0x138]                     
+00FE3470  str      s0, [x19, #0x13c]                     
+00FE3474  ldrb     w8, [x19, #0x167]                      // self.sw_obj2
+00FE3478  cbz      w8, #0xfe3510                         
+00FE347C  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE3480  cbz      x0, #0xfe3a6c                         
+00FE3484  mov      x1, xzr                               
+00FE3488  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE348C  cbz      x0, #0xfe3a6c                         
+00FE3490  mov      x1, xzr                               
+00FE3494  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3498  cbz      x0, #0xfe3a6c                         
+00FE349C  mov      x1, xzr                               
+00FE34A0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE34A4  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE34A8  cbz      x0, #0xfe3a6c                         
+00FE34AC  mov      x1, xzr                               
+00FE34B0  mov      v8.16b, v0.16b                        
+00FE34B4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE34B8  cbz      x0, #0xfe3a6c                         
+00FE34BC  mov      x1, xzr                               
+00FE34C0  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE34C4  cbz      x0, #0xfe3a6c                         
+00FE34C8  mov      x1, xzr                               
+00FE34CC  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE34D0  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE34D4  cbz      x0, #0xfe3a6c                         
+00FE34D8  mov      x1, xzr                               
+00FE34DC  mov      v9.16b, v1.16b                        
+00FE34E0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE34E4  cbz      x0, #0xfe3a6c                         
+00FE34E8  mov      x1, xzr                               
+00FE34EC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE34F0  cbz      x0, #0xfe3a6c                         
+00FE34F4  mov      x1, xzr                               
+00FE34F8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE34FC  fmov     s0, #-20.00000000                     
+00FE3500  fadd     s0, s2, s0                            
+00FE3504  str      s8, [x19, #0x140]                      // self.puntoFinal2
+00FE3508  str      s9, [x19, #0x144]                     
+00FE350C  str      s0, [x19, #0x148]                     
+00FE3510  adrp     x8, #0x236a000                        
+00FE3514  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE3518  ldr      x8, [x8, #0x670]                       // [0x236A670] '6'
+00FE351C  mov      x2, xzr                               
+00FE3520  ldr      x1, [x8]                              
+00FE3524  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE3528  tbz      w0, #0, #0xfe3664                     
+00FE352C  ldrb     w8, [x19, #0x166]                      // self.sw_obj1
+00FE3530  cbz      w8, #0xfe35c8                         
+00FE3534  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE3538  cbz      x0, #0xfe3a6c                         
+00FE353C  mov      x1, xzr                               
+00FE3540  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3544  cbz      x0, #0xfe3a6c                         
+00FE3548  mov      x1, xzr                               
+00FE354C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3550  cbz      x0, #0xfe3a6c                         
+00FE3554  mov      x1, xzr                               
+00FE3558  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE355C  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE3560  cbz      x0, #0xfe3a6c                         
+00FE3564  mov      x1, xzr                               
+00FE3568  mov      v8.16b, v0.16b                        
+00FE356C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3570  cbz      x0, #0xfe3a6c                         
+00FE3574  mov      x1, xzr                               
+00FE3578  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE357C  cbz      x0, #0xfe3a6c                         
+00FE3580  mov      x1, xzr                               
+00FE3584  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3588  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE358C  cbz      x0, #0xfe3a6c                         
+00FE3590  mov      x1, xzr                               
+00FE3594  mov      v9.16b, v1.16b                        
+00FE3598  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE359C  cbz      x0, #0xfe3a6c                         
+00FE35A0  mov      x1, xzr                               
+00FE35A4  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE35A8  cbz      x0, #0xfe3a6c                         
+00FE35AC  mov      x1, xzr                               
+00FE35B0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE35B4  fmov     s0, #-20.00000000                     
+00FE35B8  fadd     s0, s8, s0                            
+00FE35BC  str      s9, [x19, #0x138]                     
+00FE35C0  str      s0, [x19, #0x134]                      // self.puntoFinal1
+00FE35C4  str      s2, [x19, #0x13c]                     
+00FE35C8  ldrb     w8, [x19, #0x167]                      // self.sw_obj2
+00FE35CC  cbz      w8, #0xfe3664                         
+00FE35D0  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE35D4  cbz      x0, #0xfe3a6c                         
+00FE35D8  mov      x1, xzr                               
+00FE35DC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE35E0  cbz      x0, #0xfe3a6c                         
+00FE35E4  mov      x1, xzr                               
+00FE35E8  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE35EC  cbz      x0, #0xfe3a6c                         
+00FE35F0  mov      x1, xzr                               
+00FE35F4  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE35F8  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE35FC  cbz      x0, #0xfe3a6c                         
+00FE3600  mov      x1, xzr                               
+00FE3604  mov      v8.16b, v0.16b                        
+00FE3608  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE360C  cbz      x0, #0xfe3a6c                         
+00FE3610  mov      x1, xzr                               
+00FE3614  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3618  cbz      x0, #0xfe3a6c                         
+00FE361C  mov      x1, xzr                               
+00FE3620  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3624  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE3628  cbz      x0, #0xfe3a6c                         
+00FE362C  mov      x1, xzr                               
+00FE3630  mov      v9.16b, v1.16b                        
+00FE3634  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3638  cbz      x0, #0xfe3a6c                         
+00FE363C  mov      x1, xzr                               
+00FE3640  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3644  cbz      x0, #0xfe3a6c                         
+00FE3648  mov      x1, xzr                               
+00FE364C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3650  fmov     s0, #-20.00000000                     
+00FE3654  fadd     s0, s8, s0                            
+00FE3658  str      s9, [x19, #0x144]                     
+00FE365C  str      s0, [x19, #0x140]                      // self.puntoFinal2
+00FE3660  str      s2, [x19, #0x148]                     
+00FE3664  adrp     x8, #0x236a000                        
+00FE3668  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE366C  ldr      x8, [x8, #0x6a0]                       // [0x236A6A0] '7'
+00FE3670  mov      x2, xzr                               
+00FE3674  ldr      x1, [x8]                              
+00FE3678  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE367C  tbz      w0, #0, #0xfe37b8                     
+00FE3680  ldrb     w8, [x19, #0x166]                      // self.sw_obj1
+00FE3684  cbz      w8, #0xfe371c                         
+00FE3688  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE368C  cbz      x0, #0xfe3a6c                         
+00FE3690  mov      x1, xzr                               
+00FE3694  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3698  cbz      x0, #0xfe3a6c                         
+00FE369C  mov      x1, xzr                               
+00FE36A0  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE36A4  cbz      x0, #0xfe3a6c                         
+00FE36A8  mov      x1, xzr                               
+00FE36AC  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE36B0  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE36B4  cbz      x0, #0xfe3a6c                         
+00FE36B8  mov      x1, xzr                               
+00FE36BC  mov      v8.16b, v0.16b                        
+00FE36C0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE36C4  cbz      x0, #0xfe3a6c                         
+00FE36C8  mov      x1, xzr                               
+00FE36CC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE36D0  cbz      x0, #0xfe3a6c                         
+00FE36D4  mov      x1, xzr                               
+00FE36D8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE36DC  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE36E0  cbz      x0, #0xfe3a6c                         
+00FE36E4  mov      x1, xzr                               
+00FE36E8  mov      v9.16b, v1.16b                        
+00FE36EC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE36F0  cbz      x0, #0xfe3a6c                         
+00FE36F4  mov      x1, xzr                               
+00FE36F8  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE36FC  cbz      x0, #0xfe3a6c                         
+00FE3700  mov      x1, xzr                               
+00FE3704  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3708  fmov     s0, #20.00000000                      
+00FE370C  fadd     s0, s8, s0                            
+00FE3710  str      s9, [x19, #0x138]                     
+00FE3714  str      s0, [x19, #0x134]                      // self.puntoFinal1
+00FE3718  str      s2, [x19, #0x13c]                     
+00FE371C  ldrb     w8, [x19, #0x167]                      // self.sw_obj2
+00FE3720  cbz      w8, #0xfe37b8                         
+00FE3724  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE3728  cbz      x0, #0xfe3a6c                         
+00FE372C  mov      x1, xzr                               
+00FE3730  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3734  cbz      x0, #0xfe3a6c                         
+00FE3738  mov      x1, xzr                               
+00FE373C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3740  cbz      x0, #0xfe3a6c                         
+00FE3744  mov      x1, xzr                               
+00FE3748  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE374C  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE3750  cbz      x0, #0xfe3a6c                         
+00FE3754  mov      x1, xzr                               
+00FE3758  mov      v8.16b, v0.16b                        
+00FE375C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3760  cbz      x0, #0xfe3a6c                         
+00FE3764  mov      x1, xzr                               
+00FE3768  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE376C  cbz      x0, #0xfe3a6c                         
+00FE3770  mov      x1, xzr                               
+00FE3774  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3778  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE377C  cbz      x0, #0xfe3a6c                         
+00FE3780  mov      x1, xzr                               
+00FE3784  mov      v9.16b, v1.16b                        
+00FE3788  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE378C  cbz      x0, #0xfe3a6c                         
+00FE3790  mov      x1, xzr                               
+00FE3794  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3798  cbz      x0, #0xfe3a6c                         
+00FE379C  mov      x1, xzr                               
+00FE37A0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE37A4  fmov     s0, #20.00000000                      
+00FE37A8  fadd     s0, s8, s0                            
+00FE37AC  str      s9, [x19, #0x144]                     
+00FE37B0  str      s0, [x19, #0x140]                      // self.puntoFinal2
+00FE37B4  str      s2, [x19, #0x148]                     
+00FE37B8  adrp     x8, #0x236a000                        
+00FE37BC  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE37C0  ldr      x8, [x8, #0x798]                       // [0x236A798] '8'
+00FE37C4  mov      x2, xzr                               
+00FE37C8  ldr      x1, [x8]                              
+00FE37CC  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE37D0  tbz      w0, #0, #0xfe3910                     
+00FE37D4  ldrb     w8, [x19, #0x166]                      // self.sw_obj1
+00FE37D8  adrp     x20, #0x600000                        
+00FE37DC  cbz      w8, #0xfe3874                         
+00FE37E0  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE37E4  cbz      x0, #0xfe3a6c                         
+00FE37E8  mov      x1, xzr                               
+00FE37EC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE37F0  cbz      x0, #0xfe3a6c                         
+00FE37F4  mov      x1, xzr                               
+00FE37F8  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE37FC  cbz      x0, #0xfe3a6c                         
+00FE3800  mov      x1, xzr                               
+00FE3804  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3808  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE380C  cbz      x0, #0xfe3a6c                         
+00FE3810  mov      x1, xzr                               
+00FE3814  mov      v8.16b, v0.16b                        
+00FE3818  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE381C  cbz      x0, #0xfe3a6c                         
+00FE3820  mov      x1, xzr                               
+00FE3824  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3828  cbz      x0, #0xfe3a6c                         
+00FE382C  mov      x1, xzr                               
+00FE3830  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3834  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE3838  cbz      x0, #0xfe3a6c                         
+00FE383C  mov      x1, xzr                               
+00FE3840  mov      v9.16b, v1.16b                        
+00FE3844  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3848  cbz      x0, #0xfe3a6c                         
+00FE384C  mov      x1, xzr                               
+00FE3850  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3854  cbz      x0, #0xfe3a6c                         
+00FE3858  mov      x1, xzr                               
+00FE385C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3860  ldr      s0, [x20, #0x198]                     
+00FE3864  str      s8, [x19, #0x134]                      // self.puntoFinal1
+00FE3868  str      s2, [x19, #0x13c]                     
+00FE386C  fadd     s0, s9, s0                            
+00FE3870  str      s0, [x19, #0x138]                     
+00FE3874  ldrb     w8, [x19, #0x167]                      // self.sw_obj2
+00FE3878  cbz      w8, #0xfe3910                         
+00FE387C  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE3880  cbz      x0, #0xfe3a6c                         
+00FE3884  mov      x1, xzr                               
+00FE3888  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE388C  cbz      x0, #0xfe3a6c                         
+00FE3890  mov      x1, xzr                               
+00FE3894  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3898  cbz      x0, #0xfe3a6c                         
+00FE389C  mov      x1, xzr                               
+00FE38A0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE38A4  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE38A8  cbz      x0, #0xfe3a6c                         
+00FE38AC  mov      x1, xzr                               
+00FE38B0  mov      v8.16b, v0.16b                        
+00FE38B4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE38B8  cbz      x0, #0xfe3a6c                         
+00FE38BC  mov      x1, xzr                               
+00FE38C0  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE38C4  cbz      x0, #0xfe3a6c                         
+00FE38C8  mov      x1, xzr                               
+00FE38CC  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE38D0  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE38D4  cbz      x0, #0xfe3a6c                         
+00FE38D8  mov      x1, xzr                               
+00FE38DC  mov      v9.16b, v1.16b                        
+00FE38E0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE38E4  cbz      x0, #0xfe3a6c                         
+00FE38E8  mov      x1, xzr                               
+00FE38EC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE38F0  cbz      x0, #0xfe3a6c                         
+00FE38F4  mov      x1, xzr                               
+00FE38F8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE38FC  ldr      s0, [x20, #0x198]                     
+00FE3900  str      s8, [x19, #0x140]                      // self.puntoFinal2
+00FE3904  str      s2, [x19, #0x148]                     
+00FE3908  fadd     s0, s9, s0                            
+00FE390C  str      s0, [x19, #0x144]                     
+00FE3910  adrp     x8, #0x236a000                        
+00FE3914  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE3918  ldr      x8, [x8, #0x7f8]                       // [0x236A7F8] '9'
+00FE391C  mov      x2, xzr                               
+00FE3920  ldr      x1, [x8]                              
+00FE3924  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE3928  tbz      w0, #0, #0xfe3240                     
+00FE392C  ldrb     w8, [x19, #0x166]                      // self.sw_obj1
+00FE3930  adrp     x20, #0x5ff000                        
+00FE3934  cbz      w8, #0xfe39cc                         
+00FE3938  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE393C  cbz      x0, #0xfe3a6c                         
+00FE3940  mov      x1, xzr                               
+00FE3944  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3948  cbz      x0, #0xfe3a6c                         
+00FE394C  mov      x1, xzr                               
+00FE3950  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3954  cbz      x0, #0xfe3a6c                         
+00FE3958  mov      x1, xzr                               
+00FE395C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3960  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE3964  cbz      x0, #0xfe3a6c                         
+00FE3968  mov      x1, xzr                               
+00FE396C  mov      v8.16b, v0.16b                        
+00FE3970  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3974  cbz      x0, #0xfe3a6c                         
+00FE3978  mov      x1, xzr                               
+00FE397C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3980  cbz      x0, #0xfe3a6c                         
+00FE3984  mov      x1, xzr                               
+00FE3988  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE398C  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE3990  cbz      x0, #0xfe3a6c                         
+00FE3994  mov      x1, xzr                               
+00FE3998  mov      v9.16b, v1.16b                        
+00FE399C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE39A0  cbz      x0, #0xfe3a6c                         
+00FE39A4  mov      x1, xzr                               
+00FE39A8  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE39AC  cbz      x0, #0xfe3a6c                         
+00FE39B0  mov      x1, xzr                               
+00FE39B4  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE39B8  ldr      s0, [x20, #0xb00]                     
+00FE39BC  str      s8, [x19, #0x134]                      // self.puntoFinal1
+00FE39C0  str      s2, [x19, #0x13c]                     
+00FE39C4  fadd     s0, s9, s0                            
+00FE39C8  str      s0, [x19, #0x138]                     
+00FE39CC  ldrb     w8, [x19, #0x167]                      // self.sw_obj2
+00FE39D0  cbz      w8, #0xfe3240                         
+00FE39D4  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE39D8  cbz      x0, #0xfe3a6c                         
+00FE39DC  mov      x1, xzr                               
+00FE39E0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE39E4  cbz      x0, #0xfe3a6c                         
+00FE39E8  mov      x1, xzr                               
+00FE39EC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE39F0  cbz      x0, #0xfe3a6c                         
+00FE39F4  mov      x1, xzr                               
+00FE39F8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE39FC  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE3A00  cbz      x0, #0xfe3a6c                         
+00FE3A04  mov      x1, xzr                               
+00FE3A08  mov      v8.16b, v0.16b                        
+00FE3A0C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3A10  cbz      x0, #0xfe3a6c                         
+00FE3A14  mov      x1, xzr                               
+00FE3A18  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3A1C  cbz      x0, #0xfe3a6c                         
+00FE3A20  mov      x1, xzr                               
+00FE3A24  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3A28  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE3A2C  cbz      x0, #0xfe3a6c                         
+00FE3A30  mov      x1, xzr                               
+00FE3A34  mov      v9.16b, v1.16b                        
+00FE3A38  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE3A3C  cbz      x0, #0xfe3a6c                         
+00FE3A40  mov      x1, xzr                               
+00FE3A44  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE3A48  cbz      x0, #0xfe3a6c                         
+00FE3A4C  mov      x1, xzr                               
+00FE3A50  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE3A54  ldr      s0, [x20, #0xb00]                     
+00FE3A58  str      s8, [x19, #0x140]                      // self.puntoFinal2
+00FE3A5C  str      s2, [x19, #0x148]                     
+00FE3A60  fadd     s0, s9, s0                            
+00FE3A64  str      s0, [x19, #0x144]                     
+00FE3A68  b        #0xfe3240                             
+00FE3A6C  bl       #0xe61da0                             

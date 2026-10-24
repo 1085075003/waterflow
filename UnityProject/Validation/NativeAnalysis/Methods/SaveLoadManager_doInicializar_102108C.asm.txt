@@ -1,0 +1,54 @@
+// SaveLoadManager$$doInicializar VA 0x102108C, inferred length 208
+void SaveLoadManager__doInicializar (SaveLoadManager_o* __this, const MethodInfo* method);
+0102108C  str      x30, [sp, #-0x20]!                    
+01021090  stp      x20, x19, [sp, #0x10]                 
+01021094  adrp     x20, #0x24fb000                       
+01021098  ldrb     w8, [x20, #0xccd]                     
+0102109C  mov      x19, x0                               
+010210A0  tbnz     w8, #0, #0x10210c4                    
+010210A4  adrp     x0, #0x236a000                        
+010210A8  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+010210AC  bl       #0xe61b78                             
+010210B0  adrp     x0, #0x236a000                        
+010210B4  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010210B8  bl       #0xe61b78                             
+010210BC  mov      w8, #1                                
+010210C0  strb     w8, [x20, #0xccd]                     
+010210C4  ldr      x0, [x19, #0x198]                      // self.audioManager
+010210C8  cbz      x0, #0x1021158                        
+010210CC  ldr      x1, [x19, #0x178]                      // self.SonidoFuente
+010210D0  mov      x2, xzr                               
+010210D4  bl       #0x102b0e8                             // AudioManager$$StopSound
+010210D8  ldr      x0, [x19, #0x168]                      // self.cajaComplete
+010210DC  cbz      x0, #0x1021158                        
+010210E0  adrp     x20, #0x236a000                       
+010210E4  adrp     x19, #0x236a000                       
+010210E8  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010210EC  ldr      x19, [x19, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+010210F0  mov      w1, wzr                               
+010210F4  mov      x2, xzr                               
+010210F8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010210FC  ldr      x0, [x20]                             
+01021100  ldr      w8, [x0, #0xe0]                       
+01021104  cbnz     w8, #0x1021110                        
+01021108  bl       #0xe61c80                             
+0102110C  ldr      x0, [x20]                             
+01021110  ldr      x8, [x0, #0xb8]                       
+01021114  mov      w9, #1                                
+01021118  movi     v0.2d, #0000000000000000              
+0102111C  strb     w9, [x8, #0x16]                       
+01021120  str      wzr, [x8, #8]                         
+01021124  strh     wzr, [x8, #4]                         
+01021128  strb     wzr, [x8, #0x14]                      
+0102112C  ldr      x8, [x19]                             
+01021130  ldp      x20, x19, [sp, #0x10]                 
+01021134  ldr      x8, [x8, #0xb8]                       
+01021138  stur     q0, [x8, #0x44]                       
+0102113C  stur     q0, [x8, #0x34]                       
+01021140  stur     q0, [x8, #0x24]                       
+01021144  stur     q0, [x8, #0x14]                       
+01021148  stur     q0, [x8, #0x7c]                       
+0102114C  stur     q0, [x8, #0x8c]                       
+01021150  ldr      x30, [sp], #0x20                      
+01021154  ret                                            
+01021158  bl       #0xe61da0                             

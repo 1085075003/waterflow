@@ -1,0 +1,222 @@
+// AudioManager$$Awake VA 0x102AAEC, inferred length 880
+void AudioManager__Awake (AudioManager_o* __this, const MethodInfo* method);
+0102AAEC  str      d8, [sp, #-0x60]!                     
+0102AAF0  str      x30, [sp, #8]                         
+0102AAF4  stp      x28, x27, [sp, #0x10]                 
+0102AAF8  stp      x26, x25, [sp, #0x20]                 
+0102AAFC  stp      x24, x23, [sp, #0x30]                 
+0102AB00  stp      x22, x21, [sp, #0x40]                 
+0102AB04  stp      x20, x19, [sp, #0x50]                 
+0102AB08  adrp     x20, #0x24fb000                       
+0102AB0C  adrp     x22, #0x236a000                       
+0102AB10  adrp     x21, #0x2368000                       
+0102AB14  ldrb     w8, [x20, #0xcfd]                     
+0102AB18  ldr      x22, [x22, #0x9d0]                     // [0x236A9D0] AudioManager_TypeInfo
+0102AB1C  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+0102AB20  mov      x19, x0                               
+0102AB24  tbnz     w8, #0, #0x102ab90                    
+0102AB28  adrp     x0, #0x236a000                        
+0102AB2C  ldr      x0, [x0, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+0102AB30  bl       #0xe61b78                             
+0102AB34  adrp     x0, #0x2368000                        
+0102AB38  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0102AB3C  bl       #0xe61b78                             
+0102AB40  adrp     x0, #0x236b000                        
+0102AB44  ldr      x0, [x0, #0x898]                       // [0x236B898] 'Chill'
+0102AB48  bl       #0xe61b78                             
+0102AB4C  adrp     x0, #0x236b000                        
+0102AB50  ldr      x0, [x0, #0x8a0]                       // [0x236B8A0] 'MusicaLevel'
+0102AB54  bl       #0xe61b78                             
+0102AB58  adrp     x0, #0x236b000                        
+0102AB5C  ldr      x0, [x0, #0x938]                       // [0x236B938] 'Conf_music'
+0102AB60  bl       #0xe61b78                             
+0102AB64  adrp     x0, #0x236b000                        
+0102AB68  ldr      x0, [x0, #0x988]                       // [0x236B988] 'SonidoCompleted'
+0102AB6C  bl       #0xe61b78                             
+0102AB70  adrp     x0, #0x236b000                        
+0102AB74  ldr      x0, [x0, #0x890]                       // [0x236B890] 'SonidoFuente'
+0102AB78  bl       #0xe61b78                             
+0102AB7C  adrp     x0, #0x236b000                        
+0102AB80  ldr      x0, [x0, #0x940]                       // [0x236B940] 'Conf_sound'
+0102AB84  bl       #0xe61b78                             
+0102AB88  mov      w8, #1                                
+0102AB8C  strb     w8, [x20, #0xcfd]                     
+0102AB90  ldr      x8, [x22]                             
+0102AB94  ldr      x0, [x21]                             
+0102AB98  ldr      x8, [x8, #0xb8]                       
+0102AB9C  ldr      w9, [x0, #0xe0]                       
+0102ABA0  ldr      x20, [x8]                             
+0102ABA4  cbnz     w9, #0x102abac                        
+0102ABA8  bl       #0xe61c80                             
+0102ABAC  mov      x0, x20                               
+0102ABB0  mov      x1, xzr                               
+0102ABB4  mov      x2, xzr                               
+0102ABB8  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+0102ABBC  tbz      w0, #0, #0x102ac3c                    
+0102ABC0  ldr      x8, [x22]                             
+0102ABC4  ldr      x0, [x21]                             
+0102ABC8  ldr      x8, [x8, #0xb8]                       
+0102ABCC  ldr      w9, [x0, #0xe0]                       
+0102ABD0  ldr      x20, [x8]                             
+0102ABD4  cbnz     w9, #0x102abdc                        
+0102ABD8  bl       #0xe61c80                             
+0102ABDC  mov      x0, x20                               
+0102ABE0  mov      x1, x19                               
+0102ABE4  mov      x2, xzr                               
+0102ABE8  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+0102ABEC  tbz      w0, #0, #0x102ac3c                    
+0102ABF0  mov      x0, x19                               
+0102ABF4  mov      x1, xzr                               
+0102ABF8  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+0102ABFC  ldr      x8, [x21]                             
+0102AC00  mov      x19, x0                               
+0102AC04  ldr      w9, [x8, #0xe0]                       
+0102AC08  cbnz     w9, #0x102ac14                        
+0102AC0C  mov      x0, x8                                
+0102AC10  bl       #0xe61c80                             
+0102AC14  mov      x0, x19                               
+0102AC18  ldp      x20, x19, [sp, #0x50]                 
+0102AC1C  ldp      x22, x21, [sp, #0x40]                 
+0102AC20  ldp      x24, x23, [sp, #0x30]                 
+0102AC24  ldp      x26, x25, [sp, #0x20]                 
+0102AC28  ldp      x28, x27, [sp, #0x10]                 
+0102AC2C  ldr      x30, [sp, #8]                         
+0102AC30  mov      x1, xzr                               
+0102AC34  ldr      d8, [sp], #0x60                       
+0102AC38  b        #0x200a194                             // UnityEngine.Object$$Destroy
+0102AC3C  ldr      x8, [x22]                             
+0102AC40  mov      x0, x19                               
+0102AC44  mov      x1, xzr                               
+0102AC48  ldr      x8, [x8, #0xb8]                       
+0102AC4C  str      x19, [x8]                             
+0102AC50  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+0102AC54  ldr      x8, [x21]                             
+0102AC58  mov      x20, x0                               
+0102AC5C  ldr      w9, [x8, #0xe0]                       
+0102AC60  cbnz     w9, #0x102ac6c                        
+0102AC64  mov      x0, x8                                
+0102AC68  bl       #0xe61c80                             
+0102AC6C  mov      x0, x20                               
+0102AC70  mov      x1, xzr                               
+0102AC74  bl       #0x200a384                             // UnityEngine.Object$$DontDestroyOnLoad
+0102AC78  ldr      x8, [x19, #0x20]                       // self.sounds
+0102AC7C  cbz      x8, #0x102ae34                        
+0102AC80  adrp     x21, #0x236b000                       
+0102AC84  adrp     x22, #0x236b000                       
+0102AC88  adrp     x23, #0x236b000                       
+0102AC8C  adrp     x9, #0x600000                         
+0102AC90  adrp     x24, #0x236b000                       
+0102AC94  adrp     x25, #0x236b000                       
+0102AC98  adrp     x26, #0x236b000                       
+0102AC9C  ldr      x21, [x21, #0x940]                     // [0x236B940] 'Conf_sound'
+0102ACA0  ldr      x22, [x22, #0x898]                     // [0x236B898] 'Chill'
+0102ACA4  ldr      x23, [x23, #0x938]                     // [0x236B938] 'Conf_music'
+0102ACA8  ldr      s8, [x9, #0x8c]                       
+0102ACAC  ldr      x24, [x24, #0x988]                     // [0x236B988] 'SonidoCompleted'
+0102ACB0  ldr      x25, [x25, #0x890]                     // [0x236B890] 'SonidoFuente'
+0102ACB4  ldr      x26, [x26, #0x8a0]                     // [0x236B8A0] 'MusicaLevel'
+0102ACB8  mov      w20, wzr                              
+0102ACBC  ldr      w9, [x8, #0x18]                       
+0102ACC0  cmp      w20, w9                               
+0102ACC4  b.ge     #0x102ae38                            
+0102ACC8  cmp      w20, w9                               
+0102ACCC  b.hs     #0x102ae58                            
+0102ACD0  sxtw     x27, w20                              
+0102ACD4  add      x8, x8, x27, lsl #3                   
+0102ACD8  ldr      x0, [x21]                             
+0102ACDC  ldr      x28, [x8, #0x20]                      
+0102ACE0  mov      x1, xzr                               
+0102ACE4  bl       #0x2001574                             // UnityEngine.PlayerPrefs$$GetFloat
+0102ACE8  cbz      x28, #0x102ae34                       
+0102ACEC  str      s0, [x28, #0x20]                      
+0102ACF0  ldr      x8, [x19, #0x20]                       // self.sounds
+0102ACF4  cbz      x8, #0x102ae34                        
+0102ACF8  ldr      w9, [x8, #0x18]                       
+0102ACFC  cmp      w20, w9                               
+0102AD00  b.hs     #0x102ae58                            
+0102AD04  add      x8, x8, x27, lsl #3                   
+0102AD08  ldr      x8, [x8, #0x20]                       
+0102AD0C  cbz      x8, #0x102ae34                        
+0102AD10  ldr      x0, [x8, #0x10]                       
+0102AD14  ldr      x1, [x22]                             
+0102AD18  mov      x2, xzr                               
+0102AD1C  bl       #0x1960c7c                             // System.String$$op_Equality
+0102AD20  tbnz     w0, #0, #0x102ad58                    
+0102AD24  ldr      x8, [x19, #0x20]                       // self.sounds
+0102AD28  cbz      x8, #0x102ae34                        
+0102AD2C  ldr      w9, [x8, #0x18]                       
+0102AD30  cmp      w20, w9                               
+0102AD34  b.hs     #0x102ae58                            
+0102AD38  add      x8, x8, x27, lsl #3                   
+0102AD3C  ldr      x8, [x8, #0x20]                       
+0102AD40  cbz      x8, #0x102ae34                        
+0102AD44  ldr      x0, [x8, #0x10]                       
+0102AD48  ldr      x1, [x26]                             
+0102AD4C  mov      x2, xzr                               
+0102AD50  bl       #0x1960c7c                             // System.String$$op_Equality
+0102AD54  tbz      w0, #0, #0x102ad88                    
+0102AD58  ldr      x8, [x19, #0x20]                       // self.sounds
+0102AD5C  cbz      x8, #0x102ae34                        
+0102AD60  ldr      w9, [x8, #0x18]                       
+0102AD64  cmp      w20, w9                               
+0102AD68  b.hs     #0x102ae58                            
+0102AD6C  add      x8, x8, x27, lsl #3                   
+0102AD70  ldr      x0, [x23]                             
+0102AD74  ldr      x28, [x8, #0x20]                      
+0102AD78  mov      x1, xzr                               
+0102AD7C  bl       #0x2001574                             // UnityEngine.PlayerPrefs$$GetFloat
+0102AD80  cbz      x28, #0x102ae34                       
+0102AD84  str      s0, [x28, #0x20]                      
+0102AD88  ldr      x8, [x19, #0x20]                       // self.sounds
+0102AD8C  cbz      x8, #0x102ae34                        
+0102AD90  ldr      w9, [x8, #0x18]                       
+0102AD94  cmp      w20, w9                               
+0102AD98  b.hs     #0x102ae58                            
+0102AD9C  add      x8, x8, x27, lsl #3                   
+0102ADA0  ldr      x8, [x8, #0x20]                       
+0102ADA4  cbz      x8, #0x102ae34                        
+0102ADA8  ldr      x0, [x8, #0x10]                       
+0102ADAC  ldr      x1, [x24]                             
+0102ADB0  mov      x2, xzr                               
+0102ADB4  bl       #0x1960c7c                             // System.String$$op_Equality
+0102ADB8  tbnz     w0, #0, #0x102adf0                    
+0102ADBC  ldr      x8, [x19, #0x20]                       // self.sounds
+0102ADC0  cbz      x8, #0x102ae34                        
+0102ADC4  ldr      w9, [x8, #0x18]                       
+0102ADC8  cmp      w20, w9                               
+0102ADCC  b.hs     #0x102ae58                            
+0102ADD0  add      x8, x8, x27, lsl #3                   
+0102ADD4  ldr      x8, [x8, #0x20]                       
+0102ADD8  cbz      x8, #0x102ae34                        
+0102ADDC  ldr      x0, [x8, #0x10]                       
+0102ADE0  ldr      x1, [x25]                             
+0102ADE4  mov      x2, xzr                               
+0102ADE8  bl       #0x1960c7c                             // System.String$$op_Equality
+0102ADEC  tbz      w0, #0, #0x102ae28                    
+0102ADF0  ldr      x0, [x21]                             
+0102ADF4  mov      x1, xzr                               
+0102ADF8  bl       #0x2001574                             // UnityEngine.PlayerPrefs$$GetFloat
+0102ADFC  ldr      x8, [x19, #0x20]                       // self.sounds
+0102AE00  cbz      x8, #0x102ae34                        
+0102AE04  ldr      w9, [x8, #0x18]                       
+0102AE08  cmp      w20, w9                               
+0102AE0C  b.hs     #0x102ae58                            
+0102AE10  add      x9, x8, x27, lsl #3                   
+0102AE14  ldr      x9, [x9, #0x20]                       
+0102AE18  cbz      x9, #0x102ae34                        
+0102AE1C  fadd     s0, s0, s8                            
+0102AE20  str      s0, [x9, #0x20]                       
+0102AE24  b        #0x102ae2c                            
+0102AE28  ldr      x8, [x19, #0x20]                       // self.sounds
+0102AE2C  add      w20, w20, #1                          
+0102AE30  cbnz     x8, #0x102acbc                        
+0102AE34  bl       #0xe61da0                             
+0102AE38  ldp      x20, x19, [sp, #0x50]                 
+0102AE3C  ldp      x22, x21, [sp, #0x40]                 
+0102AE40  ldp      x24, x23, [sp, #0x30]                 
+0102AE44  ldp      x26, x25, [sp, #0x20]                 
+0102AE48  ldp      x28, x27, [sp, #0x10]                 
+0102AE4C  ldr      x30, [sp, #8]                         
+0102AE50  ldr      d8, [sp], #0x60                       
+0102AE54  ret                                            
+0102AE58  bl       #0xe61da8                             

@@ -1,0 +1,22 @@
+// UIManagerPortScript$$.cctor VA 0x1038934, inferred length 80
+void UIManagerPortScript___cctor (const MethodInfo* method);
+01038934  str      x30, [sp, #-0x20]!                    
+01038938  stp      x20, x19, [sp, #0x10]                 
+0103893C  adrp     x19, #0x24fb000                       
+01038940  adrp     x20, #0x236b000                       
+01038944  ldrb     w8, [x19, #0xd51]                     
+01038948  ldr      x20, [x20, #0xc10]                     // [0x236BC10] UIManagerPortScript_TypeInfo
+0103894C  tbnz     w8, #0, #0x1038964                    
+01038950  adrp     x0, #0x236b000                        
+01038954  ldr      x0, [x0, #0xc10]                       // [0x236BC10] UIManagerPortScript_TypeInfo
+01038958  bl       #0xe61b78                             
+0103895C  mov      w8, #1                                
+01038960  strb     w8, [x19, #0xd51]                     
+01038964  ldr      x8, [x20]                             
+01038968  ldp      x20, x19, [sp, #0x10]                 
+0103896C  mov      w9, #1                                
+01038970  ldr      x8, [x8, #0xb8]                       
+01038974  strb     w9, [x8]                              
+01038978  str      xzr, [x8, #0x10]                      
+0103897C  ldr      x30, [sp], #0x20                      
+01038980  ret                                            

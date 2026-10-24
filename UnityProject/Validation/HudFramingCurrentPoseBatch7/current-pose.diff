@@ -1,0 +1,51 @@
+--- a/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
++++ b/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
+@@ -90,6 +90,10 @@
+         // offset along the new view direction to recover the user's base pose.
+         if(hasApplied && ((transform.position-lastAppliedPosition).sqrMagnitude>.000001f || Quaternion.Angle(transform.rotation,lastAppliedRotation)>.0001f))
+             basePosition=transform.position+transform.forward*LastBackwardDistance;
++        // Capture the actual rendered HUD while the camera still has its
++        // current pose. ScreenSpaceCamera Canvas world geometry must not be
++        // projected from the temporary unfitted base pose below.
++        GetProtectedHudRegions(hudRegions);
+         transform.position=basePosition;
+         LastBackwardDistance=0;
+         if(view.aspect<1) { RecordAppliedPose(); return; }
+@@ -100,7 +104,6 @@
+         float backward=0; MeshCount=0; structuralBoxCount=0;
+         foreach(Renderer renderer in pieces) Measure(renderer,tanX,tanY,ref backward);
+         foreach(Renderer renderer in ground) Measure(renderer,tanX,tanY,ref backward);
+-        GetProtectedHudRegions(hudRegions);
+         // A point moves toward the viewport centre when the camera retreats.
+         // Clear each actual HUD rectangle toward that centre, rather than
+         // inventing a fixed-height full-width band which would shrink clear levels.
+@@ -217,23 +220,17 @@
+         if(canvas==null || !canvas.isActiveAndEnabled) return false;
+         Canvas root=canvas.rootCanvas;
+         if(root.renderMode==RenderMode.WorldSpace) return false;
+-        RectTransform rootRect=root.transform as RectTransform;
++        Camera canvasCamera=root.renderMode==RenderMode.ScreenSpaceOverlay ? null : root.worldCamera;
+         Rect pixels=root.pixelRect;
+-        if(rootRect==null || pixels.width<=0 || pixels.height<=0) return false;
+-        Rect logical=rootRect.rect;
+-        if(logical.width<=0 || logical.height<=0) return false;
+-        Rect canvasViewport=root.renderMode==RenderMode.ScreenSpaceCamera && root.worldCamera!=null ? root.worldCamera.rect : new Rect(0,0,1,1);
++        if(pixels.width<=0 || pixels.height<=0) return false;
+         control.GetWorldCorners(hudWorldCorners);
+         Vector2 low=new Vector2(float.PositiveInfinity,float.PositiveInfinity),high=-low;
+         foreach(Vector3 corner in hudWorldCorners)
+         {
+-            // Original gameplay Canvas is ScreenSpaceCamera at depth600.
+-            // Its world pose can still reflect the previous fitted camera when
+-            // OnPreCull restores the base pose. Root-local UI coordinates avoid
+-            // a camera/Canvas feedback loop and work for Overlay capture too.
+-            Vector3 local=rootRect.InverseTransformPoint(corner);
+-            Vector2 normalized=new Vector2((local.x-logical.xMin)/logical.width,(local.y-logical.yMin)/logical.height);
+-            normalized=canvasViewport.position+Vector2.Scale(normalized,canvasViewport.size);
++            Vector2 screen=RectTransformUtility.WorldToScreenPoint(canvasCamera,corner);
++            Vector2 normalized=new Vector2((screen.x-pixels.xMin)/pixels.width,(screen.y-pixels.yMin)/pixels.height);
++            // Full-screen overlay coordinates and RT UI-camera coordinates both
++            // normalize through the canvas's actual pixel rectangle.
+             Vector2 viewport=new Vector2((normalized.x-view.rect.xMin)/view.rect.width,(normalized.y-view.rect.yMin)/view.rect.height);
+             low=Vector2.Min(low,viewport); high=Vector2.Max(high,viewport);
+         }

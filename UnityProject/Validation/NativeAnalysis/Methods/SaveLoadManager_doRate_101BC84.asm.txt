@@ -1,0 +1,66 @@
+// SaveLoadManager$$doRate VA 0x101BC84, inferred length 256
+void SaveLoadManager__doRate (SaveLoadManager_o* __this, const MethodInfo* method);
+0101BC84  str      x30, [sp, #-0x30]!                    
+0101BC88  stp      x22, x21, [sp, #0x10]                 
+0101BC8C  stp      x20, x19, [sp, #0x20]                 
+0101BC90  adrp     x20, #0x24fb000                       
+0101BC94  ldrb     w8, [x20, #0xca4]                     
+0101BC98  mov      x19, x0                               
+0101BC9C  tbnz     w8, #0, #0x101bcd8                    
+0101BCA0  adrp     x0, #0x2368000                        
+0101BCA4  ldr      x0, [x0, #0x878]                       // [0x2368878] UnityEngine.Application_TypeInfo
+0101BCA8  bl       #0xe61b78                             
+0101BCAC  adrp     x0, #0x236a000                        
+0101BCB0  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0101BCB4  bl       #0xe61b78                             
+0101BCB8  adrp     x0, #0x236b000                        
+0101BCBC  ldr      x0, [x0, #0x508]                       // [0x236B508] 'RateDone'
+0101BCC0  bl       #0xe61b78                             
+0101BCC4  adrp     x0, #0x236b000                        
+0101BCC8  ldr      x0, [x0, #0x690]                       // [0x236B690] 'https://play.google.com/store/apps/details?id=com.Frasinapp.waterfountain'
+0101BCCC  bl       #0xe61b78                             
+0101BCD0  mov      w8, #1                                
+0101BCD4  strb     w8, [x20, #0xca4]                     
+0101BCD8  ldr      x0, [x19, #0x198]                      // self.audioManager
+0101BCDC  cbz      x0, #0x101bd80                        
+0101BCE0  ldr      x1, [x19, #0x188]                      // self.click
+0101BCE4  adrp     x21, #0x236b000                       
+0101BCE8  adrp     x22, #0x2368000                       
+0101BCEC  adrp     x20, #0x236b000                       
+0101BCF0  ldr      x21, [x21, #0x508]                     // [0x236B508] 'RateDone'
+0101BCF4  ldr      x22, [x22, #0x878]                     // [0x2368878] UnityEngine.Application_TypeInfo
+0101BCF8  ldr      x20, [x20, #0x690]                     // [0x236B690] 'https://play.google.com/store/apps/details?id=com.Frasinapp.waterfountain'
+0101BCFC  mov      x2, xzr                               
+0101BD00  bl       #0x1028540                             // AudioManager$$PlaySound
+0101BD04  ldr      x0, [x21]                             
+0101BD08  mov      w1, #1                                
+0101BD0C  mov      x2, xzr                               
+0101BD10  bl       #0x200137c                             // UnityEngine.PlayerPrefs$$SetInt
+0101BD14  ldr      x0, [x22]                             
+0101BD18  ldr      w8, [x0, #0xe0]                       
+0101BD1C  cbnz     w8, #0x101bd24                        
+0101BD20  bl       #0xe61c80                             
+0101BD24  ldr      x0, [x20]                             
+0101BD28  mov      x1, xzr                               
+0101BD2C  bl       #0x1fdffb8                             // UnityEngine.Application$$OpenURL
+0101BD30  ldr      x0, [x19, #0x170]                      // self.cajaRate
+0101BD34  cbz      x0, #0x101bd80                        
+0101BD38  adrp     x20, #0x236a000                       
+0101BD3C  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0101BD40  mov      w1, wzr                               
+0101BD44  mov      x2, xzr                               
+0101BD48  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0101BD4C  ldr      x0, [x20]                             
+0101BD50  ldr      w8, [x0, #0xe0]                       
+0101BD54  cbnz     w8, #0x101bd60                        
+0101BD58  bl       #0xe61c80                             
+0101BD5C  ldr      x0, [x20]                             
+0101BD60  ldr      x8, [x0, #0xb8]                       
+0101BD64  mov      x0, x19                               
+0101BD68  ldp      x20, x19, [sp, #0x20]                 
+0101BD6C  ldp      x22, x21, [sp, #0x10]                 
+0101BD70  mov      w9, #1                                
+0101BD74  strb     w9, [x8, #0x16]                       
+0101BD78  ldr      x30, [sp], #0x30                      
+0101BD7C  b        #0x101b9a0                             // SaveLoadManager$$doActivarBotones
+0101BD80  bl       #0xe61da0                             

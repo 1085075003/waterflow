@@ -1,0 +1,128 @@
+// Resorte$$doDesactivarMech VA 0x100C058, inferred length 504
+void Resorte__doDesactivarMech (Resorte_o* __this, const MethodInfo* method);
+0100C058  stp      x30, x21, [sp, #-0x20]!               
+0100C05C  stp      x20, x19, [sp, #0x10]                 
+0100C060  adrp     x21, #0x24fb000                       
+0100C064  adrp     x20, #0x236a000                       
+0100C068  ldrb     w8, [x21, #0xc8d]                     
+0100C06C  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+0100C070  mov      x19, x0                               
+0100C074  tbnz     w8, #0, #0x100c0c8                    
+0100C078  adrp     x0, #0x236a000                        
+0100C07C  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+0100C080  bl       #0xe61b78                             
+0100C084  adrp     x0, #0x236a000                        
+0100C088  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+0100C08C  bl       #0xe61b78                             
+0100C090  adrp     x0, #0x236a000                        
+0100C094  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+0100C098  bl       #0xe61b78                             
+0100C09C  adrp     x0, #0x236a000                        
+0100C0A0  ldr      x0, [x0, #0x6a8]                       // [0x236A6A8] '4'
+0100C0A4  bl       #0xe61b78                             
+0100C0A8  adrp     x0, #0x236a000                        
+0100C0AC  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+0100C0B0  bl       #0xe61b78                             
+0100C0B4  adrp     x0, #0x236a000                        
+0100C0B8  ldr      x0, [x0, #0x6f8]                       // [0x236A6F8] '5'
+0100C0BC  bl       #0xe61b78                             
+0100C0C0  mov      w8, #1                                
+0100C0C4  strb     w8, [x21, #0xc8d]                     
+0100C0C8  ldr      x8, [x20]                             
+0100C0CC  ldr      x8, [x8, #0xb8]                       
+0100C0D0  ldrb     w9, [x8, #0x9d]                       
+0100C0D4  cbz      w9, #0x100c244                        
+0100C0D8  adrp     x9, #0x236a000                        
+0100C0DC  ldr      x9, [x9, #0x6e8]                       // [0x236A6E8] '1'
+0100C0E0  mov      w10, #1                               
+0100C0E4  strb     w10, [x8, #0x9c]                      
+0100C0E8  ldr      x0, [x19, #0xc8]                       // self.conResorte1
+0100C0EC  ldr      x1, [x9]                              
+0100C0F0  mov      x2, xzr                               
+0100C0F4  bl       #0x1960c7c                             // System.String$$op_Equality
+0100C0F8  tbz      w0, #0, #0x100c128                    
+0100C0FC  ldr      x8, [x20]                             
+0100C100  mov      w10, #4                               
+0100C104  ldr      x8, [x8, #0xb8]                       
+0100C108  ldrb     w9, [x8, #0x74]                       
+0100C10C  str      w10, [x8, #0x14]                      
+0100C110  str      wzr, [x8, #0x54]                      
+0100C114  cbz      w9, #0x100c244                        
+0100C118  ldr      w9, [x8, #0x7c]                       
+0100C11C  add      w9, w9, #1                            
+0100C120  str      w9, [x8, #0x7c]                       
+0100C124  b        #0x100c244                            
+0100C128  adrp     x8, #0x236a000                        
+0100C12C  ldr      x0, [x19, #0xc8]                       // self.conResorte1
+0100C130  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+0100C134  mov      x2, xzr                               
+0100C138  ldr      x1, [x8]                              
+0100C13C  bl       #0x1960c7c                             // System.String$$op_Equality
+0100C140  tbz      w0, #0, #0x100c170                    
+0100C144  ldr      x8, [x20]                             
+0100C148  mov      w10, #4                               
+0100C14C  ldr      x8, [x8, #0xb8]                       
+0100C150  ldrb     w9, [x8, #0x75]                       
+0100C154  str      w10, [x8, #0x18]                      
+0100C158  str      wzr, [x8, #0x58]                      
+0100C15C  cbz      w9, #0x100c244                        
+0100C160  ldr      w9, [x8, #0x80]                       
+0100C164  add      w9, w9, #1                            
+0100C168  str      w9, [x8, #0x80]                       
+0100C16C  b        #0x100c244                            
+0100C170  adrp     x8, #0x236a000                        
+0100C174  ldr      x0, [x19, #0xc8]                       // self.conResorte1
+0100C178  ldr      x8, [x8, #0x650]                       // [0x236A650] '3'
+0100C17C  mov      x2, xzr                               
+0100C180  ldr      x1, [x8]                              
+0100C184  bl       #0x1960c7c                             // System.String$$op_Equality
+0100C188  tbz      w0, #0, #0x100c1b8                    
+0100C18C  ldr      x8, [x20]                             
+0100C190  mov      w10, #4                               
+0100C194  ldr      x8, [x8, #0xb8]                       
+0100C198  ldrb     w9, [x8, #0x76]                       
+0100C19C  str      w10, [x8, #0x1c]                      
+0100C1A0  str      wzr, [x8, #0x5c]                      
+0100C1A4  cbz      w9, #0x100c244                        
+0100C1A8  ldr      w9, [x8, #0x84]                       
+0100C1AC  add      w9, w9, #1                            
+0100C1B0  str      w9, [x8, #0x84]                       
+0100C1B4  b        #0x100c244                            
+0100C1B8  adrp     x8, #0x236a000                        
+0100C1BC  ldr      x0, [x19, #0xc8]                       // self.conResorte1
+0100C1C0  ldr      x8, [x8, #0x6a8]                       // [0x236A6A8] '4'
+0100C1C4  mov      x2, xzr                               
+0100C1C8  ldr      x1, [x8]                              
+0100C1CC  bl       #0x1960c7c                             // System.String$$op_Equality
+0100C1D0  tbz      w0, #0, #0x100c200                    
+0100C1D4  ldr      x8, [x20]                             
+0100C1D8  mov      w10, #4                               
+0100C1DC  ldr      x8, [x8, #0xb8]                       
+0100C1E0  ldrb     w9, [x8, #0x77]                       
+0100C1E4  str      w10, [x8, #0x20]                      
+0100C1E8  str      wzr, [x8, #0x60]                      
+0100C1EC  cbz      w9, #0x100c244                        
+0100C1F0  ldr      w9, [x8, #0x88]                       
+0100C1F4  add      w9, w9, #1                            
+0100C1F8  str      w9, [x8, #0x88]                       
+0100C1FC  b        #0x100c244                            
+0100C200  adrp     x8, #0x236a000                        
+0100C204  ldr      x0, [x19, #0xc8]                       // self.conResorte1
+0100C208  ldr      x8, [x8, #0x6f8]                       // [0x236A6F8] '5'
+0100C20C  mov      x2, xzr                               
+0100C210  ldr      x1, [x8]                              
+0100C214  bl       #0x1960c7c                             // System.String$$op_Equality
+0100C218  tbz      w0, #0, #0x100c244                    
+0100C21C  ldr      x8, [x20]                             
+0100C220  mov      w10, #4                               
+0100C224  ldr      x8, [x8, #0xb8]                       
+0100C228  ldrb     w9, [x8, #0x78]                       
+0100C22C  str      w10, [x8, #0x24]                      
+0100C230  str      wzr, [x8, #0x64]                      
+0100C234  cbz      w9, #0x100c244                        
+0100C238  ldr      w9, [x8, #0x8c]                       
+0100C23C  add      w9, w9, #1                            
+0100C240  str      w9, [x8, #0x8c]                       
+0100C244  ldp      x20, x19, [sp, #0x10]                 
+0100C248  ldp      x30, x21, [sp], #0x20                 
+0100C24C  ret                                            

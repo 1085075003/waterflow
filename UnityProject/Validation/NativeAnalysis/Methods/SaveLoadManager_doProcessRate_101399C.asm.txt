@@ -1,0 +1,372 @@
+// SaveLoadManager$$doProcessRate VA 0x101399C, inferred length 1480
+void SaveLoadManager__doProcessRate (SaveLoadManager_o* __this, const MethodInfo* method);
+0101399C  stp      x30, x21, [sp, #-0x20]!               
+010139A0  stp      x20, x19, [sp, #0x10]                 
+010139A4  adrp     x20, #0x24fb000                       
+010139A8  adrp     x21, #0x236b000                       
+010139AC  ldrb     w8, [x20, #0xca1]                     
+010139B0  ldr      x21, [x21, #0x508]                     // [0x236B508] 'RateDone'
+010139B4  mov      x19, x0                               
+010139B8  tbnz     w8, #0, #0x10139f4                    
+010139BC  adrp     x0, #0x236a000                        
+010139C0  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+010139C4  bl       #0xe61b78                             
+010139C8  adrp     x0, #0x236b000                        
+010139CC  ldr      x0, [x0, #0x510]                       // [0x236B510] 'showRateUs'
+010139D0  bl       #0xe61b78                             
+010139D4  adrp     x0, #0x236b000                        
+010139D8  ldr      x0, [x0, #0x508]                       // [0x236B508] 'RateDone'
+010139DC  bl       #0xe61b78                             
+010139E0  adrp     x0, #0x236b000                        
+010139E4  ldr      x0, [x0, #0x518]                       // [0x236B518] 'RateMostrado'
+010139E8  bl       #0xe61b78                             
+010139EC  mov      w8, #1                                
+010139F0  strb     w8, [x20, #0xca1]                     
+010139F4  ldr      x0, [x21]                             
+010139F8  mov      w1, wzr                               
+010139FC  mov      x2, xzr                               
+01013A00  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+01013A04  cbnz     w0, #0x1013f00                        
+01013A08  adrp     x21, #0x236a000                       
+01013A0C  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01013A10  ldr      x0, [x21]                             
+01013A14  ldr      w8, [x0, #0xe0]                       
+01013A18  cbnz     w8, #0x1013a24                        
+01013A1C  bl       #0xe61c80                             
+01013A20  ldr      x0, [x21]                             
+01013A24  ldr      x8, [x0, #0xb8]                       
+01013A28  ldr      w8, [x8]                              
+01013A2C  cmp      w8, #0xa                              
+01013A30  b.eq     #0x1013eb4                            
+01013A34  ldr      w9, [x0, #0xe0]                       
+01013A38  cbnz     w9, #0x1013a4c                        
+01013A3C  bl       #0xe61c80                             
+01013A40  ldr      x0, [x21]                             
+01013A44  ldr      x8, [x0, #0xb8]                       
+01013A48  ldr      w8, [x8]                              
+01013A4C  cmp      w8, #0x14                             
+01013A50  b.eq     #0x1013eb4                            
+01013A54  ldr      w9, [x0, #0xe0]                       
+01013A58  cbnz     w9, #0x1013a6c                        
+01013A5C  bl       #0xe61c80                             
+01013A60  ldr      x0, [x21]                             
+01013A64  ldr      x8, [x0, #0xb8]                       
+01013A68  ldr      w8, [x8]                              
+01013A6C  cmp      w8, #0x1e                             
+01013A70  b.eq     #0x1013eb4                            
+01013A74  ldr      w9, [x0, #0xe0]                       
+01013A78  cbnz     w9, #0x1013a8c                        
+01013A7C  bl       #0xe61c80                             
+01013A80  ldr      x0, [x21]                             
+01013A84  ldr      x8, [x0, #0xb8]                       
+01013A88  ldr      w8, [x8]                              
+01013A8C  cmp      w8, #0x28                             
+01013A90  b.eq     #0x1013eb4                            
+01013A94  ldr      w9, [x0, #0xe0]                       
+01013A98  cbnz     w9, #0x1013aac                        
+01013A9C  bl       #0xe61c80                             
+01013AA0  ldr      x0, [x21]                             
+01013AA4  ldr      x8, [x0, #0xb8]                       
+01013AA8  ldr      w8, [x8]                              
+01013AAC  cmp      w8, #0x3c                             
+01013AB0  b.eq     #0x1013eb4                            
+01013AB4  ldr      w9, [x0, #0xe0]                       
+01013AB8  cbnz     w9, #0x1013acc                        
+01013ABC  bl       #0xe61c80                             
+01013AC0  ldr      x0, [x21]                             
+01013AC4  ldr      x8, [x0, #0xb8]                       
+01013AC8  ldr      w8, [x8]                              
+01013ACC  cmp      w8, #0x46                             
+01013AD0  b.eq     #0x1013eb4                            
+01013AD4  ldr      w9, [x0, #0xe0]                       
+01013AD8  cbnz     w9, #0x1013aec                        
+01013ADC  bl       #0xe61c80                             
+01013AE0  ldr      x0, [x21]                             
+01013AE4  ldr      x8, [x0, #0xb8]                       
+01013AE8  ldr      w8, [x8]                              
+01013AEC  cmp      w8, #0x50                             
+01013AF0  b.eq     #0x1013eb4                            
+01013AF4  ldr      w9, [x0, #0xe0]                       
+01013AF8  cbnz     w9, #0x1013b0c                        
+01013AFC  bl       #0xe61c80                             
+01013B00  ldr      x0, [x21]                             
+01013B04  ldr      x8, [x0, #0xb8]                       
+01013B08  ldr      w8, [x8]                              
+01013B0C  cmp      w8, #0x5a                             
+01013B10  b.eq     #0x1013eb4                            
+01013B14  ldr      w9, [x0, #0xe0]                       
+01013B18  cbnz     w9, #0x1013b2c                        
+01013B1C  bl       #0xe61c80                             
+01013B20  ldr      x0, [x21]                             
+01013B24  ldr      x8, [x0, #0xb8]                       
+01013B28  ldr      w8, [x8]                              
+01013B2C  cmp      w8, #0x6e                             
+01013B30  b.eq     #0x1013eb4                            
+01013B34  ldr      w9, [x0, #0xe0]                       
+01013B38  cbnz     w9, #0x1013b4c                        
+01013B3C  bl       #0xe61c80                             
+01013B40  ldr      x0, [x21]                             
+01013B44  ldr      x8, [x0, #0xb8]                       
+01013B48  ldr      w8, [x8]                              
+01013B4C  cmp      w8, #0x78                             
+01013B50  b.eq     #0x1013eb4                            
+01013B54  ldr      w9, [x0, #0xe0]                       
+01013B58  cbnz     w9, #0x1013b6c                        
+01013B5C  bl       #0xe61c80                             
+01013B60  ldr      x0, [x21]                             
+01013B64  ldr      x8, [x0, #0xb8]                       
+01013B68  ldr      w8, [x8]                              
+01013B6C  cmp      w8, #0x82                             
+01013B70  b.eq     #0x1013eb4                            
+01013B74  ldr      w9, [x0, #0xe0]                       
+01013B78  cbnz     w9, #0x1013b8c                        
+01013B7C  bl       #0xe61c80                             
+01013B80  ldr      x0, [x21]                             
+01013B84  ldr      x8, [x0, #0xb8]                       
+01013B88  ldr      w8, [x8]                              
+01013B8C  cmp      w8, #0x8c                             
+01013B90  b.eq     #0x1013eb4                            
+01013B94  ldr      w9, [x0, #0xe0]                       
+01013B98  cbnz     w9, #0x1013bac                        
+01013B9C  bl       #0xe61c80                             
+01013BA0  ldr      x0, [x21]                             
+01013BA4  ldr      x8, [x0, #0xb8]                       
+01013BA8  ldr      w8, [x8]                              
+01013BAC  cmp      w8, #0xa0                             
+01013BB0  b.eq     #0x1013eb4                            
+01013BB4  ldr      w9, [x0, #0xe0]                       
+01013BB8  cbnz     w9, #0x1013bcc                        
+01013BBC  bl       #0xe61c80                             
+01013BC0  ldr      x0, [x21]                             
+01013BC4  ldr      x8, [x0, #0xb8]                       
+01013BC8  ldr      w8, [x8]                              
+01013BCC  cmp      w8, #0xaa                             
+01013BD0  b.eq     #0x1013eb4                            
+01013BD4  ldr      w9, [x0, #0xe0]                       
+01013BD8  cbnz     w9, #0x1013bec                        
+01013BDC  bl       #0xe61c80                             
+01013BE0  ldr      x0, [x21]                             
+01013BE4  ldr      x8, [x0, #0xb8]                       
+01013BE8  ldr      w8, [x8]                              
+01013BEC  cmp      w8, #0xb4                             
+01013BF0  b.eq     #0x1013eb4                            
+01013BF4  ldr      w9, [x0, #0xe0]                       
+01013BF8  cbnz     w9, #0x1013c0c                        
+01013BFC  bl       #0xe61c80                             
+01013C00  ldr      x0, [x21]                             
+01013C04  ldr      x8, [x0, #0xb8]                       
+01013C08  ldr      w8, [x8]                              
+01013C0C  cmp      w8, #0xbe                             
+01013C10  b.eq     #0x1013eb4                            
+01013C14  ldr      w9, [x0, #0xe0]                       
+01013C18  cbnz     w9, #0x1013c2c                        
+01013C1C  bl       #0xe61c80                             
+01013C20  ldr      x0, [x21]                             
+01013C24  ldr      x8, [x0, #0xb8]                       
+01013C28  ldr      w8, [x8]                              
+01013C2C  cmp      w8, #0x104                            
+01013C30  b.eq     #0x1013eb4                            
+01013C34  ldr      w9, [x0, #0xe0]                       
+01013C38  cbnz     w9, #0x1013c4c                        
+01013C3C  bl       #0xe61c80                             
+01013C40  ldr      x0, [x21]                             
+01013C44  ldr      x8, [x0, #0xb8]                       
+01013C48  ldr      w8, [x8]                              
+01013C4C  cmp      w8, #0x10e                            
+01013C50  b.eq     #0x1013eb4                            
+01013C54  ldr      w9, [x0, #0xe0]                       
+01013C58  cbnz     w9, #0x1013c6c                        
+01013C5C  bl       #0xe61c80                             
+01013C60  ldr      x0, [x21]                             
+01013C64  ldr      x8, [x0, #0xb8]                       
+01013C68  ldr      w8, [x8]                              
+01013C6C  cmp      w8, #0x118                            
+01013C70  b.eq     #0x1013eb4                            
+01013C74  ldr      w9, [x0, #0xe0]                       
+01013C78  cbnz     w9, #0x1013c8c                        
+01013C7C  bl       #0xe61c80                             
+01013C80  ldr      x0, [x21]                             
+01013C84  ldr      x8, [x0, #0xb8]                       
+01013C88  ldr      w8, [x8]                              
+01013C8C  cmp      w8, #0x122                            
+01013C90  b.eq     #0x1013eb4                            
+01013C94  ldr      w9, [x0, #0xe0]                       
+01013C98  cbnz     w9, #0x1013cac                        
+01013C9C  bl       #0xe61c80                             
+01013CA0  ldr      x0, [x21]                             
+01013CA4  ldr      x8, [x0, #0xb8]                       
+01013CA8  ldr      w8, [x8]                              
+01013CAC  cmp      w8, #0x19a                            
+01013CB0  b.eq     #0x1013eb4                            
+01013CB4  ldr      w9, [x0, #0xe0]                       
+01013CB8  cbnz     w9, #0x1013ccc                        
+01013CBC  bl       #0xe61c80                             
+01013CC0  ldr      x0, [x21]                             
+01013CC4  ldr      x8, [x0, #0xb8]                       
+01013CC8  ldr      w8, [x8]                              
+01013CCC  cmp      w8, #0x1a4                            
+01013CD0  b.eq     #0x1013eb4                            
+01013CD4  ldr      w9, [x0, #0xe0]                       
+01013CD8  cbnz     w9, #0x1013cec                        
+01013CDC  bl       #0xe61c80                             
+01013CE0  ldr      x0, [x21]                             
+01013CE4  ldr      x8, [x0, #0xb8]                       
+01013CE8  ldr      w8, [x8]                              
+01013CEC  cmp      w8, #0x1ae                            
+01013CF0  b.eq     #0x1013eb4                            
+01013CF4  ldr      w9, [x0, #0xe0]                       
+01013CF8  cbnz     w9, #0x1013d0c                        
+01013CFC  bl       #0xe61c80                             
+01013D00  ldr      x0, [x21]                             
+01013D04  ldr      x8, [x0, #0xb8]                       
+01013D08  ldr      w8, [x8]                              
+01013D0C  cmp      w8, #0x1b8                            
+01013D10  b.eq     #0x1013eb4                            
+01013D14  ldr      w9, [x0, #0xe0]                       
+01013D18  cbnz     w9, #0x1013d2c                        
+01013D1C  bl       #0xe61c80                             
+01013D20  ldr      x0, [x21]                             
+01013D24  ldr      x8, [x0, #0xb8]                       
+01013D28  ldr      w8, [x8]                              
+01013D2C  cmp      w8, #0x1cc                            
+01013D30  b.eq     #0x1013eb4                            
+01013D34  ldr      w9, [x0, #0xe0]                       
+01013D38  cbnz     w9, #0x1013d4c                        
+01013D3C  bl       #0xe61c80                             
+01013D40  ldr      x0, [x21]                             
+01013D44  ldr      x8, [x0, #0xb8]                       
+01013D48  ldr      w8, [x8]                              
+01013D4C  cmp      w8, #0x1d6                            
+01013D50  b.eq     #0x1013eb4                            
+01013D54  ldr      w9, [x0, #0xe0]                       
+01013D58  cbnz     w9, #0x1013d6c                        
+01013D5C  bl       #0xe61c80                             
+01013D60  ldr      x0, [x21]                             
+01013D64  ldr      x8, [x0, #0xb8]                       
+01013D68  ldr      w8, [x8]                              
+01013D6C  cmp      w8, #0x1e0                            
+01013D70  b.eq     #0x1013eb4                            
+01013D74  ldr      w9, [x0, #0xe0]                       
+01013D78  cbnz     w9, #0x1013d8c                        
+01013D7C  bl       #0xe61c80                             
+01013D80  ldr      x0, [x21]                             
+01013D84  ldr      x8, [x0, #0xb8]                       
+01013D88  ldr      w8, [x8]                              
+01013D8C  cmp      w8, #0x1ea                            
+01013D90  b.eq     #0x1013eb4                            
+01013D94  ldr      w9, [x0, #0xe0]                       
+01013D98  cbnz     w9, #0x1013dac                        
+01013D9C  bl       #0xe61c80                             
+01013DA0  ldr      x0, [x21]                             
+01013DA4  ldr      x8, [x0, #0xb8]                       
+01013DA8  ldr      w8, [x8]                              
+01013DAC  cmp      w8, #0x262                            
+01013DB0  b.eq     #0x1013eb4                            
+01013DB4  ldr      w9, [x0, #0xe0]                       
+01013DB8  cbnz     w9, #0x1013dcc                        
+01013DBC  bl       #0xe61c80                             
+01013DC0  ldr      x0, [x21]                             
+01013DC4  ldr      x8, [x0, #0xb8]                       
+01013DC8  ldr      w8, [x8]                              
+01013DCC  cmp      w8, #0x26c                            
+01013DD0  b.eq     #0x1013eb4                            
+01013DD4  ldr      w9, [x0, #0xe0]                       
+01013DD8  cbnz     w9, #0x1013dec                        
+01013DDC  bl       #0xe61c80                             
+01013DE0  ldr      x0, [x21]                             
+01013DE4  ldr      x8, [x0, #0xb8]                       
+01013DE8  ldr      w8, [x8]                              
+01013DEC  cmp      w8, #0x276                            
+01013DF0  b.eq     #0x1013eb4                            
+01013DF4  ldr      w9, [x0, #0xe0]                       
+01013DF8  cbnz     w9, #0x1013e0c                        
+01013DFC  bl       #0xe61c80                             
+01013E00  ldr      x0, [x21]                             
+01013E04  ldr      x8, [x0, #0xb8]                       
+01013E08  ldr      w8, [x8]                              
+01013E0C  cmp      w8, #0x424                            
+01013E10  b.eq     #0x1013eb4                            
+01013E14  ldr      w9, [x0, #0xe0]                       
+01013E18  cbnz     w9, #0x1013e2c                        
+01013E1C  bl       #0xe61c80                             
+01013E20  ldr      x0, [x21]                             
+01013E24  ldr      x8, [x0, #0xb8]                       
+01013E28  ldr      w8, [x8]                              
+01013E2C  cmp      w8, #0x438                            
+01013E30  b.eq     #0x1013eb4                            
+01013E34  ldr      w9, [x0, #0xe0]                       
+01013E38  cbnz     w9, #0x1013e4c                        
+01013E3C  bl       #0xe61c80                             
+01013E40  ldr      x0, [x21]                             
+01013E44  ldr      x8, [x0, #0xb8]                       
+01013E48  ldr      w8, [x8]                              
+01013E4C  cmp      w8, #0x67c                            
+01013E50  b.eq     #0x1013eb4                            
+01013E54  ldr      w9, [x0, #0xe0]                       
+01013E58  cbnz     w9, #0x1013e6c                        
+01013E5C  bl       #0xe61c80                             
+01013E60  ldr      x0, [x21]                             
+01013E64  ldr      x8, [x0, #0xb8]                       
+01013E68  ldr      w8, [x8]                              
+01013E6C  cmp      w8, #0x690                            
+01013E70  b.eq     #0x1013eb4                            
+01013E74  ldr      w9, [x0, #0xe0]                       
+01013E78  cbnz     w9, #0x1013e8c                        
+01013E7C  bl       #0xe61c80                             
+01013E80  ldr      x0, [x21]                             
+01013E84  ldr      x8, [x0, #0xb8]                       
+01013E88  ldr      w8, [x8]                              
+01013E8C  cmp      w8, #0x744                            
+01013E90  b.eq     #0x1013eb4                            
+01013E94  ldr      w9, [x0, #0xe0]                       
+01013E98  cbnz     w9, #0x1013eac                        
+01013E9C  bl       #0xe61c80                             
+01013EA0  ldr      x0, [x21]                             
+01013EA4  ldr      x8, [x0, #0xb8]                       
+01013EA8  ldr      w8, [x8]                              
+01013EAC  cmp      w8, #0x758                            
+01013EB0  b.ne     #0x1013f00                            
+01013EB4  ldr      w8, [x0, #0xe0]                       
+01013EB8  cbnz     w8, #0x1013ec4                        
+01013EBC  bl       #0xe61c80                             
+01013EC0  ldr      x0, [x21]                             
+01013EC4  ldr      x0, [x0, #0xb8]                       
+01013EC8  mov      x1, xzr                               
+01013ECC  bl       #0x1ab3994                             // System.Int32$$ToString
+01013ED0  adrp     x8, #0x236b000                        
+01013ED4  ldr      x8, [x8, #0x518]                       // [0x236B518] 'RateMostrado'
+01013ED8  mov      x1, x0                                
+01013EDC  mov      x2, xzr                               
+01013EE0  ldr      x8, [x8]                              
+01013EE4  mov      x0, x8                                
+01013EE8  bl       #0x1958280                             // System.String$$Concat
+01013EEC  mov      w1, wzr                               
+01013EF0  mov      x2, xzr                               
+01013EF4  mov      x20, x0                               
+01013EF8  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+01013EFC  cbz      w0, #0x1013f0c                        
+01013F00  ldp      x20, x19, [sp, #0x10]                 
+01013F04  ldp      x30, x21, [sp], #0x20                 
+01013F08  ret                                            
+01013F0C  ldr      x0, [x21]                             
+01013F10  ldr      w8, [x0, #0xe0]                       
+01013F14  cbnz     w8, #0x1013f20                        
+01013F18  bl       #0xe61c80                             
+01013F1C  ldr      x0, [x21]                             
+01013F20  ldr      x8, [x0, #0xb8]                       
+01013F24  mov      x0, x19                               
+01013F28  strb     wzr, [x8, #0x16]                      
+01013F2C  bl       #0x101b574                             // SaveLoadManager$$doDesactivarBotones
+01013F30  adrp     x8, #0x236b000                        
+01013F34  ldr      x8, [x8, #0x510]                       // [0x236B510] 'showRateUs'
+01013F38  fmov     s0, #2.00000000                       
+01013F3C  mov      x0, x19                               
+01013F40  mov      x2, xzr                               
+01013F44  ldr      x1, [x8]                              
+01013F48  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01013F4C  mov      x0, x20                               
+01013F50  ldp      x20, x19, [sp, #0x10]                 
+01013F54  mov      w1, #1                                
+01013F58  mov      x2, xzr                               
+01013F5C  ldp      x30, x21, [sp], #0x20                 
+01013F60  b        #0x200137c                             // UnityEngine.PlayerPrefs$$SetInt

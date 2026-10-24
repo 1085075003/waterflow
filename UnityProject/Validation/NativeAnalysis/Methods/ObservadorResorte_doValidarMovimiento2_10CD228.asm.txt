@@ -1,0 +1,23 @@
+// ObservadorResorte$$doValidarMovimiento2 VA 0x10CD228, inferred length 84
+void ObservadorResorte__doValidarMovimiento2 (ObservadorResorte_o* __this, const MethodInfo* method);
+010CD228  stp      x30, x19, [sp, #-0x10]!               
+010CD22C  ldr      w8, [x0, #0x2cc]                      
+010CD230  mov      x19, x0                               
+010CD234  strb     wzr, [x0, #0xf0]                      
+010CD238  cmp      w8, #1                                
+010CD23C  b.ne     #0x10cd24c                            
+010CD240  mov      x0, x19                               
+010CD244  bl       #0x10cda64                             // ObservadorResorte$$doValidarPos1
+010CD248  ldr      w8, [x19, #0x2cc]                      // self.position
+010CD24C  cmp      w8, #2                                
+010CD250  b.ne     #0x10cd260                            
+010CD254  mov      x0, x19                               
+010CD258  bl       #0x10cdba0                             // ObservadorResorte$$doValidarPos2
+010CD25C  ldr      w8, [x19, #0x2cc]                      // self.position
+010CD260  cmp      w8, #3                                
+010CD264  b.ne     #0x10cd274                            
+010CD268  mov      x0, x19                               
+010CD26C  ldp      x30, x19, [sp], #0x10                 
+010CD270  b        #0x10cdcf4                             // ObservadorResorte$$doValidarPos3
+010CD274  ldp      x30, x19, [sp], #0x10                 
+010CD278  ret                                            

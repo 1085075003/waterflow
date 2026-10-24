@@ -1,0 +1,206 @@
+// AguaControlPFuente$$Start VA 0xFCB104, inferred length 816
+void AguaControlPFuente__Start (AguaControlPFuente_o* __this, const MethodInfo* method);
+00FCB104  str      x30, [sp, #-0x30]!                    
+00FCB108  stp      x22, x21, [sp, #0x10]                 
+00FCB10C  stp      x20, x19, [sp, #0x20]                 
+00FCB110  adrp     x20, #0x24fb000                       
+00FCB114  ldrb     w8, [x20, #0xb39]                     
+00FCB118  mov      x19, x0                               
+00FCB11C  tbnz     w8, #0, #0xfcb14c                     
+00FCB120  adrp     x0, #0x236a000                        
+00FCB124  ldr      x0, [x0, #0x610]                       // [0x236A610] Method$UnityEngine.GameObject.GetComponent<FuenteCubeta2>()
+00FCB128  bl       #0xe61b78                             
+00FCB12C  adrp     x0, #0x2368000                        
+00FCB130  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCB134  bl       #0xe61b78                             
+00FCB138  adrp     x0, #0x2368000                        
+00FCB13C  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+00FCB140  bl       #0xe61b78                             
+00FCB144  mov      w8, #1                                
+00FCB148  strb     w8, [x20, #0xb39]                     
+00FCB14C  adrp     x22, #0x236a000                       
+00FCB150  adrp     x21, #0x2368000                       
+00FCB154  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FCB158  ldr      x22, [x22, #0x610]                     // [0x236A610] Method$UnityEngine.GameObject.GetComponent<FuenteCubeta2>()
+00FCB15C  ldr      x21, [x21, #0xf50]                     // [0x2368F50] ''
+00FCB160  cbz      w8, #0xfcb1c0                         
+00FCB164  ldr      x0, [x19, #0x40]                       // self.origen1
+00FCB168  cbz      x0, #0xfcb430                         
+00FCB16C  ldr      x1, [x22]                             
+00FCB170  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCB174  ldr      x8, [x19, #0x30]                       // self.configCho1
+00FCB178  ldr      x1, [x21]                             
+00FCB17C  mov      x20, x0                               
+00FCB180  mov      x2, xzr                               
+00FCB184  mov      x0, x8                                
+00FCB188  bl       #0x1960c80                             // System.String$$op_Inequality
+00FCB18C  tbz      w0, #0, #0xfcb19c                     
+00FCB190  cbz      x20, #0xfcb430                        
+00FCB194  ldr      x8, [x19, #0x30]                       // self.configCho1
+00FCB198  str      x8, [x20, #0xd0]                      
+00FCB19C  ldr      x0, [x19, #0x38]                       // self.configCho2
+00FCB1A0  ldr      x1, [x21]                             
+00FCB1A4  mov      x2, xzr                               
+00FCB1A8  bl       #0x1960c80                             // System.String$$op_Inequality
+00FCB1AC  tbz      w0, #0, #0xfcb1e8                     
+00FCB1B0  cbz      x20, #0xfcb430                        
+00FCB1B4  ldr      x8, [x19, #0x38]                       // self.configCho2
+00FCB1B8  str      x8, [x20, #0xd8]                      
+00FCB1BC  b        #0xfcb1e8                             
+00FCB1C0  adrp     x8, #0x2368000                        
+00FCB1C4  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCB1C8  ldr      x20, [x19, #0x40]                      // self.origen1
+00FCB1CC  ldr      x0, [x8]                              
+00FCB1D0  ldr      w8, [x0, #0xe0]                       
+00FCB1D4  cbnz     w8, #0xfcb1dc                         
+00FCB1D8  bl       #0xe61c80                             
+00FCB1DC  mov      x0, x20                               
+00FCB1E0  mov      x1, xzr                               
+00FCB1E4  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCB1E8  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FCB1EC  cbz      w8, #0xfcb24c                         
+00FCB1F0  ldr      x0, [x19, #0x48]                       // self.origen2
+00FCB1F4  cbz      x0, #0xfcb430                         
+00FCB1F8  ldr      x1, [x22]                             
+00FCB1FC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCB200  ldr      x8, [x19, #0x30]                       // self.configCho1
+00FCB204  ldr      x1, [x21]                             
+00FCB208  mov      x20, x0                               
+00FCB20C  mov      x2, xzr                               
+00FCB210  mov      x0, x8                                
+00FCB214  bl       #0x1960c80                             // System.String$$op_Inequality
+00FCB218  tbz      w0, #0, #0xfcb228                     
+00FCB21C  cbz      x20, #0xfcb430                        
+00FCB220  ldr      x8, [x19, #0x30]                       // self.configCho1
+00FCB224  str      x8, [x20, #0xd0]                      
+00FCB228  ldr      x0, [x19, #0x38]                       // self.configCho2
+00FCB22C  ldr      x1, [x21]                             
+00FCB230  mov      x2, xzr                               
+00FCB234  bl       #0x1960c80                             // System.String$$op_Inequality
+00FCB238  tbz      w0, #0, #0xfcb274                     
+00FCB23C  cbz      x20, #0xfcb430                        
+00FCB240  ldr      x8, [x19, #0x38]                       // self.configCho2
+00FCB244  str      x8, [x20, #0xd8]                      
+00FCB248  b        #0xfcb274                             
+00FCB24C  adrp     x8, #0x2368000                        
+00FCB250  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCB254  ldr      x20, [x19, #0x48]                      // self.origen2
+00FCB258  ldr      x0, [x8]                              
+00FCB25C  ldr      w8, [x0, #0xe0]                       
+00FCB260  cbnz     w8, #0xfcb268                         
+00FCB264  bl       #0xe61c80                             
+00FCB268  mov      x0, x20                               
+00FCB26C  mov      x1, xzr                               
+00FCB270  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCB274  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FCB278  cbz      w8, #0xfcb2d8                         
+00FCB27C  ldr      x0, [x19, #0x50]                       // self.origen3
+00FCB280  cbz      x0, #0xfcb430                         
+00FCB284  ldr      x1, [x22]                             
+00FCB288  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCB28C  ldr      x8, [x19, #0x30]                       // self.configCho1
+00FCB290  ldr      x1, [x21]                             
+00FCB294  mov      x20, x0                               
+00FCB298  mov      x2, xzr                               
+00FCB29C  mov      x0, x8                                
+00FCB2A0  bl       #0x1960c80                             // System.String$$op_Inequality
+00FCB2A4  tbz      w0, #0, #0xfcb2b4                     
+00FCB2A8  cbz      x20, #0xfcb430                        
+00FCB2AC  ldr      x8, [x19, #0x30]                       // self.configCho1
+00FCB2B0  str      x8, [x20, #0xd0]                      
+00FCB2B4  ldr      x0, [x19, #0x38]                       // self.configCho2
+00FCB2B8  ldr      x1, [x21]                             
+00FCB2BC  mov      x2, xzr                               
+00FCB2C0  bl       #0x1960c80                             // System.String$$op_Inequality
+00FCB2C4  tbz      w0, #0, #0xfcb300                     
+00FCB2C8  cbz      x20, #0xfcb430                        
+00FCB2CC  ldr      x8, [x19, #0x38]                       // self.configCho2
+00FCB2D0  str      x8, [x20, #0xd8]                      
+00FCB2D4  b        #0xfcb300                             
+00FCB2D8  adrp     x8, #0x2368000                        
+00FCB2DC  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCB2E0  ldr      x20, [x19, #0x50]                      // self.origen3
+00FCB2E4  ldr      x0, [x8]                              
+00FCB2E8  ldr      w8, [x0, #0xe0]                       
+00FCB2EC  cbnz     w8, #0xfcb2f4                         
+00FCB2F0  bl       #0xe61c80                             
+00FCB2F4  mov      x0, x20                               
+00FCB2F8  mov      x1, xzr                               
+00FCB2FC  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCB300  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FCB304  cbz      w8, #0xfcb364                         
+00FCB308  ldr      x0, [x19, #0x58]                       // self.origen4
+00FCB30C  cbz      x0, #0xfcb430                         
+00FCB310  ldr      x1, [x22]                             
+00FCB314  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCB318  ldr      x8, [x19, #0x30]                       // self.configCho1
+00FCB31C  ldr      x1, [x21]                             
+00FCB320  mov      x20, x0                               
+00FCB324  mov      x2, xzr                               
+00FCB328  mov      x0, x8                                
+00FCB32C  bl       #0x1960c80                             // System.String$$op_Inequality
+00FCB330  tbz      w0, #0, #0xfcb340                     
+00FCB334  cbz      x20, #0xfcb430                        
+00FCB338  ldr      x8, [x19, #0x30]                       // self.configCho1
+00FCB33C  str      x8, [x20, #0xd0]                      
+00FCB340  ldr      x0, [x19, #0x38]                       // self.configCho2
+00FCB344  ldr      x1, [x21]                             
+00FCB348  mov      x2, xzr                               
+00FCB34C  bl       #0x1960c80                             // System.String$$op_Inequality
+00FCB350  tbz      w0, #0, #0xfcb38c                     
+00FCB354  cbz      x20, #0xfcb430                        
+00FCB358  ldr      x8, [x19, #0x38]                       // self.configCho2
+00FCB35C  str      x8, [x20, #0xd8]                      
+00FCB360  b        #0xfcb38c                             
+00FCB364  adrp     x8, #0x2368000                        
+00FCB368  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCB36C  ldr      x20, [x19, #0x58]                      // self.origen4
+00FCB370  ldr      x0, [x8]                              
+00FCB374  ldr      w8, [x0, #0xe0]                       
+00FCB378  cbnz     w8, #0xfcb380                         
+00FCB37C  bl       #0xe61c80                             
+00FCB380  mov      x0, x20                               
+00FCB384  mov      x1, xzr                               
+00FCB388  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCB38C  ldrb     w8, [x19, #0x24]                       // self.ori6
+00FCB390  cbz      w8, #0xfcb3fc                         
+00FCB394  ldr      x0, [x19, #0x60]                       // self.origen6
+00FCB398  cbz      x0, #0xfcb430                         
+00FCB39C  ldr      x1, [x22]                             
+00FCB3A0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCB3A4  ldr      x8, [x19, #0x30]                       // self.configCho1
+00FCB3A8  ldr      x1, [x21]                             
+00FCB3AC  mov      x20, x0                               
+00FCB3B0  mov      x2, xzr                               
+00FCB3B4  mov      x0, x8                                
+00FCB3B8  bl       #0x1960c80                             // System.String$$op_Inequality
+00FCB3BC  tbz      w0, #0, #0xfcb3cc                     
+00FCB3C0  cbz      x20, #0xfcb430                        
+00FCB3C4  ldr      x8, [x19, #0x30]                       // self.configCho1
+00FCB3C8  str      x8, [x20, #0xd0]                      
+00FCB3CC  ldr      x0, [x19, #0x38]                       // self.configCho2
+00FCB3D0  ldr      x1, [x21]                             
+00FCB3D4  mov      x2, xzr                               
+00FCB3D8  bl       #0x1960c80                             // System.String$$op_Inequality
+00FCB3DC  tbz      w0, #0, #0xfcb3ec                     
+00FCB3E0  cbz      x20, #0xfcb430                        
+00FCB3E4  ldr      x8, [x19, #0x38]                       // self.configCho2
+00FCB3E8  str      x8, [x20, #0xd8]                      
+00FCB3EC  ldp      x20, x19, [sp, #0x20]                 
+00FCB3F0  ldp      x22, x21, [sp, #0x10]                 
+00FCB3F4  ldr      x30, [sp], #0x30                      
+00FCB3F8  ret                                            
+00FCB3FC  adrp     x8, #0x2368000                        
+00FCB400  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCB404  ldr      x19, [x19, #0x60]                      // self.origen6
+00FCB408  ldr      x0, [x8]                              
+00FCB40C  ldr      w8, [x0, #0xe0]                       
+00FCB410  cbnz     w8, #0xfcb418                         
+00FCB414  bl       #0xe61c80                             
+00FCB418  mov      x0, x19                               
+00FCB41C  ldp      x20, x19, [sp, #0x20]                 
+00FCB420  ldp      x22, x21, [sp, #0x10]                 
+00FCB424  mov      x1, xzr                               
+00FCB428  ldr      x30, [sp], #0x30                      
+00FCB42C  b        #0x200a194                             // UnityEngine.Object$$Destroy
+00FCB430  bl       #0xe61da0                             

@@ -1,0 +1,117 @@
+// RotateCamera3$$Update VA 0x102A444, inferred length 460
+void RotateCamera3__Update (RotateCamera3_o* __this, const MethodInfo* method);
+0102A444  str      d10, [sp, #-0x40]!                    
+0102A448  stp      d9, d8, [sp, #0x10]                   
+0102A44C  stp      x30, x21, [sp, #0x20]                 
+0102A450  stp      x20, x19, [sp, #0x30]                 
+0102A454  adrp     x20, #0x24fb000                       
+0102A458  adrp     x21, #0x236a000                       
+0102A45C  ldrb     w8, [x20, #0xcf9]                     
+0102A460  ldr      x21, [x21, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+0102A464  mov      x19, x0                               
+0102A468  tbnz     w8, #0, #0x102a480                    
+0102A46C  adrp     x0, #0x236a000                        
+0102A470  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+0102A474  bl       #0xe61b78                             
+0102A478  mov      w8, #1                                
+0102A47C  strb     w8, [x20, #0xcf9]                     
+0102A480  ldr      x8, [x21]                             
+0102A484  ldr      x8, [x8, #0xb8]                       
+0102A488  ldrb     w9, [x8]                              
+0102A48C  cbz      w9, #0x102a4e0                        
+0102A490  ldrb     w9, [x19, #0x2c]                       // self.check
+0102A494  ldr      s0, [x19, #0x24]                       // self.wantedRotationAngle
+0102A498  cbz      w9, #0x102a4b8                        
+0102A49C  mov      w9, #0x42b40000                       
+0102A4A0  fmov     s1, w9                                
+0102A4A4  fadd     s1, s0, s1                            
+0102A4A8  strb     wzr, [x19, #0x2c]                      // self.check
+0102A4AC  stp      s1, s0, [x19, #0x24]                   // self.wantedRotationAngle
+0102A4B0  strb     wzr, [x8, #1]                         
+0102A4B4  b        #0x102a4e0                            
+0102A4B8  ldr      s1, [x19, #0x28]                       // self.currentRotationAngle
+0102A4BC  fsub     s0, s0, s1                            
+0102A4C0  fmov     s1, #3.00000000                       
+0102A4C4  fcmp     s0, s1                                
+0102A4C8  b.pl     #0x102a4dc                            
+0102A4CC  mov      w9, #1                                
+0102A4D0  strb     wzr, [x8]                             
+0102A4D4  strb     w9, [x19, #0x2c]                       // self.check
+0102A4D8  b        #0x102a4e0                            
+0102A4DC  strb     wzr, [x19, #0x2c]                      // self.check
+0102A4E0  ldrb     w9, [x8, #1]                          
+0102A4E4  cbz      w9, #0x102a510                        
+0102A4E8  ldrb     w9, [x19, #0x2c]                       // self.check
+0102A4EC  ldr      s8, [x19, #0x24]                       // self.wantedRotationAngle
+0102A4F0  cbz      w9, #0x102a518                        
+0102A4F4  mov      w9, #-0x3d4c0000                      
+0102A4F8  fmov     s0, w9                                
+0102A4FC  fadd     s9, s8, s0                            
+0102A500  strb     wzr, [x19, #0x2c]                      // self.check
+0102A504  stp      s9, s8, [x19, #0x24]                   // self.wantedRotationAngle
+0102A508  strb     wzr, [x8]                             
+0102A50C  b        #0x102a548                            
+0102A510  ldp      s9, s8, [x19, #0x24]                   // self.wantedRotationAngle
+0102A514  b        #0x102a548                            
+0102A518  ldr      s0, [x19, #0x28]                       // self.currentRotationAngle
+0102A51C  fmov     s2, #-3.00000000                      
+0102A520  fsub     s1, s8, s0                            
+0102A524  fcmp     s1, s2                                
+0102A528  b.le     #0x102a53c                            
+0102A52C  strb     wzr, [x8, #1]                         
+0102A530  mov      w8, #1                                
+0102A534  strb     w8, [x19, #0x2c]                       // self.check
+0102A538  b        #0x102a540                            
+0102A53C  strb     wzr, [x19, #0x2c]                      // self.check
+0102A540  mov      v9.16b, v8.16b                        
+0102A544  mov      v8.16b, v0.16b                        
+0102A548  ldr      s10, [x19, #0x20]                      // self.speed
+0102A54C  mov      x0, xzr                               
+0102A550  bl       #0x1ffb6c8                             // UnityEngine.Time$$get_deltaTime
+0102A554  mov      w8, #0x43b40000                       
+0102A558  fsub     s1, s9, s8                            
+0102A55C  fmov     s2, w8                                
+0102A560  mov      w8, #-0x3c4c0000                      
+0102A564  fdiv     s3, s1, s2                            
+0102A568  fmov     s4, w8                                
+0102A56C  frintm   s3, s3                                
+0102A570  fmul     s3, s3, s4                            
+0102A574  fadd     s1, s1, s3                            
+0102A578  fmov     s3, wzr                               
+0102A57C  mov      w8, #0x43340000                       
+0102A580  fmin     s2, s1, s2                            
+0102A584  fcmp     s1, #0.0                              
+0102A588  fmov     s1, w8                                
+0102A58C  fcsel    s2, s2, s3, pl                        
+0102A590  fmul     s0, s10, s0                           
+0102A594  fcmp     s2, s1                                
+0102A598  fmov     s1, #1.00000000                       
+0102A59C  fadd     s4, s2, s4                            
+0102A5A0  fmin     s1, s0, s1                            
+0102A5A4  fcsel    s2, s4, s2, gt                        
+0102A5A8  fcmp     s0, #0.0                              
+0102A5AC  fcsel    s0, s1, s3, pl                        
+0102A5B0  fmul     s0, s0, s2                            
+0102A5B4  fadd     s0, s8, s0                            
+0102A5B8  mov      x0, x19                               
+0102A5BC  mov      x1, xzr                               
+0102A5C0  str      s0, [x19, #0x28]                       // self.currentRotationAngle
+0102A5C4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0102A5C8  adrp     x8, #0x5ff000                         
+0102A5CC  ldr      s0, [x19, #0x28]                       // self.currentRotationAngle
+0102A5D0  ldr      s1, [x8, #0xd64]                      
+0102A5D4  mov      x20, x0                               
+0102A5D8  fmov     s2, wzr                               
+0102A5DC  mov      x0, xzr                               
+0102A5E0  fmul     s1, s0, s1                            
+0102A5E4  fmov     s0, wzr                               
+0102A5E8  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0102A5EC  cbz      x20, #0x102a60c                       
+0102A5F0  mov      x0, x20                               
+0102A5F4  ldp      x20, x19, [sp, #0x30]                 
+0102A5F8  ldp      x30, x21, [sp, #0x20]                 
+0102A5FC  ldp      d9, d8, [sp, #0x10]                   
+0102A600  mov      x1, xzr                               
+0102A604  ldr      d10, [sp], #0x40                      
+0102A608  b        #0x200eccc                             // UnityEngine.Transform$$set_rotation
+0102A60C  bl       #0xe61da0                             

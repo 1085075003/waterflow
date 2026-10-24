@@ -1,0 +1,40 @@
+// ObservadorResorte$$doValidarRotacion VA 0x10CCEFC, inferred length 152
+void ObservadorResorte__doValidarRotacion (ObservadorResorte_o* __this, const MethodInfo* method);
+010CCEFC  stp      x30, x19, [sp, #-0x10]!               
+010CCF00  ldp      s0, s1, [x0, #0xd4]                   
+010CCF04  ldr      s2, [x0, #0xdc]                       
+010CCF08  fmov     s3, #20.00000000                      
+010CCF0C  mov      w8, #1                                
+010CCF10  fadd     s0, s0, s3                            
+010CCF14  mov      x19, x0                               
+010CCF18  strb     w8, [x0, #0x370]                      
+010CCF1C  bl       #0x10cd5fc                             // ObservadorResorte$$doCheckCollision
+010CCF20  ldrb     w8, [x19, #0x1a4]                      // self.checkCollision
+010CCF24  cbnz     w8, #0x10ccf88                        
+010CCF28  ldp      s0, s1, [x19, #0xd4]                   // self.parnextx
+010CCF2C  ldr      s2, [x19, #0xdc]                       // self.parnextz
+010CCF30  fmov     s3, #-20.00000000                     
+010CCF34  mov      x0, x19                               
+010CCF38  fadd     s0, s0, s3                            
+010CCF3C  bl       #0x10cd5fc                             // ObservadorResorte$$doCheckCollision
+010CCF40  ldrb     w8, [x19, #0x1a4]                      // self.checkCollision
+010CCF44  cbnz     w8, #0x10ccf88                        
+010CCF48  ldp      s1, s2, [x19, #0xd8]                   // self.parnexty
+010CCF4C  ldr      s0, [x19, #0xd4]                       // self.parnextx
+010CCF50  fmov     s3, #20.00000000                      
+010CCF54  mov      x0, x19                               
+010CCF58  fadd     s2, s2, s3                            
+010CCF5C  bl       #0x10cd5fc                             // ObservadorResorte$$doCheckCollision
+010CCF60  ldrb     w8, [x19, #0x1a4]                      // self.checkCollision
+010CCF64  cbnz     w8, #0x10ccf88                        
+010CCF68  ldp      s1, s2, [x19, #0xd8]                   // self.parnexty
+010CCF6C  ldr      s0, [x19, #0xd4]                       // self.parnextx
+010CCF70  fmov     s3, #-20.00000000                     
+010CCF74  mov      x0, x19                               
+010CCF78  fadd     s2, s2, s3                            
+010CCF7C  bl       #0x10cd5fc                             // ObservadorResorte$$doCheckCollision
+010CCF80  ldrb     w8, [x19, #0x1a4]                      // self.checkCollision
+010CCF84  cbz      w8, #0x10ccf8c                        
+010CCF88  strb     wzr, [x19, #0x370]                     // self.validaOk
+010CCF8C  ldp      x30, x19, [sp], #0x10                 
+010CCF90  ret                                            

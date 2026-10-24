@@ -1,0 +1,66 @@
+// CascadaTestE$$doProcess VA 0xFDA4D4, inferred length 256
+void CascadaTestE__doProcess (CascadaTestE_o* __this, const MethodInfo* method);
+00FDA4D4  stp      x30, x21, [sp, #-0x20]!               
+00FDA4D8  stp      x20, x19, [sp, #0x10]                 
+00FDA4DC  adrp     x20, #0x24fb000                       
+00FDA4E0  adrp     x21, #0x2368000                       
+00FDA4E4  ldrb     w8, [x20, #0xb87]                     
+00FDA4E8  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FDA4EC  mov      x19, x0                               
+00FDA4F0  tbnz     w8, #0, #0xfda508                     
+00FDA4F4  adrp     x0, #0x2368000                        
+00FDA4F8  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FDA4FC  bl       #0xe61b78                             
+00FDA500  mov      w8, #1                                
+00FDA504  strb     w8, [x20, #0xb87]                     
+00FDA508  mov      w8, #1                                
+00FDA50C  strb     w8, [x19, #0x130]                      // self.instanciar
+00FDA510  ldr      x0, [x21]                             
+00FDA514  ldr      x20, [x19, #0x90]                      // self.esferaSalida1
+00FDA518  ldr      w8, [x0, #0xe0]                       
+00FDA51C  cbnz     w8, #0xfda524                         
+00FDA520  bl       #0xe61c80                             
+00FDA524  mov      x0, x20                               
+00FDA528  mov      x1, xzr                               
+00FDA52C  mov      x2, xzr                               
+00FDA530  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FDA534  tbz      w0, #0, #0xfda548                     
+00FDA538  ldr      x0, [x19, #0x90]                       // self.esferaSalida1
+00FDA53C  cbz      x0, #0xfda5d0                         
+00FDA540  mov      w20, #2                               
+00FDA544  b        #0xfda554                             
+00FDA548  ldr      x0, [x19, #0x98]                       // self.esferaSalida2
+00FDA54C  cbz      x0, #0xfda5d0                         
+00FDA550  mov      w20, #1                               
+00FDA554  mov      w1, wzr                               
+00FDA558  mov      x2, xzr                               
+00FDA55C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FDA560  ldr      x0, [x19, #0x108]                      // self.esferaFiltrante
+00FDA564  str      w20, [x19, #0xb0]                      // self.esfera
+00FDA568  cbz      x0, #0xfda5d0                         
+00FDA56C  mov      w1, wzr                               
+00FDA570  mov      x2, xzr                               
+00FDA574  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FDA578  ldr      x0, [x21]                             
+00FDA57C  ldr      x20, [x19, #0x128]                     // self.splash
+00FDA580  ldr      w8, [x0, #0xe0]                       
+00FDA584  cbnz     w8, #0xfda58c                         
+00FDA588  bl       #0xe61c80                             
+00FDA58C  mov      x0, x20                               
+00FDA590  mov      x1, xzr                               
+00FDA594  mov      x2, xzr                               
+00FDA598  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FDA59C  tbz      w0, #0, #0xfda5c0                     
+00FDA5A0  ldr      x0, [x21]                             
+00FDA5A4  ldr      x20, [x19, #0x128]                     // self.splash
+00FDA5A8  ldr      w8, [x0, #0xe0]                       
+00FDA5AC  cbnz     w8, #0xfda5b4                         
+00FDA5B0  bl       #0xe61c80                             
+00FDA5B4  mov      x0, x20                               
+00FDA5B8  mov      x1, xzr                               
+00FDA5BC  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FDA5C0  mov      x0, x19                               
+00FDA5C4  ldp      x20, x19, [sp, #0x10]                 
+00FDA5C8  ldp      x30, x21, [sp], #0x20                 
+00FDA5CC  b        #0xfda5d4                              // CascadaTestE$$doControlChorro
+00FDA5D0  bl       #0xe61da0                             

@@ -1,0 +1,341 @@
+// SaveLoadManagerDesign$$doCargarEscenaSolucion VA 0xFEB88C, inferred length 1356
+void SaveLoadManagerDesign__doCargarEscenaSolucion (SaveLoadManagerDesign_o* __this, const MethodInfo* method);
+00FEB88C  str      d14, [sp, #-0xa0]!                    
+00FEB890  stp      d13, d12, [sp, #0x10]                 
+00FEB894  stp      d11, d10, [sp, #0x20]                 
+00FEB898  stp      d9, d8, [sp, #0x30]                   
+00FEB89C  stp      x29, x30, [sp, #0x40]                 
+00FEB8A0  stp      x28, x27, [sp, #0x50]                 
+00FEB8A4  stp      x26, x25, [sp, #0x60]                 
+00FEB8A8  stp      x24, x23, [sp, #0x70]                 
+00FEB8AC  stp      x22, x21, [sp, #0x80]                 
+00FEB8B0  stp      x20, x19, [sp, #0x90]                 
+00FEB8B4  adrp     x21, #0x24fb000                       
+00FEB8B8  adrp     x20, #0x236a000                       
+00FEB8BC  ldrb     w8, [x21, #0xbe2]                     
+00FEB8C0  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+00FEB8C4  mov      x19, x0                               
+00FEB8C8  tbnz     w8, #0, #0xfeb988                     
+00FEB8CC  adrp     x0, #0x236a000                        
+00FEB8D0  ldr      x0, [x0, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+00FEB8D4  bl       #0xe61b78                             
+00FEB8D8  adrp     x0, #0x236a000                        
+00FEB8DC  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+00FEB8E0  bl       #0xe61b78                             
+00FEB8E4  adrp     x0, #0x236a000                        
+00FEB8E8  ldr      x0, [x0, #0x800]                       // [0x236A800] Method$UnityEngine.GameObject.GetComponent<ControlFijo>()
+00FEB8EC  bl       #0xe61b78                             
+00FEB8F0  adrp     x0, #0x236a000                        
+00FEB8F4  ldr      x0, [x0, #0x958]                       // [0x236A958] Method$System.Collections.Generic.List<string>.get_Count()
+00FEB8F8  bl       #0xe61b78                             
+00FEB8FC  adrp     x0, #0x236a000                        
+00FEB900  ldr      x0, [x0, #0x960]                       // [0x236A960] Method$System.Collections.Generic.List<string>.get_Item()
+00FEB904  bl       #0xe61b78                             
+00FEB908  adrp     x0, #0x236a000                        
+00FEB90C  ldr      x0, [x0, #0x968]                       // [0x236A968] Method$System.Collections.Generic.List<float>.get_Item()
+00FEB910  bl       #0xe61b78                             
+00FEB914  adrp     x0, #0x236a000                        
+00FEB918  ldr      x0, [x0, #0x920]                       // [0x236A920] System.IO.MemoryStream_TypeInfo
+00FEB91C  bl       #0xe61b78                             
+00FEB920  adrp     x0, #0x2368000                        
+00FEB924  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FEB928  bl       #0xe61b78                             
+00FEB92C  adrp     x0, #0x2368000                        
+00FEB930  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FEB934  bl       #0xe61b78                             
+00FEB938  adrp     x0, #0x236a000                        
+00FEB93C  ldr      x0, [x0, #0x928]                       // [0x236A928] Method$UnityEngine.Resources.Load<TextAsset>()
+00FEB940  bl       #0xe61b78                             
+00FEB944  adrp     x0, #0x236a000                        
+00FEB948  ldr      x0, [x0, #0x970]                       // [0x236A970] Save_TypeInfo
+00FEB94C  bl       #0xe61b78                             
+00FEB950  adrp     x0, #0x236a000                        
+00FEB954  ldr      x0, [x0, #0x978]                       // [0x236A978] 'Cub'
+00FEB958  bl       #0xe61b78                             
+00FEB95C  adrp     x0, #0x236a000                        
+00FEB960  ldr      x0, [x0, #0x9a8]                       // [0x236A9A8] 'solu1'
+00FEB964  bl       #0xe61b78                             
+00FEB968  adrp     x0, #0x236a000                        
+00FEB96C  ldr      x0, [x0, #0x998]                       // [0x236A998] 'Y'
+00FEB970  bl       #0xe61b78                             
+00FEB974  adrp     x0, #0x236a000                        
+00FEB978  ldr      x0, [x0, #0x9b0]                       // [0x236A9B0] 'solu'
+00FEB97C  bl       #0xe61b78                             
+00FEB980  mov      w8, #1                                
+00FEB984  strb     w8, [x21, #0xbe2]                     
+00FEB988  mov      w8, #1                                
+00FEB98C  strb     w8, [x19, #0x21]                       // self.checkCargar
+00FEB990  ldr      x0, [x20]                             
+00FEB994  ldr      w8, [x0, #0xe0]                       
+00FEB998  cbnz     w8, #0xfeb9a4                         
+00FEB99C  bl       #0xe61c80                             
+00FEB9A0  ldr      x0, [x20]                             
+00FEB9A4  ldr      x8, [x0, #0xb8]                       
+00FEB9A8  adrp     x21, #0x236a000                       
+00FEB9AC  ldr      w9, [x8]                              
+00FEB9B0  ldr      x21, [x21, #0x928]                     // [0x236A928] Method$UnityEngine.Resources.Load<TextAsset>()
+00FEB9B4  cbz      w9, #0xfeb9f8                         
+00FEB9B8  adrp     x22, #0x236a000                       
+00FEB9BC  ldr      w9, [x0, #0xe0]                       
+00FEB9C0  ldr      x22, [x22, #0x9b0]                     // [0x236A9B0] 'solu'
+00FEB9C4  cbnz     w9, #0xfeb9d4                         
+00FEB9C8  bl       #0xe61c80                             
+00FEB9CC  ldr      x8, [x20]                             
+00FEB9D0  ldr      x8, [x8, #0xb8]                       
+00FEB9D4  mov      x0, x8                                
+00FEB9D8  mov      x1, xzr                               
+00FEB9DC  bl       #0x1ab3994                             // System.Int32$$ToString
+00FEB9E0  ldr      x8, [x22]                             
+00FEB9E4  mov      x1, x0                                
+00FEB9E8  mov      x2, xzr                               
+00FEB9EC  mov      x0, x8                                
+00FEB9F0  bl       #0x1958280                             // System.String$$Concat
+00FEB9F4  b        #0xfeba04                             
+00FEB9F8  adrp     x8, #0x236a000                        
+00FEB9FC  ldr      x8, [x8, #0x9a8]                       // [0x236A9A8] 'solu1'
+00FEBA00  ldr      x0, [x8]                              
+00FEBA04  ldr      x1, [x21]                             
+00FEBA08  bl       #0x118a2a8                             // UnityEngine.Resources$$Load<object>
+00FEBA0C  adrp     x8, #0x2368000                        
+00FEBA10  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FEBA14  mov      x20, x0                               
+00FEBA18  ldr      x8, [x8]                              
+00FEBA1C  ldr      w9, [x8, #0xe0]                       
+00FEBA20  cbnz     w9, #0xfeba2c                         
+00FEBA24  mov      x0, x8                                
+00FEBA28  bl       #0xe61c80                             
+00FEBA2C  mov      x0, x20                               
+00FEBA30  mov      x1, xzr                               
+00FEBA34  mov      x2, xzr                               
+00FEBA38  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FEBA3C  tbz      w0, #0, #0xfebd64                     
+00FEBA40  cbz      x20, #0xfebd90                        
+00FEBA44  mov      x0, x20                               
+00FEBA48  mov      x1, xzr                               
+00FEBA4C  bl       #0x2008b8c                             // UnityEngine.TextAsset$$get_bytes
+00FEBA50  adrp     x8, #0x236a000                        
+00FEBA54  ldr      x8, [x8, #0x920]                       // [0x236A920] System.IO.MemoryStream_TypeInfo
+00FEBA58  mov      x21, x0                               
+00FEBA5C  ldr      x8, [x8]                              
+00FEBA60  mov      x0, x8                                
+00FEBA64  bl       #0xe61d94                             
+00FEBA68  mov      x1, x21                               
+00FEBA6C  mov      x2, xzr                               
+00FEBA70  mov      x20, x0                               
+00FEBA74  bl       #0x1a18520                             // System.IO.MemoryStream$$.ctor
+00FEBA78  adrp     x8, #0x236a000                        
+00FEBA7C  ldr      x8, [x8, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+00FEBA80  ldr      x0, [x8]                              
+00FEBA84  bl       #0xe61d94                             
+00FEBA88  mov      x1, xzr                               
+00FEBA8C  mov      x21, x0                               
+00FEBA90  bl       #0x19e726c                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$.ctor
+00FEBA94  cbz      x21, #0xfebd90                        
+00FEBA98  mov      x0, x21                               
+00FEBA9C  mov      x1, x20                               
+00FEBAA0  mov      x2, xzr                               
+00FEBAA4  bl       #0x19e72ec                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$Deserialize
+00FEBAA8  cbz      x0, #0xfebd90                         
+00FEBAAC  adrp     x9, #0x236a000                        
+00FEBAB0  ldr      x9, [x9, #0x970]                       // [0x236A970] Save_TypeInfo
+00FEBAB4  ldr      x8, [x0]                              
+00FEBAB8  mov      x20, x0                               
+00FEBABC  ldr      x1, [x9]                              
+00FEBAC0  ldrb     w10, [x8, #0x130]                     
+00FEBAC4  ldrb     w9, [x1, #0x130]                      
+00FEBAC8  cmp      w10, w9                               
+00FEBACC  b.lo     #0xfebd98                             
+00FEBAD0  ldr      x8, [x8, #0xc8]                       
+00FEBAD4  add      x8, x8, x9, lsl #3                    
+00FEBAD8  ldur     x8, [x8, #-8]                         
+00FEBADC  cmp      x8, x1                                
+00FEBAE0  b.ne     #0xfebd98                             
+00FEBAE4  ldr      x0, [x20, #0x18]                      
+00FEBAE8  cbz      x0, #0xfebd90                         
+00FEBAEC  adrp     x26, #0x236a000                       
+00FEBAF0  adrp     x27, #0x236a000                       
+00FEBAF4  adrp     x24, #0x2368000                       
+00FEBAF8  adrp     x22, #0x2368000                       
+00FEBAFC  adrp     x28, #0x236a000                       
+00FEBB00  ldr      x26, [x26, #0x960]                     // [0x236A960] Method$System.Collections.Generic.List<string>.get_Item()
+00FEBB04  ldr      x27, [x27, #0x968]                     // [0x236A968] Method$System.Collections.Generic.List<float>.get_Item()
+00FEBB08  ldr      x24, [x24, #0xb70]                     // [0x2368B70] UnityEngine.Quaternion_TypeInfo
+00FEBB0C  ldr      x22, [x22, #0x900]                     // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FEBB10  ldr      x28, [x28, #0x998]                     // [0x236A998] 'Y'
+00FEBB14  mov      w21, wzr                              
+00FEBB18  adrp     x23, #0x24fb000                       
+00FEBB1C  str      x20, [sp, #8]                         
+00FEBB20  ldr      w8, [x0, #0x18]                       
+00FEBB24  cmp      w21, w8                               
+00FEBB28  b.ge     #0xfebd64                             
+00FEBB2C  ldr      x2, [x26]                             
+00FEBB30  mov      w1, w21                               
+00FEBB34  bl       #0x1571904                             // System.Collections.Generic.List<object>$$get_Item
+00FEBB38  ldr      x8, [x20, #0x20]                      
+00FEBB3C  cbz      x8, #0xfebd90                         
+00FEBB40  ldr      x2, [x27]                             
+00FEBB44  mov      x25, x0                               
+00FEBB48  mov      x0, x8                                
+00FEBB4C  mov      w1, w21                               
+00FEBB50  bl       #0x158970c                             // System.Collections.Generic.List<float>$$get_Item
+00FEBB54  ldr      x0, [x20, #0x28]                      
+00FEBB58  cbz      x0, #0xfebd90                         
+00FEBB5C  ldr      x2, [x27]                             
+00FEBB60  mov      w1, w21                               
+00FEBB64  mov      v8.16b, v0.16b                        
+00FEBB68  bl       #0x158970c                             // System.Collections.Generic.List<float>$$get_Item
+00FEBB6C  ldr      x0, [x20, #0x30]                      
+00FEBB70  cbz      x0, #0xfebd90                         
+00FEBB74  ldr      x2, [x27]                             
+00FEBB78  mov      w1, w21                               
+00FEBB7C  mov      v9.16b, v0.16b                        
+00FEBB80  bl       #0x158970c                             // System.Collections.Generic.List<float>$$get_Item
+00FEBB84  ldr      x0, [x20, #0x38]                      
+00FEBB88  mov      v10.16b, v0.16b                       
+00FEBB8C  cbz      x0, #0xfebd10                         
+00FEBB90  ldr      x2, [x26]                             
+00FEBB94  mov      w1, w21                               
+00FEBB98  bl       #0x1571904                             // System.Collections.Generic.List<object>$$get_Item
+00FEBB9C  mov      x26, x0                               
+00FEBBA0  cbz      x25, #0xfebd90                        
+00FEBBA4  adrp     x8, #0x236a000                        
+00FEBBA8  ldr      x8, [x8, #0x978]                       // [0x236A978] 'Cub'
+00FEBBAC  mov      x0, x25                               
+00FEBBB0  mov      x2, xzr                               
+00FEBBB4  ldr      x1, [x8]                              
+00FEBBB8  bl       #0x19651dc                             // System.String$$Contains
+00FEBBBC  tbz      w0, #0, #0xfebbcc                     
+00FEBBC0  ldr      w8, [x19, #0x48]                       // self.contadorFuentes
+00FEBBC4  add      w8, w8, #1                            
+00FEBBC8  str      w8, [x19, #0x48]                       // self.contadorFuentes
+00FEBBCC  ldr      x29, [x19, #0x28]                      // self.prefabPiezas
+00FEBBD0  cbz      x29, #0xfebd90                        
+00FEBBD4  ldr      w8, [x29, #0x18]                      
+00FEBBD8  cmp      w8, #1                                
+00FEBBDC  b.lt     #0xfebcec                             
+00FEBBE0  mov      w20, wzr                              
+00FEBBE4  cmp      w20, w8                               
+00FEBBE8  b.hs     #0xfebd94                             
+00FEBBEC  ldr      x8, [x19, #0x28]                       // self.prefabPiezas
+00FEBBF0  cbz      x8, #0xfebd90                         
+00FEBBF4  ldr      w9, [x8, #0x18]                       
+00FEBBF8  cmp      w20, w9                               
+00FEBBFC  b.hs     #0xfebd94                             
+00FEBC00  sxtw     x9, w20                               
+00FEBC04  add      x8, x8, x9, lsl #3                    
+00FEBC08  ldr      x0, [x8, #0x20]                       
+00FEBC0C  cbz      x0, #0xfebd90                         
+00FEBC10  add      x8, x29, w20, sxtw #3                 
+00FEBC14  ldr      x27, [x8, #0x20]                      
+00FEBC18  mov      x1, xzr                               
+00FEBC1C  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FEBC20  mov      x1, x0                                
+00FEBC24  mov      x0, x25                               
+00FEBC28  mov      x2, xzr                               
+00FEBC2C  bl       #0x19651dc                             // System.String$$Contains
+00FEBC30  tbz      w0, #0, #0xfebcdc                     
+00FEBC34  str      x27, [x19, #0x30]                      // self.prefabPieza1
+00FEBC38  ldrb     w8, [x23, #0x92b]                     
+00FEBC3C  cbnz     w8, #0xfebc50                         
+00FEBC40  mov      x0, x24                               
+00FEBC44  bl       #0xe61b78                             
+00FEBC48  mov      w8, #1                                
+00FEBC4C  strb     w8, [x23, #0x92b]                     
+00FEBC50  adrp     x9, #0x2368000                        
+00FEBC54  ldr      x8, [x24]                             
+00FEBC58  ldr      x9, [x9, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FEBC5C  ldr      x8, [x8, #0xb8]                       
+00FEBC60  ldr      x0, [x9]                              
+00FEBC64  ldp      s14, s13, [x8]                        
+00FEBC68  ldr      w9, [x0, #0xe0]                       
+00FEBC6C  ldp      s12, s11, [x8, #8]                    
+00FEBC70  cbnz     w9, #0xfebc78                         
+00FEBC74  bl       #0xe61c80                             
+00FEBC78  ldr      x1, [x22]                             
+00FEBC7C  mov      x0, x27                               
+00FEBC80  mov      v0.16b, v8.16b                        
+00FEBC84  mov      v1.16b, v9.16b                        
+00FEBC88  mov      v2.16b, v10.16b                       
+00FEBC8C  mov      v3.16b, v14.16b                       
+00FEBC90  mov      v4.16b, v13.16b                       
+00FEBC94  mov      v5.16b, v12.16b                       
+00FEBC98  mov      v6.16b, v11.16b                       
+00FEBC9C  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FEBCA0  ldr      x1, [x28]                             
+00FEBCA4  mov      x27, x0                               
+00FEBCA8  mov      x0, x26                               
+00FEBCAC  mov      x2, xzr                               
+00FEBCB0  bl       #0x1960c7c                             // System.String$$op_Equality
+00FEBCB4  tbz      w0, #0, #0xfebcdc                     
+00FEBCB8  cbz      x27, #0xfebd90                        
+00FEBCBC  adrp     x8, #0x236a000                        
+00FEBCC0  ldr      x8, [x8, #0x800]                       // [0x236A800] Method$UnityEngine.GameObject.GetComponent<ControlFijo>()
+00FEBCC4  mov      x0, x27                               
+00FEBCC8  ldr      x1, [x8]                              
+00FEBCCC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FEBCD0  cbz      x0, #0xfebd90                         
+00FEBCD4  mov      w8, #1                                
+00FEBCD8  strb     w8, [x0, #0x50]                       
+00FEBCDC  ldr      w8, [x29, #0x18]                      
+00FEBCE0  add      w20, w20, #1                          
+00FEBCE4  cmp      w20, w8                               
+00FEBCE8  b.lt     #0xfebbe4                             
+00FEBCEC  ldr      x20, [sp, #8]                         
+00FEBCF0  adrp     x26, #0x236a000                       
+00FEBCF4  adrp     x27, #0x236a000                       
+00FEBCF8  add      w21, w21, #1                          
+00FEBCFC  ldr      x0, [x20, #0x18]                      
+00FEBD00  ldr      x26, [x26, #0x960]                     // [0x236A960] Method$System.Collections.Generic.List<string>.get_Item()
+00FEBD04  ldr      x27, [x27, #0x968]                     // [0x236A968] Method$System.Collections.Generic.List<float>.get_Item()
+00FEBD08  cbnz     x0, #0xfebb20                         
+00FEBD0C  b        #0xfebd90                             
+00FEBD10  bl       #0xe61da0                             
+00FEBD14  b        #0xfebdc0                             
+00FEBD18  b        #0xfebd1c                             
+00FEBD1C  mov      x26, x0                               
+00FEBD20  cmp      w1, #1                                
+00FEBD24  b.ne     #0xfebdcc                             
+00FEBD28  mov      x0, x26                               
+00FEBD2C  bl       #0x224d2d0                            
+00FEBD30  mov      x26, x0                               
+00FEBD34  adrp     x0, #0x2368000                        
+00FEBD38  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+00FEBD3C  bl       #0xe61b8c                             
+00FEBD40  ldr      x8, [x26]                             
+00FEBD44  ldr      x1, [x8]                              
+00FEBD48  bl       #0xe621cc                             
+00FEBD4C  tbz      w0, #0, #0xfebda0                     
+00FEBD50  bl       #0x224d2e0                            
+00FEBD54  adrp     x0, #0x236a000                        
+00FEBD58  ldr      x0, [x0, #0x9a0]                       // [0x236A9A0] 'N'
+00FEBD5C  bl       #0xe61b8c                             
+00FEBD60  b        #0xfebb9c                             
+00FEBD64  ldp      x20, x19, [sp, #0x90]                 
+00FEBD68  ldp      x22, x21, [sp, #0x80]                 
+00FEBD6C  ldp      x24, x23, [sp, #0x70]                 
+00FEBD70  ldp      x26, x25, [sp, #0x60]                 
+00FEBD74  ldp      x28, x27, [sp, #0x50]                 
+00FEBD78  ldp      x29, x30, [sp, #0x40]                 
+00FEBD7C  ldp      d9, d8, [sp, #0x30]                   
+00FEBD80  ldp      d11, d10, [sp, #0x20]                 
+00FEBD84  ldp      d13, d12, [sp, #0x10]                 
+00FEBD88  ldr      d14, [sp], #0xa0                      
+00FEBD8C  ret                                            
+00FEBD90  bl       #0xe61da0                             
+00FEBD94  bl       #0xe61da8                             
+00FEBD98  mov      x0, x20                               
+00FEBD9C  bl       #0xe6213c                             
+00FEBDA0  mov      w0, #8                                
+00FEBDA4  bl       #0x224d320                            
+00FEBDA8  ldr      x8, [x26]                             
+00FEBDAC  str      x8, [x0]                              
+00FEBDB0  adrp     x1, #0x2253000                        
+00FEBDB4  add      x1, x1, #0x618                        
+00FEBDB8  mov      x2, xzr                               
+00FEBDBC  bl       #0x224d330                            
+00FEBDC0  b        #0xfebdc4                             
+00FEBDC4  mov      x26, x0                               
+00FEBDC8  bl       #0x224d2e0                            
+00FEBDCC  mov      x0, x26                               
+00FEBDD0  bl       #0xf5dd7c                             
+00FEBDD4  bl       #0xd2eb98                             

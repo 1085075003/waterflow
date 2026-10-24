@@ -1,0 +1,178 @@
+// FuenteTest3$$doLights VA 0x10A6A48, inferred length 704
+void FuenteTest3__doLights (FuenteTest3_o* __this, const MethodInfo* method);
+010A6A48  str      d12, [sp, #-0x50]!                    
+010A6A4C  stp      d11, d10, [sp, #0x10]                 
+010A6A50  stp      d9, d8, [sp, #0x20]                   
+010A6A54  stp      x30, x21, [sp, #0x30]                 
+010A6A58  stp      x20, x19, [sp, #0x40]                 
+010A6A5C  adrp     x21, #0x24fb000                       
+010A6A60  adrp     x20, #0x2368000                       
+010A6A64  ldrb     w8, [x21, #0xf6b]                     
+010A6A68  ldr      x20, [x20, #0xf50]                     // [0x2368F50] ''
+010A6A6C  mov      x19, x0                               
+010A6A70  tbnz     w8, #0, #0x10a6ad0                    
+010A6A74  adrp     x0, #0x2368000                        
+010A6A78  ldr      x0, [x0, #0x2a0]                       // [0x23682A0] Method$UnityEngine.GameObject.GetComponent<Light>()
+010A6A7C  bl       #0xe61b78                             
+010A6A80  adrp     x0, #0x2368000                        
+010A6A84  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+010A6A88  bl       #0xe61b78                             
+010A6A8C  adrp     x0, #0x2368000                        
+010A6A90  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010A6A94  bl       #0xe61b78                             
+010A6A98  adrp     x0, #0x236a000                        
+010A6A9C  ldr      x0, [x0, #0x6a0]                       // [0x236A6A0] '7'
+010A6AA0  bl       #0xe61b78                             
+010A6AA4  adrp     x0, #0x2368000                        
+010A6AA8  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+010A6AAC  bl       #0xe61b78                             
+010A6AB0  adrp     x0, #0x236a000                        
+010A6AB4  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+010A6AB8  bl       #0xe61b78                             
+010A6ABC  adrp     x0, #0x236a000                        
+010A6AC0  ldr      x0, [x0, #0x6f8]                       // [0x236A6F8] '5'
+010A6AC4  bl       #0xe61b78                             
+010A6AC8  mov      w8, #1                                
+010A6ACC  strb     w8, [x21, #0xf6b]                     
+010A6AD0  ldr      x0, [x19, #0x668]                      // self.configLi
+010A6AD4  ldr      x1, [x20]                             
+010A6AD8  mov      x2, xzr                               
+010A6ADC  bl       #0x1960c80                             // System.String$$op_Inequality
+010A6AE0  tbz      w0, #0, #0x10a6cec                    
+010A6AE4  ldr      x8, [x20]                             
+010A6AE8  ldr      x0, [x19, #0x668]                      // self.configLi
+010A6AEC  str      x8, [x19, #0x6e8]                      // self.lig1
+010A6AF0  str      x8, [x19, #0x6f0]                      // self.lig2
+010A6AF4  cbz      x0, #0x10a6d04                        
+010A6AF8  mov      w2, #1                                
+010A6AFC  mov      w1, wzr                               
+010A6B00  mov      x3, xzr                               
+010A6B04  bl       #0x196288c                             // System.String$$Substring
+010A6B08  str      x0, [x19, #0x6e8]                      // self.lig1
+010A6B0C  adrp     x21, #0x236a000                       
+010A6B10  ldr      x21, [x21, #0x6e8]                     // [0x236A6E8] '1'
+010A6B14  mov      x2, xzr                               
+010A6B18  ldr      x1, [x21]                             
+010A6B1C  bl       #0x1960c7c                             // System.String$$op_Equality
+010A6B20  tbnz     w0, #0, #0x10a6b5c                    
+010A6B24  adrp     x8, #0x236a000                        
+010A6B28  ldr      x0, [x19, #0x6e8]                      // self.lig1
+010A6B2C  ldr      x8, [x8, #0x6f8]                       // [0x236A6F8] '5'
+010A6B30  mov      x2, xzr                               
+010A6B34  ldr      x1, [x8]                              
+010A6B38  bl       #0x1960c7c                             // System.String$$op_Equality
+010A6B3C  tbnz     w0, #0, #0x10a6b5c                    
+010A6B40  adrp     x8, #0x236a000                        
+010A6B44  ldr      x0, [x19, #0x6e8]                      // self.lig1
+010A6B48  ldr      x8, [x8, #0x6a0]                       // [0x236A6A0] '7'
+010A6B4C  mov      x2, xzr                               
+010A6B50  ldr      x1, [x8]                              
+010A6B54  bl       #0x1960c7c                             // System.String$$op_Equality
+010A6B58  tbz      w0, #0, #0x10a6cec                    
+010A6B5C  ldr      x0, [x19, #0x668]                      // self.configLi
+010A6B60  cbz      x0, #0x10a6d04                        
+010A6B64  mov      w1, #1                                
+010A6B68  mov      w2, #1                                
+010A6B6C  mov      x3, xzr                               
+010A6B70  bl       #0x196288c                             // System.String$$Substring
+010A6B74  ldr      x20, [x19, #0x510]                     // self.prefabLight1
+010A6B78  str      x0, [x19, #0x6f0]                      // self.lig2
+010A6B7C  fmov     s0, wzr                               
+010A6B80  fmov     s1, wzr                               
+010A6B84  fmov     s2, wzr                               
+010A6B88  mov      x0, xzr                               
+010A6B8C  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+010A6B90  adrp     x8, #0x2368000                        
+010A6B94  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010A6B98  mov      v9.16b, v0.16b                        
+010A6B9C  mov      v10.16b, v1.16b                       
+010A6BA0  mov      v11.16b, v2.16b                       
+010A6BA4  ldr      x0, [x8]                              
+010A6BA8  mov      v12.16b, v3.16b                       
+010A6BAC  ldr      w8, [x0, #0xe0]                       
+010A6BB0  cbnz     w8, #0x10a6bb8                        
+010A6BB4  bl       #0xe61c80                             
+010A6BB8  adrp     x8, #0x2368000                        
+010A6BBC  ldr      x8, [x8, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+010A6BC0  fmov     s0, wzr                               
+010A6BC4  fmov     s2, wzr                               
+010A6BC8  mov      x0, x20                               
+010A6BCC  ldr      x1, [x8]                              
+010A6BD0  adrp     x8, #0x600000                         
+010A6BD4  ldr      s8, [x8, #0x34]                       
+010A6BD8  mov      v3.16b, v9.16b                        
+010A6BDC  mov      v4.16b, v10.16b                       
+010A6BE0  mov      v5.16b, v11.16b                       
+010A6BE4  mov      v1.16b, v8.16b                        
+010A6BE8  mov      v6.16b, v12.16b                       
+010A6BEC  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+010A6BF0  str      x0, [x19, #0x1f8]                      // self.Lights2
+010A6BF4  cbz      x0, #0x10a6d04                        
+010A6BF8  mov      x1, xzr                               
+010A6BFC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010A6C00  mov      x20, x0                               
+010A6C04  mov      x0, x19                               
+010A6C08  mov      x1, xzr                               
+010A6C0C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010A6C10  cbz      x20, #0x10a6d04                       
+010A6C14  mov      x1, x0                                
+010A6C18  mov      x0, x20                               
+010A6C1C  mov      x2, xzr                               
+010A6C20  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+010A6C24  ldr      x0, [x19, #0x1f8]                      // self.Lights2
+010A6C28  cbz      x0, #0x10a6d04                        
+010A6C2C  mov      x1, xzr                               
+010A6C30  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010A6C34  cbz      x0, #0x10a6d04                        
+010A6C38  fmov     s0, wzr                               
+010A6C3C  fmov     s2, wzr                               
+010A6C40  mov      v1.16b, v8.16b                        
+010A6C44  mov      x1, xzr                               
+010A6C48  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+010A6C4C  ldr      x0, [x19, #0x6f0]                      // self.lig2
+010A6C50  ldr      x1, [x21]                             
+010A6C54  mov      x2, xzr                               
+010A6C58  bl       #0x1960c80                             // System.String$$op_Inequality
+010A6C5C  tbz      w0, #0, #0x10a6c6c                    
+010A6C60  ldr      x1, [x19, #0x6f0]                      // self.lig2
+010A6C64  mov      x0, x19                               
+010A6C68  bl       #0x10a9d3c                             // FuenteTest3$$doConfigColor1
+010A6C6C  adrp     x8, #0x236a000                        
+010A6C70  ldr      x0, [x19, #0x6e8]                      // self.lig1
+010A6C74  ldr      x8, [x8, #0x6a0]                       // [0x236A6A0] '7'
+010A6C78  mov      x2, xzr                               
+010A6C7C  ldr      x1, [x8]                              
+010A6C80  bl       #0x1960c7c                             // System.String$$op_Equality
+010A6C84  tbz      w0, #0, #0x10a6cec                    
+010A6C88  ldr      x0, [x19, #0x1f8]                      // self.Lights2
+010A6C8C  cbz      x0, #0x10a6d04                        
+010A6C90  adrp     x8, #0x2368000                        
+010A6C94  ldr      x8, [x8, #0x2a0]                       // [0x23682A0] Method$UnityEngine.GameObject.GetComponent<Light>()
+010A6C98  ldr      x1, [x8]                              
+010A6C9C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A6CA0  cbz      x0, #0x10a6d04                        
+010A6CA4  mov      x1, xzr                               
+010A6CA8  mov      x19, x0                               
+010A6CAC  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010A6CB0  cbz      x0, #0x10a6d04                        
+010A6CB4  fmov     s0, wzr                               
+010A6CB8  fmov     s1, #6.50000000                       
+010A6CBC  fmov     s2, wzr                               
+010A6CC0  mov      x1, xzr                               
+010A6CC4  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+010A6CC8  mov      x0, x19                               
+010A6CCC  ldp      x20, x19, [sp, #0x40]                 
+010A6CD0  ldp      x30, x21, [sp, #0x30]                 
+010A6CD4  ldp      d9, d8, [sp, #0x20]                   
+010A6CD8  ldp      d11, d10, [sp, #0x10]                 
+010A6CDC  fmov     s0, #6.00000000                       
+010A6CE0  mov      x1, xzr                               
+010A6CE4  ldr      d12, [sp], #0x50                      
+010A6CE8  b        #0x1fee150                             // UnityEngine.Light$$set_intensity
+010A6CEC  ldp      x20, x19, [sp, #0x40]                 
+010A6CF0  ldp      x30, x21, [sp, #0x30]                 
+010A6CF4  ldp      d9, d8, [sp, #0x20]                   
+010A6CF8  ldp      d11, d10, [sp, #0x10]                 
+010A6CFC  ldr      d12, [sp], #0x50                      
+010A6D00  ret                                            
+010A6D04  bl       #0xe61da0                             

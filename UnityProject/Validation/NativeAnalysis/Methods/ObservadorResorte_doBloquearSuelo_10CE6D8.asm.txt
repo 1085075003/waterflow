@@ -1,0 +1,257 @@
+// ObservadorResorte$$doBloquearSuelo VA 0x10CE6D8, inferred length 1020
+void ObservadorResorte__doBloquearSuelo (ObservadorResorte_o* __this, const MethodInfo* method);
+010CE6D8  stp      d11, d10, [sp, #-0x80]!               
+010CE6DC  stp      d9, d8, [sp, #0x10]                   
+010CE6E0  str      x30, [sp, #0x20]                      
+010CE6E4  stp      x28, x27, [sp, #0x30]                 
+010CE6E8  stp      x26, x25, [sp, #0x40]                 
+010CE6EC  stp      x24, x23, [sp, #0x50]                 
+010CE6F0  stp      x22, x21, [sp, #0x60]                 
+010CE6F4  stp      x20, x19, [sp, #0x70]                 
+010CE6F8  adrp     x21, #0x24fc000                       
+010CE6FC  adrp     x20, #0x2368000                       
+010CE700  ldrb     w8, [x21, #4]                         
+010CE704  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+010CE708  mov      x19, x0                               
+010CE70C  tbnz     w8, #0, #0x10ce754                    
+010CE710  adrp     x0, #0x2368000                        
+010CE714  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+010CE718  bl       #0xe61b78                             
+010CE71C  adrp     x0, #0x236a000                        
+010CE720  ldr      x0, [x0, #0x7e8]                       // [0x236A7E8] 'Base'
+010CE724  bl       #0xe61b78                             
+010CE728  adrp     x0, #0x236a000                        
+010CE72C  ldr      x0, [x0, #0x828]                       // [0x236A828] 'Bloque'
+010CE730  bl       #0xe61b78                             
+010CE734  adrp     x0, #0x236a000                        
+010CE738  ldr      x0, [x0, #0x628]                       // [0x236A628] 'Suelo1'
+010CE73C  bl       #0xe61b78                             
+010CE740  adrp     x0, #0x236a000                        
+010CE744  ldr      x0, [x0, #0x868]                       // [0x236A868] 'PiedraFuente5'
+010CE748  bl       #0xe61b78                             
+010CE74C  mov      w8, #1                                
+010CE750  strb     w8, [x21, #4]                         
+010CE754  adrp     x8, #0x5ff000                         
+010CE758  ldp      s8, s0, [x19, #0x78]                   // self.inix
+010CE75C  ldr      s1, [x8, #0xb00]                      
+010CE760  ldr      s9, [x19, #0x80]                       // self.iniz
+010CE764  ldr      w0, [x19, #0x1c8]                      // self.mascaraSuelo
+010CE768  ldr      s10, [x19, #0x1b8]                     // self.sphereRadius
+010CE76C  fadd     s11, s0, s1                           
+010CE770  mov      x1, xzr                               
+010CE774  str      s8, [x19, #0x1d4]                      // self.valorx
+010CE778  str      s9, [x19, #0x1dc]                      // self.valorz
+010CE77C  str      s8, [x19, #0x1ac]                      // self.vector
+010CE780  str      s11, [x19, #0x1d8]                     // self.valory
+010CE784  str      s11, [x19, #0x1b0]                    
+010CE788  str      s9, [x19, #0x1b4]                     
+010CE78C  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+010CE790  ldr      x8, [x20]                             
+010CE794  mov      w20, w0                               
+010CE798  ldr      w9, [x8, #0xe0]                       
+010CE79C  cbnz     w9, #0x10ce7a8                        
+010CE7A0  mov      x0, x8                                
+010CE7A4  bl       #0xe61c80                             
+010CE7A8  mov      v0.16b, v8.16b                        
+010CE7AC  mov      v1.16b, v11.16b                       
+010CE7B0  mov      v2.16b, v9.16b                        
+010CE7B4  mov      v3.16b, v10.16b                       
+010CE7B8  mov      w0, w20                               
+010CE7BC  mov      x1, xzr                               
+010CE7C0  bl       #0x20406ec                             // UnityEngine.Physics$$OverlapSphere
+010CE7C4  cbz      x0, #0x10ceacc                        
+010CE7C8  ldr      x8, [x0, #0x18]                       
+010CE7CC  mov      x20, x0                               
+010CE7D0  cbz      x8, #0x10ceaa8                        
+010CE7D4  cmp      w8, #1                                
+010CE7D8  b.lt     #0x10ceaa8                            
+010CE7DC  adrp     x23, #0x236a000                       
+010CE7E0  adrp     x24, #0x236a000                       
+010CE7E4  adrp     x26, #0x236a000                       
+010CE7E8  adrp     x27, #0x236a000                       
+010CE7EC  ldr      x23, [x23, #0x7e8]                     // [0x236A7E8] 'Base'
+010CE7F0  ldr      x24, [x24, #0x628]                     // [0x236A628] 'Suelo1'
+010CE7F4  ldr      x26, [x26, #0x828]                     // [0x236A828] 'Bloque'
+010CE7F8  ldr      x27, [x27, #0x868]                     // [0x236A868] 'PiedraFuente5'
+010CE7FC  mov      w22, wzr                              
+010CE800  mov      w25, #1                               
+010CE804  cmp      w22, w8                               
+010CE808  b.hs     #0x10cead0                            
+010CE80C  add      x28, x20, w22, sxtw #3                
+010CE810  ldr      x0, [x28, #0x20]!                     
+010CE814  cbz      x0, #0x10ceacc                        
+010CE818  mov      x1, xzr                               
+010CE81C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CE820  cbz      x0, #0x10ceacc                        
+010CE824  mov      x1, xzr                               
+010CE828  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CE82C  cbz      x0, #0x10ceacc                        
+010CE830  mov      x1, xzr                               
+010CE834  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CE838  cbz      x0, #0x10ceacc                        
+010CE83C  mov      x1, xzr                               
+010CE840  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CE844  cbz      x0, #0x10ceacc                        
+010CE848  ldr      x1, [x23]                             
+010CE84C  mov      x2, xzr                               
+010CE850  bl       #0x19651dc                             // System.String$$Contains
+010CE854  tbz      w0, #0, #0x10ce930                    
+010CE858  ldr      w8, [x19, #0x394]                      // self.bloqueoSuelo
+010CE85C  cmp      w8, #1                                
+010CE860  b.ne     #0x10ce8c8                            
+010CE864  ldr      w8, [x20, #0x18]                      
+010CE868  cmp      w22, w8                               
+010CE86C  b.hs     #0x10cead0                            
+010CE870  ldr      x0, [x28]                             
+010CE874  cbz      x0, #0x10ceacc                        
+010CE878  mov      x1, xzr                               
+010CE87C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010CE880  cbz      x0, #0x10ceacc                        
+010CE884  mov      x1, xzr                               
+010CE888  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CE88C  cbz      x0, #0x10ceacc                        
+010CE890  mov      x1, xzr                               
+010CE894  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CE898  str      x0, [x19, #0x238]                      // self.objetoSuelo1
+010CE89C  mov      x21, x0                               
+010CE8A0  ldr      x0, [x24]                             
+010CE8A4  mov      x1, xzr                               
+010CE8A8  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+010CE8AC  cbz      x21, #0x10ceacc                       
+010CE8B0  mov      w1, w0                                
+010CE8B4  mov      x0, x21                               
+010CE8B8  mov      x2, xzr                               
+010CE8BC  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+010CE8C0  ldr      w8, [x19, #0x394]                      // self.bloqueoSuelo
+010CE8C4  strb     w25, [x19, #0x3d4]                     // self.sueloBloqueado
+010CE8C8  cmp      w8, #2                                
+010CE8CC  b.ne     #0x10ce930                            
+010CE8D0  ldr      w8, [x20, #0x18]                      
+010CE8D4  cmp      w22, w8                               
+010CE8D8  b.hs     #0x10cead0                            
+010CE8DC  ldr      x0, [x28]                             
+010CE8E0  cbz      x0, #0x10ceacc                        
+010CE8E4  mov      x1, xzr                               
+010CE8E8  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010CE8EC  cbz      x0, #0x10ceacc                        
+010CE8F0  mov      x1, xzr                               
+010CE8F4  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CE8F8  cbz      x0, #0x10ceacc                        
+010CE8FC  mov      x1, xzr                               
+010CE900  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CE904  str      x0, [x19, #0x248]                      // self.objetoSuelo3
+010CE908  mov      x21, x0                               
+010CE90C  ldr      x0, [x24]                             
+010CE910  mov      x1, xzr                               
+010CE914  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+010CE918  cbz      x21, #0x10ceacc                       
+010CE91C  mov      w1, w0                                
+010CE920  mov      x0, x21                               
+010CE924  mov      x2, xzr                               
+010CE928  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+010CE92C  strb     w25, [x19, #0x3d4]                     // self.sueloBloqueado
+010CE930  ldr      w8, [x20, #0x18]                      
+010CE934  cmp      w22, w8                               
+010CE938  b.hs     #0x10cead0                            
+010CE93C  ldr      x0, [x28]                             
+010CE940  cbz      x0, #0x10ceacc                        
+010CE944  mov      x1, xzr                               
+010CE948  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CE94C  cbz      x0, #0x10ceacc                        
+010CE950  mov      x1, xzr                               
+010CE954  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CE958  cbz      x0, #0x10ceacc                        
+010CE95C  mov      x1, xzr                               
+010CE960  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CE964  cbz      x0, #0x10ceacc                        
+010CE968  mov      x1, xzr                               
+010CE96C  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CE970  cbz      x0, #0x10ceacc                        
+010CE974  ldr      x1, [x26]                             
+010CE978  mov      x2, xzr                               
+010CE97C  bl       #0x19651dc                             // System.String$$Contains
+010CE980  tbnz     w0, #0, #0x10ce9d8                    
+010CE984  ldr      w8, [x20, #0x18]                      
+010CE988  cmp      w22, w8                               
+010CE98C  b.hs     #0x10cead0                            
+010CE990  ldr      x0, [x28]                             
+010CE994  cbz      x0, #0x10ceacc                        
+010CE998  mov      x1, xzr                               
+010CE99C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CE9A0  cbz      x0, #0x10ceacc                        
+010CE9A4  mov      x1, xzr                               
+010CE9A8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CE9AC  cbz      x0, #0x10ceacc                        
+010CE9B0  mov      x1, xzr                               
+010CE9B4  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CE9B8  cbz      x0, #0x10ceacc                        
+010CE9BC  mov      x1, xzr                               
+010CE9C0  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CE9C4  cbz      x0, #0x10ceacc                        
+010CE9C8  ldr      x1, [x27]                             
+010CE9CC  mov      x2, xzr                               
+010CE9D0  bl       #0x19651dc                             // System.String$$Contains
+010CE9D4  tbz      w0, #0, #0x10cea98                    
+010CE9D8  ldr      w8, [x19, #0x394]                      // self.bloqueoSuelo
+010CE9DC  cmp      w8, #1                                
+010CE9E0  b.ne     #0x10cea3c                            
+010CE9E4  ldr      w8, [x20, #0x18]                      
+010CE9E8  cmp      w22, w8                               
+010CE9EC  b.hs     #0x10cead0                            
+010CE9F0  ldr      x0, [x28]                             
+010CE9F4  cbz      x0, #0x10ceacc                        
+010CE9F8  mov      x1, xzr                               
+010CE9FC  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010CEA00  cbz      x0, #0x10ceacc                        
+010CEA04  mov      x1, xzr                               
+010CEA08  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CEA0C  str      x0, [x19, #0x240]                      // self.objetoSuelo2
+010CEA10  mov      x21, x0                               
+010CEA14  ldr      x0, [x24]                             
+010CEA18  mov      x1, xzr                               
+010CEA1C  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+010CEA20  cbz      x21, #0x10ceacc                       
+010CEA24  mov      w1, w0                                
+010CEA28  mov      x0, x21                               
+010CEA2C  mov      x2, xzr                               
+010CEA30  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+010CEA34  ldr      w8, [x19, #0x394]                      // self.bloqueoSuelo
+010CEA38  strb     w25, [x19, #0x3d4]                     // self.sueloBloqueado
+010CEA3C  cmp      w8, #2                                
+010CEA40  b.ne     #0x10cea98                            
+010CEA44  ldr      w8, [x20, #0x18]                      
+010CEA48  cmp      w22, w8                               
+010CEA4C  b.hs     #0x10cead0                            
+010CEA50  ldr      x0, [x28]                             
+010CEA54  cbz      x0, #0x10ceacc                        
+010CEA58  mov      x1, xzr                               
+010CEA5C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010CEA60  cbz      x0, #0x10ceacc                        
+010CEA64  mov      x1, xzr                               
+010CEA68  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CEA6C  str      x0, [x19, #0x250]                      // self.objetoSuelo4
+010CEA70  mov      x21, x0                               
+010CEA74  ldr      x0, [x24]                             
+010CEA78  mov      x1, xzr                               
+010CEA7C  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+010CEA80  cbz      x21, #0x10ceacc                       
+010CEA84  mov      w1, w0                                
+010CEA88  mov      x0, x21                               
+010CEA8C  mov      x2, xzr                               
+010CEA90  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+010CEA94  strb     w25, [x19, #0x3d4]                     // self.sueloBloqueado
+010CEA98  ldr      w8, [x20, #0x18]                      
+010CEA9C  add      w22, w22, #1                          
+010CEAA0  cmp      w22, w8                               
+010CEAA4  b.lt     #0x10ce804                            
+010CEAA8  ldp      x20, x19, [sp, #0x70]                 
+010CEAAC  ldp      x22, x21, [sp, #0x60]                 
+010CEAB0  ldp      x24, x23, [sp, #0x50]                 
+010CEAB4  ldp      x26, x25, [sp, #0x40]                 
+010CEAB8  ldp      x28, x27, [sp, #0x30]                 
+010CEABC  ldr      x30, [sp, #0x20]                      
+010CEAC0  ldp      d9, d8, [sp, #0x10]                   
+010CEAC4  ldp      d11, d10, [sp], #0x80                 
+010CEAC8  ret                                            
+010CEACC  bl       #0xe61da0                             
+010CEAD0  bl       #0xe61da8                             

@@ -1,0 +1,25 @@
+// FuenteCubetaA$$Start VA 0x1098B84, inferred length 92
+void FuenteCubetaA__Start (FuenteCubetaA_o* __this, const MethodInfo* method);
+01098B84  str      x30, [sp, #-0x20]!                    
+01098B88  stp      x20, x19, [sp, #0x10]                 
+01098B8C  adrp     x20, #0x24fb000                       
+01098B90  ldrb     w8, [x20, #0xf1d]                     
+01098B94  mov      x19, x0                               
+01098B98  tbnz     w8, #0, #0x1098bb0                    
+01098B9C  adrp     x0, #0x236a000                        
+01098BA0  ldr      x0, [x0, #0x5b0]                       // [0x236A5B0] Method$UnityEngine.GameObject.GetComponent<AguasControl>()
+01098BA4  bl       #0xe61b78                             
+01098BA8  mov      w8, #1                                
+01098BAC  strb     w8, [x20, #0xf1d]                     
+01098BB0  ldr      x0, [x19, #0xb0]                       // self.Aguas
+01098BB4  cbz      x0, #0x1098bdc                        
+01098BB8  adrp     x8, #0x236a000                        
+01098BBC  ldr      x8, [x8, #0x5b0]                       // [0x236A5B0] Method$UnityEngine.GameObject.GetComponent<AguasControl>()
+01098BC0  ldr      x1, [x8]                              
+01098BC4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01098BC8  str      x0, [x19, #0x138]                      // self.agscr
+01098BCC  strb     wzr, [x19, #0x130]                     // self.activarDiferido
+01098BD0  ldp      x20, x19, [sp, #0x10]                 
+01098BD4  ldr      x30, [sp], #0x20                      
+01098BD8  ret                                            
+01098BDC  bl       #0xe61da0                             

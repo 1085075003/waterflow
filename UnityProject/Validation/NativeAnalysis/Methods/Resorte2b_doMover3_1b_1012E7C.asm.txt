@@ -1,0 +1,194 @@
+// Resorte2b$$doMover3_1b VA 0x1012E7C, inferred length 768
+void Resorte2b__doMover3_1b (Resorte2b_o* __this, const MethodInfo* method);
+01012E7C  sub      sp, sp, #0x70                         
+01012E80  stp      d15, d14, [sp, #0x10]                 
+01012E84  stp      d13, d12, [sp, #0x20]                 
+01012E88  stp      d11, d10, [sp, #0x30]                 
+01012E8C  stp      d9, d8, [sp, #0x40]                   
+01012E90  stp      x30, x21, [sp, #0x50]                 
+01012E94  stp      x20, x19, [sp, #0x60]                 
+01012E98  mov      x19, x0                               
+01012E9C  ldr      x0, [x0, #0x38]                       
+01012EA0  cbz      x0, #0x1013178                        
+01012EA4  mov      x1, xzr                               
+01012EA8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01012EAC  ldr      x8, [x19, #0x38]                       // self.objeto4
+01012EB0  cbz      x8, #0x1013178                        
+01012EB4  mov      x20, x0                               
+01012EB8  mov      x0, x8                                
+01012EBC  mov      x1, xzr                               
+01012EC0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01012EC4  cbz      x0, #0x1013178                        
+01012EC8  mov      x1, xzr                               
+01012ECC  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+01012ED0  mov      v8.16b, v0.16b                        
+01012ED4  ldr      s0, [x19, #0x1a0]                      // self.moveSpeed
+01012ED8  ldr      s10, [x19, #0x158]                     // self.fin4_0
+01012EDC  ldr      s11, [x19, #0x15c]                    
+01012EE0  ldr      s12, [x19, #0x160]                    
+01012EE4  mov      x0, xzr                               
+01012EE8  mov      v13.16b, v1.16b                       
+01012EEC  str      s0, [sp, #0xc]                        
+01012EF0  mov      v15.16b, v2.16b                       
+01012EF4  bl       #0x1ffb6c8                             // UnityEngine.Time$$get_deltaTime
+01012EF8  adrp     x21, #0x24fb000                       
+01012EFC  ldrb     w8, [x21, #0x929]                     
+01012F00  mov      v14.16b, v0.16b                       
+01012F04  cbnz     w8, #0x1012f1c                        
+01012F08  adrp     x0, #0x2368000                        
+01012F0C  ldr      x0, [x0, #0x4d0]                       // [0x23684D0] System.Math_TypeInfo
+01012F10  bl       #0xe61b78                             
+01012F14  mov      w8, #1                                
+01012F18  strb     w8, [x21, #0x929]                     
+01012F1C  fsub     s9, s10, s8                           
+01012F20  mov      v2.16b, v8.16b                        
+01012F24  fsub     s8, s11, s13                          
+01012F28  mov      v4.16b, v15.16b                       
+01012F2C  fsub     s15, s12, s15                         
+01012F30  fmul     s0, s9, s9                            
+01012F34  fmul     s1, s8, s8                            
+01012F38  fadd     s0, s0, s1                            
+01012F3C  fmul     s1, s15, s15                          
+01012F40  mov      v3.16b, v13.16b                       
+01012F44  fadd     s13, s1, s0                           
+01012F48  fcmp     s13, #0.0                             
+01012F4C  b.eq     #0x1012fc0                            
+01012F50  ldr      s0, [sp, #0xc]                        
+01012F54  stp      s4, s3, [sp]                          
+01012F58  str      s2, [sp, #8]                          
+01012F5C  fmul     s14, s0, s14                          
+01012F60  fcmp     s14, #0.0                             
+01012F64  b.lt     #0x1012f74                            
+01012F68  fmul     s0, s14, s14                          
+01012F6C  fcmp     s13, s0                               
+01012F70  b.ls     #0x1012fc0                            
+01012F74  adrp     x8, #0x2368000                        
+01012F78  ldr      x8, [x8, #0x4d0]                       // [0x23684D0] System.Math_TypeInfo
+01012F7C  ldr      x0, [x8]                              
+01012F80  ldr      w8, [x0, #0xe0]                       
+01012F84  cbnz     w8, #0x1012f8c                        
+01012F88  bl       #0xe61c80                             
+01012F8C  ldr      s3, [sp, #8]                          
+01012F90  fsqrt    s0, s13                               
+01012F94  fdiv     s1, s9, s0                            
+01012F98  fmul     s1, s14, s1                           
+01012F9C  fadd     s10, s3, s1                           
+01012FA0  ldr      s1, [sp, #4]                          
+01012FA4  fdiv     s2, s8, s0                            
+01012FA8  fmul     s2, s14, s2                           
+01012FAC  fdiv     s0, s15, s0                           
+01012FB0  fadd     s11, s1, s2                           
+01012FB4  ldr      s1, [sp]                              
+01012FB8  fmul     s0, s14, s0                           
+01012FBC  fadd     s12, s1, s0                           
+01012FC0  cbz      x20, #0x1013178                       
+01012FC4  mov      x0, x20                               
+01012FC8  mov      v0.16b, v10.16b                       
+01012FCC  mov      v1.16b, v11.16b                       
+01012FD0  mov      v2.16b, v12.16b                       
+01012FD4  mov      x1, xzr                               
+01012FD8  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+01012FDC  ldr      x0, [x19, #0x40]                       // self.objeto5
+01012FE0  cbz      x0, #0x1013178                        
+01012FE4  mov      x1, xzr                               
+01012FE8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01012FEC  ldr      x8, [x19, #0x40]                       // self.objeto5
+01012FF0  cbz      x8, #0x1013178                        
+01012FF4  mov      x20, x0                               
+01012FF8  mov      x0, x8                                
+01012FFC  mov      x1, xzr                               
+01013000  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01013004  cbz      x0, #0x1013178                        
+01013008  mov      x1, xzr                               
+0101300C  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+01013010  mov      v8.16b, v0.16b                        
+01013014  ldr      s0, [x19, #0x1a0]                      // self.moveSpeed
+01013018  ldr      s10, [x19, #0x170]                     // self.fin5_0
+0101301C  ldr      s11, [x19, #0x174]                    
+01013020  ldr      s12, [x19, #0x178]                    
+01013024  mov      x0, xzr                               
+01013028  mov      v13.16b, v1.16b                       
+0101302C  str      s0, [sp, #0xc]                        
+01013030  mov      v15.16b, v2.16b                       
+01013034  bl       #0x1ffb6c8                             // UnityEngine.Time$$get_deltaTime
+01013038  ldrb     w8, [x21, #0x929]                     
+0101303C  mov      v14.16b, v0.16b                       
+01013040  cbnz     w8, #0x1013058                        
+01013044  adrp     x0, #0x2368000                        
+01013048  ldr      x0, [x0, #0x4d0]                       // [0x23684D0] System.Math_TypeInfo
+0101304C  bl       #0xe61b78                             
+01013050  mov      w8, #1                                
+01013054  strb     w8, [x21, #0x929]                     
+01013058  fsub     s9, s10, s8                           
+0101305C  mov      v2.16b, v8.16b                        
+01013060  fsub     s8, s11, s13                          
+01013064  mov      v4.16b, v15.16b                       
+01013068  fsub     s15, s12, s15                         
+0101306C  fmul     s0, s9, s9                            
+01013070  fmul     s1, s8, s8                            
+01013074  fadd     s0, s0, s1                            
+01013078  fmul     s1, s15, s15                          
+0101307C  mov      v3.16b, v13.16b                       
+01013080  fadd     s13, s1, s0                           
+01013084  fcmp     s13, #0.0                             
+01013088  b.eq     #0x10130fc                            
+0101308C  ldr      s0, [sp, #0xc]                        
+01013090  stp      s4, s3, [sp]                          
+01013094  str      s2, [sp, #8]                          
+01013098  fmul     s14, s0, s14                          
+0101309C  fcmp     s14, #0.0                             
+010130A0  b.lt     #0x10130b0                            
+010130A4  fmul     s0, s14, s14                          
+010130A8  fcmp     s13, s0                               
+010130AC  b.ls     #0x10130fc                            
+010130B0  adrp     x8, #0x2368000                        
+010130B4  ldr      x8, [x8, #0x4d0]                       // [0x23684D0] System.Math_TypeInfo
+010130B8  ldr      x0, [x8]                              
+010130BC  ldr      w8, [x0, #0xe0]                       
+010130C0  cbnz     w8, #0x10130c8                        
+010130C4  bl       #0xe61c80                             
+010130C8  ldr      s3, [sp, #8]                          
+010130CC  fsqrt    s0, s13                               
+010130D0  fdiv     s1, s9, s0                            
+010130D4  fmul     s1, s14, s1                           
+010130D8  fadd     s10, s3, s1                           
+010130DC  ldr      s1, [sp, #4]                          
+010130E0  fdiv     s2, s8, s0                            
+010130E4  fmul     s2, s14, s2                           
+010130E8  fdiv     s0, s15, s0                           
+010130EC  fadd     s11, s1, s2                           
+010130F0  ldr      s1, [sp]                              
+010130F4  fmul     s0, s14, s0                           
+010130F8  fadd     s12, s1, s0                           
+010130FC  cbz      x20, #0x1013178                       
+01013100  mov      x0, x20                               
+01013104  mov      v0.16b, v10.16b                       
+01013108  mov      v1.16b, v11.16b                       
+0101310C  mov      v2.16b, v12.16b                       
+01013110  mov      x1, xzr                               
+01013114  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+01013118  ldr      x0, [x19, #0x38]                       // self.objeto4
+0101311C  cbz      x0, #0x1013178                        
+01013120  ldr      s8, [x19, #0x160]                     
+01013124  mov      x1, xzr                               
+01013128  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0101312C  cbz      x0, #0x1013178                        
+01013130  mov      x1, xzr                               
+01013134  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+01013138  adrp     x8, #0x600000                         
+0101313C  ldr      s0, [x8, #0x168]                      
+01013140  fabd     s1, s8, s2                            
+01013144  str      s1, [x19, #0x1ac]                      // self.diferenciaz
+01013148  fcmp     s1, s0                                
+0101314C  b.pl     #0x1013158                            
+01013150  mov      w8, #1                                
+01013154  strb     w8, [x19, #0x1bb]                      // self.swfin3_1
+01013158  ldp      x20, x19, [sp, #0x60]                 
+0101315C  ldp      x30, x21, [sp, #0x50]                 
+01013160  ldp      d9, d8, [sp, #0x40]                   
+01013164  ldp      d11, d10, [sp, #0x30]                 
+01013168  ldp      d13, d12, [sp, #0x20]                 
+0101316C  ldp      d15, d14, [sp, #0x10]                 
+01013170  add      sp, sp, #0x70                         
+01013174  ret                                            
+01013178  bl       #0xe61da0                             

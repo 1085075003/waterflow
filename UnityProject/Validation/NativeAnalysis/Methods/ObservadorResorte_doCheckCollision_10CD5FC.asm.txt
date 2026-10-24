@@ -1,0 +1,284 @@
+// ObservadorResorte$$doCheckCollision VA 0x10CD5FC, inferred length 1128
+void ObservadorResorte__doCheckCollision (ObservadorResorte_o* __this, float valorx, float valory, float valorz, const MethodInfo* method);
+010CD5FC  stp      d11, d10, [sp, #-0x80]!               
+010CD600  stp      d9, d8, [sp, #0x10]                   
+010CD604  stp      x29, x30, [sp, #0x20]                 
+010CD608  stp      x28, x27, [sp, #0x30]                 
+010CD60C  stp      x26, x25, [sp, #0x40]                 
+010CD610  stp      x24, x23, [sp, #0x50]                 
+010CD614  stp      x22, x21, [sp, #0x60]                 
+010CD618  stp      x20, x19, [sp, #0x70]                 
+010CD61C  adrp     x21, #0x24fc000                       
+010CD620  adrp     x20, #0x2368000                       
+010CD624  ldrb     w8, [x21, #5]                         
+010CD628  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+010CD62C  mov      v8.16b, v2.16b                        
+010CD630  mov      v9.16b, v1.16b                        
+010CD634  mov      v10.16b, v0.16b                       
+010CD638  mov      x19, x0                               
+010CD63C  tbnz     w8, #0, #0x10cd6d8                    
+010CD640  adrp     x0, #0x236a000                        
+010CD644  ldr      x0, [x0, #0x840]                       // [0x236A840] Method$UnityEngine.Component.GetComponent<ControlFijo>()
+010CD648  bl       #0xe61b78                             
+010CD64C  adrp     x0, #0x236a000                        
+010CD650  ldr      x0, [x0, #0x848]                       // [0x236A848] Method$UnityEngine.Component.GetComponent<ControlPiezaC>()
+010CD654  bl       #0xe61b78                             
+010CD658  adrp     x0, #0x236a000                        
+010CD65C  ldr      x0, [x0, #0x850]                       // [0x236A850] Method$UnityEngine.Component.GetComponent<ControlPiezaPfuente>()
+010CD660  bl       #0xe61b78                             
+010CD664  adrp     x0, #0x236a000                        
+010CD668  ldr      x0, [x0, #0x858]                       // [0x236A858] Method$UnityEngine.Component.GetComponent<ControlPieza>()
+010CD66C  bl       #0xe61b78                             
+010CD670  adrp     x0, #0x2368000                        
+010CD674  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+010CD678  bl       #0xe61b78                             
+010CD67C  adrp     x0, #0x236d000                        
+010CD680  ldr      x0, [x0, #0x9b0]                       // [0x236D9B0] 'BloquePilar'
+010CD684  bl       #0xe61b78                             
+010CD688  adrp     x0, #0x236a000                        
+010CD68C  ldr      x0, [x0, #0x820]                       // [0x236A820] 'BloqueFijo'
+010CD690  bl       #0xe61b78                             
+010CD694  adrp     x0, #0x236a000                        
+010CD698  ldr      x0, [x0, #0x828]                       // [0x236A828] 'Bloque'
+010CD69C  bl       #0xe61b78                             
+010CD6A0  adrp     x0, #0x236a000                        
+010CD6A4  ldr      x0, [x0, #0x860]                       // [0x236A860] 'Aguas'
+010CD6A8  bl       #0xe61b78                             
+010CD6AC  adrp     x0, #0x236a000                        
+010CD6B0  ldr      x0, [x0, #0x868]                       // [0x236A868] 'PiedraFuente5'
+010CD6B4  bl       #0xe61b78                             
+010CD6B8  adrp     x0, #0x236a000                        
+010CD6BC  ldr      x0, [x0, #0x870]                       // [0x236A870] 'CuFuenteE'
+010CD6C0  bl       #0xe61b78                             
+010CD6C4  adrp     x0, #0x236a000                        
+010CD6C8  ldr      x0, [x0, #0xad8]                       // [0x236AAD8] 'BloqueChorro'
+010CD6CC  bl       #0xe61b78                             
+010CD6D0  mov      w8, #1                                
+010CD6D4  strb     w8, [x21, #5]                         
+010CD6D8  ldr      w0, [x19, #0x1bc]                      // self.mascaraBloque
+010CD6DC  ldr      s11, [x19, #0x1b8]                     // self.sphereRadius
+010CD6E0  mov      x1, xzr                               
+010CD6E4  strb     wzr, [x19, #0x1a4]                     // self.checkCollision
+010CD6E8  stp      s10, s9, [x19, #0xe4]                  // self.inixreturn
+010CD6EC  str      s8, [x19, #0xec]                       // self.inizreturn
+010CD6F0  str      s10, [x19, #0x1ac]                     // self.vector
+010CD6F4  str      s9, [x19, #0x1b0]                     
+010CD6F8  str      s8, [x19, #0x1b4]                     
+010CD6FC  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+010CD700  ldr      x8, [x20]                             
+010CD704  mov      w20, w0                               
+010CD708  ldr      w9, [x8, #0xe0]                       
+010CD70C  cbnz     w9, #0x10cd718                        
+010CD710  mov      x0, x8                                
+010CD714  bl       #0xe61c80                             
+010CD718  mov      v0.16b, v10.16b                       
+010CD71C  mov      v1.16b, v9.16b                        
+010CD720  mov      v2.16b, v8.16b                        
+010CD724  mov      v3.16b, v11.16b                       
+010CD728  mov      w0, w20                               
+010CD72C  mov      x1, xzr                               
+010CD730  bl       #0x20406ec                             // UnityEngine.Physics$$OverlapSphere
+010CD734  cbz      x0, #0x10cda5c                        
+010CD738  ldr      x8, [x0, #0x18]                       
+010CD73C  mov      x20, x0                               
+010CD740  cbz      x8, #0x10cda38                        
+010CD744  cmp      w8, #1                                
+010CD748  b.lt     #0x10cda38                            
+010CD74C  adrp     x24, #0x236a000                       
+010CD750  adrp     x26, #0x236a000                       
+010CD754  adrp     x27, #0x236a000                       
+010CD758  adrp     x28, #0x236d000                       
+010CD75C  adrp     x29, #0x236a000                       
+010CD760  ldr      x24, [x24, #0x860]                     // [0x236A860] 'Aguas'
+010CD764  ldr      x26, [x26, #0x820]                     // [0x236A820] 'BloqueFijo'
+010CD768  ldr      x27, [x27, #0x840]                     // [0x236A840] Method$UnityEngine.Component.GetComponent<ControlFijo>()
+010CD76C  ldr      x28, [x28, #0x9b0]                     // [0x236D9B0] 'BloquePilar'
+010CD770  ldr      x29, [x29, #0x828]                     // [0x236A828] 'Bloque'
+010CD774  mov      x22, xzr                              
+010CD778  add      x23, x20, #0x20                       
+010CD77C  mov      w25, #1                               
+010CD780  cmp      w22, w8                               
+010CD784  b.hs     #0x10cda60                            
+010CD788  ldr      x0, [x23, x22, lsl #3]                
+010CD78C  cbz      x0, #0x10cda5c                        
+010CD790  mov      x1, xzr                               
+010CD794  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CD798  cbz      x0, #0x10cda5c                        
+010CD79C  mov      x1, xzr                               
+010CD7A0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD7A4  cbz      x0, #0x10cda5c                        
+010CD7A8  mov      x1, xzr                               
+010CD7AC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CD7B0  cbz      x0, #0x10cda5c                        
+010CD7B4  mov      x1, xzr                               
+010CD7B8  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CD7BC  cbz      x0, #0x10cda5c                        
+010CD7C0  ldr      x1, [x24]                             
+010CD7C4  mov      x2, xzr                               
+010CD7C8  mov      x21, x0                               
+010CD7CC  bl       #0x19651dc                             // System.String$$Contains
+010CD7D0  tbnz     w0, #0, #0x10cda28                    
+010CD7D4  strb     w25, [x19, #0x1a4]                     // self.checkCollision
+010CD7D8  ldr      x1, [x26]                             
+010CD7DC  mov      x0, x21                               
+010CD7E0  mov      x2, xzr                               
+010CD7E4  bl       #0x19651dc                             // System.String$$Contains
+010CD7E8  tbnz     w0, #0, #0x10cd800                    
+010CD7EC  ldr      x1, [x28]                             
+010CD7F0  mov      x0, x21                               
+010CD7F4  mov      x2, xzr                               
+010CD7F8  bl       #0x19651dc                             // System.String$$Contains
+010CD7FC  tbz      w0, #0, #0x10cd878                    
+010CD800  ldr      w8, [x20, #0x18]                      
+010CD804  cmp      w22, w8                               
+010CD808  b.hs     #0x10cda60                            
+010CD80C  ldr      x0, [x23, x22, lsl #3]                
+010CD810  cbz      x0, #0x10cda5c                        
+010CD814  mov      x1, xzr                               
+010CD818  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CD81C  cbz      x0, #0x10cda5c                        
+010CD820  mov      x1, xzr                               
+010CD824  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD828  cbz      x0, #0x10cda5c                        
+010CD82C  mov      x1, xzr                               
+010CD830  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CD834  cbz      x0, #0x10cda5c                        
+010CD838  ldr      x1, [x27]                             
+010CD83C  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+010CD840  cbz      x0, #0x10cda5c                        
+010CD844  mov      x21, x0                               
+010CD848  ldr      x0, [x0, #0x70]                       
+010CD84C  ldr      x1, [x19, #0x20]                       // self.conResorte
+010CD850  mov      x2, xzr                               
+010CD854  bl       #0x1960c7c                             // System.String$$op_Equality
+010CD858  tbz      w0, #0, #0x10cda28                    
+010CD85C  ldr      x0, [x21, #0x78]                      
+010CD860  ldr      x1, [x19, #0x28]                       // self.tipoResorte
+010CD864  mov      x2, xzr                               
+010CD868  bl       #0x1960c7c                             // System.String$$op_Equality
+010CD86C  tbz      w0, #0, #0x10cda28                    
+010CD870  strb     wzr, [x19, #0x1a4]                     // self.checkCollision
+010CD874  b        #0x10cda28                            
+010CD878  ldr      x1, [x29]                             
+010CD87C  mov      x0, x21                               
+010CD880  mov      x2, xzr                               
+010CD884  bl       #0x19651dc                             // System.String$$Contains
+010CD888  tbz      w0, #0, #0x10cd918                    
+010CD88C  adrp     x8, #0x236a000                        
+010CD890  ldr      x8, [x8, #0xad8]                       // [0x236AAD8] 'BloqueChorro'
+010CD894  mov      x0, x21                               
+010CD898  mov      x2, xzr                               
+010CD89C  ldr      x1, [x8]                              
+010CD8A0  bl       #0x19651dc                             // System.String$$Contains
+010CD8A4  ldr      w8, [x20, #0x18]                      
+010CD8A8  cmp      w22, w8                               
+010CD8AC  b.hs     #0x10cda60                            
+010CD8B0  mov      w21, w0                               
+010CD8B4  ldr      x0, [x23, x22, lsl #3]                
+010CD8B8  cbz      x0, #0x10cda5c                        
+010CD8BC  mov      x1, xzr                               
+010CD8C0  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CD8C4  cbz      x0, #0x10cda5c                        
+010CD8C8  mov      x1, xzr                               
+010CD8CC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD8D0  cbz      x0, #0x10cda5c                        
+010CD8D4  mov      x1, xzr                               
+010CD8D8  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CD8DC  cbz      x0, #0x10cda5c                        
+010CD8E0  tbnz     w21, #0, #0x10cd96c                   
+010CD8E4  adrp     x8, #0x236a000                        
+010CD8E8  ldr      x8, [x8, #0x858]                       // [0x236A858] Method$UnityEngine.Component.GetComponent<ControlPieza>()
+010CD8EC  ldr      x1, [x8]                              
+010CD8F0  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+010CD8F4  cbz      x0, #0x10cda5c                        
+010CD8F8  mov      x21, x0                               
+010CD8FC  ldr      x0, [x0, #0x78]                       
+010CD900  ldr      x1, [x19, #0x20]                       // self.conResorte
+010CD904  mov      x2, xzr                               
+010CD908  bl       #0x1960c7c                             // System.String$$op_Equality
+010CD90C  tbz      w0, #0, #0x10cda28                    
+010CD910  ldr      x0, [x21, #0x80]                      
+010CD914  b        #0x10cd860                            
+010CD918  adrp     x8, #0x236a000                        
+010CD91C  ldr      x8, [x8, #0x870]                       // [0x236A870] 'CuFuenteE'
+010CD920  mov      x0, x21                               
+010CD924  mov      x2, xzr                               
+010CD928  ldr      x1, [x8]                              
+010CD92C  bl       #0x19651dc                             // System.String$$Contains
+010CD930  tbz      w0, #0, #0x10cd9a0                    
+010CD934  ldr      w8, [x20, #0x18]                      
+010CD938  cmp      w22, w8                               
+010CD93C  b.hs     #0x10cda60                            
+010CD940  ldr      x0, [x23, x22, lsl #3]                
+010CD944  cbz      x0, #0x10cda5c                        
+010CD948  mov      x1, xzr                               
+010CD94C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CD950  cbz      x0, #0x10cda5c                        
+010CD954  mov      x1, xzr                               
+010CD958  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD95C  cbz      x0, #0x10cda5c                        
+010CD960  mov      x1, xzr                               
+010CD964  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CD968  cbz      x0, #0x10cda5c                        
+010CD96C  adrp     x8, #0x236a000                        
+010CD970  ldr      x8, [x8, #0x848]                       // [0x236A848] Method$UnityEngine.Component.GetComponent<ControlPiezaC>()
+010CD974  ldr      x1, [x8]                              
+010CD978  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+010CD97C  cbz      x0, #0x10cda5c                        
+010CD980  mov      x21, x0                               
+010CD984  ldr      x0, [x0, #0x1a0]                      
+010CD988  ldr      x1, [x19, #0x20]                       // self.conResorte
+010CD98C  mov      x2, xzr                               
+010CD990  bl       #0x1960c7c                             // System.String$$op_Equality
+010CD994  tbz      w0, #0, #0x10cda28                    
+010CD998  ldr      x0, [x21, #0x1a8]                     
+010CD99C  b        #0x10cd860                            
+010CD9A0  adrp     x8, #0x236a000                        
+010CD9A4  ldr      x8, [x8, #0x868]                       // [0x236A868] 'PiedraFuente5'
+010CD9A8  mov      x0, x21                               
+010CD9AC  mov      x2, xzr                               
+010CD9B0  ldr      x1, [x8]                              
+010CD9B4  bl       #0x19651dc                             // System.String$$Contains
+010CD9B8  tbz      w0, #0, #0x10cda28                    
+010CD9BC  ldr      w8, [x20, #0x18]                      
+010CD9C0  cmp      w22, w8                               
+010CD9C4  b.hs     #0x10cda60                            
+010CD9C8  ldr      x0, [x23, x22, lsl #3]                
+010CD9CC  cbz      x0, #0x10cda5c                        
+010CD9D0  mov      x1, xzr                               
+010CD9D4  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CD9D8  cbz      x0, #0x10cda5c                        
+010CD9DC  mov      x1, xzr                               
+010CD9E0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD9E4  cbz      x0, #0x10cda5c                        
+010CD9E8  mov      x1, xzr                               
+010CD9EC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CD9F0  cbz      x0, #0x10cda5c                        
+010CD9F4  adrp     x8, #0x236a000                        
+010CD9F8  ldr      x8, [x8, #0x850]                       // [0x236A850] Method$UnityEngine.Component.GetComponent<ControlPiezaPfuente>()
+010CD9FC  ldr      x1, [x8]                              
+010CDA00  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+010CDA04  cbz      x0, #0x10cda5c                        
+010CDA08  mov      x21, x0                               
+010CDA0C  ldr      x0, [x0, #0x60]                       
+010CDA10  ldr      x1, [x19, #0x20]                       // self.conResorte
+010CDA14  mov      x2, xzr                               
+010CDA18  bl       #0x1960c7c                             // System.String$$op_Equality
+010CDA1C  tbz      w0, #0, #0x10cda28                    
+010CDA20  ldr      x0, [x21, #0x68]                      
+010CDA24  b        #0x10cd860                            
+010CDA28  ldr      w8, [x20, #0x18]                      
+010CDA2C  add      x22, x22, #1                          
+010CDA30  cmp      w22, w8                               
+010CDA34  b.lt     #0x10cd780                            
+010CDA38  ldp      x20, x19, [sp, #0x70]                 
+010CDA3C  ldp      x22, x21, [sp, #0x60]                 
+010CDA40  ldp      x24, x23, [sp, #0x50]                 
+010CDA44  ldp      x26, x25, [sp, #0x40]                 
+010CDA48  ldp      x28, x27, [sp, #0x30]                 
+010CDA4C  ldp      x29, x30, [sp, #0x20]                 
+010CDA50  ldp      d9, d8, [sp, #0x10]                   
+010CDA54  ldp      d11, d10, [sp], #0x80                 
+010CDA58  ret                                            
+010CDA5C  bl       #0xe61da0                             
+010CDA60  bl       #0xe61da8                             

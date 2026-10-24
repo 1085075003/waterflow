@@ -1,0 +1,107 @@
+// Resorte2c$$Update VA 0x10243EC, inferred length 420
+void Resorte2c__Update (Resorte2c_o* __this, const MethodInfo* method);
+010243EC  str      x30, [sp, #-0x20]!                    
+010243F0  stp      x20, x19, [sp, #0x10]                 
+010243F4  adrp     x20, #0x24fb000                       
+010243F8  ldrb     w8, [x20, #0xcd0]                     
+010243FC  mov      x19, x0                               
+01024400  tbnz     w8, #0, #0x1024424                    
+01024404  adrp     x0, #0x236b000                        
+01024408  ldr      x0, [x0, #0x8a8]                       // [0x236B8A8] 'doMovimiento3'
+0102440C  bl       #0xe61b78                             
+01024410  adrp     x0, #0x236b000                        
+01024414  ldr      x0, [x0, #0x4c8]                       // [0x236B4C8] 'desactivarMech'
+01024418  bl       #0xe61b78                             
+0102441C  mov      w8, #1                                
+01024420  strb     w8, [x20, #0xcd0]                     
+01024424  ldr      w8, [x19, #0x208]                      // self.empezar
+01024428  cmp      w8, #1                                
+0102442C  b.ne     #0x1024504                            
+01024430  ldrb     w8, [x19, #0x1d0]                      // self.swfin0
+01024434  cbz      w8, #0x1024450                        
+01024438  mov      x0, x19                               
+0102443C  bl       #0x102488c                             // Resorte2c$$doMover1_1
+01024440  ldrb     w8, [x19, #0x1d7]                      // self.swfin1_1
+01024444  cbz      w8, #0x1024450                        
+01024448  mov      w8, #0x100                            
+0102444C  strh     w8, [x19, #0x1d0]                      // self.swfin0
+01024450  ldrb     w8, [x19, #0x1d1]                      // self.swfin1
+01024454  cbz      w8, #0x1024480                        
+01024458  mov      x0, x19                               
+0102445C  bl       #0x1024c14                             // Resorte2c$$doMover2_1
+01024460  ldrb     w8, [x19, #0x1d9]                      // self.swfin2_1
+01024464  cbz      w8, #0x1024480                        
+01024468  add      x8, x19, #0x1d1                       
+0102446C  mov      w9, #0x100                            
+01024470  mov      w10, #1                               
+01024474  strh     w9, [x8]                              
+01024478  strb     w10, [x19, #0x1d5]                     // self.swfinMovimiento1
+0102447C  str      wzr, [x19, #0x31c]                     // self.primeraVez
+01024480  ldrb     w8, [x19, #0x1d2]                      // self.swfin2
+01024484  cbz      w8, #0x10244c0                        
+01024488  ldr      w8, [x19, #0x318]                      // self.numero
+0102448C  ldr      w9, [x19, #0x31c]                      // self.primeraVez
+01024490  add      w8, w8, #1                            
+01024494  str      w8, [x19, #0x318]                      // self.numero
+01024498  cbnz     w9, #0x10244c0                        
+0102449C  adrp     x8, #0x236b000                        
+010244A0  ldr      x8, [x8, #0x8a8]                       // [0x236B8A8] 'doMovimiento3'
+010244A4  fmov     s0, #2.00000000                       
+010244A8  mov      x0, x19                               
+010244AC  mov      x2, xzr                               
+010244B0  ldr      x1, [x8]                              
+010244B4  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+010244B8  mov      w8, #1                                
+010244BC  str      w8, [x19, #0x31c]                      // self.primeraVez
+010244C0  ldrb     w8, [x19, #0x1d5]                      // self.swfinMovimiento1
+010244C4  cbz      w8, #0x1024500                        
+010244C8  str      wzr, [x19, #0x318]                     // self.numero
+010244CC  adrp     x8, #0x236b000                        
+010244D0  ldr      x8, [x8, #0x4c8]                       // [0x236B4C8] 'desactivarMech'
+010244D4  fmov     s0, #25.00000000                      
+010244D8  mov      x0, x19                               
+010244DC  mov      x2, xzr                               
+010244E0  ldr      x1, [x8]                              
+010244E4  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+010244E8  ldr      x0, [x19, #0x1f8]                      // self.esfera4
+010244EC  strb     wzr, [x19, #0x1d5]                     // self.swfinMovimiento1
+010244F0  cbz      x0, #0x102458c                        
+010244F4  mov      w1, #1                                
+010244F8  mov      x2, xzr                               
+010244FC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01024500  ldr      w8, [x19, #0x208]                      // self.empezar
+01024504  cmp      w8, #4                                
+01024508  b.ne     #0x1024580                            
+0102450C  ldrb     w8, [x19, #0x1d5]                      // self.swfinMovimiento1
+01024510  cbz      w8, #0x1024544                        
+01024514  ldr      x0, [x19, #0x1f8]                      // self.esfera4
+01024518  cbz      x0, #0x102458c                        
+0102451C  mov      w1, wzr                               
+01024520  mov      x2, xzr                               
+01024524  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01024528  mov      x0, x19                               
+0102452C  bl       #0x1024dd8                             // Resorte2c$$doMover2_1b
+01024530  ldrb     w8, [x19, #0x1d9]                      // self.swfin2_1
+01024534  cbz      w8, #0x1024544                        
+01024538  mov      w8, #0x10000                          
+0102453C  str      w8, [x19, #0x1d0]                      // self.swfin0
+01024540  strb     wzr, [x19, #0x1d4]                     // self.swfin4
+01024544  ldrb     w8, [x19, #0x1d2]                      // self.swfin2
+01024548  cbz      w8, #0x102456c                        
+0102454C  mov      x0, x19                               
+01024550  bl       #0x1024a50                             // Resorte2c$$doMover1_1b
+01024554  ldrb     w8, [x19, #0x1d7]                      // self.swfin1_1
+01024558  cbz      w8, #0x102456c                        
+0102455C  mov      w8, #1                                
+01024560  strb     wzr, [x19, #0x1d4]                     // self.swfin4
+01024564  str      wzr, [x19, #0x1d0]                     // self.swfin0
+01024568  strb     w8, [x19, #0x1d6]                      // self.swfinMovimiento2
+0102456C  ldrb     w8, [x19, #0x1d6]                      // self.swfinMovimiento2
+01024570  cbz      w8, #0x1024580                        
+01024574  mov      x0, x19                               
+01024578  bl       #0x102463c                             // Resorte2c$$activarMech
+0102457C  strb     wzr, [x19, #0x1d6]                     // self.swfinMovimiento2
+01024580  ldp      x20, x19, [sp, #0x10]                 
+01024584  ldr      x30, [sp], #0x20                      
+01024588  ret                                            
+0102458C  bl       #0xe61da0                             

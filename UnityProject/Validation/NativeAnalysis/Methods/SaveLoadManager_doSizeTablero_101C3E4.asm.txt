@@ -1,0 +1,62 @@
+// SaveLoadManager$$doSizeTablero VA 0x101C3E4, inferred length 240
+void SaveLoadManager__doSizeTablero (SaveLoadManager_o* __this, const MethodInfo* method);
+0101C3E4  stp      x30, x21, [sp, #-0x20]!               
+0101C3E8  stp      x20, x19, [sp, #0x10]                 
+0101C3EC  adrp     x20, #0x24fb000                       
+0101C3F0  adrp     x21, #0x236a000                       
+0101C3F4  ldrb     w8, [x20, #0xca9]                     
+0101C3F8  ldr      x21, [x21, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+0101C3FC  mov      x19, x0                               
+0101C400  tbnz     w8, #0, #0x101c43c                    
+0101C404  adrp     x0, #0x236a000                        
+0101C408  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0101C40C  bl       #0xe61b78                             
+0101C410  adrp     x0, #0x236b000                        
+0101C414  ldr      x0, [x0, #0x698]                       // [0x236B698] 'BaseG'
+0101C418  bl       #0xe61b78                             
+0101C41C  adrp     x0, #0x236b000                        
+0101C420  ldr      x0, [x0, #0x6a0]                       // [0x236B6A0] 'BaseF'
+0101C424  bl       #0xe61b78                             
+0101C428  adrp     x0, #0x236b000                        
+0101C42C  ldr      x0, [x0, #0x6a8]                       // [0x236B6A8] 'BaseE'
+0101C430  bl       #0xe61b78                             
+0101C434  mov      w8, #1                                
+0101C438  strb     w8, [x20, #0xca9]                     
+0101C43C  ldr      x8, [x21]                             
+0101C440  ldr      x8, [x8, #0xb8]                       
+0101C444  ldr      w8, [x8]                              
+0101C448  sub      w9, w8, #1                            
+0101C44C  cmp      w9, #0x26                             
+0101C450  b.hi     #0x101c47c                            
+0101C454  adrp     x10, #0x621000                        
+0101C458  adrp     x11, #0x621000                        
+0101C45C  adrp     x12, #0x2253000                       
+0101C460  add      x10, x10, #0x2b8                      
+0101C464  add      x11, x11, #0x354                      
+0101C468  add      x12, x12, #0x678                       // 'BaseE'
+0101C46C  ldr      w10, [x10, w9, sxtw #2]               
+0101C470  ldr      s0, [x11, w9, sxtw #2]                
+0101C474  ldr      x9, [x12, w9, sxtw #3]                 // [0x2253678] 'BaseE'
+0101C478  b        #0x101c48c                            
+0101C47C  adrp     x9, #0x236b000                        
+0101C480  ldr      x9, [x9, #0x6a0]                       // [0x236B6A0] 'BaseF'
+0101C484  fmov     s0, #-20.00000000                     
+0101C488  mov      w10, #6                               
+0101C48C  str      w10, [x19, #0x74]                      // self.sizeTablero
+0101C490  str      s0, [x19, #0x78]                       // self.minimoY
+0101C494  ldr      x9, [x9]                              
+0101C498  cmp      w8, #0xb                              
+0101C49C  str      x9, [x19, #0x3c0]                      // self.cadenaBase
+0101C4A0  b.hi     #0x101c4cc                            
+0101C4A4  mov      w9, #1                                
+0101C4A8  lsl      w8, w9, w8                            
+0101C4AC  mov      w9, #0xf5e                            
+0101C4B0  tst      w8, w9                                
+0101C4B4  b.eq     #0x101c4cc                            
+0101C4B8  mov      w8, wzr                               
+0101C4BC  strb     w8, [x19, #0x3d8]                      // self.doSubt
+0101C4C0  ldp      x20, x19, [sp, #0x10]                 
+0101C4C4  ldp      x30, x21, [sp], #0x20                 
+0101C4C8  ret                                            
+0101C4CC  mov      w8, #1                                
+0101C4D0  b        #0x101c4bc                            

@@ -1,0 +1,226 @@
+// ObservadorResorte$$doInactivarPieza VA 0x10CD27C, inferred length 896
+void ObservadorResorte__doInactivarPieza (ObservadorResorte_o* __this, const MethodInfo* method);
+010CD27C  stp      x30, x21, [sp, #-0x20]!               
+010CD280  stp      x20, x19, [sp, #0x10]                 
+010CD284  adrp     x20, #0x24fc000                       
+010CD288  ldrb     w8, [x20, #0xd]                       
+010CD28C  mov      x19, x0                               
+010CD290  tbnz     w8, #0, #0x10cd338                    
+010CD294  adrp     x0, #0x236a000                        
+010CD298  ldr      x0, [x0, #0x800]                       // [0x236A800] Method$UnityEngine.GameObject.GetComponent<ControlFijo>()
+010CD29C  bl       #0xe61b78                             
+010CD2A0  adrp     x0, #0x236a000                        
+010CD2A4  ldr      x0, [x0, #0x808]                       // [0x236A808] Method$UnityEngine.GameObject.GetComponent<ControlPiezaC>()
+010CD2A8  bl       #0xe61b78                             
+010CD2AC  adrp     x0, #0x236a000                        
+010CD2B0  ldr      x0, [x0, #0x810]                       // [0x236A810] Method$UnityEngine.GameObject.GetComponent<ControlPiezaFuente>()
+010CD2B4  bl       #0xe61b78                             
+010CD2B8  adrp     x0, #0x236a000                        
+010CD2BC  ldr      x0, [x0, #0xa18]                       // [0x236AA18] Method$UnityEngine.GameObject.GetComponent<ControlPiezaPfuente>()
+010CD2C0  bl       #0xe61b78                             
+010CD2C4  adrp     x0, #0x236a000                        
+010CD2C8  ldr      x0, [x0, #0x818]                       // [0x236A818] Method$UnityEngine.GameObject.GetComponent<ControlPieza>()
+010CD2CC  bl       #0xe61b78                             
+010CD2D0  adrp     x0, #0x236a000                        
+010CD2D4  ldr      x0, [x0, #0x820]                       // [0x236A820] 'BloqueFijo'
+010CD2D8  bl       #0xe61b78                             
+010CD2DC  adrp     x0, #0x236a000                        
+010CD2E0  ldr      x0, [x0, #0xa98]                       // [0x236AA98] 'LadrilloFuente'
+010CD2E4  bl       #0xe61b78                             
+010CD2E8  adrp     x0, #0x236a000                        
+010CD2EC  ldr      x0, [x0, #0x828]                       // [0x236A828] 'Bloque'
+010CD2F0  bl       #0xe61b78                             
+010CD2F4  adrp     x0, #0x236a000                        
+010CD2F8  ldr      x0, [x0, #0x628]                       // [0x236A628] 'Suelo1'
+010CD2FC  bl       #0xe61b78                             
+010CD300  adrp     x0, #0x236a000                        
+010CD304  ldr      x0, [x0, #0x868]                       // [0x236A868] 'PiedraFuente5'
+010CD308  bl       #0xe61b78                             
+010CD30C  adrp     x0, #0x236a000                        
+010CD310  ldr      x0, [x0, #0x830]                       // [0x236A830] 'CuFuenteED'
+010CD314  bl       #0xe61b78                             
+010CD318  adrp     x0, #0x236a000                        
+010CD31C  ldr      x0, [x0, #0xad8]                       // [0x236AAD8] 'BloqueChorro'
+010CD320  bl       #0xe61b78                             
+010CD324  adrp     x0, #0x236a000                        
+010CD328  ldr      x0, [x0, #0x838]                       // [0x236A838] 'Fuente'
+010CD32C  bl       #0xe61b78                             
+010CD330  mov      w8, #1                                
+010CD334  strb     w8, [x20, #0xd]                       
+010CD338  mov      x0, x19                               
+010CD33C  mov      x1, xzr                               
+010CD340  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010CD344  cbz      x0, #0x10cd5f8                        
+010CD348  mov      x1, xzr                               
+010CD34C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CD350  cbz      x0, #0x10cd5f8                        
+010CD354  mov      x1, xzr                               
+010CD358  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010CD35C  str      x0, [x19, #0x220]                      // self.objeto3
+010CD360  cbz      x0, #0x10cd5f8                        
+010CD364  mov      x1, xzr                               
+010CD368  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD36C  cbz      x0, #0x10cd5f8                        
+010CD370  mov      x1, xzr                               
+010CD374  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CD378  cbz      x0, #0x10cd5f8                        
+010CD37C  adrp     x8, #0x236a000                        
+010CD380  ldr      x8, [x8, #0x820]                       // [0x236A820] 'BloqueFijo'
+010CD384  mov      x2, xzr                               
+010CD388  ldr      x1, [x8]                              
+010CD38C  bl       #0x19651dc                             // System.String$$Contains
+010CD390  ldr      x8, [x19, #0x220]                      // self.objeto3
+010CD394  cbz      x8, #0x10cd5f8                        
+010CD398  adrp     x21, #0x236a000                       
+010CD39C  ldr      x21, [x21, #0x628]                     // [0x236A628] 'Suelo1'
+010CD3A0  tbz      w0, #0, #0x10cd3b0                    
+010CD3A4  adrp     x9, #0x236a000                        
+010CD3A8  ldr      x9, [x9, #0x800]                       // [0x236A800] Method$UnityEngine.GameObject.GetComponent<ControlFijo>()
+010CD3AC  b        #0x10cd4f8                            
+010CD3B0  mov      x0, x8                                
+010CD3B4  mov      x1, xzr                               
+010CD3B8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD3BC  cbz      x0, #0x10cd5f8                        
+010CD3C0  mov      x1, xzr                               
+010CD3C4  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CD3C8  cbz      x0, #0x10cd5f8                        
+010CD3CC  adrp     x8, #0x236a000                        
+010CD3D0  ldr      x8, [x8, #0x828]                       // [0x236A828] 'Bloque'
+010CD3D4  mov      x2, xzr                               
+010CD3D8  ldr      x1, [x8]                              
+010CD3DC  bl       #0x19651dc                             // System.String$$Contains
+010CD3E0  tbz      w0, #0, #0x10cd41c                    
+010CD3E4  ldr      x0, [x19, #0x220]                      // self.objeto3
+010CD3E8  cbz      x0, #0x10cd5f8                        
+010CD3EC  mov      x1, xzr                               
+010CD3F0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD3F4  cbz      x0, #0x10cd5f8                        
+010CD3F8  mov      x1, xzr                               
+010CD3FC  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CD400  cbz      x0, #0x10cd5f8                        
+010CD404  adrp     x8, #0x236a000                        
+010CD408  ldr      x8, [x8, #0xad8]                       // [0x236AAD8] 'BloqueChorro'
+010CD40C  mov      x2, xzr                               
+010CD410  ldr      x1, [x8]                              
+010CD414  bl       #0x19651dc                             // System.String$$Contains
+010CD418  tbz      w0, #0, #0x10cd4b0                    
+010CD41C  ldr      x0, [x19, #0x220]                      // self.objeto3
+010CD420  cbz      x0, #0x10cd5f8                        
+010CD424  mov      x1, xzr                               
+010CD428  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD42C  cbz      x0, #0x10cd5f8                        
+010CD430  mov      x1, xzr                               
+010CD434  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CD438  cbz      x0, #0x10cd5f8                        
+010CD43C  adrp     x8, #0x236a000                        
+010CD440  ldr      x8, [x8, #0x868]                       // [0x236A868] 'PiedraFuente5'
+010CD444  mov      x2, xzr                               
+010CD448  ldr      x1, [x8]                              
+010CD44C  bl       #0x19651dc                             // System.String$$Contains
+010CD450  ldr      x8, [x19, #0x220]                      // self.objeto3
+010CD454  cbz      x8, #0x10cd5f8                        
+010CD458  tbz      w0, #0, #0x10cd468                    
+010CD45C  adrp     x9, #0x236a000                        
+010CD460  ldr      x9, [x9, #0xa18]                       // [0x236AA18] Method$UnityEngine.GameObject.GetComponent<ControlPiezaPfuente>()
+010CD464  b        #0x10cd4f8                            
+010CD468  mov      x0, x8                                
+010CD46C  mov      x1, xzr                               
+010CD470  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD474  cbz      x0, #0x10cd5f8                        
+010CD478  mov      x1, xzr                               
+010CD47C  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CD480  cbz      x0, #0x10cd5f8                        
+010CD484  adrp     x8, #0x236a000                        
+010CD488  ldr      x8, [x8, #0x830]                       // [0x236A830] 'CuFuenteED'
+010CD48C  mov      x2, xzr                               
+010CD490  ldr      x1, [x8]                              
+010CD494  bl       #0x19651dc                             // System.String$$Contains
+010CD498  ldr      x8, [x19, #0x220]                      // self.objeto3
+010CD49C  cbz      x8, #0x10cd5f8                        
+010CD4A0  tbz      w0, #0, #0x10cd59c                    
+010CD4A4  adrp     x9, #0x236a000                        
+010CD4A8  ldr      x9, [x9, #0x808]                       // [0x236A808] Method$UnityEngine.GameObject.GetComponent<ControlPiezaC>()
+010CD4AC  b        #0x10cd4f8                            
+010CD4B0  ldr      x0, [x19, #0x220]                      // self.objeto3
+010CD4B4  cbz      x0, #0x10cd5f8                        
+010CD4B8  mov      x1, xzr                               
+010CD4BC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD4C0  cbz      x0, #0x10cd5f8                        
+010CD4C4  mov      x1, xzr                               
+010CD4C8  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CD4CC  cbz      x0, #0x10cd5f8                        
+010CD4D0  adrp     x8, #0x236a000                        
+010CD4D4  ldr      x8, [x8, #0x838]                       // [0x236A838] 'Fuente'
+010CD4D8  mov      x2, xzr                               
+010CD4DC  ldr      x1, [x8]                              
+010CD4E0  bl       #0x19651dc                             // System.String$$Contains
+010CD4E4  ldr      x8, [x19, #0x220]                      // self.objeto3
+010CD4E8  cbz      x8, #0x10cd5f8                        
+010CD4EC  tbz      w0, #0, #0x10cd5d8                    
+010CD4F0  adrp     x9, #0x236a000                        
+010CD4F4  ldr      x9, [x9, #0x810]                       // [0x236A810] Method$UnityEngine.GameObject.GetComponent<ControlPiezaFuente>()
+010CD4F8  ldr      x1, [x9]                              
+010CD4FC  mov      x0, x8                                
+010CD500  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010CD504  cbz      x0, #0x10cd5f8                        
+010CD508  ldr      x20, [x0, #0x20]                      
+010CD50C  str      x20, [x19, #0x220]                     // self.objeto3
+010CD510  ldr      x0, [x21]                             
+010CD514  mov      x1, xzr                               
+010CD518  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+010CD51C  cbz      x20, #0x10cd5f8                       
+010CD520  mov      w1, w0                                
+010CD524  mov      x0, x20                               
+010CD528  mov      x2, xzr                               
+010CD52C  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+010CD530  ldrb     w8, [x19, #0x19e]                      // self.sw_obj1
+010CD534  cbz      w8, #0x10cd55c                        
+010CD538  ldr      x0, [x21]                             
+010CD53C  ldr      x20, [x19, #0x210]                     // self.objeto1
+010CD540  mov      x1, xzr                               
+010CD544  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+010CD548  cbz      x20, #0x10cd5f8                       
+010CD54C  mov      w1, w0                                
+010CD550  mov      x0, x20                               
+010CD554  mov      x2, xzr                               
+010CD558  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+010CD55C  ldrb     w8, [x19, #0x19f]                      // self.sw_obj2
+010CD560  cbz      w8, #0x10cd590                        
+010CD564  ldr      x0, [x21]                             
+010CD568  ldr      x19, [x19, #0x218]                     // self.objeto2
+010CD56C  mov      x1, xzr                               
+010CD570  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+010CD574  cbz      x19, #0x10cd5f8                       
+010CD578  mov      w1, w0                                
+010CD57C  mov      x0, x19                               
+010CD580  ldp      x20, x19, [sp, #0x10]                 
+010CD584  mov      x2, xzr                               
+010CD588  ldp      x30, x21, [sp], #0x20                 
+010CD58C  b        #0x2006350                             // UnityEngine.GameObject$$set_layer
+010CD590  ldp      x20, x19, [sp, #0x10]                 
+010CD594  ldp      x30, x21, [sp], #0x20                 
+010CD598  ret                                            
+010CD59C  mov      x0, x8                                
+010CD5A0  mov      x1, xzr                               
+010CD5A4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CD5A8  cbz      x0, #0x10cd5f8                        
+010CD5AC  mov      x1, xzr                               
+010CD5B0  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010CD5B4  cbz      x0, #0x10cd5f8                        
+010CD5B8  adrp     x8, #0x236a000                        
+010CD5BC  ldr      x8, [x8, #0xa98]                       // [0x236AA98] 'LadrilloFuente'
+010CD5C0  mov      x2, xzr                               
+010CD5C4  ldr      x1, [x8]                              
+010CD5C8  bl       #0x19651dc                             // System.String$$Contains
+010CD5CC  tbz      w0, #0, #0x10cd530                    
+010CD5D0  str      xzr, [x19, #0x220]                     // self.objeto3
+010CD5D4  b        #0x10cd530                            
+010CD5D8  adrp     x9, #0x236a000                        
+010CD5DC  ldr      x9, [x9, #0x818]                       // [0x236A818] Method$UnityEngine.GameObject.GetComponent<ControlPieza>()
+010CD5E0  mov      x0, x8                                
+010CD5E4  ldr      x1, [x9]                              
+010CD5E8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010CD5EC  cbz      x0, #0x10cd5f8                        
+010CD5F0  ldr      x20, [x0, #0x28]                      
+010CD5F4  b        #0x10cd50c                            
+010CD5F8  bl       #0xe61da0                             

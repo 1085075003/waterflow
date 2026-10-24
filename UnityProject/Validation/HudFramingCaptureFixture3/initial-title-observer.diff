@@ -1,0 +1,40 @@
+--- a/Assets/Editor/RecoveredTools/FlowWaterHudFramingValidation.cs
++++ b/Assets/Editor/RecoveredTools/FlowWaterHudFramingValidation.cs
+@@ -6,6 +6,7 @@
+ using System.Linq;
+ using System.Reflection;
+ using System.Security.Cryptography;
++using System.Text.RegularExpressions;
+ using UnityEditor;
+ using UnityEditor.SceneManagement;
+ using UnityEngine;
+@@ -94,6 +95,9 @@
+                 FlowWaterRecoveryUI.Instance.StartGame(level);
+                 while(RecoveredFlowGame.Instance==null || !RecoveredFlowGame.Instance.IsLevelActive || RecoveredFlowGame.Instance.CurrentLevelId!=level)yield return null;
+                 for(int i=0;i<16;i++)yield return null;
++                // Observe the actual native Start result before a capture wrapper,
++                // Solve or any explicit UI refresh can overwrite this title.
++                ObserveInitialLevelIdentity(level);
+                 RecoveredFlowGame game=RecoveredFlowGame.Instance;Camera camera=game.GameCamera;
+                 float fov=camera.fieldOfView,near=camera.nearClipPlane,far=camera.farClipPlane;Quaternion rotation=camera.transform.rotation;
+                 for(int stage=0;stage<2;stage++) {
+@@ -121,6 +125,19 @@
+             CheckState("all-24-real-layout-and-aspect-frames",report.frames.Count==24,"actual="+report.frames.Count);
+             CheckState("fixture-does-not-change-time-speed",Mathf.Abs(Time.timeScale-report.originalTimeScale)<.00001f,"original="+report.originalTimeScale+", actual="+Time.timeScale);
+         }
++        static void ObserveInitialLevelIdentity(int level) {
++            int expected=(level-1)%50+1;
++            Leveltexto2[] titles=OriginalScenePresentation.Components<Leveltexto2>(SceneManager.GetActiveScene())
++                .Where(x=>x.isActiveAndEnabled && x.texto1!=null && x.texto1.isActiveAndEnabled).ToArray();
++            CheckState(level+":initial-before-capture:active-original-level-title",titles.Length>0,"active original Leveltexto2 title count="+titles.Length);
++            CheckState(level+":initial-before-capture:native-global-asset-identity",ControladorJuego.nivelActual==level,"global="+ControladorJuego.nivelActual+", assetID="+level);
++            foreach(Leveltexto2 title in titles) {
++                string text=title.texto1.text??"";MatchCollection matches=Regex.Matches(text,@"[+-]?\d+");int number;
++                bool exact=matches.Count==1 && Int32.TryParse(matches[0].Value,out number) && number==expected && number>0;
++                CheckState(level+":initial-before-capture:original-positive-local-level-number",exact,
++                    "path="+Hierarchy(title.texto1.transform)+", actual='"+text+"', expected="+expected+", observedFrame="+Time.frameCount);
++            }
++        }
+         static Frame Capture(RecoveredFlowGame game,Vector2Int size,string stage,float fov,float near,float far,Quaternion rotation,bool save) {
+             Camera camera=game.GameCamera;Canvas.ForceUpdateCanvases();
+             var framing=camera.GetComponent<RecoveredBoardFraming>();framing.FitNow();

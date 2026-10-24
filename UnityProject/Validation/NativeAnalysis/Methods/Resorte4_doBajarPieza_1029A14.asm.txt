@@ -1,0 +1,55 @@
+// Resorte4$$doBajarPieza VA 0x1029A14, inferred length 212
+void Resorte4__doBajarPieza (Resorte4_o* __this, const MethodInfo* method);
+01029A14  stp      d9, d8, [sp, #-0x20]!                 
+01029A18  stp      x30, x19, [sp, #0x10]                 
+01029A1C  mov      x1, xzr                               
+01029A20  mov      x19, x0                               
+01029A24  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+01029A28  cbz      x0, #0x1029ae4                        
+01029A2C  mov      x1, xzr                               
+01029A30  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+01029A34  cbz      x0, #0x1029ae4                        
+01029A38  mov      x1, xzr                               
+01029A3C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+01029A40  mov      x0, x19                               
+01029A44  mov      x1, xzr                               
+01029A48  mov      v8.16b, v0.16b                        
+01029A4C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+01029A50  cbz      x0, #0x1029ae4                        
+01029A54  mov      x1, xzr                               
+01029A58  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+01029A5C  adrp     x8, #0x600000                         
+01029A60  ldr      s0, [x8, #0x198]                      
+01029A64  mov      x0, x19                               
+01029A68  mov      x1, xzr                               
+01029A6C  fadd     s0, s1, s0                            
+01029A70  str      s0, [x19, #0xdc]                       // self.valorY
+01029A74  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+01029A78  cbz      x0, #0x1029ae4                        
+01029A7C  mov      x1, xzr                               
+01029A80  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+01029A84  cbz      x0, #0x1029ae4                        
+01029A88  mov      x1, xzr                               
+01029A8C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+01029A90  ldr      x0, [x19, #0xb8]                       // self.otherObject
+01029A94  cbz      x0, #0x1029ae4                        
+01029A98  mov      x1, xzr                               
+01029A9C  mov      v9.16b, v2.16b                        
+01029AA0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01029AA4  cbz      x0, #0x1029ae4                        
+01029AA8  mov      x1, xzr                               
+01029AAC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+01029AB0  cbz      x0, #0x1029ae4                        
+01029AB4  ldr      s1, [x19, #0xdc]                       // self.valorY
+01029AB8  mov      v0.16b, v8.16b                        
+01029ABC  mov      v2.16b, v9.16b                        
+01029AC0  mov      x1, xzr                               
+01029AC4  bl       #0x200ea50                             // UnityEngine.Transform$$set_position
+01029AC8  mov      x0, x19                               
+01029ACC  bl       #0x1029ae8                             // Resorte4$$doActivarMech
+01029AD0  mov      w8, #1                                
+01029AD4  strb     w8, [x19, #0xd9]                       // self.chequear
+01029AD8  ldp      x30, x19, [sp, #0x10]                 
+01029ADC  ldp      d9, d8, [sp], #0x20                   
+01029AE0  ret                                            
+01029AE4  bl       #0xe61da0                             

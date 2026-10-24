@@ -1,0 +1,231 @@
+// CascadaTest$$doControlCascada6 VA 0xFD09A0, inferred length 916
+void CascadaTest__doControlCascada6 (CascadaTest_o* __this, const MethodInfo* method);
+00FD09A0  str      d14, [sp, #-0x50]!                    
+00FD09A4  stp      d13, d12, [sp, #8]                    
+00FD09A8  stp      d11, d10, [sp, #0x18]                 
+00FD09AC  stp      d9, d8, [sp, #0x28]                   
+00FD09B0  str      x30, [sp, #0x38]                      
+00FD09B4  stp      x20, x19, [sp, #0x40]                 
+00FD09B8  adrp     x20, #0x24fb000                       
+00FD09BC  ldrb     w8, [x20, #0xb54]                     
+00FD09C0  mov      x19, x0                               
+00FD09C4  tbnz     w8, #0, #0xfd09f4                     
+00FD09C8  adrp     x0, #0x2368000                        
+00FD09CC  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FD09D0  bl       #0xe61b78                             
+00FD09D4  adrp     x0, #0x2368000                        
+00FD09D8  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD09DC  bl       #0xe61b78                             
+00FD09E0  adrp     x0, #0x236a000                        
+00FD09E4  ldr      x0, [x0, #0x768]                       // [0x236A768] 'doActivarEsferaSalida'
+00FD09E8  bl       #0xe61b78                             
+00FD09EC  mov      w8, #1                                
+00FD09F0  strb     w8, [x20, #0xb54]                     
+00FD09F4  ldrb     w8, [x19, #0x170]                      // self.instanciar
+00FD09F8  cbz      w8, #0xfd0d10                         
+00FD09FC  mov      x0, x19                               
+00FD0A00  bl       #0xfd27f0                              // CascadaTest$$doAsignarValores6
+00FD0A04  ldr      w8, [x19, #0xf8]                       // self.color
+00FD0A08  cmp      w8, #1                                
+00FD0A0C  b.ne     #0xfd0a94                             
+00FD0A10  ldr      x20, [x19, #0x70]                      // self.prefabCas1_6
+00FD0A14  ldr      s8, [x19, #0x17c]                      // self.var_x
+00FD0A18  ldr      s9, [x19, #0x180]                      // self.var_y
+00FD0A1C  ldr      s10, [x19, #0x184]                     // self.var_z
+00FD0A20  fmov     s0, wzr                               
+00FD0A24  fmov     s1, wzr                               
+00FD0A28  fmov     s2, wzr                               
+00FD0A2C  mov      x0, xzr                               
+00FD0A30  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD0A34  adrp     x8, #0x2368000                        
+00FD0A38  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD0A3C  mov      v11.16b, v0.16b                       
+00FD0A40  mov      v12.16b, v1.16b                       
+00FD0A44  mov      v13.16b, v2.16b                       
+00FD0A48  ldr      x0, [x8]                              
+00FD0A4C  mov      v14.16b, v3.16b                       
+00FD0A50  ldr      w8, [x0, #0xe0]                       
+00FD0A54  cbnz     w8, #0xfd0a5c                         
+00FD0A58  bl       #0xe61c80                             
+00FD0A5C  adrp     x8, #0x2368000                        
+00FD0A60  ldr      x8, [x8, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FD0A64  mov      x0, x20                               
+00FD0A68  mov      v0.16b, v8.16b                        
+00FD0A6C  mov      v1.16b, v9.16b                        
+00FD0A70  ldr      x1, [x8]                              
+00FD0A74  mov      v2.16b, v10.16b                       
+00FD0A78  mov      v3.16b, v11.16b                       
+00FD0A7C  mov      v4.16b, v12.16b                       
+00FD0A80  mov      v5.16b, v13.16b                       
+00FD0A84  mov      v6.16b, v14.16b                       
+00FD0A88  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FD0A8C  ldr      w8, [x19, #0xf8]                       // self.color
+00FD0A90  str      x0, [x19, #0x160]                      // self.cascada
+00FD0A94  cmp      w8, #2                                
+00FD0A98  b.ne     #0xfd0b20                             
+00FD0A9C  ldr      x20, [x19, #0x78]                      // self.prefabCas2_6
+00FD0AA0  ldr      s8, [x19, #0x17c]                      // self.var_x
+00FD0AA4  ldr      s9, [x19, #0x180]                      // self.var_y
+00FD0AA8  ldr      s10, [x19, #0x184]                     // self.var_z
+00FD0AAC  fmov     s0, wzr                               
+00FD0AB0  fmov     s1, wzr                               
+00FD0AB4  fmov     s2, wzr                               
+00FD0AB8  mov      x0, xzr                               
+00FD0ABC  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD0AC0  adrp     x8, #0x2368000                        
+00FD0AC4  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD0AC8  mov      v11.16b, v0.16b                       
+00FD0ACC  mov      v12.16b, v1.16b                       
+00FD0AD0  mov      v13.16b, v2.16b                       
+00FD0AD4  ldr      x0, [x8]                              
+00FD0AD8  mov      v14.16b, v3.16b                       
+00FD0ADC  ldr      w8, [x0, #0xe0]                       
+00FD0AE0  cbnz     w8, #0xfd0ae8                         
+00FD0AE4  bl       #0xe61c80                             
+00FD0AE8  adrp     x8, #0x2368000                        
+00FD0AEC  ldr      x8, [x8, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FD0AF0  mov      x0, x20                               
+00FD0AF4  mov      v0.16b, v8.16b                        
+00FD0AF8  mov      v1.16b, v9.16b                        
+00FD0AFC  ldr      x1, [x8]                              
+00FD0B00  mov      v2.16b, v10.16b                       
+00FD0B04  mov      v3.16b, v11.16b                       
+00FD0B08  mov      v4.16b, v12.16b                       
+00FD0B0C  mov      v5.16b, v13.16b                       
+00FD0B10  mov      v6.16b, v14.16b                       
+00FD0B14  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FD0B18  ldr      w8, [x19, #0xf8]                       // self.color
+00FD0B1C  str      x0, [x19, #0x160]                      // self.cascada
+00FD0B20  cmp      w8, #3                                
+00FD0B24  b.ne     #0xfd0bac                             
+00FD0B28  ldr      x20, [x19, #0x80]                      // self.prefabCas3_6
+00FD0B2C  ldr      s8, [x19, #0x17c]                      // self.var_x
+00FD0B30  ldr      s9, [x19, #0x180]                      // self.var_y
+00FD0B34  ldr      s10, [x19, #0x184]                     // self.var_z
+00FD0B38  fmov     s0, wzr                               
+00FD0B3C  fmov     s1, wzr                               
+00FD0B40  fmov     s2, wzr                               
+00FD0B44  mov      x0, xzr                               
+00FD0B48  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD0B4C  adrp     x8, #0x2368000                        
+00FD0B50  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD0B54  mov      v11.16b, v0.16b                       
+00FD0B58  mov      v12.16b, v1.16b                       
+00FD0B5C  mov      v13.16b, v2.16b                       
+00FD0B60  ldr      x0, [x8]                              
+00FD0B64  mov      v14.16b, v3.16b                       
+00FD0B68  ldr      w8, [x0, #0xe0]                       
+00FD0B6C  cbnz     w8, #0xfd0b74                         
+00FD0B70  bl       #0xe61c80                             
+00FD0B74  adrp     x8, #0x2368000                        
+00FD0B78  ldr      x8, [x8, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FD0B7C  mov      x0, x20                               
+00FD0B80  mov      v0.16b, v8.16b                        
+00FD0B84  mov      v1.16b, v9.16b                        
+00FD0B88  ldr      x1, [x8]                              
+00FD0B8C  mov      v2.16b, v10.16b                       
+00FD0B90  mov      v3.16b, v11.16b                       
+00FD0B94  mov      v4.16b, v12.16b                       
+00FD0B98  mov      v5.16b, v13.16b                       
+00FD0B9C  mov      v6.16b, v14.16b                       
+00FD0BA0  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FD0BA4  ldr      w8, [x19, #0xf8]                       // self.color
+00FD0BA8  str      x0, [x19, #0x160]                      // self.cascada
+00FD0BAC  cmp      w8, #4                                
+00FD0BB0  b.ne     #0xfd0c38                             
+00FD0BB4  ldr      x20, [x19, #0x88]                      // self.prefabCas4_6
+00FD0BB8  ldr      s8, [x19, #0x17c]                      // self.var_x
+00FD0BBC  ldr      s9, [x19, #0x180]                      // self.var_y
+00FD0BC0  ldr      s10, [x19, #0x184]                     // self.var_z
+00FD0BC4  fmov     s0, wzr                               
+00FD0BC8  fmov     s1, wzr                               
+00FD0BCC  fmov     s2, wzr                               
+00FD0BD0  mov      x0, xzr                               
+00FD0BD4  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD0BD8  adrp     x8, #0x2368000                        
+00FD0BDC  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD0BE0  mov      v11.16b, v0.16b                       
+00FD0BE4  mov      v12.16b, v1.16b                       
+00FD0BE8  mov      v13.16b, v2.16b                       
+00FD0BEC  ldr      x0, [x8]                              
+00FD0BF0  mov      v14.16b, v3.16b                       
+00FD0BF4  ldr      w8, [x0, #0xe0]                       
+00FD0BF8  cbnz     w8, #0xfd0c00                         
+00FD0BFC  bl       #0xe61c80                             
+00FD0C00  adrp     x8, #0x2368000                        
+00FD0C04  ldr      x8, [x8, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FD0C08  mov      x0, x20                               
+00FD0C0C  mov      v0.16b, v8.16b                        
+00FD0C10  mov      v1.16b, v9.16b                        
+00FD0C14  ldr      x1, [x8]                              
+00FD0C18  mov      v2.16b, v10.16b                       
+00FD0C1C  mov      v3.16b, v11.16b                       
+00FD0C20  mov      v4.16b, v12.16b                       
+00FD0C24  mov      v5.16b, v13.16b                       
+00FD0C28  mov      v6.16b, v14.16b                       
+00FD0C2C  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FD0C30  str      x0, [x19, #0x160]                      // self.cascada
+00FD0C34  b        #0xfd0c3c                             
+00FD0C38  ldr      x0, [x19, #0x160]                      // self.cascada
+00FD0C3C  cbz      x0, #0xfd0d30                         
+00FD0C40  mov      x1, xzr                               
+00FD0C44  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD0C48  mov      x20, x0                               
+00FD0C4C  mov      x0, x19                               
+00FD0C50  mov      x1, xzr                               
+00FD0C54  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD0C58  cbz      x20, #0xfd0d30                        
+00FD0C5C  mov      x1, x0                                
+00FD0C60  mov      x0, x20                               
+00FD0C64  mov      x2, xzr                               
+00FD0C68  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+00FD0C6C  ldr      x0, [x19, #0x160]                      // self.cascada
+00FD0C70  cbz      x0, #0xfd0d30                         
+00FD0C74  mov      x1, xzr                               
+00FD0C78  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD0C7C  cbz      x0, #0xfd0d30                         
+00FD0C80  ldr      s2, [x19, #0x184]                      // self.var_z
+00FD0C84  ldr      s1, [x19, #0x180]                      // self.var_y
+00FD0C88  ldr      s0, [x19, #0x17c]                      // self.var_x
+00FD0C8C  mov      x1, xzr                               
+00FD0C90  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD0C94  ldr      x0, [x19, #0x160]                      // self.cascada
+00FD0C98  cbz      x0, #0xfd0d30                         
+00FD0C9C  mov      x1, xzr                               
+00FD0CA0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD0CA4  cbz      x0, #0xfd0d30                         
+00FD0CA8  ldr      s2, [x19, #0x1bc]                      // self.varScalez
+00FD0CAC  ldr      s1, [x19, #0x1b8]                      // self.varScaley
+00FD0CB0  ldr      s0, [x19, #0x1b4]                      // self.varScalex
+00FD0CB4  mov      x1, xzr                               
+00FD0CB8  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+00FD0CBC  ldr      x0, [x19, #0x118]                      // self.plano
+00FD0CC0  cbz      x0, #0xfd0d30                         
+00FD0CC4  adrp     x20, #0x236a000                       
+00FD0CC8  ldr      x20, [x20, #0x768]                     // [0x236A768] 'doActivarEsferaSalida'
+00FD0CCC  mov      w1, wzr                               
+00FD0CD0  mov      x2, xzr                               
+00FD0CD4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD0CD8  ldr      w8, [x19, #0x150]                      // self.altura
+00FD0CDC  fmov     s0, wzr                               
+00FD0CE0  str      wzr, [x19, #0x240]                     // self.esperaEsfera
+00FD0CE4  sub      w8, w8, #1                            
+00FD0CE8  cmp      w8, #4                                
+00FD0CEC  b.hi     #0xfd0d00                             
+00FD0CF0  adrp     x9, #0x621000                         
+00FD0CF4  add      x9, x9, #0x140                        
+00FD0CF8  ldr      s0, [x9, w8, sxtw #2]                 
+00FD0CFC  str      s0, [x19, #0x240]                      // self.esperaEsfera
+00FD0D00  ldr      x1, [x20]                             
+00FD0D04  mov      x0, x19                               
+00FD0D08  mov      x2, xzr                               
+00FD0D0C  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+00FD0D10  strb     wzr, [x19, #0x170]                     // self.instanciar
+00FD0D14  ldp      x20, x19, [sp, #0x40]                 
+00FD0D18  ldr      x30, [sp, #0x38]                      
+00FD0D1C  ldp      d9, d8, [sp, #0x28]                   
+00FD0D20  ldp      d11, d10, [sp, #0x18]                 
+00FD0D24  ldp      d13, d12, [sp, #8]                    
+00FD0D28  ldr      d14, [sp], #0x50                      
+00FD0D2C  ret                                            
+00FD0D30  bl       #0xe61da0                             

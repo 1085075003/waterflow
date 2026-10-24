@@ -1,0 +1,95 @@
+// CascadaTestC$$doCrearChorro VA 0xFD6FC4, inferred length 372
+void CascadaTestC__doCrearChorro (CascadaTestC_o* __this, const MethodInfo* method);
+00FD6FC4  stp      d11, d10, [sp, #-0x50]!               
+00FD6FC8  stp      d9, d8, [sp, #0x10]                   
+00FD6FCC  str      x30, [sp, #0x20]                      
+00FD6FD0  stp      x22, x21, [sp, #0x30]                 
+00FD6FD4  stp      x20, x19, [sp, #0x40]                 
+00FD6FD8  adrp     x20, #0x24fb000                       
+00FD6FDC  ldrb     w8, [x20, #0xb7b]                     
+00FD6FE0  mov      x19, x0                               
+00FD6FE4  tbnz     w8, #0, #0xfd7008                     
+00FD6FE8  adrp     x0, #0x2368000                        
+00FD6FEC  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FD6FF0  bl       #0xe61b78                             
+00FD6FF4  adrp     x0, #0x2368000                        
+00FD6FF8  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD6FFC  bl       #0xe61b78                             
+00FD7000  mov      w8, #1                                
+00FD7004  strb     w8, [x20, #0xb7b]                     
+00FD7008  ldrb     w8, [x19, #0xa1]                       // self.noHayChorro
+00FD700C  cbz      w8, #0xfd711c                         
+00FD7010  adrp     x8, #0x5ff000                         
+00FD7014  ldr      s0, [x19, #0xb0]                       // self.rotacion
+00FD7018  ldr      s1, [x8, #0xd64]                      
+00FD701C  adrp     x22, #0x2368000                       
+00FD7020  adrp     x21, #0x2368000                       
+00FD7024  ldr      x20, [x19, #0x50]                      // self.ChorroCorto
+00FD7028  ldr      x22, [x22, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD702C  ldr      x21, [x21, #0x900]                     // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FD7030  fmul     s1, s0, s1                            
+00FD7034  fmov     s0, wzr                               
+00FD7038  fmov     s2, wzr                               
+00FD703C  mov      x0, xzr                               
+00FD7040  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD7044  ldr      x0, [x22]                             
+00FD7048  mov      v8.16b, v0.16b                        
+00FD704C  mov      v9.16b, v1.16b                        
+00FD7050  mov      v10.16b, v2.16b                       
+00FD7054  ldr      w8, [x0, #0xe0]                       
+00FD7058  mov      v11.16b, v3.16b                       
+00FD705C  cbnz     w8, #0xfd7064                         
+00FD7060  bl       #0xe61c80                             
+00FD7064  ldr      x1, [x21]                             
+00FD7068  fmov     s0, wzr                               
+00FD706C  fmov     s1, #3.50000000                       
+00FD7070  fmov     s2, wzr                               
+00FD7074  mov      x0, x20                               
+00FD7078  mov      v3.16b, v8.16b                        
+00FD707C  mov      v4.16b, v9.16b                        
+00FD7080  mov      v5.16b, v10.16b                       
+00FD7084  mov      v6.16b, v11.16b                       
+00FD7088  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FD708C  str      x0, [x19, #0x28]                       // self.Chorro
+00FD7090  cbz      x0, #0xfd7134                         
+00FD7094  mov      x1, xzr                               
+00FD7098  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD709C  mov      x20, x0                               
+00FD70A0  mov      x0, x19                               
+00FD70A4  mov      x1, xzr                               
+00FD70A8  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD70AC  cbz      x20, #0xfd7134                        
+00FD70B0  mov      x1, x0                                
+00FD70B4  mov      x0, x20                               
+00FD70B8  mov      x2, xzr                               
+00FD70BC  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+00FD70C0  ldr      x0, [x19, #0x28]                       // self.Chorro
+00FD70C4  cbz      x0, #0xfd7134                         
+00FD70C8  mov      x1, xzr                               
+00FD70CC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD70D0  cbz      x0, #0xfd7134                         
+00FD70D4  fmov     s0, wzr                               
+00FD70D8  fmov     s1, #3.50000000                       
+00FD70DC  fmov     s2, wzr                               
+00FD70E0  mov      x1, xzr                               
+00FD70E4  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD70E8  ldr      x0, [x19, #0x28]                       // self.Chorro
+00FD70EC  cbz      x0, #0xfd7134                         
+00FD70F0  mov      x1, xzr                               
+00FD70F4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD70F8  cbz      x0, #0xfd7134                         
+00FD70FC  adrp     x9, #0x600000                         
+00FD7100  adrp     x8, #0x5ff000                         
+00FD7104  ldr      s1, [x9, #0x3c]                       
+00FD7108  ldr      s0, [x8, #0xf14]                      
+00FD710C  mov      x1, xzr                               
+00FD7110  mov      v2.16b, v1.16b                        
+00FD7114  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+00FD7118  strb     wzr, [x19, #0xa1]                      // self.noHayChorro
+00FD711C  ldp      x20, x19, [sp, #0x40]                 
+00FD7120  ldp      x22, x21, [sp, #0x30]                 
+00FD7124  ldr      x30, [sp, #0x20]                      
+00FD7128  ldp      d9, d8, [sp, #0x10]                   
+00FD712C  ldp      d11, d10, [sp], #0x50                 
+00FD7130  ret                                            
+00FD7134  bl       #0xe61da0                             

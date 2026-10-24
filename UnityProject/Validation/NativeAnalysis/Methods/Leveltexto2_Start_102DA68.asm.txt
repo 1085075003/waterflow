@@ -1,0 +1,71 @@
+// Leveltexto2$$Start VA 0x102DA68, inferred length 276
+void Leveltexto2__Start (Leveltexto2_o* __this, const MethodInfo* method);
+0102DA68  str      x30, [sp, #-0x30]!                    
+0102DA6C  stp      x22, x21, [sp, #0x10]                 
+0102DA70  stp      x20, x19, [sp, #0x20]                 
+0102DA74  adrp     x22, #0x24fb000                       
+0102DA78  adrp     x21, #0x236a000                       
+0102DA7C  adrp     x20, #0x236a000                       
+0102DA80  ldrb     w8, [x22, #0xd09]                     
+0102DA84  ldr      x21, [x21, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+0102DA88  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102DA8C  mov      x19, x0                               
+0102DA90  tbnz     w8, #0, #0x102dac0                    
+0102DA94  adrp     x0, #0x236a000                        
+0102DA98  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0102DA9C  bl       #0xe61b78                             
+0102DAA0  adrp     x0, #0x236a000                        
+0102DAA4  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0102DAA8  bl       #0xe61b78                             
+0102DAAC  adrp     x0, #0x236a000                        
+0102DAB0  ldr      x0, [x0, #0x7a8]                       // [0x236A7A8] ' '
+0102DAB4  bl       #0xe61b78                             
+0102DAB8  mov      w8, #1                                
+0102DABC  strb     w8, [x22, #0xd09]                     
+0102DAC0  mov      x0, x19                               
+0102DAC4  str      wzr, [sp, #0xc]                       
+0102DAC8  bl       #0x102db7c                             // Leveltexto2$$doLanguage
+0102DACC  ldr      x8, [x21]                             
+0102DAD0  ldr      x0, [x20]                             
+0102DAD4  ldr      x8, [x8, #0xb8]                       
+0102DAD8  ldr      w9, [x0, #0xe0]                       
+0102DADC  ldr      w21, [x8]                             
+0102DAE0  cbnz     w9, #0x102daec                        
+0102DAE4  bl       #0xe61c80                             
+0102DAE8  ldr      x0, [x20]                             
+0102DAEC  ldr      x8, [x0, #0xb8]                       
+0102DAF0  sub      w9, w21, #2                           
+0102DAF4  adrp     x21, #0x236a000                       
+0102DAF8  cmp      w9, #0x25                             
+0102DAFC  ldr      w8, [x8]                              
+0102DB00  ldr      x21, [x21, #0x7a8]                     // [0x236A7A8] ' '
+0102DB04  b.hi     #0x102db18                            
+0102DB08  adrp     x10, #0x621000                        
+0102DB0C  add      x10, x10, #0x550                      
+0102DB10  ldr      w9, [x10, w9, sxtw #2]                
+0102DB14  b        #0x102db1c                            
+0102DB18  mov      w9, wzr                               
+0102DB1C  ldr      x20, [x19, #0x28]                      // self.texto2
+0102DB20  add      w8, w9, w8                            
+0102DB24  add      x0, sp, #0xc                          
+0102DB28  mov      x1, xzr                               
+0102DB2C  str      w8, [sp, #0xc]                        
+0102DB30  bl       #0x1ab3994                             // System.Int32$$ToString
+0102DB34  ldr      x1, [x21]                             
+0102DB38  mov      x2, x0                                
+0102DB3C  mov      x0, x20                               
+0102DB40  mov      x3, xzr                               
+0102DB44  bl       #0x196118c                             // System.String$$Concat
+0102DB48  ldr      x8, [x19, #0x20]                       // self.texto1
+0102DB4C  cbz      x8, #0x102db78                        
+0102DB50  ldr      x9, [x8]                              
+0102DB54  mov      x1, x0                                
+0102DB58  mov      x0, x8                                
+0102DB5C  ldr      x10, [x9, #0x5e8]                     
+0102DB60  ldr      x2, [x9, #0x5f0]                      
+0102DB64  blr      x10                                   
+0102DB68  ldp      x20, x19, [sp, #0x20]                 
+0102DB6C  ldp      x22, x21, [sp, #0x10]                 
+0102DB70  ldr      x30, [sp], #0x30                      
+0102DB74  ret                                            
+0102DB78  bl       #0xe61da0                             

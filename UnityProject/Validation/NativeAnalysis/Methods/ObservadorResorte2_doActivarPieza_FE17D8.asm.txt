@@ -1,0 +1,63 @@
+// ObservadorResorte2$$doActivarPieza VA 0xFE17D8, inferred length 244
+void ObservadorResorte2__doActivarPieza (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE17D8  stp      x30, x21, [sp, #-0x20]!               
+00FE17DC  stp      x20, x19, [sp, #0x10]                 
+00FE17E0  adrp     x21, #0x24fb000                       
+00FE17E4  adrp     x20, #0x2368000                       
+00FE17E8  ldrb     w8, [x21, #0xbb3]                     
+00FE17EC  ldr      x20, [x20, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FE17F0  mov      x19, x0                               
+00FE17F4  tbnz     w8, #0, #0xfe1818                     
+00FE17F8  adrp     x0, #0x2368000                        
+00FE17FC  ldr      x0, [x0, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+00FE1800  bl       #0xe61b78                             
+00FE1804  adrp     x0, #0x2368000                        
+00FE1808  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FE180C  bl       #0xe61b78                             
+00FE1810  mov      w8, #1                                
+00FE1814  strb     w8, [x21, #0xbb3]                     
+00FE1818  ldr      x0, [x20]                             
+00FE181C  ldr      x20, [x19, #0x1e8]                     // self.objeto4
+00FE1820  ldr      w8, [x0, #0xe0]                       
+00FE1824  cbnz     w8, #0xfe182c                         
+00FE1828  bl       #0xe61c80                             
+00FE182C  mov      x0, x20                               
+00FE1830  mov      x1, xzr                               
+00FE1834  mov      x2, xzr                               
+00FE1838  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FE183C  tbz      w0, #0, #0xfe187c                     
+00FE1840  ldr      x0, [x19, #0x1e8]                      // self.objeto4
+00FE1844  cbz      x0, #0xfe18c8                         
+00FE1848  mov      w1, wzr                               
+00FE184C  mov      x2, xzr                               
+00FE1850  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+00FE1854  ldr      x0, [x19, #0x1e8]                      // self.objeto4
+00FE1858  cbz      x0, #0xfe18c8                         
+00FE185C  adrp     x8, #0x2368000                        
+00FE1860  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+00FE1864  ldr      x1, [x8]                              
+00FE1868  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FE186C  cbz      x0, #0xfe18c8                         
+00FE1870  ldr      x1, [x19, #0x110]                      // self.materialTexturaPieza
+00FE1874  mov      x2, xzr                               
+00FE1878  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+00FE187C  ldrb     w8, [x19, #0x166]                      // self.sw_obj1
+00FE1880  cbz      w8, #0xfe1898                         
+00FE1884  ldr      x0, [x19, #0x1d0]                      // self.objeto1
+00FE1888  cbz      x0, #0xfe18c8                         
+00FE188C  mov      w1, #0xc                              
+00FE1890  mov      x2, xzr                               
+00FE1894  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+00FE1898  ldrb     w8, [x19, #0x167]                      // self.sw_obj2
+00FE189C  cbz      w8, #0xfe18bc                         
+00FE18A0  ldr      x0, [x19, #0x1d8]                      // self.objeto2
+00FE18A4  cbz      x0, #0xfe18c8                         
+00FE18A8  ldp      x20, x19, [sp, #0x10]                 
+00FE18AC  mov      w1, #0xc                              
+00FE18B0  mov      x2, xzr                               
+00FE18B4  ldp      x30, x21, [sp], #0x20                 
+00FE18B8  b        #0x2006350                             // UnityEngine.GameObject$$set_layer
+00FE18BC  ldp      x20, x19, [sp, #0x10]                 
+00FE18C0  ldp      x30, x21, [sp], #0x20                 
+00FE18C4  ret                                            
+00FE18C8  bl       #0xe61da0                             

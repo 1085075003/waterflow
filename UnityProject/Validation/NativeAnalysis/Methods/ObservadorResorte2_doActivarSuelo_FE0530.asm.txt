@@ -1,0 +1,140 @@
+// ObservadorResorte2$$doActivarSuelo VA 0xFE0530, inferred length 552
+void ObservadorResorte2__doActivarSuelo (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE0530  stp      x30, x21, [sp, #-0x20]!               
+00FE0534  stp      x20, x19, [sp, #0x10]                 
+00FE0538  adrp     x20, #0x24fb000                       
+00FE053C  adrp     x21, #0x2368000                       
+00FE0540  ldrb     w8, [x20, #0xbb4]                     
+00FE0544  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FE0548  mov      x19, x0                               
+00FE054C  tbnz     w8, #0, #0xfe0588                     
+00FE0550  adrp     x0, #0x2368000                        
+00FE0554  ldr      x0, [x0, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+00FE0558  bl       #0xe61b78                             
+00FE055C  adrp     x0, #0x2368000                        
+00FE0560  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FE0564  bl       #0xe61b78                             
+00FE0568  adrp     x0, #0x236a000                        
+00FE056C  ldr      x0, [x0, #0x7e8]                       // [0x236A7E8] 'Base'
+00FE0570  bl       #0xe61b78                             
+00FE0574  adrp     x0, #0x236a000                        
+00FE0578  ldr      x0, [x0, #0x7f0]                       // [0x236A7F0] 'Suelo'
+00FE057C  bl       #0xe61b78                             
+00FE0580  mov      w8, #1                                
+00FE0584  strb     w8, [x20, #0xbb4]                     
+00FE0588  ldr      x0, [x21]                             
+00FE058C  ldr      x20, [x19, #0x1f8]                     // self.objetoSuelo1
+00FE0590  ldr      w8, [x0, #0xe0]                       
+00FE0594  cbnz     w8, #0xfe059c                         
+00FE0598  bl       #0xe61c80                             
+00FE059C  mov      x0, x20                               
+00FE05A0  mov      x1, xzr                               
+00FE05A4  mov      x2, xzr                               
+00FE05A8  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FE05AC  tbz      w0, #0, #0xfe0668                     
+00FE05B0  ldr      x0, [x19, #0x1f8]                      // self.objetoSuelo1
+00FE05B4  cbz      x0, #0xfe0754                         
+00FE05B8  mov      x1, xzr                               
+00FE05BC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE05C0  cbz      x0, #0xfe0754                         
+00FE05C4  mov      x1, xzr                               
+00FE05C8  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FE05CC  cbz      x0, #0xfe0754                         
+00FE05D0  adrp     x8, #0x236a000                        
+00FE05D4  ldr      x8, [x8, #0x7e8]                       // [0x236A7E8] 'Base'
+00FE05D8  mov      x2, xzr                               
+00FE05DC  ldr      x1, [x8]                              
+00FE05E0  bl       #0x19651dc                             // System.String$$Contains
+00FE05E4  ldr      x8, [x19, #0x1f8]                      // self.objetoSuelo1
+00FE05E8  cbz      x8, #0xfe0754                         
+00FE05EC  adrp     x9, #0x2368000                        
+00FE05F0  ldr      x9, [x9, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+00FE05F4  mov      w20, w0                               
+00FE05F8  mov      x0, x8                                
+00FE05FC  ldr      x1, [x9]                              
+00FE0600  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FE0604  tbz      w20, #0, #0xfe0640                    
+00FE0608  cbz      x0, #0xfe0754                         
+00FE060C  ldr      x1, [x19, #0x118]                      // self.materialTexturaSuelo
+00FE0610  mov      x2, xzr                               
+00FE0614  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+00FE0618  adrp     x8, #0x236a000                        
+00FE061C  ldr      x20, [x19, #0x1f8]                     // self.objetoSuelo1
+00FE0620  ldr      x8, [x8, #0x7f0]                       // [0x236A7F0] 'Suelo'
+00FE0624  mov      x1, xzr                               
+00FE0628  ldr      x0, [x8]                              
+00FE062C  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+00FE0630  cbz      x20, #0xfe0754                        
+00FE0634  mov      w1, w0                                
+00FE0638  mov      x0, x20                               
+00FE063C  b        #0xfe065c                             
+00FE0640  cbz      x0, #0xfe0754                         
+00FE0644  ldr      x1, [x19, #0x110]                      // self.materialTexturaPieza
+00FE0648  mov      x2, xzr                               
+00FE064C  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+00FE0650  ldr      x0, [x19, #0x1f8]                      // self.objetoSuelo1
+00FE0654  cbz      x0, #0xfe0754                         
+00FE0658  mov      w1, wzr                               
+00FE065C  mov      x2, xzr                               
+00FE0660  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+00FE0664  str      xzr, [x19, #0x1f8]                     // self.objetoSuelo1
+00FE0668  ldr      x0, [x21]                             
+00FE066C  ldr      x20, [x19, #0x200]                     // self.objetoSuelo2
+00FE0670  ldr      w8, [x0, #0xe0]                       
+00FE0674  cbnz     w8, #0xfe067c                         
+00FE0678  bl       #0xe61c80                             
+00FE067C  mov      x0, x20                               
+00FE0680  mov      x1, xzr                               
+00FE0684  mov      x2, xzr                               
+00FE0688  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FE068C  tbz      w0, #0, #0xfe0748                     
+00FE0690  ldr      x0, [x19, #0x200]                      // self.objetoSuelo2
+00FE0694  cbz      x0, #0xfe0754                         
+00FE0698  mov      x1, xzr                               
+00FE069C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE06A0  cbz      x0, #0xfe0754                         
+00FE06A4  mov      x1, xzr                               
+00FE06A8  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FE06AC  cbz      x0, #0xfe0754                         
+00FE06B0  adrp     x8, #0x236a000                        
+00FE06B4  ldr      x8, [x8, #0x7e8]                       // [0x236A7E8] 'Base'
+00FE06B8  mov      x2, xzr                               
+00FE06BC  ldr      x1, [x8]                              
+00FE06C0  bl       #0x19651dc                             // System.String$$Contains
+00FE06C4  ldr      x8, [x19, #0x200]                      // self.objetoSuelo2
+00FE06C8  cbz      x8, #0xfe0754                         
+00FE06CC  adrp     x9, #0x2368000                        
+00FE06D0  ldr      x9, [x9, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+00FE06D4  mov      w20, w0                               
+00FE06D8  mov      x0, x8                                
+00FE06DC  ldr      x1, [x9]                              
+00FE06E0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FE06E4  tbz      w20, #0, #0xfe0720                    
+00FE06E8  cbz      x0, #0xfe0754                         
+00FE06EC  ldr      x1, [x19, #0x118]                      // self.materialTexturaSuelo
+00FE06F0  mov      x2, xzr                               
+00FE06F4  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+00FE06F8  adrp     x8, #0x236a000                        
+00FE06FC  ldr      x20, [x19, #0x200]                     // self.objetoSuelo2
+00FE0700  ldr      x8, [x8, #0x7f0]                       // [0x236A7F0] 'Suelo'
+00FE0704  mov      x1, xzr                               
+00FE0708  ldr      x0, [x8]                              
+00FE070C  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+00FE0710  cbz      x20, #0xfe0754                        
+00FE0714  mov      w1, w0                                
+00FE0718  mov      x0, x20                               
+00FE071C  b        #0xfe073c                             
+00FE0720  cbz      x0, #0xfe0754                         
+00FE0724  ldr      x1, [x19, #0x110]                      // self.materialTexturaPieza
+00FE0728  mov      x2, xzr                               
+00FE072C  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+00FE0730  ldr      x0, [x19, #0x200]                      // self.objetoSuelo2
+00FE0734  cbz      x0, #0xfe0754                         
+00FE0738  mov      w1, wzr                               
+00FE073C  mov      x2, xzr                               
+00FE0740  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+00FE0744  str      xzr, [x19, #0x200]                     // self.objetoSuelo2
+00FE0748  ldp      x20, x19, [sp, #0x10]                 
+00FE074C  ldp      x30, x21, [sp], #0x20                 
+00FE0750  ret                                            
+00FE0754  bl       #0xe61da0                             

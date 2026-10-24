@@ -1,0 +1,89 @@
+// FuenteCubetaB$$doActivarEsfera VA 0x109B7E4, inferred length 348
+void FuenteCubetaB__doActivarEsfera (FuenteCubetaB_o* __this, const MethodInfo* method);
+0109B7E4  str      x30, [sp, #-0x20]!                    
+0109B7E8  stp      x20, x19, [sp, #0x10]                 
+0109B7EC  ldrb     w8, [x0, #0x180]                      
+0109B7F0  cbz      w8, #0x109b930                        
+0109B7F4  ldr      x8, [x0, #0x178]                      
+0109B7F8  mov      x19, x0                               
+0109B7FC  cbz      x8, #0x109b93c                        
+0109B800  mov      w9, #1                                
+0109B804  strb     w9, [x8, #0x30]                       
+0109B808  ldrb     w8, [x19, #0x121]                      // self.esf1
+0109B80C  cbz      w8, #0x109b84c                        
+0109B810  ldr      x0, [x19, #0x60]                       // self.esfera1
+0109B814  cbz      x0, #0x109b93c                        
+0109B818  mov      x1, xzr                               
+0109B81C  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+0109B820  cbz      x0, #0x109b93c                        
+0109B824  ldr      x1, [x19, #0x130]                      // self.tagName
+0109B828  mov      x2, xzr                               
+0109B82C  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+0109B830  ldr      x0, [x19, #0x60]                       // self.esfera1
+0109B834  cbz      x0, #0x109b93c                        
+0109B838  mov      w1, #1                                
+0109B83C  mov      x2, xzr                               
+0109B840  mov      w20, #1                               
+0109B844  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109B848  strb     w20, [x19, #0x127]                     // self.esf1Activada
+0109B84C  ldrb     w8, [x19, #0x122]                      // self.esf2
+0109B850  cbz      w8, #0x109b890                        
+0109B854  ldr      x0, [x19, #0x68]                       // self.esfera2
+0109B858  cbz      x0, #0x109b93c                        
+0109B85C  mov      x1, xzr                               
+0109B860  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+0109B864  cbz      x0, #0x109b93c                        
+0109B868  ldr      x1, [x19, #0x130]                      // self.tagName
+0109B86C  mov      x2, xzr                               
+0109B870  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+0109B874  ldr      x0, [x19, #0x68]                       // self.esfera2
+0109B878  cbz      x0, #0x109b93c                        
+0109B87C  mov      w1, #1                                
+0109B880  mov      x2, xzr                               
+0109B884  mov      w20, #1                               
+0109B888  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109B88C  strb     w20, [x19, #0x128]                     // self.esf2Activada
+0109B890  ldrb     w8, [x19, #0x123]                      // self.esf3
+0109B894  cbz      w8, #0x109b8d4                        
+0109B898  ldr      x0, [x19, #0x70]                       // self.esfera3
+0109B89C  cbz      x0, #0x109b93c                        
+0109B8A0  mov      x1, xzr                               
+0109B8A4  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+0109B8A8  cbz      x0, #0x109b93c                        
+0109B8AC  ldr      x1, [x19, #0x130]                      // self.tagName
+0109B8B0  mov      x2, xzr                               
+0109B8B4  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+0109B8B8  ldr      x0, [x19, #0x70]                       // self.esfera3
+0109B8BC  cbz      x0, #0x109b93c                        
+0109B8C0  mov      w1, #1                                
+0109B8C4  mov      x2, xzr                               
+0109B8C8  mov      w20, #1                               
+0109B8CC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109B8D0  strb     w20, [x19, #0x129]                     // self.esf3Activada
+0109B8D4  ldrb     w8, [x19, #0x124]                      // self.esf4
+0109B8D8  cbz      w8, #0x109b918                        
+0109B8DC  ldr      x0, [x19, #0x78]                       // self.esfera4
+0109B8E0  cbz      x0, #0x109b93c                        
+0109B8E4  mov      x1, xzr                               
+0109B8E8  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+0109B8EC  cbz      x0, #0x109b93c                        
+0109B8F0  ldr      x1, [x19, #0x130]                      // self.tagName
+0109B8F4  mov      x2, xzr                               
+0109B8F8  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+0109B8FC  ldr      x0, [x19, #0x78]                       // self.esfera4
+0109B900  cbz      x0, #0x109b93c                        
+0109B904  mov      w1, #1                                
+0109B908  mov      x2, xzr                               
+0109B90C  mov      w20, #1                               
+0109B910  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109B914  strb     w20, [x19, #0x12a]                     // self.esf4Activada
+0109B918  ldrb     w8, [x19, #0x125]                      // self.activar
+0109B91C  cbz      w8, #0x109b930                        
+0109B920  mov      x0, x19                               
+0109B924  ldp      x20, x19, [sp, #0x10]                 
+0109B928  ldr      x30, [sp], #0x20                      
+0109B92C  b        #0x109b940                             // FuenteCubetaB$$doActivarCascada
+0109B930  ldp      x20, x19, [sp, #0x10]                 
+0109B934  ldr      x30, [sp], #0x20                      
+0109B938  ret                                            
+0109B93C  bl       #0xe61da0                             

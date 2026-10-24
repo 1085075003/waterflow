@@ -1,0 +1,335 @@
+// SaveLoadManager$$doRescatarConfig VA 0x101C614, inferred length 1332
+void SaveLoadManager__doRescatarConfig (SaveLoadManager_o* __this, const MethodInfo* method);
+0101C614  sub      sp, sp, #0xb0                         
+0101C618  stp      d15, d14, [sp, #0x10]                 
+0101C61C  stp      d13, d12, [sp, #0x20]                 
+0101C620  stp      d11, d10, [sp, #0x30]                 
+0101C624  stp      d9, d8, [sp, #0x40]                   
+0101C628  stp      x29, x30, [sp, #0x50]                 
+0101C62C  stp      x28, x27, [sp, #0x60]                 
+0101C630  stp      x26, x25, [sp, #0x70]                 
+0101C634  stp      x24, x23, [sp, #0x80]                 
+0101C638  stp      x22, x21, [sp, #0x90]                 
+0101C63C  stp      x20, x19, [sp, #0xa0]                 
+0101C640  adrp     x20, #0x24fb000                       
+0101C644  ldrb     w8, [x20, #0xcad]                     
+0101C648  mov      x19, x0                               
+0101C64C  tbnz     w8, #0, #0x101c6e8                    
+0101C650  adrp     x0, #0x236a000                        
+0101C654  ldr      x0, [x0, #0xea0]                       // [0x236AEA0] 'ec'
+0101C658  bl       #0xe61b78                             
+0101C65C  adrp     x0, #0x236a000                        
+0101C660  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+0101C664  bl       #0xe61b78                             
+0101C668  adrp     x0, #0x236a000                        
+0101C66C  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+0101C670  bl       #0xe61b78                             
+0101C674  adrp     x0, #0x236a000                        
+0101C678  ldr      x0, [x0, #0x7e8]                       // [0x236A7E8] 'Base'
+0101C67C  bl       #0xe61b78                             
+0101C680  adrp     x0, #0x236a000                        
+0101C684  ldr      x0, [x0, #0x670]                       // [0x236A670] '6'
+0101C688  bl       #0xe61b78                             
+0101C68C  adrp     x0, #0x236a000                        
+0101C690  ldr      x0, [x0, #0x6a0]                       // [0x236A6A0] '7'
+0101C694  bl       #0xe61b78                             
+0101C698  adrp     x0, #0x236a000                        
+0101C69C  ldr      x0, [x0, #0x6a8]                       // [0x236A6A8] '4'
+0101C6A0  bl       #0xe61b78                             
+0101C6A4  adrp     x0, #0x236a000                        
+0101C6A8  ldr      x0, [x0, #0x630]                       // [0x236A630] 'Map'
+0101C6AC  bl       #0xe61b78                             
+0101C6B0  adrp     x0, #0x236a000                        
+0101C6B4  ldr      x0, [x0, #0x798]                       // [0x236A798] '8'
+0101C6B8  bl       #0xe61b78                             
+0101C6BC  adrp     x0, #0x236a000                        
+0101C6C0  ldr      x0, [x0, #0xe98]                       // [0x236AE98] 'sc'
+0101C6C4  bl       #0xe61b78                             
+0101C6C8  adrp     x0, #0x236a000                        
+0101C6CC  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+0101C6D0  bl       #0xe61b78                             
+0101C6D4  adrp     x0, #0x236a000                        
+0101C6D8  ldr      x0, [x0, #0x6f8]                       // [0x236A6F8] '5'
+0101C6DC  bl       #0xe61b78                             
+0101C6E0  mov      w8, #1                                
+0101C6E4  strb     w8, [x20, #0xcad]                     
+0101C6E8  adrp     x8, #0x600000                         
+0101C6EC  ldr      d0, [x8, #0x858]                      
+0101C6F0  ldr      x0, [x19, #0x1b0]                      // self.fijo
+0101C6F4  str      d0, [x19, #0x370]                      // self.nivelPlano
+0101C6F8  cbz      x0, #0x101cb40                        
+0101C6FC  adrp     x8, #0x236a000                        
+0101C700  ldr      x8, [x8, #0xe98]                       // [0x236AE98] 'sc'
+0101C704  mov      x2, xzr                               
+0101C708  ldr      x1, [x8]                              
+0101C70C  bl       #0x196578c                             // System.String$$IndexOf
+0101C710  cmn      w0, #1                                
+0101C714  str      w0, [x19, #0x1c0]                      // self.posicionChar
+0101C718  b.eq     #0x101cb10                            
+0101C71C  ldr      x0, [x19, #0x1b0]                      // self.fijo
+0101C720  cbz      x0, #0x101cb40                        
+0101C724  adrp     x8, #0x236a000                        
+0101C728  ldr      x8, [x8, #0xea0]                       // [0x236AEA0] 'ec'
+0101C72C  mov      x2, xzr                               
+0101C730  ldr      x1, [x8]                              
+0101C734  bl       #0x196578c                             // System.String$$IndexOf
+0101C738  cmn      w0, #1                                
+0101C73C  str      w0, [x19, #0x1c4]                      // self.posicionChar1
+0101C740  b.eq     #0x101cb10                            
+0101C744  ldr      x8, [x19, #0x1b0]                      // self.fijo
+0101C748  cbz      x8, #0x101cb40                        
+0101C74C  ldr      w9, [x19, #0x1c0]                      // self.posicionChar
+0101C750  mov      x3, xzr                               
+0101C754  add      w1, w9, #2                            
+0101C758  sub      w2, w0, w1                            
+0101C75C  mov      x0, x8                                
+0101C760  bl       #0x196288c                             // System.String$$Substring
+0101C764  ldr      w8, [x19, #0x1c4]                      // self.posicionChar1
+0101C768  ldr      w9, [x19, #0x1c0]                      // self.posicionChar
+0101C76C  ldr      w10, [x19, #0x3c8]                     // self.contadorTest
+0101C770  sub      w8, w8, w9                            
+0101C774  sub      w8, w8, #2                            
+0101C778  add      w9, w10, #1                           
+0101C77C  cmp      w8, #1                                
+0101C780  str      w8, [x19, #0x1c8]                      // self.longChar
+0101C784  str      w9, [x19, #0x3c8]                      // self.contadorTest
+0101C788  b.lt     #0x101cb10                            
+0101C78C  adrp     x8, #0x5ff000                         
+0101C790  ldr      s0, [x8, #0xee0]                      
+0101C794  adrp     x9, #0x5ff000                         
+0101C798  adrp     x10, #0x5ff000                        
+0101C79C  adrp     x8, #0x600000                         
+0101C7A0  str      s0, [sp, #4]                          
+0101C7A4  ldr      s0, [x9, #0xdb0]                      
+0101C7A8  adrp     x11, #0x5ff000                        
+0101C7AC  adrp     x9, #0x5ff000                         
+0101C7B0  ldr      s15, [x8, #0x198]                     
+0101C7B4  str      s0, [sp, #0xc]                        
+0101C7B8  ldr      s0, [x10, #0xb74]                     
+0101C7BC  adrp     x10, #0x5ff000                        
+0101C7C0  adrp     x8, #0x600000                         
+0101C7C4  adrp     x27, #0x236a000                       
+0101C7C8  str      s0, [sp, #8]                          
+0101C7CC  adrp     x29, #0x236a000                       
+0101C7D0  adrp     x26, #0x236a000                       
+0101C7D4  ldr      s14, [x11, #0xb00]                    
+0101C7D8  ldr      s10, [x9, #0xf10]                     
+0101C7DC  ldr      s11, [x10, #0xd40]                    
+0101C7E0  ldr      s12, [x8, #0x1a4]                     
+0101C7E4  ldr      x27, [x27, #0x670]                     // [0x236A670] '6'
+0101C7E8  ldr      x29, [x29, #0x6a0]                     // [0x236A6A0] '7'
+0101C7EC  ldr      x26, [x26, #0x798]                     // [0x236A798] '8'
+0101C7F0  mov      w25, wzr                              
+0101C7F4  fmov     s13, wzr                              
+0101C7F8  ldr      x0, [x19, #0x1b0]                      // self.fijo
+0101C7FC  cbz      x0, #0x101cb40                        
+0101C800  ldr      w8, [x19, #0x1c0]                      // self.posicionChar
+0101C804  mov      w2, #2                                
+0101C808  mov      x3, xzr                               
+0101C80C  add      w8, w25, w8                           
+0101C810  add      w1, w8, #2                            
+0101C814  bl       #0x196288c                             // System.String$$Substring
+0101C818  adrp     x8, #0x236a000                        
+0101C81C  ldr      x8, [x8, #0x7e8]                       // [0x236A7E8] 'Base'
+0101C820  mov      x1, x0                                
+0101C824  mov      x2, xzr                               
+0101C828  ldr      x8, [x8]                              
+0101C82C  mov      x0, x8                                
+0101C830  bl       #0x1958280                             // System.String$$Concat
+0101C834  ldr      x8, [x19, #0x1b0]                      // self.fijo
+0101C838  cbz      x8, #0x101cb40                        
+0101C83C  ldr      w9, [x19, #0x1c0]                      // self.posicionChar
+0101C840  mov      x20, x0                               
+0101C844  mov      w2, #1                                
+0101C848  mov      x0, x8                                
+0101C84C  add      w9, w25, w9                           
+0101C850  add      w1, w9, #4                            
+0101C854  mov      x3, xzr                               
+0101C858  bl       #0x196288c                             // System.String$$Substring
+0101C85C  adrp     x8, #0x236a000                        
+0101C860  ldr      x8, [x8, #0x630]                       // [0x236A630] 'Map'
+0101C864  mov      x21, x0                               
+0101C868  mov      x1, xzr                               
+0101C86C  ldr      x8, [x8]                              
+0101C870  mov      x0, x8                                
+0101C874  bl       #0x20064d0                             // UnityEngine.GameObject$$FindGameObjectsWithTag
+0101C878  str      x0, [x19, #0x50]                       // self.respawns1
+0101C87C  cbz      x0, #0x101cb40                        
+0101C880  ldr      w8, [x0, #0x18]                       
+0101C884  mov      x22, x0                               
+0101C888  cmp      w8, #1                                
+0101C88C  b.lt     #0x101cb00                            
+0101C890  mov      w28, wzr                              
+0101C894  cmp      w28, w8                               
+0101C898  b.hs     #0x101cb44                            
+0101C89C  add      x8, x22, w28, sxtw #3                 
+0101C8A0  ldr      x23, [x8, #0x20]                      
+0101C8A4  cbz      x23, #0x101cb40                       
+0101C8A8  mov      x0, x23                               
+0101C8AC  mov      x1, xzr                               
+0101C8B0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0101C8B4  cbz      x0, #0x101cb40                        
+0101C8B8  mov      x1, xzr                               
+0101C8BC  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+0101C8C0  cbz      x0, #0x101cb40                        
+0101C8C4  mov      x1, x20                               
+0101C8C8  mov      x2, xzr                               
+0101C8CC  bl       #0x19651dc                             // System.String$$Contains
+0101C8D0  tbz      w0, #0, #0x101caf0                    
+0101C8D4  adrp     x8, #0x236a000                        
+0101C8D8  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+0101C8DC  mov      x0, x21                               
+0101C8E0  mov      x2, xzr                               
+0101C8E4  ldr      x1, [x8]                              
+0101C8E8  bl       #0x1960c7c                             // System.String$$op_Equality
+0101C8EC  tbz      w0, #0, #0x101c914                    
+0101C8F0  ldr      s0, [x19, #0x374]                      // self.masbajo
+0101C8F4  fmov     s1, #1.00000000                       
+0101C8F8  fcmp     s0, s1                                
+0101C8FC  b.le     #0x101c908                            
+0101C900  mov      w8, #0x3f800000                       
+0101C904  str      w8, [x19, #0x374]                      // self.masbajo
+0101C908  ldr      s13, [sp, #4]                         
+0101C90C  mov      w8, #-0x3df00000                      
+0101C910  str      w8, [x19, #0x370]                      // self.nivelPlano
+0101C914  adrp     x8, #0x236a000                        
+0101C918  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+0101C91C  mov      x0, x21                               
+0101C920  mov      x2, xzr                               
+0101C924  ldr      x1, [x8]                              
+0101C928  bl       #0x1960c7c                             // System.String$$op_Equality
+0101C92C  tbz      w0, #0, #0x101c968                    
+0101C930  ldr      s0, [x19, #0x374]                      // self.masbajo
+0101C934  fmov     s1, #2.00000000                       
+0101C938  fcmp     s0, s1                                
+0101C93C  b.le     #0x101c948                            
+0101C940  mov      w8, #0x40000000                       
+0101C944  str      w8, [x19, #0x374]                      // self.masbajo
+0101C948  ldr      s0, [x19, #0x370]                      // self.nivelPlano
+0101C94C  ldr      s13, [sp, #0xc]                       
+0101C950  fmov     s1, #-28.00000000                     
+0101C954  fcmp     s0, s1                                
+0101C958  b.le     #0x101c968                            
+0101C95C  ldr      s13, [sp, #0xc]                       
+0101C960  mov      w8, #-0x3e200000                      
+0101C964  str      w8, [x19, #0x370]                      // self.nivelPlano
+0101C968  adrp     x8, #0x236a000                        
+0101C96C  ldr      x8, [x8, #0x650]                       // [0x236A650] '3'
+0101C970  mov      x0, x21                               
+0101C974  mov      x2, xzr                               
+0101C978  ldr      x1, [x8]                              
+0101C97C  bl       #0x1960c7c                             // System.String$$op_Equality
+0101C980  tbz      w0, #0, #0x101c9bc                    
+0101C984  ldr      s0, [x19, #0x374]                      // self.masbajo
+0101C988  fmov     s1, #3.00000000                       
+0101C98C  fcmp     s0, s1                                
+0101C990  b.le     #0x101c99c                            
+0101C994  mov      w8, #0x40400000                       
+0101C998  str      w8, [x19, #0x374]                      // self.masbajo
+0101C99C  ldr      s0, [x19, #0x370]                      // self.nivelPlano
+0101C9A0  ldr      s13, [sp, #8]                         
+0101C9A4  fmov     s1, #-24.00000000                     
+0101C9A8  fcmp     s0, s1                                
+0101C9AC  b.le     #0x101c9bc                            
+0101C9B0  ldr      s13, [sp, #8]                         
+0101C9B4  mov      w8, #-0x3e400000                      
+0101C9B8  str      w8, [x19, #0x370]                      // self.nivelPlano
+0101C9BC  adrp     x8, #0x236a000                        
+0101C9C0  ldr      x8, [x8, #0x6a8]                       // [0x236A6A8] '4'
+0101C9C4  mov      x0, x21                               
+0101C9C8  mov      x2, xzr                               
+0101C9CC  ldr      x1, [x8]                              
+0101C9D0  bl       #0x1960c7c                             // System.String$$op_Equality
+0101C9D4  tbz      w0, #0, #0x101ca10                    
+0101C9D8  ldr      s0, [x19, #0x374]                      // self.masbajo
+0101C9DC  fmov     s1, #4.00000000                       
+0101C9E0  fcmp     s0, s1                                
+0101C9E4  b.le     #0x101c9f0                            
+0101C9E8  mov      w8, #0x40800000                       
+0101C9EC  str      w8, [x19, #0x374]                      // self.masbajo
+0101C9F0  ldr      s0, [x19, #0x370]                      // self.nivelPlano
+0101C9F4  fmov     s1, #-14.00000000                     
+0101C9F8  mov      v13.16b, v14.16b                      
+0101C9FC  fcmp     s0, s1                                
+0101CA00  b.le     #0x101ca10                            
+0101CA04  mov      w8, #-0x3ea00000                      
+0101CA08  mov      v13.16b, v14.16b                      
+0101CA0C  str      w8, [x19, #0x370]                      // self.nivelPlano
+0101CA10  adrp     x8, #0x236a000                        
+0101CA14  ldr      x8, [x8, #0x6f8]                       // [0x236A6F8] '5'
+0101CA18  mov      x0, x21                               
+0101CA1C  mov      x2, xzr                               
+0101CA20  ldr      x1, [x8]                              
+0101CA24  bl       #0x1960c7c                             // System.String$$op_Equality
+0101CA28  ldr      x1, [x27]                             
+0101CA2C  tst      w0, #1                                
+0101CA30  mov      x0, x21                               
+0101CA34  mov      x2, xzr                               
+0101CA38  fcsel    s8, s15, s13, ne                      
+0101CA3C  bl       #0x1960c7c                             // System.String$$op_Equality
+0101CA40  ldr      x1, [x29]                             
+0101CA44  tst      w0, #1                                
+0101CA48  mov      x0, x21                               
+0101CA4C  mov      x2, xzr                               
+0101CA50  fcsel    s8, s10, s8, ne                       
+0101CA54  bl       #0x1960c7c                             // System.String$$op_Equality
+0101CA58  ldr      x1, [x26]                             
+0101CA5C  tst      w0, #1                                
+0101CA60  mov      x0, x21                               
+0101CA64  mov      x2, xzr                               
+0101CA68  fcsel    s8, s11, s8, ne                       
+0101CA6C  bl       #0x1960c7c                             // System.String$$op_Equality
+0101CA70  tst      w0, #1                                
+0101CA74  mov      x0, x23                               
+0101CA78  mov      x1, xzr                               
+0101CA7C  fcsel    s13, s12, s8, ne                      
+0101CA80  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0101CA84  mov      x24, x0                               
+0101CA88  mov      x0, x23                               
+0101CA8C  mov      x1, xzr                               
+0101CA90  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0101CA94  cbz      x0, #0x101cb40                        
+0101CA98  mov      x1, xzr                               
+0101CA9C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0101CAA0  mov      x0, x23                               
+0101CAA4  mov      x1, xzr                               
+0101CAA8  mov      v8.16b, v0.16b                        
+0101CAAC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0101CAB0  cbz      x0, #0x101cb40                        
+0101CAB4  mov      x1, xzr                               
+0101CAB8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0101CABC  mov      x0, x23                               
+0101CAC0  mov      x1, xzr                               
+0101CAC4  mov      v9.16b, v1.16b                        
+0101CAC8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0101CACC  cbz      x0, #0x101cb40                        
+0101CAD0  mov      x1, xzr                               
+0101CAD4  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0101CAD8  cbz      x24, #0x101cb40                       
+0101CADC  fadd     s1, s13, s9                           
+0101CAE0  mov      x0, x24                               
+0101CAE4  mov      v0.16b, v8.16b                        
+0101CAE8  mov      x1, xzr                               
+0101CAEC  bl       #0x200ea50                             // UnityEngine.Transform$$set_position
+0101CAF0  ldr      w8, [x22, #0x18]                      
+0101CAF4  add      w28, w28, #1                          
+0101CAF8  cmp      w28, w8                               
+0101CAFC  b.lt     #0x101c894                            
+0101CB00  ldr      w8, [x19, #0x1c8]                      // self.longChar
+0101CB04  add      w25, w25, #3                          
+0101CB08  cmp      w25, w8                               
+0101CB0C  b.lt     #0x101c7f8                            
+0101CB10  ldp      x20, x19, [sp, #0xa0]                 
+0101CB14  ldp      x22, x21, [sp, #0x90]                 
+0101CB18  ldp      x24, x23, [sp, #0x80]                 
+0101CB1C  ldp      x26, x25, [sp, #0x70]                 
+0101CB20  ldp      x28, x27, [sp, #0x60]                 
+0101CB24  ldp      x29, x30, [sp, #0x50]                 
+0101CB28  ldp      d9, d8, [sp, #0x40]                   
+0101CB2C  ldp      d11, d10, [sp, #0x30]                 
+0101CB30  ldp      d13, d12, [sp, #0x20]                 
+0101CB34  ldp      d15, d14, [sp, #0x10]                 
+0101CB38  add      sp, sp, #0xb0                         
+0101CB3C  ret                                            
+0101CB40  bl       #0xe61da0                             
+0101CB44  bl       #0xe61da8                             

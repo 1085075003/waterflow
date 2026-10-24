@@ -1,0 +1,204 @@
+// FuenteCubetaB$$doExit VA 0x109A354, inferred length 808
+void FuenteCubetaB__doExit (FuenteCubetaB_o* __this, const MethodInfo* method);
+0109A354  str      x30, [sp, #-0x20]!                    
+0109A358  stp      x20, x19, [sp, #0x10]                 
+0109A35C  adrp     x20, #0x24fb000                       
+0109A360  ldrb     w8, [x20, #0xf2c]                     
+0109A364  mov      x19, x0                               
+0109A368  tbnz     w8, #0, #0x109a3bc                    
+0109A36C  adrp     x0, #0x236a000                        
+0109A370  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0109A374  bl       #0xe61b78                             
+0109A378  adrp     x0, #0x2368000                        
+0109A37C  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0109A380  bl       #0xe61b78                             
+0109A384  adrp     x0, #0x236a000                        
+0109A388  ldr      x0, [x0, #0x5f0]                       // [0x236A5F0] 'color3'
+0109A38C  bl       #0xe61b78                             
+0109A390  adrp     x0, #0x236a000                        
+0109A394  ldr      x0, [x0, #0x5f8]                       // [0x236A5F8] 'color2'
+0109A398  bl       #0xe61b78                             
+0109A39C  adrp     x0, #0x236a000                        
+0109A3A0  ldr      x0, [x0, #0x600]                       // [0x236A600] 'color1'
+0109A3A4  bl       #0xe61b78                             
+0109A3A8  adrp     x0, #0x236a000                        
+0109A3AC  ldr      x0, [x0, #0x608]                       // [0x236A608] 'color4'
+0109A3B0  bl       #0xe61b78                             
+0109A3B4  mov      w8, #1                                
+0109A3B8  strb     w8, [x20, #0xf2c]                     
+0109A3BC  ldr      x8, [x19, #0x178]                      // self.agscr
+0109A3C0  cbz      x8, #0x109a678                        
+0109A3C4  strb     wzr, [x8, #0x30]                      
+0109A3C8  ldr      w9, [x8, #0x20]                       
+0109A3CC  ldr      w10, [x19, #0x30]                      // self.origen
+0109A3D0  ldrb     w8, [x19, #0x126]                      // self.activarFuente
+0109A3D4  cmp      w9, w10                               
+0109A3D8  b.ne     #0x109a5e4                            
+0109A3DC  cbz      w8, #0x109a494                        
+0109A3E0  adrp     x8, #0x2368000                        
+0109A3E4  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0109A3E8  ldr      x20, [x19, #0xa8]                      // self.Agua1
+0109A3EC  ldr      x0, [x8]                              
+0109A3F0  ldr      w8, [x0, #0xe0]                       
+0109A3F4  cbnz     w8, #0x109a3fc                        
+0109A3F8  bl       #0xe61c80                             
+0109A3FC  mov      x0, x20                               
+0109A400  mov      x1, xzr                               
+0109A404  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+0109A408  ldr      x0, [x19, #0xb0]                       // self.Agua2
+0109A40C  mov      x1, xzr                               
+0109A410  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+0109A414  adrp     x20, #0x236a000                       
+0109A418  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0109A41C  ldr      x0, [x20]                             
+0109A420  ldr      w8, [x0, #0xe0]                       
+0109A424  cbnz     w8, #0x109a430                        
+0109A428  bl       #0xe61c80                             
+0109A42C  ldr      x0, [x20]                             
+0109A430  ldr      x8, [x0, #0xb8]                       
+0109A434  ldrb     w9, [x8, #0x15]                       
+0109A438  cbz      w9, #0x109a460                        
+0109A43C  ldr      w9, [x0, #0xe0]                       
+0109A440  cbnz     w9, #0x109a450                        
+0109A444  bl       #0xe61c80                             
+0109A448  ldr      x0, [x20]                             
+0109A44C  ldr      x8, [x0, #0xb8]                       
+0109A450  ldr      d0, [x8, #8]                          
+0109A454  movi     v1.2d, #0xffffffffffffffff            
+0109A458  add      v0.2s, v0.2s, v1.2s                   
+0109A45C  str      d0, [x8, #8]                          
+0109A460  ldr      w8, [x0, #0xe0]                       
+0109A464  cbnz     w8, #0x109a470                        
+0109A468  bl       #0xe61c80                             
+0109A46C  ldr      x0, [x20]                             
+0109A470  ldr      x8, [x0, #0xb8]                       
+0109A474  ldr      w8, [x8, #0xc]                        
+0109A478  cmp      w8, #0                                
+0109A47C  b.gt     #0x109a494                            
+0109A480  ldr      x0, [x19, #0x1d8]                      // self.audioManager
+0109A484  cbz      x0, #0x109a678                        
+0109A488  ldr      x1, [x19, #0x1d0]                      // self.SonidoFuente
+0109A48C  mov      x2, xzr                               
+0109A490  bl       #0x102b0e8                             // AudioManager$$StopSound
+0109A494  ldrb     w8, [x19, #0x121]                      // self.esf1
+0109A498  strb     wzr, [x19, #0x120]                     // self.ontrigger
+0109A49C  cbz      w8, #0x109a4dc                        
+0109A4A0  ldr      x0, [x19, #0x60]                       // self.esfera1
+0109A4A4  cbz      x0, #0x109a678                        
+0109A4A8  mov      w1, wzr                               
+0109A4AC  mov      x2, xzr                               
+0109A4B0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A4B4  ldr      x0, [x19, #0x80]                       // self.esferaCascada1
+0109A4B8  cbz      x0, #0x109a678                        
+0109A4BC  mov      w1, wzr                               
+0109A4C0  mov      x2, xzr                               
+0109A4C4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A4C8  ldr      x0, [x19, #0x40]                       // self.Cascada1
+0109A4CC  cbz      x0, #0x109a678                        
+0109A4D0  mov      w1, wzr                               
+0109A4D4  mov      x2, xzr                               
+0109A4D8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A4DC  ldrb     w8, [x19, #0x122]                      // self.esf2
+0109A4E0  cbz      w8, #0x109a520                        
+0109A4E4  ldr      x0, [x19, #0x68]                       // self.esfera2
+0109A4E8  cbz      x0, #0x109a678                        
+0109A4EC  mov      w1, wzr                               
+0109A4F0  mov      x2, xzr                               
+0109A4F4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A4F8  ldr      x0, [x19, #0x88]                       // self.esferaCascada2
+0109A4FC  cbz      x0, #0x109a678                        
+0109A500  mov      w1, wzr                               
+0109A504  mov      x2, xzr                               
+0109A508  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A50C  ldr      x0, [x19, #0x48]                       // self.Cascada2
+0109A510  cbz      x0, #0x109a678                        
+0109A514  mov      w1, wzr                               
+0109A518  mov      x2, xzr                               
+0109A51C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A520  ldrb     w8, [x19, #0x123]                      // self.esf3
+0109A524  cbz      w8, #0x109a564                        
+0109A528  ldr      x0, [x19, #0x70]                       // self.esfera3
+0109A52C  cbz      x0, #0x109a678                        
+0109A530  mov      w1, wzr                               
+0109A534  mov      x2, xzr                               
+0109A538  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A53C  ldr      x0, [x19, #0x90]                       // self.esferaCascada3
+0109A540  cbz      x0, #0x109a678                        
+0109A544  mov      w1, wzr                               
+0109A548  mov      x2, xzr                               
+0109A54C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A550  ldr      x0, [x19, #0x50]                       // self.Cascada3
+0109A554  cbz      x0, #0x109a678                        
+0109A558  mov      w1, wzr                               
+0109A55C  mov      x2, xzr                               
+0109A560  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A564  ldrb     w8, [x19, #0x124]                      // self.esf4
+0109A568  cbz      w8, #0x109a5a8                        
+0109A56C  ldr      x0, [x19, #0x78]                       // self.esfera4
+0109A570  cbz      x0, #0x109a678                        
+0109A574  mov      w1, wzr                               
+0109A578  mov      x2, xzr                               
+0109A57C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A580  ldr      x0, [x19, #0x98]                       // self.esferaCascada4
+0109A584  cbz      x0, #0x109a678                        
+0109A588  mov      w1, wzr                               
+0109A58C  mov      x2, xzr                               
+0109A590  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A594  ldr      x0, [x19, #0x58]                       // self.Cascada4
+0109A598  cbz      x0, #0x109a678                        
+0109A59C  mov      w1, wzr                               
+0109A5A0  mov      x2, xzr                               
+0109A5A4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109A5A8  ldr      w8, [x19, #0x34]                       // self.colorCubeta
+0109A5AC  sub      w8, w8, #1                            
+0109A5B0  cmp      w8, #3                                
+0109A5B4  b.hi     #0x109a618                            
+0109A5B8  adrp     x9, #0x621000                         
+0109A5BC  add      x9, x9, #0xc90                        
+0109A5C0  adr      x10, #0x109a5d0                       
+0109A5C4  ldrb     w11, [x9, x8]                         
+0109A5C8  add      x10, x10, x11, lsl #2                 
+0109A5CC  br       x10                                   
+0109A5D0  ldr      x8, [x19, #0x178]                      // self.agscr
+0109A5D4  cbz      x8, #0x109a678                        
+0109A5D8  adrp     x9, #0x236a000                        
+0109A5DC  ldr      x9, [x9, #0x600]                       // [0x236A600] 'color1'
+0109A5E0  b        #0x109a65c                            
+0109A5E4  cbz      w8, #0x109a66c                        
+0109A5E8  adrp     x8, #0x2368000                        
+0109A5EC  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0109A5F0  ldr      x19, [x19, #0xb0]                      // self.Agua2
+0109A5F4  ldr      x0, [x8]                              
+0109A5F8  ldr      w8, [x0, #0xe0]                       
+0109A5FC  cbnz     w8, #0x109a604                        
+0109A600  bl       #0xe61c80                             
+0109A604  mov      x0, x19                               
+0109A608  ldp      x20, x19, [sp, #0x10]                 
+0109A60C  mov      x1, xzr                               
+0109A610  ldr      x30, [sp], #0x20                      
+0109A614  b        #0x200a194                             // UnityEngine.Object$$Destroy
+0109A618  ldr      x8, [x19, #0x178]                      // self.agscr
+0109A61C  cbnz     x8, #0x109a664                        
+0109A620  b        #0x109a678                            
+0109A624  ldr      x8, [x19, #0x178]                      // self.agscr
+0109A628  cbz      x8, #0x109a678                        
+0109A62C  adrp     x9, #0x236a000                        
+0109A630  ldr      x9, [x9, #0x5f8]                       // [0x236A5F8] 'color2'
+0109A634  b        #0x109a65c                            
+0109A638  ldr      x8, [x19, #0x178]                      // self.agscr
+0109A63C  cbz      x8, #0x109a678                        
+0109A640  adrp     x9, #0x236a000                        
+0109A644  ldr      x9, [x9, #0x5f0]                       // [0x236A5F0] 'color3'
+0109A648  b        #0x109a65c                            
+0109A64C  ldr      x8, [x19, #0x178]                      // self.agscr
+0109A650  cbz      x8, #0x109a678                        
+0109A654  adrp     x9, #0x236a000                        
+0109A658  ldr      x9, [x9, #0x608]                       // [0x236A608] 'color4'
+0109A65C  ldr      x9, [x9]                              
+0109A660  str      x9, [x8, #0xa0]                       
+0109A664  mov      w9, #9                                
+0109A668  str      w9, [x8, #0x20]                       
+0109A66C  ldp      x20, x19, [sp, #0x10]                 
+0109A670  ldr      x30, [sp], #0x20                      
+0109A674  ret                                            
+0109A678  bl       #0xe61da0                             

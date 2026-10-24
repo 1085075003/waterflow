@@ -1,0 +1,105 @@
+// CascadaTest$$CheckCollisionPNormal VA 0xFD37C8, inferred length 412
+void CascadaTest__CheckCollisionPNormal (CascadaTest_o* __this, const MethodInfo* method);
+00FD37C8  stp      d11, d10, [sp, #-0x50]!               
+00FD37CC  stp      d9, d8, [sp, #0x10]                   
+00FD37D0  stp      x30, x23, [sp, #0x20]                 
+00FD37D4  stp      x22, x21, [sp, #0x30]                 
+00FD37D8  stp      x20, x19, [sp, #0x40]                 
+00FD37DC  adrp     x20, #0x24fb000                       
+00FD37E0  ldrb     w8, [x20, #0xb5a]                     
+00FD37E4  mov      x19, x0                               
+00FD37E8  tbnz     w8, #0, #0xfd380c                     
+00FD37EC  adrp     x0, #0x2368000                        
+00FD37F0  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FD37F4  bl       #0xe61b78                             
+00FD37F8  adrp     x0, #0x236a000                        
+00FD37FC  ldr      x0, [x0, #0x790]                       // [0x236A790] 'esferacentroN'
+00FD3800  bl       #0xe61b78                             
+00FD3804  mov      w8, #1                                
+00FD3808  strb     w8, [x20, #0xb5a]                     
+00FD380C  mov      x0, x19                               
+00FD3810  mov      x1, xzr                               
+00FD3814  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD3818  cbz      x0, #0xfd395c                         
+00FD381C  mov      x1, xzr                               
+00FD3820  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD3824  ldr      s10, [x19, #0x1c4]                     // self.distancia_x
+00FD3828  mov      x0, x19                               
+00FD382C  mov      x1, xzr                               
+00FD3830  mov      v8.16b, v0.16b                        
+00FD3834  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD3838  cbz      x0, #0xfd395c                         
+00FD383C  mov      x1, xzr                               
+00FD3840  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD3844  ldr      s11, [x19, #0x178]                     // self.distan_y
+00FD3848  mov      x0, x19                               
+00FD384C  mov      x1, xzr                               
+00FD3850  mov      v9.16b, v1.16b                        
+00FD3854  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD3858  cbz      x0, #0xfd395c                         
+00FD385C  adrp     x20, #0x2368000                       
+00FD3860  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FD3864  mov      x1, xzr                               
+00FD3868  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD386C  ldr      s0, [x19, #0x1c8]                      // self.distancia_z
+00FD3870  ldr      w0, [x19, #0x208]                      // self.mascaraSuelo
+00FD3874  fadd     s8, s8, s10                           
+00FD3878  ldr      s10, [x19, #0x200]                     // self.sphereRadius
+00FD387C  fsub     s9, s9, s11                           
+00FD3880  fadd     s11, s2, s0                           
+00FD3884  mov      x1, xzr                               
+00FD3888  str      s8, [x19, #0x1e8]                      // self.vector2b
+00FD388C  str      s9, [x19, #0x1ec]                     
+00FD3890  str      s11, [x19, #0x1f0]                    
+00FD3894  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+00FD3898  ldr      x8, [x20]                             
+00FD389C  mov      w20, w0                               
+00FD38A0  ldr      w9, [x8, #0xe0]                       
+00FD38A4  cbnz     w9, #0xfd38b0                         
+00FD38A8  mov      x0, x8                                
+00FD38AC  bl       #0xe61c80                             
+00FD38B0  mov      v0.16b, v8.16b                        
+00FD38B4  mov      v1.16b, v9.16b                        
+00FD38B8  mov      v2.16b, v11.16b                       
+00FD38BC  mov      v3.16b, v10.16b                       
+00FD38C0  mov      w0, w20                               
+00FD38C4  mov      x1, xzr                               
+00FD38C8  bl       #0x20406ec                             // UnityEngine.Physics$$OverlapSphere
+00FD38CC  cbz      x0, #0xfd395c                         
+00FD38D0  ldr      x8, [x0, #0x18]                       
+00FD38D4  mov      x20, x0                               
+00FD38D8  cbz      x8, #0xfd3944                         
+00FD38DC  cmp      w8, #1                                
+00FD38E0  b.lt     #0xfd3944                             
+00FD38E4  adrp     x21, #0x236a000                       
+00FD38E8  ldr      x21, [x21, #0x790]                     // [0x236A790] 'esferacentroN'
+00FD38EC  mov      w23, wzr                              
+00FD38F0  mov      w22, #1                               
+00FD38F4  cmp      w23, w8                               
+00FD38F8  b.hs     #0xfd3960                             
+00FD38FC  add      x8, x20, w23, sxtw #3                 
+00FD3900  ldr      x0, [x8, #0x20]                       
+00FD3904  cbz      x0, #0xfd395c                         
+00FD3908  mov      x1, xzr                               
+00FD390C  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FD3910  cbz      x0, #0xfd395c                         
+00FD3914  ldr      x1, [x21]                             
+00FD3918  mov      x2, xzr                               
+00FD391C  bl       #0x19651dc                             // System.String$$Contains
+00FD3920  tbz      w0, #0, #0xfd3934                     
+00FD3924  strb     w22, [x19, #0x24c]                     // self.checkPNormal
+00FD3928  ldr      w8, [x20, #0x18]                      
+00FD392C  mov      w23, w8                               
+00FD3930  b        #0xfd3938                             
+00FD3934  ldr      w8, [x20, #0x18]                      
+00FD3938  add      w23, w23, #1                          
+00FD393C  cmp      w23, w8                               
+00FD3940  b.lt     #0xfd38f4                             
+00FD3944  ldp      x20, x19, [sp, #0x40]                 
+00FD3948  ldp      x22, x21, [sp, #0x30]                 
+00FD394C  ldp      x30, x23, [sp, #0x20]                 
+00FD3950  ldp      d9, d8, [sp, #0x10]                   
+00FD3954  ldp      d11, d10, [sp], #0x50                 
+00FD3958  ret                                            
+00FD395C  bl       #0xe61da0                             
+00FD3960  bl       #0xe61da8                             

@@ -1,0 +1,108 @@
+// ObservadorResorte2$$Update VA 0xFDECF4, inferred length 424
+void ObservadorResorte2__Update (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FDECF4  str      x30, [sp, #-0x30]!                    
+00FDECF8  stp      x22, x21, [sp, #0x10]                 
+00FDECFC  stp      x20, x19, [sp, #0x20]                 
+00FDED00  adrp     x20, #0x24fb000                       
+00FDED04  adrp     x21, #0x236a000                       
+00FDED08  ldrb     w8, [x20, #0xb9d]                     
+00FDED0C  ldr      x21, [x21, #0x7c8]                     // [0x236A7C8] Resorte1_TypeInfo
+00FDED10  mov      x19, x0                               
+00FDED14  tbnz     w8, #0, #0xfded50                     
+00FDED18  adrp     x0, #0x236a000                        
+00FDED1C  ldr      x0, [x0, #0x7c8]                       // [0x236A7C8] Resorte1_TypeInfo
+00FDED20  bl       #0xe61b78                             
+00FDED24  adrp     x0, #0x236a000                        
+00FDED28  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+00FDED2C  bl       #0xe61b78                             
+00FDED30  adrp     x0, #0x236a000                        
+00FDED34  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+00FDED38  bl       #0xe61b78                             
+00FDED3C  adrp     x0, #0x236a000                        
+00FDED40  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FDED44  bl       #0xe61b78                             
+00FDED48  mov      w8, #1                                
+00FDED4C  strb     w8, [x20, #0xb9d]                     
+00FDED50  ldr      x8, [x21]                             
+00FDED54  adrp     x20, #0x236a000                       
+00FDED58  ldr      x8, [x8, #0xb8]                       
+00FDED5C  ldrb     w9, [x8, #0x18]                       
+00FDED60  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FDED64  cbz      w9, #0xfdedac                         
+00FDED68  ldr      w8, [x8, #4]                          
+00FDED6C  ldr      x0, [x19, #0x260]                      // self.conResor
+00FDED70  mov      x2, xzr                               
+00FDED74  str      w8, [x19, #0x2f0]                      // self.managerR1
+00FDED78  ldr      x1, [x20]                             
+00FDED7C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDED80  tbz      w0, #0, #0xfdeda4                     
+00FDED84  ldr      x8, [x21]                             
+00FDED88  mov      x0, x19                               
+00FDED8C  ldr      x8, [x8, #0xb8]                       
+00FDED90  ldr      w9, [x8, #4]                          
+00FDED94  str      w9, [x19, #0x2e0]                      // self.managerResorte
+00FDED98  ldr      w8, [x8, #0x14]                       
+00FDED9C  str      w8, [x19, #0x2e8]                      // self.positionRes
+00FDEDA0  bl       #0xfdee9c                              // ObservadorResorte2$$doPrevio
+00FDEDA4  ldr      w8, [x19, #0x2f0]                      // self.managerR1
+00FDEDA8  str      w8, [x19, #0x2f4]                      // self.managerR1_old
+00FDEDAC  ldrb     w8, [x19, #0x164]                      // self.activadoResorte
+00FDEDB0  cbz      w8, #0xfdee28                         
+00FDEDB4  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FDEDB8  ldr      x1, [x20]                             
+00FDEDBC  mov      x2, xzr                               
+00FDEDC0  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDEDC4  tbnz     w0, #0, #0xfdee00                     
+00FDEDC8  adrp     x21, #0x236a000                       
+00FDEDCC  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FDEDD0  ldr      x21, [x21, #0x658]                     // [0x236A658] '2'
+00FDEDD4  mov      x2, xzr                               
+00FDEDD8  ldr      x1, [x21]                             
+00FDEDDC  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDEDE0  tbnz     w0, #0, #0xfdee00                     
+00FDEDE4  adrp     x22, #0x236a000                       
+00FDEDE8  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FDEDEC  ldr      x22, [x22, #0x650]                     // [0x236A650] '3'
+00FDEDF0  mov      x2, xzr                               
+00FDEDF4  ldr      x1, [x22]                             
+00FDEDF8  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDEDFC  tbz      w0, #0, #0xfdee38                     
+00FDEE00  ldrb     w8, [x19, #0x328]                      // self.primeraVezAguas
+00FDEE04  cbz      w8, #0xfdee14                         
+00FDEE08  mov      x0, x19                               
+00FDEE0C  bl       #0xfdeee8                              // ObservadorResorte2$$doInactivarAguas
+00FDEE10  strb     wzr, [x19, #0x328]                     // self.primeraVezAguas
+00FDEE14  mov      x0, x19                               
+00FDEE18  ldp      x20, x19, [sp, #0x20]                 
+00FDEE1C  ldp      x22, x21, [sp, #0x10]                 
+00FDEE20  ldr      x30, [sp], #0x30                      
+00FDEE24  b        #0xfdf2ac                              // ObservadorResorte2$$doRotation
+00FDEE28  ldp      x20, x19, [sp, #0x20]                 
+00FDEE2C  ldp      x22, x21, [sp, #0x10]                 
+00FDEE30  ldr      x30, [sp], #0x30                      
+00FDEE34  ret                                            
+00FDEE38  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FDEE3C  ldr      x1, [x20]                             
+00FDEE40  mov      x2, xzr                               
+00FDEE44  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDEE48  tbnz     w0, #0, #0xfdee74                     
+00FDEE4C  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FDEE50  ldr      x1, [x21]                             
+00FDEE54  mov      x2, xzr                               
+00FDEE58  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDEE5C  tbnz     w0, #0, #0xfdee74                     
+00FDEE60  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FDEE64  ldr      x1, [x22]                             
+00FDEE68  mov      x2, xzr                               
+00FDEE6C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDEE70  tbz      w0, #0, #0xfdee88                     
+00FDEE74  ldrb     w8, [x19, #0x328]                      // self.primeraVezAguas
+00FDEE78  cbz      w8, #0xfdee88                         
+00FDEE7C  mov      x0, x19                               
+00FDEE80  bl       #0xfdeee8                              // ObservadorResorte2$$doInactivarAguas
+00FDEE84  strb     wzr, [x19, #0x328]                     // self.primeraVezAguas
+00FDEE88  mov      x0, x19                               
+00FDEE8C  ldp      x20, x19, [sp, #0x20]                 
+00FDEE90  ldp      x22, x21, [sp, #0x10]                 
+00FDEE94  ldr      x30, [sp], #0x30                      
+00FDEE98  b        #0xfdf6e4                              // ObservadorResorte2$$doMove

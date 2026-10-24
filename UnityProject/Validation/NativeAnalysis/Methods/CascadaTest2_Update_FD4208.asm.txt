@@ -1,0 +1,60 @@
+// CascadaTest2$$Update VA 0xFD4208, inferred length 232
+void CascadaTest2__Update (CascadaTest2_o* __this, const MethodInfo* method);
+00FD4208  stp      x30, x21, [sp, #-0x20]!               
+00FD420C  stp      x20, x19, [sp, #0x10]                 
+00FD4210  adrp     x20, #0x24fb000                       
+00FD4214  ldrb     w8, [x20, #0xb63]                     
+00FD4218  mov      x19, x0                               
+00FD421C  tbnz     w8, #0, #0xfd4234                     
+00FD4220  adrp     x0, #0x2368000                        
+00FD4224  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD4228  bl       #0xe61b78                             
+00FD422C  mov      w8, #1                                
+00FD4230  strb     w8, [x20, #0xb63]                     
+00FD4234  mov      x0, x19                               
+00FD4238  bl       #0xfd42f0                              // CascadaTest2$$doControlAltura
+00FD423C  ldp      w9, w8, [x19, #0xa4]                   // self.altura
+00FD4240  cmp      w8, w9                                
+00FD4244  b.eq     #0xfd42e0                             
+00FD4248  adrp     x21, #0x2368000                       
+00FD424C  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD4250  ldr      x20, [x19, #0xb0]                      // self.cascada
+00FD4254  ldr      x0, [x21]                             
+00FD4258  ldr      w8, [x0, #0xe0]                       
+00FD425C  cbnz     w8, #0xfd4264                         
+00FD4260  bl       #0xe61c80                             
+00FD4264  mov      x0, x20                               
+00FD4268  mov      x1, xzr                               
+00FD426C  mov      x2, xzr                               
+00FD4270  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FD4274  tbz      w0, #0, #0xfd42c0                     
+00FD4278  ldr      x0, [x21]                             
+00FD427C  ldr      x20, [x19, #0xb0]                      // self.cascada
+00FD4280  ldr      w8, [x0, #0xe0]                       
+00FD4284  cbnz     w8, #0xfd428c                         
+00FD4288  bl       #0xe61c80                             
+00FD428C  mov      x0, x20                               
+00FD4290  mov      x1, xzr                               
+00FD4294  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FD4298  ldr      x0, [x19, #0x20]                       // self.esferaSalida
+00FD429C  cbz      x0, #0xfd42ec                         
+00FD42A0  mov      w1, wzr                               
+00FD42A4  mov      x2, xzr                               
+00FD42A8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD42AC  ldr      x0, [x19, #0x88]                       // self.esferaFiltrante
+00FD42B0  cbz      x0, #0xfd42ec                         
+00FD42B4  mov      w1, wzr                               
+00FD42B8  mov      x2, xzr                               
+00FD42BC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD42C0  ldr      w8, [x19, #0xa4]                       // self.altura
+00FD42C4  cbz      w8, #0xfd42dc                         
+00FD42C8  mov      w8, #1                                
+00FD42CC  mov      x0, x19                               
+00FD42D0  strb     w8, [x19, #0xb8]                       // self.instanciar
+00FD42D4  bl       #0xfd4414                              // CascadaTest2$$doControlCascada
+00FD42D8  ldr      w8, [x19, #0xa4]                       // self.altura
+00FD42DC  str      w8, [x19, #0xa8]                       // self.altura_old
+00FD42E0  ldp      x20, x19, [sp, #0x10]                 
+00FD42E4  ldp      x30, x21, [sp], #0x20                 
+00FD42E8  ret                                            
+00FD42EC  bl       #0xe61da0                             

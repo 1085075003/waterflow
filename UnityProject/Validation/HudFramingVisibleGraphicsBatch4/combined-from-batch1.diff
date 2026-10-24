@@ -1,0 +1,161 @@
+--- a/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
++++ b/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
+@@ -22,6 +22,12 @@
+     const float EdgeMargin = .015f;
+     readonly List<HudRegion> hudRegions = new List<HudRegion>();
+     readonly List<Vector3[]> structuralBoxes = new List<Vector3[]>();
++    int structuralBoxCount;
++    readonly List<SaveLoadManager> hudLoaders = new List<SaveLoadManager>();
++    readonly List<UnityEngine.UI.Graphic> hudGraphics = new List<UnityEngine.UI.Graphic>();
++    readonly Vector3[] hudWorldCorners = new Vector3[4];
++    readonly List<HudRegion> hudRegionPool = new List<HudRegion>();
++    readonly Dictionary<RectTransform,string> hudPaths = new Dictionary<RectTransform,string>();
+     readonly List<RectTransform> hudControls = new List<RectTransform>();
+     Camera view;
+     Transform pieceRoot;
+@@ -58,6 +64,13 @@
+         basePosition=transform.position; hasApplied=false;
+         ground.Clear();
+         Scene scene=SceneManager.GetActiveScene();
++        hudLoaders.Clear(); hudPaths.Clear(); hudGraphics.Clear();
++        foreach(SaveLoadManager loader in OriginalScenePresentation.Components<SaveLoadManager>(scene))
++        {
++            hudLoaders.Add(loader);
++            CacheHudGraphics(CommonAncestor(loader.MusicButton,loader.SoundButton));
++            CacheHudGraphics(CommonAncestor(loader.backButton1,loader.stepsButton));
++        }
+         foreach(ConfigSuelo floor in OriginalScenePresentation.Components<ConfigSuelo>(scene))
+         {
+             Renderer renderer=floor.GetComponent<Renderer>(); if(renderer!=null) ground.Add(renderer);
+@@ -82,7 +95,7 @@
+         { pieces=pieceRoot.GetComponentsInChildren<Renderer>(true); refreshAt=Time.unscaledTime+.25f; }
+         float tanY=Mathf.Tan(view.fieldOfView*.5f*Mathf.Deg2Rad)*(1-2*EdgeMargin);
+         float tanX=tanY*view.aspect;
+-        float backward=0; MeshCount=0; structuralBoxes.Clear();
++        float backward=0; MeshCount=0; structuralBoxCount=0;
+         foreach(Renderer renderer in pieces) Measure(renderer,tanX,tanY,ref backward);
+         foreach(Renderer renderer in ground) Measure(renderer,tanX,tanY,ref backward);
+         GetProtectedHudRegions(hudRegions);
+@@ -93,9 +106,9 @@
+         {
+             float previous=backward;
+             foreach(HudRegion region in hudRegions)
+-                foreach(Vector3[] box in structuralBoxes)
+-                    if(OverlapsHud(box,region.viewport,backward))
+-                        backward=Mathf.Max(backward,ClearHud(box,region.viewport,backward));
++                for(int i=0;i<structuralBoxCount;i++)
++                    if(OverlapsHud(structuralBoxes[i],region.viewport,backward))
++                        backward=Mathf.Max(backward,ClearHud(structuralBoxes[i],region.viewport,backward));
+             if(backward<=previous+.00001f) break;
+         }
+         if(backward>.0001f) { transform.position-=transform.forward*backward; LastBackwardDistance=backward; }
+@@ -119,7 +132,8 @@
+         // Per-mesh local boxes avoid inventing empty corners in one huge world
+         // AABB spanning an elevated source and a diagonally opposite low border.
+         MeshCount++;
+-        var box=new Vector3[8]; int index=0;
++        if(structuralBoxCount==structuralBoxes.Count) structuralBoxes.Add(new Vector3[8]);
++        Vector3[] box=structuralBoxes[structuralBoxCount++]; int index=0;
+         for(int x=-1;x<=1;x+=2) for(int y=-1;y<=1;y+=2) for(int z=-1;z<=1;z+=2)
+         {
+             Vector3 corner=bounds.center+Vector3.Scale(bounds.extents,new Vector3(x,y,z));
+@@ -129,16 +143,15 @@
+             backward=Mathf.Max(backward,Mathf.Abs(p.y)/tanY-p.z);
+             backward=Mathf.Max(backward,view.nearClipPlane+.01f-p.z);
+         }
+-        structuralBoxes.Add(box);
+     }
+ 
+     /// <summary>Only authored gameplay control references, never modal/tutorial roots.</summary>
+     public void GetProtectedHudRegions(List<HudRegion> output)
+     {
+         output.Clear(); hudControls.Clear();
+-        Scene scene=gameObject.scene;
+-        foreach(SaveLoadManager loader in OriginalScenePresentation.Components<SaveLoadManager>(scene))
+-        {
++        foreach(SaveLoadManager loader in hudLoaders)
++        {
++            if(loader==null) continue;
+             AddHudControl(loader.MenuButton); AddHudControl(loader.MusicButton);
+             AddHudControl(loader.SoundButton); AddHudControl(loader.RestartButton);
+             AddHudControl(loader.solutionButton); AddHudControl(loader.NextButton);
+@@ -146,12 +159,12 @@
+             AddHudControl(loader.stepsButton); AddHudControl(loader.botonNumSol);
+             AddHudControl(loader.barra==null ? null : loader.barra.gameObject);
+             AddHudControl(loader.barra1==null ? null : loader.barra1.gameObject);
+-            // The source scene's panel2 draws the visible backdrop around these
+-            // controls. Stop at their lowest shared ancestor; reject screen-sized
+-            // wrappers below, even if a different original scene uses one.
+-            Transform common=CommonAncestor(loader.MusicButton,loader.SoundButton);
+-            if(common!=null) AddHudControl(common.gameObject);
+-        }
++        }
++        // Source panel2 itself is an invisible layout container (Image disabled).
++        // Protect its real enabled artwork, including the cuadro frame, instead
++        // of treating unused container padding as an obstruction.
++        foreach(UnityEngine.UI.Graphic graphic in hudGraphics)
++            if(graphic!=null && graphic.isActiveAndEnabled && graphic.color.a>0) AddHudControl(graphic.gameObject);
+         foreach(RectTransform control in hudControls)
+         {
+             Rect rect;
+@@ -159,8 +172,25 @@
+             float padX=2f/Mathf.Max(1,view.pixelWidth), padY=2f/Mathf.Max(1,view.pixelHeight);
+             rect=Rect.MinMaxRect(Mathf.Max(0,rect.xMin-padX),Mathf.Max(0,rect.yMin-padY),
+                 Mathf.Min(1,rect.xMax+padX),Mathf.Min(1,rect.yMax+padY));
+-            output.Add(new HudRegion { path=Hierarchy(control),viewport=rect });
+-        }
++            HudRegion region; string path;
++            if(object.ReferenceEquals(output,hudRegions))
++            {
++                int index=output.Count;
++                if(index==hudRegionPool.Count) hudRegionPool.Add(new HudRegion());
++                region=hudRegionPool[index];
++                if(!hudPaths.TryGetValue(control,out path)) { path=Hierarchy(control); hudPaths.Add(control,path); }
++            }
++            else { region=new HudRegion(); path=Hierarchy(control); }
++            region.path=path; region.viewport=rect; output.Add(region);
++        }
++    }
++    void CacheHudGraphics(Transform root)
++    {
++        // All four original gameplay scenes name this exact shared HUD group
++        // panel2. A Canvas or broader common ancestor must never admit modals.
++        if(root==null || root.name!="panel2" || root.GetComponent<Canvas>()!=null) return;
++        foreach(UnityEngine.UI.Graphic graphic in root.GetComponentsInChildren<UnityEngine.UI.Graphic>(true))
++            if(!hudGraphics.Contains(graphic)) hudGraphics.Add(graphic);
+     }
+     void AddHudControl(GameObject item)
+     {
+@@ -181,17 +211,23 @@
+         if(canvas==null || !canvas.isActiveAndEnabled) return false;
+         Canvas root=canvas.rootCanvas;
+         if(root.renderMode==RenderMode.WorldSpace) return false;
+-        Camera canvasCamera=root.renderMode==RenderMode.ScreenSpaceOverlay ? null : root.worldCamera;
++        RectTransform rootRect=root.transform as RectTransform;
+         Rect pixels=root.pixelRect;
+-        if(pixels.width<=0 || pixels.height<=0) return false;
+-        var corners=new Vector3[4]; control.GetWorldCorners(corners);
++        if(rootRect==null || pixels.width<=0 || pixels.height<=0) return false;
++        Rect logical=rootRect.rect;
++        if(logical.width<=0 || logical.height<=0) return false;
++        Rect canvasViewport=root.renderMode==RenderMode.ScreenSpaceCamera && root.worldCamera!=null ? root.worldCamera.rect : new Rect(0,0,1,1);
++        control.GetWorldCorners(hudWorldCorners);
+         Vector2 low=new Vector2(float.PositiveInfinity,float.PositiveInfinity),high=-low;
+-        foreach(Vector3 corner in corners)
+-        {
+-            Vector2 screen=RectTransformUtility.WorldToScreenPoint(canvasCamera,corner);
+-            Vector2 normalized=new Vector2((screen.x-pixels.xMin)/pixels.width,(screen.y-pixels.yMin)/pixels.height);
+-            // Full-screen overlay coordinates and RT UI-camera coordinates both
+-            // normalize through the canvas's actual pixel rectangle.
++        foreach(Vector3 corner in hudWorldCorners)
++        {
++            // Original gameplay Canvas is ScreenSpaceCamera at depth600.
++            // Its world pose can still reflect the previous fitted camera when
++            // OnPreCull restores the base pose. Root-local UI coordinates avoid
++            // a camera/Canvas feedback loop and work for Overlay capture too.
++            Vector3 local=rootRect.InverseTransformPoint(corner);
++            Vector2 normalized=new Vector2((local.x-logical.xMin)/logical.width,(local.y-logical.yMin)/logical.height);
++            normalized=canvasViewport.position+Vector2.Scale(normalized,canvasViewport.size);
+             Vector2 viewport=new Vector2((normalized.x-view.rect.xMin)/view.rect.width,(normalized.y-view.rect.yMin)/view.rect.height);
+             low=Vector2.Min(low,viewport); high=Vector2.Max(high,viewport);
+         }

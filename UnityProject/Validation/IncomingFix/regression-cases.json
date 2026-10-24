@@ -1,0 +1,30 @@
+{
+  "status": "Staging only; main runtime unchanged during All800",
+  "mode": "Normal production gameplay, original Save1 placements, never Solve/final proxies",
+  "newFailures": [
+    693,
+    695,
+    750,
+    1100,
+    1135,
+    1140,
+    1142,
+    1145,
+    1147
+  ],
+  "existingMechanismRegression": [
+    622,
+    656,
+    1057,
+    1851
+  ],
+  "evidence": {
+    "AguaControl.Start": "0xFC9A3C/0xFC9AA4 and subsequent per-origin stores: conOri1..6 and conHole1..4/6 bind only the corresponding FuenteTest1 input",
+    "FuenteTest1.doProcessEnter": "0x109F78C..0x109F8DC: entered input invokes doActivarMech on its conOri and doActivarDoor on its conHole",
+    "693": "record14 actual incoming1 must publish only channel1, not conOrigen2/channel2. Incorrect simultaneous 48 and9 movements cancel the intended descent and leave record1 high/dry, never activating input channels3/4.",
+    "695": "record3 actual incoming1 must not publish conOrigen2/channel1. Incorrect output-port publication shifts record4 left fromX40 toX20 and breaks eight downstream targets."
+  },
+  "change": "New IsControllerIntakeWet matches actual entered origin; mechanism conOri/conHole use it. Bus observes every LateUpdate so the original immediate doProcessEnter/doExit event cannot be missed by the previous arbitrary .1-unscaled-second poll; publishing remains edge-only. Existing IsControllerPortWet and board topology/collision/rendering remain unchanged. Wrong-color rejected targets have no entered intake, so entry is never fabricated.",
+  "snapshotReviewStaging": "CaptureState ensures a current graph if dirty/root/level changed, and mechanisms initialize closed gate overrides before snapshot capture. The new same-frame-load real Unity fixture must confirm this separately before claiming it fixed.",
+  "diagnostics": "SwitchEventDiagnostics bounded192 records actual intake edges and merged global publications for normal gameplay A/B/physical histories; no inferred switch state."
+}

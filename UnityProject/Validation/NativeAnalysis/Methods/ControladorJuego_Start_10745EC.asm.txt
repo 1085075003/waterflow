@@ -1,0 +1,207 @@
+// ControladorJuego$$Start VA 0x10745EC, inferred length 820
+void ControladorJuego__Start (ControladorJuego_o* __this, const MethodInfo* method);
+010745EC  str      x30, [sp, #-0x30]!                    
+010745F0  stp      x22, x21, [sp, #0x10]                 
+010745F4  stp      x20, x19, [sp, #0x20]                 
+010745F8  adrp     x21, #0x24fb000                       
+010745FC  adrp     x20, #0x236a000                       
+01074600  ldrb     w8, [x21, #0xec1]                     
+01074604  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01074608  mov      x19, x0                               
+0107460C  tbnz     w8, #0, #0x1074654                    
+01074610  adrp     x0, #0x236a000                        
+01074614  ldr      x0, [x0, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+01074618  bl       #0xe61b78                             
+0107461C  adrp     x0, #0x236a000                        
+01074620  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+01074624  bl       #0xe61b78                             
+01074628  adrp     x0, #0x2368000                        
+0107462C  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+01074630  bl       #0xe61b78                             
+01074634  adrp     x0, #0x236c000                        
+01074638  ldr      x0, [x0, #0x9a0]                       // [0x236C9A0] SwipeHandler2_TypeInfo
+0107463C  bl       #0xe61b78                             
+01074640  adrp     x0, #0x236c000                        
+01074644  ldr      x0, [x0, #0x460]                       // [0x236C460] 'helpRotation'
+01074648  bl       #0xe61b78                             
+0107464C  mov      w8, #1                                
+01074650  strb     w8, [x21, #0xec1]                     
+01074654  ldr      x0, [x20]                             
+01074658  adrp     x22, #0x236a000                       
+0107465C  adrp     x21, #0x236c000                       
+01074660  ldr      w8, [x0, #0xe0]                       
+01074664  ldr      x22, [x22, #0x9d0]                     // [0x236A9D0] AudioManager_TypeInfo
+01074668  ldr      x21, [x21, #0x9a0]                     // [0x236C9A0] SwipeHandler2_TypeInfo
+0107466C  cbnz     w8, #0x1074678                        
+01074670  bl       #0xe61c80                             
+01074674  ldr      x0, [x20]                             
+01074678  ldr      x8, [x0, #0xb8]                       
+0107467C  mov      w9, #1                                
+01074680  strb     w9, [x8, #0x16]                       
+01074684  ldr      x9, [x22]                             
+01074688  adrp     x22, #0x236c000                       
+0107468C  ldr      x9, [x9, #0xb8]                       
+01074690  ldr      x9, [x9]                              
+01074694  str      wzr, [x19, #0xc0]                      // self.contadorUpdate
+01074698  strb     wzr, [x19, #0xc4]                      // self.primeraVez1
+0107469C  str      x9, [x19, #0xd8]                       // self.audioManager
+010746A0  ldr      x9, [x21]                             
+010746A4  adrp     x21, #0x2368000                       
+010746A8  ldr      x9, [x9, #0xb8]                       
+010746AC  strb     wzr, [x9]                             
+010746B0  ldr      w8, [x8]                              
+010746B4  ldr      x22, [x22, #0x460]                     // [0x236C460] 'helpRotation'
+010746B8  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+010746BC  cmp      w8, #1                                
+010746C0  b.eq     #0x1074884                            
+010746C4  ldr      w8, [x0, #0xe0]                       
+010746C8  cbnz     w8, #0x10746d4                        
+010746CC  bl       #0xe61c80                             
+010746D0  ldr      x0, [x20]                             
+010746D4  ldr      x8, [x0, #0xb8]                       
+010746D8  ldr      w8, [x8]                              
+010746DC  cmp      w8, #2                                
+010746E0  b.eq     #0x1074884                            
+010746E4  ldr      w9, [x0, #0xe0]                       
+010746E8  cbnz     w9, #0x10746fc                        
+010746EC  bl       #0xe61c80                             
+010746F0  ldr      x0, [x20]                             
+010746F4  ldr      x8, [x0, #0xb8]                       
+010746F8  ldr      w8, [x8]                              
+010746FC  cmp      w8, #7                                
+01074700  b.eq     #0x1074884                            
+01074704  ldr      w9, [x0, #0xe0]                       
+01074708  cbnz     w9, #0x107471c                        
+0107470C  bl       #0xe61c80                             
+01074710  ldr      x0, [x20]                             
+01074714  ldr      x8, [x0, #0xb8]                       
+01074718  ldr      w8, [x8]                              
+0107471C  cmp      w8, #0x33                             
+01074720  b.eq     #0x1074884                            
+01074724  ldr      w9, [x0, #0xe0]                       
+01074728  cbnz     w9, #0x107473c                        
+0107472C  bl       #0xe61c80                             
+01074730  ldr      x0, [x20]                             
+01074734  ldr      x8, [x0, #0xb8]                       
+01074738  ldr      w8, [x8]                              
+0107473C  cmp      w8, #0x34                             
+01074740  b.eq     #0x1074884                            
+01074744  ldr      w9, [x0, #0xe0]                       
+01074748  cbnz     w9, #0x107475c                        
+0107474C  bl       #0xe61c80                             
+01074750  ldr      x0, [x20]                             
+01074754  ldr      x8, [x0, #0xb8]                       
+01074758  ldr      w8, [x8]                              
+0107475C  cmp      w8, #0x191                            
+01074760  b.eq     #0x1074884                            
+01074764  ldr      w9, [x0, #0xe0]                       
+01074768  cbnz     w9, #0x107477c                        
+0107476C  bl       #0xe61c80                             
+01074770  ldr      x0, [x20]                             
+01074774  ldr      x8, [x0, #0xb8]                       
+01074778  ldr      w8, [x8]                              
+0107477C  cmp      w8, #0x192                            
+01074780  b.eq     #0x1074884                            
+01074784  ldr      w9, [x0, #0xe0]                       
+01074788  cbnz     w9, #0x107479c                        
+0107478C  bl       #0xe61c80                             
+01074790  ldr      x0, [x20]                             
+01074794  ldr      x8, [x0, #0xb8]                       
+01074798  ldr      w8, [x8]                              
+0107479C  cmp      w8, #0x193                            
+010747A0  b.eq     #0x1074884                            
+010747A4  ldr      w9, [x0, #0xe0]                       
+010747A8  cbnz     w9, #0x10747bc                        
+010747AC  bl       #0xe61c80                             
+010747B0  ldr      x0, [x20]                             
+010747B4  ldr      x8, [x0, #0xb8]                       
+010747B8  ldr      w8, [x8]                              
+010747BC  cmp      w8, #0xfb                             
+010747C0  b.eq     #0x1074884                            
+010747C4  ldr      w9, [x0, #0xe0]                       
+010747C8  cbnz     w9, #0x10747dc                        
+010747CC  bl       #0xe61c80                             
+010747D0  ldr      x0, [x20]                             
+010747D4  ldr      x8, [x0, #0xb8]                       
+010747D8  ldr      w8, [x8]                              
+010747DC  cmp      w8, #0x1c3                            
+010747E0  b.eq     #0x1074884                            
+010747E4  ldr      w9, [x0, #0xe0]                       
+010747E8  cbnz     w9, #0x10747fc                        
+010747EC  bl       #0xe61c80                             
+010747F0  ldr      x0, [x20]                             
+010747F4  ldr      x8, [x0, #0xb8]                       
+010747F8  ldr      w8, [x8]                              
+010747FC  cmp      w8, #0x1c4                            
+01074800  b.eq     #0x1074884                            
+01074804  ldr      w9, [x0, #0xe0]                       
+01074808  cbnz     w9, #0x107481c                        
+0107480C  bl       #0xe61c80                             
+01074810  ldr      x0, [x20]                             
+01074814  ldr      x8, [x0, #0xb8]                       
+01074818  ldr      w8, [x8]                              
+0107481C  cmp      w8, #0x259                            
+01074820  b.eq     #0x1074884                            
+01074824  ldr      w9, [x0, #0xe0]                       
+01074828  cbnz     w9, #0x107483c                        
+0107482C  bl       #0xe61c80                             
+01074830  ldr      x0, [x20]                             
+01074834  ldr      x8, [x0, #0xb8]                       
+01074838  ldr      w8, [x8]                              
+0107483C  cmp      w8, #0x25a                            
+01074840  b.eq     #0x1074884                            
+01074844  ldr      w9, [x0, #0xe0]                       
+01074848  cbnz     w9, #0x107485c                        
+0107484C  bl       #0xe61c80                             
+01074850  ldr      x0, [x20]                             
+01074854  ldr      x8, [x0, #0xb8]                       
+01074858  ldr      w8, [x8]                              
+0107485C  cmp      w8, #0x41b                            
+01074860  b.eq     #0x1074884                            
+01074864  ldr      w9, [x0, #0xe0]                       
+01074868  cbnz     w9, #0x107487c                        
+0107486C  bl       #0xe61c80                             
+01074870  ldr      x8, [x20]                             
+01074874  ldr      x8, [x8, #0xb8]                       
+01074878  ldr      w8, [x8]                              
+0107487C  cmp      w8, #0x673                            
+01074880  b.ne     #0x1074894                            
+01074884  ldr      x0, [x22]                             
+01074888  mov      w1, wzr                               
+0107488C  mov      x2, xzr                               
+01074890  bl       #0x200137c                             // UnityEngine.PlayerPrefs$$SetInt
+01074894  ldr      x0, [x22]                             
+01074898  mov      w1, wzr                               
+0107489C  mov      x2, xzr                               
+010748A0  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+010748A4  ldr      x8, [x21]                             
+010748A8  ldr      x21, [x19, #0xa8]                      // self.helpRotate
+010748AC  mov      w20, w0                               
+010748B0  ldr      w9, [x8, #0xe0]                       
+010748B4  cbnz     w9, #0x10748c0                        
+010748B8  mov      x0, x8                                
+010748BC  bl       #0xe61c80                             
+010748C0  mov      x0, x21                               
+010748C4  mov      x1, xzr                               
+010748C8  mov      x2, xzr                               
+010748CC  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010748D0  cbz      w20, #0x10748e8                       
+010748D4  tbz      w0, #0, #0x107490c                    
+010748D8  ldr      x0, [x19, #0xa8]                       // self.helpRotate
+010748DC  cbz      x0, #0x107491c                        
+010748E0  mov      w1, wzr                               
+010748E4  b        #0x10748f8                            
+010748E8  tbz      w0, #0, #0x107490c                    
+010748EC  ldr      x0, [x19, #0xa8]                       // self.helpRotate
+010748F0  cbz      x0, #0x107491c                        
+010748F4  mov      w1, #1                                
+010748F8  ldp      x20, x19, [sp, #0x20]                 
+010748FC  ldp      x22, x21, [sp, #0x10]                 
+01074900  mov      x2, xzr                               
+01074904  ldr      x30, [sp], #0x30                      
+01074908  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+0107490C  ldp      x20, x19, [sp, #0x20]                 
+01074910  ldp      x22, x21, [sp, #0x10]                 
+01074914  ldr      x30, [sp], #0x30                      
+01074918  ret                                            
+0107491C  bl       #0xe61da0                             

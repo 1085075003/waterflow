@@ -1,0 +1,466 @@
+// AguaControlC$$Start VA 0xFC9E28, inferred length 1856
+void AguaControlC__Start (AguaControlC_o* __this, const MethodInfo* method);
+00FC9E28  stp      x30, x21, [sp, #-0x20]!               
+00FC9E2C  stp      x20, x19, [sp, #0x10]                 
+00FC9E30  adrp     x20, #0x24fb000                       
+00FC9E34  ldrb     w8, [x20, #0xb35]                     
+00FC9E38  mov      x19, x0                               
+00FC9E3C  tbnz     w8, #0, #0xfc9e78                     
+00FC9E40  adrp     x0, #0x236a000                        
+00FC9E44  ldr      x0, [x0, #0x5c8]                       // [0x236A5C8] Method$UnityEngine.GameObject.GetComponent<AguasControl3>()
+00FC9E48  bl       #0xe61b78                             
+00FC9E4C  adrp     x0, #0x236a000                        
+00FC9E50  ldr      x0, [x0, #0x5d0]                       // [0x236A5D0] Method$UnityEngine.GameObject.GetComponent<FuenteTest3>()
+00FC9E54  bl       #0xe61b78                             
+00FC9E58  adrp     x0, #0x2368000                        
+00FC9E5C  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FC9E60  bl       #0xe61b78                             
+00FC9E64  adrp     x0, #0x236a000                        
+00FC9E68  ldr      x0, [x0, #0x5c0]                       // [0x236A5C0] 'Map1'
+00FC9E6C  bl       #0xe61b78                             
+00FC9E70  mov      w8, #1                                
+00FC9E74  strb     w8, [x20, #0xb35]                     
+00FC9E78  adrp     x21, #0x236a000                       
+00FC9E7C  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FC9E80  ldr      x21, [x21, #0x5d0]                     // [0x236A5D0] Method$UnityEngine.GameObject.GetComponent<FuenteTest3>()
+00FC9E84  cbz      w8, #0xfc9f7c                         
+00FC9E88  ldr      x0, [x19, #0x30]                       // self.origen1
+00FC9E8C  cbz      x0, #0xfca564                         
+00FC9E90  ldr      x1, [x21]                             
+00FC9E94  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FC9E98  cbz      x0, #0xfca564                         
+00FC9E9C  strb     wzr, [x0, #0x519]                     
+00FC9EA0  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FC9EA4  strb     w8, [x0, #0x51a]                      
+00FC9EA8  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FC9EAC  strb     w8, [x0, #0x51b]                      
+00FC9EB0  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FC9EB4  strb     w8, [x0, #0x51c]                      
+00FC9EB8  ldrb     w8, [x19, #0x25]                       // self.ori6
+00FC9EBC  strb     w8, [x0, #0x51d]                      
+00FC9EC0  ldr      q0, [x19, #0x80]                       // self.dirCentro1
+00FC9EC4  str      q0, [x0, #0xf0]                       
+00FC9EC8  ldr      w8, [x19, #0xa4]                       // self.tipoPieza
+00FC9ECC  str      w8, [x0, #0x520]                      
+00FC9ED0  ldr      w8, [x19, #0xa8]                       // self.colorCubeta
+00FC9ED4  str      w8, [x0, #0x34]                       
+00FC9ED8  ldr      x8, [x19, #0xb0]                       // self.confColor
+00FC9EDC  str      x8, [x0, #0x540]                      
+00FC9EE0  ldr      d1, [x19, #0xb8]                       // self.rebos1
+00FC9EE4  add      x8, x0, #0x606                        
+00FC9EE8  str      d1, [x8]                              
+00FC9EEC  ldr      d2, [x19, #0xc0]                       // self.configFuente
+00FC9EF0  str      d2, [x0, #0x610]                      
+00FC9EF4  ldr      w8, [x19, #0xc8]                       // self.configFuenteCentro
+00FC9EF8  str      w8, [x0, #0x618]                      
+00FC9EFC  ldr      q2, [x19, #0xd0]                       // self.configPit1
+00FC9F00  umov     w8, v1.b[0]                           
+00FC9F04  str      q2, [x0, #0x620]                      
+00FC9F08  ldr      q2, [x19, #0xe0]                       // self.configPit3
+00FC9F0C  str      q2, [x0, #0x630]                      
+00FC9F10  ldr      q2, [x19, #0xf0]                       // self.configRes1
+00FC9F14  str      q2, [x0, #0x640]                      
+00FC9F18  ldr      q2, [x19, #0x100]                      // self.configRes3
+00FC9F1C  str      q2, [x0, #0x650]                      
+00FC9F20  ldr      q2, [x19, #0x110]                      // self.configAnim
+00FC9F24  str      q2, [x0, #0x660]                      
+00FC9F28  cbz      w8, #0xfc9f34                         
+00FC9F2C  mov      w8, #1                                
+00FC9F30  str      w8, [x0, #0xf0]                       
+00FC9F34  umov     w8, v1.b[1]                           
+00FC9F38  cbz      w8, #0xfc9f44                         
+00FC9F3C  mov      w8, #1                                
+00FC9F40  str      w8, [x0, #0xf4]                       
+00FC9F44  umov     w8, v1.b[2]                           
+00FC9F48  cbz      w8, #0xfc9f54                         
+00FC9F4C  mov      w8, #1                                
+00FC9F50  str      w8, [x0, #0xf8]                       
+00FC9F54  umov     w8, v1.b[3]                           
+00FC9F58  cbz      w8, #0xfc9f64                         
+00FC9F5C  mov      w8, #1                                
+00FC9F60  str      w8, [x0, #0xfc]                       
+00FC9F64  ldrb     w8, [x19, #0x90]                       // self.activarFuente
+00FC9F68  strb     w8, [x0, #0x51f]                      
+00FC9F6C  fmov     w8, s0                                
+00FC9F70  cbz      w8, #0xfc9fb0                         
+00FC9F74  str      w8, [x0, #0x100]                      
+00FC9F78  b        #0xfc9fb0                             
+00FC9F7C  adrp     x8, #0x2368000                        
+00FC9F80  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FC9F84  ldr      x20, [x19, #0x30]                      // self.origen1
+00FC9F88  ldr      x0, [x8]                              
+00FC9F8C  ldr      w8, [x0, #0xe0]                       
+00FC9F90  cbnz     w8, #0xfc9f98                         
+00FC9F94  bl       #0xe61c80                             
+00FC9F98  mov      x0, x20                               
+00FC9F9C  mov      x1, xzr                               
+00FC9FA0  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9FA4  ldr      x0, [x19, #0x60]                       // self.cascada1
+00FC9FA8  mov      x1, xzr                               
+00FC9FAC  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9FB0  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FC9FB4  cbz      w8, #0xfca0ac                         
+00FC9FB8  ldr      x0, [x19, #0x38]                       // self.origen2
+00FC9FBC  cbz      x0, #0xfca564                         
+00FC9FC0  ldr      x1, [x21]                             
+00FC9FC4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FC9FC8  cbz      x0, #0xfca564                         
+00FC9FCC  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FC9FD0  strb     wzr, [x0, #0x51a]                     
+00FC9FD4  strb     w8, [x0, #0x519]                      
+00FC9FD8  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FC9FDC  strb     w8, [x0, #0x51b]                      
+00FC9FE0  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FC9FE4  strb     w8, [x0, #0x51c]                      
+00FC9FE8  ldrb     w8, [x19, #0x25]                       // self.ori6
+00FC9FEC  strb     w8, [x0, #0x51d]                      
+00FC9FF0  ldr      q0, [x19, #0x80]                       // self.dirCentro1
+00FC9FF4  str      q0, [x0, #0xf0]                       
+00FC9FF8  ldr      w8, [x19, #0xa4]                       // self.tipoPieza
+00FC9FFC  str      w8, [x0, #0x520]                      
+00FCA000  ldr      w8, [x19, #0xa8]                       // self.colorCubeta
+00FCA004  str      w8, [x0, #0x34]                       
+00FCA008  ldr      x8, [x19, #0xb0]                       // self.confColor
+00FCA00C  str      x8, [x0, #0x540]                      
+00FCA010  ldr      d1, [x19, #0xb8]                       // self.rebos1
+00FCA014  add      x8, x0, #0x606                        
+00FCA018  str      d1, [x8]                              
+00FCA01C  ldr      d2, [x19, #0xc0]                       // self.configFuente
+00FCA020  str      d2, [x0, #0x610]                      
+00FCA024  ldr      w8, [x19, #0xc8]                       // self.configFuenteCentro
+00FCA028  str      w8, [x0, #0x618]                      
+00FCA02C  ldr      q2, [x19, #0xd0]                       // self.configPit1
+00FCA030  umov     w8, v1.b[0]                           
+00FCA034  str      q2, [x0, #0x620]                      
+00FCA038  ldr      q2, [x19, #0xe0]                       // self.configPit3
+00FCA03C  str      q2, [x0, #0x630]                      
+00FCA040  ldr      q2, [x19, #0xf0]                       // self.configRes1
+00FCA044  str      q2, [x0, #0x640]                      
+00FCA048  ldr      q2, [x19, #0x100]                      // self.configRes3
+00FCA04C  str      q2, [x0, #0x650]                      
+00FCA050  ldr      q2, [x19, #0x110]                      // self.configAnim
+00FCA054  str      q2, [x0, #0x660]                      
+00FCA058  cbz      w8, #0xfca064                         
+00FCA05C  mov      w8, #1                                
+00FCA060  str      w8, [x0, #0xf0]                       
+00FCA064  umov     w8, v1.b[1]                           
+00FCA068  cbz      w8, #0xfca074                         
+00FCA06C  mov      w8, #1                                
+00FCA070  str      w8, [x0, #0xf4]                       
+00FCA074  umov     w8, v1.b[2]                           
+00FCA078  cbz      w8, #0xfca084                         
+00FCA07C  mov      w8, #1                                
+00FCA080  str      w8, [x0, #0xf8]                       
+00FCA084  umov     w8, v1.b[3]                           
+00FCA088  cbz      w8, #0xfca094                         
+00FCA08C  mov      w8, #1                                
+00FCA090  str      w8, [x0, #0xfc]                       
+00FCA094  ldrb     w9, [x19, #0x90]                       // self.activarFuente
+00FCA098  mov      w8, v0.s[1]                           
+00FCA09C  strb     w9, [x0, #0x51f]                      
+00FCA0A0  cbz      w8, #0xfca0e0                         
+00FCA0A4  str      w8, [x0, #0x100]                      
+00FCA0A8  b        #0xfca0e0                             
+00FCA0AC  adrp     x8, #0x2368000                        
+00FCA0B0  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCA0B4  ldr      x20, [x19, #0x38]                      // self.origen2
+00FCA0B8  ldr      x0, [x8]                              
+00FCA0BC  ldr      w8, [x0, #0xe0]                       
+00FCA0C0  cbnz     w8, #0xfca0c8                         
+00FCA0C4  bl       #0xe61c80                             
+00FCA0C8  mov      x0, x20                               
+00FCA0CC  mov      x1, xzr                               
+00FCA0D0  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCA0D4  ldr      x0, [x19, #0x68]                       // self.cascada2
+00FCA0D8  mov      x1, xzr                               
+00FCA0DC  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCA0E0  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FCA0E4  cbz      w8, #0xfca1dc                         
+00FCA0E8  ldr      x0, [x19, #0x40]                       // self.origen3
+00FCA0EC  cbz      x0, #0xfca564                         
+00FCA0F0  ldr      x1, [x21]                             
+00FCA0F4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCA0F8  cbz      x0, #0xfca564                         
+00FCA0FC  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FCA100  strb     w8, [x0, #0x519]                      
+00FCA104  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FCA108  strb     wzr, [x0, #0x51b]                     
+00FCA10C  strb     w8, [x0, #0x51a]                      
+00FCA110  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FCA114  strb     w8, [x0, #0x51c]                      
+00FCA118  ldrb     w8, [x19, #0x25]                       // self.ori6
+00FCA11C  strb     w8, [x0, #0x51d]                      
+00FCA120  ldr      q0, [x19, #0x80]                       // self.dirCentro1
+00FCA124  str      q0, [x0, #0xf0]                       
+00FCA128  ldr      w8, [x19, #0xa4]                       // self.tipoPieza
+00FCA12C  str      w8, [x0, #0x520]                      
+00FCA130  ldr      w8, [x19, #0xa8]                       // self.colorCubeta
+00FCA134  str      w8, [x0, #0x34]                       
+00FCA138  ldr      x8, [x19, #0xb0]                       // self.confColor
+00FCA13C  str      x8, [x0, #0x540]                      
+00FCA140  ldr      d1, [x19, #0xb8]                       // self.rebos1
+00FCA144  add      x8, x0, #0x606                        
+00FCA148  str      d1, [x8]                              
+00FCA14C  ldr      d2, [x19, #0xc0]                       // self.configFuente
+00FCA150  str      d2, [x0, #0x610]                      
+00FCA154  ldr      w8, [x19, #0xc8]                       // self.configFuenteCentro
+00FCA158  str      w8, [x0, #0x618]                      
+00FCA15C  ldr      q2, [x19, #0xd0]                       // self.configPit1
+00FCA160  umov     w8, v1.b[0]                           
+00FCA164  str      q2, [x0, #0x620]                      
+00FCA168  ldr      q2, [x19, #0xe0]                       // self.configPit3
+00FCA16C  str      q2, [x0, #0x630]                      
+00FCA170  ldr      q2, [x19, #0xf0]                       // self.configRes1
+00FCA174  str      q2, [x0, #0x640]                      
+00FCA178  ldr      q2, [x19, #0x100]                      // self.configRes3
+00FCA17C  str      q2, [x0, #0x650]                      
+00FCA180  ldr      q2, [x19, #0x110]                      // self.configAnim
+00FCA184  str      q2, [x0, #0x660]                      
+00FCA188  cbz      w8, #0xfca194                         
+00FCA18C  mov      w8, #1                                
+00FCA190  str      w8, [x0, #0xf0]                       
+00FCA194  umov     w8, v1.b[1]                           
+00FCA198  cbz      w8, #0xfca1a4                         
+00FCA19C  mov      w8, #1                                
+00FCA1A0  str      w8, [x0, #0xf4]                       
+00FCA1A4  umov     w8, v1.b[2]                           
+00FCA1A8  cbz      w8, #0xfca1b4                         
+00FCA1AC  mov      w8, #1                                
+00FCA1B0  str      w8, [x0, #0xf8]                       
+00FCA1B4  umov     w8, v1.b[3]                           
+00FCA1B8  cbz      w8, #0xfca1c4                         
+00FCA1BC  mov      w8, #1                                
+00FCA1C0  str      w8, [x0, #0xfc]                       
+00FCA1C4  ldrb     w9, [x19, #0x90]                       // self.activarFuente
+00FCA1C8  mov      w8, v0.s[2]                           
+00FCA1CC  strb     w9, [x0, #0x51f]                      
+00FCA1D0  cbz      w8, #0xfca210                         
+00FCA1D4  str      w8, [x0, #0x100]                      
+00FCA1D8  b        #0xfca210                             
+00FCA1DC  adrp     x8, #0x2368000                        
+00FCA1E0  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCA1E4  ldr      x20, [x19, #0x40]                      // self.origen3
+00FCA1E8  ldr      x0, [x8]                              
+00FCA1EC  ldr      w8, [x0, #0xe0]                       
+00FCA1F0  cbnz     w8, #0xfca1f8                         
+00FCA1F4  bl       #0xe61c80                             
+00FCA1F8  mov      x0, x20                               
+00FCA1FC  mov      x1, xzr                               
+00FCA200  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCA204  ldr      x0, [x19, #0x70]                       // self.cascada3
+00FCA208  mov      x1, xzr                               
+00FCA20C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCA210  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FCA214  cbz      w8, #0xfca30c                         
+00FCA218  ldr      x0, [x19, #0x48]                       // self.origen4
+00FCA21C  cbz      x0, #0xfca564                         
+00FCA220  ldr      x1, [x21]                             
+00FCA224  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCA228  cbz      x0, #0xfca564                         
+00FCA22C  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FCA230  strb     w8, [x0, #0x519]                      
+00FCA234  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FCA238  strb     w8, [x0, #0x51a]                      
+00FCA23C  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FCA240  strb     wzr, [x0, #0x51c]                     
+00FCA244  strb     w8, [x0, #0x51b]                      
+00FCA248  ldrb     w8, [x19, #0x25]                       // self.ori6
+00FCA24C  strb     w8, [x0, #0x51d]                      
+00FCA250  ldr      q0, [x19, #0x80]                       // self.dirCentro1
+00FCA254  str      q0, [x0, #0xf0]                       
+00FCA258  ldr      w8, [x19, #0xa4]                       // self.tipoPieza
+00FCA25C  str      w8, [x0, #0x520]                      
+00FCA260  ldr      w8, [x19, #0xa8]                       // self.colorCubeta
+00FCA264  str      w8, [x0, #0x34]                       
+00FCA268  ldr      x8, [x19, #0xb0]                       // self.confColor
+00FCA26C  str      x8, [x0, #0x540]                      
+00FCA270  ldr      d1, [x19, #0xb8]                       // self.rebos1
+00FCA274  add      x8, x0, #0x606                        
+00FCA278  str      d1, [x8]                              
+00FCA27C  ldr      d2, [x19, #0xc0]                       // self.configFuente
+00FCA280  str      d2, [x0, #0x610]                      
+00FCA284  ldr      w8, [x19, #0xc8]                       // self.configFuenteCentro
+00FCA288  str      w8, [x0, #0x618]                      
+00FCA28C  ldr      q2, [x19, #0xd0]                       // self.configPit1
+00FCA290  umov     w8, v1.b[0]                           
+00FCA294  str      q2, [x0, #0x620]                      
+00FCA298  ldr      q2, [x19, #0xe0]                       // self.configPit3
+00FCA29C  str      q2, [x0, #0x630]                      
+00FCA2A0  ldr      q2, [x19, #0xf0]                       // self.configRes1
+00FCA2A4  str      q2, [x0, #0x640]                      
+00FCA2A8  ldr      q2, [x19, #0x100]                      // self.configRes3
+00FCA2AC  str      q2, [x0, #0x650]                      
+00FCA2B0  ldr      q2, [x19, #0x110]                      // self.configAnim
+00FCA2B4  str      q2, [x0, #0x660]                      
+00FCA2B8  cbz      w8, #0xfca2c4                         
+00FCA2BC  mov      w8, #1                                
+00FCA2C0  str      w8, [x0, #0xf0]                       
+00FCA2C4  umov     w8, v1.b[1]                           
+00FCA2C8  cbz      w8, #0xfca2d4                         
+00FCA2CC  mov      w8, #1                                
+00FCA2D0  str      w8, [x0, #0xf4]                       
+00FCA2D4  umov     w8, v1.b[2]                           
+00FCA2D8  cbz      w8, #0xfca2e4                         
+00FCA2DC  mov      w8, #1                                
+00FCA2E0  str      w8, [x0, #0xf8]                       
+00FCA2E4  umov     w8, v1.b[3]                           
+00FCA2E8  cbz      w8, #0xfca2f4                         
+00FCA2EC  mov      w8, #1                                
+00FCA2F0  str      w8, [x0, #0xfc]                       
+00FCA2F4  ldrb     w9, [x19, #0x90]                       // self.activarFuente
+00FCA2F8  mov      w8, v0.s[3]                           
+00FCA2FC  strb     w9, [x0, #0x51f]                      
+00FCA300  cbz      w8, #0xfca340                         
+00FCA304  str      w8, [x0, #0x100]                      
+00FCA308  b        #0xfca340                             
+00FCA30C  adrp     x8, #0x2368000                        
+00FCA310  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCA314  ldr      x20, [x19, #0x48]                      // self.origen4
+00FCA318  ldr      x0, [x8]                              
+00FCA31C  ldr      w8, [x0, #0xe0]                       
+00FCA320  cbnz     w8, #0xfca328                         
+00FCA324  bl       #0xe61c80                             
+00FCA328  mov      x0, x20                               
+00FCA32C  mov      x1, xzr                               
+00FCA330  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCA334  ldr      x0, [x19, #0x78]                       // self.cascada4
+00FCA338  mov      x1, xzr                               
+00FCA33C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCA340  ldrb     w8, [x19, #0x24]                       // self.ori5
+00FCA344  cbz      w8, #0xfca3ec                         
+00FCA348  ldr      x0, [x19, #0x50]                       // self.origen5
+00FCA34C  cbz      x0, #0xfca564                         
+00FCA350  ldr      x1, [x21]                             
+00FCA354  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCA358  cbz      x0, #0xfca564                         
+00FCA35C  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FCA360  strb     w8, [x0, #0x519]                      
+00FCA364  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FCA368  strb     w8, [x0, #0x51a]                      
+00FCA36C  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FCA370  strb     w8, [x0, #0x51b]                      
+00FCA374  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FCA378  strb     w8, [x0, #0x51c]                      
+00FCA37C  ldrb     w8, [x19, #0x25]                       // self.ori6
+00FCA380  strb     w8, [x0, #0x51d]                      
+00FCA384  ldr      q0, [x19, #0x80]                       // self.dirCentro1
+00FCA388  str      q0, [x0, #0xf0]                       
+00FCA38C  ldr      w8, [x19, #0xa4]                       // self.tipoPieza
+00FCA390  str      w8, [x0, #0x520]                      
+00FCA394  ldr      w8, [x19, #0xa8]                       // self.colorCubeta
+00FCA398  str      w8, [x0, #0x34]                       
+00FCA39C  ldr      x8, [x19, #0xb0]                       // self.confColor
+00FCA3A0  str      x8, [x0, #0x540]                      
+00FCA3A4  ldr      d0, [x19, #0xb8]                       // self.rebos1
+00FCA3A8  add      x8, x0, #0x606                        
+00FCA3AC  str      d0, [x8]                              
+00FCA3B0  ldr      d0, [x19, #0xc0]                       // self.configFuente
+00FCA3B4  str      d0, [x0, #0x610]                      
+00FCA3B8  ldr      w8, [x19, #0xc8]                       // self.configFuenteCentro
+00FCA3BC  str      w8, [x0, #0x618]                      
+00FCA3C0  ldr      q0, [x19, #0xd0]                       // self.configPit1
+00FCA3C4  str      q0, [x0, #0x620]                      
+00FCA3C8  ldr      q0, [x19, #0xe0]                       // self.configPit3
+00FCA3CC  str      q0, [x0, #0x630]                      
+00FCA3D0  ldr      q0, [x19, #0xf0]                       // self.configRes1
+00FCA3D4  str      q0, [x0, #0x640]                      
+00FCA3D8  ldr      q0, [x19, #0x100]                      // self.configRes3
+00FCA3DC  str      q0, [x0, #0x650]                      
+00FCA3E0  ldr      q0, [x19, #0x110]                      // self.configAnim
+00FCA3E4  str      q0, [x0, #0x660]                      
+00FCA3E8  b        #0xfca438                             
+00FCA3EC  adrp     x8, #0x2368000                        
+00FCA3F0  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCA3F4  ldr      x20, [x19, #0x50]                      // self.origen5
+00FCA3F8  ldr      x0, [x8]                              
+00FCA3FC  ldr      w8, [x0, #0xe0]                       
+00FCA400  cbnz     w8, #0xfca408                         
+00FCA404  bl       #0xe61c80                             
+00FCA408  mov      x0, x20                               
+00FCA40C  mov      x1, xzr                               
+00FCA410  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCA414  ldrb     w8, [x19, #0xa0]                       // self.excepcionMap1
+00FCA418  cbnz     w8, #0xfca438                         
+00FCA41C  ldr      x0, [x19, #0x98]                       // self.esferaCentro
+00FCA420  cbz      x0, #0xfca564                         
+00FCA424  adrp     x8, #0x236a000                        
+00FCA428  ldr      x8, [x8, #0x5c0]                       // [0x236A5C0] 'Map1'
+00FCA42C  mov      x2, xzr                               
+00FCA430  ldr      x1, [x8]                              
+00FCA434  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+00FCA438  ldrb     w8, [x19, #0x25]                       // self.ori6
+00FCA43C  cbz      w8, #0xfca4e4                         
+00FCA440  ldr      x0, [x19, #0x58]                       // self.origen6
+00FCA444  cbz      x0, #0xfca564                         
+00FCA448  ldr      x1, [x21]                             
+00FCA44C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCA450  cbz      x0, #0xfca564                         
+00FCA454  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FCA458  strb     w8, [x0, #0x519]                      
+00FCA45C  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FCA460  strb     w8, [x0, #0x51a]                      
+00FCA464  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FCA468  strb     w8, [x0, #0x51b]                      
+00FCA46C  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FCA470  strb     w8, [x0, #0x51c]                      
+00FCA474  mov      w8, #1                                
+00FCA478  strb     w8, [x0, #0x51d]                      
+00FCA47C  ldr      q0, [x19, #0x80]                       // self.dirCentro1
+00FCA480  str      q0, [x0, #0xf0]                       
+00FCA484  ldr      w8, [x19, #0xa4]                       // self.tipoPieza
+00FCA488  str      w8, [x0, #0x520]                      
+00FCA48C  ldr      w8, [x19, #0xa8]                       // self.colorCubeta
+00FCA490  str      w8, [x0, #0x34]                       
+00FCA494  ldr      x8, [x19, #0xb0]                       // self.confColor
+00FCA498  str      x8, [x0, #0x540]                      
+00FCA49C  ldr      d0, [x19, #0xb8]                       // self.rebos1
+00FCA4A0  add      x8, x0, #0x606                        
+00FCA4A4  str      d0, [x8]                              
+00FCA4A8  ldr      d0, [x19, #0xc0]                       // self.configFuente
+00FCA4AC  str      d0, [x0, #0x610]                      
+00FCA4B0  ldr      w8, [x19, #0xc8]                       // self.configFuenteCentro
+00FCA4B4  str      w8, [x0, #0x618]                      
+00FCA4B8  ldr      q0, [x19, #0xd0]                       // self.configPit1
+00FCA4BC  str      q0, [x0, #0x620]                      
+00FCA4C0  ldr      q0, [x19, #0xe0]                       // self.configPit3
+00FCA4C4  str      q0, [x0, #0x630]                      
+00FCA4C8  ldr      q0, [x19, #0xf0]                       // self.configRes1
+00FCA4CC  str      q0, [x0, #0x640]                      
+00FCA4D0  ldr      q0, [x19, #0x100]                      // self.configRes3
+00FCA4D4  str      q0, [x0, #0x650]                      
+00FCA4D8  ldr      q0, [x19, #0x110]                      // self.configAnim
+00FCA4DC  str      q0, [x0, #0x660]                      
+00FCA4E0  b        #0xfca50c                             
+00FCA4E4  adrp     x8, #0x2368000                        
+00FCA4E8  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCA4EC  ldr      x20, [x19, #0x58]                      // self.origen6
+00FCA4F0  ldr      x0, [x8]                              
+00FCA4F4  ldr      w8, [x0, #0xe0]                       
+00FCA4F8  cbnz     w8, #0xfca500                         
+00FCA4FC  bl       #0xe61c80                             
+00FCA500  mov      x0, x20                               
+00FCA504  mov      x1, xzr                               
+00FCA508  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FCA50C  ldr      x0, [x19, #0x28]                       // self.aguas
+00FCA510  cbz      x0, #0xfca564                         
+00FCA514  adrp     x8, #0x236a000                        
+00FCA518  ldr      x8, [x8, #0x5c8]                       // [0x236A5C8] Method$UnityEngine.GameObject.GetComponent<AguasControl3>()
+00FCA51C  ldr      x1, [x8]                              
+00FCA520  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCA524  cbz      x0, #0xfca564                         
+00FCA528  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FCA52C  strb     w8, [x0, #0x31]                       
+00FCA530  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FCA534  strb     w8, [x0, #0x32]                       
+00FCA538  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FCA53C  strb     w8, [x0, #0x33]                       
+00FCA540  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FCA544  strb     w8, [x0, #0x34]                       
+00FCA548  ldrb     w8, [x19, #0x24]                       // self.ori5
+00FCA54C  strb     w8, [x0, #0x35]                       
+00FCA550  ldrb     w8, [x19, #0x25]                       // self.ori6
+00FCA554  ldp      x20, x19, [sp, #0x10]                 
+00FCA558  strb     w8, [x0, #0x36]                       
+00FCA55C  ldp      x30, x21, [sp], #0x20                 
+00FCA560  ret                                            
+00FCA564  bl       #0xe61da0                             

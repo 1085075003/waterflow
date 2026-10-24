@@ -1,0 +1,814 @@
+// Leveltexto1$$Start VA 0x102CDB0, inferred length 3248
+void Leveltexto1__Start (Leveltexto1_o* __this, const MethodInfo* method);
+0102CDB0  sub      sp, sp, #0x30                         
+0102CDB4  stp      x30, x21, [sp, #0x10]                 
+0102CDB8  stp      x20, x19, [sp, #0x20]                 
+0102CDBC  adrp     x21, #0x24fb000                       
+0102CDC0  adrp     x20, #0x236a000                       
+0102CDC4  ldrb     w8, [x21, #0xd08]                     
+0102CDC8  ldr      x20, [x20, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+0102CDCC  mov      x19, x0                               
+0102CDD0  tbnz     w8, #0, #0x102ce00                    
+0102CDD4  adrp     x0, #0x236a000                        
+0102CDD8  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0102CDDC  bl       #0xe61b78                             
+0102CDE0  adrp     x0, #0x236a000                        
+0102CDE4  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0102CDE8  bl       #0xe61b78                             
+0102CDEC  adrp     x0, #0x236b000                        
+0102CDF0  ldr      x0, [x0, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102CDF4  bl       #0xe61b78                             
+0102CDF8  mov      w8, #1                                
+0102CDFC  strb     w8, [x21, #0xd08]                     
+0102CE00  ldr      x8, [x20]                             
+0102CE04  str      wzr, [sp, #0xc]                       
+0102CE08  ldr      x8, [x8, #0xb8]                       
+0102CE0C  ldr      w8, [x8]                              
+0102CE10  cmp      w8, #1                                
+0102CE14  b.ne     #0x102ce6c                            
+0102CE18  adrp     x21, #0x236a000                       
+0102CE1C  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102CE20  ldr      x0, [x21]                             
+0102CE24  ldr      w8, [x0, #0xe0]                       
+0102CE28  cbnz     w8, #0x102ce34                        
+0102CE2C  bl       #0xe61c80                             
+0102CE30  ldr      x0, [x21]                             
+0102CE34  ldr      x0, [x0, #0xb8]                       
+0102CE38  mov      x1, xzr                               
+0102CE3C  bl       #0x1ab3994                             // System.Int32$$ToString
+0102CE40  adrp     x8, #0x236b000                        
+0102CE44  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102CE48  mov      x1, x0                                
+0102CE4C  mov      x2, xzr                               
+0102CE50  ldr      x8, [x8]                              
+0102CE54  mov      x0, x8                                
+0102CE58  bl       #0x1958280                             // System.String$$Concat
+0102CE5C  str      x0, [x19, #0x28]                       // self.texto
+0102CE60  ldr      x8, [x20]                             
+0102CE64  ldr      x8, [x8, #0xb8]                       
+0102CE68  ldr      w8, [x8]                              
+0102CE6C  cmp      w8, #2                                
+0102CE70  b.ne     #0x102ced8                            
+0102CE74  adrp     x21, #0x236a000                       
+0102CE78  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102CE7C  ldr      x0, [x21]                             
+0102CE80  ldr      w8, [x0, #0xe0]                       
+0102CE84  cbnz     w8, #0x102ce90                        
+0102CE88  bl       #0xe61c80                             
+0102CE8C  ldr      x0, [x21]                             
+0102CE90  ldr      x8, [x0, #0xb8]                       
+0102CE94  add      x0, sp, #0xc                          
+0102CE98  mov      x1, xzr                               
+0102CE9C  ldr      w8, [x8]                              
+0102CEA0  sub      w8, w8, #0x32                         
+0102CEA4  str      w8, [sp, #0xc]                        
+0102CEA8  bl       #0x1ab3994                             // System.Int32$$ToString
+0102CEAC  adrp     x8, #0x236b000                        
+0102CEB0  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102CEB4  mov      x1, x0                                
+0102CEB8  mov      x2, xzr                               
+0102CEBC  ldr      x8, [x8]                              
+0102CEC0  mov      x0, x8                                
+0102CEC4  bl       #0x1958280                             // System.String$$Concat
+0102CEC8  str      x0, [x19, #0x28]                       // self.texto
+0102CECC  ldr      x8, [x20]                             
+0102CED0  ldr      x8, [x8, #0xb8]                       
+0102CED4  ldr      w8, [x8]                              
+0102CED8  cmp      w8, #3                                
+0102CEDC  b.ne     #0x102cf44                            
+0102CEE0  adrp     x21, #0x236a000                       
+0102CEE4  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102CEE8  ldr      x0, [x21]                             
+0102CEEC  ldr      w8, [x0, #0xe0]                       
+0102CEF0  cbnz     w8, #0x102cefc                        
+0102CEF4  bl       #0xe61c80                             
+0102CEF8  ldr      x0, [x21]                             
+0102CEFC  ldr      x8, [x0, #0xb8]                       
+0102CF00  add      x0, sp, #0xc                          
+0102CF04  mov      x1, xzr                               
+0102CF08  ldr      w8, [x8]                              
+0102CF0C  sub      w8, w8, #0x64                         
+0102CF10  str      w8, [sp, #0xc]                        
+0102CF14  bl       #0x1ab3994                             // System.Int32$$ToString
+0102CF18  adrp     x8, #0x236b000                        
+0102CF1C  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102CF20  mov      x1, x0                                
+0102CF24  mov      x2, xzr                               
+0102CF28  ldr      x8, [x8]                              
+0102CF2C  mov      x0, x8                                
+0102CF30  bl       #0x1958280                             // System.String$$Concat
+0102CF34  str      x0, [x19, #0x28]                       // self.texto
+0102CF38  ldr      x8, [x20]                             
+0102CF3C  ldr      x8, [x8, #0xb8]                       
+0102CF40  ldr      w8, [x8]                              
+0102CF44  cmp      w8, #4                                
+0102CF48  b.ne     #0x102cfb0                            
+0102CF4C  adrp     x21, #0x236a000                       
+0102CF50  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102CF54  ldr      x0, [x21]                             
+0102CF58  ldr      w8, [x0, #0xe0]                       
+0102CF5C  cbnz     w8, #0x102cf68                        
+0102CF60  bl       #0xe61c80                             
+0102CF64  ldr      x0, [x21]                             
+0102CF68  ldr      x8, [x0, #0xb8]                       
+0102CF6C  add      x0, sp, #0xc                          
+0102CF70  mov      x1, xzr                               
+0102CF74  ldr      w8, [x8]                              
+0102CF78  sub      w8, w8, #0x96                         
+0102CF7C  str      w8, [sp, #0xc]                        
+0102CF80  bl       #0x1ab3994                             // System.Int32$$ToString
+0102CF84  adrp     x8, #0x236b000                        
+0102CF88  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102CF8C  mov      x1, x0                                
+0102CF90  mov      x2, xzr                               
+0102CF94  ldr      x8, [x8]                              
+0102CF98  mov      x0, x8                                
+0102CF9C  bl       #0x1958280                             // System.String$$Concat
+0102CFA0  str      x0, [x19, #0x28]                       // self.texto
+0102CFA4  ldr      x8, [x20]                             
+0102CFA8  ldr      x8, [x8, #0xb8]                       
+0102CFAC  ldr      w8, [x8]                              
+0102CFB0  cmp      w8, #5                                
+0102CFB4  b.ne     #0x102d01c                            
+0102CFB8  adrp     x21, #0x236a000                       
+0102CFBC  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102CFC0  ldr      x0, [x21]                             
+0102CFC4  ldr      w8, [x0, #0xe0]                       
+0102CFC8  cbnz     w8, #0x102cfd4                        
+0102CFCC  bl       #0xe61c80                             
+0102CFD0  ldr      x0, [x21]                             
+0102CFD4  ldr      x8, [x0, #0xb8]                       
+0102CFD8  add      x0, sp, #0xc                          
+0102CFDC  mov      x1, xzr                               
+0102CFE0  ldr      w8, [x8]                              
+0102CFE4  sub      w8, w8, #0xc8                         
+0102CFE8  str      w8, [sp, #0xc]                        
+0102CFEC  bl       #0x1ab3994                             // System.Int32$$ToString
+0102CFF0  adrp     x8, #0x236b000                        
+0102CFF4  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102CFF8  mov      x1, x0                                
+0102CFFC  mov      x2, xzr                               
+0102D000  ldr      x8, [x8]                              
+0102D004  mov      x0, x8                                
+0102D008  bl       #0x1958280                             // System.String$$Concat
+0102D00C  str      x0, [x19, #0x28]                       // self.texto
+0102D010  ldr      x8, [x20]                             
+0102D014  ldr      x8, [x8, #0xb8]                       
+0102D018  ldr      w8, [x8]                              
+0102D01C  cmp      w8, #6                                
+0102D020  b.ne     #0x102d088                            
+0102D024  adrp     x21, #0x236a000                       
+0102D028  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D02C  ldr      x0, [x21]                             
+0102D030  ldr      w8, [x0, #0xe0]                       
+0102D034  cbnz     w8, #0x102d040                        
+0102D038  bl       #0xe61c80                             
+0102D03C  ldr      x0, [x21]                             
+0102D040  ldr      x8, [x0, #0xb8]                       
+0102D044  add      x0, sp, #0xc                          
+0102D048  mov      x1, xzr                               
+0102D04C  ldr      w8, [x8]                              
+0102D050  sub      w8, w8, #0xfa                         
+0102D054  str      w8, [sp, #0xc]                        
+0102D058  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D05C  adrp     x8, #0x236b000                        
+0102D060  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D064  mov      x1, x0                                
+0102D068  mov      x2, xzr                               
+0102D06C  ldr      x8, [x8]                              
+0102D070  mov      x0, x8                                
+0102D074  bl       #0x1958280                             // System.String$$Concat
+0102D078  str      x0, [x19, #0x28]                       // self.texto
+0102D07C  ldr      x8, [x20]                             
+0102D080  ldr      x8, [x8, #0xb8]                       
+0102D084  ldr      w8, [x8]                              
+0102D088  cmp      w8, #7                                
+0102D08C  b.ne     #0x102d0f4                            
+0102D090  adrp     x21, #0x236a000                       
+0102D094  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D098  ldr      x0, [x21]                             
+0102D09C  ldr      w8, [x0, #0xe0]                       
+0102D0A0  cbnz     w8, #0x102d0ac                        
+0102D0A4  bl       #0xe61c80                             
+0102D0A8  ldr      x0, [x21]                             
+0102D0AC  ldr      x8, [x0, #0xb8]                       
+0102D0B0  add      x0, sp, #0xc                          
+0102D0B4  mov      x1, xzr                               
+0102D0B8  ldr      w8, [x8]                              
+0102D0BC  sub      w8, w8, #0x12c                        
+0102D0C0  str      w8, [sp, #0xc]                        
+0102D0C4  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D0C8  adrp     x8, #0x236b000                        
+0102D0CC  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D0D0  mov      x1, x0                                
+0102D0D4  mov      x2, xzr                               
+0102D0D8  ldr      x8, [x8]                              
+0102D0DC  mov      x0, x8                                
+0102D0E0  bl       #0x1958280                             // System.String$$Concat
+0102D0E4  str      x0, [x19, #0x28]                       // self.texto
+0102D0E8  ldr      x8, [x20]                             
+0102D0EC  ldr      x8, [x8, #0xb8]                       
+0102D0F0  ldr      w8, [x8]                              
+0102D0F4  cmp      w8, #8                                
+0102D0F8  b.ne     #0x102d160                            
+0102D0FC  adrp     x21, #0x236a000                       
+0102D100  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D104  ldr      x0, [x21]                             
+0102D108  ldr      w8, [x0, #0xe0]                       
+0102D10C  cbnz     w8, #0x102d118                        
+0102D110  bl       #0xe61c80                             
+0102D114  ldr      x0, [x21]                             
+0102D118  ldr      x8, [x0, #0xb8]                       
+0102D11C  add      x0, sp, #0xc                          
+0102D120  mov      x1, xzr                               
+0102D124  ldr      w8, [x8]                              
+0102D128  sub      w8, w8, #0x15e                        
+0102D12C  str      w8, [sp, #0xc]                        
+0102D130  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D134  adrp     x8, #0x236b000                        
+0102D138  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D13C  mov      x1, x0                                
+0102D140  mov      x2, xzr                               
+0102D144  ldr      x8, [x8]                              
+0102D148  mov      x0, x8                                
+0102D14C  bl       #0x1958280                             // System.String$$Concat
+0102D150  str      x0, [x19, #0x28]                       // self.texto
+0102D154  ldr      x8, [x20]                             
+0102D158  ldr      x8, [x8, #0xb8]                       
+0102D15C  ldr      w8, [x8]                              
+0102D160  cmp      w8, #9                                
+0102D164  b.ne     #0x102d1cc                            
+0102D168  adrp     x21, #0x236a000                       
+0102D16C  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D170  ldr      x0, [x21]                             
+0102D174  ldr      w8, [x0, #0xe0]                       
+0102D178  cbnz     w8, #0x102d184                        
+0102D17C  bl       #0xe61c80                             
+0102D180  ldr      x0, [x21]                             
+0102D184  ldr      x8, [x0, #0xb8]                       
+0102D188  add      x0, sp, #0xc                          
+0102D18C  mov      x1, xzr                               
+0102D190  ldr      w8, [x8]                              
+0102D194  sub      w8, w8, #0x190                        
+0102D198  str      w8, [sp, #0xc]                        
+0102D19C  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D1A0  adrp     x8, #0x236b000                        
+0102D1A4  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D1A8  mov      x1, x0                                
+0102D1AC  mov      x2, xzr                               
+0102D1B0  ldr      x8, [x8]                              
+0102D1B4  mov      x0, x8                                
+0102D1B8  bl       #0x1958280                             // System.String$$Concat
+0102D1BC  str      x0, [x19, #0x28]                       // self.texto
+0102D1C0  ldr      x8, [x20]                             
+0102D1C4  ldr      x8, [x8, #0xb8]                       
+0102D1C8  ldr      w8, [x8]                              
+0102D1CC  cmp      w8, #0xa                              
+0102D1D0  b.ne     #0x102d238                            
+0102D1D4  adrp     x21, #0x236a000                       
+0102D1D8  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D1DC  ldr      x0, [x21]                             
+0102D1E0  ldr      w8, [x0, #0xe0]                       
+0102D1E4  cbnz     w8, #0x102d1f0                        
+0102D1E8  bl       #0xe61c80                             
+0102D1EC  ldr      x0, [x21]                             
+0102D1F0  ldr      x8, [x0, #0xb8]                       
+0102D1F4  add      x0, sp, #0xc                          
+0102D1F8  mov      x1, xzr                               
+0102D1FC  ldr      w8, [x8]                              
+0102D200  sub      w8, w8, #0x1c2                        
+0102D204  str      w8, [sp, #0xc]                        
+0102D208  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D20C  adrp     x8, #0x236b000                        
+0102D210  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D214  mov      x1, x0                                
+0102D218  mov      x2, xzr                               
+0102D21C  ldr      x8, [x8]                              
+0102D220  mov      x0, x8                                
+0102D224  bl       #0x1958280                             // System.String$$Concat
+0102D228  str      x0, [x19, #0x28]                       // self.texto
+0102D22C  ldr      x8, [x20]                             
+0102D230  ldr      x8, [x8, #0xb8]                       
+0102D234  ldr      w8, [x8]                              
+0102D238  cmp      w8, #0xb                              
+0102D23C  b.ne     #0x102d2a4                            
+0102D240  adrp     x21, #0x236a000                       
+0102D244  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D248  ldr      x0, [x21]                             
+0102D24C  ldr      w8, [x0, #0xe0]                       
+0102D250  cbnz     w8, #0x102d25c                        
+0102D254  bl       #0xe61c80                             
+0102D258  ldr      x0, [x21]                             
+0102D25C  ldr      x8, [x0, #0xb8]                       
+0102D260  add      x0, sp, #0xc                          
+0102D264  mov      x1, xzr                               
+0102D268  ldr      w8, [x8]                              
+0102D26C  sub      w8, w8, #0x1f4                        
+0102D270  str      w8, [sp, #0xc]                        
+0102D274  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D278  adrp     x8, #0x236b000                        
+0102D27C  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D280  mov      x1, x0                                
+0102D284  mov      x2, xzr                               
+0102D288  ldr      x8, [x8]                              
+0102D28C  mov      x0, x8                                
+0102D290  bl       #0x1958280                             // System.String$$Concat
+0102D294  str      x0, [x19, #0x28]                       // self.texto
+0102D298  ldr      x8, [x20]                             
+0102D29C  ldr      x8, [x8, #0xb8]                       
+0102D2A0  ldr      w8, [x8]                              
+0102D2A4  cmp      w8, #0xc                              
+0102D2A8  b.ne     #0x102d310                            
+0102D2AC  adrp     x21, #0x236a000                       
+0102D2B0  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D2B4  ldr      x0, [x21]                             
+0102D2B8  ldr      w8, [x0, #0xe0]                       
+0102D2BC  cbnz     w8, #0x102d2c8                        
+0102D2C0  bl       #0xe61c80                             
+0102D2C4  ldr      x0, [x21]                             
+0102D2C8  ldr      x8, [x0, #0xb8]                       
+0102D2CC  add      x0, sp, #0xc                          
+0102D2D0  mov      x1, xzr                               
+0102D2D4  ldr      w8, [x8]                              
+0102D2D8  sub      w8, w8, #0x226                        
+0102D2DC  str      w8, [sp, #0xc]                        
+0102D2E0  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D2E4  adrp     x8, #0x236b000                        
+0102D2E8  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D2EC  mov      x1, x0                                
+0102D2F0  mov      x2, xzr                               
+0102D2F4  ldr      x8, [x8]                              
+0102D2F8  mov      x0, x8                                
+0102D2FC  bl       #0x1958280                             // System.String$$Concat
+0102D300  str      x0, [x19, #0x28]                       // self.texto
+0102D304  ldr      x8, [x20]                             
+0102D308  ldr      x8, [x8, #0xb8]                       
+0102D30C  ldr      w8, [x8]                              
+0102D310  cmp      w8, #0xd                              
+0102D314  b.ne     #0x102d37c                            
+0102D318  adrp     x21, #0x236a000                       
+0102D31C  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D320  ldr      x0, [x21]                             
+0102D324  ldr      w8, [x0, #0xe0]                       
+0102D328  cbnz     w8, #0x102d334                        
+0102D32C  bl       #0xe61c80                             
+0102D330  ldr      x0, [x21]                             
+0102D334  ldr      x8, [x0, #0xb8]                       
+0102D338  add      x0, sp, #0xc                          
+0102D33C  mov      x1, xzr                               
+0102D340  ldr      w8, [x8]                              
+0102D344  sub      w8, w8, #0x258                        
+0102D348  str      w8, [sp, #0xc]                        
+0102D34C  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D350  adrp     x8, #0x236b000                        
+0102D354  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D358  mov      x1, x0                                
+0102D35C  mov      x2, xzr                               
+0102D360  ldr      x8, [x8]                              
+0102D364  mov      x0, x8                                
+0102D368  bl       #0x1958280                             // System.String$$Concat
+0102D36C  str      x0, [x19, #0x28]                       // self.texto
+0102D370  ldr      x8, [x20]                             
+0102D374  ldr      x8, [x8, #0xb8]                       
+0102D378  ldr      w8, [x8]                              
+0102D37C  cmp      w8, #0xe                              
+0102D380  b.ne     #0x102d3e8                            
+0102D384  adrp     x21, #0x236a000                       
+0102D388  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D38C  ldr      x0, [x21]                             
+0102D390  ldr      w8, [x0, #0xe0]                       
+0102D394  cbnz     w8, #0x102d3a0                        
+0102D398  bl       #0xe61c80                             
+0102D39C  ldr      x0, [x21]                             
+0102D3A0  ldr      x8, [x0, #0xb8]                       
+0102D3A4  add      x0, sp, #0xc                          
+0102D3A8  mov      x1, xzr                               
+0102D3AC  ldr      w8, [x8]                              
+0102D3B0  sub      w8, w8, #0x28a                        
+0102D3B4  str      w8, [sp, #0xc]                        
+0102D3B8  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D3BC  adrp     x8, #0x236b000                        
+0102D3C0  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D3C4  mov      x1, x0                                
+0102D3C8  mov      x2, xzr                               
+0102D3CC  ldr      x8, [x8]                              
+0102D3D0  mov      x0, x8                                
+0102D3D4  bl       #0x1958280                             // System.String$$Concat
+0102D3D8  str      x0, [x19, #0x28]                       // self.texto
+0102D3DC  ldr      x8, [x20]                             
+0102D3E0  ldr      x8, [x8, #0xb8]                       
+0102D3E4  ldr      w8, [x8]                              
+0102D3E8  cmp      w8, #0xf                              
+0102D3EC  b.ne     #0x102d454                            
+0102D3F0  adrp     x21, #0x236a000                       
+0102D3F4  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D3F8  ldr      x0, [x21]                             
+0102D3FC  ldr      w8, [x0, #0xe0]                       
+0102D400  cbnz     w8, #0x102d40c                        
+0102D404  bl       #0xe61c80                             
+0102D408  ldr      x0, [x21]                             
+0102D40C  ldr      x8, [x0, #0xb8]                       
+0102D410  add      x0, sp, #0xc                          
+0102D414  mov      x1, xzr                               
+0102D418  ldr      w8, [x8]                              
+0102D41C  sub      w8, w8, #0x2bc                        
+0102D420  str      w8, [sp, #0xc]                        
+0102D424  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D428  adrp     x8, #0x236b000                        
+0102D42C  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D430  mov      x1, x0                                
+0102D434  mov      x2, xzr                               
+0102D438  ldr      x8, [x8]                              
+0102D43C  mov      x0, x8                                
+0102D440  bl       #0x1958280                             // System.String$$Concat
+0102D444  str      x0, [x19, #0x28]                       // self.texto
+0102D448  ldr      x8, [x20]                             
+0102D44C  ldr      x8, [x8, #0xb8]                       
+0102D450  ldr      w8, [x8]                              
+0102D454  cmp      w8, #0x10                             
+0102D458  b.ne     #0x102d4c0                            
+0102D45C  adrp     x21, #0x236a000                       
+0102D460  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D464  ldr      x0, [x21]                             
+0102D468  ldr      w8, [x0, #0xe0]                       
+0102D46C  cbnz     w8, #0x102d478                        
+0102D470  bl       #0xe61c80                             
+0102D474  ldr      x0, [x21]                             
+0102D478  ldr      x8, [x0, #0xb8]                       
+0102D47C  add      x0, sp, #0xc                          
+0102D480  mov      x1, xzr                               
+0102D484  ldr      w8, [x8]                              
+0102D488  sub      w8, w8, #0x2ee                        
+0102D48C  str      w8, [sp, #0xc]                        
+0102D490  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D494  adrp     x8, #0x236b000                        
+0102D498  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D49C  mov      x1, x0                                
+0102D4A0  mov      x2, xzr                               
+0102D4A4  ldr      x8, [x8]                              
+0102D4A8  mov      x0, x8                                
+0102D4AC  bl       #0x1958280                             // System.String$$Concat
+0102D4B0  str      x0, [x19, #0x28]                       // self.texto
+0102D4B4  ldr      x8, [x20]                             
+0102D4B8  ldr      x8, [x8, #0xb8]                       
+0102D4BC  ldr      w8, [x8]                              
+0102D4C0  cmp      w8, #0x11                             
+0102D4C4  b.ne     #0x102d52c                            
+0102D4C8  adrp     x21, #0x236a000                       
+0102D4CC  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D4D0  ldr      x0, [x21]                             
+0102D4D4  ldr      w8, [x0, #0xe0]                       
+0102D4D8  cbnz     w8, #0x102d4e4                        
+0102D4DC  bl       #0xe61c80                             
+0102D4E0  ldr      x0, [x21]                             
+0102D4E4  ldr      x8, [x0, #0xb8]                       
+0102D4E8  add      x0, sp, #0xc                          
+0102D4EC  mov      x1, xzr                               
+0102D4F0  ldr      w8, [x8]                              
+0102D4F4  sub      w8, w8, #0x3e8                        
+0102D4F8  str      w8, [sp, #0xc]                        
+0102D4FC  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D500  adrp     x8, #0x236b000                        
+0102D504  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D508  mov      x1, x0                                
+0102D50C  mov      x2, xzr                               
+0102D510  ldr      x8, [x8]                              
+0102D514  mov      x0, x8                                
+0102D518  bl       #0x1958280                             // System.String$$Concat
+0102D51C  str      x0, [x19, #0x28]                       // self.texto
+0102D520  ldr      x8, [x20]                             
+0102D524  ldr      x8, [x8, #0xb8]                       
+0102D528  ldr      w8, [x8]                              
+0102D52C  cmp      w8, #0x14                             
+0102D530  b.ne     #0x102d598                            
+0102D534  adrp     x21, #0x236a000                       
+0102D538  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D53C  ldr      x0, [x21]                             
+0102D540  ldr      w8, [x0, #0xe0]                       
+0102D544  cbnz     w8, #0x102d550                        
+0102D548  bl       #0xe61c80                             
+0102D54C  ldr      x0, [x21]                             
+0102D550  ldr      x8, [x0, #0xb8]                       
+0102D554  add      x0, sp, #0xc                          
+0102D558  mov      x1, xzr                               
+0102D55C  ldr      w8, [x8]                              
+0102D560  sub      w8, w8, #0x41a                        
+0102D564  str      w8, [sp, #0xc]                        
+0102D568  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D56C  adrp     x8, #0x236b000                        
+0102D570  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D574  mov      x1, x0                                
+0102D578  mov      x2, xzr                               
+0102D57C  ldr      x8, [x8]                              
+0102D580  mov      x0, x8                                
+0102D584  bl       #0x1958280                             // System.String$$Concat
+0102D588  str      x0, [x19, #0x28]                       // self.texto
+0102D58C  ldr      x8, [x20]                             
+0102D590  ldr      x8, [x8, #0xb8]                       
+0102D594  ldr      w8, [x8]                              
+0102D598  cmp      w8, #0x15                             
+0102D59C  b.ne     #0x102d604                            
+0102D5A0  adrp     x21, #0x236a000                       
+0102D5A4  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D5A8  ldr      x0, [x21]                             
+0102D5AC  ldr      w8, [x0, #0xe0]                       
+0102D5B0  cbnz     w8, #0x102d5bc                        
+0102D5B4  bl       #0xe61c80                             
+0102D5B8  ldr      x0, [x21]                             
+0102D5BC  ldr      x8, [x0, #0xb8]                       
+0102D5C0  add      x0, sp, #0xc                          
+0102D5C4  mov      x1, xzr                               
+0102D5C8  ldr      w8, [x8]                              
+0102D5CC  sub      w8, w8, #0x44c                        
+0102D5D0  str      w8, [sp, #0xc]                        
+0102D5D4  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D5D8  adrp     x8, #0x236b000                        
+0102D5DC  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D5E0  mov      x1, x0                                
+0102D5E4  mov      x2, xzr                               
+0102D5E8  ldr      x8, [x8]                              
+0102D5EC  mov      x0, x8                                
+0102D5F0  bl       #0x1958280                             // System.String$$Concat
+0102D5F4  str      x0, [x19, #0x28]                       // self.texto
+0102D5F8  ldr      x8, [x20]                             
+0102D5FC  ldr      x8, [x8, #0xb8]                       
+0102D600  ldr      w8, [x8]                              
+0102D604  cmp      w8, #0x16                             
+0102D608  b.ne     #0x102d670                            
+0102D60C  adrp     x21, #0x236a000                       
+0102D610  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D614  ldr      x0, [x21]                             
+0102D618  ldr      w8, [x0, #0xe0]                       
+0102D61C  cbnz     w8, #0x102d628                        
+0102D620  bl       #0xe61c80                             
+0102D624  ldr      x0, [x21]                             
+0102D628  ldr      x8, [x0, #0xb8]                       
+0102D62C  add      x0, sp, #0xc                          
+0102D630  mov      x1, xzr                               
+0102D634  ldr      w8, [x8]                              
+0102D638  sub      w8, w8, #0x47e                        
+0102D63C  str      w8, [sp, #0xc]                        
+0102D640  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D644  adrp     x8, #0x236b000                        
+0102D648  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D64C  mov      x1, x0                                
+0102D650  mov      x2, xzr                               
+0102D654  ldr      x8, [x8]                              
+0102D658  mov      x0, x8                                
+0102D65C  bl       #0x1958280                             // System.String$$Concat
+0102D660  str      x0, [x19, #0x28]                       // self.texto
+0102D664  ldr      x8, [x20]                             
+0102D668  ldr      x8, [x8, #0xb8]                       
+0102D66C  ldr      w8, [x8]                              
+0102D670  cmp      w8, #0x17                             
+0102D674  b.ne     #0x102d6dc                            
+0102D678  adrp     x21, #0x236a000                       
+0102D67C  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D680  ldr      x0, [x21]                             
+0102D684  ldr      w8, [x0, #0xe0]                       
+0102D688  cbnz     w8, #0x102d694                        
+0102D68C  bl       #0xe61c80                             
+0102D690  ldr      x0, [x21]                             
+0102D694  ldr      x8, [x0, #0xb8]                       
+0102D698  add      x0, sp, #0xc                          
+0102D69C  mov      x1, xzr                               
+0102D6A0  ldr      w8, [x8]                              
+0102D6A4  sub      w8, w8, #0x4b0                        
+0102D6A8  str      w8, [sp, #0xc]                        
+0102D6AC  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D6B0  adrp     x8, #0x236b000                        
+0102D6B4  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D6B8  mov      x1, x0                                
+0102D6BC  mov      x2, xzr                               
+0102D6C0  ldr      x8, [x8]                              
+0102D6C4  mov      x0, x8                                
+0102D6C8  bl       #0x1958280                             // System.String$$Concat
+0102D6CC  str      x0, [x19, #0x28]                       // self.texto
+0102D6D0  ldr      x8, [x20]                             
+0102D6D4  ldr      x8, [x8, #0xb8]                       
+0102D6D8  ldr      w8, [x8]                              
+0102D6DC  cmp      w8, #0x20                             
+0102D6E0  b.ne     #0x102d748                            
+0102D6E4  adrp     x21, #0x236a000                       
+0102D6E8  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D6EC  ldr      x0, [x21]                             
+0102D6F0  ldr      w8, [x0, #0xe0]                       
+0102D6F4  cbnz     w8, #0x102d700                        
+0102D6F8  bl       #0xe61c80                             
+0102D6FC  ldr      x0, [x21]                             
+0102D700  ldr      x8, [x0, #0xb8]                       
+0102D704  add      x0, sp, #0xc                          
+0102D708  mov      x1, xzr                               
+0102D70C  ldr      w8, [x8]                              
+0102D710  sub      w8, w8, #0x672                        
+0102D714  str      w8, [sp, #0xc]                        
+0102D718  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D71C  adrp     x8, #0x236b000                        
+0102D720  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D724  mov      x1, x0                                
+0102D728  mov      x2, xzr                               
+0102D72C  ldr      x8, [x8]                              
+0102D730  mov      x0, x8                                
+0102D734  bl       #0x1958280                             // System.String$$Concat
+0102D738  str      x0, [x19, #0x28]                       // self.texto
+0102D73C  ldr      x8, [x20]                             
+0102D740  ldr      x8, [x8, #0xb8]                       
+0102D744  ldr      w8, [x8]                              
+0102D748  cmp      w8, #0x21                             
+0102D74C  b.ne     #0x102d7b4                            
+0102D750  adrp     x21, #0x236a000                       
+0102D754  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D758  ldr      x0, [x21]                             
+0102D75C  ldr      w8, [x0, #0xe0]                       
+0102D760  cbnz     w8, #0x102d76c                        
+0102D764  bl       #0xe61c80                             
+0102D768  ldr      x0, [x21]                             
+0102D76C  ldr      x8, [x0, #0xb8]                       
+0102D770  add      x0, sp, #0xc                          
+0102D774  mov      x1, xzr                               
+0102D778  ldr      w8, [x8]                              
+0102D77C  sub      w8, w8, #0x6a4                        
+0102D780  str      w8, [sp, #0xc]                        
+0102D784  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D788  adrp     x8, #0x236b000                        
+0102D78C  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D790  mov      x1, x0                                
+0102D794  mov      x2, xzr                               
+0102D798  ldr      x8, [x8]                              
+0102D79C  mov      x0, x8                                
+0102D7A0  bl       #0x1958280                             // System.String$$Concat
+0102D7A4  str      x0, [x19, #0x28]                       // self.texto
+0102D7A8  ldr      x8, [x20]                             
+0102D7AC  ldr      x8, [x8, #0xb8]                       
+0102D7B0  ldr      w8, [x8]                              
+0102D7B4  cmp      w8, #0x22                             
+0102D7B8  b.ne     #0x102d820                            
+0102D7BC  adrp     x21, #0x236a000                       
+0102D7C0  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D7C4  ldr      x0, [x21]                             
+0102D7C8  ldr      w8, [x0, #0xe0]                       
+0102D7CC  cbnz     w8, #0x102d7d8                        
+0102D7D0  bl       #0xe61c80                             
+0102D7D4  ldr      x0, [x21]                             
+0102D7D8  ldr      x8, [x0, #0xb8]                       
+0102D7DC  add      x0, sp, #0xc                          
+0102D7E0  mov      x1, xzr                               
+0102D7E4  ldr      w8, [x8]                              
+0102D7E8  sub      w8, w8, #0x6d6                        
+0102D7EC  str      w8, [sp, #0xc]                        
+0102D7F0  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D7F4  adrp     x8, #0x236b000                        
+0102D7F8  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D7FC  mov      x1, x0                                
+0102D800  mov      x2, xzr                               
+0102D804  ldr      x8, [x8]                              
+0102D808  mov      x0, x8                                
+0102D80C  bl       #0x1958280                             // System.String$$Concat
+0102D810  str      x0, [x19, #0x28]                       // self.texto
+0102D814  ldr      x8, [x20]                             
+0102D818  ldr      x8, [x8, #0xb8]                       
+0102D81C  ldr      w8, [x8]                              
+0102D820  cmp      w8, #0x23                             
+0102D824  b.ne     #0x102d88c                            
+0102D828  adrp     x21, #0x236a000                       
+0102D82C  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D830  ldr      x0, [x21]                             
+0102D834  ldr      w8, [x0, #0xe0]                       
+0102D838  cbnz     w8, #0x102d844                        
+0102D83C  bl       #0xe61c80                             
+0102D840  ldr      x0, [x21]                             
+0102D844  ldr      x8, [x0, #0xb8]                       
+0102D848  add      x0, sp, #0xc                          
+0102D84C  mov      x1, xzr                               
+0102D850  ldr      w8, [x8]                              
+0102D854  sub      w8, w8, #0x708                        
+0102D858  str      w8, [sp, #0xc]                        
+0102D85C  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D860  adrp     x8, #0x236b000                        
+0102D864  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D868  mov      x1, x0                                
+0102D86C  mov      x2, xzr                               
+0102D870  ldr      x8, [x8]                              
+0102D874  mov      x0, x8                                
+0102D878  bl       #0x1958280                             // System.String$$Concat
+0102D87C  str      x0, [x19, #0x28]                       // self.texto
+0102D880  ldr      x8, [x20]                             
+0102D884  ldr      x8, [x8, #0xb8]                       
+0102D888  ldr      w8, [x8]                              
+0102D88C  cmp      w8, #0x24                             
+0102D890  b.ne     #0x102d8f8                            
+0102D894  adrp     x21, #0x236a000                       
+0102D898  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D89C  ldr      x0, [x21]                             
+0102D8A0  ldr      w8, [x0, #0xe0]                       
+0102D8A4  cbnz     w8, #0x102d8b0                        
+0102D8A8  bl       #0xe61c80                             
+0102D8AC  ldr      x0, [x21]                             
+0102D8B0  ldr      x8, [x0, #0xb8]                       
+0102D8B4  add      x0, sp, #0xc                          
+0102D8B8  mov      x1, xzr                               
+0102D8BC  ldr      w8, [x8]                              
+0102D8C0  sub      w8, w8, #0x73a                        
+0102D8C4  str      w8, [sp, #0xc]                        
+0102D8C8  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D8CC  adrp     x8, #0x236b000                        
+0102D8D0  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D8D4  mov      x1, x0                                
+0102D8D8  mov      x2, xzr                               
+0102D8DC  ldr      x8, [x8]                              
+0102D8E0  mov      x0, x8                                
+0102D8E4  bl       #0x1958280                             // System.String$$Concat
+0102D8E8  str      x0, [x19, #0x28]                       // self.texto
+0102D8EC  ldr      x8, [x20]                             
+0102D8F0  ldr      x8, [x8, #0xb8]                       
+0102D8F4  ldr      w8, [x8]                              
+0102D8F8  cmp      w8, #0x25                             
+0102D8FC  b.ne     #0x102d964                            
+0102D900  adrp     x21, #0x236a000                       
+0102D904  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D908  ldr      x0, [x21]                             
+0102D90C  ldr      w8, [x0, #0xe0]                       
+0102D910  cbnz     w8, #0x102d91c                        
+0102D914  bl       #0xe61c80                             
+0102D918  ldr      x0, [x21]                             
+0102D91C  ldr      x8, [x0, #0xb8]                       
+0102D920  add      x0, sp, #0xc                          
+0102D924  mov      x1, xzr                               
+0102D928  ldr      w8, [x8]                              
+0102D92C  sub      w8, w8, #0x76c                        
+0102D930  str      w8, [sp, #0xc]                        
+0102D934  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D938  adrp     x8, #0x236b000                        
+0102D93C  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D940  mov      x1, x0                                
+0102D944  mov      x2, xzr                               
+0102D948  ldr      x8, [x8]                              
+0102D94C  mov      x0, x8                                
+0102D950  bl       #0x1958280                             // System.String$$Concat
+0102D954  str      x0, [x19, #0x28]                       // self.texto
+0102D958  ldr      x8, [x20]                             
+0102D95C  ldr      x8, [x8, #0xb8]                       
+0102D960  ldr      w8, [x8]                              
+0102D964  cmp      w8, #0x26                             
+0102D968  b.ne     #0x102d9d0                            
+0102D96C  adrp     x21, #0x236a000                       
+0102D970  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D974  ldr      x0, [x21]                             
+0102D978  ldr      w8, [x0, #0xe0]                       
+0102D97C  cbnz     w8, #0x102d988                        
+0102D980  bl       #0xe61c80                             
+0102D984  ldr      x0, [x21]                             
+0102D988  ldr      x8, [x0, #0xb8]                       
+0102D98C  add      x0, sp, #0xc                          
+0102D990  mov      x1, xzr                               
+0102D994  ldr      w8, [x8]                              
+0102D998  sub      w8, w8, #0x79e                        
+0102D99C  str      w8, [sp, #0xc]                        
+0102D9A0  bl       #0x1ab3994                             // System.Int32$$ToString
+0102D9A4  adrp     x8, #0x236b000                        
+0102D9A8  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102D9AC  mov      x1, x0                                
+0102D9B0  mov      x2, xzr                               
+0102D9B4  ldr      x8, [x8]                              
+0102D9B8  mov      x0, x8                                
+0102D9BC  bl       #0x1958280                             // System.String$$Concat
+0102D9C0  str      x0, [x19, #0x28]                       // self.texto
+0102D9C4  ldr      x8, [x20]                             
+0102D9C8  ldr      x8, [x8, #0xb8]                       
+0102D9CC  ldr      w8, [x8]                              
+0102D9D0  cmp      w8, #0x27                             
+0102D9D4  b.ne     #0x102da30                            
+0102D9D8  adrp     x20, #0x236a000                       
+0102D9DC  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102D9E0  ldr      x0, [x20]                             
+0102D9E4  ldr      w8, [x0, #0xe0]                       
+0102D9E8  cbnz     w8, #0x102d9f4                        
+0102D9EC  bl       #0xe61c80                             
+0102D9F0  ldr      x0, [x20]                             
+0102D9F4  ldr      x8, [x0, #0xb8]                       
+0102D9F8  add      x0, sp, #0xc                          
+0102D9FC  mov      x1, xzr                               
+0102DA00  ldr      w8, [x8]                              
+0102DA04  sub      w8, w8, #0x7d0                        
+0102DA08  str      w8, [sp, #0xc]                        
+0102DA0C  bl       #0x1ab3994                             // System.Int32$$ToString
+0102DA10  adrp     x8, #0x236b000                        
+0102DA14  ldr      x8, [x8, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102DA18  mov      x1, x0                                
+0102DA1C  mov      x2, xzr                               
+0102DA20  ldr      x8, [x8]                              
+0102DA24  mov      x0, x8                                
+0102DA28  bl       #0x1958280                             // System.String$$Concat
+0102DA2C  str      x0, [x19, #0x28]                       // self.texto
+0102DA30  ldr      x0, [x19, #0x20]                       // self.texto1
+0102DA34  cbz      x0, #0x102da5c                        
+0102DA38  ldr      x8, [x0]                              
+0102DA3C  ldr      x1, [x19, #0x28]                       // self.texto
+0102DA40  ldr      x9, [x8, #0x5e8]                      
+0102DA44  ldr      x2, [x8, #0x5f0]                      
+0102DA48  blr      x9                                    
+0102DA4C  ldp      x20, x19, [sp, #0x20]                 
+0102DA50  ldp      x30, x21, [sp, #0x10]                 
+0102DA54  add      sp, sp, #0x30                         
+0102DA58  ret                                            
+0102DA5C  bl       #0xe61da0                             

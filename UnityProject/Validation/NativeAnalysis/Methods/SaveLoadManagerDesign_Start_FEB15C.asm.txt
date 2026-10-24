@@ -1,0 +1,40 @@
+// SaveLoadManagerDesign$$Start VA 0xFEB15C, inferred length 152
+void SaveLoadManagerDesign__Start (SaveLoadManagerDesign_o* __this, const MethodInfo* method);
+00FEB15C  stp      x30, x21, [sp, #-0x20]!               
+00FEB160  stp      x20, x19, [sp, #0x10]                 
+00FEB164  adrp     x21, #0x24fb000                       
+00FEB168  adrp     x20, #0x236a000                       
+00FEB16C  ldrb     w8, [x21, #0xbde]                     
+00FEB170  ldr      x20, [x20, #0x620]                     // [0x236A620] UIManagerSelScript_TypeInfo
+00FEB174  mov      x19, x0                               
+00FEB178  tbnz     w8, #0, #0xfeb19c                     
+00FEB17C  adrp     x0, #0x236a000                        
+00FEB180  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+00FEB184  bl       #0xe61b78                             
+00FEB188  adrp     x0, #0x236a000                        
+00FEB18C  ldr      x0, [x0, #0x620]                       // [0x236A620] UIManagerSelScript_TypeInfo
+00FEB190  bl       #0xe61b78                             
+00FEB194  mov      w8, #1                                
+00FEB198  strb     w8, [x21, #0xbde]                     
+00FEB19C  str      wzr, [x19, #0x48]                      // self.contadorFuentes
+00FEB1A0  ldr      x8, [x20]                             
+00FEB1A4  adrp     x20, #0x236a000                       
+00FEB1A8  mov      x0, x19                               
+00FEB1AC  ldr      x8, [x8, #0xb8]                       
+00FEB1B0  ldr      w8, [x8, #4]                          
+00FEB1B4  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+00FEB1B8  cbz      w8, #0xfeb1c4                         
+00FEB1BC  bl       #0xfeb88c                              // SaveLoadManagerDesign$$doCargarEscenaSolucion
+00FEB1C0  b        #0xfeb1c8                             
+00FEB1C4  bl       #0xfeb1f4                              // SaveLoadManagerDesign$$doCargarEscena
+00FEB1C8  ldr      x0, [x20]                             
+00FEB1CC  ldr      w19, [x19, #0x48]                      // self.contadorFuentes
+00FEB1D0  ldr      w8, [x0, #0xe0]                       
+00FEB1D4  cbnz     w8, #0xfeb1e0                         
+00FEB1D8  bl       #0xe61c80                             
+00FEB1DC  ldr      x0, [x20]                             
+00FEB1E0  ldr      x8, [x0, #0xb8]                       
+00FEB1E4  str      w19, [x8, #0x10]                      
+00FEB1E8  ldp      x20, x19, [sp, #0x10]                 
+00FEB1EC  ldp      x30, x21, [sp], #0x20                 
+00FEB1F0  ret                                            

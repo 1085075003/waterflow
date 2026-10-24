@@ -1,0 +1,70 @@
+// CascadaTestE$$doCheckConfig VA 0xFDA2A0, inferred length 272
+void CascadaTestE__doCheckConfig (CascadaTestE_o* __this, const MethodInfo* method);
+00FDA2A0  str      x30, [sp, #-0x20]!                    
+00FDA2A4  stp      x20, x19, [sp, #0x10]                 
+00FDA2A8  adrp     x20, #0x24fb000                       
+00FDA2AC  ldrb     w8, [x20, #0xb8a]                     
+00FDA2B0  mov      x19, x0                               
+00FDA2B4  tbnz     w8, #0, #0xfda2cc                     
+00FDA2B8  adrp     x0, #0x2368000                        
+00FDA2BC  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FDA2C0  bl       #0xe61b78                             
+00FDA2C4  mov      w8, #1                                
+00FDA2C8  strb     w8, [x20, #0xb8a]                     
+00FDA2CC  mov      x0, x19                               
+00FDA2D0  bl       #0xfdaf3c                              // CascadaTestE$$getEstadoChorro
+00FDA2D4  ldr      w9, [x19, #0x1c8]                      // self.estadoRes_old
+00FDA2D8  ldr      w8, [x19, #0x1cc]                      // self.estadoRes
+00FDA2DC  strb     wzr, [x19, #0x1d0]                     // self.cambioRes
+00FDA2E0  cmp      w9, w8                                
+00FDA2E4  b.eq     #0xfda3a0                             
+00FDA2E8  cmp      w8, #1                                
+00FDA2EC  b.ne     #0xfda2f8                             
+00FDA2F0  ldr      q0, [x19, #0x60]                       // self.pitR1
+00FDA2F4  b        #0xfda2fc                             
+00FDA2F8  ldr      q0, [x19, #0x40]                       // self.pitIni1
+00FDA2FC  str      q0, [x19, #0x50]                       // self.pit1
+00FDA300  adrp     x8, #0x2368000                        
+00FDA304  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FDA308  ldr      x20, [x19, #0xa0]                      // self.esferaChorro
+00FDA30C  ldr      x0, [x8]                              
+00FDA310  ldr      w8, [x0, #0xe0]                       
+00FDA314  cbnz     w8, #0xfda31c                         
+00FDA318  bl       #0xe61c80                             
+00FDA31C  mov      x0, x20                               
+00FDA320  mov      x1, xzr                               
+00FDA324  mov      x2, xzr                               
+00FDA328  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FDA32C  tbz      w0, #0, #0xfda344                     
+00FDA330  ldr      x0, [x19, #0xa0]                       // self.esferaChorro
+00FDA334  cbz      x0, #0xfda3ac                         
+00FDA338  mov      w1, wzr                               
+00FDA33C  mov      x2, xzr                               
+00FDA340  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FDA344  mov      x0, x19                               
+00FDA348  bl       #0xfdb0cc                              // CascadaTestE$$doAsignarValores
+00FDA34C  ldr      x0, [x19, #0x80]                       // self.Chorro
+00FDA350  cbz      x0, #0xfda3ac                         
+00FDA354  mov      x1, xzr                               
+00FDA358  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FDA35C  adrp     x8, #0x5ff000                         
+00FDA360  ldr      s0, [x19, #0x150]                      // self.rotacion
+00FDA364  ldr      s1, [x8, #0xd64]                      
+00FDA368  mov      x20, x0                               
+00FDA36C  fmov     s2, wzr                               
+00FDA370  mov      x0, xzr                               
+00FDA374  fmul     s1, s0, s1                            
+00FDA378  fmov     s0, wzr                               
+00FDA37C  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FDA380  cbz      x20, #0xfda3ac                        
+00FDA384  mov      x0, x20                               
+00FDA388  mov      x1, xzr                               
+00FDA38C  bl       #0x200edcc                             // UnityEngine.Transform$$set_localRotation
+00FDA390  ldr      w8, [x19, #0x1cc]                      // self.estadoRes
+00FDA394  mov      w9, #1                                
+00FDA398  strb     w9, [x19, #0x1d0]                      // self.cambioRes
+00FDA39C  str      w8, [x19, #0x1c8]                      // self.estadoRes_old
+00FDA3A0  ldp      x20, x19, [sp, #0x10]                 
+00FDA3A4  ldr      x30, [sp], #0x20                      
+00FDA3A8  ret                                            
+00FDA3AC  bl       #0xe61da0                             

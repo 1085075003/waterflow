@@ -1,0 +1,104 @@
+// SaveLoadManager$$doRecuperarSoluciones VA 0x1014448, inferred length 408
+void SaveLoadManager__doRecuperarSoluciones (SaveLoadManager_o* __this, const MethodInfo* method);
+01014448  str      x30, [sp, #-0x30]!                    
+0101444C  stp      x22, x21, [sp, #0x10]                 
+01014450  stp      x20, x19, [sp, #0x20]                 
+01014454  adrp     x21, #0x24fb000                       
+01014458  adrp     x22, #0x236b000                       
+0101445C  adrp     x20, #0x236b000                       
+01014460  ldrb     w8, [x21, #0xcb0]                     
+01014464  ldr      x22, [x22, #0x88]                      // [0x236B088] 'NumSoluciones'
+01014468  ldr      x20, [x20, #0x4f0]                     // [0x236B4F0] SaveLoadManager_TypeInfo
+0101446C  mov      x19, x0                               
+01014470  tbnz     w8, #0, #0x10144c4                    
+01014474  adrp     x0, #0x236a000                        
+01014478  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0101447C  bl       #0xe61b78                             
+01014480  adrp     x0, #0x236b000                        
+01014484  ldr      x0, [x0, #0x530]                       // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+01014488  bl       #0xe61b78                             
+0101448C  adrp     x0, #0x236b000                        
+01014490  ldr      x0, [x0, #0x4f0]                       // [0x236B4F0] SaveLoadManager_TypeInfo
+01014494  bl       #0xe61b78                             
+01014498  adrp     x0, #0x236b000                        
+0101449C  ldr      x0, [x0, #0x88]                        // [0x236B088] 'NumSoluciones'
+010144A0  bl       #0xe61b78                             
+010144A4  adrp     x0, #0x236b000                        
+010144A8  ldr      x0, [x0, #0x538]                       // [0x236B538] 'Sol'
+010144AC  bl       #0xe61b78                             
+010144B0  adrp     x0, #0x2368000                        
+010144B4  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+010144B8  bl       #0xe61b78                             
+010144BC  mov      w8, #1                                
+010144C0  strb     w8, [x21, #0xcb0]                     
+010144C4  ldr      x0, [x22]                             
+010144C8  mov      w1, #6                                
+010144CC  mov      x2, xzr                               
+010144D0  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+010144D4  ldr      x8, [x20]                             
+010144D8  mov      x1, xzr                               
+010144DC  ldr      x8, [x8, #0xb8]                       
+010144E0  str      w0, [x8]                              
+010144E4  ldr      x20, [x19, #0x90]                      // self.textNumS
+010144E8  mov      x0, x8                                
+010144EC  bl       #0x1ab3994                             // System.Int32$$ToString
+010144F0  cbz      x20, #0x10145dc                       
+010144F4  adrp     x9, #0x2368000                        
+010144F8  ldr      x8, [x20]                             
+010144FC  ldr      x9, [x9, #0xf50]                       // [0x2368F50] ''
+01014500  adrp     x22, #0x236a000                       
+01014504  ldr      x22, [x22, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01014508  ldr      x10, [x8, #0x5e8]                     
+0101450C  ldr      x9, [x9]                              
+01014510  ldr      x2, [x8, #0x5f0]                      
+01014514  adrp     x21, #0x236b000                       
+01014518  ldr      x21, [x21, #0x538]                     // [0x236B538] 'Sol'
+0101451C  cmp      x0, #0                                
+01014520  csel     x1, x9, x0, eq                        
+01014524  mov      x0, x20                               
+01014528  blr      x10                                   
+0101452C  ldr      x0, [x22]                             
+01014530  ldr      w8, [x0, #0xe0]                       
+01014534  cbnz     w8, #0x1014540                        
+01014538  bl       #0xe61c80                             
+0101453C  ldr      x0, [x22]                             
+01014540  ldr      x0, [x0, #0xb8]                       
+01014544  mov      x1, xzr                               
+01014548  bl       #0x1ab3994                             // System.Int32$$ToString
+0101454C  ldr      x8, [x21]                             
+01014550  mov      x1, x0                                
+01014554  mov      x2, xzr                               
+01014558  mov      x0, x8                                
+0101455C  bl       #0x1958280                             // System.String$$Concat
+01014560  mov      w1, wzr                               
+01014564  mov      x2, xzr                               
+01014568  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+0101456C  cmp      w0, #1                                
+01014570  str      w0, [x19, #0x100]                      // self.solucionadoAntes
+01014574  b.ne     #0x10145cc                            
+01014578  ldr      x0, [x19, #0xa0]                       // self.solutionButton
+0101457C  cbz      x0, #0x10145dc                        
+01014580  adrp     x8, #0x236b000                        
+01014584  ldr      x8, [x8, #0x530]                       // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+01014588  ldr      x1, [x8]                              
+0101458C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01014590  cbz      x0, #0x10145dc                        
+01014594  ldr      x8, [x0]                              
+01014598  adrp     x9, #0x5ff000                         
+0101459C  adrp     x10, #0x5ff000                        
+010145A0  adrp     x11, #0x5ff000                        
+010145A4  ldr      s0, [x9, #0xd80]                      
+010145A8  ldr      s1, [x10, #0xe4c]                     
+010145AC  ldr      x2, [x8, #0x2a8]                      
+010145B0  ldr      x1, [x8, #0x2b0]                      
+010145B4  ldr      s2, [x11, #0xfe4]                     
+010145B8  ldp      x20, x19, [sp, #0x20]                 
+010145BC  ldp      x22, x21, [sp, #0x10]                 
+010145C0  fmov     s3, #1.00000000                       
+010145C4  ldr      x30, [sp], #0x30                      
+010145C8  br       x2                                    
+010145CC  ldp      x20, x19, [sp, #0x20]                 
+010145D0  ldp      x22, x21, [sp, #0x10]                 
+010145D4  ldr      x30, [sp], #0x30                      
+010145D8  ret                                            
+010145DC  bl       #0xe61da0                             

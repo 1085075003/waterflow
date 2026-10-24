@@ -1,0 +1,243 @@
+// ObservadorResorte$$Update VA 0x10C80D0, inferred length 964
+void ObservadorResorte__Update (ObservadorResorte_o* __this, const MethodInfo* method);
+010C80D0  str      x30, [sp, #-0x40]!                    
+010C80D4  stp      x24, x23, [sp, #0x10]                 
+010C80D8  stp      x22, x21, [sp, #0x20]                 
+010C80DC  stp      x20, x19, [sp, #0x30]                 
+010C80E0  adrp     x20, #0x24fb000                       
+010C80E4  adrp     x21, #0x236a000                       
+010C80E8  ldrb     w8, [x20, #0xff5]                     
+010C80EC  ldr      x21, [x21, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+010C80F0  mov      x19, x0                               
+010C80F4  tbnz     w8, #0, #0x10c816c                    
+010C80F8  adrp     x0, #0x236a000                        
+010C80FC  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C8100  bl       #0xe61b78                             
+010C8104  adrp     x0, #0x236a000                        
+010C8108  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+010C810C  bl       #0xe61b78                             
+010C8110  adrp     x0, #0x236a000                        
+010C8114  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+010C8118  bl       #0xe61b78                             
+010C811C  adrp     x0, #0x236a000                        
+010C8120  ldr      x0, [x0, #0x670]                       // [0x236A670] '6'
+010C8124  bl       #0xe61b78                             
+010C8128  adrp     x0, #0x236a000                        
+010C812C  ldr      x0, [x0, #0x6a0]                       // [0x236A6A0] '7'
+010C8130  bl       #0xe61b78                             
+010C8134  adrp     x0, #0x236a000                        
+010C8138  ldr      x0, [x0, #0x6a8]                       // [0x236A6A8] '4'
+010C813C  bl       #0xe61b78                             
+010C8140  adrp     x0, #0x236a000                        
+010C8144  ldr      x0, [x0, #0x798]                       // [0x236A798] '8'
+010C8148  bl       #0xe61b78                             
+010C814C  adrp     x0, #0x236a000                        
+010C8150  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+010C8154  bl       #0xe61b78                             
+010C8158  adrp     x0, #0x236a000                        
+010C815C  ldr      x0, [x0, #0x6f8]                       // [0x236A6F8] '5'
+010C8160  bl       #0xe61b78                             
+010C8164  mov      w8, #1                                
+010C8168  strb     w8, [x20, #0xff5]                     
+010C816C  ldr      x8, [x21]                             
+010C8170  adrp     x23, #0x236a000                       
+010C8174  adrp     x22, #0x236a000                       
+010C8178  adrp     x20, #0x236a000                       
+010C817C  ldr      x8, [x8, #0xb8]                       
+010C8180  ldrb     w9, [x8, #0x9d]                       
+010C8184  ldr      x23, [x23, #0x6e8]                     // [0x236A6E8] '1'
+010C8188  ldr      x22, [x22, #0x658]                     // [0x236A658] '2'
+010C818C  ldr      x20, [x20, #0x650]                     // [0x236A650] '3'
+010C8190  cbz      w9, #0x10c83f4                        
+010C8194  ldr      w9, [x8, #0x14]                       
+010C8198  str      w9, [x19, #0x330]                      // self.managerR1
+010C819C  ldr      w9, [x8, #0x18]                       
+010C81A0  str      w9, [x19, #0x338]                      // self.managerR2
+010C81A4  ldr      w9, [x8, #0x1c]                       
+010C81A8  str      w9, [x19, #0x340]                      // self.managerR3
+010C81AC  ldr      w9, [x8, #0x20]                       
+010C81B0  str      w9, [x19, #0x348]                      // self.managerR4
+010C81B4  ldr      w9, [x8, #0x24]                       
+010C81B8  str      w9, [x19, #0x350]                      // self.managerR5
+010C81BC  ldr      w9, [x8, #0x28]                       
+010C81C0  str      w9, [x19, #0x358]                      // self.managerR6
+010C81C4  ldr      w9, [x8, #0x2c]                       
+010C81C8  str      w9, [x19, #0x360]                      // self.managerR7
+010C81CC  ldr      w8, [x8, #0x30]                       
+010C81D0  ldrb     w9, [x19, #0x2d4]                      // self.sw_hayConResorte2
+010C81D4  str      w8, [x19, #0x368]                      // self.managerR8
+010C81D8  cbz      w9, #0x10c81ec                        
+010C81DC  ldrb     w8, [x19, #0x19c]                      // self.activadoResorte
+010C81E0  cbnz     w8, #0x10c81ec                        
+010C81E4  mov      x0, x19                               
+010C81E8  bl       #0x10c8494                             // ObservadorResorte$$doCambioResorte
+010C81EC  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C81F0  ldr      x1, [x23]                             
+010C81F4  mov      x2, xzr                               
+010C81F8  bl       #0x1960c7c                             // System.String$$op_Equality
+010C81FC  tbz      w0, #0, #0x10c8220                    
+010C8200  ldr      x8, [x21]                             
+010C8204  mov      x0, x19                               
+010C8208  ldr      x8, [x8, #0xb8]                       
+010C820C  ldr      w9, [x8, #0x14]                       
+010C8210  str      w9, [x19, #0x320]                      // self.managerResorte
+010C8214  ldr      w8, [x8, #0x7c]                       
+010C8218  str      w8, [x19, #0x328]                      // self.positionRes
+010C821C  bl       #0x10c8b30                             // ObservadorResorte$$doPrevio
+010C8220  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C8224  ldr      x1, [x22]                             
+010C8228  mov      x2, xzr                               
+010C822C  bl       #0x1960c7c                             // System.String$$op_Equality
+010C8230  tbz      w0, #0, #0x10c8254                    
+010C8234  ldr      x8, [x21]                             
+010C8238  mov      x0, x19                               
+010C823C  ldr      x8, [x8, #0xb8]                       
+010C8240  ldr      w9, [x8, #0x18]                       
+010C8244  str      w9, [x19, #0x320]                      // self.managerResorte
+010C8248  ldr      w8, [x8, #0x80]                       
+010C824C  str      w8, [x19, #0x328]                      // self.positionRes
+010C8250  bl       #0x10c8b30                             // ObservadorResorte$$doPrevio
+010C8254  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C8258  ldr      x1, [x20]                             
+010C825C  adrp     x24, #0x236a000                       
+010C8260  ldr      x24, [x24, #0x6a8]                     // [0x236A6A8] '4'
+010C8264  mov      x2, xzr                               
+010C8268  bl       #0x1960c7c                             // System.String$$op_Equality
+010C826C  tbz      w0, #0, #0x10c8290                    
+010C8270  ldr      x8, [x21]                             
+010C8274  mov      x0, x19                               
+010C8278  ldr      x8, [x8, #0xb8]                       
+010C827C  ldr      w9, [x8, #0x1c]                       
+010C8280  str      w9, [x19, #0x320]                      // self.managerResorte
+010C8284  ldr      w8, [x8, #0x84]                       
+010C8288  str      w8, [x19, #0x328]                      // self.positionRes
+010C828C  bl       #0x10c8b30                             // ObservadorResorte$$doPrevio
+010C8290  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C8294  ldr      x1, [x24]                             
+010C8298  adrp     x24, #0x236a000                       
+010C829C  ldr      x24, [x24, #0x6f8]                     // [0x236A6F8] '5'
+010C82A0  mov      x2, xzr                               
+010C82A4  bl       #0x1960c7c                             // System.String$$op_Equality
+010C82A8  tbz      w0, #0, #0x10c82cc                    
+010C82AC  ldr      x8, [x21]                             
+010C82B0  mov      x0, x19                               
+010C82B4  ldr      x8, [x8, #0xb8]                       
+010C82B8  ldr      w9, [x8, #0x20]                       
+010C82BC  str      w9, [x19, #0x320]                      // self.managerResorte
+010C82C0  ldr      w8, [x8, #0x88]                       
+010C82C4  str      w8, [x19, #0x328]                      // self.positionRes
+010C82C8  bl       #0x10c8b30                             // ObservadorResorte$$doPrevio
+010C82CC  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C82D0  ldr      x1, [x24]                             
+010C82D4  adrp     x24, #0x236a000                       
+010C82D8  ldr      x24, [x24, #0x670]                     // [0x236A670] '6'
+010C82DC  mov      x2, xzr                               
+010C82E0  bl       #0x1960c7c                             // System.String$$op_Equality
+010C82E4  tbz      w0, #0, #0x10c8308                    
+010C82E8  ldr      x8, [x21]                             
+010C82EC  mov      x0, x19                               
+010C82F0  ldr      x8, [x8, #0xb8]                       
+010C82F4  ldr      w9, [x8, #0x24]                       
+010C82F8  str      w9, [x19, #0x320]                      // self.managerResorte
+010C82FC  ldr      w8, [x8, #0x8c]                       
+010C8300  str      w8, [x19, #0x328]                      // self.positionRes
+010C8304  bl       #0x10c8b30                             // ObservadorResorte$$doPrevio
+010C8308  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C830C  ldr      x1, [x24]                             
+010C8310  adrp     x24, #0x236a000                       
+010C8314  ldr      x24, [x24, #0x6a0]                     // [0x236A6A0] '7'
+010C8318  mov      x2, xzr                               
+010C831C  bl       #0x1960c7c                             // System.String$$op_Equality
+010C8320  tbz      w0, #0, #0x10c8344                    
+010C8324  ldr      x8, [x21]                             
+010C8328  mov      x0, x19                               
+010C832C  ldr      x8, [x8, #0xb8]                       
+010C8330  ldr      w9, [x8, #0x28]                       
+010C8334  str      w9, [x19, #0x320]                      // self.managerResorte
+010C8338  ldr      w8, [x8, #0x90]                       
+010C833C  str      w8, [x19, #0x328]                      // self.positionRes
+010C8340  bl       #0x10c8b30                             // ObservadorResorte$$doPrevio
+010C8344  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C8348  ldr      x1, [x24]                             
+010C834C  adrp     x24, #0x236a000                       
+010C8350  ldr      x24, [x24, #0x798]                     // [0x236A798] '8'
+010C8354  mov      x2, xzr                               
+010C8358  bl       #0x1960c7c                             // System.String$$op_Equality
+010C835C  tbz      w0, #0, #0x10c8380                    
+010C8360  ldr      x8, [x21]                             
+010C8364  mov      x0, x19                               
+010C8368  ldr      x8, [x8, #0xb8]                       
+010C836C  ldr      w9, [x8, #0x2c]                       
+010C8370  str      w9, [x19, #0x320]                      // self.managerResorte
+010C8374  ldr      w8, [x8, #0x94]                       
+010C8378  str      w8, [x19, #0x328]                      // self.positionRes
+010C837C  bl       #0x10c8b30                             // ObservadorResorte$$doPrevio
+010C8380  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C8384  ldr      x1, [x24]                             
+010C8388  mov      x2, xzr                               
+010C838C  bl       #0x1960c7c                             // System.String$$op_Equality
+010C8390  tbz      w0, #0, #0x10c83b4                    
+010C8394  ldr      x8, [x21]                             
+010C8398  mov      x0, x19                               
+010C839C  ldr      x8, [x8, #0xb8]                       
+010C83A0  ldr      w9, [x8, #0x30]                       
+010C83A4  str      w9, [x19, #0x320]                      // self.managerResorte
+010C83A8  ldr      w8, [x8, #0x98]                       
+010C83AC  str      w8, [x19, #0x328]                      // self.positionRes
+010C83B0  bl       #0x10c8b30                             // ObservadorResorte$$doPrevio
+010C83B4  ldr      w8, [x19, #0x330]                      // self.managerR1
+010C83B8  ldr      w9, [x19, #0x338]                      // self.managerR2
+010C83BC  ldr      w10, [x19, #0x340]                     // self.managerR3
+010C83C0  ldr      w11, [x19, #0x348]                     // self.managerR4
+010C83C4  str      w8, [x19, #0x334]                      // self.managerR1_old
+010C83C8  ldr      w8, [x19, #0x350]                      // self.managerR5
+010C83CC  str      w9, [x19, #0x33c]                      // self.managerR2_old
+010C83D0  ldr      w9, [x19, #0x358]                      // self.managerR6
+010C83D4  str      w10, [x19, #0x344]                     // self.managerR3_old
+010C83D8  ldr      w10, [x19, #0x360]                     // self.managerR7
+010C83DC  str      w11, [x19, #0x34c]                     // self.managerR4_old
+010C83E0  ldr      w11, [x19, #0x368]                     // self.managerR8
+010C83E4  str      w8, [x19, #0x354]                      // self.managerR5_old
+010C83E8  str      w9, [x19, #0x35c]                      // self.managerR6_old
+010C83EC  str      w10, [x19, #0x364]                     // self.managerR7_old
+010C83F0  str      w11, [x19, #0x36c]                     // self.managerR8_old
+010C83F4  ldrb     w8, [x19, #0x19c]                      // self.activadoResorte
+010C83F8  cbz      w8, #0x10c8460                        
+010C83FC  ldrb     w8, [x19, #0x3d5]                      // self.activadoResorteok
+010C8400  cbz      w8, #0x10c8464                        
+010C8404  ldr      x0, [x19, #0x278]                      // self.tipoResor
+010C8408  ldr      x1, [x23]                             
+010C840C  mov      x2, xzr                               
+010C8410  bl       #0x1960c7c                             // System.String$$op_Equality
+010C8414  tbnz     w0, #0, #0x10c8440                    
+010C8418  ldr      x0, [x19, #0x278]                      // self.tipoResor
+010C841C  ldr      x1, [x22]                             
+010C8420  mov      x2, xzr                               
+010C8424  bl       #0x1960c7c                             // System.String$$op_Equality
+010C8428  tbnz     w0, #0, #0x10c8440                    
+010C842C  ldr      x0, [x19, #0x278]                      // self.tipoResor
+010C8430  ldr      x1, [x20]                             
+010C8434  mov      x2, xzr                               
+010C8438  bl       #0x1960c7c                             // System.String$$op_Equality
+010C843C  tbz      w0, #0, #0x10c8488                    
+010C8440  ldrb     w8, [x19, #0x384]                      // self.primeraVezAguas
+010C8444  cbz      w8, #0x10c8454                        
+010C8448  mov      x0, x19                               
+010C844C  bl       #0x10c8b80                             // ObservadorResorte$$doInactivarAguas
+010C8450  strb     wzr, [x19, #0x384]                     // self.primeraVezAguas
+010C8454  mov      x0, x19                               
+010C8458  bl       #0x10c8f44                             // ObservadorResorte$$doRotation
+010C845C  b        #0x10c8464                            
+010C8460  strb     wzr, [x19, #0x3d5]                     // self.activadoResorteok
+010C8464  ldrb     w8, [x19, #0x19c]                      // self.activadoResorte
+010C8468  cbz      w8, #0x10c8474                        
+010C846C  mov      w8, #1                                
+010C8470  strb     w8, [x19, #0x3d5]                      // self.activadoResorteok
+010C8474  ldp      x20, x19, [sp, #0x30]                 
+010C8478  ldp      x22, x21, [sp, #0x20]                 
+010C847C  ldp      x24, x23, [sp, #0x10]                 
+010C8480  ldr      x30, [sp], #0x40                      
+010C8484  ret                                            
+010C8488  mov      x0, x19                               
+010C848C  bl       #0x10c9390                             // ObservadorResorte$$doMove
+010C8490  b        #0x10c8464                            

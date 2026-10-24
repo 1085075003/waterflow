@@ -1,0 +1,281 @@
+// UIManagerScriptDesign$$salvarPiezasMech VA 0xFFFA08, inferred length 1116
+void UIManagerScriptDesign__salvarPiezasMech (UIManagerScriptDesign_o* __this, const MethodInfo* method);
+00FFFA08  str      x30, [sp, #-0x40]!                    
+00FFFA0C  stp      x24, x23, [sp, #0x10]                 
+00FFFA10  stp      x22, x21, [sp, #0x20]                 
+00FFFA14  stp      x20, x19, [sp, #0x30]                 
+00FFFA18  adrp     x22, #0x24fb000                       
+00FFFA1C  adrp     x20, #0x236a000                       
+00FFFA20  adrp     x21, #0x2368000                       
+00FFFA24  ldrb     w8, [x22, #0xc33]                     
+00FFFA28  ldr      x20, [x20, #0x8d0]                     // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+00FFFA2C  ldr      x21, [x21, #0x878]                     // [0x2368878] UnityEngine.Application_TypeInfo
+00FFFA30  mov      x19, x0                               
+00FFFA34  tbnz     w8, #0, #0xfffad0                     
+00FFFA38  adrp     x0, #0x2368000                        
+00FFFA3C  ldr      x0, [x0, #0x878]                       // [0x2368878] UnityEngine.Application_TypeInfo
+00FFFA40  bl       #0xe61b78                             
+00FFFA44  adrp     x0, #0x236a000                        
+00FFFA48  ldr      x0, [x0, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+00FFFA4C  bl       #0xe61b78                             
+00FFFA50  adrp     x0, #0x236a000                        
+00FFFA54  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+00FFFA58  bl       #0xe61b78                             
+00FFFA5C  adrp     x0, #0x236a000                        
+00FFFA60  ldr      x0, [x0, #0xec8]                       // [0x236AEC8] 'C:/GM/Unity/waterfall/NUEVOS/niveles3/'
+00FFFA64  bl       #0xe61b78                             
+00FFFA68  adrp     x0, #0x236a000                        
+00FFFA6C  ldr      x0, [x0, #0xed0]                       // [0x236AED0] 'C:/GM/Unity/waterfall/NUEVOS/segundoJuegoSol3b/'
+00FFFA70  bl       #0xe61b78                             
+00FFFA74  adrp     x0, #0x236a000                        
+00FFFA78  ldr      x0, [x0, #0xed8]                       // [0x236AED8] '/users/maria/Desktop/Nuevos/niveles3/'
+00FFFA7C  bl       #0xe61b78                             
+00FFFA80  adrp     x0, #0x236a000                        
+00FFFA84  ldr      x0, [x0, #0xee0]                       // [0x236AEE0] 'C:/GM/Unity/waterfall/NUEVOS/segundoJuegoSol3/'
+00FFFA88  bl       #0xe61b78                             
+00FFFA8C  adrp     x0, #0x236a000                        
+00FFFA90  ldr      x0, [x0, #0xee8]                       // [0x236AEE8] 'ss'
+00FFFA94  bl       #0xe61b78                             
+00FFFA98  adrp     x0, #0x236a000                        
+00FFFA9C  ldr      x0, [x0, #0xef0]                       // [0x236AEF0] '/ss'
+00FFFAA0  bl       #0xe61b78                             
+00FFFAA4  adrp     x0, #0x236a000                        
+00FFFAA8  ldr      x0, [x0, #0xef8]                       // [0x236AEF8] 'C:/GM/Unity/waterfall/NUEVOS/niveles3b/'
+00FFFAAC  bl       #0xe61b78                             
+00FFFAB0  adrp     x0, #0x236a000                        
+00FFFAB4  ldr      x0, [x0, #0x900]                       // [0x236A900] '.bytes'
+00FFFAB8  bl       #0xe61b78                             
+00FFFABC  adrp     x0, #0x236a000                        
+00FFFAC0  ldr      x0, [x0, #0x908]                       // [0x236A908] '/users/maria/Desktop/Nuevos/niveles/'
+00FFFAC4  bl       #0xe61b78                             
+00FFFAC8  mov      w8, #1                                
+00FFFACC  strb     w8, [x22, #0xc33]                     
+00FFFAD0  mov      w8, #1                                
+00FFFAD4  mov      x0, x19                               
+00FFFAD8  str      w8, [x19, #0x558]                      // self.modoSave
+00FFFADC  bl       #0xff6e4c                              // UIManagerScriptDesign$$CreateSaveGameObject
+00FFFAE0  str      x0, [x19, #0x568]                      // self.save1
+00FFFAE4  ldr      x0, [x20]                             
+00FFFAE8  bl       #0xe61d94                             
+00FFFAEC  mov      x1, xzr                               
+00FFFAF0  mov      x20, x0                               
+00FFFAF4  bl       #0x19e726c                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$.ctor
+00FFFAF8  ldr      x0, [x21]                             
+00FFFAFC  ldr      w8, [x0, #0xe0]                       
+00FFFB00  cbnz     w8, #0xfffb08                         
+00FFFB04  bl       #0xe61c80                             
+00FFFB08  adrp     x24, #0x236a000                       
+00FFFB0C  adrp     x23, #0x236a000                       
+00FFFB10  ldr      x24, [x24, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+00FFFB14  ldr      x23, [x23, #0x900]                     // [0x236A900] '.bytes'
+00FFFB18  mov      x0, xzr                               
+00FFFB1C  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+00FFFB20  cmp      w0, #0xb                              
+00FFFB24  b.ne     #0xfffba8                             
+00FFFB28  ldr      x0, [x24]                             
+00FFFB2C  adrp     x22, #0x236a000                       
+00FFFB30  ldr      w8, [x0, #0xe0]                       
+00FFFB34  ldr      x22, [x22, #0xef0]                     // [0x236AEF0] '/ss'
+00FFFB38  cbnz     w8, #0xfffb44                         
+00FFFB3C  bl       #0xe61c80                             
+00FFFB40  ldr      x0, [x24]                             
+00FFFB44  ldr      x0, [x0, #0xb8]                       
+00FFFB48  mov      x1, xzr                               
+00FFFB4C  bl       #0x1ab3994                             // System.Int32$$ToString
+00FFFB50  ldr      x8, [x22]                             
+00FFFB54  ldr      x2, [x23]                             
+00FFFB58  mov      x1, x0                                
+00FFFB5C  mov      x3, xzr                               
+00FFFB60  mov      x0, x8                                
+00FFFB64  bl       #0x196118c                             // System.String$$Concat
+00FFFB68  ldr      x8, [x21]                             
+00FFFB6C  mov      x21, x0                               
+00FFFB70  ldr      w9, [x8, #0xe0]                       
+00FFFB74  cbnz     w9, #0xfffb80                         
+00FFFB78  mov      x0, x8                                
+00FFFB7C  bl       #0xe61c80                             
+00FFFB80  mov      x0, xzr                               
+00FFFB84  bl       #0x1fdfef0                             // UnityEngine.Application$$get_persistentDataPath
+00FFFB88  mov      x1, x21                               
+00FFFB8C  mov      x2, xzr                               
+00FFFB90  bl       #0x1958280                             // System.String$$Concat
+00FFFB94  mov      x22, x0                               
+00FFFB98  mov      x0, xzr                               
+00FFFB9C  bl       #0x1fdfef0                             // UnityEngine.Application$$get_persistentDataPath
+00FFFBA0  mov      x1, x21                               
+00FFFBA4  b        #0xfffcc0                             
+00FFFBA8  ldr      x0, [x21]                             
+00FFFBAC  ldr      w8, [x0, #0xe0]                       
+00FFFBB0  cbnz     w8, #0xfffbb8                         
+00FFFBB4  bl       #0xe61c80                             
+00FFFBB8  mov      x0, xzr                               
+00FFFBBC  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+00FFFBC0  cbz      w0, #0xfffc48                         
+00FFFBC4  adrp     x8, #0x236a000                        
+00FFFBC8  adrp     x9, #0x236a000                        
+00FFFBCC  ldr      x8, [x8, #0xec8]                       // [0x236AEC8] 'C:/GM/Unity/waterfall/NUEVOS/niveles3/'
+00FFFBD0  ldr      x9, [x9, #0xef8]                       // [0x236AEF8] 'C:/GM/Unity/waterfall/NUEVOS/niveles3b/'
+00FFFBD4  ldrb     w10, [x19, #0x59c]                     // self.segundoJuegoNiveles
+00FFFBD8  adrp     x11, #0x236a000                       
+00FFFBDC  adrp     x12, #0x236a000                       
+00FFFBE0  ldr      x0, [x24]                             
+00FFFBE4  ldr      x11, [x11, #0xee0]                     // [0x236AEE0] 'C:/GM/Unity/waterfall/NUEVOS/segundoJuegoSol3/'
+00FFFBE8  ldr      x12, [x12, #0xed0]                     // [0x236AED0] 'C:/GM/Unity/waterfall/NUEVOS/segundoJuegoSol3b/'
+00FFFBEC  cmp      w10, #0                               
+00FFFBF0  ldr      w10, [x0, #0xe0]                      
+00FFFBF4  csel     x8, x8, x11, eq                       
+00FFFBF8  csel     x9, x9, x12, eq                       
+00FFFBFC  ldr      x21, [x9]                             
+00FFFC00  ldr      x22, [x8]                             
+00FFFC04  cbnz     w10, #0xfffc10                        
+00FFFC08  bl       #0xe61c80                             
+00FFFC0C  ldr      x0, [x24]                             
+00FFFC10  ldr      x0, [x0, #0xb8]                       
+00FFFC14  mov      x1, xzr                               
+00FFFC18  bl       #0x1ab3994                             // System.Int32$$ToString
+00FFFC1C  adrp     x8, #0x236a000                        
+00FFFC20  ldr      x8, [x8, #0xee8]                       // [0x236AEE8] 'ss'
+00FFFC24  ldr      x2, [x23]                             
+00FFFC28  mov      x1, x0                                
+00FFFC2C  mov      x3, xzr                               
+00FFFC30  ldr      x8, [x8]                              
+00FFFC34  mov      x0, x8                                
+00FFFC38  bl       #0x196118c                             // System.String$$Concat
+00FFFC3C  mov      x23, x0                               
+00FFFC40  mov      x0, x22                               
+00FFFC44  b        #0xfffca8                             
+00FFFC48  adrp     x8, #0x236a000                        
+00FFFC4C  ldr      x0, [x24]                             
+00FFFC50  ldr      x8, [x8, #0xed8]                       // [0x236AED8] '/users/maria/Desktop/Nuevos/niveles3/'
+00FFFC54  ldr      w9, [x0, #0xe0]                       
+00FFFC58  ldr      x21, [x8]                             
+00FFFC5C  cbnz     w9, #0xfffc68                         
+00FFFC60  bl       #0xe61c80                             
+00FFFC64  ldr      x0, [x24]                             
+00FFFC68  ldr      x0, [x0, #0xb8]                       
+00FFFC6C  mov      x1, xzr                               
+00FFFC70  bl       #0x1ab3994                             // System.Int32$$ToString
+00FFFC74  adrp     x8, #0x236a000                        
+00FFFC78  ldr      x8, [x8, #0xee8]                       // [0x236AEE8] 'ss'
+00FFFC7C  ldr      x2, [x23]                             
+00FFFC80  mov      x1, x0                                
+00FFFC84  mov      x3, xzr                               
+00FFFC88  ldr      x8, [x8]                              
+00FFFC8C  mov      x0, x8                                
+00FFFC90  bl       #0x196118c                             // System.String$$Concat
+00FFFC94  adrp     x8, #0x236a000                        
+00FFFC98  ldr      x8, [x8, #0x908]                       // [0x236A908] '/users/maria/Desktop/Nuevos/niveles/'
+00FFFC9C  mov      x23, x0                               
+00FFFCA0  ldr      x8, [x8]                              
+00FFFCA4  mov      x0, x8                                
+00FFFCA8  mov      x1, x23                               
+00FFFCAC  mov      x2, xzr                               
+00FFFCB0  bl       #0x1958280                             // System.String$$Concat
+00FFFCB4  mov      x22, x0                               
+00FFFCB8  mov      x0, x21                               
+00FFFCBC  mov      x1, x23                               
+00FFFCC0  mov      x2, xzr                               
+00FFFCC4  bl       #0x1958280                             // System.String$$Concat
+00FFFCC8  mov      x21, x0                               
+00FFFCCC  mov      x0, x22                               
+00FFFCD0  mov      x1, xzr                               
+00FFFCD4  bl       #0x1a1ae04                             // System.IO.File$$Exists
+00FFFCD8  tbz      w0, #0, #0xfffce8                     
+00FFFCDC  mov      x0, x22                               
+00FFFCE0  mov      x1, xzr                               
+00FFFCE4  bl       #0x1a22464                             // System.IO.File$$Delete
+00FFFCE8  mov      x0, x22                               
+00FFFCEC  mov      x1, xzr                               
+00FFFCF0  bl       #0x1a223e4                             // System.IO.File$$Create
+00FFFCF4  mov      x22, x0                               
+00FFFCF8  cbz      x20, #0xfffd38                        
+00FFFCFC  ldr      x2, [x19, #0x568]                      // self.save1
+00FFFD00  mov      x0, x20                               
+00FFFD04  mov      x1, x22                               
+00FFFD08  mov      x3, xzr                               
+00FFFD0C  bl       #0x19e7a38                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$Serialize
+00FFFD10  cbz      x22, #0xfffd38                        
+00FFFD14  ldr      x8, [x22]                             
+00FFFD18  mov      x0, x22                               
+00FFFD1C  ldp      x20, x19, [sp, #0x30]                 
+00FFFD20  ldp      x22, x21, [sp, #0x20]                 
+00FFFD24  ldr      x2, [x8, #0x258]                      
+00FFFD28  ldr      x1, [x8, #0x260]                      
+00FFFD2C  ldp      x24, x23, [sp, #0x10]                 
+00FFFD30  ldr      x30, [sp], #0x40                      
+00FFFD34  br       x2                                    
+00FFFD38  bl       #0xe61da0                             
+00FFFD3C  cmp      w1, #1                                
+00FFFD40  mov      x23, x0                               
+00FFFD44  b.ne     #0xfffe58                             
+00FFFD48  mov      x0, x23                               
+00FFFD4C  bl       #0x224d2d0                            
+00FFFD50  mov      x23, x0                               
+00FFFD54  adrp     x0, #0x2368000                        
+00FFFD58  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+00FFFD5C  bl       #0xe61b8c                             
+00FFFD60  ldr      x8, [x23]                             
+00FFFD64  ldr      x1, [x8]                              
+00FFFD68  bl       #0xe621cc                             
+00FFFD6C  tbz      w0, #0, #0xfffdb8                     
+00FFFD70  bl       #0x224d2e0                            
+00FFFD74  adrp     x0, #0x236a000                        
+00FFFD78  ldr      x0, [x0, #0xf00]                       // [0x236AF00] 'fichero no borrado 0 '
+00FFFD7C  bl       #0xe61b8c                             
+00FFFD80  mov      x1, x22                               
+00FFFD84  mov      x2, xzr                               
+00FFFD88  bl       #0x1958280                             // System.String$$Concat
+00FFFD8C  mov      x23, x0                               
+00FFFD90  adrp     x0, #0x2368000                        
+00FFFD94  ldr      x0, [x0, #0x178]                       // [0x2368178] UnityEngine.Debug_TypeInfo
+00FFFD98  bl       #0xe61b8c                             
+00FFFD9C  ldr      w8, [x0, #0xe0]                       
+00FFFDA0  cbnz     w8, #0xfffda8                         
+00FFFDA4  bl       #0xe61c80                             
+00FFFDA8  mov      x0, x23                               
+00FFFDAC  mov      x1, xzr                               
+00FFFDB0  bl       #0x1fe3034                             // UnityEngine.Debug$$Log
+00FFFDB4  b        #0xfffce8                             
+00FFFDB8  mov      w0, #8                                
+00FFFDBC  bl       #0x224d320                            
+00FFFDC0  ldr      x8, [x23]                             
+00FFFDC4  str      x8, [x0]                              
+00FFFDC8  adrp     x1, #0x2253000                        
+00FFFDCC  add      x1, x1, #0x618                        
+00FFFDD0  mov      x2, xzr                               
+00FFFDD4  bl       #0x224d330                            
+00FFFDD8  b        #0xfffe50                             
+00FFFDDC  mov      x23, x0                               
+00FFFDE0  bl       #0x224d2e0                            
+00FFFDE4  b        #0xfffe58                             
+00FFFDE8  cmp      w1, #1                                
+00FFFDEC  mov      x23, x0                               
+00FFFDF0  b.ne     #0xfffe58                             
+00FFFDF4  mov      x0, x23                               
+00FFFDF8  bl       #0x224d2d0                            
+00FFFDFC  mov      x22, x0                               
+00FFFE00  adrp     x0, #0x2368000                        
+00FFFE04  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+00FFFE08  bl       #0xe61b8c                             
+00FFFE0C  ldr      x8, [x22]                             
+00FFFE10  ldr      x1, [x8]                              
+00FFFE14  bl       #0xe621cc                             
+00FFFE18  tbz      w0, #0, #0xfffe30                     
+00FFFE1C  bl       #0x224d2e0                            
+00FFFE20  mov      x0, x21                               
+00FFFE24  mov      x1, xzr                               
+00FFFE28  bl       #0x1a223e4                             // System.IO.File$$Create
+00FFFE2C  b        #0xfffcf4                             
+00FFFE30  mov      w0, #8                                
+00FFFE34  bl       #0x224d320                            
+00FFFE38  ldr      x8, [x22]                             
+00FFFE3C  str      x8, [x0]                              
+00FFFE40  adrp     x1, #0x2253000                        
+00FFFE44  add      x1, x1, #0x618                        
+00FFFE48  mov      x2, xzr                               
+00FFFE4C  bl       #0x224d330                            
+00FFFE50  mov      x23, x0                               
+00FFFE54  bl       #0x224d2e0                            
+00FFFE58  mov      x0, x23                               
+00FFFE5C  bl       #0xf5dd7c                             
+00FFFE60  bl       #0xd2eb98                             

@@ -1,0 +1,73 @@
+// CascadaTest1$$CheckCollision VA 0xFD3C94, inferred length 284
+bool CascadaTest1__CheckCollision (CascadaTest1_o* __this, float distan_y, const MethodInfo* method);
+00FD3C94  stp      d11, d10, [sp, #-0x40]!               
+00FD3C98  stp      d9, d8, [sp, #0x10]                   
+00FD3C9C  str      x30, [sp, #0x20]                      
+00FD3CA0  stp      x20, x19, [sp, #0x30]                 
+00FD3CA4  adrp     x20, #0x24fb000                       
+00FD3CA8  ldrb     w8, [x20, #0xb62]                     
+00FD3CAC  mov      v8.16b, v0.16b                        
+00FD3CB0  mov      x19, x0                               
+00FD3CB4  tbnz     w8, #0, #0xfd3ccc                     
+00FD3CB8  adrp     x0, #0x2368000                        
+00FD3CBC  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FD3CC0  bl       #0xe61b78                             
+00FD3CC4  mov      w8, #1                                
+00FD3CC8  strb     w8, [x20, #0xb62]                     
+00FD3CCC  mov      x0, x19                               
+00FD3CD0  mov      x1, xzr                               
+00FD3CD4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD3CD8  cbz      x0, #0xfd3dac                         
+00FD3CDC  mov      x1, xzr                               
+00FD3CE0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD3CE4  mov      x0, x19                               
+00FD3CE8  mov      x1, xzr                               
+00FD3CEC  mov      v9.16b, v0.16b                        
+00FD3CF0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD3CF4  cbz      x0, #0xfd3dac                         
+00FD3CF8  mov      x1, xzr                               
+00FD3CFC  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD3D00  mov      x0, x19                               
+00FD3D04  mov      x1, xzr                               
+00FD3D08  mov      v10.16b, v1.16b                       
+00FD3D0C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD3D10  cbz      x0, #0xfd3dac                         
+00FD3D14  mov      x1, xzr                               
+00FD3D18  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD3D1C  ldr      x0, [x19, #0x58]                       // self.esferita
+00FD3D20  fadd     s0, s10, s8                           
+00FD3D24  stp      s9, s0, [x19, #0x74]                   // self.vector2
+00FD3D28  str      s2, [x19, #0x7c]                      
+00FD3D2C  cbz      x0, #0xfd3dac                         
+00FD3D30  mov      x1, xzr                               
+00FD3D34  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD3D38  cbz      x0, #0xfd3dac                         
+00FD3D3C  ldp      s1, s2, [x19, #0x78]                  
+00FD3D40  ldr      s0, [x19, #0x74]                       // self.vector2
+00FD3D44  adrp     x20, #0x2368000                       
+00FD3D48  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FD3D4C  mov      x1, xzr                               
+00FD3D50  bl       #0x200ea50                             // UnityEngine.Transform$$set_position
+00FD3D54  ldr      w0, [x19, #0x84]                       // self.mascaraSuelo
+00FD3D58  ldp      s8, s9, [x19, #0x74]                   // self.vector2
+00FD3D5C  ldp      s10, s11, [x19, #0x7c]                
+00FD3D60  mov      x1, xzr                               
+00FD3D64  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+00FD3D68  ldr      x8, [x20]                             
+00FD3D6C  mov      w19, w0                               
+00FD3D70  ldr      w9, [x8, #0xe0]                       
+00FD3D74  cbnz     w9, #0xfd3d80                         
+00FD3D78  mov      x0, x8                                
+00FD3D7C  bl       #0xe61c80                             
+00FD3D80  mov      v0.16b, v8.16b                        
+00FD3D84  mov      v1.16b, v9.16b                        
+00FD3D88  mov      w0, w19                               
+00FD3D8C  ldp      x20, x19, [sp, #0x30]                 
+00FD3D90  ldr      x30, [sp, #0x20]                      
+00FD3D94  ldp      d9, d8, [sp, #0x10]                   
+00FD3D98  mov      v2.16b, v10.16b                       
+00FD3D9C  mov      v3.16b, v11.16b                       
+00FD3DA0  mov      x1, xzr                               
+00FD3DA4  ldp      d11, d10, [sp], #0x40                 
+00FD3DA8  b        #0x20409e0                             // UnityEngine.Physics$$CheckSphere
+00FD3DAC  bl       #0xe61da0                             

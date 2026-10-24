@@ -1,0 +1,447 @@
+#if UNITY_EDITOR
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+
+namespace Recovered.FlowWater.Editor
+{
+    // Exercises the original physical colliders through actual camera screen rays.
+    [InitializeOnLoad]
+    public static class FlowWaterInteractionValidation
+    {
+        const string ActiveKey = "FlowWater.InteractionValidation.Active";
+        const string PrefsKey = "FlowWater.InteractionValidation.Preferences";
+        const string ScenesKey = "FlowWater.InteractionValidation.Scenes";
+        const BindingFlags Private = BindingFlags.Instance | BindingFlags.NonPublic;
+        [Serializable] public sealed class Check { public string name, detail; public bool passed; }
+        [Serializable] public sealed class SavedPreference { public string key; public bool existed, isFloat; public int intValue; public float floatValue; }
+        [Serializable] public sealed class Preferences { public List<SavedPreference> values = new List<SavedPreference>(); }
+        [Serializable] public sealed class SavedScene { public string path; public bool loaded, active; }
+        [Serializable] public sealed class SavedScenes { public SavedScene[] scenes; }
+        [Serializable] public sealed class Probe
+        {
+            public string name, collider, tag;
+            public bool accepted;
+            public int pickedRecord = -1, hitRecord = -1, layer = -1;
+            public Vector3 screenPoint, worldPoint;
+        }
+        [Serializable] public sealed class Report
+        {
+            public string startedUtc, finishedUtc, unityVersion;
+            public bool passed, preferencesRestored, cameraRestored;
+            public int queries;
+            public List<Check> checks = new List<Check>();
+            public List<Probe> probes = new List<Probe>();
+            public List<string> runtimeErrors = new List<string>();
+            public List<string> screenshots = new List<string>();
+            public List<string> notes = new List<string>();
+        }
+        sealed class CameraState
+        {
+            public Camera camera; public Vector3 position; public Quaternion rotation;
+            public bool orthographic; public float orthographicSize, fieldOfView, aspect; public Rect rect;
+            public CameraState(Camera value) { camera = value; position = value.transform.position; rotation = value.transform.rotation; orthographic = value.orthographic; orthographicSize = value.orthographicSize; fieldOfView = value.fieldOfView; aspect = value.aspect; rect = value.rect; }
+            public void Restore() { if (camera == null) return; camera.transform.SetPositionAndRotation(position, rotation); camera.orthographic = orthographic; camera.orthographicSize = orthographicSize; camera.fieldOfView = fieldOfView; camera.rect = rect; camera.aspect = aspect; }
+            public bool Matches() { return camera != null && Vector3.Distance(camera.transform.position, position) < .001f && Quaternion.Angle(camera.transform.rotation, rotation) < .001f && camera.orthographic == orthographic && Mathf.Abs(camera.orthographicSize-orthographicSize)<.001f && Mathf.Abs(camera.fieldOfView-fieldOfView)<.001f && Mathf.Abs(camera.aspect-aspect)<.001f && camera.rect == rect; }
+        }
+        static Report report;
+        static IEnumerator routine;
+        static CameraState view;
+        static object boardState;
+        static double deadline;
+        static bool busy, importsLocked, colliderStatesPreserved = true;
+        static RecoveredFlowGame Game { get { return RecoveredFlowGame.Instance; } }
+        static RecoveredNativeDragMotion Motion { get { return Game==null?null:Game.GetComponent<RecoveredNativeDragMotion>(); } }
+        static string Output { get { return Path.Combine(Directory.GetParent(Application.dataPath).FullName, "Validation", "Interaction"); } }
+
+        static FlowWaterInteractionValidation()
+        {
+            EditorApplication.update += Update;
+            EditorApplication.playModeStateChanged += OnPlayMode;
+            Application.logMessageReceived += OnLog;
+        }
+        [MenuItem("Tools/Flow Water/Validate Native Screen Picking")]
+        public static void Run()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Start interaction validation from Edit mode.");
+            foreach (SceneSetup setup in EditorSceneManager.GetSceneManagerSetup())
+                if (UnityEngine.SceneManagement.SceneManager.GetSceneByPath(setup.path).isDirty) throw new InvalidOperationException("Save edited scenes before running interaction validation.");
+            RecoveryCatalogBuilder.Build(); Directory.CreateDirectory(Output);
+            var backup = new Preferences();
+            foreach (string key in new[] { "Recovery.LastLevelId", "Recovery.Complete.1", "Recovery.Completed.gm1", "Recovery.Complete.601", "Recovery.Completed.gm601", "Recovery.Complete.1057", "Recovery.Completed.gm1057", "esTablet", "OptionSelLev", "primeraVez", "MusicaON", "Soundlevel", "Conf_sound", "Conf_music" })
+            {
+                bool isFloat = key == "Conf_sound" || key == "Conf_music";
+                backup.values.Add(new SavedPreference { key = key, existed = PlayerPrefs.HasKey(key), isFloat = isFloat, intValue = isFloat ? 0 : PlayerPrefs.GetInt(key), floatValue = isFloat ? PlayerPrefs.GetFloat(key) : 0 });
+            }
+            SessionState.SetString(PrefsKey, JsonUtility.ToJson(backup));
+            SessionState.SetString(ScenesKey, JsonUtility.ToJson(new SavedScenes { scenes = EditorSceneManager.GetSceneManagerSetup().Select(s=>new SavedScene { path=s.path,loaded=s.isLoaded,active=s.isActive }).ToArray() }));
+            SessionState.SetBool(ActiveKey, true);
+            try
+            {
+                string sceneName=OriginalScenePresentation.SceneForLevel(1);
+                string scenePath=AssetDatabase.FindAssets(sceneName+" t:Scene",new[] { "Assets/Scenes" }).Select(AssetDatabase.GUIDToAssetPath).FirstOrDefault(p=>Path.GetFileNameWithoutExtension(p)==sceneName);
+                if (String.IsNullOrEmpty(scenePath)) throw new FileNotFoundException("Original scene was not found: "+sceneName);
+                PlayerPrefs.SetInt("Recovery.LastLevelId", 1);
+                EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+                EditorApplication.EnterPlaymode();
+            }
+            catch
+            {
+                RestorePreferences(); RestoreScenes(); SessionState.EraseBool(ActiveKey);
+                throw;
+            }
+        }
+        static void Update()
+        {
+            if (busy || !SessionState.GetBool(ActiveKey,false) || !EditorApplication.isPlaying || EditorApplication.isCompiling) return;
+            busy = true;
+            try
+            {
+                if (report == null)
+                {
+                    AssetDatabase.DisallowAutoRefresh(); EditorApplication.LockReloadAssemblies(); importsLocked = true;
+                    report = new Report { startedUtc = DateTime.UtcNow.ToString("o"), unityVersion = Application.unityVersion };
+                    report.notes.Add("All pick checks use Camera.WorldToScreenPoint and the production TryPick screen-ray query on original gm1 colliders. Empty-floor and stack placements invoke the production BeginDrag/ContinueDrag/EndDrag methods, followed by public Undo. No synthetic collider is added.");
+                    report.notes.Add("Lower-block and fixed-occlusion checks temporarily use horizontal views to expose the physical front faces. The authored camera and every collider enabled state are checked/restored, as are modified PlayerPrefs and the editor scene setup.");
+                    report.notes.Add("Manual moves now wait for the native drag animation's deferred commit. gm1057 uses its original fixed overhead block and empty adjacent column to exercise escape and return routes.");
+                    routine = Exercise(); deadline = EditorApplication.timeSinceStartup + 90;
+                }
+                if (EditorApplication.timeSinceStartup > deadline) throw new TimeoutException("Screen-picking validation exceeded 90 seconds.");
+                if (!routine.MoveNext()) Finish();
+            }
+            catch (Exception exception) { if (report != null) report.runtimeErrors.Add(exception.ToString()); Finish(); }
+            finally { busy = false; }
+        }
+        static IEnumerator Exercise()
+        {
+            while (Game == null || Game.CurrentLevelId != 1 || !Game.IsLevelActive || Game.GameCamera == null) yield return null;
+            view = new CameraState(Game.GameCamera); boardState = typeof(RecoveredFlowGame).GetMethod("CaptureSnapshot",Private).Invoke(Game,null);
+            CheckState("unity-version", Application.unityVersion == "2022.3.28f1", Application.unityVersion);
+            RecoveryPiece pipe = Record(3), top = Record(5), wall = Record(0);
+            Require("original-gm1-actors", pipe != null && pipe.CanMove && top != null && top.CanMove && wall != null && !wall.CanMove, "record3 Recta1j; record5 Curva1h; record0 fixed LadrilloLat1Hierba.");
+            Probe ordinary = FindProbe("authored-camera-exposed-pipe", pipe, true, true);
+            Require("authored-camera-native-pipe-selectable", ordinary != null, "Exposed original record3 must be selectable using the original scene camera.");
+            if (ordinary != null)
+            {
+                typeof(RecoveredFlowGame).GetMethod("BeginDrag",Private).Invoke(Game,new object[] { new Vector2(ordinary.screenPoint.x,ordinary.screenPoint.y) });
+                CheckState("production-begin-drag-selects-original-hit", Game.SelectedPieceIndex == pipe.Index && typeof(RecoveredFlowGame).GetField("dragging",Private).GetValue(Game) == (object)pipe, "The production BeginDrag dispatch uses the same screen point.");
+                Collider selectedCollider=(Collider)typeof(RecoveredFlowGame).GetField("dragCollider",Private).GetValue(Game);
+                CheckState("production-selection-native-layer2",selectedCollider!=null && selectedCollider.gameObject.layer==2 && MoveBloque.MoviendoBloque,"Only the selected original collider is temporarily IgnoreRaycast.");
+                Require("production-native-motion-attached",Motion!=null && Motion.IsActive,"BeginDrag starts the native movement helper.");
+                RaycastHit dropHit; Vector3 drop;
+                Vector3 floorScreen=Game.GameCamera.WorldToScreenPoint(new Vector3(40,-.25f,40));
+                bool floorDrop=RecoveredNativeInteraction.TryGetDropPoint(Game.GameCamera,floorScreen,Game,out drop,out dropHit);
+                CheckState("original-empty-map-floor-drop",floorDrop && Vector3.Distance(drop,new Vector3(40,3.95f,40))<.02f,"drop="+drop.ToString("F3")+", collider="+(dropHit.collider==null?"none":dropHit.collider.name)+", tag="+(dropHit.collider==null?"none":dropHit.collider.tag));
+                Input("ContinueDrag",floorScreen);
+                foreach(object wait in Hold(.3f)) yield return wait;
+                CheckState("held-native-pipe-lifts-before-commit",pipe.transform.position.y>pipe.InitialPosition.y+1 && Game.MoveCount==0 && Motion.IsActive && !Motion.IsReleased,pipe.transform.position.ToString("F3")+", moves="+Game.MoveCount);
+                CheckState("drag-water-node-gated",WaterGated(pipe),"Only the selected piece is excluded from network routing while moving.");
+                Capture("05-native-held-lift.png");
+                Input("CancelDrag"); yield return null;
+                CheckState("cancel-native-motion-restores-pose-layer-and-water",Vector3.Distance(pipe.transform.position,pipe.InitialPosition)<.01f && Game.MoveCount==0 && selectedCollider.gameObject.layer==12 && !Motion.IsActive && !WaterGated(pipe),pipe.transform.position.ToString("F3"));
+                Input("BeginDrag",ordinary.screenPoint); Input("ContinueDrag",floorScreen); Input("EndDrag");
+                CheckState("release-defers-commit-until-native-settle",Motion.IsActive && Motion.IsReleased && Game.MoveCount==0,"Released native Lerp is still running before a movement is committed.");
+                foreach(object wait in WaitForMotion()) yield return wait;
+                CheckState("production-drop-commits-on-native-floor",Vector3.Distance(pipe.transform.position,new Vector3(40,3.95f,40))<.02f && Game.MoveCount==1,pipe.transform.position.ToString("F3")+", moves="+Game.MoveCount);
+                CheckState("production-release-restores-layer-and-movement-flag",selectedCollider!=null && selectedCollider.gameObject.layer==12 && !MoveBloque.MoviendoBloque,"Original selected collider returns to bloque12.");
+                Game.Undo();
+                CheckState("production-floor-drop-undo",Vector3.Distance(pipe.transform.position,pipe.InitialPosition)<.01f && Game.MoveCount==0,pipe.transform.position.ToString("F3")+", moves="+Game.MoveCount);
+                typeof(RecoveredFlowGame).GetMethod("CancelDrag",Private).Invoke(Game,null);
+                CheckState("cancel-drag-preserves-original-position", Vector3.Distance(pipe.transform.position,pipe.InitialPosition)<.01f, pipe.transform.position.ToString("F3"));
+            }
+            Capture("01-original-camera-pick.png");
+            Probe topPick=FindProbe("original-stack-placement-source",top,true,true);
+            Require("original-stack-source-selectable",topPick!=null,"Original Curva1h record5 in authored view.");
+            Input("BeginDrag",topPick.screenPoint);
+            Vector3 pipeScreen=Game.GameCamera.WorldToScreenPoint(Aim(NativeBody(pipe)));
+            RaycastHit stackHit; Vector3 stackDrop;
+            bool stackSurface=RecoveredNativeInteraction.TryGetDropPoint(Game.GameCamera,pipeScreen,Game,out stackDrop,out stackHit);
+            CheckState("native-pipe-top-drop-height",stackSurface && Vector3.Distance(stackDrop,pipe.transform.position+Vector3.up*7.6f)<.03f,"drop="+stackDrop.ToString("F3")+", collider="+(stackHit.collider==null?"none":stackHit.collider.name));
+            Input("ContinueDrag",pipeScreen); Input("EndDrag");
+            foreach(object wait in WaitForMotion()) yield return wait;
+            Require("production-drag-stacks-on-original-pipe",Vector3.Distance(top.transform.position,pipe.transform.position+Vector3.up*7.6f)<.03f && Game.MoveCount==1,top.transform.position.ToString("F3")+", moves="+Game.MoveCount);
+            yield return null;
+            Probe buried = FindHorizontalProbe("buried-lower-pipe",pipe,false);
+            Require("lower-visible-pipe-blocked-by-upper-native-collider", buried != null && buried.hitRecord == pipe.SourceRecordIndex && buried.layer == LayerMask.NameToLayer("bloque") && !buried.accepted && pipe.CanMove, "The nearest hit is the lower movable pipe itself; its original overhead sphere rejects selection.");
+            if (buried != null)
+            {
+                typeof(RecoveredFlowGame).GetMethod("BeginDrag",Private).Invoke(Game,new object[] { new Vector2(buried.screenPoint.x,buried.screenPoint.y) });
+                CheckState("production-begin-drag-rejects-buried-pipe", typeof(RecoveredFlowGame).GetField("dragging",Private).GetValue(Game) == null, "The input entry point also refuses the buried original actor.");
+            }
+            Capture("02-buried-pipe-rejected.png");
+            Game.Undo(); yield return null;
+            Require("stack-arrangement-undo", Vector3.Distance(top.transform.position,top.InitialPosition)<.01f, top.transform.position.ToString("F3"));
+            Require("arrange-movable-behind-original-fixed-block", Game.TryMove(pipe.Index,new Vector3(0,3.95f,60)), Game.Status);
+            yield return null;
+            Collider body = NativeBody(pipe); Require("original-pipe-body-collider",body!=null,"Original enabled layer12 body collider.");
+            Vector3 aim = Aim(body);
+            SetHorizontalView(aim,new Vector3(1,0,1));
+            Probe unobstructed = Query("same-pipe-from-unoccluded-side",Game.GameCamera.WorldToScreenPoint(aim));
+            Require("behind-pipe-selectable-from-clear-side", unobstructed.accepted && unobstructed.pickedRecord==pipe.SourceRecordIndex, Detail(unobstructed));
+            SetHorizontalView(aim,new Vector3(-1,0,-1));
+            Probe occluded = Query("fixed-block-occludes-same-pipe",Game.GameCamera.WorldToScreenPoint(aim));
+            Require("nearest-fixed-geometry-prevents-picking-behind", !occluded.accepted && occluded.hitRecord==wall.SourceRecordIndex && !wall.CanMove, Detail(occluded));
+            Capture("03-original-fixed-occlusion.png");
+            CheckState("all-query-collider-enabled-states-restored",colliderStatesPreserved,"Queries="+report.queries+"; every original, generated and generic-proxy collider retained its prior enabled state.");
+            view.Restore(); report.cameraRestored=view.Matches();
+            CheckState("authored-camera-pose-and-projection-restored",report.cameraRestored,"Position, rotation, projection type, size/FOV, aspect and viewport restored.");
+            typeof(RecoveredFlowGame).GetMethod("RestoreSnapshot",Private).Invoke(Game,new[] { boardState }); boardState=null; view=null;
+
+            Require("original-ui-loads-pressure-plate-scene",FlowWaterRecoveryUI.Instance!=null,"Load gm601 through the production original-scene adapter.");
+            FlowWaterRecoveryUI.Instance.StartGame(601);
+            while(Game==null || Game.CurrentLevelId!=601 || !Game.IsLevelActive || Game.GameCamera==null) yield return null;
+            yield return null;
+            view=new CameraState(Game.GameCamera); boardState=typeof(RecoveredFlowGame).GetMethod("CaptureSnapshot",Private).Invoke(Game,null);
+            RecoveryPiece press=Record(3),plate=Record(12);
+            Require("original-pressure-plate-actors",press!=null && press.CanMove && plate!=null && plate.GetComponent<Resorte>()!=null,"Original gm601 record3 movable BloqueFijo; record12 BloqueResorte2.");
+            Collider plateBody=(plate.OriginalCaptureColliders??new Collider[0]).FirstOrDefault(c=>c!=null && c.name.IndexOf("CuboResorte",StringComparison.Ordinal)>=0);
+            Require("original-pressure-plate-collider",plateBody!=null,"Original authored CuboResorte collider.");
+            Vector3 unpressedBodyPosition=plateBody.transform.localPosition; Quaternion unpressedBodyRotation=plateBody.transform.localRotation; Vector3 unpressedBodyScale=plateBody.transform.localScale;
+            Probe pressPick=FindProbe("original-pressure-plate-drag-source",press,true,true);
+            Require("pressure-plate-source-selectable",pressPick!=null,"Original scene camera can select the recorded first movable block.");
+            Input("BeginDrag",pressPick.screenPoint);
+            Collider pressBody=(Collider)typeof(RecoveredFlowGame).GetField("dragCollider",Private).GetValue(Game);
+            Vector3 plateScreen=Game.GameCamera.WorldToScreenPoint(Aim(plateBody));
+            RaycastHit plateHit; Vector3 plateDrop;
+            bool plateSurface=RecoveredNativeInteraction.TryGetDropPoint(Game.GameCamera,plateScreen,Game,out plateDrop,out plateHit);
+            Vector3 unpressedLanding=plate.transform.position+Vector3.up*1.2f;
+            Require("native-pressure-plate-unpressed-landing",plateSurface && Vector3.Distance(plateDrop,unpressedLanding)<.04f,"drop="+plateDrop.ToString("F3")+", plate="+plate.transform.position.ToString("F3")+", collider="+(plateHit.collider==null?"none":plateHit.collider.name)+"; native doEnd uses guideY+4.2 before Resorte.doBajarPieza lowers the actor.");
+            Vector3 committedLanding=Vector3.positiveInfinity;
+            bool compressedAtCommit=false;
+            Animator originalPlateAnimator=plate.GetComponent<Resorte>().animResorte;
+            Action observeCommit=()=> { if(Game!=null && Game.MoveCount==1 && float.IsInfinity(committedLanding.y)) { committedLanding=press.transform.position; compressedAtCommit=originalPlateAnimator!=null && originalPlateAnimator.GetBool("boolResorte"); } };
+            Game.StateChanged+=observeCommit;
+            try
+            {
+                Input("ContinueDrag",plateScreen); Input("EndDrag");
+                foreach(object wait in WaitForMotion()) yield return wait;
+            }
+            finally { if(Game!=null) Game.StateChanged-=observeCommit; }
+            Vector3 commitExpected=compressedAtCommit?new Vector3(committedLanding.x,plate.transform.position.y,committedLanding.z):unpressedLanding;
+            bool nativePressureLine=committedLanding.x>=39.99f && committedLanding.x<=60.01f && committedLanding.z>=59.99f && committedLanding.z<=80.01f && Mathf.Abs(committedLanding.x+committedLanding.z-120)<.02f;
+            CheckState("production-pressure-commit-respects-native-compression-phase",Vector3.Distance(committedLanding,commitExpected)<.04f && nativePressureLine && Game.MoveCount==1,"quick-release commit="+committedLanding.ToString("F3")+", expected="+commitExpected.ToString("F3")+", compressed="+compressedAtCommit+"; native doBajar preserves the actor's current XZ and clears movement before it can finish its XYZ Lerp.");
+            foreach(object wait in Hold(.3f)) yield return wait;
+            CheckState("native-quick-release-pressure-lowers-actor-and-retains-inflight-xz",Mathf.Abs(press.transform.position.y-plate.transform.position.y)<.04f && nativePressureLine && Game.MoveCount==1,press.transform.position.ToString("F3")+", moves="+Game.MoveCount+"; original XYZ Lerp from(40,80) to(60,60) is interrupted at its then-current XZ, on x+z=120.");
+            if(Mathf.Abs(press.transform.position.y-plate.transform.position.y)>=.04f) PressureDiagnostics(plate,press);
+            CheckState("pressure-plate-release-layer-restored",pressBody!=null && pressBody.gameObject.layer==12 && !MoveBloque.MoviendoBloque,"Production EndDrag restores the exact body layer.");
+            Capture("04-original-pressure-plate-drop.png");
+            Game.Undo(); yield return null;
+            CheckState("pressure-plate-drop-undo",Vector3.Distance(press.transform.position,press.InitialPosition)<.02f && Game.MoveCount==0 && UIManagerScript.positionRes1==0,press.transform.position.ToString("F3")+", positionRes1="+UIManagerScript.positionRes1);
+            Animator plateAnimator=plate.GetComponent<Resorte>().animResorte;
+            CheckState("pressure-plate-undo-restores-model-animation-and-collider-pose",Vector3.Distance(plateBody.transform.localPosition,unpressedBodyPosition)<.0001f && Quaternion.Angle(plateBody.transform.localRotation,unpressedBodyRotation)<.01f && Vector3.Distance(plateBody.transform.localScale,unpressedBodyScale)<.0001f && (plateAnimator==null || (!plateAnimator.enabled && !plateAnimator.GetBool("boolResorte"))),"CuboResorte local="+plateBody.transform.localPosition+", enabled="+(plateAnimator!=null && plateAnimator.enabled));
+            Probe hoveringPick=FindProbe("pressure-plate-held-user-drag",press,true,true);
+            Require("pressure-plate-user-hover-source-selectable",hoveringPick!=null,"A second actual pointer drag follows the undo of the quick release.");
+            Input("BeginDrag",hoveringPick.screenPoint);
+            Vector3 hoverPointer=plateScreen;
+            Input("ContinueDrag",hoverPointer);
+            // The native pointer offset preserves the exact original grab
+            // point. Move the real screen pointer until that held actor is over
+            // the intended cell, as a user does, rather than teleporting it.
+            for(int adjust=0;adjust<8;adjust++)
+            {
+                Vector3 floating=(Vector3)typeof(RecoveredNativeDragMotion).GetField("floatingTarget",Private).GetValue(Motion);
+                Vector3 delta=new Vector3(plate.transform.position.x-floating.x,0,plate.transform.position.z-floating.z);
+                if(delta.sqrMagnitude<.000025f) break;
+                RaycastHit pointerHit;
+                using(RecoveredNativeInteraction.QueryOriginalColliders(Game))
+                    Require("pressure-hover-pointer-surface-"+adjust,Physics.Raycast(Game.GameCamera.ScreenPointToRay(hoverPointer),out pointerHit,Mathf.Infinity,Physics.DefaultRaycastLayers,QueryTriggerInteraction.UseGlobal),"Read the real surface beneath the adjusted pointer.");
+                hoverPointer=Game.GameCamera.WorldToScreenPoint(pointerHit.point+delta);
+                Input("ContinueDrag",hoverPointer);
+            }
+            float hoverUntil=Time.time+8;
+            while(Time.time<hoverUntil && (new Vector2(press.transform.position.x-plate.transform.position.x,press.transform.position.z-plate.transform.position.z).sqrMagnitude>.000225f || press.transform.position.y<plate.transform.position.y+15)) yield return null;
+            Require("native-held-user-drag-reaches-pressure-cell",new Vector2(press.transform.position.x-plate.transform.position.x,press.transform.position.z-plate.transform.position.z).sqrMagnitude<.0004f && press.transform.position.y>plate.transform.position.y+15,press.transform.position.ToString("F5")+", guide="+Motion.Target.ToString("F5")+"; the block is held aloft over the exact cell before release.");
+            Input("EndDrag"); foreach(object wait in WaitForMotion()) yield return wait;
+            foreach(object wait in Hold(.3f)) yield return wait;
+            CheckState("native-delayed-pressure-lowers-actor",Vector3.Distance(press.transform.position,plate.transform.position)<.04f && Game.MoveCount==1,press.transform.position.ToString("F5")+", target="+plate.transform.position.ToString("F5")+", moves="+Game.MoveCount+"; normal held drag lands and compresses at the original cell.");
+            CheckState("native-held-pressure-finishes-motion-and-water-gate",!Motion.IsActive && !MoveBloque.MoviendoBloque && !WaterGated(press),"Delayed doBajar ends the pending movement and restores the water node.");
+            Game.Undo(); yield return null;
+            CheckState("native-held-pressure-undo-restores-start",Vector3.Distance(press.transform.position,press.InitialPosition)<.02f && Game.MoveCount==0 && UIManagerScript.positionRes1==0,press.transform.position.ToString("F5")+", positionRes1="+UIManagerScript.positionRes1);
+            view.Restore(); report.cameraRestored=view.Matches();
+            CheckState("pressure-plate-camera-restored",report.cameraRestored,"Both scene cameras were restored before unloading or leaving Play mode.");
+            typeof(RecoveredFlowGame).GetMethod("RestoreSnapshot",Private).Invoke(Game,new[] { boardState }); boardState=null; view=null;
+
+            FlowWaterRecoveryUI.Instance.StartGame(1057);
+            while(Game==null || Game.CurrentLevelId!=1057 || !Game.IsLevelActive || Game.GameCamera==null) yield return null;
+            yield return null;
+            view=new CameraState(Game.GameCamera); boardState=typeof(RecoveredFlowGame).GetMethod("CaptureSnapshot",Private).Invoke(Game,null);
+            RecoveryPiece routed=Record(16),roof=Record(21);
+            Require("original-fixed-route-fixture",routed!=null && routed.CanMove && roof!=null && !roof.CanMove,"gm1057 record16 Curva4h below the original fixed BloqueFijo record21.");
+            Probe routedPick=FindProbe("fixed-roof-original-pipe",routed,true,true);
+            Require("pipe-under-original-fixed-roof-selectable",routedPick!=null,"The original scene camera reaches record16 below a fixed overhead block.");
+            Input("BeginDrag",routedPick.screenPoint);
+            Require("original-part20-enables-fixed-route",Motion!=null && Motion.UsesFixedRoute && Motion.RouteStage>0,"Native UIManagerScript.Start enables fijacionPieza for part20.");
+            Vector3 routeStart=routed.transform.position; bool traversedSide=false; float maximumY=routeStart.y;
+            float routeUntil=Time.time+8;
+            while(Motion.IsActive && Motion.RouteStage>0 && Time.time<routeUntil)
+            { maximumY=Mathf.Max(maximumY,routed.transform.position.y); traversedSide|=Mathf.Abs(routed.transform.position.z-routeStart.z)>10 || Mathf.Abs(routed.transform.position.x-routeStart.x)>10; yield return null; }
+            CheckState("native-escape-up-over-original-roof",Motion.IsActive && !Motion.IsReleased && Motion.RouteStage==0 && maximumY>40 && traversedSide,"maxY="+maximumY+", side="+traversedSide+", actor="+routed.transform.position.ToString("F3"));
+            Capture("06-native-fixed-roof-escaped.png");
+            // Keep the original guide under its roof: releasing without any
+            // pointer update must reverse the actual up/over path to that cell.
+            Input("EndDrag");
+            CheckState("native-escape-release-reverses-original-route",Motion.IsActive && Motion.IsReleased && Motion.RouteStage>0,"No guide or pointer update after the original up/over path.");
+            foreach(object wait in WaitForMotion()) yield return wait;
+            CheckState("native-escape-no-pointer-returns-under-original-roof",Vector3.Distance(routed.transform.position,routeStart)<.03f && Game.MoveCount==1,routed.transform.position.ToString("F3")+", transactions="+Game.MoveCount+"; native same-cell pickup/release is one successful undoable Recovery transaction, not a native visible score.");
+            Game.Undo(); yield return null;
+            CheckState("native-same-cell-return-undo",Vector3.Distance(routed.transform.position,routeStart)<.03f && Game.MoveCount==0,routed.transform.position.ToString("F3")+", transactions="+Game.MoveCount+"; Undo preserves the unchanged original cell and restores pre-pickup mechanism state.");
+            Probe secondRoutePick=FindProbe("fixed-roof-pipe-second-escape",routed,true,true);
+            Require("fixed-roof-pipe-selectable-after-original-return",secondRoutePick!=null,"The same original actor is selectable after its unchanged-cell return.");
+            Input("BeginDrag",secondRoutePick.screenPoint);
+            routeUntil=Time.time+8;
+            while(Motion.IsActive && Motion.RouteStage>0 && Time.time<routeUntil) yield return null;
+            Vector3 clearScreen=Game.GameCamera.WorldToScreenPoint(new Vector3(60,-.25f,40));
+            Vector3 clearLanding; RaycastHit clearHit;
+            Require("native-escape-destination-surface",RecoveredNativeInteraction.TryGetDropPoint(Game.GameCamera,clearScreen,Game,out clearLanding,out clearHit),"The original camera ray must hit a valid authored Map surface.");
+            report.notes.Add("gm1057 escape surface="+clearHit.collider.name+", colliderTransform="+clearHit.collider.transform.position.ToString("F5")+", guideLanding="+clearLanding.ToString("F5")+"; doEnd102ED60..78 adds native4.199999809265137 to the resolved original guide, preserving authored non-grid offsets.");
+            Input("ContinueDrag",clearScreen); Input("EndDrag");
+            foreach(object wait in WaitForMotion()) yield return wait;
+            CheckState("native-escape-final-commit",Vector3.Distance(routed.transform.position,clearLanding)<.03f && Game.MoveCount==1,routed.transform.position.ToString("F3")+", expected="+clearLanding.ToString("F3")+", surface="+clearHit.collider.name+", moves="+Game.MoveCount);
+            Game.Undo(); yield return null;
+            CheckState("native-escape-undo",Vector3.Distance(routed.transform.position,routeStart)<.03f && Game.MoveCount==0,routed.transform.position.ToString("F3"));
+            Require("arrange-original-pipe-for-return-route",Game.TryMove(routed.Index,new Vector3(60,3.95f,40)),Game.Status);
+            Probe returnPick=FindProbe("return-under-fixed-roof-source",routed,true,true);
+            Require("return-route-source-selectable",returnPick!=null,"Same original pipe in the empty adjacent cell.");
+            Input("BeginDrag",returnPick.screenPoint);
+            Vector3 coveredScreen=Game.GameCamera.WorldToScreenPoint(new Vector3(40,-.25f,40));
+            Input("ContinueDrag",coveredScreen);
+            foreach(object wait in Hold(.35f)) yield return wait;
+            Input("EndDrag");
+            CheckState("native-return-enters-fixed-route",Motion.IsActive && Motion.IsReleased && Motion.RouteStage>0,"Released route descends beside the original roof before sliding beneath it.");
+            foreach(object wait in WaitForMotion()) yield return wait;
+            CheckState("native-return-lands-under-fixed-roof",Vector3.Distance(routed.transform.position,routeStart)<.03f && Game.MoveCount==2,routed.transform.position.ToString("F3")+", moves="+Game.MoveCount);
+            Capture("07-native-fixed-roof-returned.png");
+            Game.Undo(); yield return null;
+            CheckState("native-return-undo",Vector3.Distance(routed.transform.position,new Vector3(60,3.95f,40))<.03f && Game.MoveCount==1,routed.transform.position.ToString("F3"));
+            view.Restore(); report.cameraRestored=view.Matches(); CheckState("fixed-route-camera-restored",report.cameraRestored,"Original third-scene camera restored.");
+        }
+        static IEnumerable Hold(float seconds) { float until=Time.time+seconds; while(Time.time<until) yield return null; }
+        static void PressureDiagnostics(RecoveryPiece plate,RecoveryPiece press)
+        {
+            Resorte source=plate.GetComponent<Resorte>(); Vector3 center=source.transform.position+Vector3.up*source.altura;
+            report.notes.Add("Pressure probe center="+center.ToString("F5")+", radius1, mask="+source.mascaraSuelo.value+", press="+press.transform.position.ToString("F5")+", moving="+RecoveredNativeDragMotion.IsMoving(press));
+            using(RecoveredNativeInteraction.QueryOriginalColliders(Game))
+            {
+                foreach(Collider candidate in press.OriginalCaptureColliders??new Collider[0])
+                    if(candidate!=null) report.notes.Add("Pressure candidate="+candidate.name+", active="+candidate.gameObject.activeInHierarchy+", enabled="+candidate.enabled+", layer="+candidate.gameObject.layer+", bounds="+candidate.bounds+", closestDistance="+Vector3.Distance(center,candidate.ClosestPoint(center)));
+                foreach(Collider hit in Physics.OverlapSphere(center,1,source.mascaraSuelo.value,QueryTriggerInteraction.UseGlobal))
+                    report.notes.Add("Pressure overlap="+hit.name+", owner="+(hit.GetComponentInParent<RecoveryPiece>()==null?-1:hit.GetComponentInParent<RecoveryPiece>().SourceRecordIndex));
+            }
+        }
+        static IEnumerable WaitForMotion()
+        {
+            float until=Time.time+15;
+            while(Motion!=null && Motion.IsActive) { if(Time.time>until) throw new TimeoutException("Native drag motion did not settle in15 seconds."); yield return null; }
+        }
+        static bool WaterGated(RecoveryPiece piece)
+        {
+            var water=RecoveredWaterNetwork.Instance; if(water==null) return false;
+            var values=typeof(RecoveredWaterNetwork).GetField("movingPieces",Private).GetValue(water) as HashSet<RecoveryPiece>;
+            return values!=null && values.Contains(piece);
+        }
+        static RecoveryPiece Record(int record) { return Game.Pieces.FirstOrDefault(p=>p!=null && p.SourceRecordIndex==record); }
+        static void Input(string method,Vector3 screen) { typeof(RecoveredFlowGame).GetMethod(method,Private).Invoke(Game,new object[] { new Vector2(screen.x,screen.y) }); }
+        static void Input(string method) { typeof(RecoveredFlowGame).GetMethod(method,Private).Invoke(Game,null); }
+        static Collider NativeBody(RecoveryPiece piece) { return piece.OriginalCaptureColliders == null ? null : piece.OriginalCaptureColliders.FirstOrDefault(c=>c!=null && c.gameObject.activeInHierarchy && c.gameObject.layer==LayerMask.NameToLayer("bloque")); }
+        static Vector3 Aim(Collider collider)
+        {
+            if (collider is BoxCollider) return collider.transform.TransformPoint(((BoxCollider)collider).center);
+            if (collider is SphereCollider) return collider.transform.TransformPoint(((SphereCollider)collider).center);
+            if (collider is CapsuleCollider) return collider.transform.TransformPoint(((CapsuleCollider)collider).center);
+            if (collider is MeshCollider && ((MeshCollider)collider).sharedMesh != null) return collider.transform.TransformPoint(((MeshCollider)collider).sharedMesh.bounds.center);
+            return collider.transform.position;
+        }
+        static IEnumerable<Vector3> Aims(Collider collider)
+        {
+            Vector3 center=Aim(collider); yield return center;
+            foreach (Vector3 offset in new[] { Vector3.right*3,Vector3.left*3,Vector3.forward*3,Vector3.back*3,Vector3.up*2,Vector3.down*2 }) yield return center+offset;
+        }
+        static Probe FindProbe(string name,RecoveryPiece actor,bool accepted,bool onlyLayer12)
+        {
+            foreach (Collider collider in actor.OriginalCaptureColliders ?? new Collider[0])
+            {
+                if (collider==null || !collider.gameObject.activeInHierarchy || (onlyLayer12 && collider.gameObject.layer!=LayerMask.NameToLayer("bloque"))) continue;
+                foreach (Vector3 aim in Aims(collider))
+                {
+                    Vector3 screen=Game.GameCamera.WorldToScreenPoint(aim); if (screen.z<=0 || !Game.GameCamera.pixelRect.Contains(new Vector2(screen.x,screen.y))) continue;
+                    Probe probe=Query(name,screen);
+                    if (probe.hitRecord==actor.SourceRecordIndex && probe.accepted==accepted && (!onlyLayer12 || probe.layer==LayerMask.NameToLayer("bloque"))) return probe;
+                }
+            }
+            return null;
+        }
+        static Probe FindHorizontalProbe(string name,RecoveryPiece actor,bool accepted)
+        {
+            Collider body=NativeBody(actor); if (body==null) return null;
+            foreach (Vector3 side in new[] { Vector3.forward,Vector3.back,Vector3.right,Vector3.left,new Vector3(1,0,1),new Vector3(-1,0,1) })
+            { SetHorizontalView(Aim(body),side); Probe probe=FindProbe(name,actor,accepted,true); if (probe!=null) return probe; }
+            return null;
+        }
+        static void SetHorizontalView(Vector3 aim,Vector3 side)
+        {
+            Camera camera=Game.GameCamera; camera.transform.position=aim+side.normalized*200; camera.transform.LookAt(aim,Vector3.up); camera.orthographic=true; camera.orthographicSize=45;
+        }
+        static Probe Query(string name,Vector3 screen)
+        {
+            Collider[] colliders=UnityEngine.Object.FindObjectsOfType<Collider>(true); bool[] enabled=colliders.Select(c=>c.enabled).ToArray();
+            RecoveryPiece picked; RaycastHit hit;
+            bool accepted=RecoveredNativeInteraction.TryPick(Game.GameCamera,screen,Game,out picked,out hit);
+            for (int i=0;i<colliders.Length;i++) if (colliders[i]!=null && colliders[i].enabled!=enabled[i]) colliderStatesPreserved=false;
+            RecoveryPiece owner=hit.collider==null?null:hit.collider.GetComponentInParent<RecoveryPiece>();
+            var probe=new Probe { name=name,accepted=accepted,pickedRecord=picked==null?-1:picked.SourceRecordIndex,hitRecord=owner==null?-1:owner.SourceRecordIndex,collider=hit.collider==null?"none":hit.collider.name,layer=hit.collider==null?-1:hit.collider.gameObject.layer,tag=hit.collider==null?"none":hit.collider.tag,screenPoint=screen,worldPoint=hit.point };
+            report.queries++; report.probes.Add(probe); return probe;
+        }
+        static string Detail(Probe probe) { return "accepted="+probe.accepted+", hitRecord="+probe.hitRecord+", collider="+probe.collider+", layer="+probe.layer+", tag="+probe.tag; }
+        static void Require(string name,bool passed,string detail) { CheckState(name,passed,detail); if (!passed) throw new InvalidOperationException(name+": "+detail); }
+        static void CheckState(string name,bool passed,string detail) { report.checks.Add(new Check { name=name,passed=passed,detail=detail }); File.WriteAllText(Path.Combine(Output,"interaction-validation.json"),JsonUtility.ToJson(report,true)); }
+        static void Capture(string file)
+        {
+            Camera camera=Game.GameCamera; RenderTexture old=camera.targetTexture,active=RenderTexture.active; float aspect=camera.aspect;
+            RenderTexture target=RenderTexture.GetTemporary(1280,800,24); Texture2D texture=new Texture2D(1280,800,TextureFormat.RGB24,false);
+            try { camera.targetTexture=target; camera.aspect=1.6f; camera.Render(); RenderTexture.active=target; texture.ReadPixels(new Rect(0,0,1280,800),0,0); texture.Apply(); string path=Path.Combine(Output,file); File.WriteAllBytes(path,texture.EncodeToPNG()); report.screenshots.Add(path); }
+            finally { camera.targetTexture=old; camera.aspect=aspect; RenderTexture.active=active; RenderTexture.ReleaseTemporary(target); UnityEngine.Object.DestroyImmediate(texture); }
+        }
+        static bool RestorePreferences()
+        {
+            string json=SessionState.GetString(PrefsKey,""); if (String.IsNullOrEmpty(json)) return false;
+            Preferences backup=JsonUtility.FromJson<Preferences>(json);
+            foreach (SavedPreference value in backup.values) if (!value.existed) PlayerPrefs.DeleteKey(value.key); else if (value.isFloat) PlayerPrefs.SetFloat(value.key,value.floatValue); else PlayerPrefs.SetInt(value.key,value.intValue);
+            PlayerPrefs.Save(); SessionState.EraseString(PrefsKey);
+            return backup.values.All(v=>PlayerPrefs.HasKey(v.key)==v.existed && (!v.existed || (v.isFloat ? PlayerPrefs.GetFloat(v.key)==v.floatValue : PlayerPrefs.GetInt(v.key)==v.intValue)));
+        }
+        static void OnLog(string message,string stack,LogType type) { if (report!=null && (type==LogType.Error || type==LogType.Exception || type==LogType.Assert)) report.runtimeErrors.Add(message+"\n"+stack); }
+        static void OnPlayMode(PlayModeStateChange state)
+        {
+            if (state==PlayModeStateChange.ExitingPlayMode) ReleaseImports();
+            if (state!=PlayModeStateChange.EnteredEditMode) return;
+            if (SessionState.GetBool(ActiveKey,false)) { RestorePreferences(); SessionState.EraseBool(ActiveKey); report=null; routine=null; }
+            RestoreScenes();
+        }
+        static void RestoreScenes()
+        {
+            string json=SessionState.GetString(ScenesKey,""); SessionState.EraseString(ScenesKey);
+            if (!String.IsNullOrEmpty(json)) { SavedScenes saved=JsonUtility.FromJson<SavedScenes>(json); if (saved.scenes!=null && saved.scenes.Length>0) EditorSceneManager.RestoreSceneManagerSetup(saved.scenes.Select(s=>new SceneSetup { path=s.path,isLoaded=s.loaded,isActive=s.active }).ToArray()); }
+        }
+        static void ReleaseImports() { if (!importsLocked) return; importsLocked=false; EditorApplication.UnlockReloadAssemblies(); AssetDatabase.AllowAutoRefresh(); }
+        static void Finish()
+        {
+            if (report==null) report=new Report();
+            if(Game!=null) Input("CancelDrag");
+            if (view!=null) { view.Restore(); report.cameraRestored=view.Matches(); }
+            if (boardState!=null && Game!=null) typeof(RecoveredFlowGame).GetMethod("RestoreSnapshot",Private).Invoke(Game,new[] { boardState });
+            report.preferencesRestored=RestorePreferences(); report.finishedUtc=DateTime.UtcNow.ToString("o");
+            report.passed=report.cameraRestored && report.preferencesRestored && colliderStatesPreserved && report.checks.Count>0 && report.checks.All(c=>c.passed) && report.runtimeErrors.Count==0;
+            Directory.CreateDirectory(Output); File.WriteAllText(Path.Combine(Output,"interaction-validation.json"),JsonUtility.ToJson(report,true));
+            bool passed=report.passed; Debug.Log("Native interaction validation "+(passed?"PASS":"FAIL")+"; checks="+report.checks.Count+"; queries="+report.queries+"; errors="+report.runtimeErrors.Count);
+            SessionState.EraseBool(ActiveKey); report=null; routine=null; boardState=null; view=null; ReleaseImports();
+            if (Application.isBatchMode) EditorApplication.Exit(passed?0:1); else EditorApplication.isPlaying=false;
+        }
+    }
+}
+#endif

@@ -1,0 +1,75 @@
+// CascadaTest2$$doControlAltura VA 0xFD42F0, inferred length 292
+void CascadaTest2__doControlAltura (CascadaTest2_o* __this, const MethodInfo* method);
+00FD42F0  stp      x30, x19, [sp, #-0x10]!               
+00FD42F4  fmov     s0, wzr                               
+00FD42F8  mov      x19, x0                               
+00FD42FC  str      wzr, [x0, #0xa4]                      
+00FD4300  strb     wzr, [x0, #0xb9]                      
+00FD4304  str      wzr, [x0, #0xbc]                      
+00FD4308  bl       #0xfd491c                              // CascadaTest2$$CheckCollision
+00FD430C  mov      w8, wzr                               
+00FD4310  and      w9, w0, #1                            
+00FD4314  strb     w9, [x19, #0xb9]                       // self.checkSuelo
+00FD4318  tbnz     w0, #0, #0xfd4408                     
+00FD431C  mov      w8, #0x70a4                           
+00FD4320  movk     w8, #0x40fd, lsl #16                  
+00FD4324  str      w8, [x19, #0xbc]                       // self.distan_y
+00FD4328  adrp     x8, #0x600000                         
+00FD432C  ldr      s0, [x8, #0x1d4]                      
+00FD4330  mov      x0, x19                               
+00FD4334  bl       #0xfd491c                              // CascadaTest2$$CheckCollision
+00FD4338  and      w8, w0, #1                            
+00FD433C  strb     w8, [x19, #0xb9]                       // self.checkSuelo
+00FD4340  tbz      w0, #0, #0xfd434c                     
+00FD4344  mov      w8, #1                                
+00FD4348  b        #0xfd4408                             
+00FD434C  mov      w8, #0x70a4                           
+00FD4350  movk     w8, #0x417d, lsl #16                  
+00FD4354  str      w8, [x19, #0xbc]                       // self.distan_y
+00FD4358  adrp     x8, #0x5ff000                         
+00FD435C  ldr      s0, [x8, #0xba8]                      
+00FD4360  mov      x0, x19                               
+00FD4364  bl       #0xfd491c                              // CascadaTest2$$CheckCollision
+00FD4368  and      w8, w0, #1                            
+00FD436C  strb     w8, [x19, #0xb9]                       // self.checkSuelo
+00FD4370  tbz      w0, #0, #0xfd437c                     
+00FD4374  mov      w8, #2                                
+00FD4378  b        #0xfd4408                             
+00FD437C  mov      w8, #0x147b                           
+00FD4380  movk     w8, #0x41be, lsl #16                  
+00FD4384  str      w8, [x19, #0xbc]                       // self.distan_y
+00FD4388  adrp     x8, #0x5ff000                         
+00FD438C  ldr      s0, [x8, #0xc70]                      
+00FD4390  mov      x0, x19                               
+00FD4394  bl       #0xfd491c                              // CascadaTest2$$CheckCollision
+00FD4398  and      w8, w0, #1                            
+00FD439C  strb     w8, [x19, #0xb9]                       // self.checkSuelo
+00FD43A0  tbz      w0, #0, #0xfd43ac                     
+00FD43A4  mov      w8, #3                                
+00FD43A8  b        #0xfd4408                             
+00FD43AC  mov      w8, #0x70a4                           
+00FD43B0  movk     w8, #0x41fd, lsl #16                  
+00FD43B4  str      w8, [x19, #0xbc]                       // self.distan_y
+00FD43B8  adrp     x8, #0x5ff000                         
+00FD43BC  ldr      s0, [x8, #0xeb8]                      
+00FD43C0  mov      x0, x19                               
+00FD43C4  bl       #0xfd491c                              // CascadaTest2$$CheckCollision
+00FD43C8  and      w8, w0, #1                            
+00FD43CC  strb     w8, [x19, #0xb9]                       // self.checkSuelo
+00FD43D0  tbz      w0, #0, #0xfd43dc                     
+00FD43D4  mov      w8, #4                                
+00FD43D8  b        #0xfd4408                             
+00FD43DC  mov      w8, #0x6666                           
+00FD43E0  movk     w8, #0x421e, lsl #16                  
+00FD43E4  str      w8, [x19, #0xbc]                       // self.distan_y
+00FD43E8  adrp     x8, #0x5ff000                         
+00FD43EC  ldr      s0, [x8, #0xe44]                      
+00FD43F0  mov      x0, x19                               
+00FD43F4  bl       #0xfd491c                              // CascadaTest2$$CheckCollision
+00FD43F8  and      w8, w0, #1                            
+00FD43FC  strb     w8, [x19, #0xb9]                       // self.checkSuelo
+00FD4400  tbz      w0, #0, #0xfd440c                     
+00FD4404  mov      w8, #5                                
+00FD4408  str      w8, [x19, #0xa4]                       // self.altura
+00FD440C  ldp      x30, x19, [sp], #0x10                 
+00FD4410  ret                                            

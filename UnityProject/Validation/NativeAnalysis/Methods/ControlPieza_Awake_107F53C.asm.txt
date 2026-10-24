@@ -1,0 +1,123 @@
+// ControlPieza$$Awake VA 0x107F53C, inferred length 484
+void ControlPieza__Awake (ControlPieza_o* __this, const MethodInfo* method);
+0107F53C  stp      d11, d10, [sp, #-0x50]!               
+0107F540  stp      d9, d8, [sp, #0x10]                   
+0107F544  str      x30, [sp, #0x20]                      
+0107F548  stp      x22, x21, [sp, #0x30]                 
+0107F54C  stp      x20, x19, [sp, #0x40]                 
+0107F550  adrp     x20, #0x24fb000                       
+0107F554  adrp     x21, #0x2368000                       
+0107F558  ldrb     w8, [x20, #0xedb]                     
+0107F55C  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+0107F560  mov      x19, x0                               
+0107F564  tbnz     w8, #0, #0x107f594                    
+0107F568  adrp     x0, #0x236d000                        
+0107F56C  ldr      x0, [x0, #0x498]                       // [0x236D498] Method$UnityEngine.GameObject.GetComponent<AguaControl>()
+0107F570  bl       #0xe61b78                             
+0107F574  adrp     x0, #0x2368000                        
+0107F578  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+0107F57C  bl       #0xe61b78                             
+0107F580  adrp     x0, #0x2368000                        
+0107F584  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0107F588  bl       #0xe61b78                             
+0107F58C  mov      w8, #1                                
+0107F590  strb     w8, [x20, #0xedb]                     
+0107F594  adrp     x22, #0x2368000                       
+0107F598  ldr      x20, [x19, #0x158]                     // self.prefabAguaControl
+0107F59C  ldr      x22, [x22, #0x900]                     // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+0107F5A0  fmov     s0, wzr                               
+0107F5A4  fmov     s1, wzr                               
+0107F5A8  fmov     s2, wzr                               
+0107F5AC  mov      x0, xzr                               
+0107F5B0  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0107F5B4  ldr      x0, [x21]                             
+0107F5B8  mov      v8.16b, v0.16b                        
+0107F5BC  mov      v9.16b, v1.16b                        
+0107F5C0  mov      v10.16b, v2.16b                       
+0107F5C4  ldr      w8, [x0, #0xe0]                       
+0107F5C8  mov      v11.16b, v3.16b                       
+0107F5CC  cbnz     w8, #0x107f5d4                        
+0107F5D0  bl       #0xe61c80                             
+0107F5D4  ldr      x1, [x22]                             
+0107F5D8  fmov     s0, wzr                               
+0107F5DC  fmov     s1, wzr                               
+0107F5E0  fmov     s2, wzr                               
+0107F5E4  mov      x0, x20                               
+0107F5E8  mov      v3.16b, v8.16b                        
+0107F5EC  mov      v4.16b, v9.16b                        
+0107F5F0  mov      v5.16b, v10.16b                       
+0107F5F4  mov      v6.16b, v11.16b                       
+0107F5F8  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+0107F5FC  str      x0, [x19, #0x160]                      // self.Agua
+0107F600  cbz      x0, #0x107f71c                        
+0107F604  mov      x1, xzr                               
+0107F608  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0107F60C  mov      x20, x0                               
+0107F610  mov      x0, x19                               
+0107F614  mov      x1, xzr                               
+0107F618  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0107F61C  cbz      x20, #0x107f71c                       
+0107F620  mov      x1, x0                                
+0107F624  mov      x0, x20                               
+0107F628  mov      x2, xzr                               
+0107F62C  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+0107F630  ldr      x0, [x19, #0x160]                      // self.Agua
+0107F634  cbz      x0, #0x107f71c                        
+0107F638  mov      x1, xzr                               
+0107F63C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0107F640  cbz      x0, #0x107f71c                        
+0107F644  fmov     s0, wzr                               
+0107F648  fmov     s1, wzr                               
+0107F64C  fmov     s2, wzr                               
+0107F650  mov      x1, xzr                               
+0107F654  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0107F658  ldr      x0, [x19, #0x160]                      // self.Agua
+0107F65C  cbz      x0, #0x107f71c                        
+0107F660  mov      x1, xzr                               
+0107F664  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0107F668  cbz      x0, #0x107f71c                        
+0107F66C  adrp     x8, #0x5ff000                         
+0107F670  ldr      s0, [x8, #0xd2c]                      
+0107F674  mov      x1, xzr                               
+0107F678  mov      v1.16b, v0.16b                        
+0107F67C  mov      v2.16b, v0.16b                        
+0107F680  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+0107F684  ldr      x0, [x19, #0x160]                      // self.Agua
+0107F688  cbz      x0, #0x107f71c                        
+0107F68C  adrp     x8, #0x236d000                        
+0107F690  ldr      x8, [x8, #0x498]                       // [0x236D498] Method$UnityEngine.GameObject.GetComponent<AguaControl>()
+0107F694  ldr      x1, [x8]                              
+0107F698  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0107F69C  cbz      x0, #0x107f71c                        
+0107F6A0  ldrb     w8, [x19, #0x168]                      // self.origen1
+0107F6A4  ldp      x22, x21, [sp, #0x30]                 
+0107F6A8  ldr      x30, [sp, #0x20]                      
+0107F6AC  ldp      d9, d8, [sp, #0x10]                   
+0107F6B0  strb     w8, [x0, #0x20]                       
+0107F6B4  ldrb     w8, [x19, #0x169]                      // self.origen2
+0107F6B8  strb     w8, [x0, #0x21]                       
+0107F6BC  ldrb     w8, [x19, #0x16a]                      // self.origen3
+0107F6C0  strb     w8, [x0, #0x22]                       
+0107F6C4  ldrb     w8, [x19, #0x16b]                      // self.origen4
+0107F6C8  strb     w8, [x0, #0x23]                       
+0107F6CC  ldrb     w8, [x19, #0x16c]                      // self.origen5
+0107F6D0  strb     w8, [x0, #0x24]                       
+0107F6D4  ldrb     w8, [x19, #0x16d]                      // self.origen6
+0107F6D8  strb     w8, [x0, #0x25]                       
+0107F6DC  ldr      q0, [x19, #0x170]                      // self.conOrigen1
+0107F6E0  stur     q0, [x0, #0x28]                       
+0107F6E4  ldr      q0, [x19, #0x180]                      // self.conOrigen3
+0107F6E8  stur     q0, [x0, #0x38]                       
+0107F6EC  ldr      x8, [x19, #0x198]                      // self.conOrigen6
+0107F6F0  str      x8, [x0, #0x48]                       
+0107F6F4  ldr      q0, [x19, #0x1f0]                      // self.dirCentro1
+0107F6F8  add      x8, x0, #0x108                        
+0107F6FC  str      q0, [x8]                              
+0107F700  ldrb     w8, [x19, #0x200]                      // self.activarFuente
+0107F704  strb     w8, [x0, #0x118]                      
+0107F708  ldrb     w8, [x19, #0x201]                      // self.excepcionMap1
+0107F70C  ldp      x20, x19, [sp, #0x40]                 
+0107F710  strb     w8, [x0, #0x128]                      
+0107F714  ldp      d11, d10, [sp], #0x50                 
+0107F718  ret                                            
+0107F71C  bl       #0xe61da0                             

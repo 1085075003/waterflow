@@ -1,0 +1,287 @@
+// AguaControl$$Start VA 0xFC99A4, inferred length 1140
+void AguaControl__Start (AguaControl_o* __this, const MethodInfo* method);
+00FC99A4  stp      x30, x21, [sp, #-0x20]!               
+00FC99A8  stp      x20, x19, [sp, #0x10]                 
+00FC99AC  adrp     x20, #0x24fb000                       
+00FC99B0  ldrb     w8, [x20, #0xb34]                     
+00FC99B4  mov      x19, x0                               
+00FC99B8  tbnz     w8, #0, #0xfc99f4                     
+00FC99BC  adrp     x0, #0x236a000                        
+00FC99C0  ldr      x0, [x0, #0x5b0]                       // [0x236A5B0] Method$UnityEngine.GameObject.GetComponent<AguasControl>()
+00FC99C4  bl       #0xe61b78                             
+00FC99C8  adrp     x0, #0x236a000                        
+00FC99CC  ldr      x0, [x0, #0x5b8]                       // [0x236A5B8] Method$UnityEngine.GameObject.GetComponent<FuenteTest1>()
+00FC99D0  bl       #0xe61b78                             
+00FC99D4  adrp     x0, #0x2368000                        
+00FC99D8  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FC99DC  bl       #0xe61b78                             
+00FC99E0  adrp     x0, #0x236a000                        
+00FC99E4  ldr      x0, [x0, #0x5c0]                       // [0x236A5C0] 'Map1'
+00FC99E8  bl       #0xe61b78                             
+00FC99EC  mov      w8, #1                                
+00FC99F0  strb     w8, [x20, #0xb34]                     
+00FC99F4  adrp     x21, #0x236a000                       
+00FC99F8  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FC99FC  ldr      x21, [x21, #0x5b8]                     // [0x236A5B8] Method$UnityEngine.GameObject.GetComponent<FuenteTest1>()
+00FC9A00  cbz      w8, #0xfc9ba4                         
+00FC9A04  ldr      x0, [x19, #0xb0]                       // self.origen1
+00FC9A08  cbz      x0, #0xfc9e14                         
+00FC9A0C  ldr      x1, [x21]                             
+00FC9A10  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FC9A14  cbz      x0, #0xfc9e14                         
+00FC9A18  strb     wzr, [x0, #0x1d9]                     
+00FC9A1C  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FC9A20  strb     w8, [x0, #0x1da]                      
+00FC9A24  ldrb     w9, [x19, #0x22]                       // self.ori3
+00FC9A28  strb     w9, [x0, #0x1db]                      
+00FC9A2C  ldrb     w9, [x19, #0x23]                       // self.ori4
+00FC9A30  strb     w9, [x0, #0x1dc]                      
+00FC9A34  ldrb     w9, [x19, #0x25]                       // self.ori6
+00FC9A38  strb     w9, [x0, #0x1dd]                      
+00FC9A3C  ldr      x9, [x19, #0x28]                       // self.conOri1
+00FC9A40  str      x9, [x0, #0x2b8]                      
+00FC9A44  ldr      x9, [x19, #0x58]                       // self.conHole1
+00FC9A48  str      x9, [x0, #0x2c0]                      
+00FC9A4C  ldr      x9, [x19, #0x80]                       // self.conDoor1
+00FC9A50  str      x9, [x0, #0x2c8]                      
+00FC9A54  ldrb     w9, [x19, #0x118]                      // self.activarFuente
+00FC9A58  strb     w9, [x0, #0x1df]                      
+00FC9A5C  ldr      w9, [x19, #0x108]                      // self.dirCentro1
+00FC9A60  cbz      w9, #0xfc9a68                         
+00FC9A64  str      w9, [x0, #0x108]                      
+00FC9A68  cbz      w8, #0xfc9be0                         
+00FC9A6C  ldr      x0, [x19, #0xb8]                       // self.origen2
+00FC9A70  cbz      x0, #0xfc9e14                         
+00FC9A74  ldr      x1, [x21]                             
+00FC9A78  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FC9A7C  cbz      x0, #0xfc9e14                         
+00FC9A80  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FC9A84  strb     wzr, [x0, #0x1da]                     
+00FC9A88  strb     w8, [x0, #0x1d9]                      
+00FC9A8C  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FC9A90  strb     w8, [x0, #0x1db]                      
+00FC9A94  ldrb     w9, [x19, #0x23]                       // self.ori4
+00FC9A98  strb     w9, [x0, #0x1dc]                      
+00FC9A9C  ldrb     w9, [x19, #0x25]                       // self.ori6
+00FC9AA0  strb     w9, [x0, #0x1dd]                      
+00FC9AA4  ldr      x9, [x19, #0x30]                       // self.conOri2
+00FC9AA8  str      x9, [x0, #0x2b8]                      
+00FC9AAC  ldr      x9, [x19, #0x60]                       // self.conHole2
+00FC9AB0  str      x9, [x0, #0x2c0]                      
+00FC9AB4  ldr      x9, [x19, #0x88]                       // self.conDoor2
+00FC9AB8  str      x9, [x0, #0x2c8]                      
+00FC9ABC  ldrb     w9, [x19, #0x118]                      // self.activarFuente
+00FC9AC0  strb     w9, [x0, #0x1df]                      
+00FC9AC4  ldr      w9, [x19, #0x10c]                      // self.dirCentro2
+00FC9AC8  cbz      w9, #0xfc9ad0                         
+00FC9ACC  str      w9, [x0, #0x108]                      
+00FC9AD0  cbz      w8, #0xfc9c1c                         
+00FC9AD4  ldr      x0, [x19, #0xc0]                       // self.origen3
+00FC9AD8  cbz      x0, #0xfc9e14                         
+00FC9ADC  ldr      x1, [x21]                             
+00FC9AE0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FC9AE4  cbz      x0, #0xfc9e14                         
+00FC9AE8  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FC9AEC  strb     w8, [x0, #0x1d9]                      
+00FC9AF0  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FC9AF4  strb     wzr, [x0, #0x1db]                     
+00FC9AF8  strb     w8, [x0, #0x1da]                      
+00FC9AFC  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FC9B00  strb     w8, [x0, #0x1dc]                      
+00FC9B04  ldrb     w9, [x19, #0x25]                       // self.ori6
+00FC9B08  strb     w9, [x0, #0x1dd]                      
+00FC9B0C  ldr      x9, [x19, #0x38]                       // self.conOri3
+00FC9B10  str      x9, [x0, #0x2b8]                      
+00FC9B14  ldr      x9, [x19, #0x68]                       // self.conHole3
+00FC9B18  str      x9, [x0, #0x2c0]                      
+00FC9B1C  ldr      x9, [x19, #0x90]                       // self.conDoor3
+00FC9B20  str      x9, [x0, #0x2c8]                      
+00FC9B24  ldrb     w9, [x19, #0x118]                      // self.activarFuente
+00FC9B28  strb     w9, [x0, #0x1df]                      
+00FC9B2C  ldr      w9, [x19, #0x110]                      // self.dirCentro3
+00FC9B30  cbz      w9, #0xfc9b38                         
+00FC9B34  str      w9, [x0, #0x108]                      
+00FC9B38  cbz      w8, #0xfc9c58                         
+00FC9B3C  ldr      x0, [x19, #0xc8]                       // self.origen4
+00FC9B40  cbz      x0, #0xfc9e14                         
+00FC9B44  ldr      x1, [x21]                             
+00FC9B48  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FC9B4C  cbz      x0, #0xfc9e14                         
+00FC9B50  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FC9B54  strb     w8, [x0, #0x1d9]                      
+00FC9B58  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FC9B5C  strb     w8, [x0, #0x1da]                      
+00FC9B60  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FC9B64  strb     wzr, [x0, #0x1dc]                     
+00FC9B68  strb     w8, [x0, #0x1db]                      
+00FC9B6C  ldrb     w8, [x19, #0x25]                       // self.ori6
+00FC9B70  strb     w8, [x0, #0x1dd]                      
+00FC9B74  ldr      x8, [x19, #0x40]                       // self.conOri4
+00FC9B78  str      x8, [x0, #0x2b8]                      
+00FC9B7C  ldr      x8, [x19, #0x70]                       // self.conHole4
+00FC9B80  str      x8, [x0, #0x2c0]                      
+00FC9B84  ldr      x8, [x19, #0x98]                       // self.conDoor4
+00FC9B88  str      x8, [x0, #0x2c8]                      
+00FC9B8C  ldrb     w8, [x19, #0x118]                      // self.activarFuente
+00FC9B90  strb     w8, [x0, #0x1df]                      
+00FC9B94  ldr      w8, [x19, #0x114]                      // self.dirCentro4
+00FC9B98  cbz      w8, #0xfc9c8c                         
+00FC9B9C  str      w8, [x0, #0x108]                      
+00FC9BA0  b        #0xfc9c8c                             
+00FC9BA4  adrp     x8, #0x2368000                        
+00FC9BA8  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FC9BAC  ldr      x20, [x19, #0xb0]                      // self.origen1
+00FC9BB0  ldr      x0, [x8]                              
+00FC9BB4  ldr      w8, [x0, #0xe0]                       
+00FC9BB8  cbnz     w8, #0xfc9bc0                         
+00FC9BBC  bl       #0xe61c80                             
+00FC9BC0  mov      x0, x20                               
+00FC9BC4  mov      x1, xzr                               
+00FC9BC8  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9BCC  ldr      x0, [x19, #0xe0]                       // self.cascada1
+00FC9BD0  mov      x1, xzr                               
+00FC9BD4  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9BD8  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FC9BDC  cbnz     w8, #0xfc9a6c                         
+00FC9BE0  adrp     x8, #0x2368000                        
+00FC9BE4  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FC9BE8  ldr      x20, [x19, #0xb8]                      // self.origen2
+00FC9BEC  ldr      x0, [x8]                              
+00FC9BF0  ldr      w8, [x0, #0xe0]                       
+00FC9BF4  cbnz     w8, #0xfc9bfc                         
+00FC9BF8  bl       #0xe61c80                             
+00FC9BFC  mov      x0, x20                               
+00FC9C00  mov      x1, xzr                               
+00FC9C04  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9C08  ldr      x0, [x19, #0xe8]                       // self.cascada2
+00FC9C0C  mov      x1, xzr                               
+00FC9C10  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9C14  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FC9C18  cbnz     w8, #0xfc9ad4                         
+00FC9C1C  adrp     x8, #0x2368000                        
+00FC9C20  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FC9C24  ldr      x20, [x19, #0xc0]                      // self.origen3
+00FC9C28  ldr      x0, [x8]                              
+00FC9C2C  ldr      w8, [x0, #0xe0]                       
+00FC9C30  cbnz     w8, #0xfc9c38                         
+00FC9C34  bl       #0xe61c80                             
+00FC9C38  mov      x0, x20                               
+00FC9C3C  mov      x1, xzr                               
+00FC9C40  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9C44  ldr      x0, [x19, #0xf0]                       // self.cascada3
+00FC9C48  mov      x1, xzr                               
+00FC9C4C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9C50  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FC9C54  cbnz     w8, #0xfc9b3c                         
+00FC9C58  adrp     x8, #0x2368000                        
+00FC9C5C  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FC9C60  ldr      x20, [x19, #0xc8]                      // self.origen4
+00FC9C64  ldr      x0, [x8]                              
+00FC9C68  ldr      w8, [x0, #0xe0]                       
+00FC9C6C  cbnz     w8, #0xfc9c74                         
+00FC9C70  bl       #0xe61c80                             
+00FC9C74  mov      x0, x20                               
+00FC9C78  mov      x1, xzr                               
+00FC9C7C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9C80  ldr      x0, [x19, #0xf8]                       // self.cascada4
+00FC9C84  mov      x1, xzr                               
+00FC9C88  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9C8C  ldrb     w8, [x19, #0x24]                       // self.ori5
+00FC9C90  cbz      w8, #0xfc9cdc                         
+00FC9C94  ldr      x0, [x19, #0xd0]                       // self.origen5
+00FC9C98  cbz      x0, #0xfc9e14                         
+00FC9C9C  ldr      x1, [x21]                             
+00FC9CA0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FC9CA4  cbz      x0, #0xfc9e14                         
+00FC9CA8  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FC9CAC  strb     w8, [x0, #0x1d9]                      
+00FC9CB0  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FC9CB4  strb     w8, [x0, #0x1da]                      
+00FC9CB8  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FC9CBC  strb     w8, [x0, #0x1db]                      
+00FC9CC0  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FC9CC4  strb     w8, [x0, #0x1dc]                      
+00FC9CC8  ldrb     w8, [x19, #0x25]                       // self.ori6
+00FC9CCC  strb     w8, [x0, #0x1dd]                      
+00FC9CD0  ldr      x8, [x19, #0x48]                       // self.conOri5
+00FC9CD4  str      x8, [x0, #0x2b8]                      
+00FC9CD8  b        #0xfc9d28                             
+00FC9CDC  adrp     x8, #0x2368000                        
+00FC9CE0  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FC9CE4  ldr      x20, [x19, #0xd0]                      // self.origen5
+00FC9CE8  ldr      x0, [x8]                              
+00FC9CEC  ldr      w8, [x0, #0xe0]                       
+00FC9CF0  cbnz     w8, #0xfc9cf8                         
+00FC9CF4  bl       #0xe61c80                             
+00FC9CF8  mov      x0, x20                               
+00FC9CFC  mov      x1, xzr                               
+00FC9D00  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9D04  ldrb     w8, [x19, #0x128]                      // self.excepcionMap1
+00FC9D08  cbnz     w8, #0xfc9d28                         
+00FC9D0C  ldr      x0, [x19, #0x120]                      // self.esferaCentro
+00FC9D10  cbz      x0, #0xfc9e14                         
+00FC9D14  adrp     x8, #0x236a000                        
+00FC9D18  ldr      x8, [x8, #0x5c0]                       // [0x236A5C0] 'Map1'
+00FC9D1C  mov      x2, xzr                               
+00FC9D20  ldr      x1, [x8]                              
+00FC9D24  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+00FC9D28  ldrb     w8, [x19, #0x25]                       // self.ori6
+00FC9D2C  cbz      w8, #0xfc9d88                         
+00FC9D30  ldr      x0, [x19, #0xd8]                       // self.origen6
+00FC9D34  cbz      x0, #0xfc9e14                         
+00FC9D38  ldr      x1, [x21]                             
+00FC9D3C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FC9D40  cbz      x0, #0xfc9e14                         
+00FC9D44  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FC9D48  strb     w8, [x0, #0x1d9]                      
+00FC9D4C  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FC9D50  strb     w8, [x0, #0x1da]                      
+00FC9D54  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FC9D58  strb     w8, [x0, #0x1db]                      
+00FC9D5C  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FC9D60  strb     w8, [x0, #0x1dc]                      
+00FC9D64  mov      w8, #1                                
+00FC9D68  strb     w8, [x0, #0x1dd]                      
+00FC9D6C  ldr      x8, [x19, #0x50]                       // self.conOri6
+00FC9D70  str      x8, [x0, #0x2b8]                      
+00FC9D74  ldr      x8, [x19, #0x78]                       // self.conHole6
+00FC9D78  str      x8, [x0, #0x2c0]                      
+00FC9D7C  ldr      x8, [x19, #0xa0]                       // self.conDoor6
+00FC9D80  str      x8, [x0, #0x2c8]                      
+00FC9D84  b        #0xfc9dbc                             
+00FC9D88  adrp     x8, #0x2368000                        
+00FC9D8C  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FC9D90  ldr      x20, [x19, #0xd8]                      // self.origen6
+00FC9D94  ldr      x0, [x8]                              
+00FC9D98  ldr      w8, [x0, #0xe0]                       
+00FC9D9C  cbnz     w8, #0xfc9da4                         
+00FC9DA0  bl       #0xe61c80                             
+00FC9DA4  mov      x0, x20                               
+00FC9DA8  mov      x1, xzr                               
+00FC9DAC  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9DB0  ldr      x0, [x19, #0x100]                      // self.cascada6
+00FC9DB4  mov      x1, xzr                               
+00FC9DB8  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FC9DBC  ldr      x0, [x19, #0xa8]                       // self.aguas
+00FC9DC0  cbz      x0, #0xfc9e14                         
+00FC9DC4  adrp     x8, #0x236a000                        
+00FC9DC8  ldr      x8, [x8, #0x5b0]                       // [0x236A5B0] Method$UnityEngine.GameObject.GetComponent<AguasControl>()
+00FC9DCC  ldr      x1, [x8]                              
+00FC9DD0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FC9DD4  cbz      x0, #0xfc9e14                         
+00FC9DD8  ldrb     w8, [x19, #0x20]                       // self.ori1
+00FC9DDC  strb     w8, [x0, #0x31]                       
+00FC9DE0  ldrb     w8, [x19, #0x21]                       // self.ori2
+00FC9DE4  strb     w8, [x0, #0x32]                       
+00FC9DE8  ldrb     w8, [x19, #0x22]                       // self.ori3
+00FC9DEC  strb     w8, [x0, #0x33]                       
+00FC9DF0  ldrb     w8, [x19, #0x23]                       // self.ori4
+00FC9DF4  strb     w8, [x0, #0x34]                       
+00FC9DF8  ldrb     w8, [x19, #0x24]                       // self.ori5
+00FC9DFC  strb     w8, [x0, #0x35]                       
+00FC9E00  ldrb     w8, [x19, #0x25]                       // self.ori6
+00FC9E04  ldp      x20, x19, [sp, #0x10]                 
+00FC9E08  strb     w8, [x0, #0x36]                       
+00FC9E0C  ldp      x30, x21, [sp], #0x20                 
+00FC9E10  ret                                            
+00FC9E14  bl       #0xe61da0                             

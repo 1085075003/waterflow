@@ -1,0 +1,421 @@
+// ObservadorDoor$$doBuscarOrigen VA 0x10C64A8, inferred length 1676
+void ObservadorDoor__doBuscarOrigen (ObservadorDoor_o* __this, const MethodInfo* method);
+010C64A8  stp      x30, x21, [sp, #-0x20]!               
+010C64AC  stp      x20, x19, [sp, #0x10]                 
+010C64B0  adrp     x20, #0x24fb000                       
+010C64B4  ldrb     w8, [x20, #0xff1]                     
+010C64B8  mov      x19, x0                               
+010C64BC  tbnz     w8, #0, #0x10c6528                    
+010C64C0  adrp     x0, #0x236a000                        
+010C64C4  ldr      x0, [x0, #0x5b8]                       // [0x236A5B8] Method$UnityEngine.GameObject.GetComponent<FuenteTest1>()
+010C64C8  bl       #0xe61b78                             
+010C64CC  adrp     x0, #0x236d000                        
+010C64D0  ldr      x0, [x0, #0x950]                       // [0x236D950] '/Aguas/Origen6'
+010C64D4  bl       #0xe61b78                             
+010C64D8  adrp     x0, #0x236d000                        
+010C64DC  ldr      x0, [x0, #0x958]                       // [0x236D958] '/Aguas/Origen4'
+010C64E0  bl       #0xe61b78                             
+010C64E4  adrp     x0, #0x236d000                        
+010C64E8  ldr      x0, [x0, #0x960]                       // [0x236D960] 'AguaControl5(Clone)'
+010C64EC  bl       #0xe61b78                             
+010C64F0  adrp     x0, #0x236d000                        
+010C64F4  ldr      x0, [x0, #0x968]                       // [0x236D968] '/Aguas/OrigenCentro'
+010C64F8  bl       #0xe61b78                             
+010C64FC  adrp     x0, #0x236d000                        
+010C6500  ldr      x0, [x0, #0x970]                       // [0x236D970] '/Aguas/Origen3'
+010C6504  bl       #0xe61b78                             
+010C6508  adrp     x0, #0x236d000                        
+010C650C  ldr      x0, [x0, #0x978]                       // [0x236D978] '/Aguas/Origen1'
+010C6510  bl       #0xe61b78                             
+010C6514  adrp     x0, #0x236d000                        
+010C6518  ldr      x0, [x0, #0x980]                       // [0x236D980] '/Aguas/Origen2'
+010C651C  bl       #0xe61b78                             
+010C6520  mov      w8, #1                                
+010C6524  strb     w8, [x20, #0xff1]                     
+010C6528  mov      x0, x19                               
+010C652C  mov      x1, xzr                               
+010C6530  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6534  cbz      x0, #0x10c6890                        
+010C6538  mov      x1, xzr                               
+010C653C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C6540  cbz      x0, #0x10c6894                        
+010C6544  mov      x1, xzr                               
+010C6548  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C654C  cbz      x0, #0x10c6898                        
+010C6550  adrp     x20, #0x236d000                       
+010C6554  ldr      x20, [x20, #0x960]                     // [0x236D960] 'AguaControl5(Clone)'
+010C6558  ldr      x1, [x20]                             
+010C655C  mov      x2, xzr                               
+010C6560  bl       #0x2010150                             // UnityEngine.Transform$$Find
+010C6564  cbz      x0, #0x10c689c                        
+010C6568  mov      x1, xzr                               
+010C656C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010C6570  ldr      x8, [x20]                             
+010C6574  stp      x0, x8, [x19, #0x40]                   // self.check1
+010C6578  adrp     x21, #0x236a000                       
+010C657C  ldrb     w8, [x19, #0x38]                       // self.ori1
+010C6580  ldr      x21, [x21, #0x5b8]                     // [0x236A5B8] Method$UnityEngine.GameObject.GetComponent<FuenteTest1>()
+010C6584  cbz      w8, #0x10c6600                        
+010C6588  mov      x0, x19                               
+010C658C  mov      x1, xzr                               
+010C6590  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6594  cbz      x0, #0x10c688c                        
+010C6598  mov      x1, xzr                               
+010C659C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C65A0  cbz      x0, #0x10c688c                        
+010C65A4  adrp     x20, #0x236d000                       
+010C65A8  ldr      x20, [x20, #0x978]                     // [0x236D978] '/Aguas/Origen1'
+010C65AC  mov      x1, xzr                               
+010C65B0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C65B4  ldr      x8, [x19, #0x48]                       // self.checkVar
+010C65B8  ldr      x1, [x20]                             
+010C65BC  mov      x20, x0                               
+010C65C0  mov      x2, xzr                               
+010C65C4  mov      x0, x8                                
+010C65C8  bl       #0x1958280                             // System.String$$Concat
+010C65CC  cbz      x20, #0x10c688c                       
+010C65D0  mov      x1, x0                                
+010C65D4  mov      x0, x20                               
+010C65D8  mov      x2, xzr                               
+010C65DC  bl       #0x2010150                             // UnityEngine.Transform$$Find
+010C65E0  cbz      x0, #0x10c688c                        
+010C65E4  mov      x1, xzr                               
+010C65E8  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010C65EC  str      x0, [x19, #0x50]                       // self.origen1
+010C65F0  cbz      x0, #0x10c688c                        
+010C65F4  ldr      x1, [x21]                             
+010C65F8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010C65FC  str      x0, [x19, #0x80]                       // self.origen1Fuente
+010C6600  ldrb     w8, [x19, #0x39]                       // self.ori2
+010C6604  cbz      w8, #0x10c6680                        
+010C6608  mov      x0, x19                               
+010C660C  mov      x1, xzr                               
+010C6610  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6614  cbz      x0, #0x10c688c                        
+010C6618  mov      x1, xzr                               
+010C661C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C6620  cbz      x0, #0x10c688c                        
+010C6624  adrp     x20, #0x236d000                       
+010C6628  ldr      x20, [x20, #0x980]                     // [0x236D980] '/Aguas/Origen2'
+010C662C  mov      x1, xzr                               
+010C6630  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6634  ldr      x8, [x19, #0x48]                       // self.checkVar
+010C6638  ldr      x1, [x20]                             
+010C663C  mov      x20, x0                               
+010C6640  mov      x2, xzr                               
+010C6644  mov      x0, x8                                
+010C6648  bl       #0x1958280                             // System.String$$Concat
+010C664C  cbz      x20, #0x10c688c                       
+010C6650  mov      x1, x0                                
+010C6654  mov      x0, x20                               
+010C6658  mov      x2, xzr                               
+010C665C  bl       #0x2010150                             // UnityEngine.Transform$$Find
+010C6660  cbz      x0, #0x10c688c                        
+010C6664  mov      x1, xzr                               
+010C6668  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010C666C  str      x0, [x19, #0x58]                       // self.origen2
+010C6670  cbz      x0, #0x10c688c                        
+010C6674  ldr      x1, [x21]                             
+010C6678  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010C667C  str      x0, [x19, #0x88]                       // self.origen2Fuente
+010C6680  ldrb     w8, [x19, #0x3a]                       // self.ori3
+010C6684  cbz      w8, #0x10c6700                        
+010C6688  mov      x0, x19                               
+010C668C  mov      x1, xzr                               
+010C6690  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6694  cbz      x0, #0x10c688c                        
+010C6698  mov      x1, xzr                               
+010C669C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C66A0  cbz      x0, #0x10c688c                        
+010C66A4  adrp     x20, #0x236d000                       
+010C66A8  ldr      x20, [x20, #0x970]                     // [0x236D970] '/Aguas/Origen3'
+010C66AC  mov      x1, xzr                               
+010C66B0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C66B4  ldr      x8, [x19, #0x48]                       // self.checkVar
+010C66B8  ldr      x1, [x20]                             
+010C66BC  mov      x20, x0                               
+010C66C0  mov      x2, xzr                               
+010C66C4  mov      x0, x8                                
+010C66C8  bl       #0x1958280                             // System.String$$Concat
+010C66CC  cbz      x20, #0x10c688c                       
+010C66D0  mov      x1, x0                                
+010C66D4  mov      x0, x20                               
+010C66D8  mov      x2, xzr                               
+010C66DC  bl       #0x2010150                             // UnityEngine.Transform$$Find
+010C66E0  cbz      x0, #0x10c688c                        
+010C66E4  mov      x1, xzr                               
+010C66E8  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010C66EC  str      x0, [x19, #0x60]                       // self.origen3
+010C66F0  cbz      x0, #0x10c688c                        
+010C66F4  ldr      x1, [x21]                             
+010C66F8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010C66FC  str      x0, [x19, #0x90]                       // self.origen3Fuente
+010C6700  ldrb     w8, [x19, #0x3b]                       // self.ori4
+010C6704  cbz      w8, #0x10c6780                        
+010C6708  mov      x0, x19                               
+010C670C  mov      x1, xzr                               
+010C6710  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6714  cbz      x0, #0x10c688c                        
+010C6718  mov      x1, xzr                               
+010C671C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C6720  cbz      x0, #0x10c688c                        
+010C6724  adrp     x20, #0x236d000                       
+010C6728  ldr      x20, [x20, #0x958]                     // [0x236D958] '/Aguas/Origen4'
+010C672C  mov      x1, xzr                               
+010C6730  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6734  ldr      x8, [x19, #0x48]                       // self.checkVar
+010C6738  ldr      x1, [x20]                             
+010C673C  mov      x20, x0                               
+010C6740  mov      x2, xzr                               
+010C6744  mov      x0, x8                                
+010C6748  bl       #0x1958280                             // System.String$$Concat
+010C674C  cbz      x20, #0x10c688c                       
+010C6750  mov      x1, x0                                
+010C6754  mov      x0, x20                               
+010C6758  mov      x2, xzr                               
+010C675C  bl       #0x2010150                             // UnityEngine.Transform$$Find
+010C6760  cbz      x0, #0x10c688c                        
+010C6764  mov      x1, xzr                               
+010C6768  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010C676C  str      x0, [x19, #0x68]                       // self.origen4
+010C6770  cbz      x0, #0x10c688c                        
+010C6774  ldr      x1, [x21]                             
+010C6778  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010C677C  str      x0, [x19, #0x98]                       // self.origen4Fuente
+010C6780  ldrb     w8, [x19, #0x3c]                       // self.ori5
+010C6784  cbz      w8, #0x10c6800                        
+010C6788  mov      x0, x19                               
+010C678C  mov      x1, xzr                               
+010C6790  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6794  cbz      x0, #0x10c688c                        
+010C6798  mov      x1, xzr                               
+010C679C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C67A0  cbz      x0, #0x10c688c                        
+010C67A4  adrp     x20, #0x236d000                       
+010C67A8  ldr      x20, [x20, #0x968]                     // [0x236D968] '/Aguas/OrigenCentro'
+010C67AC  mov      x1, xzr                               
+010C67B0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C67B4  ldr      x8, [x19, #0x48]                       // self.checkVar
+010C67B8  ldr      x1, [x20]                             
+010C67BC  mov      x20, x0                               
+010C67C0  mov      x2, xzr                               
+010C67C4  mov      x0, x8                                
+010C67C8  bl       #0x1958280                             // System.String$$Concat
+010C67CC  cbz      x20, #0x10c688c                       
+010C67D0  mov      x1, x0                                
+010C67D4  mov      x0, x20                               
+010C67D8  mov      x2, xzr                               
+010C67DC  bl       #0x2010150                             // UnityEngine.Transform$$Find
+010C67E0  cbz      x0, #0x10c688c                        
+010C67E4  mov      x1, xzr                               
+010C67E8  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010C67EC  str      x0, [x19, #0x70]                       // self.origen5
+010C67F0  cbz      x0, #0x10c688c                        
+010C67F4  ldr      x1, [x21]                             
+010C67F8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010C67FC  str      x0, [x19, #0xa0]                       // self.origen5Fuente
+010C6800  ldrb     w8, [x19, #0x3d]                       // self.ori6
+010C6804  cbz      w8, #0x10c6880                        
+010C6808  mov      x0, x19                               
+010C680C  mov      x1, xzr                               
+010C6810  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6814  cbz      x0, #0x10c688c                        
+010C6818  mov      x1, xzr                               
+010C681C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C6820  cbz      x0, #0x10c688c                        
+010C6824  adrp     x20, #0x236d000                       
+010C6828  ldr      x20, [x20, #0x950]                     // [0x236D950] '/Aguas/Origen6'
+010C682C  mov      x1, xzr                               
+010C6830  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6834  ldr      x8, [x19, #0x48]                       // self.checkVar
+010C6838  ldr      x1, [x20]                             
+010C683C  mov      x20, x0                               
+010C6840  mov      x2, xzr                               
+010C6844  mov      x0, x8                                
+010C6848  bl       #0x1958280                             // System.String$$Concat
+010C684C  cbz      x20, #0x10c688c                       
+010C6850  mov      x1, x0                                
+010C6854  mov      x0, x20                               
+010C6858  mov      x2, xzr                               
+010C685C  bl       #0x2010150                             // UnityEngine.Transform$$Find
+010C6860  cbz      x0, #0x10c688c                        
+010C6864  mov      x1, xzr                               
+010C6868  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010C686C  str      x0, [x19, #0x78]                       // self.origen6
+010C6870  cbz      x0, #0x10c688c                        
+010C6874  ldr      x1, [x21]                             
+010C6878  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010C687C  str      x0, [x19, #0xa8]                       // self.origen6Fuente
+010C6880  ldp      x20, x19, [sp, #0x10]                 
+010C6884  ldp      x30, x21, [sp], #0x20                 
+010C6888  ret                                            
+010C688C  bl       #0xe61da0                             
+010C6890  bl       #0xe61da0                             
+010C6894  bl       #0xe61da0                             
+010C6898  bl       #0xe61da0                             
+010C689C  bl       #0xe61da0                             
+010C68A0  b        #0x10c68ac                            
+010C68A4  b        #0x10c68ac                            
+010C68A8  b        #0x10c68ac                            
+010C68AC  mov      x21, x0                               
+010C68B0  mov      w20, w1                               
+010C68B4  b        #0x10c68c0                            
+010C68B8  mov      x20, x1                               
+010C68BC  mov      x21, x0                               
+010C68C0  cmp      w20, #1                               
+010C68C4  b.ne     #0x10c6b28                            
+010C68C8  mov      x0, x21                               
+010C68CC  bl       #0x224d2d0                            
+010C68D0  mov      x21, x0                               
+010C68D4  adrp     x0, #0x2368000                        
+010C68D8  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+010C68DC  bl       #0xe61b8c                             
+010C68E0  ldr      x8, [x21]                             
+010C68E4  ldr      x1, [x8]                              
+010C68E8  bl       #0xe621cc                             
+010C68EC  tbz      w0, #0, #0x10c696c                    
+010C68F0  bl       #0x224d2e0                            
+010C68F4  mov      x0, x19                               
+010C68F8  mov      x1, xzr                               
+010C68FC  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6900  cbz      x0, #0x10c6990                        
+010C6904  mov      x1, xzr                               
+010C6908  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C690C  cbz      x0, #0x10c6994                        
+010C6910  mov      x1, xzr                               
+010C6914  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6918  mov      x21, x0                               
+010C691C  cbz      x0, #0x10c6998                        
+010C6920  adrp     x0, #0x236d000                        
+010C6924  ldr      x0, [x0, #0x988]                       // [0x236D988] 'AguaControl6(Clone)'
+010C6928  bl       #0xe61b8c                             
+010C692C  mov      x1, x0                                
+010C6930  mov      x0, x21                               
+010C6934  mov      x2, xzr                               
+010C6938  bl       #0x2010150                             // UnityEngine.Transform$$Find
+010C693C  cbz      x0, #0x10c699c                        
+010C6940  mov      x1, xzr                               
+010C6944  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010C6948  str      x0, [x19, #0x40]                       // self.check1
+010C694C  adrp     x0, #0x236d000                        
+010C6950  ldr      x0, [x0, #0x988]                       // [0x236D988] 'AguaControl6(Clone)'
+010C6954  bl       #0xe61b8c                             
+010C6958  str      x0, [x19, #0x48]                       // self.checkVar
+010C695C  adrp     x0, #0x236d000                        
+010C6960  ldr      x0, [x0, #0x988]                       // [0x236D988] 'AguaControl6(Clone)'
+010C6964  bl       #0xe61b8c                             
+010C6968  b        #0x10c6578                            
+010C696C  mov      w0, #8                                
+010C6970  bl       #0x224d320                            
+010C6974  ldr      x8, [x21]                             
+010C6978  str      x8, [x0]                              
+010C697C  adrp     x1, #0x2253000                        
+010C6980  add      x1, x1, #0x618                        
+010C6984  mov      x2, xzr                               
+010C6988  bl       #0x224d330                            
+010C698C  b        #0x10c6b14                            
+010C6990  bl       #0xe61da0                             
+010C6994  bl       #0xe61da0                             
+010C6998  bl       #0xe61da0                             
+010C699C  bl       #0xe61da0                             
+010C69A0  b        #0x10c69ac                            
+010C69A4  b        #0x10c69ac                            
+010C69A8  b        #0x10c69ac                            
+010C69AC  mov      x21, x0                               
+010C69B0  b        #0x10c69b8                            
+010C69B4  mov      x21, x0                               
+010C69B8  cmp      w1, w20                               
+010C69BC  b.ne     #0x10c6b28                            
+010C69C0  mov      x0, x21                               
+010C69C4  bl       #0x224d2d0                            
+010C69C8  mov      x21, x0                               
+010C69CC  adrp     x0, #0x2368000                        
+010C69D0  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+010C69D4  bl       #0xe61b8c                             
+010C69D8  ldr      x8, [x21]                             
+010C69DC  ldr      x1, [x8]                              
+010C69E0  bl       #0xe621cc                             
+010C69E4  tbz      w0, #0, #0x10c6a74                    
+010C69E8  bl       #0x224d2e0                            
+010C69EC  mov      x0, x19                               
+010C69F0  mov      x1, xzr                               
+010C69F4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C69F8  cbz      x0, #0x10c6a64                        
+010C69FC  mov      x1, xzr                               
+010C6A00  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C6A04  cbz      x0, #0x10c6a68                        
+010C6A08  mov      x1, xzr                               
+010C6A0C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6A10  mov      x21, x0                               
+010C6A14  cbz      x0, #0x10c6a6c                        
+010C6A18  adrp     x0, #0x236d000                        
+010C6A1C  ldr      x0, [x0, #0x990]                       // [0x236D990] 'AguaControl5B(Clone)'
+010C6A20  bl       #0xe61b8c                             
+010C6A24  mov      x1, x0                                
+010C6A28  mov      x0, x21                               
+010C6A2C  mov      x2, xzr                               
+010C6A30  bl       #0x2010150                             // UnityEngine.Transform$$Find
+010C6A34  cbz      x0, #0x10c6a70                        
+010C6A38  mov      x1, xzr                               
+010C6A3C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010C6A40  str      x0, [x19, #0x40]                       // self.check1
+010C6A44  adrp     x0, #0x236d000                        
+010C6A48  ldr      x0, [x0, #0x990]                       // [0x236D990] 'AguaControl5B(Clone)'
+010C6A4C  bl       #0xe61b8c                             
+010C6A50  str      x0, [x19, #0x48]                       // self.checkVar
+010C6A54  adrp     x0, #0x236d000                        
+010C6A58  ldr      x0, [x0, #0x990]                       // [0x236D990] 'AguaControl5B(Clone)'
+010C6A5C  bl       #0xe61b8c                             
+010C6A60  b        #0x10c6578                            
+010C6A64  bl       #0xe61da0                             
+010C6A68  bl       #0xe61da0                             
+010C6A6C  bl       #0xe61da0                             
+010C6A70  bl       #0xe61da0                             
+010C6A74  mov      w0, #8                                
+010C6A78  bl       #0x224d320                            
+010C6A7C  ldr      x8, [x21]                             
+010C6A80  str      x8, [x0]                              
+010C6A84  adrp     x1, #0x2253000                        
+010C6A88  add      x1, x1, #0x618                        
+010C6A8C  mov      x2, xzr                               
+010C6A90  bl       #0x224d330                            
+010C6A94  b        #0x10c6b14                            
+010C6A98  b        #0x10c6ab8                            
+010C6A9C  b        #0x10c6ab8                            
+010C6AA0  b        #0x10c6ab8                            
+010C6AA4  mov      x21, x0                               
+010C6AA8  bl       #0x224d2e0                            
+010C6AAC  b        #0x10c6b28                            
+010C6AB0  mov      x21, x0                               
+010C6AB4  b        #0x10c6abc                            
+010C6AB8  mov      x21, x0                               
+010C6ABC  cmp      w1, w20                               
+010C6AC0  b.ne     #0x10c6b28                            
+010C6AC4  mov      x0, x21                               
+010C6AC8  bl       #0x224d2d0                            
+010C6ACC  mov      x20, x0                               
+010C6AD0  adrp     x0, #0x2368000                        
+010C6AD4  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+010C6AD8  bl       #0xe61b8c                             
+010C6ADC  ldr      x8, [x20]                             
+010C6AE0  ldr      x1, [x8]                              
+010C6AE4  bl       #0xe621cc                             
+010C6AE8  tbz      w0, #0, #0x10c6af4                    
+010C6AEC  bl       #0x224d2e0                            
+010C6AF0  b        #0x10c6578                            
+010C6AF4  mov      w0, #8                                
+010C6AF8  bl       #0x224d320                            
+010C6AFC  ldr      x8, [x20]                             
+010C6B00  str      x8, [x0]                              
+010C6B04  adrp     x1, #0x2253000                        
+010C6B08  add      x1, x1, #0x618                        
+010C6B0C  mov      x2, xzr                               
+010C6B10  bl       #0x224d330                            
+010C6B14  mov      x21, x0                               
+010C6B18  bl       #0x224d2e0                            
+010C6B1C  b        #0x10c6b28                            
+010C6B20  mov      x21, x0                               
+010C6B24  bl       #0x224d2e0                            
+010C6B28  mov      x0, x21                               
+010C6B2C  bl       #0xf5dd7c                             
+010C6B30  bl       #0xd2eb98                             

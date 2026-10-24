@@ -1,0 +1,310 @@
+// ObservadorDoor$$doEstadoAbierto VA 0x10C715C, inferred length 1232
+void ObservadorDoor__doEstadoAbierto (ObservadorDoor_o* __this, const MethodInfo* method);
+010C715C  stp      x30, x19, [sp, #-0x10]!               
+010C7160  ldr      x8, [x0, #0xb8]                       
+010C7164  cbz      x8, #0x10c7628                        
+010C7168  ldr      w9, [x0, #0x2c]                       
+010C716C  ldr      w8, [x8, #0x20]                       
+010C7170  mov      x19, x0                               
+010C7174  cmp      w9, #1                                
+010C7178  str      w8, [x0, #0xc0]                       
+010C717C  b.ne     #0x10c7290                            
+010C7180  ldr      x9, [x19, #0x80]                       // self.origen1Fuente
+010C7184  cbz      x9, #0x10c7628                        
+010C7188  add      x10, x9, #0x2d5                       
+010C718C  mov      w11, #0x100                           
+010C7190  strh     w11, [x10]                            
+010C7194  ldrb     w10, [x19, #0x38]                      // self.ori1
+010C7198  cbz      w10, #0x10c71a0                       
+010C719C  strb     wzr, [x9, #0x2d7]                     
+010C71A0  ldrb     w9, [x19, #0x39]                       // self.ori2
+010C71A4  cbz      w9, #0x10c71b4                        
+010C71A8  ldr      x9, [x19, #0x88]                       // self.origen2Fuente
+010C71AC  cbz      x9, #0x10c7628                        
+010C71B0  strb     wzr, [x9, #0x2d7]                     
+010C71B4  ldrb     w9, [x19, #0x3a]                       // self.ori3
+010C71B8  cbz      w9, #0x10c71c8                        
+010C71BC  ldr      x9, [x19, #0x90]                       // self.origen3Fuente
+010C71C0  cbz      x9, #0x10c7628                        
+010C71C4  strb     wzr, [x9, #0x2d7]                     
+010C71C8  ldrb     w9, [x19, #0x3b]                       // self.ori4
+010C71CC  cbz      w9, #0x10c71dc                        
+010C71D0  ldr      x9, [x19, #0x98]                       // self.origen4Fuente
+010C71D4  cbz      x9, #0x10c7628                        
+010C71D8  strb     wzr, [x9, #0x2d7]                     
+010C71DC  ldrb     w9, [x19, #0x3c]                       // self.ori5
+010C71E0  cbz      w9, #0x10c71f0                        
+010C71E4  ldr      x9, [x19, #0xa0]                       // self.origen5Fuente
+010C71E8  cbz      x9, #0x10c7628                        
+010C71EC  strb     wzr, [x9, #0x2d7]                     
+010C71F0  cmp      w8, #2                                
+010C71F4  b.ne     #0x10c7218                            
+010C71F8  ldr      x0, [x19, #0x88]                       // self.origen2Fuente
+010C71FC  mov      w8, #1                                
+010C7200  str      w8, [x19, #0xcc]                       // self.esf
+010C7204  cbz      x0, #0x10c7628                        
+010C7208  mov      w1, #1                                
+010C720C  mov      x2, xzr                               
+010C7210  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C7214  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C7218  cmp      w8, #3                                
+010C721C  b.ne     #0x10c7240                            
+010C7220  ldr      x0, [x19, #0x90]                       // self.origen3Fuente
+010C7224  mov      w8, #1                                
+010C7228  str      w8, [x19, #0xcc]                       // self.esf
+010C722C  cbz      x0, #0x10c7628                        
+010C7230  mov      w1, #1                                
+010C7234  mov      x2, xzr                               
+010C7238  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C723C  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C7240  cmp      w8, #4                                
+010C7244  b.ne     #0x10c7268                            
+010C7248  ldr      x0, [x19, #0x98]                       // self.origen4Fuente
+010C724C  mov      w8, #1                                
+010C7250  str      w8, [x19, #0xcc]                       // self.esf
+010C7254  cbz      x0, #0x10c7628                        
+010C7258  mov      w1, #1                                
+010C725C  mov      x2, xzr                               
+010C7260  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C7264  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C7268  cmp      w8, #5                                
+010C726C  b.ne     #0x10c728c                            
+010C7270  ldr      x0, [x19, #0xa0]                       // self.origen5Fuente
+010C7274  mov      w8, #1                                
+010C7278  str      w8, [x19, #0xcc]                       // self.esf
+010C727C  cbz      x0, #0x10c7628                        
+010C7280  mov      w1, #1                                
+010C7284  mov      x2, xzr                               
+010C7288  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C728C  ldr      w9, [x19, #0x2c]                       // self.numDoor
+010C7290  cmp      w9, #2                                
+010C7294  b.ne     #0x10c73a8                            
+010C7298  ldr      x8, [x19, #0x88]                       // self.origen2Fuente
+010C729C  cbz      x8, #0x10c7628                        
+010C72A0  add      x9, x8, #0x2d5                        
+010C72A4  mov      w10, #0x100                           
+010C72A8  strh     w10, [x9]                             
+010C72AC  ldrb     w9, [x19, #0x38]                       // self.ori1
+010C72B0  cbz      w9, #0x10c72c0                        
+010C72B4  ldr      x9, [x19, #0x80]                       // self.origen1Fuente
+010C72B8  cbz      x9, #0x10c7628                        
+010C72BC  strb     wzr, [x9, #0x2d8]                     
+010C72C0  ldrb     w9, [x19, #0x39]                       // self.ori2
+010C72C4  cbz      w9, #0x10c72cc                        
+010C72C8  strb     wzr, [x8, #0x2d8]                     
+010C72CC  ldrb     w8, [x19, #0x3a]                       // self.ori3
+010C72D0  cbz      w8, #0x10c72e0                        
+010C72D4  ldr      x8, [x19, #0x90]                       // self.origen3Fuente
+010C72D8  cbz      x8, #0x10c7628                        
+010C72DC  strb     wzr, [x8, #0x2d8]                     
+010C72E0  ldrb     w8, [x19, #0x3b]                       // self.ori4
+010C72E4  cbz      w8, #0x10c72f4                        
+010C72E8  ldr      x8, [x19, #0x98]                       // self.origen4Fuente
+010C72EC  cbz      x8, #0x10c7628                        
+010C72F0  strb     wzr, [x8, #0x2d8]                     
+010C72F4  ldrb     w8, [x19, #0x3c]                       // self.ori5
+010C72F8  cbz      w8, #0x10c7308                        
+010C72FC  ldr      x8, [x19, #0xa0]                       // self.origen5Fuente
+010C7300  cbz      x8, #0x10c7628                        
+010C7304  strb     wzr, [x8, #0x2d8]                     
+010C7308  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C730C  cmp      w8, #1                                
+010C7310  b.ne     #0x10c7334                            
+010C7314  ldr      x0, [x19, #0x80]                       // self.origen1Fuente
+010C7318  mov      w8, #2                                
+010C731C  str      w8, [x19, #0xcc]                       // self.esf
+010C7320  cbz      x0, #0x10c7628                        
+010C7324  mov      w1, #2                                
+010C7328  mov      x2, xzr                               
+010C732C  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C7330  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C7334  cmp      w8, #3                                
+010C7338  b.ne     #0x10c735c                            
+010C733C  ldr      x0, [x19, #0x90]                       // self.origen3Fuente
+010C7340  mov      w8, #2                                
+010C7344  str      w8, [x19, #0xcc]                       // self.esf
+010C7348  cbz      x0, #0x10c7628                        
+010C734C  mov      w1, #2                                
+010C7350  mov      x2, xzr                               
+010C7354  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C7358  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C735C  cmp      w8, #4                                
+010C7360  b.ne     #0x10c7384                            
+010C7364  ldr      x0, [x19, #0x98]                       // self.origen4Fuente
+010C7368  mov      w8, #2                                
+010C736C  str      w8, [x19, #0xcc]                       // self.esf
+010C7370  cbz      x0, #0x10c7628                        
+010C7374  mov      w1, #2                                
+010C7378  mov      x2, xzr                               
+010C737C  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C7380  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C7384  cmp      w8, #5                                
+010C7388  b.ne     #0x10c73a8                            
+010C738C  ldr      x0, [x19, #0xa0]                       // self.origen5Fuente
+010C7390  mov      w8, #2                                
+010C7394  str      w8, [x19, #0xcc]                       // self.esf
+010C7398  cbz      x0, #0x10c7628                        
+010C739C  mov      w1, #2                                
+010C73A0  mov      x2, xzr                               
+010C73A4  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C73A8  ldr      w8, [x19, #0x2c]                       // self.numDoor
+010C73AC  cmp      w8, #3                                
+010C73B0  b.ne     #0x10c7504                            
+010C73B4  ldr      x8, [x19, #0x90]                       // self.origen3Fuente
+010C73B8  cbz      x8, #0x10c7628                        
+010C73BC  add      x9, x8, #0x2d5                        
+010C73C0  mov      w10, #0x100                           
+010C73C4  strh     w10, [x9]                             
+010C73C8  ldrb     w9, [x19, #0x38]                       // self.ori1
+010C73CC  cbz      w9, #0x10c73dc                        
+010C73D0  ldr      x9, [x19, #0x80]                       // self.origen1Fuente
+010C73D4  cbz      x9, #0x10c7628                        
+010C73D8  strb     wzr, [x9, #0x2d9]                     
+010C73DC  ldrb     w9, [x19, #0x39]                       // self.ori2
+010C73E0  cbz      w9, #0x10c73f0                        
+010C73E4  ldr      x9, [x19, #0x88]                       // self.origen2Fuente
+010C73E8  cbz      x9, #0x10c7628                        
+010C73EC  strb     wzr, [x9, #0x2d9]                     
+010C73F0  ldrb     w9, [x19, #0x3a]                       // self.ori3
+010C73F4  cbz      w9, #0x10c73fc                        
+010C73F8  strb     wzr, [x8, #0x2d9]                     
+010C73FC  ldrb     w8, [x19, #0x3b]                       // self.ori4
+010C7400  cbz      w8, #0x10c7410                        
+010C7404  ldr      x8, [x19, #0x98]                       // self.origen4Fuente
+010C7408  cbz      x8, #0x10c7628                        
+010C740C  strb     wzr, [x8, #0x2d9]                     
+010C7410  ldrb     w8, [x19, #0x3c]                       // self.ori5
+010C7414  cbz      w8, #0x10c7424                        
+010C7418  ldr      x8, [x19, #0xa0]                       // self.origen5Fuente
+010C741C  cbz      x8, #0x10c7628                        
+010C7420  strb     wzr, [x8, #0x2d9]                     
+010C7424  ldrb     w8, [x19, #0x3d]                       // self.ori6
+010C7428  cbz      w8, #0x10c7438                        
+010C742C  ldr      x8, [x19, #0xa8]                       // self.origen6Fuente
+010C7430  cbz      x8, #0x10c7628                        
+010C7434  strb     wzr, [x8, #0x2d9]                     
+010C7438  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C743C  cmp      w8, #1                                
+010C7440  b.ne     #0x10c7464                            
+010C7444  ldr      x0, [x19, #0x80]                       // self.origen1Fuente
+010C7448  mov      w8, #3                                
+010C744C  str      w8, [x19, #0xcc]                       // self.esf
+010C7450  cbz      x0, #0x10c7628                        
+010C7454  mov      w1, #3                                
+010C7458  mov      x2, xzr                               
+010C745C  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C7460  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C7464  cmp      w8, #2                                
+010C7468  b.ne     #0x10c748c                            
+010C746C  ldr      x0, [x19, #0x88]                       // self.origen2Fuente
+010C7470  mov      w8, #3                                
+010C7474  str      w8, [x19, #0xcc]                       // self.esf
+010C7478  cbz      x0, #0x10c7628                        
+010C747C  mov      w1, #3                                
+010C7480  mov      x2, xzr                               
+010C7484  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C7488  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C748C  cmp      w8, #4                                
+010C7490  b.ne     #0x10c74b4                            
+010C7494  ldr      x0, [x19, #0x98]                       // self.origen4Fuente
+010C7498  mov      w8, #3                                
+010C749C  str      w8, [x19, #0xcc]                       // self.esf
+010C74A0  cbz      x0, #0x10c7628                        
+010C74A4  mov      w1, #3                                
+010C74A8  mov      x2, xzr                               
+010C74AC  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C74B0  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C74B4  cmp      w8, #5                                
+010C74B8  b.ne     #0x10c74dc                            
+010C74BC  ldr      x0, [x19, #0xa0]                       // self.origen5Fuente
+010C74C0  mov      w8, #3                                
+010C74C4  str      w8, [x19, #0xcc]                       // self.esf
+010C74C8  cbz      x0, #0x10c7628                        
+010C74CC  mov      w1, #3                                
+010C74D0  mov      x2, xzr                               
+010C74D4  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C74D8  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C74DC  cmp      w8, #6                                
+010C74E0  b.ne     #0x10c7500                            
+010C74E4  ldr      x0, [x19, #0xa8]                       // self.origen6Fuente
+010C74E8  mov      w8, #3                                
+010C74EC  str      w8, [x19, #0xcc]                       // self.esf
+010C74F0  cbz      x0, #0x10c7628                        
+010C74F4  mov      w1, #3                                
+010C74F8  mov      x2, xzr                               
+010C74FC  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C7500  ldr      w8, [x19, #0x2c]                       // self.numDoor
+010C7504  cmp      w8, #4                                
+010C7508  b.ne     #0x10c7620                            
+010C750C  ldr      x8, [x19, #0x98]                       // self.origen4Fuente
+010C7510  cbz      x8, #0x10c7628                        
+010C7514  add      x9, x8, #0x2d5                        
+010C7518  mov      w10, #0x100                           
+010C751C  strh     w10, [x9]                             
+010C7520  ldrb     w9, [x19, #0x38]                       // self.ori1
+010C7524  cbz      w9, #0x10c7534                        
+010C7528  ldr      x9, [x19, #0x80]                       // self.origen1Fuente
+010C752C  cbz      x9, #0x10c7628                        
+010C7530  strb     wzr, [x9, #0x2da]                     
+010C7534  ldrb     w9, [x19, #0x39]                       // self.ori2
+010C7538  cbz      w9, #0x10c7548                        
+010C753C  ldr      x9, [x19, #0x88]                       // self.origen2Fuente
+010C7540  cbz      x9, #0x10c7628                        
+010C7544  strb     wzr, [x9, #0x2da]                     
+010C7548  ldrb     w9, [x19, #0x3a]                       // self.ori3
+010C754C  cbz      w9, #0x10c755c                        
+010C7550  ldr      x9, [x19, #0x90]                       // self.origen3Fuente
+010C7554  cbz      x9, #0x10c7628                        
+010C7558  strb     wzr, [x9, #0x2da]                     
+010C755C  ldrb     w9, [x19, #0x3b]                       // self.ori4
+010C7560  cbz      w9, #0x10c7568                        
+010C7564  strb     wzr, [x8, #0x2da]                     
+010C7568  ldrb     w8, [x19, #0x3c]                       // self.ori5
+010C756C  cbz      w8, #0x10c757c                        
+010C7570  ldr      x8, [x19, #0xa0]                       // self.origen5Fuente
+010C7574  cbz      x8, #0x10c7628                        
+010C7578  strb     wzr, [x8, #0x2da]                     
+010C757C  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C7580  cmp      w8, #1                                
+010C7584  b.ne     #0x10c75a8                            
+010C7588  ldr      x0, [x19, #0x80]                       // self.origen1Fuente
+010C758C  mov      w8, #4                                
+010C7590  str      w8, [x19, #0xcc]                       // self.esf
+010C7594  cbz      x0, #0x10c7628                        
+010C7598  mov      w1, #4                                
+010C759C  mov      x2, xzr                               
+010C75A0  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C75A4  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C75A8  cmp      w8, #2                                
+010C75AC  b.ne     #0x10c75d0                            
+010C75B0  ldr      x0, [x19, #0x88]                       // self.origen2Fuente
+010C75B4  mov      w8, #4                                
+010C75B8  str      w8, [x19, #0xcc]                       // self.esf
+010C75BC  cbz      x0, #0x10c7628                        
+010C75C0  mov      w1, #4                                
+010C75C4  mov      x2, xzr                               
+010C75C8  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C75CC  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C75D0  cmp      w8, #3                                
+010C75D4  b.ne     #0x10c75f8                            
+010C75D8  ldr      x0, [x19, #0x90]                       // self.origen3Fuente
+010C75DC  mov      w8, #4                                
+010C75E0  str      w8, [x19, #0xcc]                       // self.esf
+010C75E4  cbz      x0, #0x10c7628                        
+010C75E8  mov      w1, #4                                
+010C75EC  mov      x2, xzr                               
+010C75F0  bl       #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C75F4  ldr      w8, [x19, #0xc0]                       // self.hayOrigen
+010C75F8  cmp      w8, #5                                
+010C75FC  b.ne     #0x10c7620                            
+010C7600  ldr      x0, [x19, #0xa0]                       // self.origen5Fuente
+010C7604  mov      w8, #4                                
+010C7608  str      w8, [x19, #0xcc]                       // self.esf
+010C760C  cbz      x0, #0x10c7628                        
+010C7610  mov      w1, #4                                
+010C7614  mov      x2, xzr                               
+010C7618  ldp      x30, x19, [sp], #0x10                 
+010C761C  b        #0x10a3554                             // FuenteTest1$$doDesbloquearEsferas
+010C7620  ldp      x30, x19, [sp], #0x10                 
+010C7624  ret                                            
+010C7628  bl       #0xe61da0                             

@@ -1,0 +1,110 @@
+// CascadaTest$$doActivarEsferaFiltrante VA 0xFD33F8, inferred length 432
+void CascadaTest__doActivarEsferaFiltrante (CascadaTest_o* __this, const MethodInfo* method);
+00FD33F8  str      d10, [sp, #-0x30]!                    
+00FD33FC  stp      d9, d8, [sp, #0x10]                   
+00FD3400  stp      x30, x19, [sp, #0x20]                 
+00FD3404  ldr      w8, [x0, #0x150]                      
+00FD3408  adrp     x9, #0x5ff000                         
+00FD340C  adrp     x10, #0x5ff000                        
+00FD3410  ldr      s0, [x9, #0xe88]                      
+00FD3414  ldr      s1, [x10, #0xba4]                     
+00FD3418  ldrb     w9, [x0, #0x10c]                      
+00FD341C  scvtf    s2, w8                                
+00FD3420  fmul     s0, s2, s0                            
+00FD3424  mov      x19, x0                               
+00FD3428  fadd     s8, s0, s1                            
+00FD342C  fmov     s10, wzr                              
+00FD3430  cbnz     w9, #0xfd3490                         
+00FD3434  sub      w9, w8, #1                            
+00FD3438  cmp      w9, #2                                
+00FD343C  adrp     x9, #0x5ff000                         
+00FD3440  ldr      s2, [x9, #0xd74]                      
+00FD3444  adrp     x9, #0x600000                         
+00FD3448  fmov     s0, wzr                               
+00FD344C  fmov     s1, #2.00000000                       
+00FD3450  ldr      s3, [x9, #0x98]                       
+00FD3454  adrp     x9, #0x5ff000                         
+00FD3458  fcsel    s0, s1, s0, lo                        
+00FD345C  ldr      s1, [x9, #0xe40]                      
+00FD3460  adrp     x9, #0x600000                         
+00FD3464  cmp      w8, #3                                
+00FD3468  fcsel    s0, s2, s0, eq                        
+00FD346C  ldr      s2, [x9, #0x120]                      
+00FD3470  adrp     x9, #0x5ff000                         
+00FD3474  ldr      s4, [x9, #0xc6c]                      
+00FD3478  cmp      w8, #4                                
+00FD347C  fcsel    s3, s3, s8, eq                        
+00FD3480  fcsel    s0, s1, s0, eq                        
+00FD3484  cmp      w8, #5                                
+00FD3488  fcsel    s8, s2, s3, eq                        
+00FD348C  fcsel    s10, s4, s0, eq                       
+00FD3490  ldrb     w8, [x19, #0x108]                      // self.cascada1
+00FD3494  fneg     s9, s10                               
+00FD3498  cbz      w8, #0xfd34c4                         
+00FD349C  ldr      x0, [x19, #0xb8]                       // self.esferaFiltrante
+00FD34A0  cbz      x0, #0xfd35a4                         
+00FD34A4  mov      x1, xzr                               
+00FD34A8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD34AC  cbz      x0, #0xfd35a4                         
+00FD34B0  fmov     s2, wzr                               
+00FD34B4  mov      v0.16b, v9.16b                        
+00FD34B8  mov      v1.16b, v8.16b                        
+00FD34BC  mov      x1, xzr                               
+00FD34C0  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD34C4  ldrb     w8, [x19, #0x109]                      // self.cascada2
+00FD34C8  cbz      w8, #0xfd34f4                         
+00FD34CC  ldr      x0, [x19, #0xb8]                       // self.esferaFiltrante
+00FD34D0  cbz      x0, #0xfd35a4                         
+00FD34D4  mov      x1, xzr                               
+00FD34D8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD34DC  cbz      x0, #0xfd35a4                         
+00FD34E0  fmov     s0, wzr                               
+00FD34E4  mov      v1.16b, v8.16b                        
+00FD34E8  mov      v2.16b, v10.16b                       
+00FD34EC  mov      x1, xzr                               
+00FD34F0  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD34F4  ldrb     w8, [x19, #0x10a]                      // self.cascada3
+00FD34F8  cbz      w8, #0xfd3524                         
+00FD34FC  ldr      x0, [x19, #0xb8]                       // self.esferaFiltrante
+00FD3500  cbz      x0, #0xfd35a4                         
+00FD3504  mov      x1, xzr                               
+00FD3508  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD350C  cbz      x0, #0xfd35a4                         
+00FD3510  fmov     s2, wzr                               
+00FD3514  mov      v0.16b, v10.16b                       
+00FD3518  mov      v1.16b, v8.16b                        
+00FD351C  mov      x1, xzr                               
+00FD3520  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD3524  ldrb     w8, [x19, #0x10b]                      // self.cascada4
+00FD3528  cbz      w8, #0xfd3554                         
+00FD352C  ldr      x0, [x19, #0xb8]                       // self.esferaFiltrante
+00FD3530  cbz      x0, #0xfd35a4                         
+00FD3534  mov      x1, xzr                               
+00FD3538  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD353C  cbz      x0, #0xfd35a4                         
+00FD3540  fmov     s0, wzr                               
+00FD3544  mov      v1.16b, v8.16b                        
+00FD3548  mov      v2.16b, v9.16b                        
+00FD354C  mov      x1, xzr                               
+00FD3550  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD3554  ldrb     w8, [x19, #0x10c]                      // self.cascada6
+00FD3558  cbz      w8, #0xfd3584                         
+00FD355C  ldr      x0, [x19, #0xb8]                       // self.esferaFiltrante
+00FD3560  cbz      x0, #0xfd35a4                         
+00FD3564  mov      x1, xzr                               
+00FD3568  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD356C  cbz      x0, #0xfd35a4                         
+00FD3570  fmov     s0, wzr                               
+00FD3574  fmov     s2, wzr                               
+00FD3578  mov      v1.16b, v8.16b                        
+00FD357C  mov      x1, xzr                               
+00FD3580  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD3584  ldr      x0, [x19, #0xb8]                       // self.esferaFiltrante
+00FD3588  cbz      x0, #0xfd35a4                         
+00FD358C  ldp      x30, x19, [sp, #0x20]                 
+00FD3590  ldp      d9, d8, [sp, #0x10]                   
+00FD3594  mov      w1, #1                                
+00FD3598  mov      x2, xzr                               
+00FD359C  ldr      d10, [sp], #0x30                      
+00FD35A0  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD35A4  bl       #0xe61da0                             

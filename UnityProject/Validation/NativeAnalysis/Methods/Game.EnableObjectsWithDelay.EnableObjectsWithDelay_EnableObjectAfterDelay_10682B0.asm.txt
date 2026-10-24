@@ -1,0 +1,30 @@
+// Game.EnableObjectsWithDelay.EnableObjectsWithDelay$$EnableObjectAfterDelay VA 0x10682B0, inferred length 112
+System_Collections_IEnumerator_o* Game_EnableObjectsWithDelay_EnableObjectsWithDelay__EnableObjectAfterDelay (Game_EnableObjectsWithDelay_EnableObjectsWithDelay_o* __this, UnityEngine_GameObject_o* targetObject, float delay, const MethodInfo* method);
+010682B0  str      d8, [sp, #-0x30]!                     
+010682B4  stp      x30, x21, [sp, #0x10]                 
+010682B8  stp      x20, x19, [sp, #0x20]                 
+010682BC  adrp     x20, #0x24fb000                       
+010682C0  adrp     x21, #0x236d000                       
+010682C4  ldrb     w8, [x20, #0xe68]                     
+010682C8  ldr      x21, [x21, #0x2d0]                     // [0x236D2D0] Game.EnableObjectsWithDelay.EnableObjectsWithDelay.<EnableObjectAfterDelay>d__4_TypeInfo
+010682CC  mov      v8.16b, v0.16b                        
+010682D0  mov      x19, x1                               
+010682D4  tbnz     w8, #0, #0x10682ec                    
+010682D8  adrp     x0, #0x236d000                        
+010682DC  ldr      x0, [x0, #0x2d0]                       // [0x236D2D0] Game.EnableObjectsWithDelay.EnableObjectsWithDelay.<EnableObjectAfterDelay>d__4_TypeInfo
+010682E0  bl       #0xe61b78                             
+010682E4  mov      w8, #1                                
+010682E8  strb     w8, [x20, #0xe68]                     
+010682EC  ldr      x0, [x21]                             
+010682F0  bl       #0xe61d94                             
+010682F4  mov      x1, xzr                               
+010682F8  mov      x20, x0                               
+010682FC  bl       #0x1af7704                             // System.Object$$.ctor
+01068300  str      wzr, [x20, #0x10]                     
+01068304  str      x19, [x20, #0x28]                     
+01068308  str      s8, [x20, #0x20]                      
+0106830C  mov      x0, x20                               
+01068310  ldp      x20, x19, [sp, #0x20]                 
+01068314  ldp      x30, x21, [sp, #0x10]                 
+01068318  ldr      d8, [sp], #0x30                       
+0106831C  ret                                            

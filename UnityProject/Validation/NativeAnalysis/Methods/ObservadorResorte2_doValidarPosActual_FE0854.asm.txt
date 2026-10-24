@@ -1,0 +1,291 @@
+// ObservadorResorte2$$doValidarPosActual VA 0xFE0854, inferred length 1156
+void ObservadorResorte2__doValidarPosActual (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE0854  stp      d11, d10, [sp, #-0x40]!               
+00FE0858  stp      d9, d8, [sp, #0x10]                   
+00FE085C  stp      x30, x21, [sp, #0x20]                 
+00FE0860  stp      x20, x19, [sp, #0x30]                 
+00FE0864  adrp     x21, #0x24fb000                       
+00FE0868  adrp     x20, #0x236a000                       
+00FE086C  ldrb     w8, [x21, #0xb9f]                     
+00FE0870  ldr      x20, [x20, #0x700]                     // [0x236A700] '0'
+00FE0874  mov      x19, x0                               
+00FE0878  tbnz     w8, #0, #0xfe08e4                     
+00FE087C  adrp     x0, #0x2368000                        
+00FE0880  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FE0884  bl       #0xe61b78                             
+00FE0888  adrp     x0, #0x2368000                        
+00FE088C  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FE0890  bl       #0xe61b78                             
+00FE0894  adrp     x0, #0x236a000                        
+00FE0898  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+00FE089C  bl       #0xe61b78                             
+00FE08A0  adrp     x0, #0x236a000                        
+00FE08A4  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+00FE08A8  bl       #0xe61b78                             
+00FE08AC  adrp     x0, #0x236a000                        
+00FE08B0  ldr      x0, [x0, #0x7f8]                       // [0x236A7F8] '9'
+00FE08B4  bl       #0xe61b78                             
+00FE08B8  adrp     x0, #0x236a000                        
+00FE08BC  ldr      x0, [x0, #0x798]                       // [0x236A798] '8'
+00FE08C0  bl       #0xe61b78                             
+00FE08C4  adrp     x0, #0x236a000                        
+00FE08C8  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FE08CC  bl       #0xe61b78                             
+00FE08D0  adrp     x0, #0x236a000                        
+00FE08D4  ldr      x0, [x0, #0x700]                       // [0x236A700] '0'
+00FE08D8  bl       #0xe61b78                             
+00FE08DC  mov      w8, #1                                
+00FE08E0  strb     w8, [x21, #0xb9f]                     
+00FE08E4  mov      w8, #1                                
+00FE08E8  mov      x0, x19                               
+00FE08EC  strb     w8, [x19, #0x318]                      // self.validaOk
+00FE08F0  bl       #0xfe1a3c                              // ObservadorResorte2$$doCalPuntoNext
+00FE08F4  ldur     d0, [x19, #0xcc]                       // self.parnextx
+00FE08F8  ldp      s1, s2, [x19, #0xd4]                   // self.parnextz
+00FE08FC  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE0900  mov      x2, xzr                               
+00FE0904  stur     d0, [x19, #0x64]                       // self.posx
+00FE0908  str      s1, [x19, #0x6c]                       // self.posz
+00FE090C  str      s2, [x19, #0x168]                      // self.angle
+00FE0910  ldr      x1, [x20]                             
+00FE0914  bl       #0x1960c80                             // System.String$$op_Inequality
+00FE0918  tbz      w0, #0, #0xfe0af4                     
+00FE091C  adrp     x20, #0x236a000                       
+00FE0920  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FE0924  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE0928  mov      x2, xzr                               
+00FE092C  ldr      x1, [x20]                             
+00FE0930  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0934  tbnz     w0, #0, #0xfe0954                     
+00FE0938  adrp     x8, #0x236a000                        
+00FE093C  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE0940  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+00FE0944  mov      x2, xzr                               
+00FE0948  ldr      x1, [x8]                              
+00FE094C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0950  tbz      w0, #0, #0xfe0a20                     
+00FE0954  mov      x0, x19                               
+00FE0958  mov      x1, xzr                               
+00FE095C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FE0960  cbz      x0, #0xfe0cd4                         
+00FE0964  mov      x1, xzr                               
+00FE0968  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE096C  mov      x0, x19                               
+00FE0970  mov      x1, xzr                               
+00FE0974  str      s0, [x19, #0x64]                       // self.posx
+00FE0978  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FE097C  cbz      x0, #0xfe0cd4                         
+00FE0980  mov      x1, xzr                               
+00FE0984  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE0988  mov      x0, x19                               
+00FE098C  mov      x1, xzr                               
+00FE0990  str      s1, [x19, #0x68]                       // self.posy
+00FE0994  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FE0998  cbz      x0, #0xfe0cd4                         
+00FE099C  mov      x1, xzr                               
+00FE09A0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FE09A4  mov      x0, x19                               
+00FE09A8  str      s2, [x19, #0x6c]                       // self.posz
+00FE09AC  bl       #0xfe1d10                              // ObservadorResorte2$$doNumPiezasEncima
+00FE09B0  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE09B4  ldr      x1, [x20]                             
+00FE09B8  mov      x2, xzr                               
+00FE09BC  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE09C0  tbnz     w0, #0, #0xfe0a10                     
+00FE09C4  adrp     x21, #0x236a000                       
+00FE09C8  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE09CC  ldr      x21, [x21, #0x658]                     // [0x236A658] '2'
+00FE09D0  mov      x2, xzr                               
+00FE09D4  ldr      x1, [x21]                             
+00FE09D8  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE09DC  tbnz     w0, #0, #0xfe0a10                     
+00FE09E0  adrp     x8, #0x236a000                        
+00FE09E4  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE09E8  ldr      x8, [x8, #0x650]                       // [0x236A650] '3'
+00FE09EC  mov      x2, xzr                               
+00FE09F0  ldr      x1, [x8]                              
+00FE09F4  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE09F8  tbnz     w0, #0, #0xfe0a10                     
+00FE09FC  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE0A00  ldr      x1, [x21]                             
+00FE0A04  mov      x2, xzr                               
+00FE0A08  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0A0C  tbz      w0, #0, #0xfe0b28                     
+00FE0A10  ldr      w8, [x19, #0xec]                       // self.numPiezas
+00FE0A14  cmp      w8, #1                                
+00FE0A18  b.lt     #0xfe0a20                             
+00FE0A1C  strb     wzr, [x19, #0x318]                     // self.validaOk
+00FE0A20  ldr      x0, [x19, #0x38]                       // self.valMove
+00FE0A24  ldr      x1, [x20]                             
+00FE0A28  mov      x2, xzr                               
+00FE0A2C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0A30  tbz      w0, #0, #0xfe0a90                     
+00FE0A34  ldrb     w8, [x19, #0x318]                      // self.validaOk
+00FE0A38  cbz      w8, #0xfe0bc0                         
+00FE0A3C  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE0A40  ldr      x1, [x20]                             
+00FE0A44  mov      x2, xzr                               
+00FE0A48  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0A4C  tbnz     w0, #0, #0xfe0a88                     
+00FE0A50  adrp     x8, #0x236a000                        
+00FE0A54  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE0A58  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+00FE0A5C  mov      x2, xzr                               
+00FE0A60  ldr      x1, [x8]                              
+00FE0A64  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0A68  tbnz     w0, #0, #0xfe0a88                     
+00FE0A6C  adrp     x8, #0x236a000                        
+00FE0A70  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE0A74  ldr      x8, [x8, #0x650]                       // [0x236A650] '3'
+00FE0A78  mov      x2, xzr                               
+00FE0A7C  ldr      x1, [x8]                              
+00FE0A80  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0A84  tbz      w0, #0, #0xfe0b60                     
+00FE0A88  mov      x0, x19                               
+00FE0A8C  bl       #0xfe1e54                              // ObservadorResorte2$$doValidarRotacion
+00FE0A90  ldrb     w8, [x19, #0x318]                      // self.validaOk
+00FE0A94  cbz      w8, #0xfe0bc0                         
+00FE0A98  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE0A9C  ldr      x1, [x20]                             
+00FE0AA0  mov      x2, xzr                               
+00FE0AA4  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0AA8  tbnz     w0, #0, #0xfe0ac8                     
+00FE0AAC  adrp     x8, #0x236a000                        
+00FE0AB0  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE0AB4  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+00FE0AB8  mov      x2, xzr                               
+00FE0ABC  ldr      x1, [x8]                              
+00FE0AC0  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0AC4  tbz      w0, #0, #0xfe0ad8                     
+00FE0AC8  ldrb     w8, [x19, #0x318]                      // self.validaOk
+00FE0ACC  cbz      w8, #0xfe0ad8                         
+00FE0AD0  mov      x0, x19                               
+00FE0AD4  bl       #0xfe1f90                              // ObservadorResorte2$$doInactivarPieza
+00FE0AD8  ldr      x0, [x19, #0x38]                       // self.valMove
+00FE0ADC  ldr      x1, [x20]                             
+00FE0AE0  mov      x2, xzr                               
+00FE0AE4  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0AE8  tbz      w0, #0, #0xfe0af4                     
+00FE0AEC  ldrb     w8, [x19, #0x318]                      // self.validaOk
+00FE0AF0  cbz      w8, #0xfe0b08                         
+00FE0AF4  ldp      x20, x19, [sp, #0x30]                 
+00FE0AF8  ldp      x30, x21, [sp, #0x20]                 
+00FE0AFC  ldp      d9, d8, [sp, #0x10]                   
+00FE0B00  ldp      d11, d10, [sp], #0x40                 
+00FE0B04  ret                                            
+00FE0B08  ldrb     w8, [x19, #0x274]                      // self.sueloBloqueado
+00FE0B0C  cbz      w8, #0xfe0af4                         
+00FE0B10  mov      x0, x19                               
+00FE0B14  ldp      x20, x19, [sp, #0x30]                 
+00FE0B18  ldp      x30, x21, [sp, #0x20]                 
+00FE0B1C  ldp      d9, d8, [sp, #0x10]                   
+00FE0B20  ldp      d11, d10, [sp], #0x40                 
+00FE0B24  b        #0xfe0530                              // ObservadorResorte2$$doActivarSuelo
+00FE0B28  adrp     x8, #0x236a000                        
+00FE0B2C  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE0B30  ldr      x8, [x8, #0x7f8]                       // [0x236A7F8] '9'
+00FE0B34  mov      x2, xzr                               
+00FE0B38  ldr      x1, [x8]                              
+00FE0B3C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0B40  tbz      w0, #0, #0xfe0b50                     
+00FE0B44  ldrb     w8, [x19, #0x170]                      // self.checkCollisionFijo
+00FE0B48  cbz      w8, #0xfe0b50                         
+00FE0B4C  strb     wzr, [x19, #0x318]                     // self.validaOk
+00FE0B50  ldr      w8, [x19, #0xec]                       // self.numPiezas
+00FE0B54  cmp      w8, #3                                
+00FE0B58  b.ge     #0xfe0a1c                             
+00FE0B5C  b        #0xfe0a20                             
+00FE0B60  adrp     x8, #0x236a000                        
+00FE0B64  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE0B68  ldr      x8, [x8, #0x798]                       // [0x236A798] '8'
+00FE0B6C  mov      x2, xzr                               
+00FE0B70  ldr      x1, [x8]                              
+00FE0B74  bl       #0x1960c80                             // System.String$$op_Inequality
+00FE0B78  tbz      w0, #0, #0xfe0a90                     
+00FE0B7C  adrp     x8, #0x236a000                        
+00FE0B80  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE0B84  ldr      x8, [x8, #0x7f8]                       // [0x236A7F8] '9'
+00FE0B88  mov      x2, xzr                               
+00FE0B8C  ldr      x1, [x8]                              
+00FE0B90  bl       #0x1960c80                             // System.String$$op_Inequality
+00FE0B94  tbz      w0, #0, #0xfe0a90                     
+00FE0B98  ldr      w8, [x19, #0x1b4]                      // self.comprueba
+00FE0B9C  mov      x0, x19                               
+00FE0BA0  cmp      w8, #1                                
+00FE0BA4  b.ne     #0xfe0bb0                             
+00FE0BA8  bl       #0xfe1eec                              // ObservadorResorte2$$doValidarMovimiento1
+00FE0BAC  b        #0xfe0bb4                             
+00FE0BB0  bl       #0xfe1f3c                              // ObservadorResorte2$$doValidarMovimiento2
+00FE0BB4  ldrb     w8, [x19, #0xe8]                       // self.ocupado
+00FE0BB8  cbz      w8, #0xfe0a90                         
+00FE0BBC  strb     wzr, [x19, #0x318]                     // self.validaOk
+00FE0BC0  adrp     x8, #0x5ff000                         
+00FE0BC4  ldr      s0, [x8, #0xe38]                      
+00FE0BC8  ldr      x20, [x19, #0x48]                      // self.prefabBloqueado
+00FE0BCC  fmov     s1, wzr                               
+00FE0BD0  fmov     s2, wzr                               
+00FE0BD4  mov      x0, xzr                               
+00FE0BD8  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FE0BDC  adrp     x8, #0x2368000                        
+00FE0BE0  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FE0BE4  mov      v8.16b, v0.16b                        
+00FE0BE8  mov      v9.16b, v1.16b                        
+00FE0BEC  mov      v10.16b, v2.16b                       
+00FE0BF0  ldr      x0, [x8]                              
+00FE0BF4  mov      v11.16b, v3.16b                       
+00FE0BF8  ldr      w8, [x0, #0xe0]                       
+00FE0BFC  cbnz     w8, #0xfe0c04                         
+00FE0C00  bl       #0xe61c80                             
+00FE0C04  adrp     x8, #0x2368000                        
+00FE0C08  ldr      x8, [x8, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FE0C0C  fmov     s0, wzr                               
+00FE0C10  fmov     s1, wzr                               
+00FE0C14  fmov     s2, wzr                               
+00FE0C18  ldr      x1, [x8]                              
+00FE0C1C  mov      x0, x20                               
+00FE0C20  mov      v3.16b, v8.16b                        
+00FE0C24  mov      v4.16b, v9.16b                        
+00FE0C28  mov      v5.16b, v10.16b                       
+00FE0C2C  mov      v6.16b, v11.16b                       
+00FE0C30  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FE0C34  str      x0, [x19, #0x50]                       // self.objeto
+00FE0C38  cbz      x0, #0xfe0cd4                         
+00FE0C3C  mov      x1, xzr                               
+00FE0C40  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE0C44  mov      x20, x0                               
+00FE0C48  mov      x0, x19                               
+00FE0C4C  mov      x1, xzr                               
+00FE0C50  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FE0C54  cbz      x20, #0xfe0cd4                        
+00FE0C58  mov      x1, x0                                
+00FE0C5C  mov      x0, x20                               
+00FE0C60  mov      x2, xzr                               
+00FE0C64  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+00FE0C68  ldr      x0, [x19, #0x50]                       // self.objeto
+00FE0C6C  cbz      x0, #0xfe0cd4                         
+00FE0C70  mov      x1, xzr                               
+00FE0C74  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE0C78  cbz      x0, #0xfe0cd4                         
+00FE0C7C  adrp     x8, #0x5ff000                         
+00FE0C80  ldr      s1, [x8, #0xba4]                      
+00FE0C84  fmov     s0, wzr                               
+00FE0C88  fmov     s2, wzr                               
+00FE0C8C  mov      x1, xzr                               
+00FE0C90  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FE0C94  ldr      x0, [x19, #0x50]                       // self.objeto
+00FE0C98  cbz      x0, #0xfe0cd4                         
+00FE0C9C  mov      x1, xzr                               
+00FE0CA0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE0CA4  cbz      x0, #0xfe0cd4                         
+00FE0CA8  ldp      x20, x19, [sp, #0x30]                 
+00FE0CAC  ldp      x30, x21, [sp, #0x20]                 
+00FE0CB0  ldp      d9, d8, [sp, #0x10]                   
+00FE0CB4  mov      w8, #0x42ca0000                       
+00FE0CB8  mov      w9, #0x421c0000                       
+00FE0CBC  fmov     s0, w8                                
+00FE0CC0  fmov     s2, w9                                
+00FE0CC4  mov      v1.16b, v0.16b                        
+00FE0CC8  mov      x1, xzr                               
+00FE0CCC  ldp      d11, d10, [sp], #0x40                 
+00FE0CD0  b        #0x200f138                             // UnityEngine.Transform$$set_localScale
+00FE0CD4  bl       #0xe61da0                             

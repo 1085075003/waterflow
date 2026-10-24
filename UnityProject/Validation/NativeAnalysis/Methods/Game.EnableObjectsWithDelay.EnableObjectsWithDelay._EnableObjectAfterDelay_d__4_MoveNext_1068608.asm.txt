@@ -1,0 +1,46 @@
+// Game.EnableObjectsWithDelay.EnableObjectsWithDelay.<EnableObjectAfterDelay>d__4$$MoveNext VA 0x1068608, inferred length 176
+bool Game_EnableObjectsWithDelay_EnableObjectsWithDelay__EnableObjectAfterDelay_d__4__MoveNext (Game_EnableObjectsWithDelay_EnableObjectsWithDelay__EnableObjectAfterDelay_d__4_o* __this, const MethodInfo* method);
+01068608  str      d8, [sp, #-0x20]!                     
+0106860C  str      x30, [sp, #8]                         
+01068610  stp      x20, x19, [sp, #0x10]                 
+01068614  adrp     x20, #0x24fb000                       
+01068618  ldrb     w8, [x20, #0xe6a]                     
+0106861C  mov      x19, x0                               
+01068620  tbnz     w8, #0, #0x1068638                    
+01068624  adrp     x0, #0x2368000                        
+01068628  ldr      x0, [x0, #0x830]                       // [0x2368830] UnityEngine.WaitForSeconds_TypeInfo
+0106862C  bl       #0xe61b78                             
+01068630  mov      w8, #1                                
+01068634  strb     w8, [x20, #0xe6a]                     
+01068638  ldr      w8, [x19, #0x10]                      
+0106863C  cmp      w8, #1                                
+01068640  b.eq     #0x1068684                            
+01068644  cbnz     w8, #0x10686a0                        
+01068648  mov      w8, #-1                               
+0106864C  str      w8, [x19, #0x10]                      
+01068650  adrp     x8, #0x2368000                        
+01068654  ldr      s8, [x19, #0x20]                      
+01068658  ldr      x8, [x8, #0x830]                       // [0x2368830] UnityEngine.WaitForSeconds_TypeInfo
+0106865C  ldr      x0, [x8]                              
+01068660  bl       #0xe61d94                             
+01068664  mov      v0.16b, v8.16b                        
+01068668  mov      x1, xzr                               
+0106866C  mov      x20, x0                               
+01068670  bl       #0x200b2e8                             // UnityEngine.WaitForSeconds$$.ctor
+01068674  mov      w0, #1                                
+01068678  str      x20, [x19, #0x18]                     
+0106867C  str      w0, [x19, #0x10]                      
+01068680  b        #0x10686a4                            
+01068684  ldr      x0, [x19, #0x28]                      
+01068688  mov      w8, #-1                               
+0106868C  str      w8, [x19, #0x10]                      
+01068690  cbz      x0, #0x10686b4                        
+01068694  mov      w1, #1                                
+01068698  mov      x2, xzr                               
+0106869C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010686A0  mov      w0, wzr                               
+010686A4  ldp      x20, x19, [sp, #0x10]                 
+010686A8  ldr      x30, [sp, #8]                         
+010686AC  ldr      d8, [sp], #0x20                       
+010686B0  ret                                            
+010686B4  bl       #0xe61da0                             

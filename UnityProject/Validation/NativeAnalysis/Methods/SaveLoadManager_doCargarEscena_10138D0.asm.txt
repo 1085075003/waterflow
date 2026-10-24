@@ -1,0 +1,53 @@
+// SaveLoadManager$$doCargarEscena VA 0x10138D0, inferred length 204
+void SaveLoadManager__doCargarEscena (SaveLoadManager_o* __this, const MethodInfo* method);
+010138D0  str      x30, [sp, #-0x20]!                    
+010138D4  stp      x20, x19, [sp, #0x10]                 
+010138D8  adrp     x20, #0x24fb000                       
+010138DC  ldrb     w8, [x20, #0xc9e]                     
+010138E0  mov      x19, x0                               
+010138E4  tbnz     w8, #0, #0x1013908                    
+010138E8  adrp     x0, #0x2368000                        
+010138EC  ldr      x0, [x0, #0x878]                       // [0x2368878] UnityEngine.Application_TypeInfo
+010138F0  bl       #0xe61b78                             
+010138F4  adrp     x0, #0x236a000                        
+010138F8  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+010138FC  bl       #0xe61b78                             
+01013900  mov      w8, #1                                
+01013904  strb     w8, [x20, #0xc9e]                     
+01013908  ldr      x0, [x19, #0x198]                      // self.audioManager
+0101390C  cbz      x0, #0x1013998                        
+01013910  ldr      x1, [x19, #0x178]                      // self.SonidoFuente
+01013914  adrp     x20, #0x236a000                       
+01013918  ldr      x20, [x20, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+0101391C  mov      x2, xzr                               
+01013920  bl       #0x102b0e8                             // AudioManager$$StopSound
+01013924  ldr      x8, [x20]                             
+01013928  ldr      x8, [x8, #0xb8]                       
+0101392C  ldr      w8, [x8, #8]                          
+01013930  cbz      w8, #0x1013944                        
+01013934  mov      x0, x19                               
+01013938  ldp      x20, x19, [sp, #0x10]                 
+0101393C  ldr      x30, [sp], #0x20                      
+01013940  b        #0x1018384                             // SaveLoadManager$$doCargarEscenaDesign
+01013944  adrp     x20, #0x2368000                       
+01013948  ldr      x20, [x20, #0x878]                     // [0x2368878] UnityEngine.Application_TypeInfo
+0101394C  ldr      x0, [x20]                             
+01013950  ldr      w8, [x0, #0xe0]                       
+01013954  cbnz     w8, #0x101395c                        
+01013958  bl       #0xe61c80                             
+0101395C  mov      x0, xzr                               
+01013960  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+01013964  cbz      w0, #0x1013934                        
+01013968  ldr      x0, [x20]                             
+0101396C  ldr      w8, [x0, #0xe0]                       
+01013970  cbnz     w8, #0x1013978                        
+01013974  bl       #0xe61c80                             
+01013978  mov      x0, xzr                               
+0101397C  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+01013980  cmp      w0, #7                                
+01013984  b.eq     #0x1013934                            
+01013988  mov      x0, x19                               
+0101398C  ldp      x20, x19, [sp, #0x10]                 
+01013990  ldr      x30, [sp], #0x20                      
+01013994  b        #0x10187a8                             // SaveLoadManager$$doCargarEscenaResources
+01013998  bl       #0xe61da0                             

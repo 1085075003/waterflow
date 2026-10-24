@@ -1,0 +1,127 @@
+// MoveBloque$$HandleSolution VA 0x102E700, inferred length 500
+void MoveBloque__HandleSolution (MoveBloque_o* __this, const MethodInfo* method);
+0102E700  str      x30, [sp, #-0x30]!                    
+0102E704  stp      x22, x21, [sp, #0x10]                 
+0102E708  stp      x20, x19, [sp, #0x20]                 
+0102E70C  adrp     x21, #0x24fb000                       
+0102E710  adrp     x20, #0x236b000                       
+0102E714  ldrb     w8, [x21, #0xd29]                     
+0102E718  ldr      x20, [x20, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+0102E71C  mov      x19, x0                               
+0102E720  tbnz     w8, #0, #0x102e744                    
+0102E724  adrp     x0, #0x236a000                        
+0102E728  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0102E72C  bl       #0xe61b78                             
+0102E730  adrp     x0, #0x236b000                        
+0102E734  ldr      x0, [x0, #0x498]                       // [0x236B498] MoveBloque_TypeInfo
+0102E738  bl       #0xe61b78                             
+0102E73C  mov      w8, #1                                
+0102E740  strb     w8, [x21, #0xd29]                     
+0102E744  ldr      x0, [x20]                             
+0102E748  ldr      w21, [x19, #0x20]                      // self.modoSolucion_old
+0102E74C  ldr      w8, [x0, #0xe0]                       
+0102E750  cbnz     w8, #0x102e75c                        
+0102E754  bl       #0xe61c80                             
+0102E758  ldr      x0, [x20]                             
+0102E75C  ldr      x8, [x0, #0xb8]                       
+0102E760  ldr      w8, [x8, #4]                          
+0102E764  cmp      w21, w8                               
+0102E768  b.ne     #0x102e77c                            
+0102E76C  ldr      w8, [x19, #0x388]                      // self.faseSol
+0102E770  add      x21, x19, #0x388                      
+0102E774  cbnz     w8, #0x102e7a8                        
+0102E778  b        #0x102e78c                            
+0102E77C  add      x21, x19, #0x388                      
+0102E780  str      wzr, [x19, #0x388]                     // self.faseSol
+0102E784  strb     wzr, [x19, #0xa9]                      // self.isMouseDragging1
+0102E788  str      xzr, [x19, #0x30]                      // self.getTarget
+0102E78C  mov      x0, x19                               
+0102E790  bl       #0x103399c                             // MoveBloque$$doCargarSolucionDesign
+0102E794  mov      w8, #1                                
+0102E798  str      wzr, [x19, #0x390]                     // self.numMove
+0102E79C  str      w8, [x19, #0x388]                      // self.faseSol
+0102E7A0  strb     w8, [x19, #0x3cc]                      // self.cambiofase
+0102E7A4  ldr      x0, [x20]                             
+0102E7A8  ldr      w8, [x0, #0xe0]                       
+0102E7AC  cbnz     w8, #0x102e7b8                        
+0102E7B0  bl       #0xe61c80                             
+0102E7B4  ldr      x0, [x20]                             
+0102E7B8  ldr      x8, [x0, #0xb8]                       
+0102E7BC  ldr      w8, [x8, #4]                          
+0102E7C0  cmp      w8, #1                                
+0102E7C4  b.ne     #0x102e814                            
+0102E7C8  adrp     x22, #0x236a000                       
+0102E7CC  ldr      x22, [x22, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102E7D0  ldr      x0, [x22]                             
+0102E7D4  ldr      w8, [x0, #0xe0]                       
+0102E7D8  cbnz     w8, #0x102e7e4                        
+0102E7DC  bl       #0xe61c80                             
+0102E7E0  ldr      x0, [x22]                             
+0102E7E4  ldr      x8, [x0, #0xb8]                       
+0102E7E8  mov      x0, x19                               
+0102E7EC  strb     wzr, [x8, #0x16]                      
+0102E7F0  bl       #0x1033d20                             // MoveBloque$$HandleSolutionTotal
+0102E7F4  ldr      x0, [x20]                             
+0102E7F8  ldr      w8, [x0, #0xe0]                       
+0102E7FC  cbnz     w8, #0x102e808                        
+0102E800  bl       #0xe61c80                             
+0102E804  ldr      x0, [x20]                             
+0102E808  ldr      x8, [x0, #0xb8]                       
+0102E80C  mov      w9, #3                                
+0102E810  str      w9, [x8, #4]                          
+0102E814  ldr      w8, [x0, #0xe0]                       
+0102E818  cbnz     w8, #0x102e824                        
+0102E81C  bl       #0xe61c80                             
+0102E820  ldr      x0, [x20]                             
+0102E824  ldr      x8, [x0, #0xb8]                       
+0102E828  ldr      w8, [x8, #4]                          
+0102E82C  cmp      w8, #2                                
+0102E830  b.ne     #0x102e8e0                            
+0102E834  ldr      w8, [x21]                             
+0102E838  cmp      w8, #1                                
+0102E83C  b.lt     #0x102e8e0                            
+0102E840  mov      x0, x19                               
+0102E844  bl       #0x10341f4                             // MoveBloque$$HandleStepsSolution
+0102E848  ldr      w8, [x19, #0x388]                      // self.faseSol
+0102E84C  cmp      w8, #9                                
+0102E850  b.ne     #0x102e8e0                            
+0102E854  ldr      w8, [x19, #0x390]                      // self.numMove
+0102E858  ldr      w9, [x19, #0x394]                      // self.numMoveMax
+0102E85C  add      w8, w8, #1                            
+0102E860  cmp      w8, w9                                
+0102E864  str      w8, [x19, #0x390]                      // self.numMove
+0102E868  b.le     #0x102e8d4                            
+0102E86C  ldr      x0, [x20]                             
+0102E870  ldr      w8, [x0, #0xe0]                       
+0102E874  cbnz     w8, #0x102e880                        
+0102E878  bl       #0xe61c80                             
+0102E87C  ldr      x0, [x20]                             
+0102E880  ldr      x8, [x0, #0xb8]                       
+0102E884  mov      w9, #3                                
+0102E888  str      w9, [x8, #4]                          
+0102E88C  strb     wzr, [x8, #8]                         
+0102E890  strb     wzr, [x8, #0xb]                       
+0102E894  ldr      x0, [x19, #0xa0]                       // self.planoGuia2
+0102E898  cbz      x0, #0x102e8f0                        
+0102E89C  mov      w1, wzr                               
+0102E8A0  mov      x2, xzr                               
+0102E8A4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0102E8A8  ldr      x0, [x19, #0x408]                      // self.animBack
+0102E8AC  strb     wzr, [x19, #0x2f7]                     // self.downProcess
+0102E8B0  str      wzr, [x19, #0x388]                     // self.faseSol
+0102E8B4  str      xzr, [x19, #0x30]                      // self.getTarget
+0102E8B8  cbz      x0, #0x102e8f0                        
+0102E8BC  ldp      x20, x19, [sp, #0x20]                 
+0102E8C0  ldp      x22, x21, [sp, #0x10]                 
+0102E8C4  mov      w1, #1                                
+0102E8C8  mov      x2, xzr                               
+0102E8CC  ldr      x30, [sp], #0x30                      
+0102E8D0  b        #0x2002f88                             // UnityEngine.Behaviour$$set_enabled
+0102E8D4  mov      w8, #1                                
+0102E8D8  str      w8, [x19, #0x388]                      // self.faseSol
+0102E8DC  strb     w8, [x19, #0x3cc]                      // self.cambiofase
+0102E8E0  ldp      x20, x19, [sp, #0x20]                 
+0102E8E4  ldp      x22, x21, [sp, #0x10]                 
+0102E8E8  ldr      x30, [sp], #0x30                      
+0102E8EC  ret                                            
+0102E8F0  bl       #0xe61da0                             

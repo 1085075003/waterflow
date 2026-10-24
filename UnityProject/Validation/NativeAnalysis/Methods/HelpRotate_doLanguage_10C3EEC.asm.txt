@@ -1,0 +1,104 @@
+// HelpRotate$$doLanguage VA 0x10C3EEC, inferred length 408
+void HelpRotate__doLanguage (HelpRotate_o* __this, const MethodInfo* method);
+010C3EEC  stp      x30, x23, [sp, #-0x30]!               
+010C3EF0  stp      x22, x21, [sp, #0x10]                 
+010C3EF4  stp      x20, x19, [sp, #0x20]                 
+010C3EF8  adrp     x21, #0x24fb000                       
+010C3EFC  adrp     x22, #0x236b000                       
+010C3F00  adrp     x23, #0x236b000                       
+010C3F04  adrp     x20, #0x236b000                       
+010C3F08  ldrb     w8, [x21, #0xfe2]                     
+010C3F0C  ldr      x22, [x22, #0x208]                     // [0x236B208] 'language'
+010C3F10  ldr      x23, [x23, #0x210]                     // [0x236B210] 'en'
+010C3F14  ldr      x20, [x20, #0x9d8]                     // [0x236B9D8] 'ar'
+010C3F18  mov      x19, x0                               
+010C3F1C  tbnz     w8, #0, #0x10c3f64                    
+010C3F20  adrp     x0, #0x236d000                        
+010C3F24  ldr      x0, [x0, #0x50]                        // [0x236D050] Method$System.Linq.Enumerable.Reverse<char>()
+010C3F28  bl       #0xe61b78                             
+010C3F2C  adrp     x0, #0x236d000                        
+010C3F30  ldr      x0, [x0, #0x58]                        // [0x236D058] Method$System.Linq.Enumerable.ToArray<char>()
+010C3F34  bl       #0xe61b78                             
+010C3F38  adrp     x0, #0x236b000                        
+010C3F3C  ldr      x0, [x0, #0x9d8]                       // [0x236B9D8] 'ar'
+010C3F40  bl       #0xe61b78                             
+010C3F44  adrp     x0, #0x236b000                        
+010C3F48  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+010C3F4C  bl       #0xe61b78                             
+010C3F50  adrp     x0, #0x236b000                        
+010C3F54  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+010C3F58  bl       #0xe61b78                             
+010C3F5C  mov      w8, #1                                
+010C3F60  strb     w8, [x21, #0xfe2]                     
+010C3F64  ldr      x0, [x22]                             
+010C3F68  ldr      x1, [x23]                             
+010C3F6C  mov      x2, xzr                               
+010C3F70  bl       #0x2001644                             // UnityEngine.PlayerPrefs$$GetString
+010C3F74  str      x0, [x19, #0x58]                       // self.idioma
+010C3F78  mov      x0, x19                               
+010C3F7C  bl       #0x10c4138                             // HelpRotate$$ObtenerTexto1
+010C3F80  str      x0, [x19, #0x60]                       // self.texto1
+010C3F84  mov      x0, x19                               
+010C3F88  bl       #0x10c4824                             // HelpRotate$$ObtenerTexto2
+010C3F8C  str      x0, [x19, #0x68]                       // self.texto2
+010C3F90  ldr      x0, [x19, #0x58]                       // self.idioma
+010C3F94  ldr      x1, [x20]                             
+010C3F98  mov      x2, xzr                               
+010C3F9C  bl       #0x1960c7c                             // System.String$$op_Equality
+010C3FA0  tbz      w0, #0, #0x10c4004                    
+010C3FA4  adrp     x20, #0x236d000                       
+010C3FA8  ldr      x20, [x20, #0x50]                      // [0x236D050] Method$System.Linq.Enumerable.Reverse<char>()
+010C3FAC  ldr      x0, [x19, #0x60]                       // self.texto1
+010C3FB0  adrp     x21, #0x236d000                       
+010C3FB4  ldr      x1, [x20]                             
+010C3FB8  ldr      x21, [x21, #0x58]                      // [0x236D058] Method$System.Linq.Enumerable.ToArray<char>()
+010C3FBC  bl       #0x1151338                             // System.Linq.Enumerable$$Reverse<char>
+010C3FC0  ldr      x1, [x21]                             
+010C3FC4  bl       #0x1157170                             // System.Linq.Enumerable$$ToArray<char>
+010C3FC8  mov      x1, x0                                
+010C3FCC  mov      x0, xzr                               
+010C3FD0  mov      x2, xzr                               
+010C3FD4  bl       #0x195f5a0                             // System.String$$CreateString
+010C3FD8  str      x0, [x19, #0x60]                       // self.texto1
+010C3FDC  ldr      x0, [x19, #0x68]                       // self.texto2
+010C3FE0  ldr      x1, [x20]                             
+010C3FE4  bl       #0x1151338                             // System.Linq.Enumerable$$Reverse<char>
+010C3FE8  ldr      x1, [x21]                             
+010C3FEC  bl       #0x1157170                             // System.Linq.Enumerable$$ToArray<char>
+010C3FF0  mov      x1, x0                                
+010C3FF4  mov      x0, xzr                               
+010C3FF8  mov      x2, xzr                               
+010C3FFC  bl       #0x195f5a0                             // System.String$$CreateString
+010C4000  str      x0, [x19, #0x68]                       // self.texto2
+010C4004  ldr      x0, [x19, #0x38]                       // self.texto1a
+010C4008  cbz      x0, #0x10c4080                        
+010C400C  ldr      x8, [x0]                              
+010C4010  ldr      x1, [x19, #0x60]                       // self.texto1
+010C4014  ldr      x9, [x8, #0x5e8]                      
+010C4018  ldr      x2, [x8, #0x5f0]                      
+010C401C  blr      x9                                    
+010C4020  ldr      x0, [x19, #0x40]                       // self.texto1b
+010C4024  cbz      x0, #0x10c4080                        
+010C4028  ldr      x8, [x0]                              
+010C402C  ldr      x1, [x19, #0x68]                       // self.texto2
+010C4030  ldr      x9, [x8, #0x5e8]                      
+010C4034  ldr      x2, [x8, #0x5f0]                      
+010C4038  blr      x9                                    
+010C403C  ldr      x0, [x19, #0x48]                       // self.texto2a
+010C4040  cbz      x0, #0x10c4080                        
+010C4044  ldr      x8, [x0]                              
+010C4048  ldr      x1, [x19, #0x60]                       // self.texto1
+010C404C  ldr      x9, [x8, #0x5e8]                      
+010C4050  ldr      x2, [x8, #0x5f0]                      
+010C4054  blr      x9                                    
+010C4058  ldr      x0, [x19, #0x50]                       // self.texto2b
+010C405C  cbz      x0, #0x10c4080                        
+010C4060  ldr      x8, [x0]                              
+010C4064  ldr      x1, [x19, #0x68]                       // self.texto2
+010C4068  ldp      x20, x19, [sp, #0x20]                 
+010C406C  ldp      x22, x21, [sp, #0x10]                 
+010C4070  ldr      x3, [x8, #0x5e8]                      
+010C4074  ldr      x2, [x8, #0x5f0]                      
+010C4078  ldp      x30, x23, [sp], #0x30                 
+010C407C  br       x3                                    
+010C4080  bl       #0xe61da0                             

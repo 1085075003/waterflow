@@ -1,0 +1,45 @@
+// MoveBloque$$doProcesoEspera VA 0x1035210, inferred length 172
+void MoveBloque__doProcesoEspera (MoveBloque_o* __this, const MethodInfo* method);
+01035210  stp      x30, x21, [sp, #-0x20]!               
+01035214  stp      x20, x19, [sp, #0x10]                 
+01035218  adrp     x20, #0x24fb000                       
+0103521C  adrp     x21, #0x236a000                       
+01035220  ldrb     w8, [x20, #0xd2e]                     
+01035224  ldr      x21, [x21, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+01035228  mov      x19, x0                               
+0103522C  tbnz     w8, #0, #0x1035244                    
+01035230  adrp     x0, #0x236a000                        
+01035234  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+01035238  bl       #0xe61b78                             
+0103523C  mov      w8, #1                                
+01035240  strb     w8, [x20, #0xd2e]                     
+01035244  ldr      x8, [x21]                             
+01035248  ldr      x8, [x8, #0xb8]                       
+0103524C  ldrb     w9, [x8, #0x74]                       
+01035250  cbnz     w9, #0x103528c                        
+01035254  ldrb     w9, [x8, #0x75]                       
+01035258  cbnz     w9, #0x103528c                        
+0103525C  ldrb     w9, [x8, #0x76]                       
+01035260  cbnz     w9, #0x103528c                        
+01035264  ldrb     w9, [x8, #0x77]                       
+01035268  cbnz     w9, #0x103528c                        
+0103526C  ldrb     w9, [x8, #0x78]                       
+01035270  cbnz     w9, #0x103528c                        
+01035274  ldrb     w9, [x8, #0x79]                       
+01035278  cbnz     w9, #0x103528c                        
+0103527C  ldrb     w9, [x8, #0x7a]                       
+01035280  cbnz     w9, #0x103528c                        
+01035284  ldrb     w8, [x8, #0x7b]                       
+01035288  cbz      w8, #0x10352a0                        
+0103528C  mov      w8, #1                                
+01035290  str      w8, [x19, #0x3d0]                      // self.activadoMech
+01035294  ldp      x20, x19, [sp, #0x10]                 
+01035298  ldp      x30, x21, [sp], #0x20                 
+0103529C  ret                                            
+010352A0  ldr      w8, [x19, #0x3d0]                      // self.activadoMech
+010352A4  cmp      w8, #1                                
+010352A8  b.ne     #0x1035294                            
+010352AC  mov      w8, #2                                
+010352B0  str      w8, [x19, #0x3d0]                      // self.activadoMech
+010352B4  strb     wzr, [x19, #0x3d4]                     // self.activadaEspera
+010352B8  b        #0x1035294                            

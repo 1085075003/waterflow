@@ -1,0 +1,90 @@
+--- a/Assets/Editor/RecoveredTools/FlowWaterHudFramingValidation.cs
++++ b/Assets/Editor/RecoveredTools/FlowWaterHudFramingValidation.cs
+@@ -25,6 +25,7 @@
+         [Serializable] public sealed class Frame {
+             public int level,width,height,structuralMeshes,structuralVertices,hudOverlapMeshes,outsideVertices;
+             public string stage,screenshot;
++            public List<string> captureTrace=new List<string>();
+             public float backwardDistance,fov,nearClip,farClip;
+             public Vector3 cameraPosition;
+             public Quaternion cameraRotation;
+@@ -45,6 +46,7 @@
+         static IEnumerator routine;
+         static bool busy,locked;
+         static double deadline;
++        static int resumeFrame;
+         static CaptureScope capture;
+         static readonly Vector2Int[] Sizes={new Vector2Int(1280,720),new Vector2Int(885,630),new Vector2Int(2560,1080)};
+         static string Output { get {return Path.Combine(Directory.GetParent(Application.dataPath).FullName,"Validation","HudFraming");} }
+@@ -77,8 +79,10 @@
+                         runtimeSourceSha256=Sha(Path.Combine(Application.dataPath,"Scripts/RecoveryUI/RecoveredBoardFraming.cs")),originalTimeScale=SessionState.GetFloat(Key+".Scale",Time.timeScale)};
+                     deadline=EditorApplication.timeSinceStartup+300;routine=Exercise();
+                 }
++                if(Time.frameCount<resumeFrame)return;
+                 if(EditorApplication.timeSinceStartup>deadline)throw new TimeoutException("HUD framing fixture 300second deadline");
+                 if(!routine.MoveNext())Finish();
++                else resumeFrame=Time.frameCount+1;
+             } catch(Exception error){if(report==null)report=new Report();report.errors.Add(error.ToString());Finish();}
+             finally{busy=false;}
+         }
+@@ -120,9 +124,10 @@
+         static Frame Capture(RecoveredFlowGame game,Vector2Int size,string stage,float fov,float near,float far,Quaternion rotation,bool save) {
+             Camera camera=game.GameCamera;Canvas.ForceUpdateCanvases();
+             var framing=camera.GetComponent<RecoveredBoardFraming>();framing.FitNow();
+-            capture.Render();
++            var trace=new List<string>{capture.Describe("after-fit")};
++            capture.Render(trace);
+             var frame=new Frame{level=game.CurrentLevelId,width=size.x,height=size.y,stage=stage,backwardDistance=framing.LastBackwardDistance,fov=camera.fieldOfView,
+-                nearClip=camera.nearClipPlane,farClip=camera.farClipPlane,cameraPosition=camera.transform.position,cameraRotation=camera.transform.rotation};
++                nearClip=camera.nearClipPlane,farClip=camera.farClipPlane,cameraPosition=camera.transform.position,cameraRotation=camera.transform.rotation,captureTrace=trace};
+             var regions=new List<RecoveredBoardFraming.HudRegion>();framing.GetProtectedHudRegions(regions);
+             frame.protectedHud=regions.Select(x=>new Region{path=x.path,viewport=x.viewport}).ToList();
+             string tag=frame.level+":"+stage+":"+size.x+"x"+size.y;
+@@ -140,9 +145,27 @@
+             }
+             CheckState(tag+":all-structural-vertices-in-camera",frame.structuralVertices>0 && frame.outsideVertices==0,"vertices="+frame.structuralVertices+", outside="+frame.outsideVertices);
+             CheckState(tag+":structural-meshes-clear-original-HUD",frame.structuralMeshes>0 && frame.hudOverlapMeshes==0,"meshes="+frame.structuralMeshes+", overlaps="+frame.hudOverlapMeshes+" "+String.Join(";",frame.overlaps.ToArray()));
+-            if(frame.level==401)CheckState(tag+":clear-small-level-no-unneeded-retreat",frame.backwardDistance<.025f,"actual="+frame.backwardDistance);
++            if(frame.level==401) {
++                bool needed=BaseNeedsFit(game,camera,regions,frame.backwardDistance);
++                CheckState(tag+":clear-small-level-no-unneeded-retreat",frame.backwardDistance<.025f || needed,"actual="+frame.backwardDistance+", original base needs viewport margin/HUD fit="+needed);
++            }
+             if(save){Directory.CreateDirectory(Output);frame.screenshot=Path.Combine(Output,"gm"+frame.level+"-"+stage+"-"+size.x+"x"+size.y+".png");capture.Save(frame.screenshot);report.frames.Add(frame);}
+             return frame;
++        }
++        static bool BaseNeedsFit(RecoveredFlowGame game,Camera camera,List<RecoveredBoardFraming.HudRegion> regions,float backward) {
++            float tanY=Mathf.Tan(camera.fieldOfView*.5f*Mathf.Deg2Rad),tanX=tanY*camera.aspect;
++            foreach(Renderer renderer in Structural(game)) {
++                MeshFilter filter=renderer.GetComponent<MeshFilter>();var points=new List<Vector2>();
++                foreach(Vector3 corner in Corners(filter.sharedMesh.bounds)) {
++                    Vector3 p=camera.transform.InverseTransformPoint(filter.transform.TransformPoint(corner));p.z-=backward;
++                    if(p.z<=camera.nearClipPlane)return true;
++                    Vector2 v=new Vector2(.5f+p.x/(2*tanX*p.z),.5f+p.y/(2*tanY*p.z));points.Add(v);
++                    if(v.x<.015f || v.x>.985f || v.y<.015f || v.y>.985f)return true;
++                }
++                Rect bounds=Rect.MinMaxRect(points.Min(x=>x.x),points.Min(x=>x.y),points.Max(x=>x.x),points.Max(x=>x.y));
++                if(regions.Any(x=>bounds.Overlaps(x.viewport)))return true;
++            }
++            return false;
+         }
+         static IEnumerable<Renderer> Structural(RecoveredFlowGame game) {
+             var all=new List<Renderer>(game.PieceRoot.GetComponentsInChildren<Renderer>(true));
+@@ -164,7 +187,7 @@
+                 }
+                 var occupied=new HashSet<int>(UnityEngine.Object.FindObjectsOfType<Transform>().Select(x=>x.gameObject.layer));layer=Enumerable.Range(8,24).Reverse().First(x=>!occupied.Contains(x));
+                 uiObject=new GameObject("HUD fixture capture UI camera",typeof(Camera));uiObject.hideFlags=HideFlags.HideAndDontSave;uiCamera=uiObject.GetComponent<Camera>();uiCamera.enabled=false;
+-                uiCamera.targetTexture=target;uiCamera.clearFlags=CameraClearFlags.Depth;uiCamera.orthographic=true;uiCamera.orthographicSize=height*.5f;uiCamera.nearClipPlane=.1f;uiCamera.farClipPlane=1000;uiCamera.cullingMask=1<<layer;
++                uiCamera.targetTexture=target;uiCamera.rect=new Rect(0,0,1,1);uiCamera.aspect=width/(float)height;uiCamera.clearFlags=CameraClearFlags.Depth;uiCamera.orthographic=true;uiCamera.orthographicSize=height*.5f;uiCamera.nearClipPlane=.1f;uiCamera.farClipPlane=1000;uiCamera.cullingMask=1<<layer;
+                 foreach(Canvas canvas in UnityEngine.Object.FindObjectsOfType<Canvas>()){
+                     if(!canvas.isActiveAndEnabled || !canvas.isRootCanvas || canvas.renderMode!=RenderMode.ScreenSpaceOverlay)continue;
+                     canvases.Add(new CanvasState{canvas=canvas,mode=canvas.renderMode,camera=canvas.worldCamera,distance=canvas.planeDistance,scale=canvas.scaleFactor});
+@@ -176,7 +199,8 @@
+                 foreach(CanvasScaler scaler in UnityEngine.Object.FindObjectsOfType<CanvasScaler>())if(scaler.isActiveAndEnabled && handle!=null)handle.Invoke(scaler,null);
+                 Canvas.ForceUpdateCanvases();
+             }
+-            public void Render(){RenderTexture previous=RenderTexture.active;try{RenderTexture.active=target;GL.Clear(true,true,cameras.Count>0?cameras[0].camera.backgroundColor:Color.black);foreach(CameraState state in cameras)state.camera.Render();uiCamera.Render();}finally{RenderTexture.active=previous;}}
++            public string Describe(string stage){return stage+" frame="+Time.frameCount+" | "+String.Join(" | ",cameras.Select(x=>x.camera.name+" pos="+x.camera.transform.position.ToString("F4")+" rect="+x.camera.rect+" pixel="+x.camera.pixelRect+" aspect="+x.camera.aspect+" backward="+(x.camera.GetComponent<RecoveredBoardFraming>()==null?-1:x.camera.GetComponent<RecoveredBoardFraming>().LastBackwardDistance)).ToArray())+" | UI rect="+uiCamera.rect+" pixel="+uiCamera.pixelRect+" aspect="+uiCamera.aspect+" | "+String.Join(" | ",canvases.Select(x=>x.canvas.name+" pixel="+x.canvas.pixelRect+" rect="+((RectTransform)x.canvas.transform).rect+" scale="+x.canvas.scaleFactor+" camera="+(x.canvas.worldCamera==null?"null":x.canvas.worldCamera.name)).ToArray());}
++            public void Render(List<string> trace){RenderTexture previous=RenderTexture.active;try{RenderTexture.active=target;GL.Clear(true,true,cameras.Count>0?cameras[0].camera.backgroundColor:Color.black);foreach(CameraState state in cameras){state.camera.Render();trace.Add(Describe("after-source-render"));}uiCamera.Render();trace.Add(Describe("after-ui-render"));}finally{RenderTexture.active=previous;}}
+             public void Save(string path){RenderTexture previous=RenderTexture.active;Texture2D pixels=null;try{RenderTexture.active=target;pixels=new Texture2D(target.width,target.height,TextureFormat.RGB24,false);pixels.ReadPixels(new Rect(0,0,target.width,target.height),0,0,false);pixels.Apply(false,false);File.WriteAllBytes(path,pixels.EncodeToPNG());}finally{RenderTexture.active=previous;if(pixels!=null)UnityEngine.Object.DestroyImmediate(pixels);}}
+             public void Dispose(){foreach(var item in layers)if(item.Key!=null)item.Key.layer=item.Value;foreach(CanvasState state in canvases)if(state.canvas!=null){state.canvas.renderMode=state.mode;state.canvas.worldCamera=state.camera;state.canvas.planeDistance=state.distance;state.canvas.scaleFactor=state.scale;}foreach(CameraState state in cameras)if(state.camera!=null){state.camera.targetTexture=state.target;state.camera.aspect=state.aspect;state.camera.cullingMask=state.mask;}if(uiObject!=null)UnityEngine.Object.DestroyImmediate(uiObject);target.Release();UnityEngine.Object.DestroyImmediate(target);Canvas.ForceUpdateCanvases();}
+         }

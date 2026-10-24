@@ -1,0 +1,49 @@
+// SaveLoadManager$$cancelSolution VA 0x1020228, inferred length 188
+void SaveLoadManager__cancelSolution (SaveLoadManager_o* __this, const MethodInfo* method);
+01020228  str      x30, [sp, #-0x20]!                    
+0102022C  stp      x20, x19, [sp, #0x10]                 
+01020230  adrp     x20, #0x24fb000                       
+01020234  ldrb     w8, [x20, #0xcb2]                     
+01020238  mov      x19, x0                               
+0102023C  tbnz     w8, #0, #0x1020260                    
+01020240  adrp     x0, #0x236a000                        
+01020244  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+01020248  bl       #0xe61b78                             
+0102024C  adrp     x0, #0x236b000                        
+01020250  ldr      x0, [x0, #0x720]                       // [0x236B720] 'completeOff'
+01020254  bl       #0xe61b78                             
+01020258  mov      w8, #1                                
+0102025C  strb     w8, [x20, #0xcb2]                     
+01020260  ldr      x0, [x19, #0x198]                      // self.audioManager
+01020264  cbz      x0, #0x10202e0                        
+01020268  ldr      x1, [x19, #0x188]                      // self.click
+0102026C  mov      x2, xzr                               
+01020270  bl       #0x1028540                             // AudioManager$$PlaySound
+01020274  ldr      x0, [x19, #0xe0]                       // self.solutionOff
+01020278  cbz      x0, #0x10202e0                        
+0102027C  adrp     x8, #0x236b000                        
+01020280  ldr      x8, [x8, #0x720]                       // [0x236B720] 'completeOff'
+01020284  mov      w2, #1                                
+01020288  mov      x3, xzr                               
+0102028C  ldr      x1, [x8]                              
+01020290  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+01020294  ldr      x0, [x19, #0xe8]                       // self.cajaSolution
+01020298  cbz      x0, #0x10202e0                        
+0102029C  adrp     x20, #0x236a000                       
+010202A0  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010202A4  mov      w1, wzr                               
+010202A8  mov      x2, xzr                               
+010202AC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010202B0  ldr      x0, [x20]                             
+010202B4  ldr      w8, [x0, #0xe0]                       
+010202B8  cbnz     w8, #0x10202c4                        
+010202BC  bl       #0xe61c80                             
+010202C0  ldr      x0, [x20]                             
+010202C4  ldr      x8, [x0, #0xb8]                       
+010202C8  mov      x0, x19                               
+010202CC  ldp      x20, x19, [sp, #0x10]                 
+010202D0  mov      w9, #1                                
+010202D4  strb     w9, [x8, #0x16]                       
+010202D8  ldr      x30, [sp], #0x20                      
+010202DC  b        #0x101b9a0                             // SaveLoadManager$$doActivarBotones
+010202E0  bl       #0xe61da0                             

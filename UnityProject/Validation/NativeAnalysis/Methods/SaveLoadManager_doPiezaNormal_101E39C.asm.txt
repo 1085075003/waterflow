@@ -1,0 +1,110 @@
+// SaveLoadManager$$doPiezaNormal VA 0x101E39C, inferred length 432
+void SaveLoadManager__doPiezaNormal (SaveLoadManager_o* __this, const MethodInfo* method);
+0101E39C  stp      x30, x21, [sp, #-0x20]!               
+0101E3A0  stp      x20, x19, [sp, #0x10]                 
+0101E3A4  adrp     x20, #0x24fb000                       
+0101E3A8  ldrb     w8, [x20, #0xccc]                     
+0101E3AC  mov      x19, x0                               
+0101E3B0  tbnz     w8, #0, #0x101e3d4                    
+0101E3B4  adrp     x0, #0x236a000                        
+0101E3B8  ldr      x0, [x0, #0x818]                       // [0x236A818] Method$UnityEngine.GameObject.GetComponent<ControlPieza>()
+0101E3BC  bl       #0xe61b78                             
+0101E3C0  adrp     x0, #0x2368000                        
+0101E3C4  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+0101E3C8  bl       #0xe61b78                             
+0101E3CC  mov      w8, #1                                
+0101E3D0  strb     w8, [x20, #0xccc]                     
+0101E3D4  ldr      x0, [x19, #0x40]                       // self.objeto
+0101E3D8  cbz      x0, #0x101e548                        
+0101E3DC  adrp     x8, #0x236a000                        
+0101E3E0  ldr      x8, [x8, #0x818]                       // [0x236A818] Method$UnityEngine.GameObject.GetComponent<ControlPieza>()
+0101E3E4  adrp     x21, #0x2368000                       
+0101E3E8  ldr      x1, [x8]                              
+0101E3EC  ldr      x21, [x21, #0xf50]                     // [0x2368F50] ''
+0101E3F0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0101E3F4  ldr      x8, [x19, #0x278]                      // self.hole1
+0101E3F8  ldr      x1, [x21]                             
+0101E3FC  mov      x20, x0                               
+0101E400  mov      x2, xzr                               
+0101E404  mov      x0, x8                                
+0101E408  bl       #0x1960c80                             // System.String$$op_Inequality
+0101E40C  tbz      w0, #0, #0x101e41c                    
+0101E410  cbz      x20, #0x101e548                       
+0101E414  ldr      x8, [x19, #0x278]                      // self.hole1
+0101E418  str      x8, [x20, #0x1a0]                     
+0101E41C  ldr      x0, [x19, #0x280]                      // self.hole2
+0101E420  ldr      x1, [x21]                             
+0101E424  mov      x2, xzr                               
+0101E428  bl       #0x1960c80                             // System.String$$op_Inequality
+0101E42C  tbz      w0, #0, #0x101e43c                    
+0101E430  cbz      x20, #0x101e548                       
+0101E434  ldr      x8, [x19, #0x280]                      // self.hole2
+0101E438  str      x8, [x20, #0x1a8]                     
+0101E43C  ldr      x0, [x19, #0x288]                      // self.hole3
+0101E440  ldr      x1, [x21]                             
+0101E444  mov      x2, xzr                               
+0101E448  bl       #0x1960c80                             // System.String$$op_Inequality
+0101E44C  tbz      w0, #0, #0x101e45c                    
+0101E450  cbz      x20, #0x101e548                       
+0101E454  ldr      x8, [x19, #0x288]                      // self.hole3
+0101E458  str      x8, [x20, #0x1b0]                     
+0101E45C  ldr      x0, [x19, #0x290]                      // self.hole4
+0101E460  ldr      x1, [x21]                             
+0101E464  mov      x2, xzr                               
+0101E468  bl       #0x1960c80                             // System.String$$op_Inequality
+0101E46C  tbz      w0, #0, #0x101e47c                    
+0101E470  cbz      x20, #0x101e548                       
+0101E474  ldr      x8, [x19, #0x290]                      // self.hole4
+0101E478  str      x8, [x20, #0x1b8]                     
+0101E47C  ldr      x0, [x19, #0x298]                      // self.hole6
+0101E480  ldr      x1, [x21]                             
+0101E484  mov      x2, xzr                               
+0101E488  bl       #0x1960c80                             // System.String$$op_Inequality
+0101E48C  tbz      w0, #0, #0x101e49c                    
+0101E490  cbz      x20, #0x101e548                       
+0101E494  ldr      x8, [x19, #0x298]                      // self.hole6
+0101E498  str      x8, [x20, #0x1c0]                     
+0101E49C  ldr      x0, [x19, #0x2a0]                      // self.door1
+0101E4A0  ldr      x1, [x21]                             
+0101E4A4  mov      x2, xzr                               
+0101E4A8  bl       #0x1960c80                             // System.String$$op_Inequality
+0101E4AC  tbz      w0, #0, #0x101e4bc                    
+0101E4B0  cbz      x20, #0x101e548                       
+0101E4B4  ldr      x8, [x19, #0x2a0]                      // self.door1
+0101E4B8  str      x8, [x20, #0x1c8]                     
+0101E4BC  ldr      x0, [x19, #0x2a8]                      // self.door2
+0101E4C0  ldr      x1, [x21]                             
+0101E4C4  mov      x2, xzr                               
+0101E4C8  bl       #0x1960c80                             // System.String$$op_Inequality
+0101E4CC  tbz      w0, #0, #0x101e4dc                    
+0101E4D0  cbz      x20, #0x101e548                       
+0101E4D4  ldr      x8, [x19, #0x2a8]                      // self.door2
+0101E4D8  str      x8, [x20, #0x1d0]                     
+0101E4DC  ldr      x0, [x19, #0x2b0]                      // self.door3
+0101E4E0  ldr      x1, [x21]                             
+0101E4E4  mov      x2, xzr                               
+0101E4E8  bl       #0x1960c80                             // System.String$$op_Inequality
+0101E4EC  tbz      w0, #0, #0x101e4fc                    
+0101E4F0  cbz      x20, #0x101e548                       
+0101E4F4  ldr      x8, [x19, #0x2b0]                      // self.door3
+0101E4F8  str      x8, [x20, #0x1d8]                     
+0101E4FC  ldr      x0, [x19, #0x2b8]                      // self.door4
+0101E500  ldr      x1, [x21]                             
+0101E504  mov      x2, xzr                               
+0101E508  bl       #0x1960c80                             // System.String$$op_Inequality
+0101E50C  tbz      w0, #0, #0x101e51c                    
+0101E510  cbz      x20, #0x101e548                       
+0101E514  ldr      x8, [x19, #0x2b8]                      // self.door4
+0101E518  str      x8, [x20, #0x1e0]                     
+0101E51C  ldr      x0, [x19, #0x2c0]                      // self.door6
+0101E520  ldr      x1, [x21]                             
+0101E524  mov      x2, xzr                               
+0101E528  bl       #0x1960c80                             // System.String$$op_Inequality
+0101E52C  tbz      w0, #0, #0x101e53c                    
+0101E530  cbz      x20, #0x101e548                       
+0101E534  ldr      x8, [x19, #0x2c0]                      // self.door6
+0101E538  str      x8, [x20, #0x1e8]                     
+0101E53C  ldp      x20, x19, [sp, #0x10]                 
+0101E540  ldp      x30, x21, [sp], #0x20                 
+0101E544  ret                                            
+0101E548  bl       #0xe61da0                             

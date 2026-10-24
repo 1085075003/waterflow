@@ -1,0 +1,133 @@
+// ConfigFondo$$doFondo1 VA 0x10974D8, inferred length 524
+void ConfigFondo__doFondo1 (ConfigFondo_o* __this, const MethodInfo* method);
+010974D8  sub      sp, sp, #0x80                         
+010974DC  stp      d15, d14, [sp, #0x10]                 
+010974E0  stp      d13, d12, [sp, #0x20]                 
+010974E4  stp      d11, d10, [sp, #0x30]                 
+010974E8  stp      d9, d8, [sp, #0x40]                   
+010974EC  str      x30, [sp, #0x50]                      
+010974F0  stp      x22, x21, [sp, #0x60]                 
+010974F4  stp      x20, x19, [sp, #0x70]                 
+010974F8  adrp     x21, #0x24fb000                       
+010974FC  adrp     x20, #0x2368000                       
+01097500  ldrb     w8, [x21, #0xf0d]                     
+01097504  ldr      x20, [x20, #0x3e0]                     // [0x23683E0] UnityEngine.Vector3[]_TypeInfo
+01097508  mov      x19, x0                               
+0109750C  tbnz     w8, #0, #0x1097524                    
+01097510  adrp     x0, #0x2368000                        
+01097514  ldr      x0, [x0, #0x3e0]                       // [0x23683E0] UnityEngine.Vector3[]_TypeInfo
+01097518  bl       #0xe61b78                             
+0109751C  mov      w8, #1                                
+01097520  strb     w8, [x21, #0xf0d]                     
+01097524  mov      x0, xzr                               
+01097528  bl       #0x1fe21ec                             // UnityEngine.Camera$$get_main
+0109752C  ldr      x0, [x20]                             
+01097530  mov      w1, #4                                
+01097534  bl       #0xe61bf0                             
+01097538  ldr      x8, [x19, #0x20]                       // self.background
+0109753C  cbz      x8, #0x10976e0                        
+01097540  mov      x20, x0                               
+01097544  mov      x0, x8                                
+01097548  mov      x1, x20                               
+0109754C  mov      x2, xzr                               
+01097550  bl       #0x200e478                             // UnityEngine.RectTransform$$GetWorldCorners
+01097554  cbz      x20, #0x10976e0                       
+01097558  ldr      w8, [x20, #0x18]                      
+0109755C  cbz      w8, #0x10976dc                        
+01097560  cmp      w8, #3                                
+01097564  b.ls     #0x10976dc                            
+01097568  adrp     x21, #0x24fb000                       
+0109756C  ldp      s11, s12, [x20, #0x20]                
+01097570  ldr      s13, [x20, #0x28]                     
+01097574  ldp      s10, s8, [x20, #0x44]                 
+01097578  ldrb     w8, [x21, #0x8ae]                     
+0109757C  ldr      s9, [x20, #0x4c]                      
+01097580  cbnz     w8, #0x1097598                        
+01097584  adrp     x0, #0x2368000                        
+01097588  ldr      x0, [x0, #0x4d0]                       // [0x23684D0] System.Math_TypeInfo
+0109758C  bl       #0xe61b78                             
+01097590  mov      w8, #1                                
+01097594  strb     w8, [x21, #0x8ae]                     
+01097598  adrp     x22, #0x2368000                       
+0109759C  ldr      x22, [x22, #0x4d0]                     // [0x23684D0] System.Math_TypeInfo
+010975A0  ldr      x0, [x22]                             
+010975A4  ldr      w8, [x0, #0xe0]                       
+010975A8  cbnz     w8, #0x10975b0                        
+010975AC  bl       #0xe61c80                             
+010975B0  ldr      w8, [x20, #0x18]                      
+010975B4  cbz      w8, #0x10976dc                        
+010975B8  cmp      w8, #1                                
+010975BC  b.eq     #0x10976dc                            
+010975C0  ldr      s1, [x20, #0x20]                      
+010975C4  ldr      s0, [x20, #0x24]                      
+010975C8  stp      s9, s13, [sp]                         
+010975CC  mov      v9.16b, v12.16b                       
+010975D0  ldrb     w8, [x21, #0x8ae]                     
+010975D4  stp      s0, s1, [sp, #8]                      
+010975D8  ldp      s1, s13, [x20, #0x28]                 
+010975DC  ldp      s12, s0, [x20, #0x30]                 
+010975E0  stp      s0, s1, [sp, #0x58]                   
+010975E4  cbnz     w8, #0x10975fc                        
+010975E8  adrp     x0, #0x2368000                        
+010975EC  ldr      x0, [x0, #0x4d0]                       // [0x23684D0] System.Math_TypeInfo
+010975F0  bl       #0xe61b78                             
+010975F4  mov      w8, #1                                
+010975F8  strb     w8, [x21, #0x8ae]                     
+010975FC  ldr      x0, [x22]                             
+01097600  ldr      w8, [x0, #0xe0]                       
+01097604  cbnz     w8, #0x109760c                        
+01097608  bl       #0xe61c80                             
+0109760C  ldp      s14, s15, [x19, #0x28]                 // self.factorX
+01097610  ldr      w21, [x19, #0x30]                      // self.tipo
+01097614  mov      x0, x19                               
+01097618  mov      x1, xzr                               
+0109761C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+01097620  mov      x20, x0                               
+01097624  cbz      w21, #0x1097648                       
+01097628  mov      x0, x19                               
+0109762C  mov      x1, xzr                               
+01097630  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+01097634  cbz      x0, #0x10976e0                        
+01097638  mov      x1, xzr                               
+0109763C  bl       #0x200f098                             // UnityEngine.Transform$$get_localScale
+01097640  cbnz     x20, #0x1097678                       
+01097644  b        #0x10976e0                            
+01097648  cbz      x20, #0x10976e0                       
+0109764C  ldp      s3, s2, [sp]                          
+01097650  fsub     s0, s11, s10                          
+01097654  fsub     s1, s9, s8                            
+01097658  fmul     s0, s0, s0                            
+0109765C  fsub     s2, s2, s3                            
+01097660  fmul     s1, s1, s1                            
+01097664  fadd     s0, s0, s1                            
+01097668  fmul     s1, s2, s2                            
+0109766C  fadd     s0, s1, s0                            
+01097670  fsqrt    s0, s0                                
+01097674  fmul     s0, s0, s14                           
+01097678  ldp      s9, s8, [sp, #8]                      
+0109767C  ldp      s4, s3, [sp, #0x58]                   
+01097680  mov      x0, x20                               
+01097684  ldp      x20, x19, [sp, #0x70]                 
+01097688  fsub     s1, s8, s13                           
+0109768C  fsub     s2, s9, s12                           
+01097690  fsub     s3, s3, s4                            
+01097694  fmul     s1, s1, s1                            
+01097698  fmul     s2, s2, s2                            
+0109769C  fmul     s3, s3, s3                            
+010976A0  fadd     s1, s1, s2                            
+010976A4  fadd     s1, s3, s1                            
+010976A8  fsqrt    s1, s1                                
+010976AC  fmul     s1, s1, s15                           
+010976B0  ldp      x22, x21, [sp, #0x60]                 
+010976B4  ldr      x30, [sp, #0x50]                      
+010976B8  ldp      d9, d8, [sp, #0x40]                   
+010976BC  ldp      d11, d10, [sp, #0x30]                 
+010976C0  ldp      d13, d12, [sp, #0x20]                 
+010976C4  ldp      d15, d14, [sp, #0x10]                 
+010976C8  mov      w8, #0x42c80000                       
+010976CC  fmov     s2, w8                                
+010976D0  mov      x1, xzr                               
+010976D4  add      sp, sp, #0x80                         
+010976D8  b        #0x200f138                             // UnityEngine.Transform$$set_localScale
+010976DC  bl       #0xe61da8                             
+010976E0  bl       #0xe61da0                             

@@ -1,0 +1,65 @@
+// ObservadorResorte2$$doProcesoContPiezas VA 0xFE0758, inferred length 252
+void ObservadorResorte2__doProcesoContPiezas (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE0758  stp      x30, x23, [sp, #-0x30]!               
+00FE075C  stp      x22, x21, [sp, #0x10]                 
+00FE0760  stp      x20, x19, [sp, #0x20]                 
+00FE0764  adrp     x21, #0x24fb000                       
+00FE0768  adrp     x20, #0x236a000                       
+00FE076C  ldrb     w8, [x21, #0xbb7]                     
+00FE0770  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FE0774  mov      x19, x0                               
+00FE0778  tbnz     w8, #0, #0xfe079c                     
+00FE077C  adrp     x0, #0x236a000                        
+00FE0780  ldr      x0, [x0, #0x7c8]                       // [0x236A7C8] Resorte1_TypeInfo
+00FE0784  bl       #0xe61b78                             
+00FE0788  adrp     x0, #0x236a000                        
+00FE078C  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FE0790  bl       #0xe61b78                             
+00FE0794  mov      w8, #1                                
+00FE0798  strb     w8, [x21, #0xbb7]                     
+00FE079C  ldr      x0, [x19, #0x260]                      // self.conResor
+00FE07A0  ldr      x1, [x20]                             
+00FE07A4  adrp     x21, #0x236a000                       
+00FE07A8  ldr      x21, [x21, #0x7c8]                     // [0x236A7C8] Resorte1_TypeInfo
+00FE07AC  mov      x2, xzr                               
+00FE07B0  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE07B4  tbz      w0, #0, #0xfe07f4                     
+00FE07B8  ldr      x8, [x21]                             
+00FE07BC  ldr      x8, [x8, #0xb8]                       
+00FE07C0  ldp      w10, w9, [x8, #8]                     
+00FE07C4  ldr      w22, [x8, #0x14]                      
+00FE07C8  add      w23, w9, #1                           
+00FE07CC  cmp      w23, w10                              
+00FE07D0  b.ne     #0xfe0820                             
+00FE07D4  ldr      w8, [x19, #0x26c]                      // self.proceso
+00FE07D8  cmp      w8, #1                                
+00FE07DC  b.ne     #0xfe0800                             
+00FE07E0  ldr      w8, [x19, #0x288]                      // self.position
+00FE07E4  ldr      w9, [x19, #0xf0]                       // self.posiMaxTotal
+00FE07E8  cmp      w8, w9                                
+00FE07EC  cset     w8, lt                                
+00FE07F0  b        #0xfe0808                             
+00FE07F4  mov      w22, wzr                              
+00FE07F8  mov      w23, #1                               
+00FE07FC  b        #0xfe0820                             
+00FE0800  cmp      w22, #0                               
+00FE0804  csetm    w8, gt                                
+00FE0808  ldr      x9, [x21]                             
+00FE080C  mov      w23, wzr                              
+00FE0810  add      w22, w8, w22                          
+00FE0814  mov      w8, #5                                
+00FE0818  ldr      x9, [x9, #0xb8]                       
+00FE081C  str      w8, [x9]                              
+00FE0820  ldr      x0, [x19, #0x260]                      // self.conResor
+00FE0824  ldr      x1, [x20]                             
+00FE0828  mov      x2, xzr                               
+00FE082C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0830  tbz      w0, #0, #0xfe0844                     
+00FE0834  ldr      x8, [x21]                             
+00FE0838  ldr      x8, [x8, #0xb8]                       
+00FE083C  str      w23, [x8, #0xc]                       
+00FE0840  str      w22, [x8, #0x14]                      
+00FE0844  ldp      x20, x19, [sp, #0x20]                 
+00FE0848  ldp      x22, x21, [sp, #0x10]                 
+00FE084C  ldp      x30, x23, [sp], #0x30                 
+00FE0850  ret                                            

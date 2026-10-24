@@ -1,0 +1,24 @@
+// FuenteCubetaC$$Start VA 0x109BC88, inferred length 88
+void FuenteCubetaC__Start (FuenteCubetaC_o* __this, const MethodInfo* method);
+0109BC88  stp      x30, x21, [sp, #-0x20]!               
+0109BC8C  stp      x20, x19, [sp, #0x10]                 
+0109BC90  adrp     x20, #0x24fb000                       
+0109BC94  adrp     x21, #0x236a000                       
+0109BC98  ldrb     w8, [x20, #0xf32]                     
+0109BC9C  ldr      x21, [x21, #0x9d0]                     // [0x236A9D0] AudioManager_TypeInfo
+0109BCA0  mov      x19, x0                               
+0109BCA4  tbnz     w8, #0, #0x109bcbc                    
+0109BCA8  adrp     x0, #0x236a000                        
+0109BCAC  ldr      x0, [x0, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+0109BCB0  bl       #0xe61b78                             
+0109BCB4  mov      w8, #1                                
+0109BCB8  strb     w8, [x20, #0xf32]                     
+0109BCBC  ldr      x8, [x21]                             
+0109BCC0  ldr      x8, [x8, #0xb8]                       
+0109BCC4  ldr      x8, [x8]                              
+0109BCC8  str      wzr, [x19, #0x1b0]                     // self.numOrigen5
+0109BCCC  str      wzr, [x19, #0x190]                     // self.contador
+0109BCD0  str      x8, [x19, #0x1c0]                      // self.audioManager
+0109BCD4  ldp      x20, x19, [sp, #0x10]                 
+0109BCD8  ldp      x30, x21, [sp], #0x20                 
+0109BCDC  ret                                            

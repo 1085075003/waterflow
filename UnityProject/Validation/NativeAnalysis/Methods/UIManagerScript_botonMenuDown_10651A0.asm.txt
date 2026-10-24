@@ -1,0 +1,81 @@
+// UIManagerScript$$botonMenuDown VA 0x10651A0, inferred length 316
+void UIManagerScript__botonMenuDown (UIManagerScript_o* __this, const MethodInfo* method);
+010651A0  str      x30, [sp, #-0x20]!                    
+010651A4  stp      x20, x19, [sp, #0x10]                 
+010651A8  adrp     x20, #0x24fb000                       
+010651AC  ldrb     w8, [x20, #0xe3f]                     
+010651B0  mov      x19, x0                               
+010651B4  tbnz     w8, #0, #0x10651e4                    
+010651B8  adrp     x0, #0x236a000                        
+010651BC  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+010651C0  bl       #0xe61b78                             
+010651C4  adrp     x0, #0x236a000                        
+010651C8  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010651CC  bl       #0xe61b78                             
+010651D0  adrp     x0, #0x236b000                        
+010651D4  ldr      x0, [x0, #0xcd8]                       // [0x236BCD8] 'contadorInterstitial'
+010651D8  bl       #0xe61b78                             
+010651DC  mov      w8, #1                                
+010651E0  strb     w8, [x20, #0xe3f]                     
+010651E4  ldr      x0, [x19, #0x1c8]                      // self.menuIcon
+010651E8  cbz      x0, #0x10652d8                        
+010651EC  ldr      x8, [x0]                              
+010651F0  adrp     x10, #0x5ff000                        
+010651F4  adrp     x11, #0x600000                        
+010651F8  ldr      s1, [x10, #0xb6c]                     
+010651FC  ldr      x9, [x8, #0x2a8]                      
+01065200  ldr      x1, [x8, #0x2b0]                      
+01065204  adrp     x8, #0x5ff000                         
+01065208  adrp     x20, #0x236a000                       
+0106520C  ldr      s0, [x8, #0xd84]                      
+01065210  ldr      s3, [x11, #0x54]                      
+01065214  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+01065218  mov      v2.16b, v1.16b                        
+0106521C  blr      x9                                    
+01065220  ldr      x8, [x20]                             
+01065224  mov      w9, #1                                
+01065228  ldr      x8, [x8, #0xb8]                       
+0106522C  str      w9, [x8, #0xb4]                       
+01065230  ldr      x0, [x19, #0x70]                       // self.audioManager
+01065234  cbz      x0, #0x10652d8                        
+01065238  ldr      x1, [x19, #0x50]                       // self.click
+0106523C  mov      x2, xzr                               
+01065240  bl       #0x1028540                             // AudioManager$$PlaySound
+01065244  ldr      w8, [x19, #0xbc]                       // self.indicadorAds
+01065248  cbnz     w8, #0x10652c0                        
+0106524C  ldr      w8, [x19, #0xcc]                       // self.modoAd
+01065250  cmp      w8, #1                                
+01065254  b.gt     #0x10652c0                            
+01065258  adrp     x20, #0x236a000                       
+0106525C  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01065260  ldr      x0, [x20]                             
+01065264  ldr      w8, [x0, #0xe0]                       
+01065268  cbnz     w8, #0x1065274                        
+0106526C  bl       #0xe61c80                             
+01065270  ldr      x0, [x20]                             
+01065274  ldr      x8, [x0, #0xb8]                       
+01065278  ldrb     w8, [x8, #6]                          
+0106527C  cbnz     w8, #0x10652c0                        
+01065280  adrp     x20, #0x236b000                       
+01065284  ldr      x20, [x20, #0xcd8]                     // [0x236BCD8] 'contadorInterstitial'
+01065288  mov      w1, wzr                               
+0106528C  mov      x2, xzr                               
+01065290  ldr      x0, [x20]                             
+01065294  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+01065298  mov      w1, wzr                               
+0106529C  cmp      w0, #4                                
+010652A0  str      w0, [x19, #0xb4]                       // self.contadorInterstitial
+010652A4  b.gt     #0x10652b0                            
+010652A8  cbz      w0, #0x10652d0                        
+010652AC  sub      w1, w0, #1                            
+010652B0  str      w1, [x19, #0xb4]                       // self.contadorInterstitial
+010652B4  ldr      x0, [x20]                             
+010652B8  mov      x2, xzr                               
+010652BC  bl       #0x200137c                             // UnityEngine.PlayerPrefs$$SetInt
+010652C0  mov      x0, x19                               
+010652C4  ldp      x20, x19, [sp, #0x10]                 
+010652C8  ldr      x30, [sp], #0x20                      
+010652CC  b        #0x10652dc                             // UIManagerScript$$doInterstitial
+010652D0  mov      w1, wzr                               
+010652D4  b        #0x10652b4                            
+010652D8  bl       #0xe61da0                             

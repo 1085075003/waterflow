@@ -1,0 +1,425 @@
+// ObservadorResorte$$doCambioResorte VA 0x10C8494, inferred length 1692
+void ObservadorResorte__doCambioResorte (ObservadorResorte_o* __this, const MethodInfo* method);
+010C8494  stp      x30, x21, [sp, #-0x20]!               
+010C8498  stp      x20, x19, [sp, #0x10]                 
+010C849C  adrp     x21, #0x24fb000                       
+010C84A0  adrp     x20, #0x236a000                       
+010C84A4  ldrb     w8, [x21, #0xff6]                     
+010C84A8  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+010C84AC  mov      x19, x0                               
+010C84B0  tbnz     w8, #0, #0x10c84f8                    
+010C84B4  adrp     x0, #0x236a000                        
+010C84B8  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C84BC  bl       #0xe61b78                             
+010C84C0  adrp     x0, #0x236a000                        
+010C84C4  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+010C84C8  bl       #0xe61b78                             
+010C84CC  adrp     x0, #0x236a000                        
+010C84D0  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+010C84D4  bl       #0xe61b78                             
+010C84D8  adrp     x0, #0x236a000                        
+010C84DC  ldr      x0, [x0, #0x6a8]                       // [0x236A6A8] '4'
+010C84E0  bl       #0xe61b78                             
+010C84E4  adrp     x0, #0x236a000                        
+010C84E8  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+010C84EC  bl       #0xe61b78                             
+010C84F0  mov      w8, #1                                
+010C84F4  strb     w8, [x21, #0xff6]                     
+010C84F8  ldr      x0, [x19, #0x298]                      // self.conResorte1
+010C84FC  ldr      x1, [x20]                             
+010C8500  mov      x2, xzr                               
+010C8504  bl       #0x1960c7c                             // System.String$$op_Equality
+010C8508  tbz      w0, #0, #0x10c8784                    
+010C850C  ldr      w8, [x19, #0x330]                      // self.managerR1
+010C8510  ldr      w9, [x19, #0x334]                      // self.managerR1_old
+010C8514  cmp      w8, w9                                
+010C8518  b.eq     #0x10c8784                            
+010C851C  ldr      x8, [x19, #0x298]                      // self.conResorte1
+010C8520  add      x9, x19, #0x2e8                       
+010C8524  ldr      x10, [x19, #0x2f8]                     // self.tipoResorte1_3
+010C8528  adrp     x20, #0x236a000                       
+010C852C  str      x8, [x19, #0x2a8]                      // self.conResor
+010C8530  ldrh     w8, [x19, #0x31a]                      // self.sw_hayresorte1_2
+010C8534  ldr      q0, [x9]                              
+010C8538  ldr      w9, [x19, #0xfc]                       // self.posiMaxTotal1
+010C853C  str      x10, [x19, #0x290]                     // self.tipoResor3
+010C8540  strb     wzr, [x19, #0x31e]                     // self.sigueMovimiento
+010C8544  strh     w8, [x19, #0x318]                      // self.sw_hayresorte2
+010C8548  str      w9, [x19, #0xf8]                       // self.posiMaxTotal
+010C854C  str      d0, [x19, #0x278]                      // self.tipoResor
+010C8550  str      q0, [x19, #0x280]                      // self.tipoResor1
+010C8554  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+010C8558  ldr      x8, [x20]                             
+010C855C  ldr      x8, [x8, #0xb8]                       
+010C8560  ldr      w8, [x8, #0x7c]                       
+010C8564  cbnz     w8, #0x10c85ec                        
+010C8568  mov      x0, x19                               
+010C856C  mov      x1, xzr                               
+010C8570  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C8574  cbz      x0, #0x10c8b2c                        
+010C8578  mov      x1, xzr                               
+010C857C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8580  cbz      x0, #0x10c8b2c                        
+010C8584  mov      x1, xzr                               
+010C8588  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C858C  mov      x0, x19                               
+010C8590  mov      x1, xzr                               
+010C8594  str      s0, [x19, #0x84]                       // self.inix0
+010C8598  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C859C  cbz      x0, #0x10c8b2c                        
+010C85A0  mov      x1, xzr                               
+010C85A4  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C85A8  cbz      x0, #0x10c8b2c                        
+010C85AC  mov      x1, xzr                               
+010C85B0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C85B4  mov      x0, x19                               
+010C85B8  mov      x1, xzr                               
+010C85BC  str      s1, [x19, #0x88]                       // self.iniy0
+010C85C0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C85C4  cbz      x0, #0x10c8b2c                        
+010C85C8  mov      x1, xzr                               
+010C85CC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C85D0  cbz      x0, #0x10c8b2c                        
+010C85D4  mov      x1, xzr                               
+010C85D8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C85DC  str      s2, [x19, #0x8c]                       // self.iniz0
+010C85E0  ldr      x8, [x20]                             
+010C85E4  ldr      x8, [x8, #0xb8]                       
+010C85E8  ldr      w8, [x8, #0x7c]                       
+010C85EC  cmp      w8, #1                                
+010C85F0  b.ne     #0x10c8678                            
+010C85F4  mov      x0, x19                               
+010C85F8  mov      x1, xzr                               
+010C85FC  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C8600  cbz      x0, #0x10c8b2c                        
+010C8604  mov      x1, xzr                               
+010C8608  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C860C  cbz      x0, #0x10c8b2c                        
+010C8610  mov      x1, xzr                               
+010C8614  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8618  mov      x0, x19                               
+010C861C  mov      x1, xzr                               
+010C8620  str      s0, [x19, #0x94]                       // self.inix1
+010C8624  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C8628  cbz      x0, #0x10c8b2c                        
+010C862C  mov      x1, xzr                               
+010C8630  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8634  cbz      x0, #0x10c8b2c                        
+010C8638  mov      x1, xzr                               
+010C863C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8640  mov      x0, x19                               
+010C8644  mov      x1, xzr                               
+010C8648  str      s1, [x19, #0x98]                       // self.iniy1
+010C864C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C8650  cbz      x0, #0x10c8b2c                        
+010C8654  mov      x1, xzr                               
+010C8658  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C865C  cbz      x0, #0x10c8b2c                        
+010C8660  mov      x1, xzr                               
+010C8664  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8668  str      s2, [x19, #0x9c]                       // self.iniz1
+010C866C  ldr      x8, [x20]                             
+010C8670  ldr      x8, [x8, #0xb8]                       
+010C8674  ldr      w8, [x8, #0x7c]                       
+010C8678  cmp      w8, #2                                
+010C867C  b.ne     #0x10c8704                            
+010C8680  mov      x0, x19                               
+010C8684  mov      x1, xzr                               
+010C8688  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C868C  cbz      x0, #0x10c8b2c                        
+010C8690  mov      x1, xzr                               
+010C8694  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8698  cbz      x0, #0x10c8b2c                        
+010C869C  mov      x1, xzr                               
+010C86A0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C86A4  mov      x0, x19                               
+010C86A8  mov      x1, xzr                               
+010C86AC  str      s0, [x19, #0xa4]                       // self.inix2
+010C86B0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C86B4  cbz      x0, #0x10c8b2c                        
+010C86B8  mov      x1, xzr                               
+010C86BC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C86C0  cbz      x0, #0x10c8b2c                        
+010C86C4  mov      x1, xzr                               
+010C86C8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C86CC  mov      x0, x19                               
+010C86D0  mov      x1, xzr                               
+010C86D4  str      s1, [x19, #0xa8]                       // self.iniy2
+010C86D8  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C86DC  cbz      x0, #0x10c8b2c                        
+010C86E0  mov      x1, xzr                               
+010C86E4  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C86E8  cbz      x0, #0x10c8b2c                        
+010C86EC  mov      x1, xzr                               
+010C86F0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C86F4  str      s2, [x19, #0xac]                       // self.iniz2
+010C86F8  ldr      x8, [x20]                             
+010C86FC  ldr      x8, [x8, #0xb8]                       
+010C8700  ldr      w8, [x8, #0x7c]                       
+010C8704  cmp      w8, #3                                
+010C8708  b.ne     #0x10c8784                            
+010C870C  mov      x0, x19                               
+010C8710  mov      x1, xzr                               
+010C8714  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C8718  cbz      x0, #0x10c8b2c                        
+010C871C  mov      x1, xzr                               
+010C8720  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8724  cbz      x0, #0x10c8b2c                        
+010C8728  mov      x1, xzr                               
+010C872C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8730  mov      x0, x19                               
+010C8734  mov      x1, xzr                               
+010C8738  str      s0, [x19, #0xb4]                       // self.inix3
+010C873C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C8740  cbz      x0, #0x10c8b2c                        
+010C8744  mov      x1, xzr                               
+010C8748  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C874C  cbz      x0, #0x10c8b2c                        
+010C8750  mov      x1, xzr                               
+010C8754  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8758  mov      x0, x19                               
+010C875C  mov      x1, xzr                               
+010C8760  str      s1, [x19, #0xb8]                       // self.iniy3
+010C8764  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C8768  cbz      x0, #0x10c8b2c                        
+010C876C  mov      x1, xzr                               
+010C8770  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8774  cbz      x0, #0x10c8b2c                        
+010C8778  mov      x1, xzr                               
+010C877C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8780  str      s2, [x19, #0xbc]                       // self.iniz3
+010C8784  adrp     x8, #0x236a000                        
+010C8788  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+010C878C  ldr      x0, [x19, #0x2a0]                      // self.conResorte2
+010C8790  mov      x2, xzr                               
+010C8794  ldr      x1, [x8]                              
+010C8798  bl       #0x1960c7c                             // System.String$$op_Equality
+010C879C  tbz      w0, #0, #0x10c8a2c                    
+010C87A0  ldr      w8, [x19, #0x338]                      // self.managerR2
+010C87A4  ldr      w9, [x19, #0x33c]                      // self.managerR2_old
+010C87A8  cmp      w8, w9                                
+010C87AC  b.eq     #0x10c8a2c                            
+010C87B0  ldr      x8, [x19, #0x2a0]                      // self.conResorte2
+010C87B4  ldr      q0, [x19, #0x300]                      // self.tipoResorte2_1
+010C87B8  ldr      x9, [x19, #0x310]                      // self.tipoResorte2_3
+010C87BC  ldrh     w10, [x19, #0x31c]                     // self.sw_hayresorte2_2
+010C87C0  str      x8, [x19, #0x2a8]                      // self.conResor
+010C87C4  ldr      w8, [x19, #0x100]                      // self.posiMaxTotal2
+010C87C8  strb     wzr, [x19, #0x31e]                     // self.sigueMovimiento
+010C87CC  str      d0, [x19, #0x278]                      // self.tipoResor
+010C87D0  str      q0, [x19, #0x280]                      // self.tipoResor1
+010C87D4  str      x9, [x19, #0x290]                      // self.tipoResor3
+010C87D8  strh     w10, [x19, #0x318]                     // self.sw_hayresorte2
+010C87DC  str      w8, [x19, #0xf8]                       // self.posiMaxTotal
+010C87E0  adrp     x20, #0x236a000                       
+010C87E4  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+010C87E8  ldrb     w9, [x19, #0x385]                      // self.prineraVezResorte2
+010C87EC  ldr      x8, [x20]                             
+010C87F0  ldr      x8, [x8, #0xb8]                       
+010C87F4  cbz      w9, #0x10c8808                        
+010C87F8  ldr      w9, [x8, #0x38]                       
+010C87FC  add      w9, w9, #1                            
+010C8800  str      w9, [x8, #0x38]                       
+010C8804  strb     wzr, [x19, #0x385]                     // self.prineraVezResorte2
+010C8808  ldr      w8, [x8, #0x80]                       
+010C880C  cbnz     w8, #0x10c8894                        
+010C8810  mov      x0, x19                               
+010C8814  mov      x1, xzr                               
+010C8818  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C881C  cbz      x0, #0x10c8b2c                        
+010C8820  mov      x1, xzr                               
+010C8824  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8828  cbz      x0, #0x10c8b2c                        
+010C882C  mov      x1, xzr                               
+010C8830  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8834  mov      x0, x19                               
+010C8838  mov      x1, xzr                               
+010C883C  str      s0, [x19, #0x84]                       // self.inix0
+010C8840  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C8844  cbz      x0, #0x10c8b2c                        
+010C8848  mov      x1, xzr                               
+010C884C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8850  cbz      x0, #0x10c8b2c                        
+010C8854  mov      x1, xzr                               
+010C8858  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C885C  mov      x0, x19                               
+010C8860  mov      x1, xzr                               
+010C8864  str      s1, [x19, #0x88]                       // self.iniy0
+010C8868  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C886C  cbz      x0, #0x10c8b2c                        
+010C8870  mov      x1, xzr                               
+010C8874  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8878  cbz      x0, #0x10c8b2c                        
+010C887C  mov      x1, xzr                               
+010C8880  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8884  str      s2, [x19, #0x8c]                       // self.iniz0
+010C8888  ldr      x8, [x20]                             
+010C888C  ldr      x8, [x8, #0xb8]                       
+010C8890  ldr      w8, [x8, #0x80]                       
+010C8894  cmp      w8, #1                                
+010C8898  b.ne     #0x10c8920                            
+010C889C  mov      x0, x19                               
+010C88A0  mov      x1, xzr                               
+010C88A4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C88A8  cbz      x0, #0x10c8b2c                        
+010C88AC  mov      x1, xzr                               
+010C88B0  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C88B4  cbz      x0, #0x10c8b2c                        
+010C88B8  mov      x1, xzr                               
+010C88BC  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C88C0  mov      x0, x19                               
+010C88C4  mov      x1, xzr                               
+010C88C8  str      s0, [x19, #0x94]                       // self.inix1
+010C88CC  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C88D0  cbz      x0, #0x10c8b2c                        
+010C88D4  mov      x1, xzr                               
+010C88D8  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C88DC  cbz      x0, #0x10c8b2c                        
+010C88E0  mov      x1, xzr                               
+010C88E4  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C88E8  mov      x0, x19                               
+010C88EC  mov      x1, xzr                               
+010C88F0  str      s1, [x19, #0x98]                       // self.iniy1
+010C88F4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C88F8  cbz      x0, #0x10c8b2c                        
+010C88FC  mov      x1, xzr                               
+010C8900  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8904  cbz      x0, #0x10c8b2c                        
+010C8908  mov      x1, xzr                               
+010C890C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8910  str      s2, [x19, #0x9c]                       // self.iniz1
+010C8914  ldr      x8, [x20]                             
+010C8918  ldr      x8, [x8, #0xb8]                       
+010C891C  ldr      w8, [x8, #0x80]                       
+010C8920  cmp      w8, #2                                
+010C8924  b.ne     #0x10c89ac                            
+010C8928  mov      x0, x19                               
+010C892C  mov      x1, xzr                               
+010C8930  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C8934  cbz      x0, #0x10c8b2c                        
+010C8938  mov      x1, xzr                               
+010C893C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8940  cbz      x0, #0x10c8b2c                        
+010C8944  mov      x1, xzr                               
+010C8948  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C894C  mov      x0, x19                               
+010C8950  mov      x1, xzr                               
+010C8954  str      s0, [x19, #0xa4]                       // self.inix2
+010C8958  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C895C  cbz      x0, #0x10c8b2c                        
+010C8960  mov      x1, xzr                               
+010C8964  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8968  cbz      x0, #0x10c8b2c                        
+010C896C  mov      x1, xzr                               
+010C8970  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8974  mov      x0, x19                               
+010C8978  mov      x1, xzr                               
+010C897C  str      s1, [x19, #0xa8]                       // self.iniy2
+010C8980  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C8984  cbz      x0, #0x10c8b2c                        
+010C8988  mov      x1, xzr                               
+010C898C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8990  cbz      x0, #0x10c8b2c                        
+010C8994  mov      x1, xzr                               
+010C8998  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C899C  str      s2, [x19, #0xac]                       // self.iniz2
+010C89A0  ldr      x8, [x20]                             
+010C89A4  ldr      x8, [x8, #0xb8]                       
+010C89A8  ldr      w8, [x8, #0x80]                       
+010C89AC  cmp      w8, #3                                
+010C89B0  b.ne     #0x10c8a2c                            
+010C89B4  mov      x0, x19                               
+010C89B8  mov      x1, xzr                               
+010C89BC  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C89C0  cbz      x0, #0x10c8b2c                        
+010C89C4  mov      x1, xzr                               
+010C89C8  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C89CC  cbz      x0, #0x10c8b2c                        
+010C89D0  mov      x1, xzr                               
+010C89D4  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C89D8  mov      x0, x19                               
+010C89DC  mov      x1, xzr                               
+010C89E0  str      s0, [x19, #0xb4]                       // self.inix3
+010C89E4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C89E8  cbz      x0, #0x10c8b2c                        
+010C89EC  mov      x1, xzr                               
+010C89F0  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C89F4  cbz      x0, #0x10c8b2c                        
+010C89F8  mov      x1, xzr                               
+010C89FC  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8A00  mov      x0, x19                               
+010C8A04  mov      x1, xzr                               
+010C8A08  str      s1, [x19, #0xb8]                       // self.iniy3
+010C8A0C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C8A10  cbz      x0, #0x10c8b2c                        
+010C8A14  mov      x1, xzr                               
+010C8A18  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C8A1C  cbz      x0, #0x10c8b2c                        
+010C8A20  mov      x1, xzr                               
+010C8A24  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C8A28  str      s2, [x19, #0xbc]                       // self.iniz3
+010C8A2C  adrp     x8, #0x236a000                        
+010C8A30  ldr      x8, [x8, #0x650]                       // [0x236A650] '3'
+010C8A34  ldr      x0, [x19, #0x298]                      // self.conResorte1
+010C8A38  adrp     x20, #0x236a000                       
+010C8A3C  mov      x2, xzr                               
+010C8A40  ldr      x1, [x8]                              
+010C8A44  ldr      x20, [x20, #0x6a8]                     // [0x236A6A8] '4'
+010C8A48  bl       #0x1960c7c                             // System.String$$op_Equality
+010C8A4C  tbz      w0, #0, #0x10c8a9c                    
+010C8A50  ldr      w8, [x19, #0x340]                      // self.managerR3
+010C8A54  cmp      w8, #1                                
+010C8A58  b.ne     #0x10c8a9c                            
+010C8A5C  ldr      w8, [x19, #0x344]                      // self.managerR3_old
+010C8A60  cmp      w8, #1                                
+010C8A64  b.eq     #0x10c8a9c                            
+010C8A68  ldr      x8, [x19, #0x298]                      // self.conResorte1
+010C8A6C  add      x9, x19, #0x2e8                       
+010C8A70  ldr      x10, [x19, #0x2f8]                     // self.tipoResorte1_3
+010C8A74  ldrh     w11, [x19, #0x31a]                     // self.sw_hayresorte1_2
+010C8A78  str      x8, [x19, #0x2a8]                      // self.conResor
+010C8A7C  ldr      w12, [x19, #0xfc]                      // self.posiMaxTotal1
+010C8A80  ldr      q0, [x9]                              
+010C8A84  str      x10, [x19, #0x290]                     // self.tipoResor3
+010C8A88  strb     wzr, [x19, #0x31e]                     // self.sigueMovimiento
+010C8A8C  strh     w11, [x19, #0x318]                     // self.sw_hayresorte2
+010C8A90  str      d0, [x19, #0x278]                      // self.tipoResor
+010C8A94  str      q0, [x19, #0x280]                      // self.tipoResor1
+010C8A98  str      w12, [x19, #0xf8]                      // self.posiMaxTotal
+010C8A9C  ldr      x0, [x19, #0x2a0]                      // self.conResorte2
+010C8AA0  ldr      x1, [x20]                             
+010C8AA4  mov      x2, xzr                               
+010C8AA8  bl       #0x1960c7c                             // System.String$$op_Equality
+010C8AAC  tbz      w0, #0, #0x10c8b20                    
+010C8AB0  ldr      w8, [x19, #0x348]                      // self.managerR4
+010C8AB4  cmp      w8, #1                                
+010C8AB8  b.ne     #0x10c8b20                            
+010C8ABC  ldr      w8, [x19, #0x34c]                      // self.managerR4_old
+010C8AC0  cmp      w8, #1                                
+010C8AC4  b.eq     #0x10c8b20                            
+010C8AC8  ldr      x8, [x19, #0x2a0]                      // self.conResorte2
+010C8ACC  ldr      q0, [x19, #0x300]                      // self.tipoResorte2_1
+010C8AD0  ldr      x9, [x19, #0x310]                      // self.tipoResorte2_3
+010C8AD4  ldrh     w10, [x19, #0x31c]                     // self.sw_hayresorte2_2
+010C8AD8  ldr      w11, [x19, #0x100]                     // self.posiMaxTotal2
+010C8ADC  ldrb     w12, [x19, #0x385]                     // self.prineraVezResorte2
+010C8AE0  strb     wzr, [x19, #0x31e]                     // self.sigueMovimiento
+010C8AE4  str      x8, [x19, #0x2a8]                      // self.conResor
+010C8AE8  str      d0, [x19, #0x278]                      // self.tipoResor
+010C8AEC  str      q0, [x19, #0x280]                      // self.tipoResor1
+010C8AF0  str      x9, [x19, #0x290]                      // self.tipoResor3
+010C8AF4  strh     w10, [x19, #0x318]                     // self.sw_hayresorte2
+010C8AF8  str      w11, [x19, #0xf8]                      // self.posiMaxTotal
+010C8AFC  cbz      w12, #0x10c8b20                       
+010C8B00  adrp     x8, #0x236a000                        
+010C8B04  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C8B08  ldr      x8, [x8]                              
+010C8B0C  ldr      x8, [x8, #0xb8]                       
+010C8B10  ldr      w9, [x8, #0x40]                       
+010C8B14  add      w9, w9, #1                            
+010C8B18  str      w9, [x8, #0x40]                       
+010C8B1C  strb     wzr, [x19, #0x385]                     // self.prineraVezResorte2
+010C8B20  ldp      x20, x19, [sp, #0x10]                 
+010C8B24  ldp      x30, x21, [sp], #0x20                 
+010C8B28  ret                                            
+010C8B2C  bl       #0xe61da0                             

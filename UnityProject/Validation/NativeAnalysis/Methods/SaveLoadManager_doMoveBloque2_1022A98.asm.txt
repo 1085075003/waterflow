@@ -1,0 +1,25 @@
+// SaveLoadManager$$doMoveBloque2 VA 0x1022A98, inferred length 92
+void SaveLoadManager__doMoveBloque2 (SaveLoadManager_o* __this, const MethodInfo* method);
+01022A98  str      x30, [sp, #-0x20]!                    
+01022A9C  stp      x20, x19, [sp, #0x10]                 
+01022AA0  adrp     x20, #0x24fb000                       
+01022AA4  adrp     x19, #0x236b000                       
+01022AA8  ldrb     w8, [x20, #0xcc9]                     
+01022AAC  ldr      x19, [x19, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+01022AB0  tbnz     w8, #0, #0x1022ac8                    
+01022AB4  adrp     x0, #0x236b000                        
+01022AB8  ldr      x0, [x0, #0x498]                       // [0x236B498] MoveBloque_TypeInfo
+01022ABC  bl       #0xe61b78                             
+01022AC0  mov      w8, #1                                
+01022AC4  strb     w8, [x20, #0xcc9]                     
+01022AC8  ldr      x0, [x19]                             
+01022ACC  ldr      w8, [x0, #0xe0]                       
+01022AD0  cbnz     w8, #0x1022adc                        
+01022AD4  bl       #0xe61c80                             
+01022AD8  ldr      x0, [x19]                             
+01022ADC  ldr      x8, [x0, #0xb8]                       
+01022AE0  ldp      x20, x19, [sp, #0x10]                 
+01022AE4  mov      w9, #2                                
+01022AE8  str      w9, [x8, #4]                          
+01022AEC  ldr      x30, [sp], #0x20                      
+01022AF0  ret                                            

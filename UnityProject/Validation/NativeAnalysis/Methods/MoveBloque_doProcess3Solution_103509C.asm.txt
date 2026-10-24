@@ -1,0 +1,95 @@
+// MoveBloque$$doProcess3Solution VA 0x103509C, inferred length 372
+void MoveBloque__doProcess3Solution (MoveBloque_o* __this, const MethodInfo* method);
+0103509C  str      x30, [sp, #-0x20]!                    
+010350A0  stp      x20, x19, [sp, #0x10]                 
+010350A4  adrp     x20, #0x24fb000                       
+010350A8  ldrb     w8, [x20, #0xd32]                     
+010350AC  mov      x19, x0                               
+010350B0  tbnz     w8, #0, #0x10350c8                    
+010350B4  adrp     x0, #0x236b000                        
+010350B8  ldr      x0, [x0, #0xb48]                       // [0x236BB48] Method$System.Collections.Generic.List<int>.get_Item()
+010350BC  bl       #0xe61b78                             
+010350C0  mov      w8, #1                                
+010350C4  strb     w8, [x20, #0xd32]                     
+010350C8  ldr      x8, [x19, #0x380]                      // self.save1
+010350CC  cbz      x8, #0x103520c                        
+010350D0  ldr      x0, [x8, #0x30]                       
+010350D4  cbz      x0, #0x103520c                        
+010350D8  adrp     x20, #0x236b000                       
+010350DC  ldr      x20, [x20, #0xb48]                     // [0x236BB48] Method$System.Collections.Generic.List<int>.get_Item()
+010350E0  ldr      w1, [x19, #0x390]                      // self.numMove
+010350E4  ldr      x2, [x20]                             
+010350E8  bl       #0x15580e8                             // System.Collections.Generic.List<int>$$get_Item
+010350EC  add      w9, w0, w0, lsl #2                    
+010350F0  ldr      x8, [x19, #0x380]                      // self.save1
+010350F4  lsl      w9, w9, #2                            
+010350F8  mov      w10, #-0x3d900000                     
+010350FC  scvtf    s0, w9                                
+01035100  fmov     s1, w10                               
+01035104  fadd     s0, s0, s1                            
+01035108  str      s0, [x19, #0x3a4]                      // self.finx
+0103510C  cbz      x8, #0x103520c                        
+01035110  ldr      x0, [x8, #0x38]                       
+01035114  cbz      x0, #0x103520c                        
+01035118  ldr      w1, [x19, #0x390]                      // self.numMove
+0103511C  ldr      x2, [x20]                             
+01035120  bl       #0x15580e8                             // System.Collections.Generic.List<int>$$get_Item
+01035124  adrp     x8, #0x600000                         
+01035128  ldr      s0, [x8, #0x198]                      
+0103512C  adrp     x8, #0x5ff000                         
+01035130  ldr      s1, [x8, #0xda0]                      
+01035134  sub      w9, w0, #1                            
+01035138  ldr      x8, [x19, #0x380]                      // self.save1
+0103513C  scvtf    s2, w9                                
+01035140  fmul     s0, s2, s0                            
+01035144  fadd     s0, s0, s1                            
+01035148  str      s0, [x19, #0x3a8]                      // self.finy
+0103514C  cbz      x8, #0x103520c                        
+01035150  ldr      x0, [x8, #0x40]                       
+01035154  cbz      x0, #0x103520c                        
+01035158  ldr      w1, [x19, #0x390]                      // self.numMove
+0103515C  ldr      x2, [x20]                             
+01035160  bl       #0x15580e8                             // System.Collections.Generic.List<int>$$get_Item
+01035164  add      w8, w0, w0, lsl #2                    
+01035168  ldr      w10, [x19, #0x28]                      // self.fijacionPieza
+0103516C  ldr      s2, [x19, #0x3a4]                      // self.finx
+01035170  ldr      s1, [x19, #0x3a8]                      // self.finy
+01035174  mov      w9, #-0x3d900000                      
+01035178  lsl      w8, w8, #2                            
+0103517C  scvtf    s0, w8                                
+01035180  fmov     s3, w9                                
+01035184  fadd     s0, s0, s3                            
+01035188  str      s0, [x19, #0x3ac]                      // self.finz
+0103518C  cbz      w10, #0x10351e0                       
+01035190  mov      x0, x19                               
+01035194  str      s2, [x19, #0x1c8]                      // self.puntoFinal
+01035198  str      s1, [x19, #0x1cc]                     
+0103519C  str      s0, [x19, #0x1d0]                     
+010351A0  str      s2, [x19, #0x194]                      // self.valor3x
+010351A4  str      s1, [x19, #0x198]                      // self.valor3y
+010351A8  str      s0, [x19, #0x19c]                      // self.valor3z
+010351AC  bl       #0x103288c                             // MoveBloque$$doCheckArribaFija
+010351B0  ldrb     w8, [x19, #0x141]                      // self.checkFija
+010351B4  cbz      w8, #0x10351ec                        
+010351B8  ldr      s0, [x19, #0x3a8]                      // self.finy
+010351BC  mov      w8, #2                                
+010351C0  mov      x0, x19                               
+010351C4  str      w8, [x19, #0x350]                      // self.buscarC
+010351C8  str      s0, [x19, #0x180]                      // self.variay
+010351CC  bl       #0x102f428                             // MoveBloque$$doBuscarCamino
+010351D0  mov      w8, #1                                
+010351D4  str      w8, [x19, #0x290]                      // self.paso
+010351D8  strb     w8, [x19, #0x2c4]                      // self.moviendoRuta1
+010351DC  b        #0x1035200                            
+010351E0  stp      s2, s1, [x19, #0xb8]                   // self.hitPosition1
+010351E4  str      s0, [x19, #0xc0]                      
+010351E8  b        #0x1035200                            
+010351EC  add      x8, x19, #0x3a4                       
+010351F0  ldr      d0, [x8]                              
+010351F4  ldr      s1, [x19, #0x3ac]                      // self.finz
+010351F8  str      d0, [x19, #0xb8]                       // self.hitPosition1
+010351FC  str      s1, [x19, #0xc0]                      
+01035200  ldp      x20, x19, [sp, #0x10]                 
+01035204  ldr      x30, [sp], #0x20                      
+01035208  ret                                            
+0103520C  bl       #0xe61da0                             

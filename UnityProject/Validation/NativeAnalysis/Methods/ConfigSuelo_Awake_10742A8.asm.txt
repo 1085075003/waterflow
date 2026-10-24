@@ -1,0 +1,106 @@
+// ConfigSuelo$$Awake VA 0x10742A8, inferred length 416
+void ConfigSuelo__Awake (ConfigSuelo_o* __this, const MethodInfo* method);
+010742A8  stp      x30, x21, [sp, #-0x20]!               
+010742AC  stp      x20, x19, [sp, #0x10]                 
+010742B0  adrp     x20, #0x24fb000                       
+010742B4  ldrb     w8, [x20, #0xebe]                     
+010742B8  mov      x19, x0                               
+010742BC  tbnz     w8, #0, #0x10742ec                    
+010742C0  adrp     x0, #0x2368000                        
+010742C4  ldr      x0, [x0, #0x508]                       // [0x2368508] Method$UnityEngine.Component.GetComponent<Renderer>()
+010742C8  bl       #0xe61b78                             
+010742CC  adrp     x0, #0x2368000                        
+010742D0  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010742D4  bl       #0xe61b78                             
+010742D8  adrp     x0, #0x236a000                        
+010742DC  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+010742E0  bl       #0xe61b78                             
+010742E4  mov      w8, #1                                
+010742E8  strb     w8, [x20, #0xebe]                     
+010742EC  mov      x0, x19                               
+010742F0  mov      x1, xzr                               
+010742F4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010742F8  cbz      x0, #0x1074444                        
+010742FC  adrp     x21, #0x236a000                       
+01074300  ldr      x21, [x21, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+01074304  mov      x1, xzr                               
+01074308  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0107430C  adrp     x8, #0x600000                         
+01074310  ldr      s0, [x8, #0xa0]                       
+01074314  fcmp     s1, s0                                
+01074318  b.pl     #0x1074344                            
+0107431C  adrp     x8, #0x2368000                        
+01074320  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+01074324  ldr      x20, [x19, #0x28]                      // self.tierra
+01074328  ldr      x0, [x8]                              
+0107432C  ldr      w8, [x0, #0xe0]                       
+01074330  cbnz     w8, #0x1074338                        
+01074334  bl       #0xe61c80                             
+01074338  mov      x0, x20                               
+0107433C  mov      x1, xzr                               
+01074340  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+01074344  ldr      x8, [x21]                             
+01074348  ldr      x8, [x8, #0xb8]                       
+0107434C  ldr      w8, [x8]                              
+01074350  sub      w8, w8, #1                            
+01074354  cmp      w8, #0x25                             
+01074358  b.hi     #0x1074394                            
+0107435C  adrp     x9, #0x621000                         
+01074360  add      x9, x9, #0x77c                        
+01074364  adr      x10, #0x1074374                       
+01074368  ldrb     w11, [x9, x8]                         
+0107436C  add      x10, x10, x11, lsl #2                 
+01074370  br       x10                                   
+01074374  adrp     x8, #0x2368000                        
+01074378  ldr      x8, [x8, #0x508]                       // [0x2368508] Method$UnityEngine.Component.GetComponent<Renderer>()
+0107437C  mov      x0, x19                               
+01074380  ldr      x1, [x8]                              
+01074384  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+01074388  cbz      x0, #0x1074444                        
+0107438C  add      x8, x19, #0x40                        
+01074390  b        #0x1074430                            
+01074394  adrp     x8, #0x2368000                        
+01074398  ldr      x8, [x8, #0x508]                       // [0x2368508] Method$UnityEngine.Component.GetComponent<Renderer>()
+0107439C  mov      x0, x19                               
+010743A0  ldr      x1, [x8]                              
+010743A4  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+010743A8  cbz      x0, #0x1074444                        
+010743AC  add      x8, x19, #0x30                        
+010743B0  b        #0x1074430                            
+010743B4  adrp     x8, #0x2368000                        
+010743B8  ldr      x8, [x8, #0x508]                       // [0x2368508] Method$UnityEngine.Component.GetComponent<Renderer>()
+010743BC  mov      x0, x19                               
+010743C0  ldr      x1, [x8]                              
+010743C4  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+010743C8  cbz      x0, #0x1074444                        
+010743CC  add      x8, x19, #0x38                        
+010743D0  b        #0x1074430                            
+010743D4  adrp     x8, #0x2368000                        
+010743D8  ldr      x8, [x8, #0x508]                       // [0x2368508] Method$UnityEngine.Component.GetComponent<Renderer>()
+010743DC  mov      x0, x19                               
+010743E0  ldr      x1, [x8]                              
+010743E4  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+010743E8  cbz      x0, #0x1074444                        
+010743EC  add      x8, x19, #0x48                        
+010743F0  b        #0x1074430                            
+010743F4  adrp     x8, #0x2368000                        
+010743F8  ldr      x8, [x8, #0x508]                       // [0x2368508] Method$UnityEngine.Component.GetComponent<Renderer>()
+010743FC  mov      x0, x19                               
+01074400  ldr      x1, [x8]                              
+01074404  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+01074408  cbz      x0, #0x1074444                        
+0107440C  add      x8, x19, #0x50                        
+01074410  b        #0x1074430                            
+01074414  adrp     x8, #0x2368000                        
+01074418  ldr      x8, [x8, #0x508]                       // [0x2368508] Method$UnityEngine.Component.GetComponent<Renderer>()
+0107441C  mov      x0, x19                               
+01074420  ldr      x1, [x8]                              
+01074424  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+01074428  cbz      x0, #0x1074444                        
+0107442C  add      x8, x19, #0x58                        
+01074430  ldr      x1, [x8]                              
+01074434  ldp      x20, x19, [sp, #0x10]                 
+01074438  mov      x2, xzr                               
+0107443C  ldp      x30, x21, [sp], #0x20                 
+01074440  b        #0x1fec520                             // UnityEngine.Renderer$$set_material
+01074444  bl       #0xe61da0                             

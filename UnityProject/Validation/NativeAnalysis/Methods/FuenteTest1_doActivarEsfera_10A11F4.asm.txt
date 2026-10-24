@@ -1,0 +1,189 @@
+// FuenteTest1$$doActivarEsfera VA 0x10A11F4, inferred length 748
+void FuenteTest1__doActivarEsfera (FuenteTest1_o* __this, const MethodInfo* method);
+010A11F4  str      x30, [sp, #-0x20]!                    
+010A11F8  stp      x20, x19, [sp, #0x10]                 
+010A11FC  adrp     x20, #0x24fb000                       
+010A1200  ldrb     w8, [x20, #0xf4e]                     
+010A1204  mov      x19, x0                               
+010A1208  tbnz     w8, #0, #0x10a1220                    
+010A120C  adrp     x0, #0x236c000                        
+010A1210  ldr      x0, [x0, #0x7d8]                       // [0x236C7D8] 'esferaCas'
+010A1214  bl       #0xe61b78                             
+010A1218  mov      w8, #1                                
+010A121C  strb     w8, [x20, #0xf4e]                     
+010A1220  ldrb     w8, [x19, #0x258]                      // self.triggered
+010A1224  cbz      w8, #0x10a14d0                        
+010A1228  ldr      x8, [x19, #0x250]                      // self.agscr
+010A122C  cbz      x8, #0x10a14dc                        
+010A1230  mov      w9, #1                                
+010A1234  strb     w9, [x8, #0x30]                       
+010A1238  ldr      x0, [x19, #0x20]                       // self.nombreObjeto
+010A123C  cbz      x0, #0x10a14dc                        
+010A1240  adrp     x8, #0x236c000                        
+010A1244  ldr      x8, [x8, #0x7d8]                       // [0x236C7D8] 'esferaCas'
+010A1248  mov      x2, xzr                               
+010A124C  ldr      x1, [x8]                              
+010A1250  bl       #0x19651dc                             // System.String$$Contains
+010A1254  tbz      w0, #0, #0x10a12ac                    
+010A1258  ldr      w8, [x19, #0x34]                       // self.origen
+010A125C  sub      w8, w8, #1                            
+010A1260  cmp      w8, #3                                
+010A1264  b.hi     #0x10a12ac                            
+010A1268  adrp     x9, #0x621000                         
+010A126C  add      x9, x9, #0xc98                        
+010A1270  adr      x10, #0x10a1280                       
+010A1274  ldrb     w11, [x9, x8]                         
+010A1278  add      x10, x10, x11, lsl #2                 
+010A127C  br       x10                                   
+010A1280  mov      w8, #1                                
+010A1284  strb     w8, [x19, #0x1d9]                      // self.esf1
+010A1288  b        #0x10a12ac                            
+010A128C  mov      w8, #1                                
+010A1290  strb     w8, [x19, #0x1da]                      // self.esf2
+010A1294  b        #0x10a12ac                            
+010A1298  mov      w8, #1                                
+010A129C  strb     w8, [x19, #0x1db]                      // self.esf3
+010A12A0  b        #0x10a12ac                            
+010A12A4  mov      w8, #1                                
+010A12A8  strb     w8, [x19, #0x1dc]                      // self.esf4
+010A12AC  ldrb     w8, [x19, #0x1d9]                      // self.esf1
+010A12B0  cbz      w8, #0x10a131c                        
+010A12B4  ldrb     w8, [x19, #0x2d7]                      // self.cerrada1
+010A12B8  cbz      w8, #0x10a12e0                        
+010A12BC  mov      w1, #1                                
+010A12C0  mov      x0, x19                               
+010A12C4  bl       #0x10a14e0                             // FuenteTest1$$doProcessUnionAguasBarrera
+010A12C8  ldr      x0, [x19, #0xc8]                       // self.plano1
+010A12CC  cbz      x0, #0x10a14dc                        
+010A12D0  mov      w1, wzr                               
+010A12D4  mov      x2, xzr                               
+010A12D8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A12DC  b        #0x10a131c                            
+010A12E0  ldr      x0, [x19, #0x68]                       // self.esfera1
+010A12E4  cbz      x0, #0x10a14dc                        
+010A12E8  mov      x1, xzr                               
+010A12EC  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A12F0  cbz      x0, #0x10a14dc                        
+010A12F4  ldr      x1, [x19, #0x1e8]                      // self.tagName
+010A12F8  mov      x2, xzr                               
+010A12FC  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A1300  ldr      x0, [x19, #0x68]                       // self.esfera1
+010A1304  cbz      x0, #0x10a14dc                        
+010A1308  mov      w1, #1                                
+010A130C  mov      x2, xzr                               
+010A1310  mov      w20, #1                               
+010A1314  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1318  strb     w20, [x19, #0x1e0]                     // self.esf1Activada
+010A131C  ldrb     w8, [x19, #0x1da]                      // self.esf2
+010A1320  cbz      w8, #0x10a138c                        
+010A1324  ldrb     w8, [x19, #0x2d8]                      // self.cerrada2
+010A1328  cbz      w8, #0x10a1350                        
+010A132C  mov      w1, #2                                
+010A1330  mov      x0, x19                               
+010A1334  bl       #0x10a14e0                             // FuenteTest1$$doProcessUnionAguasBarrera
+010A1338  ldr      x0, [x19, #0xd0]                       // self.plano2
+010A133C  cbz      x0, #0x10a14dc                        
+010A1340  mov      w1, wzr                               
+010A1344  mov      x2, xzr                               
+010A1348  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A134C  b        #0x10a138c                            
+010A1350  ldr      x0, [x19, #0x70]                       // self.esfera2
+010A1354  cbz      x0, #0x10a14dc                        
+010A1358  mov      x1, xzr                               
+010A135C  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A1360  cbz      x0, #0x10a14dc                        
+010A1364  ldr      x1, [x19, #0x1e8]                      // self.tagName
+010A1368  mov      x2, xzr                               
+010A136C  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A1370  ldr      x0, [x19, #0x70]                       // self.esfera2
+010A1374  cbz      x0, #0x10a14dc                        
+010A1378  mov      w1, #1                                
+010A137C  mov      x2, xzr                               
+010A1380  mov      w20, #1                               
+010A1384  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1388  strb     w20, [x19, #0x1e1]                     // self.esf2Activada
+010A138C  ldrb     w8, [x19, #0x1db]                      // self.esf3
+010A1390  cbz      w8, #0x10a13fc                        
+010A1394  ldrb     w8, [x19, #0x2d9]                      // self.cerrada3
+010A1398  cbz      w8, #0x10a13c0                        
+010A139C  mov      w1, #3                                
+010A13A0  mov      x0, x19                               
+010A13A4  bl       #0x10a14e0                             // FuenteTest1$$doProcessUnionAguasBarrera
+010A13A8  ldr      x0, [x19, #0xd8]                       // self.plano3
+010A13AC  cbz      x0, #0x10a14dc                        
+010A13B0  mov      w1, wzr                               
+010A13B4  mov      x2, xzr                               
+010A13B8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A13BC  b        #0x10a13fc                            
+010A13C0  ldr      x0, [x19, #0x78]                       // self.esfera3
+010A13C4  cbz      x0, #0x10a14dc                        
+010A13C8  mov      x1, xzr                               
+010A13CC  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A13D0  cbz      x0, #0x10a14dc                        
+010A13D4  ldr      x1, [x19, #0x1e8]                      // self.tagName
+010A13D8  mov      x2, xzr                               
+010A13DC  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A13E0  ldr      x0, [x19, #0x78]                       // self.esfera3
+010A13E4  cbz      x0, #0x10a14dc                        
+010A13E8  mov      w1, #1                                
+010A13EC  mov      x2, xzr                               
+010A13F0  mov      w20, #1                               
+010A13F4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A13F8  strb     w20, [x19, #0x1e2]                     // self.esf3Activada
+010A13FC  ldrb     w8, [x19, #0x1dc]                      // self.esf4
+010A1400  cbz      w8, #0x10a146c                        
+010A1404  ldrb     w8, [x19, #0x2da]                      // self.cerrada4
+010A1408  cbz      w8, #0x10a1430                        
+010A140C  mov      w1, #4                                
+010A1410  mov      x0, x19                               
+010A1414  bl       #0x10a14e0                             // FuenteTest1$$doProcessUnionAguasBarrera
+010A1418  ldr      x0, [x19, #0xe0]                       // self.plano4
+010A141C  cbz      x0, #0x10a14dc                        
+010A1420  mov      w1, wzr                               
+010A1424  mov      x2, xzr                               
+010A1428  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A142C  b        #0x10a146c                            
+010A1430  ldr      x0, [x19, #0x80]                       // self.esfera4
+010A1434  cbz      x0, #0x10a14dc                        
+010A1438  mov      x1, xzr                               
+010A143C  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A1440  cbz      x0, #0x10a14dc                        
+010A1444  ldr      x1, [x19, #0x1e8]                      // self.tagName
+010A1448  mov      x2, xzr                               
+010A144C  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A1450  ldr      x0, [x19, #0x80]                       // self.esfera4
+010A1454  cbz      x0, #0x10a14dc                        
+010A1458  mov      w1, #1                                
+010A145C  mov      x2, xzr                               
+010A1460  mov      w20, #1                               
+010A1464  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1468  strb     w20, [x19, #0x1e3]                     // self.esf4Activada
+010A146C  ldrb     w8, [x19, #0x1dd]                      // self.esf6
+010A1470  cbz      w8, #0x10a14b8                        
+010A1474  ldrb     w8, [x19, #0x2db]                      // self.cerrada6
+010A1478  cbnz     w8, #0x10a14b8                        
+010A147C  ldr      x0, [x19, #0x88]                       // self.esfera6
+010A1480  cbz      x0, #0x10a14dc                        
+010A1484  mov      x1, xzr                               
+010A1488  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A148C  cbz      x0, #0x10a14dc                        
+010A1490  ldr      x1, [x19, #0x1e8]                      // self.tagName
+010A1494  mov      x2, xzr                               
+010A1498  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A149C  ldr      x0, [x19, #0x88]                       // self.esfera6
+010A14A0  cbz      x0, #0x10a14dc                        
+010A14A4  mov      w1, #1                                
+010A14A8  mov      x2, xzr                               
+010A14AC  mov      w20, #1                               
+010A14B0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A14B4  strb     w20, [x19, #0x1e4]                     // self.esf6Activada
+010A14B8  ldrb     w8, [x19, #0x1de]                      // self.activar
+010A14BC  cbz      w8, #0x10a14d0                        
+010A14C0  mov      x0, x19                               
+010A14C4  ldp      x20, x19, [sp, #0x10]                 
+010A14C8  ldr      x30, [sp], #0x20                      
+010A14CC  b        #0x10a19d8                             // FuenteTest1$$doActivarCascada
+010A14D0  ldp      x20, x19, [sp, #0x10]                 
+010A14D4  ldr      x30, [sp], #0x20                      
+010A14D8  ret                                            
+010A14DC  bl       #0xe61da0                             

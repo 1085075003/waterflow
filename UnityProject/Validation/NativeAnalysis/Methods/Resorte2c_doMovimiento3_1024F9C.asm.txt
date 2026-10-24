@@ -1,0 +1,27 @@
+// Resorte2c$$doMovimiento3 VA 0x1024F9C, inferred length 100
+void Resorte2c__doMovimiento3 (Resorte2c_o* __this, const MethodInfo* method);
+01024F9C  stp      x30, x21, [sp, #-0x20]!               
+01024FA0  stp      x20, x19, [sp, #0x10]                 
+01024FA4  adrp     x20, #0x24fb000                       
+01024FA8  adrp     x21, #0x236a000                       
+01024FAC  ldrb     w8, [x20, #0xcd6]                     
+01024FB0  ldr      x21, [x21, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+01024FB4  mov      x19, x0                               
+01024FB8  tbnz     w8, #0, #0x1024fd0                    
+01024FBC  adrp     x0, #0x236a000                        
+01024FC0  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+01024FC4  bl       #0xe61b78                             
+01024FC8  mov      w8, #1                                
+01024FCC  strb     w8, [x20, #0xcd6]                     
+01024FD0  ldr      x8, [x21]                             
+01024FD4  mov      w9, #1                                
+01024FD8  mov      w10, #0x1000000                       
+01024FDC  ldr      x8, [x8, #0xb8]                       
+01024FE0  str      w9, [x8, #0x14]                       
+01024FE4  strb     w9, [x19, #0x1db]                      // self.swfin3_1
+01024FE8  str      w10, [x19, #0x1d0]                     // self.swfin0
+01024FEC  strb     w9, [x19, #0x1d5]                      // self.swfinMovimiento1
+01024FF0  str      wzr, [x19, #0x31c]                     // self.primeraVez
+01024FF4  ldp      x20, x19, [sp, #0x10]                 
+01024FF8  ldp      x30, x21, [sp], #0x20                 
+01024FFC  ret                                            

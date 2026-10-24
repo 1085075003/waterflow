@@ -1,0 +1,521 @@
+// ObservadorResorte2$$doResorte VA 0xFDFD14, inferred length 2076
+void ObservadorResorte2__doResorte (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FDFD14  stp      x30, x21, [sp, #-0x20]!               
+00FDFD18  stp      x20, x19, [sp, #0x10]                 
+00FDFD1C  adrp     x20, #0x24fb000                       
+00FDFD20  ldrb     w8, [x20, #0xb9e]                     
+00FDFD24  mov      x19, x0                               
+00FDFD28  tbnz     w8, #0, #0xfdfd58                     
+00FDFD2C  adrp     x0, #0x236a000                        
+00FDFD30  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+00FDFD34  bl       #0xe61b78                             
+00FDFD38  adrp     x0, #0x236a000                        
+00FDFD3C  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FDFD40  bl       #0xe61b78                             
+00FDFD44  adrp     x0, #0x236a000                        
+00FDFD48  ldr      x0, [x0, #0x700]                       // [0x236A700] '0'
+00FDFD4C  bl       #0xe61b78                             
+00FDFD50  mov      w8, #1                                
+00FDFD54  strb     w8, [x20, #0xb9e]                     
+00FDFD58  ldr      w8, [x19, #0x2e0]                      // self.managerResorte
+00FDFD5C  cmp      w8, #5                                
+00FDFD60  b.eq     #0xfdfd6c                             
+00FDFD64  cmp      w8, #3                                
+00FDFD68  b.ne     #0xfdfde0                             
+00FDFD6C  ldr      w8, [x19, #0x288]                      // self.position
+00FDFD70  cmp      w8, #2                                
+00FDFD74  b.eq     #0xfdfd90                             
+00FDFD78  cmp      w8, #1                                
+00FDFD7C  b.eq     #0xfdfd9c                             
+00FDFD80  cbnz     w8, #0xfdfdb0                         
+00FDFD84  ldur     d0, [x19, #0x7c]                       // self.inix0
+00FDFD88  add      x8, x19, #0x84                        
+00FDFD8C  b        #0xfdfda4                             
+00FDFD90  ldur     d0, [x19, #0x9c]                       // self.inix2
+00FDFD94  add      x8, x19, #0xa4                        
+00FDFD98  b        #0xfdfda4                             
+00FDFD9C  ldur     d0, [x19, #0x8c]                       // self.inix1
+00FDFDA0  add      x8, x19, #0x94                        
+00FDFDA4  stur     d0, [x19, #0x64]                       // self.posx
+00FDFDA8  ldr      s0, [x8]                              
+00FDFDAC  str      s0, [x19, #0x6c]                       // self.posz
+00FDFDB0  mov      x0, x19                               
+00FDFDB4  mov      x1, xzr                               
+00FDFDB8  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FDFDBC  cbz      x0, #0xfe052c                         
+00FDFDC0  mov      x1, xzr                               
+00FDFDC4  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FDFDC8  cbz      x0, #0xfe052c                         
+00FDFDCC  ldp      s1, s2, [x19, #0x68]                   // self.posy
+00FDFDD0  ldr      s0, [x19, #0x64]                       // self.posx
+00FDFDD4  mov      x1, xzr                               
+00FDFDD8  bl       #0x200ea50                             // UnityEngine.Transform$$set_position
+00FDFDDC  ldr      w8, [x19, #0x2e0]                      // self.managerResorte
+00FDFDE0  cmp      w8, #1                                
+00FDFDE4  b.ne     #0xfe0018                             
+00FDFDE8  ldr      w8, [x19, #0x288]                      // self.position
+00FDFDEC  ldr      w9, [x19, #0xf0]                       // self.posiMaxTotal
+00FDFDF0  cmp      w8, w9                                
+00FDFDF4  b.ge     #0xfe00b8                             
+00FDFDF8  ldr      w8, [x19, #0x2e4]                      // self.managerResorte_old
+00FDFDFC  mov      w9, #1                                
+00FDFE00  str      w9, [x19, #0x26c]                      // self.proceso
+00FDFE04  cmp      w8, #4                                
+00FDFE08  b.ne     #0xfdfe38                             
+00FDFE0C  adrp     x8, #0x236a000                        
+00FDFE10  ldr      x0, [x19, #0x38]                       // self.valMove
+00FDFE14  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+00FDFE18  mov      x2, xzr                               
+00FDFE1C  ldr      x1, [x8]                              
+00FDFE20  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDFE24  tbz      w0, #0, #0xfdfe38                     
+00FDFE28  ldrb     w8, [x19, #0x274]                      // self.sueloBloqueado
+00FDFE2C  cbz      w8, #0xfdfe38                         
+00FDFE30  mov      x0, x19                               
+00FDFE34  bl       #0xfe0530                              // ObservadorResorte2$$doActivarSuelo
+00FDFE38  ldr      w8, [x19, #0x288]                      // self.position
+00FDFE3C  strb     wzr, [x19, #0x2df]                     // self.hacerMovimiento
+00FDFE40  cbz      w8, #0xfdfe5c                         
+00FDFE44  cmp      w8, #1                                
+00FDFE48  b.eq     #0xfdfe64                             
+00FDFE4C  cmp      w8, #2                                
+00FDFE50  b.ne     #0xfdfe70                             
+00FDFE54  ldr      x0, [x19, #0x248]                      // self.tipoResor3
+00FDFE58  b        #0xfdfe68                             
+00FDFE5C  ldr      x0, [x19, #0x238]                      // self.tipoResor1
+00FDFE60  b        #0xfdfe68                             
+00FDFE64  ldr      x0, [x19, #0x240]                      // self.tipoResor2
+00FDFE68  str      x0, [x19, #0x230]                      // self.tipoResor
+00FDFE6C  b        #0xfdfe74                             
+00FDFE70  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FDFE74  adrp     x20, #0x236a000                       
+00FDFE78  ldr      x20, [x20, #0x700]                     // [0x236A700] '0'
+00FDFE7C  mov      x2, xzr                               
+00FDFE80  ldr      x1, [x20]                             
+00FDFE84  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDFE88  ldr      w8, [x19, #0x288]                      // self.position
+00FDFE8C  tbz      w0, #0, #0xfdfeb8                     
+00FDFE90  cbz      w8, #0xfdffb4                         
+00FDFE94  cmp      w8, #2                                
+00FDFE98  b.eq     #0xfdffc8                             
+00FDFE9C  cmp      w8, #1                                
+00FDFEA0  b.ne     #0xfdffd8                             
+00FDFEA4  ldur     d0, [x19, #0x8c]                       // self.inix1
+00FDFEA8  ldr      s1, [x19, #0x94]                       // self.iniz1
+00FDFEAC  stur     d0, [x19, #0x9c]                       // self.inix2
+00FDFEB0  str      s1, [x19, #0xa4]                       // self.iniz2
+00FDFEB4  b        #0xfdffd8                             
+00FDFEB8  cbnz     w8, #0xfdff08                         
+00FDFEBC  ldr      x8, [x19, #0x238]                      // self.tipoResor1
+00FDFEC0  ldur     q0, [x19, #0x7c]                       // self.inix0
+00FDFEC4  mov      w21, #1                               
+00FDFEC8  mov      x0, x19                               
+00FDFECC  str      w21, [x19, #0x1b4]                     // self.comprueba
+00FDFED0  str      x8, [x19, #0x230]                      // self.tipoResor
+00FDFED4  stur     q0, [x19, #0xbc]                       // self.parx
+00FDFED8  bl       #0xfe0854                              // ObservadorResorte2$$doValidarPosActual
+00FDFEDC  ldrb     w8, [x19, #0x318]                      // self.validaOk
+00FDFEE0  cbz      w8, #0xfdff04                         
+00FDFEE4  ldp      s0, s1, [x19, #0xcc]                   // self.parnextx
+00FDFEE8  ldp      s2, s3, [x19, #0xd4]                   // self.parnextz
+00FDFEEC  strb     w21, [x19, #0x2df]                     // self.hacerMovimiento
+00FDFEF0  stp      s0, s1, [x19, #0x8c]                   // self.inix1
+00FDFEF4  stp      s2, s3, [x19, #0x94]                   // self.iniz1
+00FDFEF8  stp      s0, s1, [x19, #0x64]                   // self.posx
+00FDFEFC  str      s2, [x19, #0x6c]                       // self.posz
+00FDFF00  str      s3, [x19, #0x168]                      // self.angle
+00FDFF04  ldr      w8, [x19, #0x288]                      // self.position
+00FDFF08  cmp      w8, #1                                
+00FDFF0C  b.ne     #0xfdff58                             
+00FDFF10  ldr      x8, [x19, #0x240]                      // self.tipoResor2
+00FDFF14  ldur     q0, [x19, #0x8c]                       // self.inix1
+00FDFF18  mov      w21, #1                               
+00FDFF1C  mov      x0, x19                               
+00FDFF20  str      w21, [x19, #0x1b4]                     // self.comprueba
+00FDFF24  str      x8, [x19, #0x230]                      // self.tipoResor
+00FDFF28  stur     q0, [x19, #0xbc]                       // self.parx
+00FDFF2C  bl       #0xfe0854                              // ObservadorResorte2$$doValidarPosActual
+00FDFF30  ldrb     w8, [x19, #0x318]                      // self.validaOk
+00FDFF34  cbz      w8, #0xfdff58                         
+00FDFF38  ldp      s0, s1, [x19, #0xcc]                   // self.parnextx
+00FDFF3C  ldp      s2, s3, [x19, #0xd4]                   // self.parnextz
+00FDFF40  strb     w21, [x19, #0x2df]                     // self.hacerMovimiento
+00FDFF44  stp      s0, s1, [x19, #0x9c]                   // self.inix2
+00FDFF48  stp      s2, s3, [x19, #0xa4]                   // self.iniz2
+00FDFF4C  stp      s0, s1, [x19, #0x64]                   // self.posx
+00FDFF50  str      s2, [x19, #0x6c]                       // self.posz
+00FDFF54  str      s3, [x19, #0x168]                      // self.angle
+00FDFF58  ldr      w8, [x19, #0x288]                      // self.position
+00FDFF5C  cmp      w8, #2                                
+00FDFF60  b.ne     #0xfdffe0                             
+00FDFF64  ldr      x8, [x19, #0x248]                      // self.tipoResor3
+00FDFF68  ldur     q0, [x19, #0x9c]                       // self.inix2
+00FDFF6C  mov      w21, #1                               
+00FDFF70  mov      x0, x19                               
+00FDFF74  str      w21, [x19, #0x1b4]                     // self.comprueba
+00FDFF78  str      x8, [x19, #0x230]                      // self.tipoResor
+00FDFF7C  stur     q0, [x19, #0xbc]                       // self.parx
+00FDFF80  bl       #0xfe0854                              // ObservadorResorte2$$doValidarPosActual
+00FDFF84  ldrb     w8, [x19, #0x318]                      // self.validaOk
+00FDFF88  cbz      w8, #0xfdffe0                         
+00FDFF8C  ldp      s0, s1, [x19, #0xcc]                   // self.parnextx
+00FDFF90  ldp      s2, s3, [x19, #0xd4]                   // self.parnextz
+00FDFF94  strb     w21, [x19, #0x2df]                     // self.hacerMovimiento
+00FDFF98  strb     wzr, [x19, #0x164]                     // self.activadoResorte
+00FDFF9C  stp      s0, s1, [x19, #0xac]                   // self.inix3
+00FDFFA0  stp      s2, s3, [x19, #0xb4]                   // self.iniz3
+00FDFFA4  stp      s0, s1, [x19, #0x64]                   // self.posx
+00FDFFA8  str      s2, [x19, #0x6c]                       // self.posz
+00FDFFAC  str      s3, [x19, #0x168]                      // self.angle
+00FDFFB0  b        #0xfdffec                             
+00FDFFB4  ldur     d0, [x19, #0x7c]                       // self.inix0
+00FDFFB8  ldr      s1, [x19, #0x84]                       // self.iniz0
+00FDFFBC  stur     d0, [x19, #0x8c]                       // self.inix1
+00FDFFC0  str      s1, [x19, #0x94]                       // self.iniz1
+00FDFFC4  b        #0xfdffd8                             
+00FDFFC8  ldur     d0, [x19, #0x9c]                       // self.inix2
+00FDFFCC  ldr      s1, [x19, #0xa4]                       // self.iniz2
+00FDFFD0  stur     d0, [x19, #0xac]                       // self.inix3
+00FDFFD4  str      s1, [x19, #0xb4]                       // self.iniz3
+00FDFFD8  mov      x0, x19                               
+00FDFFDC  bl       #0xfe0758                              // ObservadorResorte2$$doProcesoContPiezas
+00FDFFE0  ldrb     w8, [x19, #0x2df]                      // self.hacerMovimiento
+00FDFFE4  strb     wzr, [x19, #0x164]                     // self.activadoResorte
+00FDFFE8  cbz      w8, #0xfe032c                         
+00FDFFEC  mov      x0, x19                               
+00FDFFF0  strb     wzr, [x19, #0x165]                     // self.terminadoResorte
+00FDFFF4  bl       #0xfe0cd8                              // ObservadorResorte2$$doPuntoFinal1
+00FDFFF8  mov      w8, #1                                
+00FDFFFC  mov      x0, x19                               
+00FE0000  strb     w8, [x19, #0x164]                      // self.activadoResorte
+00FE0004  strb     w8, [x19, #0x328]                      // self.primeraVezAguas
+00FE0008  bl       #0xfe16e8                              // ObservadorResorte2$$doActivaRes
+00FE000C  ldr      w9, [x19, #0x288]                      // self.position
+00FE0010  ldr      w8, [x19, #0x2e0]                      // self.managerResorte
+00FE0014  str      w9, [x19, #0x28c]                      // self.position_old
+00FE0018  cmp      w8, #3                                
+00FE001C  b.ne     #0xfe00b0                             
+00FE0020  adrp     x8, #0x236a000                        
+00FE0024  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE0028  ldr      x8, [x8, #0x700]                       // [0x236A700] '0'
+00FE002C  mov      x2, xzr                               
+00FE0030  ldr      x1, [x8]                              
+00FE0034  bl       #0x1960c80                             // System.String$$op_Inequality
+00FE0038  tbz      w0, #0, #0xfe00ac                     
+00FE003C  adrp     x20, #0x236a000                       
+00FE0040  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE0044  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FE0048  mov      x2, xzr                               
+00FE004C  ldr      x1, [x20]                             
+00FE0050  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0054  tbnz     w0, #0, #0xfe0074                     
+00FE0058  adrp     x8, #0x236a000                        
+00FE005C  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE0060  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+00FE0064  mov      x2, xzr                               
+00FE0068  ldr      x1, [x8]                              
+00FE006C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0070  tbz      w0, #0, #0xfe007c                     
+00FE0074  mov      x0, x19                               
+00FE0078  bl       #0xfe17d8                              // ObservadorResorte2$$doActivarPieza
+00FE007C  ldr      x0, [x19, #0x38]                       // self.valMove
+00FE0080  ldr      x1, [x20]                             
+00FE0084  mov      x2, xzr                               
+00FE0088  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE008C  tbz      w0, #0, #0xfe00a0                     
+00FE0090  ldrb     w8, [x19, #0x274]                      // self.sueloBloqueado
+00FE0094  cbz      w8, #0xfe00a0                         
+00FE0098  mov      x0, x19                               
+00FE009C  bl       #0xfe0530                              // ObservadorResorte2$$doActivarSuelo
+00FE00A0  mov      x0, x19                               
+00FE00A4  strb     wzr, [x19, #0x164]                     // self.activadoResorte
+00FE00A8  bl       #0xfe18cc                              // ObservadorResorte2$$doInactivaRes
+00FE00AC  ldr      w8, [x19, #0x2e0]                      // self.managerResorte
+00FE00B0  cmp      w8, #1                                
+00FE00B4  b.ne     #0xfe0138                             
+00FE00B8  ldr      w8, [x19, #0x288]                      // self.position
+00FE00BC  ldr      w9, [x19, #0xf0]                       // self.posiMaxTotal
+00FE00C0  cmp      w8, w9                                
+00FE00C4  b.ne     #0xfe04ec                             
+00FE00C8  adrp     x20, #0x236a000                       
+00FE00CC  ldr      x0, [x19, #0x38]                       // self.valMove
+00FE00D0  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FE00D4  mov      x2, xzr                               
+00FE00D8  ldr      x1, [x20]                             
+00FE00DC  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE00E0  tbz      w0, #0, #0xfe00f4                     
+00FE00E4  ldrb     w8, [x19, #0x274]                      // self.sueloBloqueado
+00FE00E8  cbz      w8, #0xfe00f4                         
+00FE00EC  mov      x0, x19                               
+00FE00F0  bl       #0xfe0530                              // ObservadorResorte2$$doActivarSuelo
+00FE00F4  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE00F8  ldr      x1, [x20]                             
+00FE00FC  mov      x2, xzr                               
+00FE0100  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0104  tbnz     w0, #0, #0xfe0124                     
+00FE0108  adrp     x8, #0x236a000                        
+00FE010C  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE0110  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+00FE0114  mov      x2, xzr                               
+00FE0118  ldr      x1, [x8]                              
+00FE011C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0120  tbz      w0, #0, #0xfe012c                     
+00FE0124  mov      x0, x19                               
+00FE0128  bl       #0xfe17d8                              // ObservadorResorte2$$doActivarPieza
+00FE012C  ldr      w8, [x19, #0x2e0]                      // self.managerResorte
+00FE0130  mov      w9, #1                                
+00FE0134  strb     w9, [x19, #0x165]                      // self.terminadoResorte
+00FE0138  cmp      w8, #4                                
+00FE013C  b.ne     #0xfe0450                             
+00FE0140  ldr      w8, [x19, #0x2e4]                      // self.managerResorte_old
+00FE0144  mov      w9, #2                                
+00FE0148  str      w9, [x19, #0x26c]                      // self.proceso
+00FE014C  cmp      w8, #1                                
+00FE0150  b.ne     #0xfe0180                             
+00FE0154  adrp     x8, #0x236a000                        
+00FE0158  ldr      x0, [x19, #0x38]                       // self.valMove
+00FE015C  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+00FE0160  mov      x2, xzr                               
+00FE0164  ldr      x1, [x8]                              
+00FE0168  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE016C  tbz      w0, #0, #0xfe0180                     
+00FE0170  ldrb     w8, [x19, #0x274]                      // self.sueloBloqueado
+00FE0174  cbz      w8, #0xfe0180                         
+00FE0178  mov      x0, x19                               
+00FE017C  bl       #0xfe0530                              // ObservadorResorte2$$doActivarSuelo
+00FE0180  ldr      w8, [x19, #0x288]                      // self.position
+00FE0184  strb     wzr, [x19, #0x2df]                     // self.hacerMovimiento
+00FE0188  cmp      w8, #1                                
+00FE018C  b.eq     #0xfe01a8                             
+00FE0190  cmp      w8, #2                                
+00FE0194  b.eq     #0xfe01b0                             
+00FE0198  cmp      w8, #3                                
+00FE019C  b.ne     #0xfe01bc                             
+00FE01A0  ldr      x0, [x19, #0x248]                      // self.tipoResor3
+00FE01A4  b        #0xfe01b4                             
+00FE01A8  ldr      x0, [x19, #0x238]                      // self.tipoResor1
+00FE01AC  b        #0xfe01b4                             
+00FE01B0  ldr      x0, [x19, #0x240]                      // self.tipoResor2
+00FE01B4  str      x0, [x19, #0x230]                      // self.tipoResor
+00FE01B8  b        #0xfe01c0                             
+00FE01BC  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE01C0  adrp     x20, #0x236a000                       
+00FE01C4  ldr      x20, [x20, #0x700]                     // [0x236A700] '0'
+00FE01C8  mov      x2, xzr                               
+00FE01CC  ldr      x1, [x20]                             
+00FE01D0  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE01D4  ldr      w8, [x19, #0x288]                      // self.position
+00FE01D8  tbz      w0, #0, #0xfe0208                     
+00FE01DC  cmp      w8, #3                                
+00FE01E0  b.eq     #0xfe0368                             
+00FE01E4  cmp      w8, #2                                
+00FE01E8  b.eq     #0xfe037c                             
+00FE01EC  cmp      w8, #1                                
+00FE01F0  b.ne     #0xfe0390                             
+00FE01F4  ldur     d0, [x19, #0x8c]                       // self.inix1
+00FE01F8  ldr      s1, [x19, #0x94]                       // self.iniz1
+00FE01FC  stur     d0, [x19, #0x7c]                       // self.inix0
+00FE0200  str      s1, [x19, #0x84]                       // self.iniz0
+00FE0204  b        #0xfe0394                             
+00FE0208  cbnz     w8, #0xfe0218                         
+00FE020C  mov      x0, x19                               
+00FE0210  bl       #0xfe19bc                              // ObservadorResorte2$$doInicializarContPiezas
+00FE0214  ldr      w8, [x19, #0x288]                      // self.position
+00FE0218  cmp      w8, #1                                
+00FE021C  b.ne     #0xfe0268                             
+00FE0220  ldr      x8, [x19, #0x238]                      // self.tipoResor1
+00FE0224  ldur     q0, [x19, #0x8c]                       // self.inix1
+00FE0228  mov      w9, #2                                
+00FE022C  mov      x0, x19                               
+00FE0230  str      w9, [x19, #0x1b4]                      // self.comprueba
+00FE0234  str      x8, [x19, #0x230]                      // self.tipoResor
+00FE0238  stur     q0, [x19, #0xbc]                       // self.parx
+00FE023C  bl       #0xfe0854                              // ObservadorResorte2$$doValidarPosActual
+00FE0240  ldrb     w8, [x19, #0x318]                      // self.validaOk
+00FE0244  cbz      w8, #0xfe0268                         
+00FE0248  ldp      s0, s1, [x19, #0xcc]                   // self.parnextx
+00FE024C  ldr      s2, [x19, #0xd4]                       // self.parnextz
+00FE0250  mov      w8, #1                                
+00FE0254  strb     w8, [x19, #0x2df]                      // self.hacerMovimiento
+00FE0258  stp      s0, s1, [x19, #0x7c]                   // self.inix0
+00FE025C  str      s2, [x19, #0x84]                       // self.iniz0
+00FE0260  stp      s0, s1, [x19, #0x64]                   // self.posx
+00FE0264  str      s2, [x19, #0x6c]                       // self.posz
+00FE0268  ldr      w8, [x19, #0x288]                      // self.position
+00FE026C  cmp      w8, #2                                
+00FE0270  b.ne     #0xfe02c4                             
+00FE0274  ldr      x9, [x19, #0x240]                      // self.tipoResor2
+00FE0278  ldur     d0, [x19, #0x9c]                       // self.inix2
+00FE027C  ldr      s1, [x19, #0xa4]                       // self.iniz2
+00FE0280  mov      x0, x19                               
+00FE0284  str      w8, [x19, #0x1b4]                      // self.comprueba
+00FE0288  str      x9, [x19, #0x230]                      // self.tipoResor
+00FE028C  stur     d0, [x19, #0xbc]                       // self.parx
+00FE0290  str      s1, [x19, #0xc4]                       // self.parz
+00FE0294  bl       #0xfe0854                              // ObservadorResorte2$$doValidarPosActual
+00FE0298  ldrb     w8, [x19, #0x318]                      // self.validaOk
+00FE029C  cbz      w8, #0xfe02c0                         
+00FE02A0  ldp      s0, s1, [x19, #0xcc]                   // self.parnextx
+00FE02A4  ldr      s2, [x19, #0xd4]                       // self.parnextz
+00FE02A8  mov      w8, #1                                
+00FE02AC  strb     w8, [x19, #0x2df]                      // self.hacerMovimiento
+00FE02B0  stp      s0, s1, [x19, #0x8c]                   // self.inix1
+00FE02B4  str      s2, [x19, #0x94]                       // self.iniz1
+00FE02B8  stp      s0, s1, [x19, #0x64]                   // self.posx
+00FE02BC  str      s2, [x19, #0x6c]                       // self.posz
+00FE02C0  ldr      w8, [x19, #0x288]                      // self.position
+00FE02C4  cmp      w8, #3                                
+00FE02C8  b.ne     #0xfe039c                             
+00FE02CC  ldr      x9, [x19, #0x248]                      // self.tipoResor3
+00FE02D0  ldur     d0, [x19, #0xac]                       // self.inix3
+00FE02D4  ldr      s1, [x19, #0xb4]                       // self.iniz3
+00FE02D8  mov      w8, #2                                
+00FE02DC  mov      x0, x19                               
+00FE02E0  str      w8, [x19, #0x1b4]                      // self.comprueba
+00FE02E4  str      x9, [x19, #0x230]                      // self.tipoResor
+00FE02E8  stur     d0, [x19, #0xbc]                       // self.parx
+00FE02EC  str      s1, [x19, #0xc4]                       // self.parz
+00FE02F0  bl       #0xfe0854                              // ObservadorResorte2$$doValidarPosActual
+00FE02F4  ldrb     w8, [x19, #0x318]                      // self.validaOk
+00FE02F8  cbz      w8, #0xfe039c                         
+00FE02FC  ldp      s0, s1, [x19, #0xcc]                   // self.parnextx
+00FE0300  ldr      s2, [x19, #0xd4]                       // self.parnextz
+00FE0304  ldr      x8, [x19, #0x248]                      // self.tipoResor3
+00FE0308  mov      w9, #1                                
+00FE030C  strb     w9, [x19, #0x2df]                      // self.hacerMovimiento
+00FE0310  stp      s0, s1, [x19, #0x9c]                   // self.inix2
+00FE0314  str      s2, [x19, #0xa4]                       // self.iniz2
+00FE0318  str      x8, [x19, #0x230]                      // self.tipoResor
+00FE031C  stp      s0, s1, [x19, #0x64]                   // self.posx
+00FE0320  str      s2, [x19, #0x6c]                       // self.posz
+00FE0324  strb     wzr, [x19, #0x164]                     // self.activadoResorte
+00FE0328  b        #0xfe03a8                             
+00FE032C  ldr      w8, [x19, #0x288]                      // self.position
+00FE0330  ldr      w9, [x19, #0xf0]                       // self.posiMaxTotal
+00FE0334  cmp      w8, w9                                
+00FE0338  b.ge     #0xfe000c                             
+00FE033C  strb     wzr, [x19, #0x164]                     // self.activadoResorte
+00FE0340  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE0344  ldr      x1, [x20]                             
+00FE0348  mov      x2, xzr                               
+00FE034C  bl       #0x1960c80                             // System.String$$op_Inequality
+00FE0350  tbz      w0, #0, #0xfe000c                     
+00FE0354  mov      w8, #3                                
+00FE0358  mov      x0, x19                               
+00FE035C  str      w8, [x19, #0x2e0]                      // self.managerResorte
+00FE0360  bl       #0xfe1760                              // ObservadorResorte2$$doChangeManager
+00FE0364  b        #0xfe000c                             
+00FE0368  ldur     d0, [x19, #0xac]                       // self.inix3
+00FE036C  ldr      s1, [x19, #0xb4]                       // self.iniz3
+00FE0370  stur     d0, [x19, #0x9c]                       // self.inix2
+00FE0374  str      s1, [x19, #0xa4]                       // self.iniz2
+00FE0378  b        #0xfe0394                             
+00FE037C  ldur     d0, [x19, #0x9c]                       // self.inix2
+00FE0380  ldr      s1, [x19, #0xa4]                       // self.iniz2
+00FE0384  stur     d0, [x19, #0x8c]                       // self.inix1
+00FE0388  str      s1, [x19, #0x94]                       // self.iniz1
+00FE038C  b        #0xfe0394                             
+00FE0390  b.lt     #0xfe039c                             
+00FE0394  mov      x0, x19                               
+00FE0398  bl       #0xfe1940                              // ObservadorResorte2$$doSumaContPiezas
+00FE039C  ldrb     w8, [x19, #0x2df]                      // self.hacerMovimiento
+00FE03A0  strb     wzr, [x19, #0x164]                     // self.activadoResorte
+00FE03A4  cbz      w8, #0xfe04f8                         
+00FE03A8  mov      x0, x19                               
+00FE03AC  strb     wzr, [x19, #0x165]                     // self.terminadoResorte
+00FE03B0  bl       #0xfe0cd8                              // ObservadorResorte2$$doPuntoFinal1
+00FE03B4  mov      w8, #1                                
+00FE03B8  mov      x0, x19                               
+00FE03BC  strb     w8, [x19, #0x164]                      // self.activadoResorte
+00FE03C0  strb     w8, [x19, #0x328]                      // self.primeraVezAguas
+00FE03C4  bl       #0xfe16e8                              // ObservadorResorte2$$doActivaRes
+00FE03C8  ldr      w9, [x19, #0x288]                      // self.position
+00FE03CC  ldr      w8, [x19, #0x2e0]                      // self.managerResorte
+00FE03D0  str      w9, [x19, #0x28c]                      // self.position_old
+00FE03D4  cmp      w8, #4                                
+00FE03D8  b.ne     #0xfe0450                             
+00FE03DC  cbnz     w9, #0xfe04ec                         
+00FE03E0  adrp     x20, #0x236a000                       
+00FE03E4  ldr      x0, [x19, #0x38]                       // self.valMove
+00FE03E8  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FE03EC  mov      x2, xzr                               
+00FE03F0  ldr      x1, [x20]                             
+00FE03F4  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE03F8  tbz      w0, #0, #0xfe040c                     
+00FE03FC  ldrb     w8, [x19, #0x274]                      // self.sueloBloqueado
+00FE0400  cbz      w8, #0xfe040c                         
+00FE0404  mov      x0, x19                               
+00FE0408  bl       #0xfe0530                              // ObservadorResorte2$$doActivarSuelo
+00FE040C  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE0410  ldr      x1, [x20]                             
+00FE0414  mov      x2, xzr                               
+00FE0418  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE041C  tbnz     w0, #0, #0xfe043c                     
+00FE0420  adrp     x8, #0x236a000                        
+00FE0424  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE0428  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+00FE042C  mov      x2, xzr                               
+00FE0430  ldr      x1, [x8]                              
+00FE0434  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE0438  tbz      w0, #0, #0xfe0444                     
+00FE043C  mov      x0, x19                               
+00FE0440  bl       #0xfe17d8                              // ObservadorResorte2$$doActivarPieza
+00FE0444  ldr      w8, [x19, #0x2e0]                      // self.managerResorte
+00FE0448  mov      w9, #1                                
+00FE044C  strb     w9, [x19, #0x165]                      // self.terminadoResorte
+00FE0450  cmp      w8, #5                                
+00FE0454  b.ne     #0xfe04ec                             
+00FE0458  adrp     x8, #0x236a000                        
+00FE045C  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE0460  ldr      x8, [x8, #0x700]                       // [0x236A700] '0'
+00FE0464  mov      x2, xzr                               
+00FE0468  ldr      x1, [x8]                              
+00FE046C  bl       #0x1960c80                             // System.String$$op_Inequality
+00FE0470  tbz      w0, #0, #0xfe04ec                     
+00FE0474  adrp     x20, #0x236a000                       
+00FE0478  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE047C  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FE0480  mov      x2, xzr                               
+00FE0484  ldr      x1, [x20]                             
+00FE0488  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE048C  tbnz     w0, #0, #0xfe04ac                     
+00FE0490  adrp     x8, #0x236a000                        
+00FE0494  ldr      x0, [x19, #0x30]                       // self.valEncima
+00FE0498  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+00FE049C  mov      x2, xzr                               
+00FE04A0  ldr      x1, [x8]                              
+00FE04A4  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE04A8  tbz      w0, #0, #0xfe04b4                     
+00FE04AC  mov      x0, x19                               
+00FE04B0  bl       #0xfe17d8                              // ObservadorResorte2$$doActivarPieza
+00FE04B4  ldr      x0, [x19, #0x38]                       // self.valMove
+00FE04B8  ldr      x1, [x20]                             
+00FE04BC  mov      x2, xzr                               
+00FE04C0  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE04C4  tbz      w0, #0, #0xfe04d8                     
+00FE04C8  ldrb     w8, [x19, #0x274]                      // self.sueloBloqueado
+00FE04CC  cbz      w8, #0xfe04d8                         
+00FE04D0  mov      x0, x19                               
+00FE04D4  bl       #0xfe0530                              // ObservadorResorte2$$doActivarSuelo
+00FE04D8  strb     wzr, [x19, #0x164]                     // self.activadoResorte
+00FE04DC  mov      x0, x19                               
+00FE04E0  ldp      x20, x19, [sp, #0x10]                 
+00FE04E4  ldp      x30, x21, [sp], #0x20                 
+00FE04E8  b        #0xfe18cc                              // ObservadorResorte2$$doInactivaRes
+00FE04EC  ldp      x20, x19, [sp, #0x10]                 
+00FE04F0  ldp      x30, x21, [sp], #0x20                 
+00FE04F4  ret                                            
+00FE04F8  ldr      w9, [x19, #0x288]                      // self.position
+00FE04FC  cmp      w9, #1                                
+00FE0500  b.lt     #0xfe03cc                             
+00FE0504  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE0508  ldr      x1, [x20]                             
+00FE050C  mov      x2, xzr                               
+00FE0510  bl       #0x1960c80                             // System.String$$op_Inequality
+00FE0514  tbz      w0, #0, #0xfe03c8                     
+00FE0518  mov      w8, #5                                
+00FE051C  mov      x0, x19                               
+00FE0520  str      w8, [x19, #0x2e0]                      // self.managerResorte
+00FE0524  bl       #0xfe1760                              // ObservadorResorte2$$doChangeManager
+00FE0528  b        #0xfe03c8                             
+00FE052C  bl       #0xe61da0                             

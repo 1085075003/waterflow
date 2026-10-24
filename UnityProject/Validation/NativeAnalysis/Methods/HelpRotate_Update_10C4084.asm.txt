@@ -1,0 +1,47 @@
+// HelpRotate$$Update VA 0x10C4084, inferred length 180
+void HelpRotate__Update (HelpRotate_o* __this, const MethodInfo* method);
+010C4084  str      x30, [sp, #-0x20]!                    
+010C4088  stp      x20, x19, [sp, #0x10]                 
+010C408C  adrp     x20, #0x24fb000                       
+010C4090  ldrb     w8, [x20, #0xfe1]                     
+010C4094  mov      x19, x0                               
+010C4098  tbnz     w8, #0, #0x10c40bc                    
+010C409C  adrp     x0, #0x236c000                        
+010C40A0  ldr      x0, [x0, #0x9a0]                       // [0x236C9A0] SwipeHandler2_TypeInfo
+010C40A4  bl       #0xe61b78                             
+010C40A8  adrp     x0, #0x236c000                        
+010C40AC  ldr      x0, [x0, #0x460]                       // [0x236C460] 'helpRotation'
+010C40B0  bl       #0xe61b78                             
+010C40B4  mov      w8, #1                                
+010C40B8  strb     w8, [x20, #0xfe1]                     
+010C40BC  ldrb     w8, [x19, #0x28]                       // self.checkSwipe
+010C40C0  cbz      w8, #0x10c4128                        
+010C40C4  adrp     x8, #0x236c000                        
+010C40C8  ldr      x8, [x8, #0x9a0]                       // [0x236C9A0] SwipeHandler2_TypeInfo
+010C40CC  ldr      x8, [x8]                              
+010C40D0  ldr      x8, [x8, #0xb8]                       
+010C40D4  ldrb     w8, [x8]                              
+010C40D8  cbz      w8, #0x10c4128                        
+010C40DC  ldr      x0, [x19, #0x20]                       // self.fadeOut
+010C40E0  cbz      x0, #0x10c4134                        
+010C40E4  mov      w1, #1                                
+010C40E8  mov      x2, xzr                               
+010C40EC  bl       #0x2002f88                             // UnityEngine.Behaviour$$set_enabled
+010C40F0  adrp     x8, #0x236c000                        
+010C40F4  ldr      x8, [x8, #0x460]                       // [0x236C460] 'helpRotation'
+010C40F8  mov      w1, #1                                
+010C40FC  mov      x2, xzr                               
+010C4100  ldr      x0, [x8]                              
+010C4104  bl       #0x200137c                             // UnityEngine.PlayerPrefs$$SetInt
+010C4108  ldr      x0, [x19, #0x30]                       // self.Rotation
+010C410C  strb     wzr, [x19, #0x28]                      // self.checkSwipe
+010C4110  cbz      x0, #0x10c4134                        
+010C4114  ldp      x20, x19, [sp, #0x10]                 
+010C4118  mov      w1, wzr                               
+010C411C  mov      x2, xzr                               
+010C4120  ldr      x30, [sp], #0x20                      
+010C4124  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+010C4128  ldp      x20, x19, [sp, #0x10]                 
+010C412C  ldr      x30, [sp], #0x20                      
+010C4130  ret                                            
+010C4134  bl       #0xe61da0                             

@@ -1,0 +1,34 @@
+// ObservadorResorte2$$doValidarMovimientos2 VA 0xFE2AAC, inferred length 128
+void ObservadorResorte2__doValidarMovimientos2 (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE2AAC  stp      x30, x19, [sp, #-0x10]!               
+00FE2AB0  mov      x19, x0                               
+00FE2AB4  bl       #0xfe0530                              // ObservadorResorte2$$doActivarSuelo
+00FE2AB8  ldr      w8, [x19, #0x288]                      // self.position
+00FE2ABC  mov      w9, #9                                
+00FE2AC0  str      w9, [x19, #0x320]                      // self.posiMin
+00FE2AC4  strb     wzr, [x19, #0xe8]                      // self.ocupado
+00FE2AC8  cmp      w8, #3                                
+00FE2ACC  b.ne     #0xfe2aec                             
+00FE2AD0  ldrb     w8, [x19, #0x2d9]                      // self.sw_hayresorte3
+00FE2AD4  cbz      w8, #0xfe2ae8                         
+00FE2AD8  mov      x0, x19                               
+00FE2ADC  bl       #0xfe2874                              // ObservadorResorte2$$doValidarPos3
+00FE2AE0  ldrb     w8, [x19, #0xe8]                       // self.ocupado
+00FE2AE4  cbnz     w8, #0xfe2b24                         
+00FE2AE8  ldr      w8, [x19, #0x288]                      // self.position
+00FE2AEC  cmp      w8, #1                                
+00FE2AF0  b.le     #0xfe2b0c                             
+00FE2AF4  ldrb     w8, [x19, #0x2d8]                      // self.sw_hayresorte2
+00FE2AF8  cbz      w8, #0xfe2b0c                         
+00FE2AFC  mov      x0, x19                               
+00FE2B00  bl       #0xfe2720                              // ObservadorResorte2$$doValidarPos2
+00FE2B04  ldrb     w8, [x19, #0xe8]                       // self.ocupado
+00FE2B08  cbnz     w8, #0xfe2b24                         
+00FE2B0C  ldr      w8, [x19, #0x288]                      // self.position
+00FE2B10  cmp      w8, #1                                
+00FE2B14  b.lt     #0xfe2b24                             
+00FE2B18  mov      x0, x19                               
+00FE2B1C  ldp      x30, x19, [sp], #0x10                 
+00FE2B20  b        #0xfe25e4                              // ObservadorResorte2$$doValidarPos1
+00FE2B24  ldp      x30, x19, [sp], #0x10                 
+00FE2B28  ret                                            

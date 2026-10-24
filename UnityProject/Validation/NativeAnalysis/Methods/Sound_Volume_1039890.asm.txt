@@ -1,0 +1,9 @@
+// Sound$$Volume VA 0x1039890, inferred length 28
+void Sound__Volume (Sound_o* __this, float volume, const MethodInfo* method);
+01039890  str      x30, [sp, #-0x10]!                    
+01039894  ldr      x0, [x0, #0x30]                       
+01039898  cbz      x0, #0x10398a8                        
+0103989C  mov      x1, xzr                               
+010398A0  ldr      x30, [sp], #0x10                      
+010398A4  b        #0x1fdd604                             // UnityEngine.AudioSource$$set_volume
+010398A8  bl       #0xe61da0                             

@@ -1,0 +1,16 @@
+// Resorte2$$activarMech VA 0x100D484, inferred length 56
+void Resorte2__activarMech (Resorte2_o* __this, const MethodInfo* method);
+0100D484  ldr      w8, [x0, #0x328]                      
+0100D488  cmp      w8, #4                                
+0100D48C  b.ne     #0x100d4b8                            
+0100D490  mov      w8, #1                                
+0100D494  add      x9, x0, #0x2ed                        
+0100D498  add      x10, x0, #0x2f2                       
+0100D49C  strb     wzr, [x0, #0x2f1]                     
+0100D4A0  strb     w8, [x0, #0x2ec]                      
+0100D4A4  str      wzr, [x9]                             
+0100D4A8  str      wzr, [x10]                            
+0100D4AC  stur     wzr, [x10, #3]                        
+0100D4B0  strb     w8, [x0, #0x2f9]                      
+0100D4B4  str      w8, [x0, #0x328]                      
+0100D4B8  ret                                            

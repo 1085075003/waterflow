@@ -1,0 +1,24 @@
+// FuenteCubetaC$$Awake VA 0x109BC30, inferred length 88
+void FuenteCubetaC__Awake (FuenteCubetaC_o* __this, const MethodInfo* method);
+0109BC30  str      x30, [sp, #-0x20]!                    
+0109BC34  stp      x20, x19, [sp, #0x10]                 
+0109BC38  adrp     x20, #0x24fb000                       
+0109BC3C  ldrb     w8, [x20, #0xf31]                     
+0109BC40  mov      x19, x0                               
+0109BC44  tbnz     w8, #0, #0x109bc5c                    
+0109BC48  adrp     x0, #0x236a000                        
+0109BC4C  ldr      x0, [x0, #0x5d8]                       // [0x236A5D8] Method$UnityEngine.GameObject.GetComponent<AguasControlB>()
+0109BC50  bl       #0xe61b78                             
+0109BC54  mov      w8, #1                                
+0109BC58  strb     w8, [x20, #0xf31]                     
+0109BC5C  ldr      x0, [x19, #0xb8]                       // self.Aguas
+0109BC60  cbz      x0, #0x109bc84                        
+0109BC64  adrp     x8, #0x236a000                        
+0109BC68  ldr      x8, [x8, #0x5d8]                       // [0x236A5D8] Method$UnityEngine.GameObject.GetComponent<AguasControlB>()
+0109BC6C  ldr      x1, [x8]                              
+0109BC70  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0109BC74  str      x0, [x19, #0x160]                      // self.agscr
+0109BC78  ldp      x20, x19, [sp, #0x10]                 
+0109BC7C  ldr      x30, [sp], #0x20                      
+0109BC80  ret                                            
+0109BC84  bl       #0xe61da0                             

@@ -1,0 +1,283 @@
+// UIManagerScript$$doElegirFondo VA 0x1064148, inferred length 1124
+void UIManagerScript__doElegirFondo (UIManagerScript_o* __this, const MethodInfo* method);
+01064148  str      x30, [sp, #-0x30]!                    
+0106414C  stp      x22, x21, [sp, #0x10]                 
+01064150  stp      x20, x19, [sp, #0x20]                 
+01064154  adrp     x20, #0x24fb000                       
+01064158  adrp     x21, #0x236a000                       
+0106415C  ldrb     w8, [x20, #0xe3c]                     
+01064160  ldr      x21, [x21, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+01064164  mov      x19, x0                               
+01064168  tbnz     w8, #0, #0x1064198                    
+0106416C  adrp     x0, #0x236a000                        
+01064170  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+01064174  bl       #0xe61b78                             
+01064178  adrp     x0, #0x236b000                        
+0106417C  ldr      x0, [x0, #0x530]                       // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+01064180  bl       #0xe61b78                             
+01064184  adrp     x0, #0x236a000                        
+01064188  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0106418C  bl       #0xe61b78                             
+01064190  mov      w8, #1                                
+01064194  strb     w8, [x20, #0xe3c]                     
+01064198  ldr      x8, [x21]                             
+0106419C  ldr      x8, [x8, #0xb8]                       
+010641A0  ldr      w8, [x8]                              
+010641A4  sub      w8, w8, #1                            
+010641A8  cmp      w8, #0x26                             
+010641AC  b.hi     #0x10641d4                            
+010641B0  adrp     x9, #0x621000                         
+010641B4  add      x9, x9, #0x69b                        
+010641B8  adr      x10, #0x10641c8                       
+010641BC  ldrb     w11, [x9, x8]                         
+010641C0  add      x10, x10, x11, lsl #2                 
+010641C4  br       x10                                   
+010641C8  ldr      x0, [x19, #0x28]                       // self.fondo2
+010641CC  cbnz     x0, #0x1064290                        
+010641D0  b        #0x10645a8                            
+010641D4  ldr      x0, [x19, #0x20]                       // self.fondo1
+010641D8  cbnz     x0, #0x1064290                        
+010641DC  b        #0x10645a8                            
+010641E0  ldr      x0, [x19, #0x30]                       // self.fondo3
+010641E4  cbnz     x0, #0x1064290                        
+010641E8  b        #0x10645a8                            
+010641EC  ldr      x0, [x19, #0x38]                       // self.fondo4
+010641F0  cbnz     x0, #0x1064290                        
+010641F4  b        #0x10645a8                            
+010641F8  ldr      x0, [x19, #0x40]                       // self.fondo5
+010641FC  cbnz     x0, #0x1064290                        
+01064200  b        #0x10645a8                            
+01064204  ldr      x0, [x19, #0x1a0]                      // self.fondoz1
+01064208  cbz      x0, #0x10645a8                        
+0106420C  mov      w1, #1                                
+01064210  mov      x2, xzr                               
+01064214  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01064218  ldr      x0, [x19, #0x1a0]                      // self.fondoz1
+0106421C  cbz      x0, #0x10645a8                        
+01064220  adrp     x8, #0x236b000                        
+01064224  ldr      x8, [x8, #0x530]                       // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+01064228  ldr      x1, [x8]                              
+0106422C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01064230  cbz      x0, #0x10645a8                        
+01064234  ldr      x8, [x0]                              
+01064238  fmov     s3, #1.00000000                       
+0106423C  ldr      x9, [x8, #0x2a8]                      
+01064240  ldr      x1, [x8, #0x2b0]                      
+01064244  adrp     x8, #0x600000                         
+01064248  ldr      s0, [x8, #0xa8]                       
+0106424C  mov      v1.16b, v0.16b                        
+01064250  mov      v2.16b, v0.16b                        
+01064254  blr      x9                                    
+01064258  adrp     x8, #0x5ff000                         
+0106425C  ldr      s0, [x8, #0xc94]                      
+01064260  b        #0x1064590                            
+01064264  ldr      x0, [x19, #0x1a0]                      // self.fondoz1
+01064268  cbnz     x0, #0x1064290                        
+0106426C  b        #0x10645a8                            
+01064270  ldr      x0, [x19, #0x1a8]                      // self.fondoz2
+01064274  cbnz     x0, #0x1064290                        
+01064278  b        #0x10645a8                            
+0106427C  ldr      x0, [x19, #0x1b0]                      // self.fondoz3
+01064280  cbnz     x0, #0x1064290                        
+01064284  b        #0x10645a8                            
+01064288  ldr      x0, [x19, #0x1b8]                      // self.fondoz4
+0106428C  cbz      x0, #0x10645a8                        
+01064290  mov      w1, #1                                
+01064294  mov      x2, xzr                               
+01064298  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0106429C  ldr      x8, [x21]                             
+010642A0  ldr      x8, [x8, #0xb8]                       
+010642A4  ldr      w8, [x8]                              
+010642A8  and      w8, w8, #0xfffffffc                   
+010642AC  cmp      w8, #0x24                             
+010642B0  b.ne     #0x10642d4                            
+010642B4  ldr      x0, [x19, #0x48]                       // self.light
+010642B8  cbz      x0, #0x10645a8                        
+010642BC  ldp      x20, x19, [sp, #0x20]                 
+010642C0  ldp      x22, x21, [sp, #0x10]                 
+010642C4  mov      w1, wzr                               
+010642C8  mov      x2, xzr                               
+010642CC  ldr      x30, [sp], #0x30                      
+010642D0  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+010642D4  ldp      x20, x19, [sp, #0x20]                 
+010642D8  ldp      x22, x21, [sp, #0x10]                 
+010642DC  ldr      x30, [sp], #0x30                      
+010642E0  ret                                            
+010642E4  ldr      x0, [x19, #0x1c0]                      // self.fondoz1n
+010642E8  cbz      x0, #0x10645a8                        
+010642EC  mov      w1, #1                                
+010642F0  mov      x2, xzr                               
+010642F4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010642F8  ldr      x0, [x19, #0x1c0]                      // self.fondoz1n
+010642FC  cbz      x0, #0x10645a8                        
+01064300  adrp     x8, #0x236b000                        
+01064304  ldr      x8, [x8, #0x530]                       // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+01064308  ldr      x1, [x8]                              
+0106430C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01064310  adrp     x22, #0x236a000                       
+01064314  ldr      x22, [x22, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01064318  mov      x20, x0                               
+0106431C  ldr      x8, [x22]                             
+01064320  ldr      w9, [x8, #0xe0]                       
+01064324  cbnz     w9, #0x1064334                        
+01064328  mov      x0, x8                                
+0106432C  bl       #0xe61c80                             
+01064330  ldr      x8, [x22]                             
+01064334  ldr      x9, [x8, #0xb8]                       
+01064338  ldr      w9, [x9]                              
+0106433C  cmp      w9, #0x73b                            
+01064340  b.lt     #0x1064368                            
+01064344  ldr      w10, [x8, #0xe0]                      
+01064348  cbnz     w10, #0x1064360                       
+0106434C  mov      x0, x8                                
+01064350  bl       #0xe61c80                             
+01064354  ldr      x8, [x22]                             
+01064358  ldr      x9, [x8, #0xb8]                       
+0106435C  ldr      w9, [x9]                              
+01064360  cmp      w9, #0x744                            
+01064364  b.le     #0x10644d0                            
+01064368  ldr      w9, [x8, #0xe0]                       
+0106436C  cbnz     w9, #0x106437c                        
+01064370  mov      x0, x8                                
+01064374  bl       #0xe61c80                             
+01064378  ldr      x8, [x22]                             
+0106437C  ldr      x9, [x8, #0xb8]                       
+01064380  ldr      w9, [x9]                              
+01064384  cmp      w9, #0x745                            
+01064388  b.lt     #0x10643b0                            
+0106438C  ldr      w10, [x8, #0xe0]                      
+01064390  cbnz     w10, #0x10643a8                       
+01064394  mov      x0, x8                                
+01064398  bl       #0xe61c80                             
+0106439C  ldr      x8, [x22]                             
+010643A0  ldr      x8, [x8, #0xb8]                       
+010643A4  ldr      w9, [x8]                              
+010643A8  cmp      w9, #0x74e                            
+010643AC  b.le     #0x1064524                            
+010643B0  cbz      x20, #0x10645a8                       
+010643B4  ldr      x8, [x20]                             
+010643B8  ldr      x9, [x8, #0x2a8]                      
+010643BC  ldr      x1, [x8, #0x2b0]                      
+010643C0  adrp     x8, #0x600000                         
+010643C4  ldr      s0, [x8, #0x9c]                       
+010643C8  b        #0x10644b0                            
+010643CC  ldr      x0, [x19, #0x1a0]                      // self.fondoz1
+010643D0  cbz      x0, #0x10645a8                        
+010643D4  mov      w1, #1                                
+010643D8  mov      x2, xzr                               
+010643DC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010643E0  ldr      x0, [x19, #0x1a0]                      // self.fondoz1
+010643E4  cbz      x0, #0x10645a8                        
+010643E8  adrp     x8, #0x236b000                        
+010643EC  ldr      x8, [x8, #0x530]                       // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+010643F0  ldr      x1, [x8]                              
+010643F4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010643F8  adrp     x22, #0x236a000                       
+010643FC  ldr      x22, [x22, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01064400  mov      x20, x0                               
+01064404  ldr      x8, [x22]                             
+01064408  ldr      w9, [x8, #0xe0]                       
+0106440C  cbnz     w9, #0x106441c                        
+01064410  mov      x0, x8                                
+01064414  bl       #0xe61c80                             
+01064418  ldr      x8, [x22]                             
+0106441C  ldr      x9, [x8, #0xb8]                       
+01064420  ldr      w9, [x9]                              
+01064424  cmp      w9, #0x76d                            
+01064428  b.lt     #0x1064450                            
+0106442C  ldr      w10, [x8, #0xe0]                      
+01064430  cbnz     w10, #0x1064448                       
+01064434  mov      x0, x8                                
+01064438  bl       #0xe61c80                             
+0106443C  ldr      x8, [x22]                             
+01064440  ldr      x9, [x8, #0xb8]                       
+01064444  ldr      w9, [x9]                              
+01064448  cmp      w9, #0x776                            
+0106444C  b.le     #0x1064508                            
+01064450  ldr      w9, [x8, #0xe0]                       
+01064454  cbnz     w9, #0x1064464                        
+01064458  mov      x0, x8                                
+0106445C  bl       #0xe61c80                             
+01064460  ldr      x8, [x22]                             
+01064464  ldr      x9, [x8, #0xb8]                       
+01064468  ldr      w9, [x9]                              
+0106446C  cmp      w9, #0x777                            
+01064470  b.lt     #0x1064498                            
+01064474  ldr      w10, [x8, #0xe0]                      
+01064478  cbnz     w10, #0x1064490                       
+0106447C  mov      x0, x8                                
+01064480  bl       #0xe61c80                             
+01064484  ldr      x8, [x22]                             
+01064488  ldr      x8, [x8, #0xb8]                       
+0106448C  ldr      w9, [x8]                              
+01064490  cmp      w9, #0x780                            
+01064494  b.le     #0x106455c                            
+01064498  cbz      x20, #0x10645a8                       
+0106449C  ldr      x8, [x20]                             
+010644A0  ldr      x9, [x8, #0x2a8]                      
+010644A4  ldr      x1, [x8, #0x2b0]                      
+010644A8  adrp     x8, #0x600000                         
+010644AC  ldr      s0, [x8, #0x54]                       
+010644B0  fmov     s3, #1.00000000                       
+010644B4  mov      x0, x20                               
+010644B8  mov      v1.16b, v0.16b                        
+010644BC  mov      v2.16b, v0.16b                        
+010644C0  blr      x9                                    
+010644C4  adrp     x8, #0x5ff000                         
+010644C8  ldr      s0, [x8, #0xef8]                      
+010644CC  b        #0x1064590                            
+010644D0  cbz      x20, #0x10645a8                       
+010644D4  ldr      x8, [x20]                             
+010644D8  fmov     s3, #1.00000000                       
+010644DC  mov      x0, x20                               
+010644E0  ldr      x9, [x8, #0x2a8]                      
+010644E4  ldr      x1, [x8, #0x2b0]                      
+010644E8  adrp     x8, #0x600000                         
+010644EC  ldr      s0, [x8, #0x1b0]                      
+010644F0  mov      v1.16b, v0.16b                        
+010644F4  mov      v2.16b, v0.16b                        
+010644F8  blr      x9                                    
+010644FC  adrp     x8, #0x600000                         
+01064500  ldr      s0, [x8, #0x188]                      
+01064504  b        #0x1064590                            
+01064508  cbz      x20, #0x10645a8                       
+0106450C  ldr      x8, [x20]                             
+01064510  ldr      x9, [x8, #0x2a8]                      
+01064514  ldr      x1, [x8, #0x2b0]                      
+01064518  adrp     x8, #0x5ff000                         
+0106451C  ldr      s0, [x8, #0xc30]                      
+01064520  b        #0x1064574                            
+01064524  cbz      x20, #0x10645a8                       
+01064528  ldr      x8, [x20]                             
+0106452C  fmov     s3, #1.00000000                       
+01064530  mov      x0, x20                               
+01064534  ldr      x9, [x8, #0x2a8]                      
+01064538  ldr      x1, [x8, #0x2b0]                      
+0106453C  adrp     x8, #0x5ff000                         
+01064540  ldr      s0, [x8, #0xef8]                      
+01064544  mov      v1.16b, v0.16b                        
+01064548  mov      v2.16b, v0.16b                        
+0106454C  blr      x9                                    
+01064550  adrp     x8, #0x5ff000                         
+01064554  ldr      s0, [x8, #0xd70]                      
+01064558  b        #0x1064590                            
+0106455C  cbz      x20, #0x10645a8                       
+01064560  ldr      x8, [x20]                             
+01064564  ldr      x9, [x8, #0x2a8]                      
+01064568  ldr      x1, [x8, #0x2b0]                      
+0106456C  adrp     x8, #0x5ff000                         
+01064570  ldr      s0, [x8, #0xb50]                      
+01064574  fmov     s3, #1.00000000                       
+01064578  mov      x0, x20                               
+0106457C  mov      v1.16b, v0.16b                        
+01064580  mov      v2.16b, v0.16b                        
+01064584  blr      x9                                    
+01064588  adrp     x8, #0x5ff000                         
+0106458C  ldr      s0, [x8, #0xc98]                      
+01064590  fmov     s3, #1.00000000                       
+01064594  mov      v1.16b, v0.16b                        
+01064598  mov      v2.16b, v0.16b                        
+0106459C  mov      x0, xzr                               
+010645A0  bl       #0x1fec684                             // UnityEngine.RenderSettings$$set_ambientLight
+010645A4  b        #0x106429c                            
+010645A8  bl       #0xe61da0                             

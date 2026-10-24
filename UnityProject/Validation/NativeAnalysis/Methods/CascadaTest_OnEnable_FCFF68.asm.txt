@@ -1,0 +1,228 @@
+// CascadaTest$$OnEnable VA 0xFCFF68, inferred length 904
+void CascadaTest__OnEnable (CascadaTest_o* __this, const MethodInfo* method);
+00FCFF68  stp      d11, d10, [sp, #-0x40]!               
+00FCFF6C  stp      d9, d8, [sp, #0x10]                   
+00FCFF70  stp      x30, x21, [sp, #0x20]                 
+00FCFF74  stp      x20, x19, [sp, #0x30]                 
+00FCFF78  adrp     x20, #0x24fb000                       
+00FCFF7C  ldrb     w8, [x20, #0xb50]                     
+00FCFF80  mov      x19, x0                               
+00FCFF84  tbnz     w8, #0, #0xfcff9c                     
+00FCFF88  adrp     x0, #0x2368000                        
+00FCFF8C  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCFF90  bl       #0xe61b78                             
+00FCFF94  mov      w8, #1                                
+00FCFF98  strb     w8, [x20, #0xb50]                     
+00FCFF9C  ldr      x0, [x19, #0x28]                       // self.esferaSalida
+00FCFFA0  mov      w8, #0xa                              
+00FCFFA4  str      w8, [x19, #0x248]                      // self.contUpdates
+00FCFFA8  cbz      x0, #0xfd02ec                         
+00FCFFAC  adrp     x21, #0x2368000                       
+00FCFFB0  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCFFB4  mov      w1, wzr                               
+00FCFFB8  mov      x2, xzr                               
+00FCFFBC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FCFFC0  ldr      x0, [x21]                             
+00FCFFC4  ldr      x20, [x19, #0x160]                     // self.cascada
+00FCFFC8  ldr      w8, [x0, #0xe0]                       
+00FCFFCC  cbnz     w8, #0xfcffd4                         
+00FCFFD0  bl       #0xe61c80                             
+00FCFFD4  mov      x0, x20                               
+00FCFFD8  mov      x1, xzr                               
+00FCFFDC  mov      x2, xzr                               
+00FCFFE0  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FCFFE4  tbz      w0, #0, #0xfd0008                     
+00FCFFE8  ldr      x0, [x21]                             
+00FCFFEC  ldr      x20, [x19, #0x160]                     // self.cascada
+00FCFFF0  ldr      w8, [x0, #0xe0]                       
+00FCFFF4  cbnz     w8, #0xfcfffc                         
+00FCFFF8  bl       #0xe61c80                             
+00FCFFFC  mov      x0, x20                               
+00FD0000  mov      x1, xzr                               
+00FD0004  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FD0008  ldr      x0, [x19, #0xb8]                       // self.esferaFiltrante
+00FD000C  cbz      x0, #0xfd02ec                         
+00FD0010  mov      w1, wzr                               
+00FD0014  mov      x2, xzr                               
+00FD0018  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD001C  ldr      x0, [x21]                             
+00FD0020  ldr      x20, [x19, #0xc0]                      // self.capsulaFiltrante
+00FD0024  ldr      w8, [x0, #0xe0]                       
+00FD0028  cbnz     w8, #0xfd0030                         
+00FD002C  bl       #0xe61c80                             
+00FD0030  mov      x0, x20                               
+00FD0034  mov      x1, xzr                               
+00FD0038  mov      x2, xzr                               
+00FD003C  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FD0040  tbz      w0, #0, #0xfd0058                     
+00FD0044  ldr      x0, [x19, #0xc0]                       // self.capsulaFiltrante
+00FD0048  cbz      x0, #0xfd02ec                         
+00FD004C  mov      w1, wzr                               
+00FD0050  mov      x2, xzr                               
+00FD0054  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD0058  add      x20, x19, #0x10d                      
+00FD005C  mov      w8, #-2                               
+00FD0060  str      w8, [x19, #0x154]                      // self.altura_old
+00FD0064  str      wzr, [x20]                            
+00FD0068  ldr      x0, [x19, #0x28]                       // self.esferaSalida
+00FD006C  cbz      x0, #0xfd02ec                         
+00FD0070  mov      x1, xzr                               
+00FD0074  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD0078  cbz      x0, #0xfd02ec                         
+00FD007C  mov      x1, xzr                               
+00FD0080  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD0084  mov      x0, x19                               
+00FD0088  mov      x1, xzr                               
+00FD008C  mov      v9.16b, v0.16b                        
+00FD0090  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD0094  cbz      x0, #0xfd02ec                         
+00FD0098  mov      x1, xzr                               
+00FD009C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD00A0  ldr      x0, [x19, #0x28]                       // self.esferaSalida
+00FD00A4  cbz      x0, #0xfd02ec                         
+00FD00A8  mov      x1, xzr                               
+00FD00AC  mov      v10.16b, v0.16b                       
+00FD00B0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD00B4  cbz      x0, #0xfd02ec                         
+00FD00B8  mov      x1, xzr                               
+00FD00BC  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD00C0  mov      x0, x19                               
+00FD00C4  mov      x1, xzr                               
+00FD00C8  mov      v8.16b, v2.16b                        
+00FD00CC  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD00D0  cbz      x0, #0xfd02ec                         
+00FD00D4  mov      x1, xzr                               
+00FD00D8  fabd     s9, s9, s10                           
+00FD00DC  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD00E0  fmov     s11, #1.00000000                      
+00FD00E4  fcmp     s9, s11                               
+00FD00E8  mov      v9.16b, v2.16b                        
+00FD00EC  b.le     #0xfd0168                             
+00FD00F0  ldr      x0, [x19, #0x28]                       // self.esferaSalida
+00FD00F4  cbz      x0, #0xfd02ec                         
+00FD00F8  mov      x1, xzr                               
+00FD00FC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD0100  cbz      x0, #0xfd02ec                         
+00FD0104  mov      x1, xzr                               
+00FD0108  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD010C  mov      x0, x19                               
+00FD0110  mov      x1, xzr                               
+00FD0114  mov      v10.16b, v0.16b                       
+00FD0118  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD011C  cbz      x0, #0xfd02ec                         
+00FD0120  mov      x1, xzr                               
+00FD0124  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD0128  fcmp     s10, s0                               
+00FD012C  fmov     s0, #20.00000000                      
+00FD0130  fmov     s1, #-20.00000000                     
+00FD0134  mov      w8, #0x10f                            
+00FD0138  mov      w9, #0x10d                            
+00FD013C  fmov     s2, #14.00000000                      
+00FD0140  fcsel    s0, s1, s0, mi                        
+00FD0144  fmov     s1, #-14.00000000                     
+00FD0148  csel     x8, x9, x8, mi                        
+00FD014C  mov      w9, #1                                
+00FD0150  fcsel    s1, s1, s2, mi                        
+00FD0154  strb     w9, [x19, x8]                         
+00FD0158  str      s0, [x19, #0x1c4]                      // self.distancia_x
+00FD015C  str      s1, [x19, #0x1d4]                      // self.distancia_x2
+00FD0160  str      wzr, [x19, #0x1c8]                     // self.distancia_z
+00FD0164  str      wzr, [x19, #0x1d8]                     // self.distancia_z2
+00FD0168  fabd     s0, s8, s9                            
+00FD016C  fcmp     s0, s11                               
+00FD0170  b.le     #0xfd01d8                             
+00FD0174  ldr      x0, [x19, #0x28]                       // self.esferaSalida
+00FD0178  cbz      x0, #0xfd02ec                         
+00FD017C  mov      x1, xzr                               
+00FD0180  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD0184  cbz      x0, #0xfd02ec                         
+00FD0188  mov      x1, xzr                               
+00FD018C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD0190  mov      x0, x19                               
+00FD0194  mov      x1, xzr                               
+00FD0198  mov      v8.16b, v2.16b                        
+00FD019C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD01A0  cbz      x0, #0xfd02ec                         
+00FD01A4  mov      x1, xzr                               
+00FD01A8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FD01AC  fcmp     s8, s2                                
+00FD01B0  fmov     s0, #20.00000000                      
+00FD01B4  fmov     s1, #-20.00000000                     
+00FD01B8  fmov     s2, #14.00000000                      
+00FD01BC  fmov     s3, #-14.00000000                     
+00FD01C0  fcsel    s0, s1, s0, mi                        
+00FD01C4  fcsel    s1, s3, s2, mi                        
+00FD01C8  str      wzr, [x19, #0x1c4]                     // self.distancia_x
+00FD01CC  str      wzr, [x19, #0x1d4]                     // self.distancia_x2
+00FD01D0  str      s0, [x19, #0x1c8]                      // self.distancia_z
+00FD01D4  str      s1, [x19, #0x1d8]                      // self.distancia_z2
+00FD01D8  ldrb     w11, [x19, #0x108]                     // self.cascada1
+00FD01DC  ldrb     w10, [x19, #0x109]                     // self.cascada2
+00FD01E0  ldrb     w9, [x19, #0x10a]                      // self.cascada3
+00FD01E4  ldrb     w8, [x19, #0x10b]                      // self.cascada4
+00FD01E8  strb     w11, [x19, #0x10d]                     // self.cas1
+00FD01EC  strb     w10, [x19, #0x10e]                     // self.cas2
+00FD01F0  strb     w9, [x19, #0x10f]                      // self.cas3
+00FD01F4  strb     w8, [x19, #0x110]                      // self.cas4
+00FD01F8  cbz      w11, #0xfd0234                        
+00FD01FC  adrp     x11, #0x600000                        
+00FD0200  ldr      d0, [x11, #0x3e0]                     
+00FD0204  mov      w11, #0xb852                          
+00FD0208  movk     w11, #0xbffe, lsl #16                 
+00FD020C  str      w11, [x19, #0x17c]                     // self.var_x
+00FD0210  stur     d0, [x20, #0x77]                      
+00FD0214  ldrb     w11, [x19, #0x239]                     // self.swhayrebose
+00FD0218  mov      w12, #-0x40000000                     
+00FD021C  str      w12, [x19, #0x214]                     // self.varx_esfera
+00FD0220  str      wzr, [x19, #0x21c]                     // self.varz_esfera
+00FD0224  cbz      w11, #0xfd0234                        
+00FD0228  mov      w11, #0x999a                          
+00FD022C  movk     w11, #0xbf99, lsl #16                 
+00FD0230  str      w11, [x19, #0x214]                     // self.varx_esfera
+00FD0234  cbz      w10, #0xfd0268                        
+00FD0238  adrp     x10, #0x600000                        
+00FD023C  ldr      d0, [x10, #0x9f8]                     
+00FD0240  str      wzr, [x19, #0x17c]                     // self.var_x
+00FD0244  adrp     x11, #0x5ff000                        
+00FD0248  fmov     s1, #2.00000000                       
+00FD024C  stur     d0, [x20, #0x77]                      
+00FD0250  ldrb     w10, [x19, #0x239]                     // self.swhayrebose
+00FD0254  ldr      s0, [x11, #0xd68]                     
+00FD0258  str      wzr, [x19, #0x214]                     // self.varx_esfera
+00FD025C  cmp      w10, #0                               
+00FD0260  fcsel    s0, s1, s0, eq                        
+00FD0264  str      s0, [x19, #0x21c]                      // self.varz_esfera
+00FD0268  cbz      w9, #0xfd02a4                         
+00FD026C  adrp     x9, #0x600000                         
+00FD0270  ldr      d0, [x9, #0x988]                      
+00FD0274  mov      w9, #0x999a                           
+00FD0278  movk     w9, #0x3fd9, lsl #16                  
+00FD027C  str      w9, [x19, #0x17c]                      // self.var_x
+00FD0280  stur     d0, [x20, #0x77]                      
+00FD0284  ldrb     w9, [x19, #0x239]                      // self.swhayrebose
+00FD0288  mov      w10, #0x40000000                      
+00FD028C  str      w10, [x19, #0x214]                     // self.varx_esfera
+00FD0290  str      wzr, [x19, #0x21c]                     // self.varz_esfera
+00FD0294  cbz      w9, #0xfd02a4                         
+00FD0298  mov      w9, #0x999a                           
+00FD029C  movk     w9, #0x3f99, lsl #16                  
+00FD02A0  str      w9, [x19, #0x214]                      // self.varx_esfera
+00FD02A4  cbz      w8, #0xfd02d8                         
+00FD02A8  adrp     x8, #0x600000                         
+00FD02AC  ldr      d0, [x8, #0x478]                      
+00FD02B0  str      wzr, [x19, #0x17c]                     // self.var_x
+00FD02B4  adrp     x9, #0x5ff000                         
+00FD02B8  fmov     s1, #-2.00000000                      
+00FD02BC  stur     d0, [x20, #0x77]                      
+00FD02C0  ldrb     w8, [x19, #0x239]                      // self.swhayrebose
+00FD02C4  ldr      s0, [x9, #0xc50]                      
+00FD02C8  str      wzr, [x19, #0x214]                     // self.varx_esfera
+00FD02CC  cmp      w8, #0                                
+00FD02D0  fcsel    s0, s1, s0, eq                        
+00FD02D4  str      s0, [x19, #0x21c]                      // self.varz_esfera
+00FD02D8  ldp      x20, x19, [sp, #0x30]                 
+00FD02DC  ldp      x30, x21, [sp, #0x20]                 
+00FD02E0  ldp      d9, d8, [sp, #0x10]                   
+00FD02E4  ldp      d11, d10, [sp], #0x40                 
+00FD02E8  ret                                            
+00FD02EC  bl       #0xe61da0                             

@@ -1,0 +1,127 @@
+// FuenteCubetaB$$doActivarCascada VA 0x109B940, inferred length 500
+void FuenteCubetaB__doActivarCascada (FuenteCubetaB_o* __this, const MethodInfo* method);
+0109B940  str      x30, [sp, #-0x20]!                    
+0109B944  stp      x20, x19, [sp, #0x10]                 
+0109B948  adrp     x20, #0x24fb000                       
+0109B94C  ldrb     w8, [x20, #0xf2e]                     
+0109B950  mov      x19, x0                               
+0109B954  tbnz     w8, #0, #0x109b96c                    
+0109B958  adrp     x0, #0x236d000                        
+0109B95C  ldr      x0, [x0, #0x580]                       // [0x236D580] Method$UnityEngine.GameObject.GetComponent<CascadaTest>()
+0109B960  bl       #0xe61b78                             
+0109B964  mov      w8, #1                                
+0109B968  strb     w8, [x20, #0xf2e]                     
+0109B96C  adrp     x20, #0x236d000                       
+0109B970  ldrb     w8, [x19, #0x121]                      // self.esf1
+0109B974  ldr      x20, [x20, #0x580]                     // [0x236D580] Method$UnityEngine.GameObject.GetComponent<CascadaTest>()
+0109B978  cbz      w8, #0x109b9e0                        
+0109B97C  ldr      x0, [x19, #0x60]                       // self.esfera1
+0109B980  cbz      x0, #0x109bb30                        
+0109B984  mov      w1, #1                                
+0109B988  mov      x2, xzr                               
+0109B98C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109B990  ldr      x0, [x19, #0x40]                       // self.Cascada1
+0109B994  cbz      x0, #0x109bb30                        
+0109B998  mov      w1, #1                                
+0109B99C  mov      x2, xzr                               
+0109B9A0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109B9A4  ldr      x0, [x19, #0x80]                       // self.esferaCascada1
+0109B9A8  cbz      x0, #0x109bb30                        
+0109B9AC  mov      x1, xzr                               
+0109B9B0  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+0109B9B4  cbz      x0, #0x109bb30                        
+0109B9B8  ldr      x1, [x19, #0x130]                      // self.tagName
+0109B9BC  mov      x2, xzr                               
+0109B9C0  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+0109B9C4  ldr      x0, [x19, #0x40]                       // self.Cascada1
+0109B9C8  cbz      x0, #0x109bb30                        
+0109B9CC  ldr      x1, [x20]                             
+0109B9D0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0109B9D4  cbz      x0, #0x109bb30                        
+0109B9D8  ldr      w8, [x19, #0x138]                      // self.color
+0109B9DC  str      w8, [x0, #0xf8]                       
+0109B9E0  ldrb     w8, [x19, #0x122]                      // self.esf2
+0109B9E4  cbz      w8, #0x109ba4c                        
+0109B9E8  ldr      x0, [x19, #0x68]                       // self.esfera2
+0109B9EC  cbz      x0, #0x109bb30                        
+0109B9F0  mov      w1, #1                                
+0109B9F4  mov      x2, xzr                               
+0109B9F8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109B9FC  ldr      x0, [x19, #0x48]                       // self.Cascada2
+0109BA00  cbz      x0, #0x109bb30                        
+0109BA04  mov      w1, #1                                
+0109BA08  mov      x2, xzr                               
+0109BA0C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109BA10  ldr      x0, [x19, #0x88]                       // self.esferaCascada2
+0109BA14  cbz      x0, #0x109bb30                        
+0109BA18  mov      x1, xzr                               
+0109BA1C  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+0109BA20  cbz      x0, #0x109bb30                        
+0109BA24  ldr      x1, [x19, #0x130]                      // self.tagName
+0109BA28  mov      x2, xzr                               
+0109BA2C  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+0109BA30  ldr      x0, [x19, #0x48]                       // self.Cascada2
+0109BA34  cbz      x0, #0x109bb30                        
+0109BA38  ldr      x1, [x20]                             
+0109BA3C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0109BA40  cbz      x0, #0x109bb30                        
+0109BA44  ldr      w8, [x19, #0x138]                      // self.color
+0109BA48  str      w8, [x0, #0xf8]                       
+0109BA4C  ldrb     w8, [x19, #0x123]                      // self.esf3
+0109BA50  cbz      w8, #0x109bab8                        
+0109BA54  ldr      x0, [x19, #0x70]                       // self.esfera3
+0109BA58  cbz      x0, #0x109bb30                        
+0109BA5C  mov      w1, #1                                
+0109BA60  mov      x2, xzr                               
+0109BA64  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109BA68  ldr      x0, [x19, #0x50]                       // self.Cascada3
+0109BA6C  cbz      x0, #0x109bb30                        
+0109BA70  mov      w1, #1                                
+0109BA74  mov      x2, xzr                               
+0109BA78  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109BA7C  ldr      x0, [x19, #0x90]                       // self.esferaCascada3
+0109BA80  cbz      x0, #0x109bb30                        
+0109BA84  mov      x1, xzr                               
+0109BA88  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+0109BA8C  cbz      x0, #0x109bb30                        
+0109BA90  ldr      x1, [x19, #0x130]                      // self.tagName
+0109BA94  mov      x2, xzr                               
+0109BA98  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+0109BA9C  ldr      x0, [x19, #0x50]                       // self.Cascada3
+0109BAA0  cbz      x0, #0x109bb30                        
+0109BAA4  ldr      x1, [x20]                             
+0109BAA8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0109BAAC  cbz      x0, #0x109bb30                        
+0109BAB0  ldr      w8, [x19, #0x138]                      // self.color
+0109BAB4  str      w8, [x0, #0xf8]                       
+0109BAB8  ldrb     w8, [x19, #0x124]                      // self.esf4
+0109BABC  cbz      w8, #0x109bb24                        
+0109BAC0  ldr      x0, [x19, #0x78]                       // self.esfera4
+0109BAC4  cbz      x0, #0x109bb30                        
+0109BAC8  mov      w1, #1                                
+0109BACC  mov      x2, xzr                               
+0109BAD0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109BAD4  ldr      x0, [x19, #0x58]                       // self.Cascada4
+0109BAD8  cbz      x0, #0x109bb30                        
+0109BADC  mov      w1, #1                                
+0109BAE0  mov      x2, xzr                               
+0109BAE4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0109BAE8  ldr      x0, [x19, #0x98]                       // self.esferaCascada4
+0109BAEC  cbz      x0, #0x109bb30                        
+0109BAF0  mov      x1, xzr                               
+0109BAF4  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+0109BAF8  cbz      x0, #0x109bb30                        
+0109BAFC  ldr      x1, [x19, #0x130]                      // self.tagName
+0109BB00  mov      x2, xzr                               
+0109BB04  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+0109BB08  ldr      x0, [x19, #0x58]                       // self.Cascada4
+0109BB0C  cbz      x0, #0x109bb30                        
+0109BB10  ldr      x1, [x20]                             
+0109BB14  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0109BB18  cbz      x0, #0x109bb30                        
+0109BB1C  ldr      w8, [x19, #0x138]                      // self.color
+0109BB20  str      w8, [x0, #0xf8]                       
+0109BB24  ldp      x20, x19, [sp, #0x10]                 
+0109BB28  ldr      x30, [sp], #0x20                      
+0109BB2C  ret                                            
+0109BB30  bl       #0xe61da0                             

@@ -1,0 +1,286 @@
+// SwipeHandler2$$HandleMobileSwipe2 VA 0x1055D4C, inferred length 1136
+void SwipeHandler2__HandleMobileSwipe2 (SwipeHandler2_o* __this, const MethodInfo* method);
+01055D4C  sub      sp, sp, #0x120                        
+01055D50  stp      d11, d10, [sp, #0xd0]                 
+01055D54  stp      d9, d8, [sp, #0xe0]                   
+01055D58  str      x29, [sp, #0xf0]                      
+01055D5C  stp      x30, x21, [sp, #0x100]                
+01055D60  stp      x20, x19, [sp, #0x110]                
+01055D64  adrp     x21, #0x24fb000                       
+01055D68  ldrb     w8, [x21, #0xdf7]                     
+01055D6C  mov      x19, x0                               
+01055D70  add      x20, sp, #0x80                        
+01055D74  tbnz     w8, #0, #0x1055d8c                    
+01055D78  adrp     x0, #0x2368000                        
+01055D7C  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+01055D80  bl       #0xe61b78                             
+01055D84  mov      w8, #1                                
+01055D88  strb     w8, [x21, #0xdf7]                     
+01055D8C  movi     v0.2d, #0000000000000000              
+01055D90  add      x8, sp, #8                            
+01055D94  mov      w0, wzr                               
+01055D98  mov      x1, xzr                               
+01055D9C  str      wzr, [sp, #0xc0]                      
+01055DA0  stp      q0, q0, [x20, #0x20]                  
+01055DA4  str      q0, [x20, #0x10]                      
+01055DA8  str      q0, [sp, #0x80]                       
+01055DAC  stur     q0, [sp, #0x6c]                       
+01055DB0  stp      q0, q0, [sp, #0x50]                   
+01055DB4  bl       #0x203a830                             // UnityEngine.Input$$GetTouch
+01055DB8  add      x0, sp, #0x80                         
+01055DBC  add      x1, sp, #8                            
+01055DC0  mov      w2, #0x44                             
+01055DC4  bl       #0x224d3f0                            
+01055DC8  add      x0, sp, #0x80                         
+01055DCC  mov      x1, xzr                               
+01055DD0  bl       #0x203a2a0                             // UnityEngine.Touch$$get_phase
+01055DD4  cbnz     w0, #0x1055eb4                        
+01055DD8  add      x1, sp, #0x50                         
+01055DDC  mov      x0, x19                               
+01055DE0  bl       #0x1055700                             // SwipeHandler2$$ReturnClickedObject1
+01055DE4  str      x0, [x19, #0x68]                       // self.getAreaRotation
+01055DE8  adrp     x8, #0x2368000                        
+01055DEC  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+01055DF0  mov      x20, x0                               
+01055DF4  ldr      x0, [x8]                              
+01055DF8  ldr      w8, [x0, #0xe0]                       
+01055DFC  cbnz     w8, #0x1055e04                        
+01055E00  bl       #0xe61c80                             
+01055E04  mov      x0, x20                               
+01055E08  mov      x1, xzr                               
+01055E0C  mov      x2, xzr                               
+01055E10  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01055E14  tbz      w0, #0, #0x1055eb0                    
+01055E18  mov      w20, #1                               
+01055E1C  mov      x0, xzr                               
+01055E20  strb     w20, [x19, #0x70]                      // self.areaCorrecta
+01055E24  bl       #0x200c4fc                             // UnityEngine.Time$$get_time
+01055E28  str      s0, [x19, #0xd8]                       // self.startTime
+01055E2C  adrp     x21, #0x24fb000                       
+01055E30  ldrb     w8, [x21, #0x8ad]                     
+01055E34  cbnz     w8, #0x1055e48                        
+01055E38  adrp     x0, #0x2368000                        
+01055E3C  ldr      x0, [x0, #0x148]                       // [0x2368148] UnityEngine.Vector3_TypeInfo
+01055E40  bl       #0xe61b78                             
+01055E44  strb     w20, [x21, #0x8ad]                    
+01055E48  adrp     x8, #0x2368000                        
+01055E4C  ldr      x8, [x8, #0x148]                       // [0x2368148] UnityEngine.Vector3_TypeInfo
+01055E50  mov      x0, xzr                               
+01055E54  ldr      x8, [x8]                              
+01055E58  ldr      x8, [x8, #0xb8]                       
+01055E5C  ldr      d0, [x8]                              
+01055E60  ldr      s1, [x8, #8]                          
+01055E64  str      wzr, [x19, #0xd4]                      // self.length
+01055E68  stur     d0, [x19, #0xa4]                       // self.finalPosition
+01055E6C  str      s1, [x19, #0xac]                      
+01055E70  bl       #0x203ab00                             // UnityEngine.Input$$get_mousePosition
+01055E74  ldr      x0, [x19, #0x20]                       // self.EsferaCamera
+01055E78  str      s0, [x19, #0xb0]                       // self.startpos
+01055E7C  str      wzr, [x19, #0xb4]                     
+01055E80  str      s1, [x19, #0xb8]                      
+01055E84  cbz      x0, #0x10561b8                        
+01055E88  mov      x1, xzr                               
+01055E8C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+01055E90  cbz      x0, #0x10561b8                        
+01055E94  mov      x1, xzr                               
+01055E98  bl       #0x200ec20                             // UnityEngine.Transform$$get_eulerAngles
+01055E9C  mov      w8, #1                                
+01055EA0  stp      s0, s1, [x19, #0x50]                   // self.rotationInicial
+01055EA4  str      s2, [x19, #0x58]                      
+01055EA8  strb     w8, [x19, #0x40]                       // self.hayClick
+01055EAC  b        #0x1055eb4                            
+01055EB0  strb     wzr, [x19, #0x70]                      // self.areaCorrecta
+01055EB4  ldrb     w8, [x19, #0x70]                       // self.areaCorrecta
+01055EB8  cbz      w8, #0x105619c                        
+01055EBC  add      x8, sp, #8                            
+01055EC0  mov      w0, wzr                               
+01055EC4  mov      x1, xzr                               
+01055EC8  bl       #0x203a830                             // UnityEngine.Input$$GetTouch
+01055ECC  add      x0, sp, #0x80                         
+01055ED0  add      x1, sp, #8                            
+01055ED4  mov      w2, #0x44                             
+01055ED8  bl       #0x224d3f0                            
+01055EDC  add      x0, sp, #0x80                         
+01055EE0  mov      x1, xzr                               
+01055EE4  bl       #0x203a2a0                             // UnityEngine.Touch$$get_phase
+01055EE8  cmp      w0, #3                                
+01055EEC  b.ne     #0x1056094                            
+01055EF0  mov      x0, xzr                               
+01055EF4  bl       #0x203ab00                             // UnityEngine.Input$$get_mousePosition
+01055EF8  ldp      s2, s3, [x19, #0xb0]                   // self.startpos
+01055EFC  ldr      s4, [x19, #0xb8]                      
+01055F00  str      s0, [x19, #0xbc]                       // self.endpos
+01055F04  str      wzr, [x19, #0xc0]                     
+01055F08  fsub     s8, s0, s2                            
+01055F0C  fmov     s0, wzr                               
+01055F10  fsub     s10, s0, s3                           
+01055F14  fsub     s9, s1, s4                            
+01055F18  str      s1, [x19, #0xc4]                      
+01055F1C  stp      s8, s10, [x19, #0xa4]                  // self.finalPosition
+01055F20  str      s9, [x19, #0xac]                      
+01055F24  adrp     x20, #0x24fb000                       
+01055F28  ldrb     w8, [x20, #0x928]                     
+01055F2C  mov      v11.16b, v8.16b                       
+01055F30  cbnz     w8, #0x1055f50                        
+01055F34  adrp     x0, #0x2368000                        
+01055F38  ldr      x0, [x0, #0x4d0]                       // [0x23684D0] System.Math_TypeInfo
+01055F3C  bl       #0xe61b78                             
+01055F40  mov      w8, #1                                
+01055F44  strb     w8, [x20, #0x928]                     
+01055F48  ldp      s11, s10, [x19, #0xa4]                 // self.finalPosition
+01055F4C  ldr      s9, [x19, #0xac]                      
+01055F50  adrp     x8, #0x2368000                        
+01055F54  ldr      x8, [x8, #0x4d0]                       // [0x23684D0] System.Math_TypeInfo
+01055F58  ldr      x0, [x8]                              
+01055F5C  ldr      w8, [x0, #0xe0]                       
+01055F60  cbnz     w8, #0x1055f68                        
+01055F64  bl       #0xe61c80                             
+01055F68  fmul     s0, s11, s11                          
+01055F6C  fmul     s1, s10, s10                          
+01055F70  fadd     s0, s0, s1                            
+01055F74  fmul     s1, s9, s9                            
+01055F78  fadd     s0, s0, s1                            
+01055F7C  mov      x0, xzr                               
+01055F80  fsqrt    s9, s0                                
+01055F84  bl       #0x1ffb6c8                             // UnityEngine.Time$$get_deltaTime
+01055F88  fmul     s1, s9, s0                            
+01055F8C  fnmul    s0, s9, s0                            
+01055F90  fcmp     s8, #0.0                              
+01055F94  fcsel    s0, s1, s0, mi                        
+01055F98  fmov     s1, #0.50000000                       
+01055F9C  fmul     s8, s0, s1                            
+01055FA0  mov      x0, xzr                               
+01055FA4  str      s8, [x19, #0xd4]                       // self.length
+01055FA8  bl       #0x200c4fc                             // UnityEngine.Time$$get_time
+01055FAC  ldr      s1, [x19, #0xd8]                       // self.startTime
+01055FB0  ldr      s2, [x19, #0xa0]                       // self.maxForce
+01055FB4  ldrb     w8, [x19, #0x91]                       // self.handleFlicks
+01055FB8  strb     wzr, [x19, #0x40]                      // self.hayClick
+01055FBC  fsub     s0, s0, s1                            
+01055FC0  fdiv     s0, s8, s0                            
+01055FC4  fneg     s1, s2                                
+01055FC8  fcmp     s0, s2                                
+01055FCC  fcsel    s2, s2, s0, gt                        
+01055FD0  fcmp     s0, s1                                
+01055FD4  fcsel    s0, s2, s1, pl                        
+01055FD8  str      s0, [x19, #0xe0]                       // self.force
+01055FDC  cbz      w8, #0x1056094                        
+01055FE0  ldr      s1, [x19, #0x94]                       // self.requiredForceForFlick
+01055FE4  fabs     s0, s0                                
+01055FE8  fcmp     s0, s1                                
+01055FEC  b.le     #0x1056094                            
+01055FF0  ldr      w8, [x19, #0x98]                       // self.flickType
+01055FF4  cbz      w8, #0x1056094                        
+01055FF8  ldr      s0, [x19, #0xd4]                       // self.length
+01055FFC  fcmp     s0, #0.0                              
+01056000  b.le     #0x1056048                            
+01056004  adrp     x20, #0x24fb000                       
+01056008  ldrb     w8, [x20, #0xdf5]                     
+0105600C  tbnz     w8, #0, #0x1056024                    
+01056010  adrp     x0, #0x236c000                        
+01056014  ldr      x0, [x0, #0x9a0]                       // [0x236C9A0] SwipeHandler2_TypeInfo
+01056018  bl       #0xe61b78                             
+0105601C  mov      w8, #1                                
+01056020  strb     w8, [x20, #0xdf5]                     
+01056024  ldr      s0, [x19, #0x60]                      
+01056028  mov      w8, #-0x3d4c0000                      
+0105602C  fmov     s1, w8                                
+01056030  adrp     x8, #0x236c000                        
+01056034  fadd     s0, s0, s1                            
+01056038  str      s0, [x19, #0x60]                      
+0105603C  ldr      x8, [x8, #0x9a0]                       // [0x236C9A0] SwipeHandler2_TypeInfo
+01056040  ldr      x8, [x8]                              
+01056044  b        #0x1056088                            
+01056048  adrp     x21, #0x24fb000                       
+0105604C  adrp     x20, #0x236c000                       
+01056050  ldrb     w8, [x21, #0xdf4]                     
+01056054  ldr      x20, [x20, #0x9a0]                     // [0x236C9A0] SwipeHandler2_TypeInfo
+01056058  tbnz     w8, #0, #0x1056070                    
+0105605C  adrp     x0, #0x236c000                        
+01056060  ldr      x0, [x0, #0x9a0]                       // [0x236C9A0] SwipeHandler2_TypeInfo
+01056064  bl       #0xe61b78                             
+01056068  mov      w8, #1                                
+0105606C  strb     w8, [x21, #0xdf4]                     
+01056070  ldr      s0, [x19, #0x60]                      
+01056074  mov      w8, #0x42b40000                       
+01056078  fmov     s1, w8                                
+0105607C  fadd     s0, s0, s1                            
+01056080  str      s0, [x19, #0x60]                      
+01056084  ldr      x8, [x20]                             
+01056088  ldr      x8, [x8, #0xb8]                       
+0105608C  mov      w9, #1                                
+01056090  strb     w9, [x8]                              
+01056094  ldrb     w8, [x19, #0x40]                       // self.hayClick
+01056098  cbz      w8, #0x10560fc                        
+0105609C  mov      w0, wzr                               
+010560A0  mov      x1, xzr                               
+010560A4  bl       #0x1058390                             // Helper$$GetMouseAxis
+010560A8  ldrb     w8, [x19, #0x90]                       // self.handleSwipes
+010560AC  str      s0, [x19, #0xdc]                       // self.mouseMove1
+010560B0  cbz      w8, #0x105619c                        
+010560B4  mov      w0, wzr                               
+010560B8  mov      x1, xzr                               
+010560BC  bl       #0x203a77c                             // UnityEngine.Input$$GetMouseButton
+010560C0  tbz      w0, #0, #0x105619c                    
+010560C4  ldr      s0, [x19, #0xdc]                       // self.mouseMove1
+010560C8  fcmp     s0, #0.0                              
+010560CC  b.eq     #0x105619c                            
+010560D0  ldr      s1, [x19, #0x4c]                       // self.multiplicador
+010560D4  ldr      x20, [x19, #0x20]                      // self.EsferaCamera
+010560D8  fmul     s0, s0, s1                            
+010560DC  str      s0, [x19, #0x48]                       // self.degree
+010560E0  cbz      x20, #0x10561b8                       
+010560E4  mov      x0, x20                               
+010560E8  mov      x1, xzr                               
+010560EC  bl       #0x200ec20                             // UnityEngine.Transform$$get_eulerAngles
+010560F0  ldr      s0, [x19, #0x48]                       // self.degree
+010560F4  fadd     s1, s1, s0                            
+010560F8  b        #0x1056188                            
+010560FC  ldr      x20, [x19, #0x20]                      // self.EsferaCamera
+01056100  cbz      x20, #0x10561b8                       
+01056104  mov      x0, x20                               
+01056108  mov      x1, xzr                               
+0105610C  bl       #0x200ec20                             // UnityEngine.Transform$$get_eulerAngles
+01056110  ldr      s9, [x19, #0x60]                      
+01056114  ldr      s10, [x19, #0x44]                      // self.smoothSpeed
+01056118  mov      x0, xzr                               
+0105611C  mov      v8.16b, v1.16b                        
+01056120  bl       #0x1ffb6c8                             // UnityEngine.Time$$get_deltaTime
+01056124  mov      w8, #0x43b40000                       
+01056128  fsub     s1, s9, s8                            
+0105612C  fmov     s2, w8                                
+01056130  mov      w8, #-0x3c4c0000                      
+01056134  fdiv     s3, s1, s2                            
+01056138  fmov     s4, w8                                
+0105613C  frintm   s3, s3                                
+01056140  fmul     s3, s3, s4                            
+01056144  fadd     s1, s1, s3                            
+01056148  fmov     s3, wzr                               
+0105614C  mov      w8, #0x43340000                       
+01056150  fmin     s2, s1, s2                            
+01056154  fcmp     s1, #0.0                              
+01056158  fmov     s1, w8                                
+0105615C  fcsel    s2, s2, s3, pl                        
+01056160  fmul     s0, s10, s0                           
+01056164  fcmp     s2, s1                                
+01056168  fmov     s1, #1.00000000                       
+0105616C  fadd     s4, s2, s4                            
+01056170  fmin     s1, s0, s1                            
+01056174  fcsel    s2, s4, s2, gt                        
+01056178  fcmp     s0, #0.0                              
+0105617C  fcsel    s0, s1, s3, pl                        
+01056180  fmul     s0, s0, s2                            
+01056184  fadd     s1, s8, s0                            
+01056188  fmov     s0, wzr                               
+0105618C  fmov     s2, wzr                               
+01056190  mov      x0, x20                               
+01056194  mov      x1, xzr                               
+01056198  bl       #0x200eca0                             // UnityEngine.Transform$$set_eulerAngles
+0105619C  ldp      x20, x19, [sp, #0x110]                
+010561A0  ldp      x30, x21, [sp, #0x100]                
+010561A4  ldr      x29, [sp, #0xf0]                      
+010561A8  ldp      d9, d8, [sp, #0xe0]                   
+010561AC  ldp      d11, d10, [sp, #0xd0]                 
+010561B0  add      sp, sp, #0x120                        
+010561B4  ret                                            
+010561B8  bl       #0xe61da0                             

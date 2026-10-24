@@ -1,0 +1,31 @@
+--- a/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
++++ b/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
+@@ -24,6 +24,7 @@
+     readonly List<Vector3[]> structuralBoxes = new List<Vector3[]>();
+     int structuralBoxCount;
+     readonly List<SaveLoadManager> hudLoaders = new List<SaveLoadManager>();
++    readonly List<Leveltexto2> hudTitles = new List<Leveltexto2>();
+     readonly List<UnityEngine.UI.Graphic> hudGraphics = new List<UnityEngine.UI.Graphic>();
+     readonly Vector3[] hudWorldCorners = new Vector3[4];
+     readonly List<HudRegion> hudRegionPool = new List<HudRegion>();
+@@ -64,7 +65,8 @@
+         basePosition=transform.position; hasApplied=false;
+         ground.Clear();
+         Scene scene=SceneManager.GetActiveScene();
+-        hudLoaders.Clear(); hudPaths.Clear(); hudGraphics.Clear();
++        hudLoaders.Clear(); hudPaths.Clear(); hudGraphics.Clear(); hudTitles.Clear();
++        foreach(Leveltexto2 title in OriginalScenePresentation.Components<Leveltexto2>(scene)) hudTitles.Add(title);
+         foreach(SaveLoadManager loader in OriginalScenePresentation.Components<SaveLoadManager>(scene))
+         {
+             hudLoaders.Add(loader);
+@@ -160,6 +162,10 @@
+             AddHudControl(loader.barra==null ? null : loader.barra.gameObject);
+             AddHudControl(loader.barra1==null ? null : loader.barra1.gameObject);
+         }
++        // barra/barra1 are original progress separators, not the level name.
++        // The native Leveltexto2 serialized Text is the actual authored title.
++        foreach(Leveltexto2 title in hudTitles)
++            if(title!=null && title.texto1!=null && title.texto1.isActiveAndEnabled) AddHudControl(title.texto1.gameObject);
+         // Source panel2 itself is an invisible layout container (Image disabled).
+         // Protect its real enabled artwork, including the cuadro frame, instead
+         // of treating unused container padding as an obstruction.

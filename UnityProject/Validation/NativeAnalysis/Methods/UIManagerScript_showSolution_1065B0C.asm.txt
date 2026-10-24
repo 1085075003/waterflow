@@ -1,0 +1,47 @@
+// UIManagerScript$$showSolution VA 0x1065B0C, inferred length 180
+void UIManagerScript__showSolution (UIManagerScript_o* __this, const MethodInfo* method);
+01065B0C  str      x30, [sp, #-0x20]!                    
+01065B10  stp      x20, x19, [sp, #0x10]                 
+01065B14  adrp     x20, #0x24fb000                       
+01065B18  ldrb     w8, [x20, #0xe4a]                     
+01065B1C  mov      x19, x0                               
+01065B20  tbnz     w8, #0, #0x1065b44                    
+01065B24  adrp     x0, #0x236a000                        
+01065B28  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+01065B2C  bl       #0xe61b78                             
+01065B30  adrp     x0, #0x236b000                        
+01065B34  ldr      x0, [x0, #0x720]                       // [0x236B720] 'completeOff'
+01065B38  bl       #0xe61b78                             
+01065B3C  mov      w8, #1                                
+01065B40  strb     w8, [x20, #0xe4a]                     
+01065B44  ldr      x0, [x19, #0x70]                       // self.audioManager
+01065B48  cbz      x0, #0x1065bbc                        
+01065B4C  ldr      x1, [x19, #0x50]                       // self.click
+01065B50  mov      x2, xzr                               
+01065B54  bl       #0x1028540                             // AudioManager$$PlaySound
+01065B58  ldr      x0, [x19, #0x98]                       // self.cajaSolution
+01065B5C  cbz      x0, #0x1065bbc                        
+01065B60  mov      w1, #1                                
+01065B64  mov      x2, xzr                               
+01065B68  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01065B6C  ldr      x0, [x19, #0xa8]                       // self.solutionOff
+01065B70  cbz      x0, #0x1065bbc                        
+01065B74  adrp     x8, #0x236b000                        
+01065B78  ldr      x8, [x8, #0x720]                       // [0x236B720] 'completeOff'
+01065B7C  adrp     x19, #0x236a000                       
+01065B80  mov      w2, wzr                               
+01065B84  mov      x3, xzr                               
+01065B88  ldr      x1, [x8]                              
+01065B8C  ldr      x19, [x19, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01065B90  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+01065B94  ldr      x0, [x19]                             
+01065B98  ldr      w8, [x0, #0xe0]                       
+01065B9C  cbnz     w8, #0x1065ba8                        
+01065BA0  bl       #0xe61c80                             
+01065BA4  ldr      x0, [x19]                             
+01065BA8  ldr      x8, [x0, #0xb8]                       
+01065BAC  ldp      x20, x19, [sp, #0x10]                 
+01065BB0  strb     wzr, [x8, #0x16]                      
+01065BB4  ldr      x30, [sp], #0x20                      
+01065BB8  ret                                            
+01065BBC  bl       #0xe61da0                             

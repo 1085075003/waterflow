@@ -1,0 +1,28 @@
+// Resorte2$$doMovimiento3 VA 0x100D2C8, inferred length 104
+void Resorte2__doMovimiento3 (Resorte2_o* __this, const MethodInfo* method);
+0100D2C8  str      x30, [sp, #-0x20]!                    
+0100D2CC  stp      x20, x19, [sp, #0x10]                 
+0100D2D0  ldrb     w8, [x0, #0x2f9]                      
+0100D2D4  mov      x19, x0                               
+0100D2D8  cbz      w8, #0x100d2e8                        
+0100D2DC  mov      x0, x19                               
+0100D2E0  bl       #0x100d0a4                             // Resorte2$$doInactivarAguas2
+0100D2E4  strb     wzr, [x19, #0x2f9]                     // self.primeraVezAguas
+0100D2E8  mov      x0, x19                               
+0100D2EC  bl       #0x100fcf8                             // Resorte2$$doRota3_1
+0100D2F0  mov      x0, x19                               
+0100D2F4  bl       #0x100ff0c                             // Resorte2$$doMover3_1
+0100D2F8  ldrb     w8, [x19, #0x2f8]                      // self.swfin3_1
+0100D2FC  cbz      w8, #0x100d324                        
+0100D300  ldrb     w8, [x19, #0x2f3]                      // self.swfinRota3
+0100D304  cbz      w8, #0x100d324                        
+0100D308  mov      w20, #1                               
+0100D30C  mov      x0, x19                               
+0100D310  strh     wzr, [x19, #0x2ec]                     // self.swfin0
+0100D314  strb     wzr, [x19, #0x2ee]                     // self.swfin2
+0100D318  strb     w20, [x19, #0x2f0]                     // self.swfinMovimiento1
+0100D31C  bl       #0x100d0fc                             // Resorte2$$doActivarAguas2
+0100D320  strb     w20, [x19, #0x2f9]                     // self.primeraVezAguas
+0100D324  ldp      x20, x19, [sp, #0x10]                 
+0100D328  ldr      x30, [sp], #0x20                      
+0100D32C  ret                                            

@@ -1,0 +1,151 @@
+// SaveLoadManager$$showSolution VA 0x101F9E0, inferred length 596
+void SaveLoadManager__showSolution (SaveLoadManager_o* __this, const MethodInfo* method);
+0101F9E0  stp      x30, x21, [sp, #-0x20]!               
+0101F9E4  stp      x20, x19, [sp, #0x10]                 
+0101F9E8  adrp     x21, #0x24fb000                       
+0101F9EC  adrp     x20, #0x236a000                       
+0101F9F0  ldrb     w8, [x21, #0xcb1]                     
+0101F9F4  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0101F9F8  mov      x19, x0                               
+0101F9FC  tbnz     w8, #0, #0x101fa5c                    
+0101FA00  adrp     x0, #0x236a000                        
+0101FA04  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0101FA08  bl       #0xe61b78                             
+0101FA0C  adrp     x0, #0x236b000                        
+0101FA10  ldr      x0, [x0, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+0101FA14  bl       #0xe61b78                             
+0101FA18  adrp     x0, #0x236b000                        
+0101FA1C  ldr      x0, [x0, #0x4f0]                       // [0x236B4F0] SaveLoadManager_TypeInfo
+0101FA20  bl       #0xe61b78                             
+0101FA24  adrp     x0, #0x236a000                        
+0101FA28  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+0101FA2C  bl       #0xe61b78                             
+0101FA30  adrp     x0, #0x236b000                        
+0101FA34  ldr      x0, [x0, #0x720]                       // [0x236B720] 'completeOff'
+0101FA38  bl       #0xe61b78                             
+0101FA3C  adrp     x0, #0x236b000                        
+0101FA40  ldr      x0, [x0, #0x680]                       // [0x236B680] 'an_complete'
+0101FA44  bl       #0xe61b78                             
+0101FA48  adrp     x0, #0x236b000                        
+0101FA4C  ldr      x0, [x0, #0x688]                       // [0x236B688] 'an_complete2d'
+0101FA50  bl       #0xe61b78                             
+0101FA54  mov      w8, #1                                
+0101FA58  strb     w8, [x21, #0xcb1]                     
+0101FA5C  ldr      x0, [x20]                             
+0101FA60  ldr      w8, [x0, #0xe0]                       
+0101FA64  cbnz     w8, #0x101fa70                        
+0101FA68  bl       #0xe61c80                             
+0101FA6C  ldr      x0, [x20]                             
+0101FA70  ldr      x8, [x0, #0xb8]                       
+0101FA74  ldrb     w8, [x8, #5]                          
+0101FA78  cbnz     w8, #0x101facc                        
+0101FA7C  adrp     x8, #0x236a000                        
+0101FA80  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+0101FA84  ldr      x8, [x8]                              
+0101FA88  ldr      x8, [x8, #0xb8]                       
+0101FA8C  ldrb     w9, [x8, #0x74]                       
+0101FA90  cbnz     w9, #0x101facc                        
+0101FA94  ldrb     w9, [x8, #0x75]                       
+0101FA98  cbnz     w9, #0x101facc                        
+0101FA9C  ldrb     w9, [x8, #0x76]                       
+0101FAA0  cbnz     w9, #0x101facc                        
+0101FAA4  ldrb     w9, [x8, #0x77]                       
+0101FAA8  cbnz     w9, #0x101facc                        
+0101FAAC  ldrb     w9, [x8, #0x78]                       
+0101FAB0  cbnz     w9, #0x101facc                        
+0101FAB4  ldrb     w9, [x8, #0x79]                       
+0101FAB8  cbnz     w9, #0x101facc                        
+0101FABC  ldrb     w9, [x8, #0x7a]                       
+0101FAC0  cbnz     w9, #0x101facc                        
+0101FAC4  ldrb     w8, [x8, #0x7b]                       
+0101FAC8  cbz      w8, #0x101fad8                        
+0101FACC  ldp      x20, x19, [sp, #0x10]                 
+0101FAD0  ldp      x30, x21, [sp], #0x20                 
+0101FAD4  ret                                            
+0101FAD8  ldr      x0, [x19, #0x198]                      // self.audioManager
+0101FADC  cbz      x0, #0x101fc30                        
+0101FAE0  ldr      x1, [x19, #0x188]                      // self.click
+0101FAE4  mov      x2, xzr                               
+0101FAE8  bl       #0x1028540                             // AudioManager$$PlaySound
+0101FAEC  ldr      x0, [x20]                             
+0101FAF0  ldr      w8, [x0, #0xe0]                       
+0101FAF4  cbnz     w8, #0x101fb00                        
+0101FAF8  bl       #0xe61c80                             
+0101FAFC  ldr      x0, [x20]                             
+0101FB00  ldr      x8, [x0, #0xb8]                       
+0101FB04  mov      x0, x19                               
+0101FB08  strb     wzr, [x8, #0x16]                      
+0101FB0C  bl       #0x101b574                             // SaveLoadManager$$doDesactivarBotones
+0101FB10  ldr      w8, [x19, #0x100]                      // self.solucionadoAntes
+0101FB14  cbz      w8, #0x101fb48                        
+0101FB18  ldr      x0, [x20]                             
+0101FB1C  ldr      w8, [x0, #0xe0]                       
+0101FB20  cbnz     w8, #0x101fb2c                        
+0101FB24  bl       #0xe61c80                             
+0101FB28  ldr      x0, [x20]                             
+0101FB2C  ldr      x8, [x0, #0xb8]                       
+0101FB30  mov      x0, x19                               
+0101FB34  str      wzr, [x8, #8]                         
+0101FB38  strb     wzr, [x19, #0x381]                     // self.recuperarSuelo
+0101FB3C  ldp      x20, x19, [sp, #0x10]                 
+0101FB40  ldp      x30, x21, [sp], #0x20                 
+0101FB44  b        #0x101fc34                             // SaveLoadManager$$doSolucionLevel
+0101FB48  adrp     x8, #0x236b000                        
+0101FB4C  ldr      x8, [x8, #0x4f0]                       // [0x236B4F0] SaveLoadManager_TypeInfo
+0101FB50  ldr      x8, [x8]                              
+0101FB54  ldr      x8, [x8, #0xb8]                       
+0101FB58  ldr      w8, [x8]                              
+0101FB5C  cmp      w8, #1                                
+0101FB60  b.lt     #0x101fba4                            
+0101FB64  ldr      x0, [x19, #0xe0]                       // self.solutionOff
+0101FB68  cbz      x0, #0x101fc30                        
+0101FB6C  adrp     x8, #0x236b000                        
+0101FB70  ldr      x8, [x8, #0x720]                       // [0x236B720] 'completeOff'
+0101FB74  mov      w2, wzr                               
+0101FB78  mov      x3, xzr                               
+0101FB7C  ldr      x1, [x8]                              
+0101FB80  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+0101FB84  ldr      x0, [x19, #0xe8]                       // self.cajaSolution
+0101FB88  cbz      x0, #0x101fc30                        
+0101FB8C  mov      w1, #1                                
+0101FB90  mov      x2, xzr                               
+0101FB94  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0101FB98  ldr      x0, [x19, #0xe8]                       // self.cajaSolution
+0101FB9C  cbnz     x0, #0x101fbe0                        
+0101FBA0  b        #0x101fc30                            
+0101FBA4  ldr      x0, [x19, #0xf0]                       // self.noMoreOff
+0101FBA8  cbz      x0, #0x101fc30                        
+0101FBAC  adrp     x8, #0x236b000                        
+0101FBB0  ldr      x8, [x8, #0x720]                       // [0x236B720] 'completeOff'
+0101FBB4  mov      w2, wzr                               
+0101FBB8  mov      x3, xzr                               
+0101FBBC  ldr      x1, [x8]                              
+0101FBC0  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+0101FBC4  ldr      x0, [x19, #0xf8]                       // self.cajaNoMore
+0101FBC8  cbz      x0, #0x101fc30                        
+0101FBCC  mov      w1, #1                                
+0101FBD0  mov      x2, xzr                               
+0101FBD4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0101FBD8  ldr      x0, [x19, #0xf8]                       // self.cajaNoMore
+0101FBDC  cbz      x0, #0x101fc30                        
+0101FBE0  adrp     x8, #0x236b000                        
+0101FBE4  ldr      x8, [x8, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+0101FBE8  ldr      x1, [x8]                              
+0101FBEC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0101FBF0  cbz      x0, #0x101fc30                        
+0101FBF4  ldr      w8, [x19, #0x3e8]                      // self.esTablet
+0101FBF8  cmp      w8, #1                                
+0101FBFC  b.ne     #0x101fc0c                            
+0101FC00  adrp     x8, #0x236b000                        
+0101FC04  ldr      x8, [x8, #0x688]                       // [0x236B688] 'an_complete2d'
+0101FC08  b        #0x101fc14                            
+0101FC0C  adrp     x8, #0x236b000                        
+0101FC10  ldr      x8, [x8, #0x680]                       // [0x236B680] 'an_complete'
+0101FC14  ldr      x1, [x8]                              
+0101FC18  ldp      x20, x19, [sp, #0x10]                 
+0101FC1C  fmov     s0, wzr                               
+0101FC20  mov      w2, wzr                               
+0101FC24  mov      x3, xzr                               
+0101FC28  ldp      x30, x21, [sp], #0x20                 
+0101FC2C  b        #0x1fdb684                             // UnityEngine.Animator$$Play
+0101FC30  bl       #0xe61da0                             

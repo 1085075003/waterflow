@@ -1,0 +1,80 @@
+{
+  "preparedUtc": "2026-10-16T10:29:18.531182+00:00",
+  "immutable": true,
+  "runtimeChanges": true,
+  "physicsChanges": false,
+  "files": [
+    {
+      "target": "Assets/Editor/RecoveredTools/FlowWaterHudFramingValidation.cs",
+      "previousSha256": null,
+      "source": "Validation/HudAwareFramingBatch1/Assets/Editor/RecoveredTools/FlowWaterHudFramingValidation.cs",
+      "sha256": "aa0ac91b15cf87bb2131dc078b9f3e338e4cd5e6a01edeea2a8c7c9e32a8d32d"
+    },
+    {
+      "target": "Assets/Editor/RecoveredTools/FlowWaterHudFramingValidation.cs.meta",
+      "previousSha256": null,
+      "source": "Validation/HudAwareFramingBatch1/Assets/Editor/RecoveredTools/FlowWaterHudFramingValidation.cs.meta",
+      "sha256": "2a003d6723b5b906ccc0ea9fa5ddaf2decfacdd7e7401146e7a6942011fb7121"
+    },
+    {
+      "target": "Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs",
+      "previousSha256": "47c836757825aa0c7347a99678d19a287f406e1fa8db0f48db5c9470068816d1",
+      "source": "Validation/HudAwareFramingBatch1/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs",
+      "sha256": "9e1ede6ad42121ba80cc2c3993c754661c4545922129fc31df95c3af6204c791"
+    },
+    {
+      "target": "Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs.meta",
+      "previousSha256": "f146d79b1ba8869fb8b5d5d370e871c9383a079640c8468956fa896d24b0e93f",
+      "source": "Validation/HudAwareFramingBatch1/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs.meta",
+      "sha256": "f146d79b1ba8869fb8b5d5d370e871c9383a079640c8468956fa896d24b0e93f"
+    }
+  ],
+  "runtimeScope": "Only RecoveredBoardFraming.cs: add minimum along-view retreat for actual original gameplay HUD RectTransforms. Keep original FOV/rotation/near/far, native camera/orbit controller, all UI/model transforms, water/collider/actor/scheduler code unchanged. Protected controls come from SaveLoadManager original refs, their level labels and Music/Sound lowest common parent. Only upper finite rectangles outside screen centre qualify; no tutorial/modal/fullscreen containers. Uses actual rootCanvas pixelRect for overlay or capture UI-camera conversion. Existing mesh/active-drag/water filtering retained.",
+  "diff": "Validation/HudAwareFramingBatch1/RecoveredBoardFraming.diff",
+  "diffSha256": "3030573e16d757458f92ebc6c0d0aa240682624806ee2687d33660d2b025891e",
+  "entry": "Recovered.FlowWater.Editor.FlowWaterHudFramingValidation.Run",
+  "reportDirectory": "Validation/HudFraming",
+  "reportFile": "hud-framing-validation.json",
+  "actualScope": {
+    "levels": [
+      366,
+      409,
+      421,
+      401
+    ],
+    "sizes": [
+      [
+        1280,
+        720
+      ],
+      [
+        885,
+        630
+      ],
+      [
+        2560,
+        1080
+      ]
+    ],
+    "stages": [
+      "initial",
+      "solution"
+    ],
+    "expectedFrames": 24
+  },
+  "requiredCheckSuffixes": [
+    "actual-original-HUD-rectangles",
+    "original-projection-and-rotation-retained",
+    "all-structural-vertices-in-camera",
+    "structural-meshes-clear-original-HUD",
+    "clear-small-level-no-unneeded-retreat",
+    "resize-returns-to-wide-fit"
+  ],
+  "fixtureScope": "Own active-key guards on every callback. No Time speed changes during PlayMode, no physics/controller/transform mutations besides normal StartGame/Solve. RenderTexture/canvas capture transforms restored. Saves/restores prefs and original editor Time scale after EnteredEditMode. Measures actual vertices and conservative projected mesh bounds after two real target-resolution frames.",
+  "compile": {
+    "unity": "2022.3.28f1",
+    "runtime": "Roslyn exit0, no errors",
+    "editor": "Roslyn exit0, no errors"
+  },
+  "frozenUtc": "2026-10-16T10:29:18.540375+00:00"
+}

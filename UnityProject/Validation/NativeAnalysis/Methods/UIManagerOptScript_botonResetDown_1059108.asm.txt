@@ -1,0 +1,120 @@
+// UIManagerOptScript$$botonResetDown VA 0x1059108, inferred length 472
+void UIManagerOptScript__botonResetDown (UIManagerOptScript_o* __this, const MethodInfo* method);
+01059108  str      x30, [sp, #-0x20]!                    
+0105910C  stp      x20, x19, [sp, #0x10]                 
+01059110  adrp     x20, #0x24fb000                       
+01059114  ldrb     w8, [x20, #0xe07]                     
+01059118  mov      x19, x0                               
+0105911C  tbnz     w8, #0, #0x1059170                    
+01059120  adrp     x0, #0x236c000                        
+01059124  ldr      x0, [x0, #0x9d0]                       // [0x236C9D0] Method$UnityEngine.Component.GetComponent<Slider>()
+01059128  bl       #0xe61b78                             
+0105912C  adrp     x0, #0x236b000                        
+01059130  ldr      x0, [x0, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+01059134  bl       #0xe61b78                             
+01059138  adrp     x0, #0x236a000                        
+0105913C  ldr      x0, [x0, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01059140  bl       #0xe61b78                             
+01059144  adrp     x0, #0x236c000                        
+01059148  ldr      x0, [x0, #0x9d8]                       // [0x236C9D8] 'an_resetpopup2d'
+0105914C  bl       #0xe61b78                             
+01059150  adrp     x0, #0x236c000                        
+01059154  ldr      x0, [x0, #0x9e0]                       // [0x236C9E0] 'an_resetpopup'
+01059158  bl       #0xe61b78                             
+0105915C  adrp     x0, #0x236b000                        
+01059160  ldr      x0, [x0, #0x4e8]                       // [0x236B4E8] 'esTablet'
+01059164  bl       #0xe61b78                             
+01059168  mov      w8, #1                                
+0105916C  strb     w8, [x20, #0xe07]                     
+01059170  ldr      x0, [x19, #0x28]                       // self.audioManager
+01059174  cbz      x0, #0x10592dc                        
+01059178  ldr      x1, [x19, #0x20]                       // self.click
+0105917C  mov      x2, xzr                               
+01059180  bl       #0x1037514                             // AudioManager0$$PlaySound
+01059184  ldr      x0, [x19, #0x68]                       // self.resetButton
+01059188  cbz      x0, #0x10592dc                        
+0105918C  adrp     x20, #0x236a000                       
+01059190  ldr      x20, [x20, #0xf48]                     // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01059194  ldr      x1, [x20]                             
+01059198  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0105919C  cbz      x0, #0x10592dc                        
+010591A0  mov      w1, wzr                               
+010591A4  mov      x2, xzr                               
+010591A8  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+010591AC  ldr      x0, [x19, #0x70]                       // self.storeButton
+010591B0  cbz      x0, #0x10592dc                        
+010591B4  ldr      x1, [x20]                             
+010591B8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010591BC  cbz      x0, #0x10592dc                        
+010591C0  mov      w1, wzr                               
+010591C4  mov      x2, xzr                               
+010591C8  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+010591CC  ldr      x0, [x19, #0x78]                       // self.rateButton
+010591D0  cbz      x0, #0x10592dc                        
+010591D4  ldr      x1, [x20]                             
+010591D8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010591DC  cbz      x0, #0x10592dc                        
+010591E0  mov      w1, wzr                               
+010591E4  mov      x2, xzr                               
+010591E8  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+010591EC  ldr      x0, [x19, #0x80]                       // self.backButton
+010591F0  cbz      x0, #0x10592dc                        
+010591F4  ldr      x1, [x20]                             
+010591F8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010591FC  cbz      x0, #0x10592dc                        
+01059200  mov      w1, wzr                               
+01059204  mov      x2, xzr                               
+01059208  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+0105920C  ldr      x0, [x19, #0x30]                       // self.volumen1
+01059210  cbz      x0, #0x10592dc                        
+01059214  adrp     x20, #0x236c000                       
+01059218  ldr      x20, [x20, #0x9d0]                     // [0x236C9D0] Method$UnityEngine.Component.GetComponent<Slider>()
+0105921C  ldr      x1, [x20]                             
+01059220  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+01059224  cbz      x0, #0x10592dc                        
+01059228  mov      w1, wzr                               
+0105922C  mov      x2, xzr                               
+01059230  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01059234  ldr      x0, [x19, #0x38]                       // self.volumen2
+01059238  cbz      x0, #0x10592dc                        
+0105923C  ldr      x1, [x20]                             
+01059240  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+01059244  cbz      x0, #0x10592dc                        
+01059248  mov      w1, wzr                               
+0105924C  mov      x2, xzr                               
+01059250  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01059254  ldr      x0, [x19, #0x58]                       // self.cajaReset
+01059258  cbz      x0, #0x10592dc                        
+0105925C  mov      w1, #1                                
+01059260  mov      x2, xzr                               
+01059264  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01059268  ldr      x0, [x19, #0x58]                       // self.cajaReset
+0105926C  cbz      x0, #0x10592dc                        
+01059270  adrp     x8, #0x236b000                        
+01059274  ldr      x8, [x8, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+01059278  adrp     x19, #0x236b000                       
+0105927C  ldr      x1, [x8]                              
+01059280  ldr      x19, [x19, #0x4e8]                     // [0x236B4E8] 'esTablet'
+01059284  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01059288  ldr      x8, [x19]                             
+0105928C  mov      x19, x0                               
+01059290  mov      w1, wzr                               
+01059294  mov      x2, xzr                               
+01059298  mov      x0, x8                                
+0105929C  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+010592A0  cbz      x19, #0x10592dc                       
+010592A4  adrp     x8, #0x236c000                        
+010592A8  adrp     x9, #0x236c000                        
+010592AC  ldr      x8, [x8, #0x9d8]                       // [0x236C9D8] 'an_resetpopup2d'
+010592B0  ldr      x9, [x9, #0x9e0]                       // [0x236C9E0] 'an_resetpopup'
+010592B4  cmp      w0, #1                                
+010592B8  mov      x0, x19                               
+010592BC  ldp      x20, x19, [sp, #0x10]                 
+010592C0  csel     x8, x8, x9, eq                        
+010592C4  ldr      x1, [x8]                              
+010592C8  fmov     s0, wzr                               
+010592CC  mov      w2, wzr                               
+010592D0  mov      x3, xzr                               
+010592D4  ldr      x30, [sp], #0x20                      
+010592D8  b        #0x1fdb684                             // UnityEngine.Animator$$Play
+010592DC  bl       #0xe61da0                             

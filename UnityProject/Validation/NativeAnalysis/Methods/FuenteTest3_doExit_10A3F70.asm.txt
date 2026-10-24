@@ -1,0 +1,532 @@
+// FuenteTest3$$doExit VA 0x10A3F70, inferred length 2120
+void FuenteTest3__doExit (FuenteTest3_o* __this, const MethodInfo* method);
+010A3F70  stp      x30, x21, [sp, #-0x20]!               
+010A3F74  stp      x20, x19, [sp, #0x10]                 
+010A3F78  adrp     x20, #0x24fb000                       
+010A3F7C  ldrb     w8, [x20, #0xf67]                     
+010A3F80  mov      x19, x0                               
+010A3F84  tbnz     w8, #0, #0x10a3fa8                    
+010A3F88  adrp     x0, #0x236a000                        
+010A3F8C  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+010A3F90  bl       #0xe61b78                             
+010A3F94  adrp     x0, #0x2368000                        
+010A3F98  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010A3F9C  bl       #0xe61b78                             
+010A3FA0  mov      w8, #1                                
+010A3FA4  strb     w8, [x20, #0xf67]                     
+010A3FA8  ldr      x8, [x19, #0x5a0]                      // self.agscr
+010A3FAC  strb     wzr, [x19, #0x604]                     // self.creaAgua
+010A3FB0  cbz      x8, #0x10a47b4                        
+010A3FB4  strb     wzr, [x8, #0x30]                      
+010A3FB8  ldr      w9, [x8, #0x20]                       
+010A3FBC  ldr      w10, [x19, #0x3c]                      // self.origen
+010A3FC0  ldrb     w8, [x19, #0x51f]                      // self.activarFuente
+010A3FC4  cmp      w9, w10                               
+010A3FC8  b.ne     #0x10a4570                            
+010A3FCC  cbz      w8, #0x10a43d0                        
+010A3FD0  adrp     x21, #0x2368000                       
+010A3FD4  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+010A3FD8  ldr      x20, [x19, #0x128]                     // self.Agua1
+010A3FDC  ldr      x0, [x21]                             
+010A3FE0  ldr      w8, [x0, #0xe0]                       
+010A3FE4  cbnz     w8, #0x10a3fec                        
+010A3FE8  bl       #0xe61c80                             
+010A3FEC  mov      x0, x20                               
+010A3FF0  mov      x1, xzr                               
+010A3FF4  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A3FF8  ldr      x0, [x19, #0x130]                      // self.Agua2
+010A3FFC  mov      x1, xzr                               
+010A4000  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4004  ldr      x0, [x19, #0x140]                      // self.Agua4
+010A4008  mov      x1, xzr                               
+010A400C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4010  ldr      x0, [x19, #0x148]                      // self.Agua5
+010A4014  mov      x1, xzr                               
+010A4018  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A401C  ldr      x0, [x19, #0x150]                      // self.Agua6
+010A4020  mov      x1, xzr                               
+010A4024  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4028  ldr      x0, [x19, #0x158]                      // self.Agua7
+010A402C  mov      x1, xzr                               
+010A4030  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4034  ldr      x0, [x19, #0x160]                      // self.Agua71
+010A4038  mov      x1, xzr                               
+010A403C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4040  ldr      x0, [x19, #0x168]                      // self.Agua72
+010A4044  mov      x1, xzr                               
+010A4048  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A404C  ldr      x0, [x19, #0x170]                      // self.Agua73
+010A4050  mov      x1, xzr                               
+010A4054  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4058  ldr      x0, [x19, #0x178]                      // self.Agua74
+010A405C  mov      x1, xzr                               
+010A4060  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4064  ldr      x0, [x19, #0x180]                      // self.Agua8
+010A4068  mov      x1, xzr                               
+010A406C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4070  ldr      x0, [x19, #0x188]                      // self.Agua9
+010A4074  mov      x1, xzr                               
+010A4078  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A407C  ldr      x0, [x19, #0x190]                      // self.Agua91
+010A4080  mov      x1, xzr                               
+010A4084  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4088  ldr      x0, [x19, #0x198]                      // self.Agua92
+010A408C  mov      x1, xzr                               
+010A4090  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4094  ldr      x0, [x19, #0x1a0]                      // self.Agua10
+010A4098  mov      x1, xzr                               
+010A409C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A40A0  ldr      x0, [x19, #0x1a8]                      // self.Agua11
+010A40A4  mov      x1, xzr                               
+010A40A8  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A40AC  ldr      x0, [x19, #0x1b0]                      // self.Agua12
+010A40B0  mov      x1, xzr                               
+010A40B4  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A40B8  ldr      x0, [x19, #0x1b8]                      // self.Agua121
+010A40BC  mov      x1, xzr                               
+010A40C0  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A40C4  ldr      x0, [x19, #0x1c0]                      // self.Agua122
+010A40C8  mov      x1, xzr                               
+010A40CC  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A40D0  ldr      x0, [x19, #0x1c8]                      // self.Agua123
+010A40D4  mov      x1, xzr                               
+010A40D8  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A40DC  ldr      x0, [x19, #0x1d0]                      // self.Agua13
+010A40E0  mov      x1, xzr                               
+010A40E4  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A40E8  ldr      x0, [x19, #0x1d8]                      // self.Agua14
+010A40EC  mov      x1, xzr                               
+010A40F0  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A40F4  ldr      x0, [x19, #0x1e0]                      // self.Agua15
+010A40F8  mov      x1, xzr                               
+010A40FC  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4100  ldr      x0, [x19, #0x1e8]                      // self.Agua16
+010A4104  mov      x1, xzr                               
+010A4108  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A410C  ldr      x0, [x19, #0x1f0]                      // self.Lights1
+010A4110  mov      x1, xzr                               
+010A4114  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4118  ldr      x0, [x19, #0x1f8]                      // self.Lights2
+010A411C  mov      x1, xzr                               
+010A4120  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4124  ldr      x0, [x19, #0x200]                      // self.lit11
+010A4128  mov      x1, xzr                               
+010A412C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4130  ldr      x0, [x19, #0x208]                      // self.lit12
+010A4134  mov      x1, xzr                               
+010A4138  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A413C  ldr      x0, [x19, #0x210]                      // self.lit13
+010A4140  mov      x1, xzr                               
+010A4144  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4148  ldr      x0, [x19, #0x218]                      // self.lit14
+010A414C  mov      x1, xzr                               
+010A4150  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4154  mov      x0, x19                               
+010A4158  mov      x1, xzr                               
+010A415C  bl       #0x2006ff8                             // UnityEngine.MonoBehaviour$$CancelInvoke
+010A4160  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A4164  and      w8, w8, #0xfffffffe                   
+010A4168  cmp      w8, #8                                
+010A416C  b.eq     #0x10a417c                            
+010A4170  ldr      w8, [x19, #0x614]                      // self.configFuenteB
+010A4174  cmp      w8, #9                                
+010A4178  b.ne     #0x10a426c                            
+010A417C  ldr      x0, [x21]                             
+010A4180  ldr      x20, [x19, #0x718]                     // self.obj13
+010A4184  ldr      w8, [x0, #0xe0]                       
+010A4188  cbnz     w8, #0x10a4190                        
+010A418C  bl       #0xe61c80                             
+010A4190  mov      x0, x20                               
+010A4194  mov      x1, xzr                               
+010A4198  mov      x2, xzr                               
+010A419C  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010A41A0  tbz      w0, #0, #0x10a41b8                    
+010A41A4  ldr      x0, [x19, #0x718]                      // self.obj13
+010A41A8  cbz      x0, #0x10a47b4                        
+010A41AC  mov      w1, wzr                               
+010A41B0  mov      x2, xzr                               
+010A41B4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A41B8  ldr      x0, [x21]                             
+010A41BC  ldr      x20, [x19, #0x720]                     // self.obj14
+010A41C0  ldr      w8, [x0, #0xe0]                       
+010A41C4  cbnz     w8, #0x10a41cc                        
+010A41C8  bl       #0xe61c80                             
+010A41CC  mov      x0, x20                               
+010A41D0  mov      x1, xzr                               
+010A41D4  mov      x2, xzr                               
+010A41D8  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010A41DC  tbz      w0, #0, #0x10a41f4                    
+010A41E0  ldr      x0, [x19, #0x720]                      // self.obj14
+010A41E4  cbz      x0, #0x10a47b4                        
+010A41E8  mov      w1, wzr                               
+010A41EC  mov      x2, xzr                               
+010A41F0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A41F4  ldr      x0, [x21]                             
+010A41F8  ldr      x20, [x19, #0x728]                     // self.obj15
+010A41FC  ldr      w8, [x0, #0xe0]                       
+010A4200  cbnz     w8, #0x10a4208                        
+010A4204  bl       #0xe61c80                             
+010A4208  mov      x0, x20                               
+010A420C  mov      x1, xzr                               
+010A4210  mov      x2, xzr                               
+010A4214  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010A4218  tbz      w0, #0, #0x10a4230                    
+010A421C  ldr      x0, [x19, #0x728]                      // self.obj15
+010A4220  cbz      x0, #0x10a47b4                        
+010A4224  mov      w1, wzr                               
+010A4228  mov      x2, xzr                               
+010A422C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4230  ldr      x0, [x21]                             
+010A4234  ldr      x20, [x19, #0x730]                     // self.obj16
+010A4238  ldr      w8, [x0, #0xe0]                       
+010A423C  cbnz     w8, #0x10a4244                        
+010A4240  bl       #0xe61c80                             
+010A4244  mov      x0, x20                               
+010A4248  mov      x1, xzr                               
+010A424C  mov      x2, xzr                               
+010A4250  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010A4254  tbz      w0, #0, #0x10a426c                    
+010A4258  ldr      x0, [x19, #0x730]                      // self.obj16
+010A425C  cbz      x0, #0x10a47b4                        
+010A4260  mov      w1, wzr                               
+010A4264  mov      x2, xzr                               
+010A4268  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A426C  ldr      x0, [x19, #0xc0]                       // self.plano1
+010A4270  strb     wzr, [x19, #0x5fc]                     // self.unionAguas5
+010A4274  cbz      x0, #0x10a47b4                        
+010A4278  mov      w1, wzr                               
+010A427C  mov      x2, xzr                               
+010A4280  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4284  ldr      x0, [x19, #0xc8]                       // self.plano2
+010A4288  cbz      x0, #0x10a47b4                        
+010A428C  mov      w1, wzr                               
+010A4290  mov      x2, xzr                               
+010A4294  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4298  ldr      x0, [x19, #0xd0]                       // self.plano3
+010A429C  cbz      x0, #0x10a47b4                        
+010A42A0  mov      w1, wzr                               
+010A42A4  mov      x2, xzr                               
+010A42A8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A42AC  ldr      x0, [x19, #0xd8]                       // self.plano4
+010A42B0  cbz      x0, #0x10a47b4                        
+010A42B4  mov      w1, wzr                               
+010A42B8  mov      x2, xzr                               
+010A42BC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A42C0  ldr      x0, [x19, #0xe0]                       // self.planoCentro
+010A42C4  cbz      x0, #0x10a47b4                        
+010A42C8  mov      w1, wzr                               
+010A42CC  mov      x2, xzr                               
+010A42D0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A42D4  ldr      x0, [x19, #0xe8]                       // self.planoCentro1
+010A42D8  cbz      x0, #0x10a47b4                        
+010A42DC  mov      w1, wzr                               
+010A42E0  mov      x2, xzr                               
+010A42E4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A42E8  adrp     x20, #0x236a000                       
+010A42EC  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010A42F0  ldr      x0, [x20]                             
+010A42F4  ldr      w8, [x0, #0xe0]                       
+010A42F8  cbnz     w8, #0x10a4304                        
+010A42FC  bl       #0xe61c80                             
+010A4300  ldr      x0, [x20]                             
+010A4304  ldr      x8, [x0, #0xb8]                       
+010A4308  ldrb     w9, [x8, #0x15]                       
+010A430C  cbz      w9, #0x10a4374                        
+010A4310  ldr      w9, [x19, #0x520]                      // self.tipoPieza
+010A4314  cmp      w9, #2                                
+010A4318  b.lt     #0x10a4374                            
+010A431C  cmp      w9, #8                                
+010A4320  b.eq     #0x10a4374                            
+010A4324  cmp      w9, #2                                
+010A4328  b.ne     #0x10a4334                            
+010A432C  ldrb     w9, [x19, #0x710]                      // self.pieza2confuentes
+010A4330  cbz      w9, #0x10a4354                        
+010A4334  ldr      w9, [x0, #0xe0]                       
+010A4338  cbnz     w9, #0x10a4348                        
+010A433C  bl       #0xe61c80                             
+010A4340  ldr      x0, [x20]                             
+010A4344  ldr      x8, [x0, #0xb8]                       
+010A4348  ldr      w9, [x8, #0xc]                        
+010A434C  sub      w9, w9, #1                            
+010A4350  str      w9, [x8, #0xc]                        
+010A4354  ldr      w8, [x0, #0xe0]                       
+010A4358  cbnz     w8, #0x10a4364                        
+010A435C  bl       #0xe61c80                             
+010A4360  ldr      x0, [x20]                             
+010A4364  ldr      x8, [x0, #0xb8]                       
+010A4368  ldr      w9, [x8, #8]                          
+010A436C  sub      w9, w9, #1                            
+010A4370  str      w9, [x8, #8]                          
+010A4374  ldr      w8, [x0, #0xe0]                       
+010A4378  cbnz     w8, #0x10a4384                        
+010A437C  bl       #0xe61c80                             
+010A4380  ldr      x0, [x20]                             
+010A4384  ldr      x8, [x0, #0xb8]                       
+010A4388  ldr      w8, [x8, #0xc]                        
+010A438C  cmp      w8, #0                                
+010A4390  b.gt     #0x10a43d0                            
+010A4394  ldr      x0, [x21]                             
+010A4398  ldr      x20, [x19, #0x768]                     // self.audioManager
+010A439C  ldr      w8, [x0, #0xe0]                       
+010A43A0  cbnz     w8, #0x10a43a8                        
+010A43A4  bl       #0xe61c80                             
+010A43A8  mov      x0, x20                               
+010A43AC  mov      x1, xzr                               
+010A43B0  mov      x2, xzr                               
+010A43B4  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010A43B8  tbz      w0, #0, #0x10a43d0                    
+010A43BC  ldr      x0, [x19, #0x768]                      // self.audioManager
+010A43C0  cbz      x0, #0x10a47b4                        
+010A43C4  ldr      x1, [x19, #0x760]                      // self.SonidoFuente
+010A43C8  mov      x2, xzr                               
+010A43CC  bl       #0x102b0e8                             // AudioManager$$StopSound
+010A43D0  ldrb     w8, [x19, #0x519]                      // self.esf1
+010A43D4  strb     wzr, [x19, #0x518]                     // self.ontrigger
+010A43D8  cbz      w8, #0x10a442c                        
+010A43DC  ldr      x0, [x19, #0x68]                       // self.esfera1
+010A43E0  cbz      x0, #0x10a47b4                        
+010A43E4  mov      w1, wzr                               
+010A43E8  mov      x2, xzr                               
+010A43EC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A43F0  ldr      x0, [x19, #0x90]                       // self.esferaCascada1
+010A43F4  cbz      x0, #0x10a47b4                        
+010A43F8  mov      w1, wzr                               
+010A43FC  mov      x2, xzr                               
+010A4400  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4404  ldr      x0, [x19, #0x48]                       // self.Cascada1
+010A4408  cbz      x0, #0x10a47b4                        
+010A440C  mov      w1, wzr                               
+010A4410  mov      x2, xzr                               
+010A4414  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4418  ldr      x0, [x19, #0x108]                      // self.planoCas1
+010A441C  cbz      x0, #0x10a47b4                        
+010A4420  mov      w1, wzr                               
+010A4424  mov      x2, xzr                               
+010A4428  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A442C  ldrb     w8, [x19, #0x51a]                      // self.esf2
+010A4430  cbz      w8, #0x10a4484                        
+010A4434  ldr      x0, [x19, #0x70]                       // self.esfera2
+010A4438  cbz      x0, #0x10a47b4                        
+010A443C  mov      w1, wzr                               
+010A4440  mov      x2, xzr                               
+010A4444  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4448  ldr      x0, [x19, #0x98]                       // self.esferaCascada2
+010A444C  cbz      x0, #0x10a47b4                        
+010A4450  mov      w1, wzr                               
+010A4454  mov      x2, xzr                               
+010A4458  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A445C  ldr      x0, [x19, #0x50]                       // self.Cascada2
+010A4460  cbz      x0, #0x10a47b4                        
+010A4464  mov      w1, wzr                               
+010A4468  mov      x2, xzr                               
+010A446C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4470  ldr      x0, [x19, #0x110]                      // self.planoCas2
+010A4474  cbz      x0, #0x10a47b4                        
+010A4478  mov      w1, wzr                               
+010A447C  mov      x2, xzr                               
+010A4480  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4484  ldrb     w8, [x19, #0x51b]                      // self.esf3
+010A4488  cbz      w8, #0x10a44dc                        
+010A448C  ldr      x0, [x19, #0x78]                       // self.esfera3
+010A4490  cbz      x0, #0x10a47b4                        
+010A4494  mov      w1, wzr                               
+010A4498  mov      x2, xzr                               
+010A449C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A44A0  ldr      x0, [x19, #0xa0]                       // self.esferaCascada3
+010A44A4  cbz      x0, #0x10a47b4                        
+010A44A8  mov      w1, wzr                               
+010A44AC  mov      x2, xzr                               
+010A44B0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A44B4  ldr      x0, [x19, #0x58]                       // self.Cascada3
+010A44B8  cbz      x0, #0x10a47b4                        
+010A44BC  mov      w1, wzr                               
+010A44C0  mov      x2, xzr                               
+010A44C4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A44C8  ldr      x0, [x19, #0x118]                      // self.planoCas3
+010A44CC  cbz      x0, #0x10a47b4                        
+010A44D0  mov      w1, wzr                               
+010A44D4  mov      x2, xzr                               
+010A44D8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A44DC  ldrb     w8, [x19, #0x51c]                      // self.esf4
+010A44E0  cbz      w8, #0x10a4534                        
+010A44E4  ldr      x0, [x19, #0x80]                       // self.esfera4
+010A44E8  cbz      x0, #0x10a47b4                        
+010A44EC  mov      w1, wzr                               
+010A44F0  mov      x2, xzr                               
+010A44F4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A44F8  ldr      x0, [x19, #0xa8]                       // self.esferaCascada4
+010A44FC  cbz      x0, #0x10a47b4                        
+010A4500  mov      w1, wzr                               
+010A4504  mov      x2, xzr                               
+010A4508  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A450C  ldr      x0, [x19, #0x60]                       // self.Cascada4
+010A4510  cbz      x0, #0x10a47b4                        
+010A4514  mov      w1, wzr                               
+010A4518  mov      x2, xzr                               
+010A451C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4520  ldr      x0, [x19, #0x120]                      // self.planoCas4
+010A4524  cbz      x0, #0x10a47b4                        
+010A4528  mov      w1, wzr                               
+010A452C  mov      x2, xzr                               
+010A4530  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4534  ldrb     w8, [x19, #0x51d]                      // self.esf6
+010A4538  cbz      w8, #0x10a4550                        
+010A453C  ldr      x0, [x19, #0x88]                       // self.esfera6
+010A4540  cbz      x0, #0x10a47b4                        
+010A4544  mov      w1, wzr                               
+010A4548  mov      x2, xzr                               
+010A454C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4550  ldr      x0, [x19, #0x5a0]                      // self.agscr
+010A4554  cbz      x0, #0x10a47b4                        
+010A4558  ldp      x20, x19, [sp, #0x10]                 
+010A455C  mov      w8, #9                                
+010A4560  str      w8, [x0, #0x20]                       
+010A4564  mov      x1, xzr                               
+010A4568  ldp      x30, x21, [sp], #0x20                 
+010A456C  b        #0xfcbc1c                              // AguasControl3$$doBuscarOrigen
+010A4570  cbz      w8, #0x10a47a8                        
+010A4574  adrp     x21, #0x2368000                       
+010A4578  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+010A457C  ldr      x20, [x19, #0x130]                     // self.Agua2
+010A4580  ldr      x0, [x21]                             
+010A4584  ldr      w8, [x0, #0xe0]                       
+010A4588  cbnz     w8, #0x10a4590                        
+010A458C  bl       #0xe61c80                             
+010A4590  mov      x0, x20                               
+010A4594  mov      x1, xzr                               
+010A4598  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A459C  ldr      x0, [x19, #0x140]                      // self.Agua4
+010A45A0  mov      x1, xzr                               
+010A45A4  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A45A8  ldr      x0, [x19, #0x148]                      // self.Agua5
+010A45AC  mov      x1, xzr                               
+010A45B0  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A45B4  ldr      x0, [x19, #0x150]                      // self.Agua6
+010A45B8  mov      x1, xzr                               
+010A45BC  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A45C0  ldr      x0, [x19, #0x158]                      // self.Agua7
+010A45C4  mov      x1, xzr                               
+010A45C8  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A45CC  ldr      x0, [x19, #0x160]                      // self.Agua71
+010A45D0  mov      x1, xzr                               
+010A45D4  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A45D8  ldr      x0, [x19, #0x168]                      // self.Agua72
+010A45DC  mov      x1, xzr                               
+010A45E0  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A45E4  ldr      x0, [x19, #0x170]                      // self.Agua73
+010A45E8  mov      x1, xzr                               
+010A45EC  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A45F0  ldr      x0, [x19, #0x178]                      // self.Agua74
+010A45F4  mov      x1, xzr                               
+010A45F8  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A45FC  ldr      x0, [x19, #0x180]                      // self.Agua8
+010A4600  mov      x1, xzr                               
+010A4604  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4608  ldr      x0, [x19, #0x188]                      // self.Agua9
+010A460C  mov      x1, xzr                               
+010A4610  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4614  ldr      x0, [x19, #0x190]                      // self.Agua91
+010A4618  mov      x1, xzr                               
+010A461C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4620  ldr      x0, [x19, #0x198]                      // self.Agua92
+010A4624  mov      x1, xzr                               
+010A4628  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A462C  ldr      x0, [x19, #0x1a0]                      // self.Agua10
+010A4630  mov      x1, xzr                               
+010A4634  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4638  ldr      x0, [x19, #0x1a8]                      // self.Agua11
+010A463C  mov      x1, xzr                               
+010A4640  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4644  ldr      x0, [x19, #0x1b0]                      // self.Agua12
+010A4648  mov      x1, xzr                               
+010A464C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4650  ldr      x0, [x19, #0x1b8]                      // self.Agua121
+010A4654  mov      x1, xzr                               
+010A4658  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A465C  ldr      x0, [x19, #0x1c0]                      // self.Agua122
+010A4660  mov      x1, xzr                               
+010A4664  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4668  ldr      x0, [x19, #0x1c8]                      // self.Agua123
+010A466C  mov      x1, xzr                               
+010A4670  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4674  ldr      x0, [x19, #0x1d0]                      // self.Agua13
+010A4678  mov      x1, xzr                               
+010A467C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4680  ldr      x0, [x19, #0x1d8]                      // self.Agua14
+010A4684  mov      x1, xzr                               
+010A4688  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A468C  ldr      x0, [x19, #0x1e0]                      // self.Agua15
+010A4690  mov      x1, xzr                               
+010A4694  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4698  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A469C  and      w8, w8, #0xfffffffe                   
+010A46A0  cmp      w8, #8                                
+010A46A4  b.eq     #0x10a46b4                            
+010A46A8  ldr      w8, [x19, #0x614]                      // self.configFuenteB
+010A46AC  cmp      w8, #9                                
+010A46B0  b.ne     #0x10a47a4                            
+010A46B4  ldr      x0, [x21]                             
+010A46B8  ldr      x20, [x19, #0x718]                     // self.obj13
+010A46BC  ldr      w8, [x0, #0xe0]                       
+010A46C0  cbnz     w8, #0x10a46c8                        
+010A46C4  bl       #0xe61c80                             
+010A46C8  mov      x0, x20                               
+010A46CC  mov      x1, xzr                               
+010A46D0  mov      x2, xzr                               
+010A46D4  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010A46D8  tbz      w0, #0, #0x10a46f0                    
+010A46DC  ldr      x0, [x19, #0x718]                      // self.obj13
+010A46E0  cbz      x0, #0x10a47b4                        
+010A46E4  mov      w1, wzr                               
+010A46E8  mov      x2, xzr                               
+010A46EC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A46F0  ldr      x0, [x21]                             
+010A46F4  ldr      x20, [x19, #0x720]                     // self.obj14
+010A46F8  ldr      w8, [x0, #0xe0]                       
+010A46FC  cbnz     w8, #0x10a4704                        
+010A4700  bl       #0xe61c80                             
+010A4704  mov      x0, x20                               
+010A4708  mov      x1, xzr                               
+010A470C  mov      x2, xzr                               
+010A4710  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010A4714  tbz      w0, #0, #0x10a472c                    
+010A4718  ldr      x0, [x19, #0x720]                      // self.obj14
+010A471C  cbz      x0, #0x10a47b4                        
+010A4720  mov      w1, wzr                               
+010A4724  mov      x2, xzr                               
+010A4728  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A472C  ldr      x0, [x21]                             
+010A4730  ldr      x20, [x19, #0x728]                     // self.obj15
+010A4734  ldr      w8, [x0, #0xe0]                       
+010A4738  cbnz     w8, #0x10a4740                        
+010A473C  bl       #0xe61c80                             
+010A4740  mov      x0, x20                               
+010A4744  mov      x1, xzr                               
+010A4748  mov      x2, xzr                               
+010A474C  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010A4750  tbz      w0, #0, #0x10a4768                    
+010A4754  ldr      x0, [x19, #0x728]                      // self.obj15
+010A4758  cbz      x0, #0x10a47b4                        
+010A475C  mov      w1, wzr                               
+010A4760  mov      x2, xzr                               
+010A4764  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A4768  ldr      x0, [x21]                             
+010A476C  ldr      x20, [x19, #0x730]                     // self.obj16
+010A4770  ldr      w8, [x0, #0xe0]                       
+010A4774  cbnz     w8, #0x10a477c                        
+010A4778  bl       #0xe61c80                             
+010A477C  mov      x0, x20                               
+010A4780  mov      x1, xzr                               
+010A4784  mov      x2, xzr                               
+010A4788  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010A478C  tbz      w0, #0, #0x10a47a4                    
+010A4790  ldr      x0, [x19, #0x730]                      // self.obj16
+010A4794  cbz      x0, #0x10a47b4                        
+010A4798  mov      w1, wzr                               
+010A479C  mov      x2, xzr                               
+010A47A0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A47A4  strb     wzr, [x19, #0x5fc]                     // self.unionAguas5
+010A47A8  ldp      x20, x19, [sp, #0x10]                 
+010A47AC  ldp      x30, x21, [sp], #0x20                 
+010A47B0  ret                                            
+010A47B4  bl       #0xe61da0                             

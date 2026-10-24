@@ -1,0 +1,469 @@
+// Leveltexto$$Start VA 0x102C65C, inferred length 1868
+void Leveltexto__Start (Leveltexto_o* __this, const MethodInfo* method);
+0102C65C  sub      sp, sp, #0x40                         
+0102C660  stp      x30, x23, [sp, #0x10]                 
+0102C664  stp      x22, x21, [sp, #0x20]                 
+0102C668  stp      x20, x19, [sp, #0x30]                 
+0102C66C  adrp     x21, #0x24fb000                       
+0102C670  adrp     x20, #0x236a000                       
+0102C674  ldrb     w8, [x21, #0xd07]                     
+0102C678  ldr      x20, [x20, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+0102C67C  mov      x19, x0                               
+0102C680  tbnz     w8, #0, #0x102c704                    
+0102C684  adrp     x0, #0x236a000                        
+0102C688  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0102C68C  bl       #0xe61b78                             
+0102C690  adrp     x0, #0x236a000                        
+0102C694  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0102C698  bl       #0xe61b78                             
+0102C69C  adrp     x0, #0x236b000                        
+0102C6A0  ldr      x0, [x0, #0xae0]                       // [0x236BAE0] 'MIX  LEVEL '
+0102C6A4  bl       #0xe61b78                             
+0102C6A8  adrp     x0, #0x236b000                        
+0102C6AC  ldr      x0, [x0, #0xae8]                       // [0x236BAE8] 'MASTER  LEVEL '
+0102C6B0  bl       #0xe61b78                             
+0102C6B4  adrp     x0, #0x236b000                        
+0102C6B8  ldr      x0, [x0, #0xaf0]                       // [0x236BAF0] 'LEVEL '
+0102C6BC  bl       #0xe61b78                             
+0102C6C0  adrp     x0, #0x236b000                        
+0102C6C4  ldr      x0, [x0, #0xaf8]                       // [0x236BAF8] 'EASY 2  LEVEL '
+0102C6C8  bl       #0xe61b78                             
+0102C6CC  adrp     x0, #0x236b000                        
+0102C6D0  ldr      x0, [x0, #0xb00]                       // [0x236BB00] 'MANIAC  LEVEL '
+0102C6D4  bl       #0xe61b78                             
+0102C6D8  adrp     x0, #0x236b000                        
+0102C6DC  ldr      x0, [x0, #0xb08]                       // [0x236BB08] 'GENIUS  LEVEL '
+0102C6E0  bl       #0xe61b78                             
+0102C6E4  adrp     x0, #0x236b000                        
+0102C6E8  ldr      x0, [x0, #0xb10]                       // [0x236BB10] 'EASY 1  LEVEL '
+0102C6EC  bl       #0xe61b78                             
+0102C6F0  adrp     x0, #0x236b000                        
+0102C6F4  ldr      x0, [x0, #0xb18]                       // [0x236BB18] 'NUEVOS  LEVEL '
+0102C6F8  bl       #0xe61b78                             
+0102C6FC  mov      w8, #1                                
+0102C700  strb     w8, [x21, #0xd07]                     
+0102C704  ldr      x8, [x20]                             
+0102C708  str      wzr, [sp, #0xc]                       
+0102C70C  adrp     x21, #0x236a000                       
+0102C710  adrp     x22, #0x236b000                       
+0102C714  ldr      x8, [x8, #0xb8]                       
+0102C718  ldr      w8, [x8]                              
+0102C71C  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102C720  ldr      x22, [x22, #0xaf0]                     // [0x236BAF0] 'LEVEL '
+0102C724  cmp      w8, #1                                
+0102C728  b.ne     #0x102c7a0                            
+0102C72C  ldr      x0, [x21]                             
+0102C730  adrp     x23, #0x236b000                       
+0102C734  ldr      w8, [x0, #0xe0]                       
+0102C738  ldr      x23, [x23, #0xb10]                     // [0x236BB10] 'EASY 1  LEVEL '
+0102C73C  cbnz     w8, #0x102c748                        
+0102C740  bl       #0xe61c80                             
+0102C744  ldr      x0, [x21]                             
+0102C748  ldr      x0, [x0, #0xb8]                       
+0102C74C  mov      x1, xzr                               
+0102C750  bl       #0x1ab3994                             // System.Int32$$ToString
+0102C754  ldr      x8, [x22]                             
+0102C758  mov      x1, x0                                
+0102C75C  mov      x2, xzr                               
+0102C760  mov      x0, x8                                
+0102C764  bl       #0x1958280                             // System.String$$Concat
+0102C768  str      x0, [x19, #0xa8]                       // self.textoB
+0102C76C  ldr      x8, [x21]                             
+0102C770  mov      x1, xzr                               
+0102C774  ldr      x0, [x8, #0xb8]                       
+0102C778  bl       #0x1ab3994                             // System.Int32$$ToString
+0102C77C  ldr      x8, [x23]                             
+0102C780  mov      x1, x0                                
+0102C784  mov      x2, xzr                               
+0102C788  mov      x0, x8                                
+0102C78C  bl       #0x1958280                             // System.String$$Concat
+0102C790  str      x0, [x19, #0xa0]                       // self.texto
+0102C794  ldr      x8, [x20]                             
+0102C798  ldr      x8, [x8, #0xb8]                       
+0102C79C  ldr      w8, [x8]                              
+0102C7A0  cmp      w8, #2                                
+0102C7A4  b.ne     #0x102c83c                            
+0102C7A8  ldr      x0, [x21]                             
+0102C7AC  adrp     x23, #0x236b000                       
+0102C7B0  ldr      w8, [x0, #0xe0]                       
+0102C7B4  ldr      x23, [x23, #0xaf8]                     // [0x236BAF8] 'EASY 2  LEVEL '
+0102C7B8  cbnz     w8, #0x102c7c4                        
+0102C7BC  bl       #0xe61c80                             
+0102C7C0  ldr      x0, [x21]                             
+0102C7C4  ldr      x8, [x0, #0xb8]                       
+0102C7C8  add      x0, sp, #0xc                          
+0102C7CC  mov      x1, xzr                               
+0102C7D0  ldr      w8, [x8]                              
+0102C7D4  sub      w8, w8, #0x32                         
+0102C7D8  str      w8, [sp, #0xc]                        
+0102C7DC  bl       #0x1ab3994                             // System.Int32$$ToString
+0102C7E0  ldr      x8, [x22]                             
+0102C7E4  mov      x1, x0                                
+0102C7E8  mov      x2, xzr                               
+0102C7EC  mov      x0, x8                                
+0102C7F0  bl       #0x1958280                             // System.String$$Concat
+0102C7F4  str      x0, [x19, #0xa8]                       // self.textoB
+0102C7F8  ldr      x8, [x21]                             
+0102C7FC  add      x0, sp, #0xc                          
+0102C800  mov      x1, xzr                               
+0102C804  ldr      x8, [x8, #0xb8]                       
+0102C808  ldr      w8, [x8]                              
+0102C80C  sub      w8, w8, #0x32                         
+0102C810  str      w8, [sp, #0xc]                        
+0102C814  bl       #0x1ab3994                             // System.Int32$$ToString
+0102C818  ldr      x8, [x23]                             
+0102C81C  mov      x1, x0                                
+0102C820  mov      x2, xzr                               
+0102C824  mov      x0, x8                                
+0102C828  bl       #0x1958280                             // System.String$$Concat
+0102C82C  str      x0, [x19, #0xa0]                       // self.texto
+0102C830  ldr      x8, [x20]                             
+0102C834  ldr      x8, [x8, #0xb8]                       
+0102C838  ldr      w8, [x8]                              
+0102C83C  cmp      w8, #3                                
+0102C840  b.ne     #0x102c8d8                            
+0102C844  ldr      x0, [x21]                             
+0102C848  adrp     x23, #0x236b000                       
+0102C84C  ldr      w8, [x0, #0xe0]                       
+0102C850  ldr      x23, [x23, #0xae8]                     // [0x236BAE8] 'MASTER  LEVEL '
+0102C854  cbnz     w8, #0x102c860                        
+0102C858  bl       #0xe61c80                             
+0102C85C  ldr      x0, [x21]                             
+0102C860  ldr      x8, [x0, #0xb8]                       
+0102C864  add      x0, sp, #0xc                          
+0102C868  mov      x1, xzr                               
+0102C86C  ldr      w8, [x8]                              
+0102C870  sub      w8, w8, #0x64                         
+0102C874  str      w8, [sp, #0xc]                        
+0102C878  bl       #0x1ab3994                             // System.Int32$$ToString
+0102C87C  ldr      x8, [x22]                             
+0102C880  mov      x1, x0                                
+0102C884  mov      x2, xzr                               
+0102C888  mov      x0, x8                                
+0102C88C  bl       #0x1958280                             // System.String$$Concat
+0102C890  str      x0, [x19, #0xa8]                       // self.textoB
+0102C894  ldr      x8, [x21]                             
+0102C898  add      x0, sp, #0xc                          
+0102C89C  mov      x1, xzr                               
+0102C8A0  ldr      x8, [x8, #0xb8]                       
+0102C8A4  ldr      w8, [x8]                              
+0102C8A8  sub      w8, w8, #0x64                         
+0102C8AC  str      w8, [sp, #0xc]                        
+0102C8B0  bl       #0x1ab3994                             // System.Int32$$ToString
+0102C8B4  ldr      x8, [x23]                             
+0102C8B8  mov      x1, x0                                
+0102C8BC  mov      x2, xzr                               
+0102C8C0  mov      x0, x8                                
+0102C8C4  bl       #0x1958280                             // System.String$$Concat
+0102C8C8  str      x0, [x19, #0xa0]                       // self.texto
+0102C8CC  ldr      x8, [x20]                             
+0102C8D0  ldr      x8, [x8, #0xb8]                       
+0102C8D4  ldr      w8, [x8]                              
+0102C8D8  cmp      w8, #4                                
+0102C8DC  b.ne     #0x102c974                            
+0102C8E0  ldr      x0, [x21]                             
+0102C8E4  adrp     x23, #0x236b000                       
+0102C8E8  ldr      w8, [x0, #0xe0]                       
+0102C8EC  ldr      x23, [x23, #0xb08]                     // [0x236BB08] 'GENIUS  LEVEL '
+0102C8F0  cbnz     w8, #0x102c8fc                        
+0102C8F4  bl       #0xe61c80                             
+0102C8F8  ldr      x0, [x21]                             
+0102C8FC  ldr      x8, [x0, #0xb8]                       
+0102C900  add      x0, sp, #0xc                          
+0102C904  mov      x1, xzr                               
+0102C908  ldr      w8, [x8]                              
+0102C90C  sub      w8, w8, #0x96                         
+0102C910  str      w8, [sp, #0xc]                        
+0102C914  bl       #0x1ab3994                             // System.Int32$$ToString
+0102C918  ldr      x8, [x22]                             
+0102C91C  mov      x1, x0                                
+0102C920  mov      x2, xzr                               
+0102C924  mov      x0, x8                                
+0102C928  bl       #0x1958280                             // System.String$$Concat
+0102C92C  str      x0, [x19, #0xa8]                       // self.textoB
+0102C930  ldr      x8, [x21]                             
+0102C934  add      x0, sp, #0xc                          
+0102C938  mov      x1, xzr                               
+0102C93C  ldr      x8, [x8, #0xb8]                       
+0102C940  ldr      w8, [x8]                              
+0102C944  sub      w8, w8, #0x96                         
+0102C948  str      w8, [sp, #0xc]                        
+0102C94C  bl       #0x1ab3994                             // System.Int32$$ToString
+0102C950  ldr      x8, [x23]                             
+0102C954  mov      x1, x0                                
+0102C958  mov      x2, xzr                               
+0102C95C  mov      x0, x8                                
+0102C960  bl       #0x1958280                             // System.String$$Concat
+0102C964  str      x0, [x19, #0xa0]                       // self.texto
+0102C968  ldr      x8, [x20]                             
+0102C96C  ldr      x8, [x8, #0xb8]                       
+0102C970  ldr      w8, [x8]                              
+0102C974  cmp      w8, #5                                
+0102C978  b.ne     #0x102ca10                            
+0102C97C  ldr      x0, [x21]                             
+0102C980  adrp     x23, #0x236b000                       
+0102C984  ldr      w8, [x0, #0xe0]                       
+0102C988  ldr      x23, [x23, #0xb18]                     // [0x236BB18] 'NUEVOS  LEVEL '
+0102C98C  cbnz     w8, #0x102c998                        
+0102C990  bl       #0xe61c80                             
+0102C994  ldr      x0, [x21]                             
+0102C998  ldr      x8, [x0, #0xb8]                       
+0102C99C  add      x0, sp, #0xc                          
+0102C9A0  mov      x1, xzr                               
+0102C9A4  ldr      w8, [x8]                              
+0102C9A8  sub      w8, w8, #0xc8                         
+0102C9AC  str      w8, [sp, #0xc]                        
+0102C9B0  bl       #0x1ab3994                             // System.Int32$$ToString
+0102C9B4  ldr      x8, [x22]                             
+0102C9B8  mov      x1, x0                                
+0102C9BC  mov      x2, xzr                               
+0102C9C0  mov      x0, x8                                
+0102C9C4  bl       #0x1958280                             // System.String$$Concat
+0102C9C8  str      x0, [x19, #0xa8]                       // self.textoB
+0102C9CC  ldr      x8, [x21]                             
+0102C9D0  add      x0, sp, #0xc                          
+0102C9D4  mov      x1, xzr                               
+0102C9D8  ldr      x8, [x8, #0xb8]                       
+0102C9DC  ldr      w8, [x8]                              
+0102C9E0  sub      w8, w8, #0xc8                         
+0102C9E4  str      w8, [sp, #0xc]                        
+0102C9E8  bl       #0x1ab3994                             // System.Int32$$ToString
+0102C9EC  ldr      x8, [x23]                             
+0102C9F0  mov      x1, x0                                
+0102C9F4  mov      x2, xzr                               
+0102C9F8  mov      x0, x8                                
+0102C9FC  bl       #0x1958280                             // System.String$$Concat
+0102CA00  str      x0, [x19, #0xa0]                       // self.texto
+0102CA04  ldr      x8, [x20]                             
+0102CA08  ldr      x8, [x8, #0xb8]                       
+0102CA0C  ldr      w8, [x8]                              
+0102CA10  adrp     x23, #0x236b000                       
+0102CA14  ldr      x23, [x23, #0xae0]                     // [0x236BAE0] 'MIX  LEVEL '
+0102CA18  cmp      w8, #6                                
+0102CA1C  b.ne     #0x102caac                            
+0102CA20  ldr      x0, [x21]                             
+0102CA24  ldr      w8, [x0, #0xe0]                       
+0102CA28  cbnz     w8, #0x102ca34                        
+0102CA2C  bl       #0xe61c80                             
+0102CA30  ldr      x0, [x21]                             
+0102CA34  ldr      x8, [x0, #0xb8]                       
+0102CA38  add      x0, sp, #0xc                          
+0102CA3C  mov      x1, xzr                               
+0102CA40  ldr      w8, [x8]                              
+0102CA44  sub      w8, w8, #0xfa                         
+0102CA48  str      w8, [sp, #0xc]                        
+0102CA4C  bl       #0x1ab3994                             // System.Int32$$ToString
+0102CA50  ldr      x8, [x22]                             
+0102CA54  mov      x1, x0                                
+0102CA58  mov      x2, xzr                               
+0102CA5C  mov      x0, x8                                
+0102CA60  bl       #0x1958280                             // System.String$$Concat
+0102CA64  str      x0, [x19, #0xa8]                       // self.textoB
+0102CA68  ldr      x8, [x21]                             
+0102CA6C  add      x0, sp, #0xc                          
+0102CA70  mov      x1, xzr                               
+0102CA74  ldr      x8, [x8, #0xb8]                       
+0102CA78  ldr      w8, [x8]                              
+0102CA7C  sub      w8, w8, #0xfa                         
+0102CA80  str      w8, [sp, #0xc]                        
+0102CA84  bl       #0x1ab3994                             // System.Int32$$ToString
+0102CA88  ldr      x8, [x23]                             
+0102CA8C  mov      x1, x0                                
+0102CA90  mov      x2, xzr                               
+0102CA94  mov      x0, x8                                
+0102CA98  bl       #0x1958280                             // System.String$$Concat
+0102CA9C  str      x0, [x19, #0xa0]                       // self.texto
+0102CAA0  ldr      x8, [x20]                             
+0102CAA4  ldr      x8, [x8, #0xb8]                       
+0102CAA8  ldr      w8, [x8]                              
+0102CAAC  cmp      w8, #7                                
+0102CAB0  b.ne     #0x102cb40                            
+0102CAB4  ldr      x0, [x21]                             
+0102CAB8  ldr      w8, [x0, #0xe0]                       
+0102CABC  cbnz     w8, #0x102cac8                        
+0102CAC0  bl       #0xe61c80                             
+0102CAC4  ldr      x0, [x21]                             
+0102CAC8  ldr      x8, [x0, #0xb8]                       
+0102CACC  add      x0, sp, #0xc                          
+0102CAD0  mov      x1, xzr                               
+0102CAD4  ldr      w8, [x8]                              
+0102CAD8  sub      w8, w8, #0x12c                        
+0102CADC  str      w8, [sp, #0xc]                        
+0102CAE0  bl       #0x1ab3994                             // System.Int32$$ToString
+0102CAE4  ldr      x8, [x22]                             
+0102CAE8  mov      x1, x0                                
+0102CAEC  mov      x2, xzr                               
+0102CAF0  mov      x0, x8                                
+0102CAF4  bl       #0x1958280                             // System.String$$Concat
+0102CAF8  str      x0, [x19, #0xa8]                       // self.textoB
+0102CAFC  ldr      x8, [x21]                             
+0102CB00  add      x0, sp, #0xc                          
+0102CB04  mov      x1, xzr                               
+0102CB08  ldr      x8, [x8, #0xb8]                       
+0102CB0C  ldr      w8, [x8]                              
+0102CB10  sub      w8, w8, #0x12c                        
+0102CB14  str      w8, [sp, #0xc]                        
+0102CB18  bl       #0x1ab3994                             // System.Int32$$ToString
+0102CB1C  ldr      x8, [x23]                             
+0102CB20  mov      x1, x0                                
+0102CB24  mov      x2, xzr                               
+0102CB28  mov      x0, x8                                
+0102CB2C  bl       #0x1958280                             // System.String$$Concat
+0102CB30  str      x0, [x19, #0xa0]                       // self.texto
+0102CB34  ldr      x8, [x20]                             
+0102CB38  ldr      x8, [x8, #0xb8]                       
+0102CB3C  ldr      w8, [x8]                              
+0102CB40  cmp      w8, #8                                
+0102CB44  b.ne     #0x102cbd0                            
+0102CB48  ldr      x0, [x21]                             
+0102CB4C  adrp     x20, #0x236b000                       
+0102CB50  ldr      w8, [x0, #0xe0]                       
+0102CB54  ldr      x20, [x20, #0xb00]                     // [0x236BB00] 'MANIAC  LEVEL '
+0102CB58  cbnz     w8, #0x102cb64                        
+0102CB5C  bl       #0xe61c80                             
+0102CB60  ldr      x0, [x21]                             
+0102CB64  ldr      x8, [x0, #0xb8]                       
+0102CB68  add      x0, sp, #0xc                          
+0102CB6C  mov      x1, xzr                               
+0102CB70  ldr      w8, [x8]                              
+0102CB74  sub      w8, w8, #0x15e                        
+0102CB78  str      w8, [sp, #0xc]                        
+0102CB7C  bl       #0x1ab3994                             // System.Int32$$ToString
+0102CB80  ldr      x8, [x22]                             
+0102CB84  mov      x1, x0                                
+0102CB88  mov      x2, xzr                               
+0102CB8C  mov      x0, x8                                
+0102CB90  bl       #0x1958280                             // System.String$$Concat
+0102CB94  str      x0, [x19, #0xa8]                       // self.textoB
+0102CB98  ldr      x8, [x21]                             
+0102CB9C  add      x0, sp, #0xc                          
+0102CBA0  mov      x1, xzr                               
+0102CBA4  ldr      x8, [x8, #0xb8]                       
+0102CBA8  ldr      w8, [x8]                              
+0102CBAC  sub      w8, w8, #0x15e                        
+0102CBB0  str      w8, [sp, #0xc]                        
+0102CBB4  bl       #0x1ab3994                             // System.Int32$$ToString
+0102CBB8  ldr      x8, [x20]                             
+0102CBBC  mov      x1, x0                                
+0102CBC0  mov      x2, xzr                               
+0102CBC4  mov      x0, x8                                
+0102CBC8  bl       #0x1958280                             // System.String$$Concat
+0102CBCC  str      x0, [x19, #0xa0]                       // self.texto
+0102CBD0  ldr      x0, [x19, #0x20]                       // self.textoFront
+0102CBD4  cbz      x0, #0x102cda4                        
+0102CBD8  ldr      x8, [x0]                              
+0102CBDC  ldr      x1, [x19, #0xa0]                       // self.texto
+0102CBE0  ldr      x9, [x8, #0x5e8]                      
+0102CBE4  ldr      x2, [x8, #0x5f0]                      
+0102CBE8  blr      x9                                    
+0102CBEC  ldr      x0, [x19, #0x28]                       // self.textoPerfil1
+0102CBF0  cbz      x0, #0x102cda4                        
+0102CBF4  ldr      x8, [x0]                              
+0102CBF8  ldr      x1, [x19, #0xa0]                       // self.texto
+0102CBFC  ldr      x9, [x8, #0x5e8]                      
+0102CC00  ldr      x2, [x8, #0x5f0]                      
+0102CC04  blr      x9                                    
+0102CC08  ldr      x0, [x19, #0x30]                       // self.textoPerfil2
+0102CC0C  cbz      x0, #0x102cda4                        
+0102CC10  ldr      x8, [x0]                              
+0102CC14  ldr      x1, [x19, #0xa0]                       // self.texto
+0102CC18  ldr      x9, [x8, #0x5e8]                      
+0102CC1C  ldr      x2, [x8, #0x5f0]                      
+0102CC20  blr      x9                                    
+0102CC24  ldr      x0, [x19, #0x38]                       // self.textoPerfil3
+0102CC28  cbz      x0, #0x102cda4                        
+0102CC2C  ldr      x8, [x0]                              
+0102CC30  ldr      x1, [x19, #0xa0]                       // self.texto
+0102CC34  ldr      x9, [x8, #0x5e8]                      
+0102CC38  ldr      x2, [x8, #0x5f0]                      
+0102CC3C  blr      x9                                    
+0102CC40  ldr      x0, [x19, #0x40]                       // self.textoSombra
+0102CC44  cbz      x0, #0x102cda4                        
+0102CC48  ldr      x8, [x0]                              
+0102CC4C  ldr      x1, [x19, #0xa0]                       // self.texto
+0102CC50  ldr      x9, [x8, #0x5e8]                      
+0102CC54  ldr      x2, [x8, #0x5f0]                      
+0102CC58  blr      x9                                    
+0102CC5C  ldr      x0, [x19, #0x48]                       // self.texto1
+0102CC60  cbz      x0, #0x102cda4                        
+0102CC64  ldr      x8, [x0]                              
+0102CC68  ldr      x1, [x19, #0xa8]                       // self.textoB
+0102CC6C  ldr      x9, [x8, #0x5e8]                      
+0102CC70  ldr      x2, [x8, #0x5f0]                      
+0102CC74  blr      x9                                    
+0102CC78  ldr      x0, [x19, #0x50]                       // self.texto2
+0102CC7C  cbz      x0, #0x102cda4                        
+0102CC80  ldr      x8, [x0]                              
+0102CC84  ldr      x1, [x19, #0xa8]                       // self.textoB
+0102CC88  ldr      x9, [x8, #0x5e8]                      
+0102CC8C  ldr      x2, [x8, #0x5f0]                      
+0102CC90  blr      x9                                    
+0102CC94  ldr      x0, [x19, #0x58]                       // self.texto3
+0102CC98  cbz      x0, #0x102cda4                        
+0102CC9C  ldr      x8, [x0]                              
+0102CCA0  ldr      x1, [x19, #0xa8]                       // self.textoB
+0102CCA4  ldr      x9, [x8, #0x5e8]                      
+0102CCA8  ldr      x2, [x8, #0x5f0]                      
+0102CCAC  blr      x9                                    
+0102CCB0  ldr      x0, [x19, #0x60]                       // self.texto4
+0102CCB4  cbz      x0, #0x102cda4                        
+0102CCB8  ldr      x8, [x0]                              
+0102CCBC  ldr      x1, [x19, #0xa8]                       // self.textoB
+0102CCC0  ldr      x9, [x8, #0x5e8]                      
+0102CCC4  ldr      x2, [x8, #0x5f0]                      
+0102CCC8  blr      x9                                    
+0102CCCC  ldr      x0, [x19, #0x68]                       // self.texto5
+0102CCD0  cbz      x0, #0x102cda4                        
+0102CCD4  ldr      x8, [x0]                              
+0102CCD8  ldr      x1, [x19, #0xa8]                       // self.textoB
+0102CCDC  ldr      x9, [x8, #0x5e8]                      
+0102CCE0  ldr      x2, [x8, #0x5f0]                      
+0102CCE4  blr      x9                                    
+0102CCE8  ldr      x0, [x19, #0x70]                       // self.texto6
+0102CCEC  cbz      x0, #0x102cda4                        
+0102CCF0  ldr      x8, [x0]                              
+0102CCF4  ldr      x1, [x19, #0xa8]                       // self.textoB
+0102CCF8  ldr      x9, [x8, #0x5e8]                      
+0102CCFC  ldr      x2, [x8, #0x5f0]                      
+0102CD00  blr      x9                                    
+0102CD04  ldr      x0, [x19, #0x78]                       // self.texto7
+0102CD08  cbz      x0, #0x102cda4                        
+0102CD0C  ldr      x8, [x0]                              
+0102CD10  ldr      x1, [x19, #0xa8]                       // self.textoB
+0102CD14  ldr      x9, [x8, #0x5e8]                      
+0102CD18  ldr      x2, [x8, #0x5f0]                      
+0102CD1C  blr      x9                                    
+0102CD20  ldr      x0, [x19, #0x80]                       // self.texto8
+0102CD24  cbz      x0, #0x102cda4                        
+0102CD28  ldr      x8, [x0]                              
+0102CD2C  ldr      x1, [x19, #0xa8]                       // self.textoB
+0102CD30  ldr      x9, [x8, #0x5e8]                      
+0102CD34  ldr      x2, [x8, #0x5f0]                      
+0102CD38  blr      x9                                    
+0102CD3C  ldr      x0, [x19, #0x88]                       // self.texto9
+0102CD40  cbz      x0, #0x102cda4                        
+0102CD44  ldr      x8, [x0]                              
+0102CD48  ldr      x1, [x19, #0xa8]                       // self.textoB
+0102CD4C  ldr      x9, [x8, #0x5e8]                      
+0102CD50  ldr      x2, [x8, #0x5f0]                      
+0102CD54  blr      x9                                    
+0102CD58  ldr      x0, [x19, #0x90]                       // self.texto10
+0102CD5C  cbz      x0, #0x102cda4                        
+0102CD60  ldr      x8, [x0]                              
+0102CD64  ldr      x1, [x19, #0xa8]                       // self.textoB
+0102CD68  ldr      x9, [x8, #0x5e8]                      
+0102CD6C  ldr      x2, [x8, #0x5f0]                      
+0102CD70  blr      x9                                    
+0102CD74  ldr      x0, [x19, #0x98]                       // self.texto11
+0102CD78  cbz      x0, #0x102cda4                        
+0102CD7C  ldr      x8, [x0]                              
+0102CD80  ldr      x1, [x19, #0xa8]                       // self.textoB
+0102CD84  ldr      x9, [x8, #0x5e8]                      
+0102CD88  ldr      x2, [x8, #0x5f0]                      
+0102CD8C  blr      x9                                    
+0102CD90  ldp      x20, x19, [sp, #0x30]                 
+0102CD94  ldp      x22, x21, [sp, #0x20]                 
+0102CD98  ldp      x30, x23, [sp, #0x10]                 
+0102CD9C  add      sp, sp, #0x40                         
+0102CDA0  ret                                            
+0102CDA4  bl       #0xe61da0                             

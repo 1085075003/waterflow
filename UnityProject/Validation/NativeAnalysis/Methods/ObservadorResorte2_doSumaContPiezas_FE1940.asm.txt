@@ -1,0 +1,33 @@
+// ObservadorResorte2$$doSumaContPiezas VA 0xFE1940, inferred length 124
+void ObservadorResorte2__doSumaContPiezas (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE1940  stp      x30, x21, [sp, #-0x20]!               
+00FE1944  stp      x20, x19, [sp, #0x10]                 
+00FE1948  adrp     x21, #0x24fb000                       
+00FE194C  adrp     x20, #0x236a000                       
+00FE1950  ldrb     w8, [x21, #0xbb6]                     
+00FE1954  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FE1958  mov      x19, x0                               
+00FE195C  tbnz     w8, #0, #0xfe1980                     
+00FE1960  adrp     x0, #0x236a000                        
+00FE1964  ldr      x0, [x0, #0x7c8]                       // [0x236A7C8] Resorte1_TypeInfo
+00FE1968  bl       #0xe61b78                             
+00FE196C  adrp     x0, #0x236a000                        
+00FE1970  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FE1974  bl       #0xe61b78                             
+00FE1978  mov      w8, #1                                
+00FE197C  strb     w8, [x21, #0xbb6]                     
+00FE1980  ldr      x0, [x19, #0x260]                      // self.conResor
+00FE1984  ldr      x1, [x20]                             
+00FE1988  mov      x2, xzr                               
+00FE198C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE1990  tbz      w0, #0, #0xfe19b0                     
+00FE1994  adrp     x8, #0x236a000                        
+00FE1998  ldr      x8, [x8, #0x7c8]                       // [0x236A7C8] Resorte1_TypeInfo
+00FE199C  ldr      x8, [x8]                              
+00FE19A0  ldr      x8, [x8, #0xb8]                       
+00FE19A4  ldr      w9, [x8, #0xc]                        
+00FE19A8  add      w9, w9, #1                            
+00FE19AC  str      w9, [x8, #0xc]                        
+00FE19B0  ldp      x20, x19, [sp, #0x10]                 
+00FE19B4  ldp      x30, x21, [sp], #0x20                 
+00FE19B8  ret                                            

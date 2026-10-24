@@ -1,0 +1,218 @@
+// UIManagerScriptDesign$$cargarSaveX VA 0x1002208, inferred length 864
+void UIManagerScriptDesign__cargarSaveX (UIManagerScriptDesign_o* __this, const MethodInfo* method);
+01002208  stp      x30, x23, [sp, #-0x30]!               
+0100220C  stp      x22, x21, [sp, #0x10]                 
+01002210  stp      x20, x19, [sp, #0x20]                 
+01002214  adrp     x20, #0x24fb000                       
+01002218  adrp     x21, #0x2368000                       
+0100221C  ldrb     w8, [x20, #0xc49]                     
+01002220  ldr      x21, [x21, #0x878]                     // [0x2368878] UnityEngine.Application_TypeInfo
+01002224  mov      x19, x0                               
+01002228  tbnz     w8, #0, #0x10022a0                    
+0100222C  adrp     x0, #0x2368000                        
+01002230  ldr      x0, [x0, #0x878]                       // [0x2368878] UnityEngine.Application_TypeInfo
+01002234  bl       #0xe61b78                             
+01002238  adrp     x0, #0x236a000                        
+0100223C  ldr      x0, [x0, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+01002240  bl       #0xe61b78                             
+01002244  adrp     x0, #0x236a000                        
+01002248  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0100224C  bl       #0xe61b78                             
+01002250  adrp     x0, #0x236a000                        
+01002254  ldr      x0, [x0, #0x910]                       // [0x236A910] System.IO.FileStream_TypeInfo
+01002258  bl       #0xe61b78                             
+0100225C  adrp     x0, #0x236a000                        
+01002260  ldr      x0, [x0, #0x918]                       // [0x236A918] Save1_TypeInfo
+01002264  bl       #0xe61b78                             
+01002268  adrp     x0, #0x236a000                        
+0100226C  ldr      x0, [x0, #0x8e0]                       // [0x236A8E0] '/so'
+01002270  bl       #0xe61b78                             
+01002274  adrp     x0, #0x236a000                        
+01002278  ldr      x0, [x0, #0x8f0]                       // [0x236A8F0] 'C:/GM/Unity/waterfall/NUEVOS/niveles/'
+0100227C  bl       #0xe61b78                             
+01002280  adrp     x0, #0x236a000                        
+01002284  ldr      x0, [x0, #0x8f8]                       // [0x236A8F8] 'so'
+01002288  bl       #0xe61b78                             
+0100228C  adrp     x0, #0x236a000                        
+01002290  ldr      x0, [x0, #0x900]                       // [0x236A900] '.bytes'
+01002294  bl       #0xe61b78                             
+01002298  mov      w8, #1                                
+0100229C  strb     w8, [x20, #0xc49]                     
+010022A0  ldr      x0, [x21]                             
+010022A4  ldr      w8, [x0, #0xe0]                       
+010022A8  cbnz     w8, #0x10022b0                        
+010022AC  bl       #0xe61c80                             
+010022B0  adrp     x22, #0x236a000                       
+010022B4  adrp     x20, #0x236a000                       
+010022B8  ldr      x22, [x22, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010022BC  ldr      x20, [x20, #0x900]                     // [0x236A900] '.bytes'
+010022C0  mov      x0, xzr                               
+010022C4  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+010022C8  cmp      w0, #0xb                              
+010022CC  b.ne     #0x1002338                            
+010022D0  ldr      x0, [x22]                             
+010022D4  adrp     x23, #0x236a000                       
+010022D8  ldr      w8, [x0, #0xe0]                       
+010022DC  ldr      x23, [x23, #0x8e0]                     // [0x236A8E0] '/so'
+010022E0  cbnz     w8, #0x10022ec                        
+010022E4  bl       #0xe61c80                             
+010022E8  ldr      x0, [x22]                             
+010022EC  ldr      x0, [x0, #0xb8]                       
+010022F0  mov      x1, xzr                               
+010022F4  bl       #0x1ab3994                             // System.Int32$$ToString
+010022F8  ldr      x8, [x23]                             
+010022FC  ldr      x2, [x20]                             
+01002300  mov      x1, x0                                
+01002304  mov      x3, xzr                               
+01002308  mov      x0, x8                                
+0100230C  bl       #0x196118c                             // System.String$$Concat
+01002310  ldr      x8, [x21]                             
+01002314  mov      x20, x0                               
+01002318  ldr      w9, [x8, #0xe0]                       
+0100231C  cbnz     w9, #0x1002328                        
+01002320  mov      x0, x8                                
+01002324  bl       #0xe61c80                             
+01002328  mov      x0, xzr                               
+0100232C  bl       #0x1fdfef0                             // UnityEngine.Application$$get_persistentDataPath
+01002330  mov      x1, x20                               
+01002334  b        #0x10023c4                            
+01002338  ldr      x0, [x21]                             
+0100233C  ldr      w8, [x0, #0xe0]                       
+01002340  cbnz     w8, #0x1002348                        
+01002344  bl       #0xe61c80                             
+01002348  mov      x0, xzr                               
+0100234C  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+01002350  cbz      w0, #0x1002370                        
+01002354  ldr      x0, [x21]                             
+01002358  ldr      w8, [x0, #0xe0]                       
+0100235C  cbnz     w8, #0x1002364                        
+01002360  bl       #0xe61c80                             
+01002364  mov      x0, xzr                               
+01002368  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+0100236C  cmp      w0, #7                                
+01002370  ldr      x0, [x22]                             
+01002374  ldr      w8, [x0, #0xe0]                       
+01002378  cbnz     w8, #0x1002384                        
+0100237C  bl       #0xe61c80                             
+01002380  ldr      x0, [x22]                             
+01002384  ldr      x0, [x0, #0xb8]                       
+01002388  mov      x1, xzr                               
+0100238C  bl       #0x1ab3994                             // System.Int32$$ToString
+01002390  adrp     x8, #0x236a000                        
+01002394  ldr      x8, [x8, #0x8f8]                       // [0x236A8F8] 'so'
+01002398  ldr      x2, [x20]                             
+0100239C  mov      x1, x0                                
+010023A0  mov      x3, xzr                               
+010023A4  ldr      x8, [x8]                              
+010023A8  mov      x0, x8                                
+010023AC  bl       #0x196118c                             // System.String$$Concat
+010023B0  adrp     x8, #0x236a000                        
+010023B4  ldr      x8, [x8, #0x8f0]                       // [0x236A8F0] 'C:/GM/Unity/waterfall/NUEVOS/niveles/'
+010023B8  mov      x1, x0                                
+010023BC  ldr      x8, [x8]                              
+010023C0  mov      x0, x8                                
+010023C4  mov      x2, xzr                               
+010023C8  bl       #0x1958280                             // System.String$$Concat
+010023CC  mov      x1, xzr                               
+010023D0  mov      x21, x0                               
+010023D4  bl       #0x1a1ae04                             // System.IO.File$$Exists
+010023D8  tbz      w0, #0, #0x10024b4                    
+010023DC  adrp     x8, #0x236a000                        
+010023E0  ldr      x8, [x8, #0x910]                       // [0x236A910] System.IO.FileStream_TypeInfo
+010023E4  ldr      x0, [x8]                              
+010023E8  bl       #0xe61d94                             
+010023EC  mov      x20, x0                               
+010023F0  mov      w2, #3                                
+010023F4  mov      x1, x21                               
+010023F8  mov      x3, xzr                               
+010023FC  bl       #0x1a2bca8                             // System.IO.FileStream$$.ctor
+01002400  adrp     x8, #0x236a000                        
+01002404  ldr      x8, [x8, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+01002408  ldr      x0, [x8]                              
+0100240C  bl       #0xe61d94                             
+01002410  mov      x21, x0                               
+01002414  mov      x1, xzr                               
+01002418  bl       #0x19e726c                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$.ctor
+0100241C  cbz      x21, #0x10024dc                       
+01002420  mov      x0, x21                               
+01002424  mov      x1, x20                               
+01002428  mov      x2, xzr                               
+0100242C  bl       #0x19e72ec                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$Deserialize
+01002430  cbz      x0, #0x10024c8                        
+01002434  adrp     x8, #0x236a000                        
+01002438  ldr      x8, [x8, #0x918]                       // [0x236A918] Save1_TypeInfo
+0100243C  ldr      x9, [x0]                              
+01002440  ldr      x1, [x8]                              
+01002444  ldrb     w10, [x9, #0x130]                     
+01002448  ldrb     w8, [x1, #0x130]                      
+0100244C  cmp      w10, w8                               
+01002450  b.lo     #0x10024d4                            
+01002454  ldr      x10, [x9, #0xc8]                      
+01002458  sub      x9, x8, #1                            
+0100245C  ldr      x10, [x10, x9, lsl #3]                
+01002460  cmp      x10, x1                               
+01002464  b.ne     #0x10024d4                            
+01002468  str      x0, [x19, #0x5c0]                      // self.saveX
+0100246C  ldr      x10, [x0]                             
+01002470  ldrb     w11, [x10, #0x130]                    
+01002474  cmp      w11, w8                               
+01002478  b.lo     #0x10024d8                            
+0100247C  ldr      x8, [x10, #0xc8]                      
+01002480  ldr      x8, [x8, x9, lsl #3]                  
+01002484  cmp      x8, x1                                
+01002488  b.ne     #0x10024d8                            
+0100248C  cbz      x20, #0x10024d0                       
+01002490  ldr      x8, [x20]                             
+01002494  ldr      x1, [x8, #0x260]                      
+01002498  ldr      x9, [x8, #0x258]                      
+0100249C  mov      x0, x20                               
+010024A0  blr      x9                                    
+010024A4  ldp      x20, x19, [sp, #0x20]                 
+010024A8  ldp      x22, x21, [sp, #0x10]                 
+010024AC  ldp      x30, x23, [sp], #0x30                 
+010024B0  ret                                            
+010024B4  mov      x0, x19                               
+010024B8  ldp      x20, x19, [sp, #0x20]                 
+010024BC  ldp      x22, x21, [sp, #0x10]                 
+010024C0  ldp      x30, x23, [sp], #0x30                 
+010024C4  b        #0x1002568                             // UIManagerScriptDesign$$cargarSave1Resources
+010024C8  str      xzr, [x19, #0x5c0]                     // self.saveX
+010024CC  cbnz     x20, #0x1002490                       
+010024D0  bl       #0xe61da0                             
+010024D4  bl       #0xe6213c                             
+010024D8  bl       #0xe6213c                             
+010024DC  bl       #0xe61da0                             
+010024E0  b        #0x10024f0                            
+010024E4  b        #0x10024f0                            
+010024E8  b        #0x10024f0                            
+010024EC  b        #0x10024f0                            
+010024F0  mov      x19, x0                               
+010024F4  cmp      w1, #1                                
+010024F8  b.ne     #0x100255c                            
+010024FC  mov      x0, x19                               
+01002500  bl       #0x224d2d0                            
+01002504  mov      x19, x0                               
+01002508  adrp     x0, #0x2368000                        
+0100250C  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+01002510  bl       #0xe61b8c                             
+01002514  ldr      x8, [x19]                             
+01002518  ldr      x1, [x8]                              
+0100251C  bl       #0xe621cc                             
+01002520  tbz      w0, #0, #0x1002534                    
+01002524  ldp      x20, x19, [sp, #0x20]                 
+01002528  ldp      x22, x21, [sp, #0x10]                 
+0100252C  ldp      x30, x23, [sp], #0x30                 
+01002530  b        #0x224d2e0                            
+01002534  mov      w0, #8                                
+01002538  bl       #0x224d320                            
+0100253C  ldr      x8, [x19]                             
+01002540  str      x8, [x0]                              
+01002544  adrp     x1, #0x2253000                        
+01002548  add      x1, x1, #0x618                        
+0100254C  mov      x2, xzr                               
+01002550  bl       #0x224d330                            
+01002554  mov      x19, x0                               
+01002558  bl       #0x224d2e0                            
+0100255C  mov      x0, x19                               
+01002560  bl       #0xf5dd7c                             
+01002564  bl       #0xd2eb98                             

@@ -1,0 +1,48 @@
+// Resorte2d$$activarMech VA 0x1026628, inferred length 184
+void Resorte2d__activarMech (Resorte2d_o* __this, const MethodInfo* method);
+01026628  str      x30, [sp, #-0x20]!                    
+0102662C  stp      x20, x19, [sp, #0x10]                 
+01026630  adrp     x20, #0x24fb000                       
+01026634  ldrb     w8, [x20, #0xcdd]                     
+01026638  mov      x19, x0                               
+0102663C  tbnz     w8, #0, #0x1026654                    
+01026640  adrp     x0, #0x236b000                        
+01026644  ldr      x0, [x0, #0x4c0]                       // [0x236B4C0] 'activarComienzo'
+01026648  bl       #0xe61b78                             
+0102664C  mov      w8, #1                                
+01026650  strb     w8, [x20, #0xcdd]                     
+01026654  ldr      w8, [x19, #0x220]                      // self.empezar
+01026658  cmp      w8, #4                                
+0102665C  b.ne     #0x10266d4                            
+01026660  add      x8, x19, #0x1ed                       
+01026664  mov      w9, #1                                
+01026668  add      x10, x19, #0x1e9                      
+0102666C  strh     wzr, [x8]                             
+01026670  strb     w9, [x19, #0x1e8]                      // self.swfin0
+01026674  strb     wzr, [x19, #0x1ef]                     // self.swfin1_1
+01026678  strb     wzr, [x19, #0x1f1]                     // self.swfin2_1
+0102667C  strb     wzr, [x19, #0x1f3]                     // self.swfin3_1
+01026680  strb     wzr, [x19, #0x1f5]                     // self.swfin4_1
+01026684  str      wzr, [x10]                            
+01026688  ldr      w8, [x19, #0x308]                      // self.vez
+0102668C  adrp     x20, #0x236b000                       
+01026690  ldr      x20, [x20, #0x4c0]                     // [0x236B4C0] 'activarComienzo'
+01026694  mov      x0, x19                               
+01026698  add      w10, w8, #1                           
+0102669C  cmp      w10, #4                               
+010266A0  csinc    w8, w9, w8, eq                        
+010266A4  strb     w9, [x19, #0x1f7]                      // self.primeraVezAguas
+010266A8  str      w8, [x19, #0x308]                      // self.vez
+010266AC  bl       #0x1025b98                             // Resorte2d$$doConfigureColors
+010266B0  mov      x0, x19                               
+010266B4  bl       #0x1026880                             // Resorte2d$$doBorrarChorros
+010266B8  ldr      x1, [x20]                             
+010266BC  mov      x0, x19                               
+010266C0  ldp      x20, x19, [sp, #0x10]                 
+010266C4  fmov     s0, #5.00000000                       
+010266C8  mov      x2, xzr                               
+010266CC  ldr      x30, [sp], #0x20                      
+010266D0  b        #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+010266D4  ldp      x20, x19, [sp, #0x10]                 
+010266D8  ldr      x30, [sp], #0x20                      
+010266DC  ret                                            

@@ -1,0 +1,43 @@
+// FuenteCubeta2$$Update VA 0x10985F0, inferred length 164
+void FuenteCubeta2__Update (FuenteCubeta2_o* __this, const MethodInfo* method);
+010985F0  str      x30, [sp, #-0x20]!                    
+010985F4  stp      x20, x19, [sp, #0x10]                 
+010985F8  adrp     x20, #0x24fb000                       
+010985FC  ldrb     w8, [x20, #0xf17]                     
+01098600  mov      x19, x0                               
+01098604  tbnz     w8, #0, #0x109861c                    
+01098608  adrp     x0, #0x236d000                        
+0109860C  ldr      x0, [x0, #0x570]                       // [0x236D570] 'doActivarEsfera'
+01098610  bl       #0xe61b78                             
+01098614  mov      w8, #1                                
+01098618  strb     w8, [x20, #0xf17]                     
+0109861C  ldrb     w8, [x19, #0xc0]                       // self.triggered
+01098620  cbz      w8, #0x1098644                        
+01098624  ldr      x0, [x19, #0xc8]                       // self.otherObject
+01098628  cbz      x0, #0x1098690                        
+0109862C  mov      x1, xzr                               
+01098630  bl       #0x20063d8                             // UnityEngine.GameObject$$get_activeSelf
+01098634  tbnz     w0, #0, #0x1098644                    
+01098638  mov      x0, x19                               
+0109863C  bl       #0x1098694                             // FuenteCubeta2$$doDesactivar
+01098640  strb     wzr, [x19, #0xc0]                      // self.triggered
+01098644  ldrb     w8, [x19, #0xb0]                       // self.activarDiferido
+01098648  cbz      w8, #0x1098684                        
+0109864C  ldr      x8, [x19, #0xb8]                       // self.agscr
+01098650  cbz      x8, #0x1098690                        
+01098654  ldr      w9, [x8, #0x20]                       
+01098658  cbnz     w9, #0x1098684                        
+0109865C  ldr      w9, [x19, #0x20]                       // self.origen
+01098660  adrp     x10, #0x236d000                       
+01098664  ldr      x10, [x10, #0x570]                     // [0x236D570] 'doActivarEsfera'
+01098668  mov      x0, x19                               
+0109866C  str      w9, [x8, #0x20]                       
+01098670  ldr      s0, [x19, #0x38]                       // self.espera
+01098674  ldr      x1, [x10]                             
+01098678  mov      x2, xzr                               
+0109867C  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01098680  strb     wzr, [x19, #0xb0]                      // self.activarDiferido
+01098684  ldp      x20, x19, [sp, #0x10]                 
+01098688  ldr      x30, [sp], #0x20                      
+0109868C  ret                                            
+01098690  bl       #0xe61da0                             

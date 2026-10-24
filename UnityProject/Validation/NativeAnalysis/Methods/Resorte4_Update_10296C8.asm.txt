@@ -1,0 +1,64 @@
+// Resorte4$$Update VA 0x10296C8, inferred length 248
+void Resorte4__Update (Resorte4_o* __this, const MethodInfo* method);
+010296C8  str      d8, [sp, #-0x20]!                     
+010296CC  str      x30, [sp, #8]                         
+010296D0  stp      x20, x19, [sp, #0x10]                 
+010296D4  adrp     x20, #0x24fb000                       
+010296D8  ldrb     w8, [x20, #0xcf0]                     
+010296DC  mov      x19, x0                               
+010296E0  tbnz     w8, #0, #0x1029704                    
+010296E4  adrp     x0, #0x236a000                        
+010296E8  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010296EC  bl       #0xe61b78                             
+010296F0  adrp     x0, #0x236b000                        
+010296F4  ldr      x0, [x0, #0x488]                       // [0x236B488] 'doBajarPieza'
+010296F8  bl       #0xe61b78                             
+010296FC  mov      w8, #1                                
+01029700  strb     w8, [x20, #0xcf0]                     
+01029704  ldr      s0, [x19, #0x30]                       // self.contUpdate
+01029708  fcmp     s0, #0.0                              
+0102970C  b.le     #0x1029794                            
+01029710  mov      x0, x19                               
+01029714  bl       #0x10297c0                             // Resorte4$$doCheckLayer
+01029718  ldrb     w8, [x19, #0xe4]                       // self.checkPieza
+0102971C  fmov     s8, wzr                               
+01029720  cbz      w8, #0x102979c                        
+01029724  mov      x0, x19                               
+01029728  bl       #0x1029868                             // Resorte4$$doCheckCollision
+0102972C  ldrb     w9, [x19, #0x64]                       // self.checkCollision
+01029730  ldrb     w8, [x19, #0x65]                       // self.checkCollision_old
+01029734  cbz      w9, #0x10297b0                        
+01029738  cbnz     w8, #0x102979c                        
+0102973C  strb     wzr, [x19, #0xd9]                      // self.chequear
+01029740  adrp     x8, #0x236a000                        
+01029744  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+01029748  ldr      x8, [x8]                              
+0102974C  ldr      x8, [x8, #0xb8]                       
+01029750  ldr      w8, [x8, #4]                          
+01029754  cmp      w8, #1                                
+01029758  b.ne     #0x102976c                            
+0102975C  ldr      x0, [x19, #0xf8]                       // self.audioManager
+01029760  cbz      x0, #0x10297bc                        
+01029764  ldr      x1, [x19, #0xf0]                       // self.SoundResorte
+01029768  bl       #0x1028540                             // AudioManager$$PlaySound
+0102976C  adrp     x8, #0x236b000                        
+01029770  ldr      s0, [x19, #0x28]                       // self.tiempo1
+01029774  ldr      x8, [x8, #0x488]                       // [0x236B488] 'doBajarPieza'
+01029778  mov      x0, x19                               
+0102977C  mov      x2, xzr                               
+01029780  ldr      x1, [x8]                              
+01029784  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01029788  mov      w8, #1                                
+0102978C  strb     w8, [x19, #0x65]                       // self.checkCollision_old
+01029790  b        #0x102979c                            
+01029794  fmov     s1, #1.00000000                       
+01029798  fadd     s8, s0, s1                            
+0102979C  str      s8, [x19, #0x30]                       // self.contUpdate
+010297A0  ldp      x20, x19, [sp, #0x10]                 
+010297A4  ldr      x30, [sp, #8]                         
+010297A8  ldr      d8, [sp], #0x20                       
+010297AC  ret                                            
+010297B0  cbz      w8, #0x102979c                        
+010297B4  strb     wzr, [x19, #0x65]                      // self.checkCollision_old
+010297B8  b        #0x102979c                            
+010297BC  bl       #0xe61da0                             

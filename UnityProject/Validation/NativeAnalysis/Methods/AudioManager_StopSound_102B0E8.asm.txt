@@ -1,0 +1,71 @@
+// AudioManager$$StopSound VA 0x102B0E8, inferred length 276
+void AudioManager__StopSound (AudioManager_o* __this, System_String_o* _name, const MethodInfo* method);
+0102B0E8  str      x30, [sp, #-0x30]!                    
+0102B0EC  stp      x22, x21, [sp, #0x10]                 
+0102B0F0  stp      x20, x19, [sp, #0x20]                 
+0102B0F4  ldr      x8, [x0, #0x20]                       
+0102B0F8  cbz      x8, #0x102b148                        
+0102B0FC  mov      x19, x0                               
+0102B100  mov      x20, x1                               
+0102B104  mov      w21, #4                               
+0102B108  ldr      w9, [x8, #0x18]                       
+0102B10C  sub      x22, x21, #4                          
+0102B110  cmp      w22, w9                               
+0102B114  b.ge     #0x102b16c                            
+0102B118  cmp      w22, w9                               
+0102B11C  b.hs     #0x102b17c                            
+0102B120  ldr      x8, [x8, x21, lsl #3]                 
+0102B124  cbz      x8, #0x102b148                        
+0102B128  ldr      x0, [x8, #0x10]                       
+0102B12C  mov      x1, x20                               
+0102B130  mov      x2, xzr                               
+0102B134  bl       #0x1960c7c                             // System.String$$op_Equality
+0102B138  tbnz     w0, #0, #0x102b14c                    
+0102B13C  ldr      x8, [x19, #0x20]                       // self.sounds
+0102B140  add      x21, x21, #1                          
+0102B144  cbnz     x8, #0x102b108                        
+0102B148  bl       #0xe61da0                             
+0102B14C  ldr      x8, [x19, #0x20]                       // self.sounds
+0102B150  cbz      x8, #0x102b148                        
+0102B154  ldr      w9, [x8, #0x18]                       
+0102B158  cmp      w22, w9                               
+0102B15C  b.hs     #0x102b17c                            
+0102B160  ldr      x0, [x8, x21, lsl #3]                 
+0102B164  cbz      x0, #0x102b180                        
+0102B168  bl       #0x102a9d0                             // Sound2$$Stop
+0102B16C  ldp      x20, x19, [sp, #0x20]                 
+0102B170  ldp      x22, x21, [sp, #0x10]                 
+0102B174  ldr      x30, [sp], #0x30                      
+0102B178  ret                                            
+0102B17C  bl       #0xe61da8                             
+0102B180  bl       #0xe61da0                             
+0102B184  cmp      w1, #1                                
+0102B188  mov      x19, x0                               
+0102B18C  b.ne     #0x102b1f0                            
+0102B190  mov      x0, x19                               
+0102B194  bl       #0x224d2d0                            
+0102B198  mov      x19, x0                               
+0102B19C  adrp     x0, #0x2368000                        
+0102B1A0  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+0102B1A4  bl       #0xe61b8c                             
+0102B1A8  ldr      x8, [x19]                             
+0102B1AC  ldr      x1, [x8]                              
+0102B1B0  bl       #0xe621cc                             
+0102B1B4  tbz      w0, #0, #0x102b1c8                    
+0102B1B8  ldp      x20, x19, [sp, #0x20]                 
+0102B1BC  ldp      x22, x21, [sp, #0x10]                 
+0102B1C0  ldr      x30, [sp], #0x30                      
+0102B1C4  b        #0x224d2e0                            
+0102B1C8  mov      w0, #8                                
+0102B1CC  bl       #0x224d320                            
+0102B1D0  ldr      x8, [x19]                             
+0102B1D4  str      x8, [x0]                              
+0102B1D8  adrp     x1, #0x2253000                        
+0102B1DC  add      x1, x1, #0x618                        
+0102B1E0  mov      x2, xzr                               
+0102B1E4  bl       #0x224d330                            
+0102B1E8  mov      x19, x0                               
+0102B1EC  bl       #0x224d2e0                            
+0102B1F0  mov      x0, x19                               
+0102B1F4  bl       #0xf5dd7c                             
+0102B1F8  bl       #0xd2eb98                             

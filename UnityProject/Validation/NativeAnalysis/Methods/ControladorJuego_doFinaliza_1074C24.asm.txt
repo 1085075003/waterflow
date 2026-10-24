@@ -1,0 +1,38 @@
+// ControladorJuego$$doFinaliza VA 0x1074C24, inferred length 144
+void ControladorJuego__doFinaliza (ControladorJuego_o* __this, const MethodInfo* method);
+01074C24  stp      x30, x21, [sp, #-0x20]!               
+01074C28  stp      x20, x19, [sp, #0x10]                 
+01074C2C  adrp     x21, #0x24fb000                       
+01074C30  adrp     x20, #0x236a000                       
+01074C34  ldrb     w8, [x21, #0xec4]                     
+01074C38  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+01074C3C  mov      x19, x0                               
+01074C40  tbnz     w8, #0, #0x1074c58                    
+01074C44  adrp     x0, #0x236a000                        
+01074C48  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+01074C4C  bl       #0xe61b78                             
+01074C50  mov      w8, #1                                
+01074C54  strb     w8, [x21, #0xec4]                     
+01074C58  mov      x0, x19                               
+01074C5C  bl       #0x1074cb4                             // ControladorJuego$$doQuitaBotones
+01074C60  ldr      x8, [x20]                             
+01074C64  ldr      x8, [x8, #0xb8]                       
+01074C68  ldr      w8, [x8, #4]                          
+01074C6C  cmp      w8, #1                                
+01074C70  b.ne     #0x1074ca4                            
+01074C74  ldr      x0, [x19, #0xd8]                       // self.audioManager
+01074C78  cbz      x0, #0x1074cb0                        
+01074C7C  ldr      x1, [x19, #0xd0]                       // self.MusicaLevel
+01074C80  mov      x2, xzr                               
+01074C84  bl       #0x102b0e8                             // AudioManager$$StopSound
+01074C88  ldr      x0, [x19, #0xd8]                       // self.audioManager
+01074C8C  cbz      x0, #0x1074cb0                        
+01074C90  ldr      x1, [x19, #0xc8]                       // self.SonidoCompleted
+01074C94  ldp      x20, x19, [sp, #0x10]                 
+01074C98  mov      x2, xzr                               
+01074C9C  ldp      x30, x21, [sp], #0x20                 
+01074CA0  b        #0x1028540                             // AudioManager$$PlaySound
+01074CA4  ldp      x20, x19, [sp, #0x10]                 
+01074CA8  ldp      x30, x21, [sp], #0x20                 
+01074CAC  ret                                            
+01074CB0  bl       #0xe61da0                             

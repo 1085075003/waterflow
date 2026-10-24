@@ -1,0 +1,101 @@
+// SaveLoadManagerDesign$$salvarEscenaSolucion VA 0xFEC3B0, inferred length 396
+void SaveLoadManagerDesign__salvarEscenaSolucion (SaveLoadManagerDesign_o* __this, const MethodInfo* method);
+00FEC3B0  str      x30, [sp, #-0x40]!                    
+00FEC3B4  stp      x24, x23, [sp, #0x10]                 
+00FEC3B8  stp      x22, x21, [sp, #0x20]                 
+00FEC3BC  stp      x20, x19, [sp, #0x30]                 
+00FEC3C0  adrp     x23, #0x24fb000                       
+00FEC3C4  adrp     x21, #0x236a000                       
+00FEC3C8  adrp     x20, #0x236a000                       
+00FEC3CC  adrp     x22, #0x236a000                       
+00FEC3D0  ldrb     w8, [x23, #0xbe0]                     
+00FEC3D4  ldr      x21, [x21, #0x9b8]                     // [0x236A9B8] 'Assets/Resources/'
+00FEC3D8  ldr      x20, [x20, #0x8d0]                     // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+00FEC3DC  ldr      x22, [x22, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+00FEC3E0  mov      x19, x0                               
+00FEC3E4  tbnz     w8, #0, #0xfec42c                     
+00FEC3E8  adrp     x0, #0x236a000                        
+00FEC3EC  ldr      x0, [x0, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+00FEC3F0  bl       #0xe61b78                             
+00FEC3F4  adrp     x0, #0x236a000                        
+00FEC3F8  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+00FEC3FC  bl       #0xe61b78                             
+00FEC400  adrp     x0, #0x236a000                        
+00FEC404  ldr      x0, [x0, #0x9b8]                       // [0x236A9B8] 'Assets/Resources/'
+00FEC408  bl       #0xe61b78                             
+00FEC40C  adrp     x0, #0x236a000                        
+00FEC410  ldr      x0, [x0, #0x900]                       // [0x236A900] '.bytes'
+00FEC414  bl       #0xe61b78                             
+00FEC418  adrp     x0, #0x236a000                        
+00FEC41C  ldr      x0, [x0, #0x9b0]                       // [0x236A9B0] 'solu'
+00FEC420  bl       #0xe61b78                             
+00FEC424  mov      w8, #1                                
+00FEC428  strb     w8, [x23, #0xbe0]                     
+00FEC42C  adrp     x23, #0x236a000                       
+00FEC430  adrp     x24, #0x236a000                       
+00FEC434  ldr      x23, [x23, #0x9b0]                     // [0x236A9B0] 'solu'
+00FEC438  ldr      x24, [x24, #0x900]                     // [0x236A900] '.bytes'
+00FEC43C  mov      w8, #1                                
+00FEC440  mov      x0, x19                               
+00FEC444  strb     w8, [x19, #0x20]                       // self.checkSalvar
+00FEC448  bl       #0xfebf64                              // SaveLoadManagerDesign$$CreateSaveGameObject
+00FEC44C  ldr      x8, [x20]                             
+00FEC450  ldr      x21, [x21]                            
+00FEC454  mov      x19, x0                               
+00FEC458  mov      x0, x8                                
+00FEC45C  bl       #0xe61d94                             
+00FEC460  mov      x1, xzr                               
+00FEC464  mov      x20, x0                               
+00FEC468  bl       #0x19e726c                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$.ctor
+00FEC46C  ldr      x0, [x22]                             
+00FEC470  ldr      w8, [x0, #0xe0]                       
+00FEC474  cbnz     w8, #0xfec480                         
+00FEC478  bl       #0xe61c80                             
+00FEC47C  ldr      x0, [x22]                             
+00FEC480  ldr      x0, [x0, #0xb8]                       
+00FEC484  mov      x1, xzr                               
+00FEC488  bl       #0x1ab3994                             // System.Int32$$ToString
+00FEC48C  ldr      x8, [x23]                             
+00FEC490  ldr      x2, [x24]                             
+00FEC494  mov      x1, x0                                
+00FEC498  mov      x3, xzr                               
+00FEC49C  mov      x0, x8                                
+00FEC4A0  bl       #0x196118c                             // System.String$$Concat
+00FEC4A4  mov      x22, x0                               
+00FEC4A8  mov      x0, x21                               
+00FEC4AC  mov      x1, x22                               
+00FEC4B0  mov      x2, xzr                               
+00FEC4B4  bl       #0x1958280                             // System.String$$Concat
+00FEC4B8  mov      x1, xzr                               
+00FEC4BC  bl       #0x1a1ae04                             // System.IO.File$$Exists
+00FEC4C0  tbz      w0, #0, #0xfec4dc                     
+00FEC4C4  mov      x0, x21                               
+00FEC4C8  mov      x1, x22                               
+00FEC4CC  mov      x2, xzr                               
+00FEC4D0  bl       #0x1958280                             // System.String$$Concat
+00FEC4D4  mov      x1, xzr                               
+00FEC4D8  bl       #0x1a22464                             // System.IO.File$$Delete
+00FEC4DC  mov      x0, x21                               
+00FEC4E0  mov      x1, x22                               
+00FEC4E4  mov      x2, xzr                               
+00FEC4E8  bl       #0x1958280                             // System.String$$Concat
+00FEC4EC  mov      x1, xzr                               
+00FEC4F0  bl       #0x1a223e4                             // System.IO.File$$Create
+00FEC4F4  cbz      x20, #0xfec538                        
+00FEC4F8  mov      x21, x0                               
+00FEC4FC  mov      x0, x20                               
+00FEC500  mov      x1, x21                               
+00FEC504  mov      x2, x19                               
+00FEC508  mov      x3, xzr                               
+00FEC50C  bl       #0x19e7a38                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$Serialize
+00FEC510  cbz      x21, #0xfec538                        
+00FEC514  ldr      x8, [x21]                             
+00FEC518  mov      x0, x21                               
+00FEC51C  ldp      x20, x19, [sp, #0x30]                 
+00FEC520  ldp      x22, x21, [sp, #0x20]                 
+00FEC524  ldr      x2, [x8, #0x258]                      
+00FEC528  ldr      x1, [x8, #0x260]                      
+00FEC52C  ldp      x24, x23, [sp, #0x10]                 
+00FEC530  ldr      x30, [sp], #0x40                      
+00FEC534  br       x2                                    
+00FEC538  bl       #0xe61da0                             

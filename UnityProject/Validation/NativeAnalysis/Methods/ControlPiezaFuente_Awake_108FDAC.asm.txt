@@ -1,0 +1,158 @@
+// ControlPiezaFuente$$Awake VA 0x108FDAC, inferred length 624
+void ControlPiezaFuente__Awake (ControlPiezaFuente_o* __this, const MethodInfo* method);
+0108FDAC  stp      d11, d10, [sp, #-0x50]!               
+0108FDB0  stp      d9, d8, [sp, #0x10]                   
+0108FDB4  str      x30, [sp, #0x20]                      
+0108FDB8  stp      x22, x21, [sp, #0x30]                 
+0108FDBC  stp      x20, x19, [sp, #0x40]                 
+0108FDC0  adrp     x20, #0x24fb000                       
+0108FDC4  adrp     x21, #0x236a000                       
+0108FDC8  ldrb     w8, [x20, #0xef4]                     
+0108FDCC  ldr      x21, [x21, #0x620]                     // [0x236A620] UIManagerSelScript_TypeInfo
+0108FDD0  mov      x19, x0                               
+0108FDD4  tbnz     w8, #0, #0x108fe34                    
+0108FDD8  adrp     x0, #0x236d000                        
+0108FDDC  ldr      x0, [x0, #0x508]                       // [0x236D508] Method$UnityEngine.GameObject.GetComponent<AguaControlFuente>()
+0108FDE0  bl       #0xe61b78                             
+0108FDE4  adrp     x0, #0x2368000                        
+0108FDE8  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+0108FDEC  bl       #0xe61b78                             
+0108FDF0  adrp     x0, #0x2368000                        
+0108FDF4  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0108FDF8  bl       #0xe61b78                             
+0108FDFC  adrp     x0, #0x236a000                        
+0108FE00  ldr      x0, [x0, #0x620]                       // [0x236A620] UIManagerSelScript_TypeInfo
+0108FE04  bl       #0xe61b78                             
+0108FE08  adrp     x0, #0x236a000                        
+0108FE0C  ldr      x0, [x0, #0x7d8]                       // [0x236A7D8] 'AguaControlChorro1'
+0108FE10  bl       #0xe61b78                             
+0108FE14  adrp     x0, #0x236a000                        
+0108FE18  ldr      x0, [x0, #0x628]                       // [0x236A628] 'Suelo1'
+0108FE1C  bl       #0xe61b78                             
+0108FE20  adrp     x0, #0x236a000                        
+0108FE24  ldr      x0, [x0, #0x630]                       // [0x236A630] 'Map'
+0108FE28  bl       #0xe61b78                             
+0108FE2C  mov      w8, #1                                
+0108FE30  strb     w8, [x20, #0xef4]                     
+0108FE34  ldr      x8, [x21]                             
+0108FE38  ldr      x8, [x8, #0xb8]                       
+0108FE3C  ldr      w8, [x8]                              
+0108FE40  cbnz     w8, #0x108fea8                        
+0108FE44  ldr      x0, [x19, #0x20]                       // self.objetoCollider
+0108FE48  cbz      x0, #0x1090018                        
+0108FE4C  adrp     x8, #0x236a000                        
+0108FE50  ldr      x8, [x8, #0x630]                       // [0x236A630] 'Map'
+0108FE54  mov      x2, xzr                               
+0108FE58  ldr      x1, [x8]                              
+0108FE5C  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+0108FE60  ldr      x0, [x19, #0x20]                       // self.objetoCollider
+0108FE64  cbz      x0, #0x1090018                        
+0108FE68  mov      w1, wzr                               
+0108FE6C  mov      x2, xzr                               
+0108FE70  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+0108FE74  ldrb     w8, [x19, #0x38]                       // self.indicadorSuelo1
+0108FE78  cbz      w8, #0x108fea8                        
+0108FE7C  adrp     x8, #0x236a000                        
+0108FE80  ldr      x20, [x19, #0x20]                      // self.objetoCollider
+0108FE84  ldr      x8, [x8, #0x628]                       // [0x236A628] 'Suelo1'
+0108FE88  mov      x1, xzr                               
+0108FE8C  ldr      x0, [x8]                              
+0108FE90  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+0108FE94  cbz      x20, #0x1090018                       
+0108FE98  mov      w1, w0                                
+0108FE9C  mov      x0, x20                               
+0108FEA0  mov      x2, xzr                               
+0108FEA4  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+0108FEA8  adrp     x22, #0x2368000                       
+0108FEAC  adrp     x21, #0x2368000                       
+0108FEB0  ldr      x20, [x19, #0x40]                      // self.prefabAguaControl
+0108FEB4  ldr      x22, [x22, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+0108FEB8  ldr      x21, [x21, #0x900]                     // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+0108FEBC  fmov     s0, wzr                               
+0108FEC0  fmov     s1, wzr                               
+0108FEC4  fmov     s2, wzr                               
+0108FEC8  mov      x0, xzr                               
+0108FECC  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0108FED0  ldr      x0, [x22]                             
+0108FED4  mov      v8.16b, v0.16b                        
+0108FED8  mov      v9.16b, v1.16b                        
+0108FEDC  mov      v10.16b, v2.16b                       
+0108FEE0  ldr      w8, [x0, #0xe0]                       
+0108FEE4  mov      v11.16b, v3.16b                       
+0108FEE8  cbnz     w8, #0x108fef0                        
+0108FEEC  bl       #0xe61c80                             
+0108FEF0  ldr      x1, [x21]                             
+0108FEF4  fmov     s0, wzr                               
+0108FEF8  fmov     s1, wzr                               
+0108FEFC  fmov     s2, wzr                               
+0108FF00  mov      x0, x20                               
+0108FF04  mov      v3.16b, v8.16b                        
+0108FF08  mov      v4.16b, v9.16b                        
+0108FF0C  mov      v5.16b, v10.16b                       
+0108FF10  mov      v6.16b, v11.16b                       
+0108FF14  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+0108FF18  str      x0, [x19, #0x48]                       // self.Agua
+0108FF1C  cbz      x0, #0x1090018                        
+0108FF20  adrp     x8, #0x236a000                        
+0108FF24  ldr      x8, [x8, #0x7d8]                       // [0x236A7D8] 'AguaControlChorro1'
+0108FF28  mov      x2, xzr                               
+0108FF2C  ldr      x1, [x8]                              
+0108FF30  bl       #0x2009a74                             // UnityEngine.Object$$set_name
+0108FF34  ldr      x0, [x19, #0x48]                       // self.Agua
+0108FF38  cbz      x0, #0x1090018                        
+0108FF3C  mov      x1, xzr                               
+0108FF40  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0108FF44  mov      x20, x0                               
+0108FF48  mov      x0, x19                               
+0108FF4C  mov      x1, xzr                               
+0108FF50  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0108FF54  cbz      x20, #0x1090018                       
+0108FF58  mov      x1, x0                                
+0108FF5C  mov      x0, x20                               
+0108FF60  mov      x2, xzr                               
+0108FF64  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+0108FF68  ldr      x0, [x19, #0x48]                       // self.Agua
+0108FF6C  cbz      x0, #0x1090018                        
+0108FF70  mov      x1, xzr                               
+0108FF74  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0108FF78  cbz      x0, #0x1090018                        
+0108FF7C  fmov     s0, wzr                               
+0108FF80  fmov     s1, wzr                               
+0108FF84  fmov     s2, wzr                               
+0108FF88  mov      x1, xzr                               
+0108FF8C  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0108FF90  ldr      x0, [x19, #0x48]                       // self.Agua
+0108FF94  cbz      x0, #0x1090018                        
+0108FF98  mov      x1, xzr                               
+0108FF9C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0108FFA0  cbz      x0, #0x1090018                        
+0108FFA4  fmov     s0, #1.00000000                       
+0108FFA8  fmov     s1, #1.00000000                       
+0108FFAC  fmov     s2, #1.00000000                       
+0108FFB0  mov      x1, xzr                               
+0108FFB4  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+0108FFB8  ldr      x0, [x19, #0x48]                       // self.Agua
+0108FFBC  cbz      x0, #0x1090018                        
+0108FFC0  adrp     x8, #0x236d000                        
+0108FFC4  ldr      x8, [x8, #0x508]                       // [0x236D508] Method$UnityEngine.GameObject.GetComponent<AguaControlFuente>()
+0108FFC8  ldr      x1, [x8]                              
+0108FFCC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0108FFD0  str      x0, [x19, #0x1a0]                      // self.aguaC
+0108FFD4  cbz      x0, #0x1090018                        
+0108FFD8  ldrb     w8, [x19, #0x70]                       // self.cascada1
+0108FFDC  ldp      x22, x21, [sp, #0x30]                 
+0108FFE0  ldr      x30, [sp, #0x20]                      
+0108FFE4  ldp      d9, d8, [sp, #0x10]                   
+0108FFE8  strb     w8, [x0, #0x20]                       
+0108FFEC  ldrb     w8, [x19, #0x71]                       // self.cascada2
+0108FFF0  strb     w8, [x0, #0x21]                       
+0108FFF4  ldrb     w8, [x19, #0x72]                       // self.cascada3
+0108FFF8  strb     w8, [x0, #0x22]                       
+0108FFFC  ldrb     w8, [x19, #0x73]                       // self.cascada4
+01090000  strb     w8, [x0, #0x23]                       
+01090004  ldr      w8, [x19, #0xc4]                       // self.color
+01090008  ldp      x20, x19, [sp, #0x40]                 
+0109000C  str      w8, [x0, #0x68]                       
+01090010  ldp      d11, d10, [sp], #0x50                 
+01090014  ret                                            
+01090018  bl       #0xe61da0                             

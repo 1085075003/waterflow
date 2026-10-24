@@ -1,0 +1,133 @@
+// MoveBloque$$DoMoverArriba VA 0x10320E0, inferred length 524
+void MoveBloque__DoMoverArriba (MoveBloque_o* __this, const MethodInfo* method);
+010320E0  stp      x30, x21, [sp, #-0x20]!               
+010320E4  stp      x20, x19, [sp, #0x10]                 
+010320E8  adrp     x21, #0x24fb000                       
+010320EC  adrp     x20, #0x2368000                       
+010320F0  ldrb     w8, [x21, #0xd22]                     
+010320F4  ldr      x20, [x20, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+010320F8  mov      x19, x0                               
+010320FC  tbnz     w8, #0, #0x1032120                    
+01032100  adrp     x0, #0x236b000                        
+01032104  ldr      x0, [x0, #0x498]                       // [0x236B498] MoveBloque_TypeInfo
+01032108  bl       #0xe61b78                             
+0103210C  adrp     x0, #0x2368000                        
+01032110  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+01032114  bl       #0xe61b78                             
+01032118  mov      w8, #1                                
+0103211C  strb     w8, [x21, #0xd22]                     
+01032120  ldr      x0, [x20]                             
+01032124  ldr      x20, [x19, #0x30]                      // self.getTarget
+01032128  ldr      w8, [x0, #0xe0]                       
+0103212C  cbnz     w8, #0x1032134                        
+01032130  bl       #0xe61c80                             
+01032134  mov      x0, x20                               
+01032138  mov      x1, xzr                               
+0103213C  mov      x2, xzr                               
+01032140  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01032144  tbz      w0, #0, #0x10322dc                    
+01032148  ldr      w8, [x19, #0x2c8]                      // self.camino
+0103214C  mov      w9, #1                                
+01032150  strb     w9, [x19, #0x2f5]                      // self.moveArriba
+01032154  cmp      w8, #5                                
+01032158  b.ne     #0x1032208                            
+0103215C  ldr      x0, [x19, #0x2a8]                      // self.rend0
+01032160  mov      w8, #3                                
+01032164  str      w8, [x19, #0x290]                      // self.paso
+01032168  cbz      x0, #0x10322e8                        
+0103216C  mov      w1, wzr                               
+01032170  mov      x2, xzr                               
+01032174  bl       #0x1fec2f0                             // UnityEngine.Renderer$$set_enabled
+01032178  ldr      s0, [x19, #0x1ec]                      // self.punto1
+0103217C  ldr      s1, [x19, #0x1f0]                     
+01032180  ldr      s2, [x19, #0x1f4]                     
+01032184  mov      x0, x19                               
+01032188  bl       #0x10332d0                             // MoveBloque$$doMovimiento
+0103218C  ldr      w8, [x19, #0x290]                      // self.paso
+01032190  cmp      w8, #4                                
+01032194  b.ne     #0x10322dc                            
+01032198  ldr      x0, [x19, #0x2a8]                      // self.rend0
+0103219C  cbz      x0, #0x10322e8                        
+010321A0  mov      w1, #1                                
+010321A4  mov      x2, xzr                               
+010321A8  mov      w20, #1                               
+010321AC  bl       #0x1fec2f0                             // UnityEngine.Renderer$$set_enabled
+010321B0  adrp     x21, #0x236b000                       
+010321B4  ldr      x21, [x21, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+010321B8  ldr      x0, [x21]                             
+010321BC  ldr      w8, [x0, #0xe0]                       
+010321C0  cbnz     w8, #0x10321cc                        
+010321C4  bl       #0xe61c80                             
+010321C8  ldr      x0, [x21]                             
+010321CC  ldr      x8, [x0, #0xb8]                       
+010321D0  strb     wzr, [x8, #0xb]                       
+010321D4  strb     wzr, [x8, #8]                         
+010321D8  str      w20, [x19, #0x290]                     // self.paso
+010321DC  strb     wzr, [x19, #0x141]                     // self.checkFija
+010321E0  strb     wzr, [x19, #0x2c4]                     // self.moviendoRuta1
+010321E4  strb     wzr, [x19, #0x2f6]                     // self.moviendoArriba
+010321E8  str      xzr, [x19, #0x50]                      // self.target1_old
+010321EC  ldr      w8, [x8, #4]                          
+010321F0  cmp      w8, #2                                
+010321F4  b.ne     #0x10322dc                            
+010321F8  mov      w9, #1                                
+010321FC  str      w8, [x19, #0x388]                      // self.faseSol
+01032200  strb     w9, [x19, #0x3cc]                      // self.cambiofase
+01032204  b        #0x10322dc                            
+01032208  ldr      w8, [x19, #0x290]                      // self.paso
+0103220C  cmp      w8, #1                                
+01032210  b.ne     #0x1032240                            
+01032214  ldrb     w8, [x19, #0x13f]                      // self.noPunto3
+01032218  cbz      w8, #0x1032228                        
+0103221C  mov      w8, #2                                
+01032220  str      w8, [x19, #0x290]                      // self.paso
+01032224  b        #0x1032248                            
+01032228  ldr      s0, [x19, #0x204]                      // self.punto3
+0103222C  ldr      s1, [x19, #0x208]                     
+01032230  ldr      s2, [x19, #0x20c]                     
+01032234  mov      x0, x19                               
+01032238  bl       #0x10332d0                             // MoveBloque$$doMovimiento
+0103223C  ldr      w8, [x19, #0x290]                      // self.paso
+01032240  cmp      w8, #2                                
+01032244  b.ne     #0x1032260                            
+01032248  ldr      s0, [x19, #0x1f8]                      // self.punto2
+0103224C  ldr      s1, [x19, #0x1fc]                     
+01032250  ldr      s2, [x19, #0x200]                     
+01032254  mov      x0, x19                               
+01032258  bl       #0x10332d0                             // MoveBloque$$doMovimiento
+0103225C  ldr      w8, [x19, #0x290]                      // self.paso
+01032260  cmp      w8, #3                                
+01032264  b.ne     #0x1032280                            
+01032268  ldr      s0, [x19, #0x1ec]                      // self.punto1
+0103226C  ldr      s1, [x19, #0x1f0]                     
+01032270  ldr      s2, [x19, #0x1f4]                     
+01032274  mov      x0, x19                               
+01032278  bl       #0x10332d0                             // MoveBloque$$doMovimiento
+0103227C  ldr      w8, [x19, #0x290]                      // self.paso
+01032280  cmp      w8, #4                                
+01032284  b.ne     #0x10322dc                            
+01032288  adrp     x20, #0x236b000                       
+0103228C  ldr      x20, [x20, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+01032290  ldr      x0, [x20]                             
+01032294  ldr      w8, [x0, #0xe0]                       
+01032298  cbnz     w8, #0x10322a4                        
+0103229C  bl       #0xe61c80                             
+010322A0  ldr      x0, [x20]                             
+010322A4  ldr      x9, [x0, #0xb8]                       
+010322A8  mov      w8, #1                                
+010322AC  strb     wzr, [x9, #0xb]                       
+010322B0  strb     wzr, [x9, #8]                         
+010322B4  str      w8, [x19, #0x290]                      // self.paso
+010322B8  strb     wzr, [x19, #0x141]                     // self.checkFija
+010322BC  strb     wzr, [x19, #0x2c4]                     // self.moviendoRuta1
+010322C0  strb     wzr, [x19, #0x2f6]                     // self.moviendoArriba
+010322C4  str      xzr, [x19, #0x50]                      // self.target1_old
+010322C8  ldr      w9, [x9, #4]                          
+010322CC  cmp      w9, #2                                
+010322D0  b.ne     #0x10322dc                            
+010322D4  str      w9, [x19, #0x388]                      // self.faseSol
+010322D8  strb     w8, [x19, #0x3cc]                      // self.cambiofase
+010322DC  ldp      x20, x19, [sp, #0x10]                 
+010322E0  ldp      x30, x21, [sp], #0x20                 
+010322E4  ret                                            
+010322E8  bl       #0xe61da0                             

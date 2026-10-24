@@ -1,0 +1,89 @@
+// Resorte3$$Start VA 0x1027BB8, inferred length 348
+void Resorte3__Start (Resorte3_o* __this, const MethodInfo* method);
+01027BB8  stp      x30, x21, [sp, #-0x20]!               
+01027BBC  stp      x20, x19, [sp, #0x10]                 
+01027BC0  adrp     x20, #0x24fb000                       
+01027BC4  adrp     x21, #0x236a000                       
+01027BC8  ldrb     w8, [x20, #0xce1]                     
+01027BCC  ldr      x21, [x21, #0x9d0]                     // [0x236A9D0] AudioManager_TypeInfo
+01027BD0  mov      x19, x0                               
+01027BD4  tbnz     w8, #0, #0x1027c10                    
+01027BD8  adrp     x0, #0x236a000                        
+01027BDC  ldr      x0, [x0, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+01027BE0  bl       #0xe61b78                             
+01027BE4  adrp     x0, #0x236a000                        
+01027BE8  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+01027BEC  bl       #0xe61b78                             
+01027BF0  adrp     x0, #0x236a000                        
+01027BF4  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+01027BF8  bl       #0xe61b78                             
+01027BFC  adrp     x0, #0x236a000                        
+01027C00  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+01027C04  bl       #0xe61b78                             
+01027C08  mov      w8, #1                                
+01027C0C  strb     w8, [x20, #0xce1]                     
+01027C10  ldr      x8, [x21]                             
+01027C14  ldr      x0, [x19, #0x60]                       // self.conResorte
+01027C18  mov      w9, #1                                
+01027C1C  ldr      x8, [x8, #0xb8]                       
+01027C20  ldr      x8, [x8]                              
+01027C24  strb     w9, [x19, #0xe1]                       // self.chequear
+01027C28  str      wzr, [x19, #0x11c]                     // self.contador
+01027C2C  str      w9, [x19, #0xf8]                       // self.fase
+01027C30  str      x8, [x19, #0x108]                      // self.audioManager
+01027C34  cbz      x0, #0x1027d10                        
+01027C38  ldr      w8, [x0, #0x10]                       
+01027C3C  cmp      w8, #2                                
+01027C40  b.ge     #0x1027c4c                            
+01027C44  str      x0, [x19, #0xc0]                       // self.conResorte1
+01027C48  b        #0x1027c80                            
+01027C4C  mov      w2, #1                                
+01027C50  mov      w1, wzr                               
+01027C54  mov      x3, xzr                               
+01027C58  bl       #0x196288c                             // System.String$$Substring
+01027C5C  ldr      x8, [x19, #0x60]                       // self.conResorte
+01027C60  str      x0, [x19, #0xd0]                       // self.conRes1
+01027C64  cbz      x8, #0x1027d10                        
+01027C68  mov      w1, #1                                
+01027C6C  mov      w2, #1                                
+01027C70  mov      x0, x8                                
+01027C74  mov      x3, xzr                               
+01027C78  bl       #0x196288c                             // System.String$$Substring
+01027C7C  str      x0, [x19, #0xd8]                       // self.conRes2
+01027C80  adrp     x8, #0x236a000                        
+01027C84  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+01027C88  str      wzr, [x19, #0x40]                      // self.contUpdate
+01027C8C  str      wzr, [x19, #0xfc]                      // self.modo
+01027C90  ldr      x0, [x19, #0x68]                       // self.modoRes3
+01027C94  ldr      x1, [x8]                              
+01027C98  mov      x2, xzr                               
+01027C9C  bl       #0x1960c7c                             // System.String$$op_Equality
+01027CA0  tbz      w0, #0, #0x1027cac                    
+01027CA4  mov      w8, #1                                
+01027CA8  b        #0x1027cf0                            
+01027CAC  adrp     x8, #0x236a000                        
+01027CB0  ldr      x0, [x19, #0x68]                       // self.modoRes3
+01027CB4  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+01027CB8  mov      x2, xzr                               
+01027CBC  ldr      x1, [x8]                              
+01027CC0  bl       #0x1960c7c                             // System.String$$op_Equality
+01027CC4  tbz      w0, #0, #0x1027cd0                    
+01027CC8  mov      w8, #2                                
+01027CCC  b        #0x1027cf0                            
+01027CD0  adrp     x8, #0x236a000                        
+01027CD4  ldr      x0, [x19, #0x68]                       // self.modoRes3
+01027CD8  ldr      x8, [x8, #0x650]                       // [0x236A650] '3'
+01027CDC  mov      x2, xzr                               
+01027CE0  ldr      x1, [x8]                              
+01027CE4  bl       #0x1960c7c                             // System.String$$op_Equality
+01027CE8  tbz      w0, #0, #0x1027d04                    
+01027CEC  mov      w8, #3                                
+01027CF0  str      w8, [x19, #0xfc]                       // self.modo
+01027CF4  mov      x0, x19                               
+01027CF8  ldp      x20, x19, [sp, #0x10]                 
+01027CFC  ldp      x30, x21, [sp], #0x20                 
+01027D00  b        #0x1027d14                             // Resorte3$$doTextura1
+01027D04  ldp      x20, x19, [sp, #0x10]                 
+01027D08  ldp      x30, x21, [sp], #0x20                 
+01027D0C  ret                                            
+01027D10  bl       #0xe61da0                             

@@ -1,0 +1,34 @@
+// UIManagerScript$$botonCompleteOff VA 0x1065A8C, inferred length 128
+void UIManagerScript__botonCompleteOff (UIManagerScript_o* __this, const MethodInfo* method);
+01065A8C  str      x30, [sp, #-0x20]!                    
+01065A90  stp      x20, x19, [sp, #0x10]                 
+01065A94  adrp     x20, #0x24fb000                       
+01065A98  ldrb     w8, [x20, #0xe49]                     
+01065A9C  mov      x19, x0                               
+01065AA0  tbnz     w8, #0, #0x1065ab8                    
+01065AA4  adrp     x0, #0x236b000                        
+01065AA8  ldr      x0, [x0, #0x720]                       // [0x236B720] 'completeOff'
+01065AAC  bl       #0xe61b78                             
+01065AB0  mov      w8, #1                                
+01065AB4  strb     w8, [x20, #0xe49]                     
+01065AB8  ldr      x0, [x19, #0x70]                       // self.audioManager
+01065ABC  cbz      x0, #0x1065b08                        
+01065AC0  ldr      x1, [x19, #0x50]                       // self.click
+01065AC4  mov      x2, xzr                               
+01065AC8  bl       #0x1028540                             // AudioManager$$PlaySound
+01065ACC  ldr      x0, [x19, #0xa0]                       // self.completeOff
+01065AD0  cbz      x0, #0x1065b08                        
+01065AD4  adrp     x8, #0x236b000                        
+01065AD8  ldr      x8, [x8, #0x720]                       // [0x236B720] 'completeOff'
+01065ADC  mov      w2, #1                                
+01065AE0  mov      x3, xzr                               
+01065AE4  ldr      x1, [x8]                              
+01065AE8  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+01065AEC  ldr      x0, [x19, #0xc0]                       // self.nextButton
+01065AF0  cbz      x0, #0x1065b08                        
+01065AF4  ldp      x20, x19, [sp, #0x10]                 
+01065AF8  mov      w1, #1                                
+01065AFC  mov      x2, xzr                               
+01065B00  ldr      x30, [sp], #0x20                      
+01065B04  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+01065B08  bl       #0xe61da0                             

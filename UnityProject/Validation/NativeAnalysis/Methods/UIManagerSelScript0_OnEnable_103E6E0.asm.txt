@@ -1,0 +1,135 @@
+// UIManagerSelScript0$$OnEnable VA 0x103E6E0, inferred length 532
+void UIManagerSelScript0__OnEnable (UIManagerSelScript0_o* __this, const MethodInfo* method);
+0103E6E0  str      d10, [sp, #-0x40]!                    
+0103E6E4  stp      d9, d8, [sp, #8]                      
+0103E6E8  str      x30, [sp, #0x18]                      
+0103E6EC  stp      x22, x21, [sp, #0x20]                 
+0103E6F0  stp      x20, x19, [sp, #0x30]                 
+0103E6F4  adrp     x22, #0x24fb000                       
+0103E6F8  adrp     x20, #0x236a000                       
+0103E6FC  adrp     x21, #0x236c000                       
+0103E700  ldrb     w8, [x22, #0xd74]                     
+0103E704  ldr      x20, [x20, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+0103E708  ldr      x21, [x21, #0x238]                     // [0x236C238] 'OptionSelLev'
+0103E70C  mov      x19, x0                               
+0103E710  tbnz     w8, #0, #0x103e740                    
+0103E714  adrp     x0, #0x236b000                        
+0103E718  ldr      x0, [x0, #0x530]                       // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+0103E71C  bl       #0xe61b78                             
+0103E720  adrp     x0, #0x236a000                        
+0103E724  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0103E728  bl       #0xe61b78                             
+0103E72C  adrp     x0, #0x236c000                        
+0103E730  ldr      x0, [x0, #0x238]                       // [0x236C238] 'OptionSelLev'
+0103E734  bl       #0xe61b78                             
+0103E738  mov      w8, #1                                
+0103E73C  strb     w8, [x22, #0xd74]                     
+0103E740  ldr      x8, [x20]                             
+0103E744  mov      w1, #1                                
+0103E748  mov      x2, xzr                               
+0103E74C  ldr      x8, [x8, #0xb8]                       
+0103E750  str      wzr, [x8]                             
+0103E754  ldr      x0, [x21]                             
+0103E758  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+0103E75C  cmp      w0, #6                                
+0103E760  str      w0, [x19, #0x4d8]                      // self.optionSelLev
+0103E764  b.ne     #0x103e8d4                            
+0103E768  ldr      x0, [x19, #0x4c0]                      // self.fondo1
+0103E76C  cbz      x0, #0x103e8f0                        
+0103E770  mov      w1, wzr                               
+0103E774  mov      x2, xzr                               
+0103E778  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0103E77C  ldr      x0, [x19, #0x4c8]                      // self.fondo2
+0103E780  cbz      x0, #0x103e8f0                        
+0103E784  mov      w1, #1                                
+0103E788  mov      x2, xzr                               
+0103E78C  mov      w21, #1                               
+0103E790  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0103E794  ldr      x0, [x19, #0x4d0]                      // self.dirLight
+0103E798  cbz      x0, #0x103e8f0                        
+0103E79C  mov      w1, wzr                               
+0103E7A0  mov      x2, xzr                               
+0103E7A4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0103E7A8  adrp     x8, #0x600000                         
+0103E7AC  ldr      s0, [x8, #0xc]                        
+0103E7B0  fmov     s3, #1.00000000                       
+0103E7B4  mov      x0, xzr                               
+0103E7B8  mov      v1.16b, v0.16b                        
+0103E7BC  mov      v2.16b, v0.16b                        
+0103E7C0  bl       #0x1fec684                             // UnityEngine.RenderSettings$$set_ambientLight
+0103E7C4  ldr      x8, [x20]                             
+0103E7C8  ldr      x8, [x8, #0xb8]                       
+0103E7CC  str      w21, [x8, #4]                         
+0103E7D0  ldr      x0, [x19, #0x4e8]                      // self.Fade2
+0103E7D4  cbz      x0, #0x103e8f0                        
+0103E7D8  mov      w1, #1                                
+0103E7DC  mov      x2, xzr                               
+0103E7E0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0103E7E4  ldr      x0, [x19, #0x4f0]                      // self.tab1
+0103E7E8  cbz      x0, #0x103e8f0                        
+0103E7EC  adrp     x20, #0x236b000                       
+0103E7F0  ldr      x20, [x20, #0x530]                     // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+0103E7F4  ldr      x1, [x20]                             
+0103E7F8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0103E7FC  cbz      x0, #0x103e8f0                        
+0103E800  ldr      x8, [x0]                              
+0103E804  adrp     x10, #0x600000                        
+0103E808  adrp     x11, #0x5ff000                        
+0103E80C  ldr      s8, [x10, #0x58]                      
+0103E810  ldr      x9, [x8, #0x2a8]                      
+0103E814  ldr      x1, [x8, #0x2b0]                      
+0103E818  adrp     x8, #0x5ff000                         
+0103E81C  ldr      s10, [x8, #0xf68]                     
+0103E820  ldr      s9, [x11, #0xe14]                     
+0103E824  fmov     s3, #1.00000000                       
+0103E828  mov      v1.16b, v8.16b                        
+0103E82C  mov      v0.16b, v10.16b                       
+0103E830  mov      v2.16b, v9.16b                        
+0103E834  blr      x9                                    
+0103E838  ldr      x0, [x19, #0x4f8]                      // self.tab2
+0103E83C  cbz      x0, #0x103e8f0                        
+0103E840  ldr      x1, [x20]                             
+0103E844  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0103E848  cbz      x0, #0x103e8f0                        
+0103E84C  ldr      x8, [x0]                              
+0103E850  fmov     s3, #1.00000000                       
+0103E854  mov      v0.16b, v10.16b                       
+0103E858  mov      v1.16b, v8.16b                        
+0103E85C  ldr      x9, [x8, #0x2a8]                      
+0103E860  ldr      x1, [x8, #0x2b0]                      
+0103E864  mov      v2.16b, v9.16b                        
+0103E868  blr      x9                                    
+0103E86C  ldr      x0, [x19, #0x500]                      // self.tab3
+0103E870  cbz      x0, #0x103e8f0                        
+0103E874  ldr      x1, [x20]                             
+0103E878  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0103E87C  cbz      x0, #0x103e8f0                        
+0103E880  ldr      x8, [x0]                              
+0103E884  fmov     s3, #1.00000000                       
+0103E888  mov      v0.16b, v10.16b                       
+0103E88C  mov      v1.16b, v8.16b                        
+0103E890  ldr      x9, [x8, #0x2a8]                      
+0103E894  ldr      x1, [x8, #0x2b0]                      
+0103E898  mov      v2.16b, v9.16b                        
+0103E89C  blr      x9                                    
+0103E8A0  ldr      x0, [x19, #0x508]                      // self.tab4
+0103E8A4  cbz      x0, #0x103e8f0                        
+0103E8A8  ldr      x1, [x20]                             
+0103E8AC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0103E8B0  cbz      x0, #0x103e8f0                        
+0103E8B4  ldr      x8, [x0]                              
+0103E8B8  fmov     s3, #1.00000000                       
+0103E8BC  mov      v0.16b, v10.16b                       
+0103E8C0  mov      v1.16b, v8.16b                        
+0103E8C4  ldr      x9, [x8, #0x2a8]                      
+0103E8C8  ldr      x1, [x8, #0x2b0]                      
+0103E8CC  mov      v2.16b, v9.16b                        
+0103E8D0  blr      x9                                    
+0103E8D4  mov      x0, x19                               
+0103E8D8  ldp      x20, x19, [sp, #0x30]                 
+0103E8DC  ldp      x22, x21, [sp, #0x20]                 
+0103E8E0  ldr      x30, [sp, #0x18]                      
+0103E8E4  ldp      d9, d8, [sp, #8]                      
+0103E8E8  ldr      d10, [sp], #0x40                      
+0103E8EC  b        #0x103e8f4                             // UIManagerSelScript0$$doConfigureColors
+0103E8F0  bl       #0xe61da0                             

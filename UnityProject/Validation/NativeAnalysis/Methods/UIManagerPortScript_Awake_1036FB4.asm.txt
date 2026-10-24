@@ -1,0 +1,33 @@
+// UIManagerPortScript$$Awake VA 0x1036FB4, inferred length 124
+void UIManagerPortScript__Awake (UIManagerPortScript_o* __this, const MethodInfo* method);
+01036FB4  stp      x30, x21, [sp, #-0x20]!               
+01036FB8  stp      x20, x19, [sp, #0x10]                 
+01036FBC  adrp     x21, #0x24fb000                       
+01036FC0  adrp     x20, #0x236b000                       
+01036FC4  ldrb     w8, [x21, #0xd3d]                     
+01036FC8  ldr      x20, [x20, #0xc10]                     // [0x236BC10] UIManagerPortScript_TypeInfo
+01036FCC  mov      x19, x0                               
+01036FD0  tbnz     w8, #0, #0x1036fe8                    
+01036FD4  adrp     x0, #0x236b000                        
+01036FD8  ldr      x0, [x0, #0xc10]                       // [0x236BC10] UIManagerPortScript_TypeInfo
+01036FDC  bl       #0xe61b78                             
+01036FE0  mov      w8, #1                                
+01036FE4  strb     w8, [x21, #0xd3d]                     
+01036FE8  ldr      x0, [x20]                             
+01036FEC  ldr      w8, [x0, #0xe0]                       
+01036FF0  cbnz     w8, #0x1036ffc                        
+01036FF4  bl       #0xe61c80                             
+01036FF8  ldr      x0, [x20]                             
+01036FFC  ldr      x8, [x0, #0xb8]                       
+01037000  ldr      w8, [x8, #0x14]                       
+01037004  cbz      w8, #0x1037014                        
+01037008  ldp      x20, x19, [sp, #0x10]                 
+0103700C  ldp      x30, x21, [sp], #0x20                 
+01037010  ret                                            
+01037014  mov      x0, x19                               
+01037018  bl       #0x1037030                             // UIManagerPortScript$$RequestConsent
+0103701C  mov      x0, x19                               
+01037020  bl       #0x1037124                             // UIManagerPortScript$$doDevice
+01037024  ldp      x20, x19, [sp, #0x10]                 
+01037028  ldp      x30, x21, [sp], #0x20                 
+0103702C  b        #0x103724c                             // UIManagerPortScript$$doFirebase

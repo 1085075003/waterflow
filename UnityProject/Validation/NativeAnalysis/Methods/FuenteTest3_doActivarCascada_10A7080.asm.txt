@@ -1,0 +1,155 @@
+// FuenteTest3$$doActivarCascada VA 0x10A7080, inferred length 612
+void FuenteTest3__doActivarCascada (FuenteTest3_o* __this, const MethodInfo* method);
+010A7080  str      x30, [sp, #-0x20]!                    
+010A7084  stp      x20, x19, [sp, #0x10]                 
+010A7088  adrp     x20, #0x24fb000                       
+010A708C  ldrb     w8, [x20, #0xf8c]                     
+010A7090  mov      x19, x0                               
+010A7094  tbnz     w8, #0, #0x10a70ac                    
+010A7098  adrp     x0, #0x236d000                        
+010A709C  ldr      x0, [x0, #0x580]                       // [0x236D580] Method$UnityEngine.GameObject.GetComponent<CascadaTest>()
+010A70A0  bl       #0xe61b78                             
+010A70A4  mov      w8, #1                                
+010A70A8  strb     w8, [x20, #0xf8c]                     
+010A70AC  adrp     x20, #0x236d000                       
+010A70B0  ldrb     w8, [x19, #0x519]                      // self.esf1
+010A70B4  ldr      x20, [x20, #0x580]                     // [0x236D580] Method$UnityEngine.GameObject.GetComponent<CascadaTest>()
+010A70B8  cbz      w8, #0x10a713c                        
+010A70BC  ldr      x0, [x19, #0x48]                       // self.Cascada1
+010A70C0  cbz      x0, #0x10a72e0                        
+010A70C4  mov      w1, #1                                
+010A70C8  mov      x2, xzr                               
+010A70CC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A70D0  ldr      x0, [x19, #0x90]                       // self.esferaCascada1
+010A70D4  cbz      x0, #0x10a72e0                        
+010A70D8  mov      x1, xzr                               
+010A70DC  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A70E0  cbz      x0, #0x10a72e0                        
+010A70E4  ldr      x1, [x19, #0x530]                      // self.tagName
+010A70E8  mov      x2, xzr                               
+010A70EC  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A70F0  ldr      x0, [x19, #0x48]                       // self.Cascada1
+010A70F4  cbz      x0, #0x10a72e0                        
+010A70F8  ldr      x1, [x20]                             
+010A70FC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A7100  cbz      x0, #0x10a72e0                        
+010A7104  ldr      w8, [x19, #0x538]                      // self.color
+010A7108  str      w8, [x0, #0xf8]                       
+010A710C  ldr      x8, [x19, #0x540]                      // self.confColor
+010A7110  str      x8, [x0, #0x100]                      
+010A7114  ldrb     w8, [x19, #0x606]                      // self.rebose1
+010A7118  strb     w8, [x0, #0x23a]                      
+010A711C  ldrb     w8, [x19, #0x60a]                      // self.wall1
+010A7120  strb     w8, [x0, #0x23b]                      
+010A7124  ldrb     w8, [x19, #0x60b]                      // self.wall2
+010A7128  strb     w8, [x0, #0x23c]                      
+010A712C  ldrb     w8, [x19, #0x60c]                      // self.wall3
+010A7130  strb     w8, [x0, #0x23d]                      
+010A7134  ldrb     w8, [x19, #0x60d]                      // self.wall4
+010A7138  strb     w8, [x0, #0x23e]                      
+010A713C  ldrb     w8, [x19, #0x51a]                      // self.esf2
+010A7140  cbz      w8, #0x10a71c4                        
+010A7144  ldr      x0, [x19, #0x50]                       // self.Cascada2
+010A7148  cbz      x0, #0x10a72e0                        
+010A714C  mov      w1, #1                                
+010A7150  mov      x2, xzr                               
+010A7154  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A7158  ldr      x0, [x19, #0x98]                       // self.esferaCascada2
+010A715C  cbz      x0, #0x10a72e0                        
+010A7160  mov      x1, xzr                               
+010A7164  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A7168  cbz      x0, #0x10a72e0                        
+010A716C  ldr      x1, [x19, #0x530]                      // self.tagName
+010A7170  mov      x2, xzr                               
+010A7174  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A7178  ldr      x0, [x19, #0x50]                       // self.Cascada2
+010A717C  cbz      x0, #0x10a72e0                        
+010A7180  ldr      x1, [x20]                             
+010A7184  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A7188  cbz      x0, #0x10a72e0                        
+010A718C  ldr      w8, [x19, #0x538]                      // self.color
+010A7190  str      w8, [x0, #0xf8]                       
+010A7194  ldr      x8, [x19, #0x540]                      // self.confColor
+010A7198  str      x8, [x0, #0x100]                      
+010A719C  ldrb     w8, [x19, #0x607]                      // self.rebose2
+010A71A0  strb     w8, [x0, #0x23a]                      
+010A71A4  ldrb     w8, [x19, #0x60a]                      // self.wall1
+010A71A8  strb     w8, [x0, #0x23b]                      
+010A71AC  ldrb     w8, [x19, #0x60b]                      // self.wall2
+010A71B0  strb     w8, [x0, #0x23c]                      
+010A71B4  ldrb     w8, [x19, #0x60c]                      // self.wall3
+010A71B8  strb     w8, [x0, #0x23d]                      
+010A71BC  ldrb     w8, [x19, #0x60d]                      // self.wall4
+010A71C0  strb     w8, [x0, #0x23e]                      
+010A71C4  ldrb     w8, [x19, #0x51b]                      // self.esf3
+010A71C8  cbz      w8, #0x10a724c                        
+010A71CC  ldr      x0, [x19, #0x58]                       // self.Cascada3
+010A71D0  cbz      x0, #0x10a72e0                        
+010A71D4  mov      w1, #1                                
+010A71D8  mov      x2, xzr                               
+010A71DC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A71E0  ldr      x0, [x19, #0xa0]                       // self.esferaCascada3
+010A71E4  cbz      x0, #0x10a72e0                        
+010A71E8  mov      x1, xzr                               
+010A71EC  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A71F0  cbz      x0, #0x10a72e0                        
+010A71F4  ldr      x1, [x19, #0x530]                      // self.tagName
+010A71F8  mov      x2, xzr                               
+010A71FC  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A7200  ldr      x0, [x19, #0x58]                       // self.Cascada3
+010A7204  cbz      x0, #0x10a72e0                        
+010A7208  ldr      x1, [x20]                             
+010A720C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A7210  cbz      x0, #0x10a72e0                        
+010A7214  ldr      w8, [x19, #0x538]                      // self.color
+010A7218  str      w8, [x0, #0xf8]                       
+010A721C  ldr      x8, [x19, #0x540]                      // self.confColor
+010A7220  str      x8, [x0, #0x100]                      
+010A7224  ldrb     w8, [x19, #0x608]                      // self.rebose3
+010A7228  strb     w8, [x0, #0x23a]                      
+010A722C  ldrb     w8, [x19, #0x60a]                      // self.wall1
+010A7230  strb     w8, [x0, #0x23b]                      
+010A7234  ldrb     w8, [x19, #0x60b]                      // self.wall2
+010A7238  strb     w8, [x0, #0x23c]                      
+010A723C  ldrb     w8, [x19, #0x60c]                      // self.wall3
+010A7240  strb     w8, [x0, #0x23d]                      
+010A7244  ldrb     w8, [x19, #0x60d]                      // self.wall4
+010A7248  strb     w8, [x0, #0x23e]                      
+010A724C  ldrb     w8, [x19, #0x51c]                      // self.esf4
+010A7250  cbz      w8, #0x10a72d4                        
+010A7254  ldr      x0, [x19, #0x60]                       // self.Cascada4
+010A7258  cbz      x0, #0x10a72e0                        
+010A725C  mov      w1, #1                                
+010A7260  mov      x2, xzr                               
+010A7264  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A7268  ldr      x0, [x19, #0xa8]                       // self.esferaCascada4
+010A726C  cbz      x0, #0x10a72e0                        
+010A7270  mov      x1, xzr                               
+010A7274  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A7278  cbz      x0, #0x10a72e0                        
+010A727C  ldr      x1, [x19, #0x530]                      // self.tagName
+010A7280  mov      x2, xzr                               
+010A7284  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A7288  ldr      x0, [x19, #0x60]                       // self.Cascada4
+010A728C  cbz      x0, #0x10a72e0                        
+010A7290  ldr      x1, [x20]                             
+010A7294  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A7298  cbz      x0, #0x10a72e0                        
+010A729C  ldr      w8, [x19, #0x538]                      // self.color
+010A72A0  str      w8, [x0, #0xf8]                       
+010A72A4  ldr      x8, [x19, #0x540]                      // self.confColor
+010A72A8  str      x8, [x0, #0x100]                      
+010A72AC  ldrb     w8, [x19, #0x609]                      // self.rebose4
+010A72B0  strb     w8, [x0, #0x23a]                      
+010A72B4  ldrb     w8, [x19, #0x60a]                      // self.wall1
+010A72B8  strb     w8, [x0, #0x23b]                      
+010A72BC  ldrb     w8, [x19, #0x60b]                      // self.wall2
+010A72C0  strb     w8, [x0, #0x23c]                      
+010A72C4  ldrb     w8, [x19, #0x60c]                      // self.wall3
+010A72C8  strb     w8, [x0, #0x23d]                      
+010A72CC  ldrb     w8, [x19, #0x60d]                      // self.wall4
+010A72D0  strb     w8, [x0, #0x23e]                      
+010A72D4  ldp      x20, x19, [sp, #0x10]                 
+010A72D8  ldr      x30, [sp], #0x20                      
+010A72DC  ret                                            
+010A72E0  bl       #0xe61da0                             

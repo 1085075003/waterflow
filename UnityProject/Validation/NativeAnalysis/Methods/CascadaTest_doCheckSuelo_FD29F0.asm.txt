@@ -1,0 +1,124 @@
+// CascadaTest$$doCheckSuelo VA 0xFD29F0, inferred length 488
+void CascadaTest__doCheckSuelo (CascadaTest_o* __this, const MethodInfo* method);
+00FD29F0  stp      d11, d10, [sp, #-0x50]!               
+00FD29F4  stp      d9, d8, [sp, #0x10]                   
+00FD29F8  stp      x30, x23, [sp, #0x20]                 
+00FD29FC  stp      x22, x21, [sp, #0x30]                 
+00FD2A00  stp      x20, x19, [sp, #0x40]                 
+00FD2A04  adrp     x21, #0x24fb000                       
+00FD2A08  adrp     x20, #0x2368000                       
+00FD2A0C  ldrb     w8, [x21, #0xb57]                     
+00FD2A10  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FD2A14  mov      x19, x0                               
+00FD2A18  tbnz     w8, #0, #0xfd2a48                     
+00FD2A1C  adrp     x0, #0x2368000                        
+00FD2A20  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD2A24  bl       #0xe61b78                             
+00FD2A28  adrp     x0, #0x2368000                        
+00FD2A2C  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FD2A30  bl       #0xe61b78                             
+00FD2A34  adrp     x0, #0x236a000                        
+00FD2A38  ldr      x0, [x0, #0x5c0]                       // [0x236A5C0] 'Map1'
+00FD2A3C  bl       #0xe61b78                             
+00FD2A40  mov      w8, #1                                
+00FD2A44  strb     w8, [x21, #0xb57]                     
+00FD2A48  ldr      w0, [x19, #0x208]                      // self.mascaraSuelo
+00FD2A4C  ldr      s8, [x19, #0x1dc]                      // self.vector2
+00FD2A50  ldr      s9, [x19, #0x1e0]                     
+00FD2A54  ldr      s10, [x19, #0x1e4]                    
+00FD2A58  ldr      s11, [x19, #0x200]                     // self.sphereRadius
+00FD2A5C  mov      x1, xzr                               
+00FD2A60  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+00FD2A64  ldr      x8, [x20]                             
+00FD2A68  mov      w20, w0                               
+00FD2A6C  ldr      w9, [x8, #0xe0]                       
+00FD2A70  cbnz     w9, #0xfd2a7c                         
+00FD2A74  mov      x0, x8                                
+00FD2A78  bl       #0xe61c80                             
+00FD2A7C  mov      v0.16b, v8.16b                        
+00FD2A80  mov      v1.16b, v9.16b                        
+00FD2A84  mov      v2.16b, v10.16b                       
+00FD2A88  mov      v3.16b, v11.16b                       
+00FD2A8C  mov      w0, w20                               
+00FD2A90  mov      x1, xzr                               
+00FD2A94  bl       #0x20406ec                             // UnityEngine.Physics$$OverlapSphere
+00FD2A98  cbz      x0, #0xfd2bd4                         
+00FD2A9C  ldr      w8, [x0, #0x18]                       
+00FD2AA0  mov      x20, x0                               
+00FD2AA4  cmp      w8, #1                                
+00FD2AA8  b.lt     #0xfd2b20                             
+00FD2AAC  adrp     x23, #0x236a000                       
+00FD2AB0  ldr      x23, [x23, #0x5c0]                     // [0x236A5C0] 'Map1'
+00FD2AB4  mov      w22, wzr                              
+00FD2AB8  mov      w21, wzr                              
+00FD2ABC  cmp      w22, w8                               
+00FD2AC0  b.hs     #0xfd2bd0                             
+00FD2AC4  add      x8, x20, w22, sxtw #3                 
+00FD2AC8  ldr      x0, [x8, #0x20]                       
+00FD2ACC  cbz      x0, #0xfd2bd4                         
+00FD2AD0  mov      x1, xzr                               
+00FD2AD4  bl       #0x2003eec                             // UnityEngine.Component$$get_tag
+00FD2AD8  ldr      x1, [x23]                             
+00FD2ADC  mov      x2, xzr                               
+00FD2AE0  bl       #0x1960c7c                             // System.String$$op_Equality
+00FD2AE4  ldr      w8, [x20, #0x18]                      
+00FD2AE8  add      w22, w22, #1                          
+00FD2AEC  orr      w21, w21, w0                          
+00FD2AF0  cmp      w22, w8                               
+00FD2AF4  b.lt     #0xfd2abc                             
+00FD2AF8  tbz      w21, #0, #0xfd2b20                    
+00FD2AFC  ldrb     w8, [x19, #0x239]                      // self.swhayrebose
+00FD2B00  cbz      w8, #0xfd2bb4                         
+00FD2B04  mov      x0, x19                               
+00FD2B08  ldp      x20, x19, [sp, #0x40]                 
+00FD2B0C  ldp      x22, x21, [sp, #0x30]                 
+00FD2B10  ldp      x30, x23, [sp, #0x20]                 
+00FD2B14  ldp      d9, d8, [sp, #0x10]                   
+00FD2B18  ldp      d11, d10, [sp], #0x50                 
+00FD2B1C  b        #0xfd31f4                              // CascadaTest$$doActivarCapsulaFiltrante
+00FD2B20  ldr      x0, [x19, #0xb8]                       // self.esferaFiltrante
+00FD2B24  cbz      x0, #0xfd2bd4                         
+00FD2B28  adrp     x20, #0x2368000                       
+00FD2B2C  ldr      x20, [x20, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD2B30  mov      w1, wzr                               
+00FD2B34  mov      x2, xzr                               
+00FD2B38  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD2B3C  ldr      x0, [x20]                             
+00FD2B40  ldr      x20, [x19, #0xc0]                      // self.capsulaFiltrante
+00FD2B44  ldr      w8, [x0, #0xe0]                       
+00FD2B48  cbnz     w8, #0xfd2b50                         
+00FD2B4C  bl       #0xe61c80                             
+00FD2B50  mov      x0, x20                               
+00FD2B54  mov      x1, xzr                               
+00FD2B58  mov      x2, xzr                               
+00FD2B5C  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FD2B60  tbz      w0, #0, #0xfd2b78                     
+00FD2B64  ldr      x0, [x19, #0xc0]                       // self.capsulaFiltrante
+00FD2B68  cbz      x0, #0xfd2bd4                         
+00FD2B6C  mov      w1, wzr                               
+00FD2B70  mov      x2, xzr                               
+00FD2B74  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD2B78  ldrb     w8, [x19, #0x239]                      // self.swhayrebose
+00FD2B7C  cbz      w8, #0xfd2b9c                         
+00FD2B80  mov      x0, x19                               
+00FD2B84  ldp      x20, x19, [sp, #0x40]                 
+00FD2B88  ldp      x22, x21, [sp, #0x30]                 
+00FD2B8C  ldp      x30, x23, [sp, #0x20]                 
+00FD2B90  ldp      d9, d8, [sp, #0x10]                   
+00FD2B94  ldp      d11, d10, [sp], #0x50                 
+00FD2B98  b        #0xfd2bd8                              // CascadaTest$$doInstanciarSplash
+00FD2B9C  ldp      x20, x19, [sp, #0x40]                 
+00FD2BA0  ldp      x22, x21, [sp, #0x30]                 
+00FD2BA4  ldp      x30, x23, [sp, #0x20]                 
+00FD2BA8  ldp      d9, d8, [sp, #0x10]                   
+00FD2BAC  ldp      d11, d10, [sp], #0x50                 
+00FD2BB0  ret                                            
+00FD2BB4  mov      x0, x19                               
+00FD2BB8  ldp      x20, x19, [sp, #0x40]                 
+00FD2BBC  ldp      x22, x21, [sp, #0x30]                 
+00FD2BC0  ldp      x30, x23, [sp, #0x20]                 
+00FD2BC4  ldp      d9, d8, [sp, #0x10]                   
+00FD2BC8  ldp      d11, d10, [sp], #0x50                 
+00FD2BCC  b        #0xfd33f8                              // CascadaTest$$doActivarEsferaFiltrante
+00FD2BD0  bl       #0xe61da8                             
+00FD2BD4  bl       #0xe61da0                             

@@ -1,0 +1,14 @@
+// AguasControl3$$doCheckCollider2 VA 0xFCBEBC, inferred length 48
+void AguasControl3__doCheckCollider2 (AguasControl3_o* __this, const MethodInfo* method);
+00FCBEBC  stp      x30, x19, [sp, #-0x10]!               
+00FCBEC0  adrp     x8, #0x600000                         
+00FCBEC4  ldr      d0, [x8, #0x750]                      
+00FCBEC8  fmov     s1, #8.00000000                       
+00FCBECC  mov      x19, x0                               
+00FCBED0  str      d0, [x0, #0x88]                       
+00FCBED4  fmov     s0, wzr                               
+00FCBED8  bl       #0xfcbf74                              // AguasControl3$$doCheckCollision1
+00FCBEDC  ldrb     w8, [x19, #0x37]                       // self.checkCollision
+00FCBEE0  strb     w8, [x19, #0x39]                       // self.checkCollision2
+00FCBEE4  ldp      x30, x19, [sp], #0x10                 
+00FCBEE8  ret                                            

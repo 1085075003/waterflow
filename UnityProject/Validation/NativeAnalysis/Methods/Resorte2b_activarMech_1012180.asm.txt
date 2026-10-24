@@ -1,0 +1,31 @@
+// Resorte2b$$activarMech VA 0x1012180, inferred length 116
+void Resorte2b__activarMech (Resorte2b_o* __this, const MethodInfo* method);
+01012180  str      x30, [sp, #-0x20]!                    
+01012184  stp      x20, x19, [sp, #0x10]                 
+01012188  ldr      w8, [x0, #0x1e8]                      
+0101218C  cmp      w8, #4                                
+01012190  b.ne     #0x10121e8                            
+01012194  add      x8, x0, #0x1b5                        
+01012198  mov      w20, #1                               
+0101219C  add      x9, x0, #0x1b1                        
+010121A0  strh     wzr, [x8]                             
+010121A4  strb     w20, [x0, #0x1b0]                     
+010121A8  strb     wzr, [x0, #0x1b7]                     
+010121AC  strb     wzr, [x0, #0x1b9]                     
+010121B0  strb     wzr, [x0, #0x1bb]                     
+010121B4  strb     wzr, [x0, #0x1bd]                     
+010121B8  str      wzr, [x9]                             
+010121BC  ldr      w8, [x0, #0x2d0]                      
+010121C0  mov      x19, x0                               
+010121C4  strb     w20, [x0, #0x1bf]                     
+010121C8  add      w9, w8, #1                            
+010121CC  cmp      w9, #4                                
+010121D0  csinc    w8, w20, w8, eq                       
+010121D4  str      w8, [x0, #0x2d0]                      
+010121D8  bl       #0x1011388                             // Resorte2b$$doConfigureColors
+010121DC  mov      x0, x19                               
+010121E0  bl       #0x10117c4                             // Resorte2b$$doBorrarChorros
+010121E4  str      w20, [x19, #0x1e8]                     // self.empezar
+010121E8  ldp      x20, x19, [sp, #0x10]                 
+010121EC  ldr      x30, [sp], #0x20                      
+010121F0  ret                                            

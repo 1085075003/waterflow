@@ -1,0 +1,34 @@
+// ObservadorResorte$$doValidarMovimientos2 VA 0x10CDF2C, inferred length 128
+void ObservadorResorte__doValidarMovimientos2 (ObservadorResorte_o* __this, const MethodInfo* method);
+010CDF2C  stp      x30, x19, [sp, #-0x10]!               
+010CDF30  mov      x19, x0                               
+010CDF34  bl       #0x10ca7ac                             // ObservadorResorte$$doActivarSuelo
+010CDF38  ldr      w8, [x19, #0x2cc]                      // self.position
+010CDF3C  mov      w9, #9                                
+010CDF40  str      w9, [x19, #0x378]                      // self.posiMin
+010CDF44  strb     wzr, [x19, #0xf0]                      // self.ocupado
+010CDF48  cmp      w8, #3                                
+010CDF4C  b.ne     #0x10cdf6c                            
+010CDF50  ldrb     w8, [x19, #0x319]                      // self.sw_hayresorte3
+010CDF54  cbz      w8, #0x10cdf68                        
+010CDF58  mov      x0, x19                               
+010CDF5C  bl       #0x10cdcf4                             // ObservadorResorte$$doValidarPos3
+010CDF60  ldrb     w8, [x19, #0xf0]                       // self.ocupado
+010CDF64  cbnz     w8, #0x10cdfa4                        
+010CDF68  ldr      w8, [x19, #0x2cc]                      // self.position
+010CDF6C  cmp      w8, #1                                
+010CDF70  b.le     #0x10cdf8c                            
+010CDF74  ldrb     w8, [x19, #0x318]                      // self.sw_hayresorte2
+010CDF78  cbz      w8, #0x10cdf8c                        
+010CDF7C  mov      x0, x19                               
+010CDF80  bl       #0x10cdba0                             // ObservadorResorte$$doValidarPos2
+010CDF84  ldrb     w8, [x19, #0xf0]                       // self.ocupado
+010CDF88  cbnz     w8, #0x10cdfa4                        
+010CDF8C  ldr      w8, [x19, #0x2cc]                      // self.position
+010CDF90  cmp      w8, #1                                
+010CDF94  b.lt     #0x10cdfa4                            
+010CDF98  mov      x0, x19                               
+010CDF9C  ldp      x30, x19, [sp], #0x10                 
+010CDFA0  b        #0x10cda64                             // ObservadorResorte$$doValidarPos1
+010CDFA4  ldp      x30, x19, [sp], #0x10                 
+010CDFA8  ret                                            

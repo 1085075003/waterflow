@@ -1,0 +1,30 @@
+// CascadaTestE$$doActivarEsferaFiltrante VA 0xFDE8D4, inferred length 112
+void CascadaTestE__doActivarEsferaFiltrante (CascadaTestE_o* __this, const MethodInfo* method);
+00FDE8D4  str      d8, [sp, #-0x20]!                     
+00FDE8D8  stp      x30, x19, [sp, #0x10]                 
+00FDE8DC  mov      x19, x0                               
+00FDE8E0  ldr      x0, [x0, #0x108]                      
+00FDE8E4  cbz      x0, #0xfde940                         
+00FDE8E8  ldr      s8, [x19, #0x114]                      // self.altura
+00FDE8EC  mov      x1, xzr                               
+00FDE8F0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FDE8F4  cbz      x0, #0xfde940                         
+00FDE8F8  adrp     x8, #0x600000                         
+00FDE8FC  adrp     x9, #0x5ff000                         
+00FDE900  ldr      s1, [x8, #0x198]                      
+00FDE904  ldr      s3, [x9, #0xfa4]                      
+00FDE908  ldr      s2, [x19, #0x148]                      // self.distancia_z1
+00FDE90C  ldr      s0, [x19, #0x13c]                      // self.distancia_x1
+00FDE910  scvtf    s4, s8                                
+00FDE914  fmul     s1, s4, s1                            
+00FDE918  fadd     s1, s1, s3                            
+00FDE91C  mov      x1, xzr                               
+00FDE920  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FDE924  ldr      x0, [x19, #0x108]                      // self.esferaFiltrante
+00FDE928  cbz      x0, #0xfde940                         
+00FDE92C  ldp      x30, x19, [sp, #0x10]                 
+00FDE930  mov      w1, #1                                
+00FDE934  mov      x2, xzr                               
+00FDE938  ldr      d8, [sp], #0x20                       
+00FDE93C  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FDE940  bl       #0xe61da0                             

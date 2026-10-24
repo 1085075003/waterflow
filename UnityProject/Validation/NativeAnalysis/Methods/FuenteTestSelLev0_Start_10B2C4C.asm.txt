@@ -1,0 +1,39 @@
+// FuenteTestSelLev0$$Start VA 0x10B2C4C, inferred length 148
+void FuenteTestSelLev0__Start (FuenteTestSelLev0_o* __this, const MethodInfo* method);
+010B2C4C  str      x30, [sp, #-0x30]!                    
+010B2C50  stp      x22, x21, [sp, #0x10]                 
+010B2C54  stp      x20, x19, [sp, #0x20]                 
+010B2C58  adrp     x21, #0x24fb000                       
+010B2C5C  adrp     x22, #0x236a000                       
+010B2C60  adrp     x20, #0x236a000                       
+010B2C64  ldrb     w8, [x21, #0xf94]                     
+010B2C68  ldr      x22, [x22, #0x9d0]                     // [0x236A9D0] AudioManager_TypeInfo
+010B2C6C  ldr      x20, [x20, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+010B2C70  mov      x19, x0                               
+010B2C74  tbnz     w8, #0, #0x10b2c98                    
+010B2C78  adrp     x0, #0x236a000                        
+010B2C7C  ldr      x0, [x0, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+010B2C80  bl       #0xe61b78                             
+010B2C84  adrp     x0, #0x236a000                        
+010B2C88  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+010B2C8C  bl       #0xe61b78                             
+010B2C90  mov      w8, #1                                
+010B2C94  strb     w8, [x21, #0xf94]                     
+010B2C98  ldr      x8, [x22]                             
+010B2C9C  ldp      x22, x21, [sp, #0x10]                 
+010B2CA0  ldr      x8, [x8, #0xb8]                       
+010B2CA4  ldr      x8, [x8]                              
+010B2CA8  strb     wzr, [x19, #0x5fc]                     // self.creaAgua
+010B2CAC  str      wzr, [x19, #0x5f0]                     // self.numOrigen5
+010B2CB0  str      wzr, [x19, #0x5f8]                     // self.contador
+010B2CB4  str      x8, [x19, #0x760]                      // self.audioManager
+010B2CB8  ldr      x8, [x20]                             
+010B2CBC  ldr      x8, [x8, #0xb8]                       
+010B2CC0  ldr      w8, [x8]                              
+010B2CC4  and      w8, w8, #0xfffffffe                   
+010B2CC8  cmp      w8, #0x24                             
+010B2CCC  cset     w8, eq                                
+010B2CD0  strb     w8, [x19, #0x750]                      // self.night
+010B2CD4  ldp      x20, x19, [sp, #0x20]                 
+010B2CD8  ldr      x30, [sp], #0x30                      
+010B2CDC  ret                                            

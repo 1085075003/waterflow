@@ -1,0 +1,32 @@
+// MoveBloque$$doCheckArribaFija VA 0x103288C, inferred length 120
+void MoveBloque__doCheckArribaFija (MoveBloque_o* __this, const MethodInfo* method);
+0103288C  str      x30, [sp, #-0x20]!                    
+01032890  stp      x20, x19, [sp, #0x10]                 
+01032894  mov      x19, x0                               
+01032898  mov      w20, #1                               
+0103289C  strb     wzr, [x0, #0x141]                     
+010328A0  strb     wzr, [x0, #0x137]                     
+010328A4  str      wzr, [x0, #0x2c0]                     
+010328A8  ldr      s0, [x19, #0x198]                      // self.valor3y
+010328AC  ldr      s1, [x19, #0x1b8]                      // self.arribay
+010328B0  mov      x0, x19                               
+010328B4  fadd     s0, s0, s1                            
+010328B8  str      s0, [x19, #0x198]                      // self.valor3y
+010328BC  bl       #0x1032904                             // MoveBloque$$doCheckColl3
+010328C0  ldrb     w8, [x19, #0x137]                      // self.checkCollision3
+010328C4  cbnz     w8, #0x10328dc                        
+010328C8  sub      w8, w20, #1                           
+010328CC  add      w20, w20, #1                          
+010328D0  cmp      w8, #7                                
+010328D4  b.lo     #0x10328a8                            
+010328D8  b        #0x10328f8                            
+010328DC  ldr      s0, [x19, #0x198]                      // self.valor3y
+010328E0  ldr      s1, [x19, #0x1b8]                      // self.arribay
+010328E4  mov      w8, #1                                
+010328E8  strb     w8, [x19, #0x141]                      // self.checkFija
+010328EC  str      w20, [x19, #0x2c0]                     // self.altura3
+010328F0  fsub     s0, s0, s1                            
+010328F4  str      s0, [x19, #0x198]                      // self.valor3y
+010328F8  ldp      x20, x19, [sp, #0x10]                 
+010328FC  ldr      x30, [sp], #0x20                      
+01032900  ret                                            

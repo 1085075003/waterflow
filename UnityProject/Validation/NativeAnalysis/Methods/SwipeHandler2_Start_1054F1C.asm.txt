@@ -1,0 +1,52 @@
+// SwipeHandler2$$Start VA 0x1054F1C, inferred length 200
+void SwipeHandler2__Start (SwipeHandler2_o* __this, const MethodInfo* method);
+01054F1C  str      x30, [sp, #-0x20]!                    
+01054F20  stp      x20, x19, [sp, #0x10]                 
+01054F24  adrp     x20, #0x24fb000                       
+01054F28  ldrb     w8, [x20, #0xdf0]                     
+01054F2C  mov      x19, x0                               
+01054F30  tbnz     w8, #0, #0x1054f54                    
+01054F34  adrp     x0, #0x2368000                        
+01054F38  ldr      x0, [x0, #0x958]                       // [0x2368958] string[]_TypeInfo
+01054F3C  bl       #0xe61b78                             
+01054F40  adrp     x0, #0x236c000                        
+01054F44  ldr      x0, [x0, #0x998]                       // [0x236C998] 'entrada'
+01054F48  bl       #0xe61b78                             
+01054F4C  mov      w8, #1                                
+01054F50  strb     w8, [x20, #0xdf0]                     
+01054F54  ldr      x0, [x19, #0x20]                       // self.EsferaCamera
+01054F58  mov      w8, #1                                
+01054F5C  strb     w8, [x19, #0xe5]                       // self.finished
+01054F60  strb     w8, [x19, #0x78]                       // self.inicio
+01054F64  strb     w8, [x19, #0x88]                       // self.permitirClick
+01054F68  cbz      x0, #0x1054fdc                        
+01054F6C  mov      x1, xzr                               
+01054F70  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+01054F74  cbz      x0, #0x1054fdc                        
+01054F78  adrp     x20, #0x2368000                       
+01054F7C  ldr      x20, [x20, #0x958]                     // [0x2368958] string[]_TypeInfo
+01054F80  mov      x1, xzr                               
+01054F84  bl       #0x200ec20                             // UnityEngine.Transform$$get_eulerAngles
+01054F88  stp      s0, s1, [x19, #0x50]                   // self.rotationInicial
+01054F8C  str      s2, [x19, #0x58]                      
+01054F90  str      xzr, [x19, #0x60]                     
+01054F94  str      wzr, [x19, #0x5c]                      // self.rotationFinal
+01054F98  str      wzr, [x19, #0x48]                      // self.degree
+01054F9C  ldr      x0, [x20]                             
+01054FA0  mov      w1, #1                                
+01054FA4  bl       #0xe61bf0                             
+01054FA8  cbz      x0, #0x1054fdc                        
+01054FAC  ldr      w8, [x0, #0x18]                       
+01054FB0  cbz      w8, #0x1054fe0                        
+01054FB4  adrp     x8, #0x236c000                        
+01054FB8  ldr      x8, [x8, #0x998]                       // [0x236C998] 'entrada'
+01054FBC  mov      x1, xzr                               
+01054FC0  ldr      x8, [x8]                              
+01054FC4  str      x8, [x0, #0x20]                       
+01054FC8  bl       #0x20068bc                             // UnityEngine.LayerMask$$GetMask
+01054FCC  str      w0, [x19, #0x74]                       // self.layer_mask
+01054FD0  ldp      x20, x19, [sp, #0x10]                 
+01054FD4  ldr      x30, [sp], #0x20                      
+01054FD8  ret                                            
+01054FDC  bl       #0xe61da0                             
+01054FE0  bl       #0xe61da8                             

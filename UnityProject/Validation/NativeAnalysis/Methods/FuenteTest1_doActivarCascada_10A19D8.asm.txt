@@ -1,0 +1,218 @@
+// FuenteTest1$$doActivarCascada VA 0x10A19D8, inferred length 864
+void FuenteTest1__doActivarCascada (FuenteTest1_o* __this, const MethodInfo* method);
+010A19D8  str      x30, [sp, #-0x20]!                    
+010A19DC  stp      x20, x19, [sp, #0x10]                 
+010A19E0  adrp     x20, #0x24fb000                       
+010A19E4  ldrb     w8, [x20, #0xf53]                     
+010A19E8  mov      x19, x0                               
+010A19EC  tbnz     w8, #0, #0x10a1a04                    
+010A19F0  adrp     x0, #0x236d000                        
+010A19F4  ldr      x0, [x0, #0x580]                       // [0x236D580] Method$UnityEngine.GameObject.GetComponent<CascadaTest>()
+010A19F8  bl       #0xe61b78                             
+010A19FC  mov      w8, #1                                
+010A1A00  strb     w8, [x20, #0xf53]                     
+010A1A04  ldrb     w8, [x19, #0x1d9]                      // self.esf1
+010A1A08  cbz      w8, #0x10a1a80                        
+010A1A0C  ldrb     w8, [x19, #0x2d7]                      // self.cerrada1
+010A1A10  cbnz     w8, #0x10a1a80                        
+010A1A14  ldr      x0, [x19, #0x68]                       // self.esfera1
+010A1A18  cbz      x0, #0x10a1c94                        
+010A1A1C  mov      w1, #1                                
+010A1A20  mov      x2, xzr                               
+010A1A24  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1A28  ldr      x0, [x19, #0x40]                       // self.Cascada1
+010A1A2C  cbz      x0, #0x10a1c94                        
+010A1A30  mov      w1, #1                                
+010A1A34  mov      x2, xzr                               
+010A1A38  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1A3C  ldr      x0, [x19, #0x90]                       // self.esferaCascada1
+010A1A40  cbz      x0, #0x10a1c94                        
+010A1A44  mov      x1, xzr                               
+010A1A48  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A1A4C  cbz      x0, #0x10a1c94                        
+010A1A50  ldr      x1, [x19, #0x1e8]                      // self.tagName
+010A1A54  mov      x2, xzr                               
+010A1A58  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A1A5C  ldr      x0, [x19, #0x40]                       // self.Cascada1
+010A1A60  cbz      x0, #0x10a1c94                        
+010A1A64  adrp     x8, #0x236d000                        
+010A1A68  ldr      x8, [x8, #0x580]                       // [0x236D580] Method$UnityEngine.GameObject.GetComponent<CascadaTest>()
+010A1A6C  ldr      x1, [x8]                              
+010A1A70  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1A74  cbz      x0, #0x10a1c94                        
+010A1A78  ldr      w8, [x19, #0x1f0]                      // self.color
+010A1A7C  str      w8, [x0, #0xf8]                       
+010A1A80  ldrb     w8, [x19, #0x1da]                      // self.esf2
+010A1A84  cbz      w8, #0x10a1afc                        
+010A1A88  ldrb     w8, [x19, #0x2d8]                      // self.cerrada2
+010A1A8C  cbnz     w8, #0x10a1afc                        
+010A1A90  ldr      x0, [x19, #0x70]                       // self.esfera2
+010A1A94  cbz      x0, #0x10a1c94                        
+010A1A98  mov      w1, #1                                
+010A1A9C  mov      x2, xzr                               
+010A1AA0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1AA4  ldr      x0, [x19, #0x48]                       // self.Cascada2
+010A1AA8  cbz      x0, #0x10a1c94                        
+010A1AAC  mov      w1, #1                                
+010A1AB0  mov      x2, xzr                               
+010A1AB4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1AB8  ldr      x0, [x19, #0x98]                       // self.esferaCascada2
+010A1ABC  cbz      x0, #0x10a1c94                        
+010A1AC0  mov      x1, xzr                               
+010A1AC4  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A1AC8  cbz      x0, #0x10a1c94                        
+010A1ACC  ldr      x1, [x19, #0x1e8]                      // self.tagName
+010A1AD0  mov      x2, xzr                               
+010A1AD4  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A1AD8  ldr      x0, [x19, #0x48]                       // self.Cascada2
+010A1ADC  cbz      x0, #0x10a1c94                        
+010A1AE0  adrp     x8, #0x236d000                        
+010A1AE4  ldr      x8, [x8, #0x580]                       // [0x236D580] Method$UnityEngine.GameObject.GetComponent<CascadaTest>()
+010A1AE8  ldr      x1, [x8]                              
+010A1AEC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1AF0  cbz      x0, #0x10a1c94                        
+010A1AF4  ldr      w8, [x19, #0x1f0]                      // self.color
+010A1AF8  str      w8, [x0, #0xf8]                       
+010A1AFC  ldrb     w8, [x19, #0x1db]                      // self.esf3
+010A1B00  cbz      w8, #0x10a1b90                        
+010A1B04  ldrb     w8, [x19, #0x2d9]                      // self.cerrada3
+010A1B08  cbz      w8, #0x10a1b24                        
+010A1B0C  ldr      x0, [x19, #0xd8]                       // self.plano3
+010A1B10  cbz      x0, #0x10a1c94                        
+010A1B14  mov      w1, wzr                               
+010A1B18  mov      x2, xzr                               
+010A1B1C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1B20  b        #0x10a1b90                            
+010A1B24  ldr      x0, [x19, #0x78]                       // self.esfera3
+010A1B28  cbz      x0, #0x10a1c94                        
+010A1B2C  mov      w1, #1                                
+010A1B30  mov      x2, xzr                               
+010A1B34  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1B38  ldr      x0, [x19, #0x50]                       // self.Cascada3
+010A1B3C  cbz      x0, #0x10a1c94                        
+010A1B40  mov      w1, #1                                
+010A1B44  mov      x2, xzr                               
+010A1B48  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1B4C  ldr      x0, [x19, #0xa0]                       // self.esferaCascada3
+010A1B50  cbz      x0, #0x10a1c94                        
+010A1B54  mov      x1, xzr                               
+010A1B58  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A1B5C  cbz      x0, #0x10a1c94                        
+010A1B60  ldr      x1, [x19, #0x1e8]                      // self.tagName
+010A1B64  mov      x2, xzr                               
+010A1B68  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A1B6C  ldr      x0, [x19, #0x50]                       // self.Cascada3
+010A1B70  cbz      x0, #0x10a1c94                        
+010A1B74  adrp     x8, #0x236d000                        
+010A1B78  ldr      x8, [x8, #0x580]                       // [0x236D580] Method$UnityEngine.GameObject.GetComponent<CascadaTest>()
+010A1B7C  ldr      x1, [x8]                              
+010A1B80  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1B84  cbz      x0, #0x10a1c94                        
+010A1B88  ldr      w8, [x19, #0x1f0]                      // self.color
+010A1B8C  str      w8, [x0, #0xf8]                       
+010A1B90  ldrb     w8, [x19, #0x1dc]                      // self.esf4
+010A1B94  cbz      w8, #0x10a1c0c                        
+010A1B98  ldrb     w8, [x19, #0x2da]                      // self.cerrada4
+010A1B9C  cbnz     w8, #0x10a1c0c                        
+010A1BA0  ldr      x0, [x19, #0x80]                       // self.esfera4
+010A1BA4  cbz      x0, #0x10a1c94                        
+010A1BA8  mov      w1, #1                                
+010A1BAC  mov      x2, xzr                               
+010A1BB0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1BB4  ldr      x0, [x19, #0x58]                       // self.Cascada4
+010A1BB8  cbz      x0, #0x10a1c94                        
+010A1BBC  mov      w1, #1                                
+010A1BC0  mov      x2, xzr                               
+010A1BC4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1BC8  ldr      x0, [x19, #0xa8]                       // self.esferaCascada4
+010A1BCC  cbz      x0, #0x10a1c94                        
+010A1BD0  mov      x1, xzr                               
+010A1BD4  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A1BD8  cbz      x0, #0x10a1c94                        
+010A1BDC  ldr      x1, [x19, #0x1e8]                      // self.tagName
+010A1BE0  mov      x2, xzr                               
+010A1BE4  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A1BE8  ldr      x0, [x19, #0x58]                       // self.Cascada4
+010A1BEC  cbz      x0, #0x10a1c94                        
+010A1BF0  adrp     x8, #0x236d000                        
+010A1BF4  ldr      x8, [x8, #0x580]                       // [0x236D580] Method$UnityEngine.GameObject.GetComponent<CascadaTest>()
+010A1BF8  ldr      x1, [x8]                              
+010A1BFC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1C00  cbz      x0, #0x10a1c94                        
+010A1C04  ldr      w8, [x19, #0x1f0]                      // self.color
+010A1C08  str      w8, [x0, #0xf8]                       
+010A1C0C  ldrb     w8, [x19, #0x1dd]                      // self.esf6
+010A1C10  cbz      w8, #0x10a1c88                        
+010A1C14  ldr      x0, [x19, #0x88]                       // self.esfera6
+010A1C18  cbz      x0, #0x10a1c94                        
+010A1C1C  mov      w1, #1                                
+010A1C20  mov      x2, xzr                               
+010A1C24  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1C28  ldrb     w8, [x19, #0x2db]                      // self.cerrada6
+010A1C2C  cbnz     w8, #0x10a1c88                        
+010A1C30  ldr      x0, [x19, #0x60]                       // self.Cascada6
+010A1C34  cbz      x0, #0x10a1c98                        
+010A1C38  mov      w1, #1                                
+010A1C3C  mov      x2, xzr                               
+010A1C40  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A1C44  ldr      x0, [x19, #0xb0]                       // self.esferaCascada6
+010A1C48  cbz      x0, #0x10a1c9c                        
+010A1C4C  mov      x1, xzr                               
+010A1C50  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A1C54  cbz      x0, #0x10a1ca0                        
+010A1C58  ldr      x1, [x19, #0x1e8]                      // self.tagName
+010A1C5C  mov      x2, xzr                               
+010A1C60  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A1C64  ldr      x0, [x19, #0x60]                       // self.Cascada6
+010A1C68  cbz      x0, #0x10a1ca4                        
+010A1C6C  adrp     x8, #0x236d000                        
+010A1C70  ldr      x8, [x8, #0x580]                       // [0x236D580] Method$UnityEngine.GameObject.GetComponent<CascadaTest>()
+010A1C74  ldr      x1, [x8]                              
+010A1C78  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1C7C  cbz      x0, #0x10a1ca8                        
+010A1C80  ldr      w8, [x19, #0x1f0]                      // self.color
+010A1C84  str      w8, [x0, #0xf8]                       
+010A1C88  ldp      x20, x19, [sp, #0x10]                 
+010A1C8C  ldr      x30, [sp], #0x20                      
+010A1C90  ret                                            
+010A1C94  bl       #0xe61da0                             
+010A1C98  bl       #0xe61da0                             
+010A1C9C  bl       #0xe61da0                             
+010A1CA0  bl       #0xe61da0                             
+010A1CA4  bl       #0xe61da0                             
+010A1CA8  bl       #0xe61da0                             
+010A1CAC  b        #0x10a1cc4                            
+010A1CB0  b        #0x10a1cc4                            
+010A1CB4  b        #0x10a1cc4                            
+010A1CB8  b        #0x10a1cc4                            
+010A1CBC  b        #0x10a1cc4                            
+010A1CC0  b        #0x10a1cc4                            
+010A1CC4  mov      x19, x0                               
+010A1CC8  cmp      w1, #1                                
+010A1CCC  b.ne     #0x10a1d2c                            
+010A1CD0  mov      x0, x19                               
+010A1CD4  bl       #0x224d2d0                            
+010A1CD8  mov      x19, x0                               
+010A1CDC  adrp     x0, #0x2368000                        
+010A1CE0  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+010A1CE4  bl       #0xe61b8c                             
+010A1CE8  ldr      x8, [x19]                             
+010A1CEC  ldr      x1, [x8]                              
+010A1CF0  bl       #0xe621cc                             
+010A1CF4  tbz      w0, #0, #0x10a1d04                    
+010A1CF8  ldp      x20, x19, [sp, #0x10]                 
+010A1CFC  ldr      x30, [sp], #0x20                      
+010A1D00  b        #0x224d2e0                            
+010A1D04  mov      w0, #8                                
+010A1D08  bl       #0x224d320                            
+010A1D0C  ldr      x8, [x19]                             
+010A1D10  str      x8, [x0]                              
+010A1D14  adrp     x1, #0x2253000                        
+010A1D18  add      x1, x1, #0x618                        
+010A1D1C  mov      x2, xzr                               
+010A1D20  bl       #0x224d330                            
+010A1D24  mov      x19, x0                               
+010A1D28  bl       #0x224d2e0                            
+010A1D2C  mov      x0, x19                               
+010A1D30  bl       #0xf5dd7c                             
+010A1D34  bl       #0xd2eb98                             

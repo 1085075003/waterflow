@@ -1,0 +1,153 @@
+// FuenteTest1$$Update VA 0x109E9D0, inferred length 604
+void FuenteTest1__Update (FuenteTest1_o* __this, const MethodInfo* method);
+0109E9D0  str      x30, [sp, #-0x20]!                    
+0109E9D4  stp      x20, x19, [sp, #0x10]                 
+0109E9D8  adrp     x20, #0x24fb000                       
+0109E9DC  ldrb     w8, [x20, #0xf48]                     
+0109E9E0  mov      x19, x0                               
+0109E9E4  tbnz     w8, #0, #0x109ea14                    
+0109E9E8  adrp     x0, #0x236b000                        
+0109E9EC  ldr      x0, [x0, #0x498]                       // [0x236B498] MoveBloque_TypeInfo
+0109E9F0  bl       #0xe61b78                             
+0109E9F4  adrp     x0, #0x2368000                        
+0109E9F8  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0109E9FC  bl       #0xe61b78                             
+0109EA00  adrp     x0, #0x236d000                        
+0109EA04  ldr      x0, [x0, #0x598]                       // [0x236D598] 'AguaControl5B'
+0109EA08  bl       #0xe61b78                             
+0109EA0C  mov      w8, #1                                
+0109EA10  strb     w8, [x20, #0xf48]                     
+0109EA14  ldrb     w8, [x19, #0x258]                      // self.triggered
+0109EA18  cbz      w8, #0x109eb08                        
+0109EA1C  mov      x0, x19                               
+0109EA20  mov      x1, xzr                               
+0109EA24  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109EA28  cbz      x0, #0x109ec28                        
+0109EA2C  mov      x1, xzr                               
+0109EA30  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0109EA34  ldr      s0, [x19, #0x2b4]                      // self.transformOld
+0109EA38  adrp     x8, #0x600000                         
+0109EA3C  ldr      s2, [x8, #0x3c]                       
+0109EA40  fsub     s0, s1, s0                            
+0109EA44  fcmp     s0, s2                                
+0109EA48  b.le     #0x109ea98                            
+0109EA4C  mov      x0, x19                               
+0109EA50  mov      x1, xzr                               
+0109EA54  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109EA58  cbz      x0, #0x109ec28                        
+0109EA5C  mov      x1, xzr                               
+0109EA60  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+0109EA64  cbz      x0, #0x109ec28                        
+0109EA68  mov      x1, xzr                               
+0109EA6C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+0109EA70  cbz      x0, #0x109ec28                        
+0109EA74  mov      x1, xzr                               
+0109EA78  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+0109EA7C  cbz      x0, #0x109ec28                        
+0109EA80  adrp     x8, #0x236d000                        
+0109EA84  ldr      x8, [x8, #0x598]                       // [0x236D598] 'AguaControl5B'
+0109EA88  mov      x2, xzr                               
+0109EA8C  ldr      x1, [x8]                              
+0109EA90  bl       #0x19651dc                             // System.String$$Contains
+0109EA94  tbz      w0, #0, #0x109eb38                    
+0109EA98  adrp     x8, #0x2368000                        
+0109EA9C  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0109EAA0  ldr      x20, [x19, #0x260]                     // self.otherObject
+0109EAA4  ldr      x0, [x8]                              
+0109EAA8  ldr      w8, [x0, #0xe0]                       
+0109EAAC  cbnz     w8, #0x109eab4                        
+0109EAB0  bl       #0xe61c80                             
+0109EAB4  mov      x0, x20                               
+0109EAB8  mov      x1, xzr                               
+0109EABC  mov      x2, xzr                               
+0109EAC0  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+0109EAC4  tbz      w0, #0, #0x109eb90                    
+0109EAC8  ldr      x0, [x19, #0x260]                      // self.otherObject
+0109EACC  cbz      x0, #0x109ec28                        
+0109EAD0  mov      x1, xzr                               
+0109EAD4  bl       #0x2006414                             // UnityEngine.GameObject$$get_activeInHierarchy
+0109EAD8  tbnz     w0, #0, #0x109eaec                    
+0109EADC  mov      x0, x19                               
+0109EAE0  strb     wzr, [x19, #0x258]                     // self.triggered
+0109EAE4  str      xzr, [x19, #0x260]                     // self.otherObject
+0109EAE8  bl       #0x109ec2c                             // FuenteTest1$$doExit
+0109EAEC  ldrb     w8, [x19, #0x2d5]                      // self.barrera
+0109EAF0  cbz      w8, #0x109eb90                        
+0109EAF4  mov      x0, x19                               
+0109EAF8  strb     wzr, [x19, #0x258]                     // self.triggered
+0109EAFC  str      xzr, [x19, #0x260]                     // self.otherObject
+0109EB00  bl       #0x109ec2c                             // FuenteTest1$$doExit
+0109EB04  b        #0x109eb90                            
+0109EB08  ldrb     w8, [x19, #0x2d6]                      // self.barreraOpen
+0109EB0C  cbz      w8, #0x109ec1c                        
+0109EB10  ldr      x0, [x19, #0x250]                      // self.agscr
+0109EB14  cbz      x0, #0x109ec28                        
+0109EB18  ldr      w8, [x0, #0x20]                       
+0109EB1C  cbnz     w8, #0x109eb30                        
+0109EB20  mov      w8, #9                                
+0109EB24  mov      x1, xzr                               
+0109EB28  str      w8, [x0, #0x20]                       
+0109EB2C  bl       #0xfcb44c                              // AguasControl$$doBuscarOrigen
+0109EB30  strb     wzr, [x19, #0x2d6]                     // self.barreraOpen
+0109EB34  b        #0x109ec1c                            
+0109EB38  adrp     x20, #0x236b000                       
+0109EB3C  ldr      x20, [x20, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+0109EB40  ldr      x0, [x20]                             
+0109EB44  ldr      w8, [x0, #0xe0]                       
+0109EB48  cbnz     w8, #0x109eb54                        
+0109EB4C  bl       #0xe61c80                             
+0109EB50  ldr      x0, [x20]                             
+0109EB54  ldr      x8, [x0, #0xb8]                       
+0109EB58  ldrb     w8, [x8, #8]                          
+0109EB5C  cbz      w8, #0x109eb74                        
+0109EB60  mov      x0, x19                               
+0109EB64  str      xzr, [x19, #0x260]                     // self.otherObject
+0109EB68  bl       #0x109ec2c                             // FuenteTest1$$doExit
+0109EB6C  strb     wzr, [x19, #0x258]                     // self.triggered
+0109EB70  b        #0x109eb90                            
+0109EB74  mov      x0, x19                               
+0109EB78  mov      x1, xzr                               
+0109EB7C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109EB80  cbz      x0, #0x109ec28                        
+0109EB84  mov      x1, xzr                               
+0109EB88  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0109EB8C  str      s1, [x19, #0x2b4]                      // self.transformOld
+0109EB90  ldr      x8, [x19, #0x250]                      // self.agscr
+0109EB94  cbz      x8, #0x109ec28                        
+0109EB98  ldr      w8, [x8, #0x20]                       
+0109EB9C  cmp      w8, #5                                
+0109EBA0  b.ne     #0x109ec1c                            
+0109EBA4  ldr      w8, [x19, #0x34]                       // self.origen
+0109EBA8  cmp      w8, #5                                
+0109EBAC  b.ne     #0x109ec1c                            
+0109EBB0  ldr      w8, [x19, #0x2a8]                      // self.numOrigen5
+0109EBB4  cmp      w8, #2                                
+0109EBB8  b.ne     #0x109ec1c                            
+0109EBBC  ldr      w8, [x19, #0x2b0]                      // self.contador
+0109EBC0  cmp      w8, #0x65                             
+0109EBC4  b.ge     #0x109ebd4                            
+0109EBC8  add      w8, w8, #1                            
+0109EBCC  str      w8, [x19, #0x2b0]                      // self.contador
+0109EBD0  b        #0x109ec1c                            
+0109EBD4  mov      x0, x19                               
+0109EBD8  str      wzr, [x19, #0x2b0]                     // self.contador
+0109EBDC  bl       #0x109f15c                             // FuenteTest1$$doCheckCollision5
+0109EBE0  ldrb     w8, [x19, #0x2a0]                      // self.checkCollision5
+0109EBE4  cbnz     w8, #0x109ec1c                        
+0109EBE8  adrp     x8, #0x2368000                        
+0109EBEC  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0109EBF0  ldr      x20, [x19, #0x138]                     // self.Agua2
+0109EBF4  ldr      x0, [x8]                              
+0109EBF8  ldr      w8, [x0, #0xe0]                       
+0109EBFC  cbnz     w8, #0x109ec04                        
+0109EC00  bl       #0xe61c80                             
+0109EC04  mov      x0, x20                               
+0109EC08  mov      x1, xzr                               
+0109EC0C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+0109EC10  mov      w8, #1                                
+0109EC14  strb     wzr, [x19, #0x2ac]                     // self.unionAguas5
+0109EC18  str      w8, [x19, #0x2a8]                      // self.numOrigen5
+0109EC1C  ldp      x20, x19, [sp, #0x10]                 
+0109EC20  ldr      x30, [sp], #0x20                      
+0109EC24  ret                                            
+0109EC28  bl       #0xe61da0                             

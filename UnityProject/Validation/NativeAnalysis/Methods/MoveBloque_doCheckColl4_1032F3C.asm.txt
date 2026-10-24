@@ -1,0 +1,105 @@
+// MoveBloque$$doCheckColl4 VA 0x1032F3C, inferred length 412
+void MoveBloque__doCheckColl4 (MoveBloque_o* __this, const MethodInfo* method);
+01032F3C  stp      d11, d10, [sp, #-0x70]!               
+01032F40  stp      d9, d8, [sp, #0x10]                   
+01032F44  str      x30, [sp, #0x20]                      
+01032F48  stp      x26, x25, [sp, #0x30]                 
+01032F4C  stp      x24, x23, [sp, #0x40]                 
+01032F50  stp      x22, x21, [sp, #0x50]                 
+01032F54  stp      x20, x19, [sp, #0x60]                 
+01032F58  adrp     x21, #0x24fb000                       
+01032F5C  adrp     x20, #0x2368000                       
+01032F60  ldrb     w8, [x21, #0xd20]                     
+01032F64  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+01032F68  mov      x19, x0                               
+01032F6C  tbnz     w8, #0, #0x1032f9c                    
+01032F70  adrp     x0, #0x2368000                        
+01032F74  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+01032F78  bl       #0xe61b78                             
+01032F7C  adrp     x0, #0x236a000                        
+01032F80  ldr      x0, [x0, #0x5c0]                       // [0x236A5C0] 'Map1'
+01032F84  bl       #0xe61b78                             
+01032F88  adrp     x0, #0x236a000                        
+01032F8C  ldr      x0, [x0, #0x7f0]                       // [0x236A7F0] 'Suelo'
+01032F90  bl       #0xe61b78                             
+01032F94  mov      w8, #1                                
+01032F98  strb     w8, [x21, #0xd20]                     
+01032F9C  ldr      s8, [x19, #0x1a0]                      // self.valor4x
+01032FA0  ldr      s9, [x19, #0x1a4]                      // self.valor4y
+01032FA4  ldr      s10, [x19, #0x1a8]                     // self.valor4z
+01032FA8  ldr      w0, [x19, #0xf8]                       // self.mascaraSuelo2
+01032FAC  ldr      s11, [x19, #0x108]                     // self.sphereRadius
+01032FB0  mov      x1, xzr                               
+01032FB4  strb     wzr, [x19, #0x138]                     // self.checkCollision4
+01032FB8  str      s8, [x19, #0x10c]                      // self.vector
+01032FBC  str      s9, [x19, #0x110]                     
+01032FC0  str      s10, [x19, #0x114]                    
+01032FC4  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+01032FC8  ldr      x8, [x20]                             
+01032FCC  mov      w20, w0                               
+01032FD0  ldr      w9, [x8, #0xe0]                       
+01032FD4  cbnz     w9, #0x1032fe0                        
+01032FD8  mov      x0, x8                                
+01032FDC  bl       #0xe61c80                             
+01032FE0  mov      v0.16b, v8.16b                        
+01032FE4  mov      v1.16b, v9.16b                        
+01032FE8  mov      v2.16b, v10.16b                       
+01032FEC  mov      v3.16b, v11.16b                       
+01032FF0  mov      w0, w20                               
+01032FF4  mov      x1, xzr                               
+01032FF8  bl       #0x20406ec                             // UnityEngine.Physics$$OverlapSphere
+01032FFC  cbz      x0, #0x10330d0                        
+01033000  ldr      x8, [x0, #0x18]                       
+01033004  mov      x20, x0                               
+01033008  cbz      x8, #0x10330b0                        
+0103300C  cmp      w8, #1                                
+01033010  b.lt     #0x10330b0                            
+01033014  adrp     x24, #0x236a000                       
+01033018  adrp     x25, #0x236a000                       
+0103301C  ldr      x24, [x24, #0x7f0]                     // [0x236A7F0] 'Suelo'
+01033020  b        #0x224ce68                            
+01033024  mov      x22, xzr                              
+01033028  add      x23, x20, #0x20                       
+0103302C  mov      w26, #1                               
+01033030  cmp      w22, w8                               
+01033034  b.hs     #0x10330d4                            
+01033038  ldr      x0, [x23, x22, lsl #3]                
+0103303C  cbz      x0, #0x10330d0                        
+01033040  mov      x1, xzr                               
+01033044  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01033048  cbz      x0, #0x10330d0                        
+0103304C  mov      x1, xzr                               
+01033050  bl       #0x2006314                             // UnityEngine.GameObject$$get_layer
+01033054  ldr      x8, [x24]                             
+01033058  mov      w21, w0                               
+0103305C  mov      x1, xzr                               
+01033060  mov      x0, x8                                
+01033064  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+01033068  cmp      w21, w0                               
+0103306C  b.ne     #0x103309c                            
+01033070  ldr      w8, [x20, #0x18]                      
+01033074  cmp      w22, w8                               
+01033078  b.hs     #0x10330d4                            
+0103307C  ldr      x0, [x23, x22, lsl #3]                
+01033080  cbz      x0, #0x10330d0                        
+01033084  mov      x1, xzr                               
+01033088  bl       #0x2003eec                             // UnityEngine.Component$$get_tag
+0103308C  ldr      x1, [x25]                              // [0x236A000] System.Collections.Generic.IDictionary<Type, ImporterFunc>_TypeInfo
+01033090  mov      x2, xzr                               
+01033094  bl       #0x1960c7c                             // System.String$$op_Equality
+01033098  tbz      w0, #0, #0x10330a0                    
+0103309C  strb     w26, [x19, #0x138]                     // self.checkCollision4
+010330A0  ldr      w8, [x20, #0x18]                      
+010330A4  add      x22, x22, #1                          
+010330A8  cmp      w22, w8                               
+010330AC  b.lt     #0x1033030                            
+010330B0  ldp      x20, x19, [sp, #0x60]                 
+010330B4  ldp      x22, x21, [sp, #0x50]                 
+010330B8  ldp      x24, x23, [sp, #0x40]                 
+010330BC  ldp      x26, x25, [sp, #0x30]                 
+010330C0  ldr      x30, [sp, #0x20]                      
+010330C4  ldp      d9, d8, [sp, #0x10]                   
+010330C8  ldp      d11, d10, [sp], #0x70                 
+010330CC  ret                                            
+010330D0  bl       #0xe61da0                             
+010330D4  bl       #0xe61da8                             

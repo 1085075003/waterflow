@@ -1,0 +1,19 @@
+// GrupoLev0$$Start VA 0x10C3CF4, inferred length 68
+void GrupoLev0__Start (GrupoLev0_o* __this, const MethodInfo* method);
+010C3CF4  str      d8, [sp, #-0x20]!                     
+010C3CF8  stp      x30, x19, [sp, #0x10]                 
+010C3CFC  mov      x19, x0                               
+010C3D00  mov      x0, xzr                               
+010C3D04  bl       #0x1fe9f30                             // UnityEngine.Screen$$get_width
+010C3D08  scvtf    s0, w0                                
+010C3D0C  fmov     s8, #0.50000000                       
+010C3D10  fmul     s0, s0, s8                            
+010C3D14  mov      x0, xzr                               
+010C3D18  str      s0, [x19, #0x20]                       // self.halfWidth
+010C3D1C  bl       #0x1fe9f58                             // UnityEngine.Screen$$get_height
+010C3D20  scvtf    s0, w0                                
+010C3D24  fmul     s0, s0, s8                            
+010C3D28  str      s0, [x19, #0x24]                       // self.halfHeight
+010C3D2C  ldp      x30, x19, [sp, #0x10]                 
+010C3D30  ldr      d8, [sp], #0x20                       
+010C3D34  ret                                            

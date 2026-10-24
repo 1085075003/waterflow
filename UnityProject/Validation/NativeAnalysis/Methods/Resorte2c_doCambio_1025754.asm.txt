@@ -1,0 +1,16 @@
+// Resorte2c$$doCambio VA 0x1025754, inferred length 56
+void Resorte2c__doCambio (Resorte2c_o* __this, const MethodInfo* method);
+01025754  stp      x30, x19, [sp, #-0x10]!               
+01025758  mov      x19, x0                               
+0102575C  ldr      x0, [x0, #0x50]                       
+01025760  cbz      x0, #0x1025788                        
+01025764  mov      w1, #1                                
+01025768  mov      x2, xzr                               
+0102576C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01025770  ldr      x0, [x19, #0x58]                       // self.objeto8
+01025774  cbz      x0, #0x1025788                        
+01025778  mov      w1, #1                                
+0102577C  mov      x2, xzr                               
+01025780  ldp      x30, x19, [sp], #0x10                 
+01025784  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+01025788  bl       #0xe61da0                             

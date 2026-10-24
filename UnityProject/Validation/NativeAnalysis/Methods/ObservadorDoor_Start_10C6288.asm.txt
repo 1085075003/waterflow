@@ -1,0 +1,138 @@
+// ObservadorDoor$$Start VA 0x10C6288, inferred length 544
+void ObservadorDoor__Start (ObservadorDoor_o* __this, const MethodInfo* method);
+010C6288  stp      x30, x21, [sp, #-0x20]!               
+010C628C  stp      x20, x19, [sp, #0x10]                 
+010C6290  adrp     x20, #0x24fb000                       
+010C6294  ldrb     w8, [x20, #0xfef]                     
+010C6298  mov      x19, x0                               
+010C629C  tbnz     w8, #0, #0x10c62fc                    
+010C62A0  adrp     x0, #0x236a000                        
+010C62A4  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C62A8  bl       #0xe61b78                             
+010C62AC  adrp     x0, #0x236a000                        
+010C62B0  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+010C62B4  bl       #0xe61b78                             
+010C62B8  adrp     x0, #0x236a000                        
+010C62BC  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+010C62C0  bl       #0xe61b78                             
+010C62C4  adrp     x0, #0x236d000                        
+010C62C8  ldr      x0, [x0, #0x948]                       // [0x236D948] 'openDoor'
+010C62CC  bl       #0xe61b78                             
+010C62D0  adrp     x0, #0x236a000                        
+010C62D4  ldr      x0, [x0, #0x6a8]                       // [0x236A6A8] '4'
+010C62D8  bl       #0xe61b78                             
+010C62DC  adrp     x0, #0x236a000                        
+010C62E0  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+010C62E4  bl       #0xe61b78                             
+010C62E8  adrp     x0, #0x236a000                        
+010C62EC  ldr      x0, [x0, #0x6f8]                       // [0x236A6F8] '5'
+010C62F0  bl       #0xe61b78                             
+010C62F4  mov      w8, #1                                
+010C62F8  strb     w8, [x20, #0xfef]                     
+010C62FC  mov      x0, x19                               
+010C6300  bl       #0x10c64a8                             // ObservadorDoor$$doBuscarOrigen
+010C6304  mov      x0, x19                               
+010C6308  bl       #0x10c6b34                             // ObservadorDoor$$doBuscarAguas
+010C630C  ldr      w8, [x19, #0x2c]                       // self.numDoor
+010C6310  sub      w8, w8, #1                            
+010C6314  cmp      w8, #3                                
+010C6318  b.hi     #0x10c6368                            
+010C631C  adrp     x9, #0x621000                         
+010C6320  add      x9, x9, #0xc98                        
+010C6324  adr      x10, #0x10c6334                       
+010C6328  ldrb     w11, [x9, x8]                         
+010C632C  add      x10, x10, x11, lsl #2                 
+010C6330  br       x10                                   
+010C6334  ldr      x8, [x19, #0x80]                       // self.origen1Fuente
+010C6338  cbnz     x8, #0x10c6360                        
+010C633C  b        #0x10c64a4                            
+010C6340  ldr      x8, [x19, #0x88]                       // self.origen2Fuente
+010C6344  cbnz     x8, #0x10c6360                        
+010C6348  b        #0x10c64a4                            
+010C634C  ldr      x8, [x19, #0x90]                       // self.origen3Fuente
+010C6350  cbnz     x8, #0x10c6360                        
+010C6354  b        #0x10c64a4                            
+010C6358  ldr      x8, [x19, #0x98]                       // self.origen4Fuente
+010C635C  cbz      x8, #0x10c64a4                        
+010C6360  mov      w9, #1                                
+010C6364  strb     w9, [x8, #0x2d5]                      
+010C6368  ldr      x0, [x19, #0x20]                       // self.anim_door
+010C636C  cbz      x0, #0x10c64a4                        
+010C6370  adrp     x8, #0x236d000                        
+010C6374  ldr      x8, [x8, #0x948]                       // [0x236D948] 'openDoor'
+010C6378  adrp     x21, #0x236a000                       
+010C637C  adrp     x20, #0x236a000                       
+010C6380  mov      w2, wzr                               
+010C6384  ldr      x1, [x8]                              
+010C6388  ldr      x21, [x21, #0x6e8]                     // [0x236A6E8] '1'
+010C638C  ldr      x20, [x20, #0x658]                     // [0x236A658] '2'
+010C6390  mov      x3, xzr                               
+010C6394  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+010C6398  ldr      x0, [x19, #0x30]                       // self.conDoor
+010C639C  ldr      x1, [x21]                             
+010C63A0  mov      x2, xzr                               
+010C63A4  bl       #0x1960c7c                             // System.String$$op_Equality
+010C63A8  tbz      w0, #0, #0x10c63c4                    
+010C63AC  adrp     x8, #0x236a000                        
+010C63B0  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C63B4  mov      w9, #2                                
+010C63B8  ldr      x8, [x8]                              
+010C63BC  ldr      x8, [x8, #0xb8]                       
+010C63C0  str      w9, [x8, #0xa0]                       
+010C63C4  ldr      x0, [x19, #0x30]                       // self.conDoor
+010C63C8  ldr      x1, [x20]                             
+010C63CC  adrp     x20, #0x236a000                       
+010C63D0  ldr      x20, [x20, #0x650]                     // [0x236A650] '3'
+010C63D4  mov      x2, xzr                               
+010C63D8  bl       #0x1960c7c                             // System.String$$op_Equality
+010C63DC  tbz      w0, #0, #0x10c63f8                    
+010C63E0  adrp     x8, #0x236a000                        
+010C63E4  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C63E8  mov      w9, #2                                
+010C63EC  ldr      x8, [x8]                              
+010C63F0  ldr      x8, [x8, #0xb8]                       
+010C63F4  str      w9, [x8, #0xa4]                       
+010C63F8  ldr      x0, [x19, #0x30]                       // self.conDoor
+010C63FC  ldr      x1, [x20]                             
+010C6400  adrp     x20, #0x236a000                       
+010C6404  ldr      x20, [x20, #0x6a8]                     // [0x236A6A8] '4'
+010C6408  mov      x2, xzr                               
+010C640C  bl       #0x1960c7c                             // System.String$$op_Equality
+010C6410  tbz      w0, #0, #0x10c642c                    
+010C6414  adrp     x8, #0x236a000                        
+010C6418  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C641C  mov      w9, #2                                
+010C6420  ldr      x8, [x8]                              
+010C6424  ldr      x8, [x8, #0xb8]                       
+010C6428  str      w9, [x8, #0xa8]                       
+010C642C  ldr      x0, [x19, #0x30]                       // self.conDoor
+010C6430  ldr      x1, [x20]                             
+010C6434  adrp     x20, #0x236a000                       
+010C6438  ldr      x20, [x20, #0x6f8]                     // [0x236A6F8] '5'
+010C643C  mov      x2, xzr                               
+010C6440  bl       #0x1960c7c                             // System.String$$op_Equality
+010C6444  tbz      w0, #0, #0x10c6460                    
+010C6448  adrp     x8, #0x236a000                        
+010C644C  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C6450  mov      w9, #2                                
+010C6454  ldr      x8, [x8]                              
+010C6458  ldr      x8, [x8, #0xb8]                       
+010C645C  str      w9, [x8, #0xac]                       
+010C6460  ldr      x0, [x19, #0x30]                       // self.conDoor
+010C6464  ldr      x1, [x20]                             
+010C6468  mov      x2, xzr                               
+010C646C  bl       #0x1960c7c                             // System.String$$op_Equality
+010C6470  tbz      w0, #0, #0x10c648c                    
+010C6474  adrp     x8, #0x236a000                        
+010C6478  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C647C  mov      w9, #2                                
+010C6480  ldr      x8, [x8]                              
+010C6484  ldr      x8, [x8, #0xb8]                       
+010C6488  str      w9, [x8, #0xb0]                       
+010C648C  mov      w8, #2                                
+010C6490  str      w8, [x19, #0xc4]                       // self.estado_old
+010C6494  mov      x0, x19                               
+010C6498  ldp      x20, x19, [sp, #0x10]                 
+010C649C  ldp      x30, x21, [sp], #0x20                 
+010C64A0  b        #0x10c6c08                             // ObservadorDoor$$doInicioCerrado
+010C64A4  bl       #0xe61da0                             

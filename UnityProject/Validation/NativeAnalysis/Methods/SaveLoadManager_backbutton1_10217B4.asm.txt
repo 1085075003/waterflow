@@ -1,0 +1,69 @@
+// SaveLoadManager$$backbutton1 VA 0x10217B4, inferred length 268
+void SaveLoadManager__backbutton1 (SaveLoadManager_o* __this, const MethodInfo* method);
+010217B4  str      d8, [sp, #-0x20]!                     
+010217B8  str      x30, [sp, #8]                         
+010217BC  stp      x20, x19, [sp, #0x10]                 
+010217C0  adrp     x20, #0x24fb000                       
+010217C4  ldrb     w8, [x20, #0xcb9]                     
+010217C8  mov      x19, x0                               
+010217CC  tbnz     w8, #0, #0x10217f0                    
+010217D0  adrp     x0, #0x236a000                        
+010217D4  ldr      x0, [x0, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+010217D8  bl       #0xe61b78                             
+010217DC  adrp     x0, #0x236b000                        
+010217E0  ldr      x0, [x0, #0x530]                       // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+010217E4  bl       #0xe61b78                             
+010217E8  mov      w8, #1                                
+010217EC  strb     w8, [x20, #0xcb9]                     
+010217F0  ldr      x0, [x19, #0xb0]                       // self.backButton1
+010217F4  cbz      x0, #0x10218bc                        
+010217F8  adrp     x20, #0x236a000                       
+010217FC  ldr      x20, [x20, #0xf48]                     // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01021800  ldr      x1, [x20]                             
+01021804  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01021808  cbz      x0, #0x10218bc                        
+0102180C  mov      w1, #1                                
+01021810  mov      x2, xzr                               
+01021814  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01021818  ldr      x0, [x19, #0xb8]                       // self.stepsButton
+0102181C  cbz      x0, #0x10218bc                        
+01021820  ldr      x1, [x20]                             
+01021824  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01021828  cbz      x0, #0x10218bc                        
+0102182C  mov      w1, #1                                
+01021830  mov      x2, xzr                               
+01021834  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01021838  ldr      x0, [x19, #0xc8]                       // self.back1
+0102183C  cbz      x0, #0x10218bc                        
+01021840  adrp     x20, #0x236b000                       
+01021844  ldr      x20, [x20, #0x530]                     // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+01021848  ldr      x1, [x20]                             
+0102184C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01021850  cbz      x0, #0x10218bc                        
+01021854  ldr      x8, [x0]                              
+01021858  fmov     s3, #1.00000000                       
+0102185C  ldr      x9, [x8, #0x2a8]                      
+01021860  ldr      x1, [x8, #0x2b0]                      
+01021864  adrp     x8, #0x5ff000                         
+01021868  ldr      s8, [x8, #0xc88]                      
+0102186C  mov      v0.16b, v8.16b                        
+01021870  mov      v1.16b, v8.16b                        
+01021874  mov      v2.16b, v8.16b                        
+01021878  blr      x9                                    
+0102187C  ldr      x0, [x19, #0xd0]                       // self.steps1
+01021880  cbz      x0, #0x10218bc                        
+01021884  ldr      x1, [x20]                             
+01021888  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0102188C  cbz      x0, #0x10218bc                        
+01021890  ldr      x8, [x0]                              
+01021894  ldp      x20, x19, [sp, #0x10]                 
+01021898  ldr      x30, [sp, #8]                         
+0102189C  fmov     s3, #1.00000000                       
+010218A0  ldr      x2, [x8, #0x2a8]                      
+010218A4  ldr      x1, [x8, #0x2b0]                      
+010218A8  mov      v0.16b, v8.16b                        
+010218AC  mov      v1.16b, v8.16b                        
+010218B0  mov      v2.16b, v8.16b                        
+010218B4  ldr      d8, [sp], #0x20                       
+010218B8  br       x2                                    
+010218BC  bl       #0xe61da0                             

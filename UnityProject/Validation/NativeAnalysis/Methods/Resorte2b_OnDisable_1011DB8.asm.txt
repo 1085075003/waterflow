@@ -1,0 +1,16 @@
+// Resorte2b$$OnDisable VA 0x1011DB8, inferred length 56
+void Resorte2b__OnDisable (Resorte2b_o* __this, const MethodInfo* method);
+01011DB8  stp      x30, x19, [sp, #-0x10]!               
+01011DBC  mov      x19, x0                               
+01011DC0  ldr      x0, [x0, #0x78]                       
+01011DC4  mov      w8, #1                                
+01011DC8  str      w8, [x19, #0x1ec]                      // self.disabled
+01011DCC  cbz      x0, #0x1011dec                        
+01011DD0  mov      w1, wzr                               
+01011DD4  mov      x2, xzr                               
+01011DD8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01011DDC  mov      x0, x19                               
+01011DE0  mov      x1, xzr                               
+01011DE4  ldp      x30, x19, [sp], #0x10                 
+01011DE8  b        #0x2006ff8                             // UnityEngine.MonoBehaviour$$CancelInvoke
+01011DEC  bl       #0xe61da0                             

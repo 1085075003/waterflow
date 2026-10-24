@@ -1,0 +1,77 @@
+// ControlPiezaFuente$$doConfigureColors VA 0x1091F3C, inferred length 300
+void ControlPiezaFuente__doConfigureColors (ControlPiezaFuente_o* __this, const MethodInfo* method);
+01091F3C  stp      x30, x21, [sp, #-0x20]!               
+01091F40  stp      x20, x19, [sp, #0x10]                 
+01091F44  adrp     x20, #0x24fb000                       
+01091F48  adrp     x21, #0x236a000                       
+01091F4C  ldrb     w8, [x20, #0xefa]                     
+01091F50  ldr      x21, [x21, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+01091F54  mov      x19, x0                               
+01091F58  tbnz     w8, #0, #0x1091f7c                    
+01091F5C  adrp     x0, #0x236a000                        
+01091F60  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+01091F64  bl       #0xe61b78                             
+01091F68  adrp     x0, #0x236a000                        
+01091F6C  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+01091F70  bl       #0xe61b78                             
+01091F74  mov      w8, #1                                
+01091F78  strb     w8, [x20, #0xefa]                     
+01091F7C  ldr      x8, [x21]                             
+01091F80  ldr      x8, [x8, #0xb8]                       
+01091F84  ldr      w8, [x8]                              
+01091F88  and      w8, w8, #0xfffffffc                   
+01091F8C  cmp      w8, #0x24                             
+01091F90  b.ne     #0x1092018                            
+01091F94  ldr      x0, [x19, #0x1d8]                      // self.material1
+01091F98  cbz      x0, #0x1092064                        
+01091F9C  ldr      x1, [x19, #0x260]                      // self.shader1
+01091FA0  mov      x2, xzr                               
+01091FA4  bl       #0x1fecc14                             // UnityEngine.Material$$set_shader
+01091FA8  ldr      x0, [x19, #0x1e0]                      // self.material2
+01091FAC  cbz      x0, #0x1092064                        
+01091FB0  ldr      x1, [x19, #0x260]                      // self.shader1
+01091FB4  mov      x2, xzr                               
+01091FB8  bl       #0x1fecc14                             // UnityEngine.Material$$set_shader
+01091FBC  ldr      x0, [x19, #0x1e8]                      // self.material3
+01091FC0  cbz      x0, #0x1092064                        
+01091FC4  ldr      x1, [x19, #0x260]                      // self.shader1
+01091FC8  mov      x2, xzr                               
+01091FCC  bl       #0x1fecc14                             // UnityEngine.Material$$set_shader
+01091FD0  ldr      x0, [x19, #0x1f0]                      // self.material4
+01091FD4  cbz      x0, #0x1092064                        
+01091FD8  ldr      x1, [x19, #0x260]                      // self.shader1
+01091FDC  mov      x2, xzr                               
+01091FE0  bl       #0x1fecc14                             // UnityEngine.Material$$set_shader
+01091FE4  ldr      x0, [x19, #0x1f8]                      // self.material5
+01091FE8  cbz      x0, #0x1092064                        
+01091FEC  ldr      x1, [x19, #0x260]                      // self.shader1
+01091FF0  mov      x2, xzr                               
+01091FF4  bl       #0x1fecc14                             // UnityEngine.Material$$set_shader
+01091FF8  ldr      x0, [x19, #0x208]                      // self.material7
+01091FFC  cbz      x0, #0x1092064                        
+01092000  ldr      x1, [x19, #0x260]                      // self.shader1
+01092004  mov      x2, xzr                               
+01092008  bl       #0x1fecc14                             // UnityEngine.Material$$set_shader
+0109200C  mov      x0, x19                               
+01092010  bl       #0x1092834                             // ControlPiezaFuente$$doColor2
+01092014  b        #0x1092020                            
+01092018  mov      x0, x19                               
+0109201C  bl       #0x1093364                             // ControlPiezaFuente$$doColor1
+01092020  ldr      w8, [x19, #0xc4]                       // self.color
+01092024  cmp      w8, #3                                
+01092028  b.eq     #0x109203c                            
+0109202C  cmp      w8, #4                                
+01092030  b.ne     #0x1092058                            
+01092034  mov      w8, #0x10                             
+01092038  b        #0x1092040                            
+0109203C  mov      w8, #0xc                              
+01092040  adrp     x9, #0x236a000                        
+01092044  ldr      x9, [x9, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+01092048  ldr      w10, [x19, #0xd0]                      // self.confC
+0109204C  ldr      x9, [x9]                              
+01092050  ldr      x9, [x9, #0xb8]                       
+01092054  str      w10, [x9, x8]                         
+01092058  ldp      x20, x19, [sp, #0x10]                 
+0109205C  ldp      x30, x21, [sp], #0x20                 
+01092060  ret                                            
+01092064  bl       #0xe61da0                             

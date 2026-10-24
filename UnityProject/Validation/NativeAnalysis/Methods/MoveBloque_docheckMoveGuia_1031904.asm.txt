@@ -1,0 +1,23 @@
+// MoveBloque$$docheckMoveGuia VA 0x1031904, inferred length 84
+void MoveBloque__docheckMoveGuia (MoveBloque_o* __this, const MethodInfo* method);
+01031904  stp      x30, x19, [sp, #-0x10]!               
+01031908  mov      x19, x0                               
+0103190C  mov      x0, xzr                               
+01031910  bl       #0x203ab00                             // UnityEngine.Input$$get_mousePosition
+01031914  mov      x0, xzr                               
+01031918  str      s0, [x19, #0x2e0]                      // self.posx
+0103191C  bl       #0x203ab00                             // UnityEngine.Input$$get_mousePosition
+01031920  ldr      s0, [x19, #0x2e0]                      // self.posx
+01031924  ldr      s2, [x19, #0x2dc]                      // self.postotal_ini
+01031928  ldr      s3, [x19, #0x2f0]                      // self.margen
+0103192C  str      s1, [x19, #0x2e4]                      // self.posy
+01031930  fadd     s0, s1, s0                            
+01031934  str      s0, [x19, #0x2e8]                      // self.postotal
+01031938  fabd     s0, s0, s2                            
+0103193C  fcmp     s0, s3                                
+01031940  str      s0, [x19, #0x2ec]                      // self.cambio
+01031944  b.le     #0x1031950                            
+01031948  mov      w8, #1                                
+0103194C  strb     w8, [x19, #0x2f4]                      // self.moverGuia
+01031950  ldp      x30, x19, [sp], #0x10                 
+01031954  ret                                            

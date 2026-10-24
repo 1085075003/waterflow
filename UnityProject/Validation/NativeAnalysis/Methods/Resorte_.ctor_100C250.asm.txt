@@ -1,0 +1,26 @@
+// Resorte$$.ctor VA 0x100C250, inferred length 96
+void Resorte___ctor (Resorte_o* __this, const MethodInfo* method);
+0100C250  stp      x30, x21, [sp, #-0x20]!               
+0100C254  stp      x20, x19, [sp, #0x10]                 
+0100C258  adrp     x21, #0x24fb000                       
+0100C25C  adrp     x20, #0x236b000                       
+0100C260  ldrb     w8, [x21, #0xc8e]                     
+0100C264  ldr      x20, [x20, #0x4a0]                     // [0x236B4A0] 'SonidoResorte'
+0100C268  mov      x19, x0                               
+0100C26C  tbnz     w8, #0, #0x100c284                    
+0100C270  adrp     x0, #0x236b000                        
+0100C274  ldr      x0, [x0, #0x4a0]                       // [0x236B4A0] 'SonidoResorte'
+0100C278  bl       #0xe61b78                             
+0100C27C  mov      w8, #1                                
+0100C280  strb     w8, [x21, #0xc8e]                     
+0100C284  mov      w8, #0x3f800000                       
+0100C288  mov      w9, #1                                
+0100C28C  str      w8, [x19, #0x50]                       // self.sphereRadius
+0100C290  strb     w9, [x19, #0xda]                       // self.chequear
+0100C294  ldr      x8, [x20]                             
+0100C298  mov      x0, x19                               
+0100C29C  mov      x1, xzr                               
+0100C2A0  str      x8, [x19, #0xe0]                       // self.SoundResorte
+0100C2A4  ldp      x20, x19, [sp, #0x10]                 
+0100C2A8  ldp      x30, x21, [sp], #0x20                 
+0100C2AC  b        #0x2007a3c                             // UnityEngine.MonoBehaviour$$.ctor

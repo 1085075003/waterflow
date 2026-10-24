@@ -1,0 +1,41 @@
+// MoveBloque$$doCheckTarget2 VA 0x1031B94, inferred length 156
+void MoveBloque__doCheckTarget2 (MoveBloque_o* __this, const MethodInfo* method);
+01031B94  stp      x30, x21, [sp, #-0x20]!               
+01031B98  stp      x20, x19, [sp, #0x10]                 
+01031B9C  mov      x19, x0                               
+01031BA0  mov      w20, #-1                              
+01031BA4  mov      w21, #1                               
+01031BA8  strb     wzr, [x0, #0x27a]                     
+01031BAC  ldr      s0, [x19, #0x180]                      // self.variay
+01031BB0  ldr      s1, [x19, #0x1b8]                      // self.arribay
+01031BB4  mov      x0, x19                               
+01031BB8  fadd     s0, s0, s1                            
+01031BBC  str      s0, [x19, #0x180]                      // self.variay
+01031BC0  bl       #0x10324cc                             // MoveBloque$$doCheckColl2
+01031BC4  ldrb     w8, [x19, #0x27a]                      // self.encontrado
+01031BC8  cbz      w8, #0x1031be0                        
+01031BCC  ldrb     w8, [x19, #0x279]                      // self.checkResorte
+01031BD0  cbnz     w8, #0x1031c04                        
+01031BD4  ldrb     w8, [x19, #0x133]                      // self.checkCollisionTarget2
+01031BD8  cbnz     w8, #0x1031bf4                        
+01031BDC  b        #0x1031c20                            
+01031BE0  ldrb     w8, [x19, #0x133]                      // self.checkCollisionTarget2
+01031BE4  cbz      w8, #0x1031bf4                        
+01031BE8  ldrb     w8, [x19, #0x279]                      // self.checkResorte
+01031BEC  strb     w21, [x19, #0x27a]                     // self.encontrado
+01031BF0  cbnz     w8, #0x1031c04                        
+01031BF4  add      w20, w20, #1                          
+01031BF8  cmp      w20, #0xb                             
+01031BFC  b.lo     #0x1031bac                            
+01031C00  b        #0x1031c24                            
+01031C04  adrp     x8, #0x5ff000                         
+01031C08  ldr      s0, [x19, #0x180]                      // self.variay
+01031C0C  ldr      s1, [x8, #0xd68]                      
+01031C10  str      w20, [x19, #0x27c]                     // self.altura
+01031C14  fadd     s0, s0, s1                            
+01031C18  str      s0, [x19, #0x180]                      // self.variay
+01031C1C  b        #0x1031c24                            
+01031C20  str      w20, [x19, #0x27c]                     // self.altura
+01031C24  ldp      x20, x19, [sp, #0x10]                 
+01031C28  ldp      x30, x21, [sp], #0x20                 
+01031C2C  ret                                            

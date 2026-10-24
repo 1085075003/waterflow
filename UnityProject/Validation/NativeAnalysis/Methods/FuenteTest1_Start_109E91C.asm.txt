@@ -1,0 +1,47 @@
+// FuenteTest1$$Start VA 0x109E91C, inferred length 180
+void FuenteTest1__Start (FuenteTest1_o* __this, const MethodInfo* method);
+0109E91C  str      x30, [sp, #-0x20]!                    
+0109E920  stp      x20, x19, [sp, #0x10]                 
+0109E924  adrp     x20, #0x24fb000                       
+0109E928  ldrb     w8, [x20, #0xf47]                     
+0109E92C  mov      x19, x0                               
+0109E930  tbnz     w8, #0, #0x109e954                    
+0109E934  adrp     x0, #0x236a000                        
+0109E938  ldr      x0, [x0, #0x6c0]                       // [0x236A6C0] 'B'
+0109E93C  bl       #0xe61b78                             
+0109E940  adrp     x0, #0x236a000                        
+0109E944  ldr      x0, [x0, #0x6f0]                       // [0x236A6F0] 'A'
+0109E948  bl       #0xe61b78                             
+0109E94C  mov      w8, #1                                
+0109E950  strb     w8, [x20, #0xf47]                     
+0109E954  mov      x0, x19                               
+0109E958  mov      x1, xzr                               
+0109E95C  str      wzr, [x19, #0x2a8]                     // self.numOrigen5
+0109E960  str      wzr, [x19, #0x2b0]                     // self.contador
+0109E964  strb     wzr, [x19, #0x308]                     // self.activarUnion
+0109E968  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109E96C  cbz      x0, #0x109e9cc                        
+0109E970  adrp     x20, #0x236a000                       
+0109E974  ldr      x20, [x20, #0x6f0]                     // [0x236A6F0] 'A'
+0109E978  mov      x1, xzr                               
+0109E97C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0109E980  str      s1, [x19, #0x2b4]                      // self.transformOld
+0109E984  str      wzr, [x19, #0x304]                     // self.faseMech
+0109E988  ldr      x0, [x19, #0x2b8]                      // self.conOri
+0109E98C  ldr      x1, [x20]                             
+0109E990  mov      x2, xzr                               
+0109E994  bl       #0x1960c7c                             // System.String$$op_Equality
+0109E998  tbnz     w0, #0, #0x109e9b8                    
+0109E99C  adrp     x8, #0x236a000                        
+0109E9A0  ldr      x0, [x19, #0x2b8]                      // self.conOri
+0109E9A4  ldr      x8, [x8, #0x6c0]                       // [0x236A6C0] 'B'
+0109E9A8  mov      x2, xzr                               
+0109E9AC  ldr      x1, [x8]                              
+0109E9B0  bl       #0x1960c7c                             // System.String$$op_Equality
+0109E9B4  tbz      w0, #0, #0x109e9c0                    
+0109E9B8  mov      w8, #1                                
+0109E9BC  str      w8, [x19, #0x304]                      // self.faseMech
+0109E9C0  ldp      x20, x19, [sp, #0x10]                 
+0109E9C4  ldr      x30, [sp], #0x20                      
+0109E9C8  ret                                            
+0109E9CC  bl       #0xe61da0                             

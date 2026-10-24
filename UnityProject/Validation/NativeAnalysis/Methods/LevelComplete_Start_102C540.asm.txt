@@ -1,0 +1,71 @@
+// LevelComplete$$Start VA 0x102C540, inferred length 276
+void LevelComplete__Start (LevelComplete_o* __this, const MethodInfo* method);
+0102C540  stp      x30, x23, [sp, #-0x30]!               
+0102C544  stp      x22, x21, [sp, #0x10]                 
+0102C548  stp      x20, x19, [sp, #0x20]                 
+0102C54C  adrp     x22, #0x24fb000                       
+0102C550  adrp     x23, #0x236a000                       
+0102C554  adrp     x20, #0x236b000                       
+0102C558  adrp     x21, #0x236a000                       
+0102C55C  ldrb     w8, [x22, #0xd06]                     
+0102C560  ldr      x23, [x23, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+0102C564  ldr      x20, [x20, #0xad8]                     // [0x236BAD8] 'levelMaxP'
+0102C568  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102C56C  mov      x19, x0                               
+0102C570  tbnz     w8, #0, #0x102c5a0                    
+0102C574  adrp     x0, #0x236a000                        
+0102C578  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0102C57C  bl       #0xe61b78                             
+0102C580  adrp     x0, #0x236a000                        
+0102C584  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0102C588  bl       #0xe61b78                             
+0102C58C  adrp     x0, #0x236b000                        
+0102C590  ldr      x0, [x0, #0xad8]                       // [0x236BAD8] 'levelMaxP'
+0102C594  bl       #0xe61b78                             
+0102C598  mov      w8, #1                                
+0102C59C  strb     w8, [x22, #0xd06]                     
+0102C5A0  ldr      x8, [x23]                             
+0102C5A4  mov      x1, xzr                               
+0102C5A8  ldr      x0, [x8, #0xb8]                       
+0102C5AC  bl       #0x1ab3994                             // System.Int32$$ToString
+0102C5B0  ldr      x8, [x20]                             
+0102C5B4  mov      x1, x0                                
+0102C5B8  mov      x2, xzr                               
+0102C5BC  mov      x0, x8                                
+0102C5C0  bl       #0x1958280                             // System.String$$Concat
+0102C5C4  mov      x1, xzr                               
+0102C5C8  str      x0, [x19, #0x28]                       // self.strlevelMax
+0102C5CC  bl       #0x2001450                             // UnityEngine.PlayerPrefs$$GetInt
+0102C5D0  str      w0, [x19, #0x20]                       // self.levelMaxAnterior
+0102C5D4  mov      w20, w0                               
+0102C5D8  ldr      x0, [x21]                             
+0102C5DC  ldr      w8, [x0, #0xe0]                       
+0102C5E0  cbnz     w8, #0x102c5ec                        
+0102C5E4  bl       #0xe61c80                             
+0102C5E8  ldr      x0, [x21]                             
+0102C5EC  ldr      x8, [x0, #0xb8]                       
+0102C5F0  ldr      w1, [x8]                              
+0102C5F4  cmp      w20, w1                               
+0102C5F8  b.ge     #0x102c628                            
+0102C5FC  ldr      w8, [x0, #0xe0]                       
+0102C600  ldr      x19, [x19, #0x28]                      // self.strlevelMax
+0102C604  cbnz     w8, #0x102c618                        
+0102C608  bl       #0xe61c80                             
+0102C60C  ldr      x8, [x21]                             
+0102C610  ldr      x8, [x8, #0xb8]                       
+0102C614  ldr      w1, [x8]                              
+0102C618  mov      x0, x19                               
+0102C61C  mov      x2, xzr                               
+0102C620  bl       #0x200137c                             // UnityEngine.PlayerPrefs$$SetInt
+0102C624  ldr      x0, [x21]                             
+0102C628  ldr      w8, [x0, #0xe0]                       
+0102C62C  cbnz     w8, #0x102c638                        
+0102C630  bl       #0xe61c80                             
+0102C634  ldr      x0, [x21]                             
+0102C638  ldr      x8, [x0, #0xb8]                       
+0102C63C  ldp      x20, x19, [sp, #0x20]                 
+0102C640  ldp      x22, x21, [sp, #0x10]                 
+0102C644  mov      w9, #1                                
+0102C648  strb     w9, [x8, #4]                          
+0102C64C  ldp      x30, x23, [sp], #0x30                 
+0102C650  ret                                            

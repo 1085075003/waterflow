@@ -1,0 +1,96 @@
+// UIManagerPortScript$$botonExitDown VA 0x103789C, inferred length 376
+void UIManagerPortScript__botonExitDown (UIManagerPortScript_o* __this, const MethodInfo* method);
+0103789C  str      x30, [sp, #-0x20]!                    
+010378A0  stp      x20, x19, [sp, #0x10]                 
+010378A4  adrp     x20, #0x24fb000                       
+010378A8  ldrb     w8, [x20, #0xd43]                     
+010378AC  mov      x19, x0                               
+010378B0  tbnz     w8, #0, #0x10378f8                    
+010378B4  adrp     x0, #0x236b000                        
+010378B8  ldr      x0, [x0, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+010378BC  bl       #0xe61b78                             
+010378C0  adrp     x0, #0x236a000                        
+010378C4  ldr      x0, [x0, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+010378C8  bl       #0xe61b78                             
+010378CC  adrp     x0, #0x236b000                        
+010378D0  ldr      x0, [x0, #0x4e8]                       // [0x236B4E8] 'esTablet'
+010378D4  bl       #0xe61b78                             
+010378D8  adrp     x0, #0x236b000                        
+010378DC  ldr      x0, [x0, #0x680]                       // [0x236B680] 'an_complete'
+010378E0  bl       #0xe61b78                             
+010378E4  adrp     x0, #0x236b000                        
+010378E8  ldr      x0, [x0, #0xc88]                       // [0x236BC88] 'an_exit2d'
+010378EC  bl       #0xe61b78                             
+010378F0  mov      w8, #1                                
+010378F4  strb     w8, [x20, #0xd43]                     
+010378F8  ldrb     w8, [x19, #0x40]                       // self.botonesActivos
+010378FC  cbz      w8, #0x1037a04                        
+01037900  ldr      x0, [x19, #0x50]                       // self.audioManager
+01037904  cbz      x0, #0x1037a10                        
+01037908  ldr      x1, [x19, #0x48]                       // self.click
+0103790C  bl       #0x1037514                             // AudioManager0$$PlaySound
+01037910  ldr      x0, [x19, #0x28]                       // self.PlayButton
+01037914  strb     wzr, [x19, #0x40]                      // self.botonesActivos
+01037918  cbz      x0, #0x1037a10                        
+0103791C  adrp     x20, #0x236a000                       
+01037920  ldr      x20, [x20, #0xf48]                     // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01037924  ldr      x1, [x20]                             
+01037928  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0103792C  cbz      x0, #0x1037a10                        
+01037930  mov      w1, wzr                               
+01037934  mov      x2, xzr                               
+01037938  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+0103793C  ldr      x0, [x19, #0x30]                       // self.SettingsButton
+01037940  cbz      x0, #0x1037a10                        
+01037944  ldr      x1, [x20]                             
+01037948  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0103794C  cbz      x0, #0x1037a10                        
+01037950  mov      w1, wzr                               
+01037954  mov      x2, xzr                               
+01037958  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+0103795C  ldr      x0, [x19, #0x38]                       // self.ExitButton
+01037960  cbz      x0, #0x1037a10                        
+01037964  ldr      x1, [x20]                             
+01037968  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0103796C  cbz      x0, #0x1037a10                        
+01037970  adrp     x20, #0x236b000                       
+01037974  ldr      x20, [x20, #0x4e8]                     // [0x236B4E8] 'esTablet'
+01037978  mov      w1, wzr                               
+0103797C  mov      x2, xzr                               
+01037980  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01037984  ldr      x0, [x20]                             
+01037988  mov      w1, wzr                               
+0103798C  mov      x2, xzr                               
+01037990  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+01037994  ldr      x8, [x19, #0x20]                       // self.panelExit
+01037998  str      w0, [x19, #0x108]                      // self.esTablet
+0103799C  cbz      x8, #0x1037a10                        
+010379A0  mov      w1, #1                                
+010379A4  mov      x0, x8                                
+010379A8  mov      x2, xzr                               
+010379AC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010379B0  ldr      x0, [x19, #0x20]                       // self.panelExit
+010379B4  cbz      x0, #0x1037a10                        
+010379B8  adrp     x8, #0x236b000                        
+010379BC  ldr      x8, [x8, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+010379C0  ldr      x1, [x8]                              
+010379C4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010379C8  cbz      x0, #0x1037a10                        
+010379CC  ldr      w8, [x19, #0x108]                      // self.esTablet
+010379D0  adrp     x9, #0x236b000                        
+010379D4  adrp     x10, #0x236b000                       
+010379D8  ldr      x9, [x9, #0xc88]                       // [0x236BC88] 'an_exit2d'
+010379DC  ldr      x10, [x10, #0x680]                     // [0x236B680] 'an_complete'
+010379E0  cmp      w8, #1                                
+010379E4  ldp      x20, x19, [sp, #0x10]                 
+010379E8  fmov     s0, wzr                               
+010379EC  csel     x8, x9, x10, eq                       
+010379F0  ldr      x1, [x8]                              
+010379F4  mov      w2, wzr                               
+010379F8  mov      x3, xzr                               
+010379FC  ldr      x30, [sp], #0x20                      
+01037A00  b        #0x1fdb684                             // UnityEngine.Animator$$Play
+01037A04  ldp      x20, x19, [sp, #0x10]                 
+01037A08  ldr      x30, [sp], #0x20                      
+01037A0C  ret                                            
+01037A10  bl       #0xe61da0                             

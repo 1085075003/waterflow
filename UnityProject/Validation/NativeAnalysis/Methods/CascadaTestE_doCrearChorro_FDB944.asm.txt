@@ -1,0 +1,155 @@
+// CascadaTestE$$doCrearChorro VA 0xFDB944, inferred length 612
+void CascadaTestE__doCrearChorro (CascadaTestE_o* __this, const MethodInfo* method);
+00FDB944  str      d12, [sp, #-0x50]!                    
+00FDB948  stp      d11, d10, [sp, #8]                    
+00FDB94C  stp      d9, d8, [sp, #0x18]                   
+00FDB950  str      x30, [sp, #0x28]                      
+00FDB954  stp      x22, x21, [sp, #0x30]                 
+00FDB958  stp      x20, x19, [sp, #0x40]                 
+00FDB95C  adrp     x20, #0x24fb000                       
+00FDB960  ldrb     w8, [x20, #0xb99]                     
+00FDB964  mov      x19, x0                               
+00FDB968  tbnz     w8, #0, #0xfdb998                     
+00FDB96C  adrp     x0, #0x236a000                        
+00FDB970  ldr      x0, [x0, #0x7b0]                       // [0x236A7B0] Method$UnityEngine.GameObject.GetComponent<CascadaChorroParticlesE>()
+00FDB974  bl       #0xe61b78                             
+00FDB978  adrp     x0, #0x2368000                        
+00FDB97C  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FDB980  bl       #0xe61b78                             
+00FDB984  adrp     x0, #0x2368000                        
+00FDB988  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FDB98C  bl       #0xe61b78                             
+00FDB990  mov      w8, #1                                
+00FDB994  strb     w8, [x20, #0xb99]                     
+00FDB998  ldr      w8, [x19, #0x120]                      // self.color_old
+00FDB99C  ldr      w9, [x19, #0x110]                      // self.color
+00FDB9A0  adrp     x21, #0x2368000                       
+00FDB9A4  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FDB9A8  cmp      w8, w9                                
+00FDB9AC  b.ne     #0xfdb9bc                             
+00FDB9B0  ldrb     w8, [x19, #0x131]                      // self.noHayChorro
+00FDB9B4  cbnz     w8, #0xfdba30                         
+00FDB9B8  b        #0xfdbb88                             
+00FDB9BC  ldr      x0, [x21]                             
+00FDB9C0  ldr      x20, [x19, #0x80]                      // self.Chorro
+00FDB9C4  ldr      w8, [x0, #0xe0]                       
+00FDB9C8  cbnz     w8, #0xfdb9d0                         
+00FDB9CC  bl       #0xe61c80                             
+00FDB9D0  mov      x0, x20                               
+00FDB9D4  mov      x1, xzr                               
+00FDB9D8  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FDB9DC  ldr      w8, [x19, #0x110]                      // self.color
+00FDB9E0  mov      w9, #1                                
+00FDB9E4  strb     w9, [x19, #0x131]                      // self.noHayChorro
+00FDB9E8  sub      w8, w8, #1                            
+00FDB9EC  cmp      w8, #3                                
+00FDB9F0  b.hi     #0xfdba30                             
+00FDB9F4  adrp     x9, #0x621000                         
+00FDB9F8  add      x9, x9, #0x135                        
+00FDB9FC  adr      x10, #0xfdba0c                        
+00FDBA00  ldrb     w11, [x9, x8]                         
+00FDBA04  add      x10, x10, x11, lsl #2                 
+00FDBA08  br       x10                                   
+00FDBA0C  add      x8, x19, #0xe0                        
+00FDBA10  b        #0xfdba28                             
+00FDBA14  add      x8, x19, #0xe8                        
+00FDBA18  b        #0xfdba28                             
+00FDBA1C  add      x8, x19, #0xf0                        
+00FDBA20  b        #0xfdba28                             
+00FDBA24  add      x8, x19, #0xf8                        
+00FDBA28  ldr      x8, [x8]                              
+00FDBA2C  str      x8, [x19, #0xd8]                       // self.ChorroLargo
+00FDBA30  adrp     x8, #0x5ff000                         
+00FDBA34  ldr      s0, [x19, #0x150]                      // self.rotacion
+00FDBA38  ldr      s1, [x8, #0xd64]                      
+00FDBA3C  adrp     x22, #0x2368000                       
+00FDBA40  ldr      x20, [x19, #0xd8]                      // self.ChorroLargo
+00FDBA44  ldr      x22, [x22, #0x900]                     // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FDBA48  fmul     s1, s0, s1                            
+00FDBA4C  fmov     s0, wzr                               
+00FDBA50  fmov     s2, wzr                               
+00FDBA54  mov      x0, xzr                               
+00FDBA58  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FDBA5C  ldr      x0, [x21]                             
+00FDBA60  mov      v9.16b, v0.16b                        
+00FDBA64  mov      v10.16b, v1.16b                       
+00FDBA68  mov      v11.16b, v2.16b                       
+00FDBA6C  ldr      w8, [x0, #0xe0]                       
+00FDBA70  mov      v12.16b, v3.16b                       
+00FDBA74  cbnz     w8, #0xfdba7c                         
+00FDBA78  bl       #0xe61c80                             
+00FDBA7C  adrp     x8, #0x5ff000                         
+00FDBA80  ldr      s8, [x8, #0xde4]                      
+00FDBA84  ldr      x1, [x22]                             
+00FDBA88  fmov     s0, wzr                               
+00FDBA8C  fmov     s2, wzr                               
+00FDBA90  mov      x0, x20                               
+00FDBA94  mov      v1.16b, v8.16b                        
+00FDBA98  mov      v3.16b, v9.16b                        
+00FDBA9C  mov      v4.16b, v10.16b                       
+00FDBAA0  mov      v5.16b, v11.16b                       
+00FDBAA4  mov      v6.16b, v12.16b                       
+00FDBAA8  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FDBAAC  str      x0, [x19, #0x80]                       // self.Chorro
+00FDBAB0  cbz      x0, #0xfdbba4                         
+00FDBAB4  mov      x1, xzr                               
+00FDBAB8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FDBABC  mov      x20, x0                               
+00FDBAC0  mov      x0, x19                               
+00FDBAC4  mov      x1, xzr                               
+00FDBAC8  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FDBACC  cbz      x20, #0xfdbba4                        
+00FDBAD0  mov      x1, x0                                
+00FDBAD4  mov      x0, x20                               
+00FDBAD8  mov      x2, xzr                               
+00FDBADC  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+00FDBAE0  ldr      x0, [x19, #0x80]                       // self.Chorro
+00FDBAE4  cbz      x0, #0xfdbba4                         
+00FDBAE8  mov      x1, xzr                               
+00FDBAEC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FDBAF0  cbz      x0, #0xfdbba4                         
+00FDBAF4  fmov     s0, wzr                               
+00FDBAF8  fmov     s2, wzr                               
+00FDBAFC  mov      v1.16b, v8.16b                        
+00FDBB00  mov      x1, xzr                               
+00FDBB04  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FDBB08  ldr      x0, [x19, #0x80]                       // self.Chorro
+00FDBB0C  cbz      x0, #0xfdbba4                         
+00FDBB10  mov      x1, xzr                               
+00FDBB14  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FDBB18  cbz      x0, #0xfdbba4                         
+00FDBB1C  fmov     s0, #1.00000000                       
+00FDBB20  fmov     s1, #1.00000000                       
+00FDBB24  fmov     s2, #1.00000000                       
+00FDBB28  mov      x1, xzr                               
+00FDBB2C  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+00FDBB30  ldr      x0, [x19, #0x80]                       // self.Chorro
+00FDBB34  cbz      x0, #0xfdbba4                         
+00FDBB38  adrp     x8, #0x236a000                        
+00FDBB3C  ldr      x8, [x8, #0x7b0]                       // [0x236A7B0] Method$UnityEngine.GameObject.GetComponent<CascadaChorroParticlesE>()
+00FDBB40  ldr      x1, [x8]                              
+00FDBB44  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FDBB48  cbz      x0, #0xfdbba4                         
+00FDBB4C  ldr      w8, [x19, #0x110]                      // self.color
+00FDBB50  str      w8, [x0, #0x30]                       
+00FDBB54  ldr      x0, [x19, #0x80]                       // self.Chorro
+00FDBB58  strb     wzr, [x19, #0x131]                     // self.noHayChorro
+00FDBB5C  cbz      x0, #0xfdbba4                         
+00FDBB60  mov      x1, xzr                               
+00FDBB64  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FDBB68  cbz      x0, #0xfdbba4                         
+00FDBB6C  mov      w1, wzr                               
+00FDBB70  mov      x2, xzr                               
+00FDBB74  bl       #0x20102bc                             // UnityEngine.Transform$$GetChild
+00FDBB78  cbz      x0, #0xfdbba4                         
+00FDBB7C  mov      x1, xzr                               
+00FDBB80  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FDBB84  str      x0, [x19, #0xa0]                       // self.esferaChorro
+00FDBB88  ldp      x20, x19, [sp, #0x40]                 
+00FDBB8C  ldp      x22, x21, [sp, #0x30]                 
+00FDBB90  ldr      x30, [sp, #0x28]                      
+00FDBB94  ldp      d9, d8, [sp, #0x18]                   
+00FDBB98  ldp      d11, d10, [sp, #8]                    
+00FDBB9C  ldr      d12, [sp], #0x50                      
+00FDBBA0  ret                                            
+00FDBBA4  bl       #0xe61da0                             

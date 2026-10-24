@@ -1,0 +1,152 @@
+// FuenteCubeta2$$OnTriggerEnter VA 0x109878C, inferred length 600
+void FuenteCubeta2__OnTriggerEnter (FuenteCubeta2_o* __this, UnityEngine_Collider_o* other, const MethodInfo* method);
+0109878C  stp      x30, x21, [sp, #-0x20]!               
+01098790  stp      x20, x19, [sp, #0x10]                 
+01098794  adrp     x21, #0x24fb000                       
+01098798  ldrb     w8, [x21, #0xf18]                     
+0109879C  mov      x20, x1                               
+010987A0  mov      x19, x0                               
+010987A4  tbnz     w8, #0, #0x10987f8                    
+010987A8  adrp     x0, #0x236d000                        
+010987AC  ldr      x0, [x0, #0x570]                       // [0x236D570] 'doActivarEsfera'
+010987B0  bl       #0xe61b78                             
+010987B4  adrp     x0, #0x236a000                        
+010987B8  ldr      x0, [x0, #0x5f0]                       // [0x236A5F0] 'color3'
+010987BC  bl       #0xe61b78                             
+010987C0  adrp     x0, #0x236a000                        
+010987C4  ldr      x0, [x0, #0x5f8]                       // [0x236A5F8] 'color2'
+010987C8  bl       #0xe61b78                             
+010987CC  adrp     x0, #0x236a000                        
+010987D0  ldr      x0, [x0, #0x600]                       // [0x236A600] 'color1'
+010987D4  bl       #0xe61b78                             
+010987D8  adrp     x0, #0x236a000                        
+010987DC  ldr      x0, [x0, #0x608]                       // [0x236A608] 'color4'
+010987E0  bl       #0xe61b78                             
+010987E4  adrp     x0, #0x236d000                        
+010987E8  ldr      x0, [x0, #0x448]                       // [0x236D448] 'Objeto'
+010987EC  bl       #0xe61b78                             
+010987F0  mov      w8, #1                                
+010987F4  strb     w8, [x21, #0xf18]                     
+010987F8  mov      w8, #1                                
+010987FC  strb     w8, [x19, #0x83]                       // self.activar
+01098800  strb     w8, [x19, #0x80]                       // self.ontrigger0
+01098804  cbz      x20, #0x10989e0                       
+01098808  mov      x0, x20                               
+0109880C  mov      x1, xzr                               
+01098810  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01098814  cbz      x0, #0x10989e0                        
+01098818  adrp     x21, #0x236d000                       
+0109881C  ldr      x21, [x21, #0x448]                     // [0x236D448] 'Objeto'
+01098820  mov      x1, xzr                               
+01098824  bl       #0x2006314                             // UnityEngine.GameObject$$get_layer
+01098828  ldr      x8, [x21]                             
+0109882C  mov      w21, w0                               
+01098830  mov      x1, xzr                               
+01098834  mov      x0, x8                                
+01098838  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+0109883C  cmp      w21, w0                               
+01098840  b.ne     #0x10989b0                            
+01098844  mov      w21, #1                               
+01098848  mov      x0, x20                               
+0109884C  mov      x1, xzr                               
+01098850  strb     w21, [x19, #0xc0]                      // self.triggered
+01098854  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01098858  ldrb     w8, [x19, #0x84]                       // self.activarFuente
+0109885C  str      x0, [x19, #0xc8]                       // self.otherObject
+01098860  strb     w21, [x19, #0x81]                      // self.ontrigger
+01098864  cbz      w8, #0x109898c                        
+01098868  mov      x0, x20                               
+0109886C  mov      x1, xzr                               
+01098870  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01098874  cbz      x0, #0x10989e0                        
+01098878  mov      x1, xzr                               
+0109887C  bl       #0x2003f5c                             // UnityEngine.GameObject$$get_tag
+01098880  adrp     x8, #0x236a000                        
+01098884  ldr      x8, [x8, #0x600]                       // [0x236A600] 'color1'
+01098888  mov      x2, xzr                               
+0109888C  ldr      x1, [x8]                              
+01098890  bl       #0x1960c7c                             // System.String$$op_Equality
+01098894  tbz      w0, #0, #0x10988a8                    
+01098898  ldr      x8, [x19, #0x50]                       // self.prefabAgua1
+0109889C  mov      w9, #1                                
+010988A0  str      w9, [x19, #0x90]                       // self.color
+010988A4  str      x8, [x19, #0x70]                       // self.prefabAgua
+010988A8  mov      x0, x20                               
+010988AC  mov      x1, xzr                               
+010988B0  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010988B4  cbz      x0, #0x10989e0                        
+010988B8  mov      x1, xzr                               
+010988BC  bl       #0x2003f5c                             // UnityEngine.GameObject$$get_tag
+010988C0  adrp     x8, #0x236a000                        
+010988C4  ldr      x8, [x8, #0x5f8]                       // [0x236A5F8] 'color2'
+010988C8  mov      x2, xzr                               
+010988CC  ldr      x1, [x8]                              
+010988D0  bl       #0x1960c7c                             // System.String$$op_Equality
+010988D4  tbz      w0, #0, #0x10988e8                    
+010988D8  ldr      x8, [x19, #0x58]                       // self.prefabAgua2
+010988DC  mov      w9, #2                                
+010988E0  str      w9, [x19, #0x90]                       // self.color
+010988E4  str      x8, [x19, #0x70]                       // self.prefabAgua
+010988E8  mov      x0, x20                               
+010988EC  mov      x1, xzr                               
+010988F0  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010988F4  cbz      x0, #0x10989e0                        
+010988F8  mov      x1, xzr                               
+010988FC  bl       #0x2003f5c                             // UnityEngine.GameObject$$get_tag
+01098900  adrp     x8, #0x236a000                        
+01098904  ldr      x8, [x8, #0x5f0]                       // [0x236A5F0] 'color3'
+01098908  mov      x2, xzr                               
+0109890C  ldr      x1, [x8]                              
+01098910  bl       #0x1960c7c                             // System.String$$op_Equality
+01098914  tbz      w0, #0, #0x1098928                    
+01098918  ldr      x8, [x19, #0x60]                       // self.prefabAgua3
+0109891C  mov      w9, #3                                
+01098920  str      w9, [x19, #0x90]                       // self.color
+01098924  str      x8, [x19, #0x70]                       // self.prefabAgua
+01098928  mov      x0, x20                               
+0109892C  mov      x1, xzr                               
+01098930  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01098934  cbz      x0, #0x10989e0                        
+01098938  mov      x1, xzr                               
+0109893C  bl       #0x2003f5c                             // UnityEngine.GameObject$$get_tag
+01098940  adrp     x8, #0x236a000                        
+01098944  ldr      x8, [x8, #0x608]                       // [0x236A608] 'color4'
+01098948  mov      x2, xzr                               
+0109894C  ldr      x1, [x8]                              
+01098950  bl       #0x1960c7c                             // System.String$$op_Equality
+01098954  tbz      w0, #0, #0x1098968                    
+01098958  ldr      x8, [x19, #0x68]                       // self.prefabAgua4
+0109895C  mov      w9, #4                                
+01098960  str      w9, [x19, #0x90]                       // self.color
+01098964  str      x8, [x19, #0x70]                       // self.prefabAgua
+01098968  ldr      x9, [x19, #0xb8]                       // self.agscr
+0109896C  cbz      x9, #0x10989e0                        
+01098970  ldr      w8, [x9, #0x20]                       
+01098974  cbz      w8, #0x1098980                        
+01098978  mov      w8, #1                                
+0109897C  b        #0x1098988                            
+01098980  ldr      w10, [x19, #0x20]                      // self.origen
+01098984  str      w10, [x9, #0x20]                      
+01098988  strb     w8, [x19, #0xb0]                       // self.activarDiferido
+0109898C  mov      x0, x20                               
+01098990  mov      x1, xzr                               
+01098994  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01098998  cbz      x0, #0x10989e0                        
+0109899C  mov      x1, xzr                               
+010989A0  bl       #0x2003f5c                             // UnityEngine.GameObject$$get_tag
+010989A4  ldrb     w8, [x19, #0xb0]                       // self.activarDiferido
+010989A8  str      x0, [x19, #0x88]                       // self.tagName
+010989AC  cbz      w8, #0x10989bc                        
+010989B0  ldp      x20, x19, [sp, #0x10]                 
+010989B4  ldp      x30, x21, [sp], #0x20                 
+010989B8  ret                                            
+010989BC  adrp     x8, #0x236d000                        
+010989C0  ldr      s0, [x19, #0x38]                       // self.espera
+010989C4  ldr      x8, [x8, #0x570]                       // [0x236D570] 'doActivarEsfera'
+010989C8  mov      x0, x19                               
+010989CC  ldp      x20, x19, [sp, #0x10]                 
+010989D0  mov      x2, xzr                               
+010989D4  ldr      x1, [x8]                              
+010989D8  ldp      x30, x21, [sp], #0x20                 
+010989DC  b        #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+010989E0  bl       #0xe61da0                             

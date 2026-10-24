@@ -1,0 +1,40 @@
+// MoveBloque$$checkMaxAltura VA 0x1033758, inferred length 152
+void MoveBloque__checkMaxAltura (MoveBloque_o* __this, const MethodInfo* method);
+01033758  stp      x30, x21, [sp, #-0x20]!               
+0103375C  stp      x20, x19, [sp, #0x10]                 
+01033760  adrp     x8, #0x5ff000                         
+01033764  ldr      s0, [x8, #0xd40]                      
+01033768  mov      x19, x0                               
+0103376C  add      x20, x0, #0x31c                       
+01033770  movi     v1.2d, #0000000000000000              
+01033774  mov      w21, #4                               
+01033778  str      d1, [x20]                             
+0103377C  ldr      s1, [x19, #0x1b8]                      // self.arribay
+01033780  mov      x0, x19                               
+01033784  fadd     s0, s0, s1                            
+01033788  str      s0, [x19, #0x308]                      // self.pary
+0103378C  bl       #0x10337f0                             // MoveBloque$$doCheckColl7
+01033790  ldrb     w8, [x19, #0x13a]                      // self.checkCollision7
+01033794  cbz      w8, #0x103379c                        
+01033798  str      w21, [x20]                            
+0103379C  ldrb     w8, [x19, #0x13b]                      // self.checkCollision8
+010337A0  cbz      w8, #0x10337a8                        
+010337A4  str      w21, [x19, #0x320]                     // self.altura8
+010337A8  cmp      w21, #0xc                             
+010337AC  b.eq     #0x10337bc                            
+010337B0  ldr      s0, [x19, #0x308]                      // self.pary
+010337B4  add      w21, w21, #1                          
+010337B8  b        #0x103377c                            
+010337BC  ldr      w9, [x19, #0x314]                      // self.alturaMax7
+010337C0  ldr      w8, [x19, #0x31c]                      // self.altura7
+010337C4  cmp      w9, w8                                
+010337C8  b.ge     #0x10337d0                            
+010337CC  str      w8, [x19, #0x314]                      // self.alturaMax7
+010337D0  ldr      w9, [x19, #0x318]                      // self.alturaMax8
+010337D4  ldr      w8, [x19, #0x320]                      // self.altura8
+010337D8  cmp      w9, w8                                
+010337DC  b.ge     #0x10337e4                            
+010337E0  str      w8, [x19, #0x318]                      // self.alturaMax8
+010337E4  ldp      x20, x19, [sp, #0x10]                 
+010337E8  ldp      x30, x21, [sp], #0x20                 
+010337EC  ret                                            

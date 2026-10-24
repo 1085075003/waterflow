@@ -1,0 +1,48 @@
+// GrupoLev0_1$$Update VA 0x10C3E20, inferred length 184
+void GrupoLev0_1__Update (GrupoLev0_1_o* __this, const MethodInfo* method);
+010C3E20  stp      d9, d8, [sp, #-0x30]!                 
+010C3E24  str      x30, [sp, #0x10]                      
+010C3E28  stp      x20, x19, [sp, #0x20]                 
+010C3E2C  mov      x19, x0                               
+010C3E30  mov      x0, xzr                               
+010C3E34  bl       #0x1fe9f30                             // UnityEngine.Screen$$get_width
+010C3E38  scvtf    s0, w0                                
+010C3E3C  mov      x0, xzr                               
+010C3E40  str      s0, [x19, #0x48]                       // self.Screenwidth
+010C3E44  bl       #0x1fe9f58                             // UnityEngine.Screen$$get_height
+010C3E48  scvtf    s0, w0                                
+010C3E4C  mov      x0, xzr                               
+010C3E50  str      s0, [x19, #0x4c]                       // self.Screenheight
+010C3E54  bl       #0x1fe9f30                             // UnityEngine.Screen$$get_width
+010C3E58  scvtf    s0, w0                                
+010C3E5C  fmov     s8, #0.50000000                       
+010C3E60  fmul     s0, s0, s8                            
+010C3E64  mov      x0, xzr                               
+010C3E68  str      s0, [x19, #0x20]                       // self.halfWidth
+010C3E6C  bl       #0x1fe9f58                             // UnityEngine.Screen$$get_height
+010C3E70  ldr      x8, [x19, #0x40]                       // self.esferaControl
+010C3E74  scvtf    s0, w0                                
+010C3E78  fmul     s0, s0, s8                            
+010C3E7C  str      s0, [x19, #0x24]                       // self.halfHeight
+010C3E80  cbz      x8, #0x10c3ed4                        
+010C3E84  mov      x0, x8                                
+010C3E88  mov      x1, xzr                               
+010C3E8C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C3E90  ldr      x8, [x19, #0x38]                       // self.c
+010C3E94  cbz      x8, #0x10c3ed4                        
+010C3E98  ldp      s8, s9, [x19, #0x20]                   // self.halfWidth
+010C3E9C  mov      x20, x0                               
+010C3EA0  mov      x0, x8                                
+010C3EA4  mov      x1, xzr                               
+010C3EA8  bl       #0x1fe1184                             // UnityEngine.Camera$$get_nearClipPlane
+010C3EAC  cbz      x20, #0x10c3ed4                       
+010C3EB0  mov      x0, x20                               
+010C3EB4  ldp      x20, x19, [sp, #0x20]                 
+010C3EB8  ldr      x30, [sp, #0x10]                      
+010C3EBC  mov      v2.16b, v0.16b                        
+010C3EC0  mov      v0.16b, v8.16b                        
+010C3EC4  mov      v1.16b, v9.16b                        
+010C3EC8  mov      x1, xzr                               
+010C3ECC  ldp      d9, d8, [sp], #0x30                   
+010C3ED0  b        #0x200ea50                             // UnityEngine.Transform$$set_position
+010C3ED4  bl       #0xe61da0                             

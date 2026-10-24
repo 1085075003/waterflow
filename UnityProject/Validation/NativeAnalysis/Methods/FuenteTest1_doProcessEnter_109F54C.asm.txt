@@ -1,0 +1,240 @@
+// FuenteTest1$$doProcessEnter VA 0x109F54C, inferred length 952
+void FuenteTest1__doProcessEnter (FuenteTest1_o* __this, const MethodInfo* method);
+0109F54C  stp      x30, x23, [sp, #-0x30]!               
+0109F550  stp      x22, x21, [sp, #0x10]                 
+0109F554  stp      x20, x19, [sp, #0x20]                 
+0109F558  adrp     x20, #0x24fb000                       
+0109F55C  ldrb     w8, [x20, #0xf4c]                     
+0109F560  mov      x19, x0                               
+0109F564  tbnz     w8, #0, #0x109f5f4                    
+0109F568  adrp     x0, #0x2368000                        
+0109F56C  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0109F570  bl       #0xe61b78                             
+0109F574  adrp     x0, #0x236d000                        
+0109F578  ldr      x0, [x0, #0x570]                       // [0x236D570] 'doActivarEsfera'
+0109F57C  bl       #0xe61b78                             
+0109F580  adrp     x0, #0x236a000                        
+0109F584  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+0109F588  bl       #0xe61b78                             
+0109F58C  adrp     x0, #0x236a000                        
+0109F590  ldr      x0, [x0, #0x5f0]                       // [0x236A5F0] 'color3'
+0109F594  bl       #0xe61b78                             
+0109F598  adrp     x0, #0x236a000                        
+0109F59C  ldr      x0, [x0, #0x5f8]                       // [0x236A5F8] 'color2'
+0109F5A0  bl       #0xe61b78                             
+0109F5A4  adrp     x0, #0x236a000                        
+0109F5A8  ldr      x0, [x0, #0x600]                       // [0x236A600] 'color1'
+0109F5AC  bl       #0xe61b78                             
+0109F5B0  adrp     x0, #0x236a000                        
+0109F5B4  ldr      x0, [x0, #0x608]                       // [0x236A608] 'color4'
+0109F5B8  bl       #0xe61b78                             
+0109F5BC  adrp     x0, #0x236a000                        
+0109F5C0  ldr      x0, [x0, #0x6c0]                       // [0x236A6C0] 'B'
+0109F5C4  bl       #0xe61b78                             
+0109F5C8  adrp     x0, #0x2368000                        
+0109F5CC  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+0109F5D0  bl       #0xe61b78                             
+0109F5D4  adrp     x0, #0x236a000                        
+0109F5D8  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+0109F5DC  bl       #0xe61b78                             
+0109F5E0  adrp     x0, #0x236a000                        
+0109F5E4  ldr      x0, [x0, #0x6f0]                       // [0x236A6F0] 'A'
+0109F5E8  bl       #0xe61b78                             
+0109F5EC  mov      w8, #1                                
+0109F5F0  strb     w8, [x20, #0xf4c]                     
+0109F5F4  ldr      x8, [x19, #0x250]                      // self.agscr
+0109F5F8  cbz      x8, #0x109f900                        
+0109F5FC  ldr      w9, [x19, #0x34]                       // self.origen
+0109F600  mov      x0, x19                               
+0109F604  mov      x1, xzr                               
+0109F608  str      w9, [x8, #0x20]                       
+0109F60C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109F610  cbz      x0, #0x109f900                        
+0109F614  mov      x1, xzr                               
+0109F618  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0109F61C  ldr      x8, [x19, #0x250]                      // self.agscr
+0109F620  str      s1, [x19, #0x2b4]                      // self.transformOld
+0109F624  cbz      x8, #0x109f900                        
+0109F628  ldr      x9, [x19, #0x280]                      // self.tagcolor
+0109F62C  adrp     x21, #0x236a000                       
+0109F630  mov      w22, #1                               
+0109F634  str      x9, [x8, #0x28]                       
+0109F638  ldr      w8, [x19, #0x34]                       // self.origen
+0109F63C  ldr      x21, [x21, #0x600]                     // [0x236A600] 'color1'
+0109F640  strb     w22, [x19, #0x258]                     // self.triggered
+0109F644  cmp      w8, #5                                
+0109F648  b.eq     #0x109f69c                            
+0109F64C  adrp     x23, #0x2368000                       
+0109F650  ldr      x23, [x23, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+0109F654  ldr      x20, [x19, #0x138]                     // self.Agua2
+0109F658  ldr      x0, [x23]                             
+0109F65C  ldr      w8, [x0, #0xe0]                       
+0109F660  cbnz     w8, #0x109f668                        
+0109F664  bl       #0xe61c80                             
+0109F668  mov      x0, x20                               
+0109F66C  mov      x1, xzr                               
+0109F670  mov      x2, xzr                               
+0109F674  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+0109F678  tbz      w0, #0, #0x109f69c                    
+0109F67C  ldr      x0, [x23]                             
+0109F680  ldr      x20, [x19, #0x138]                     // self.Agua2
+0109F684  ldr      w8, [x0, #0xe0]                       
+0109F688  cbnz     w8, #0x109f690                        
+0109F68C  bl       #0xe61c80                             
+0109F690  mov      x0, x20                               
+0109F694  mov      x1, xzr                               
+0109F698  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+0109F69C  strb     w22, [x19, #0x1d8]                     // self.ontrigger
+0109F6A0  ldr      x0, [x19, #0x280]                      // self.tagcolor
+0109F6A4  ldr      x1, [x21]                             
+0109F6A8  adrp     x20, #0x236a000                       
+0109F6AC  ldr      x20, [x20, #0x5f8]                     // [0x236A5F8] 'color2'
+0109F6B0  mov      x2, xzr                               
+0109F6B4  bl       #0x1960c7c                             // System.String$$op_Equality
+0109F6B8  tbz      w0, #0, #0x109f6c4                    
+0109F6BC  mov      w8, #1                                
+0109F6C0  str      w8, [x19, #0x1f0]                      // self.color
+0109F6C4  ldr      x0, [x19, #0x280]                      // self.tagcolor
+0109F6C8  ldr      x1, [x20]                             
+0109F6CC  adrp     x20, #0x236a000                       
+0109F6D0  ldr      x20, [x20, #0x5f0]                     // [0x236A5F0] 'color3'
+0109F6D4  mov      x2, xzr                               
+0109F6D8  bl       #0x1960c7c                             // System.String$$op_Equality
+0109F6DC  tbz      w0, #0, #0x109f6e8                    
+0109F6E0  mov      w8, #2                                
+0109F6E4  str      w8, [x19, #0x1f0]                      // self.color
+0109F6E8  ldr      x0, [x19, #0x280]                      // self.tagcolor
+0109F6EC  ldr      x1, [x20]                             
+0109F6F0  adrp     x20, #0x236a000                       
+0109F6F4  ldr      x20, [x20, #0x608]                     // [0x236A608] 'color4'
+0109F6F8  mov      x2, xzr                               
+0109F6FC  bl       #0x1960c7c                             // System.String$$op_Equality
+0109F700  tbz      w0, #0, #0x109f70c                    
+0109F704  mov      w8, #3                                
+0109F708  str      w8, [x19, #0x1f0]                      // self.color
+0109F70C  ldr      x0, [x19, #0x280]                      // self.tagcolor
+0109F710  ldr      x1, [x20]                             
+0109F714  mov      x2, xzr                               
+0109F718  bl       #0x1960c7c                             // System.String$$op_Equality
+0109F71C  tbz      w0, #0, #0x109f728                    
+0109F720  mov      w8, #4                                
+0109F724  str      w8, [x19, #0x1f0]                      // self.color
+0109F728  adrp     x20, #0x2368000                       
+0109F72C  ldrb     w8, [x19, #0x1df]                      // self.activarFuente
+0109F730  ldr      x20, [x20, #0xf50]                     // [0x2368F50] ''
+0109F734  cbz      w8, #0x109f78c                        
+0109F738  ldr      w8, [x19, #0x1f0]                      // self.color
+0109F73C  sub      w8, w8, #1                            
+0109F740  cmp      w8, #3                                
+0109F744  b.hi     #0x109f784                            
+0109F748  adrp     x9, #0x621000                         
+0109F74C  add      x9, x9, #0x135                        
+0109F750  adr      x10, #0x109f760                       
+0109F754  ldrb     w11, [x9, x8]                         
+0109F758  add      x10, x10, x11, lsl #2                 
+0109F75C  br       x10                                   
+0109F760  add      x8, x19, #0x178                       
+0109F764  b        #0x109f77c                            
+0109F768  add      x8, x19, #0x180                       
+0109F76C  b        #0x109f77c                            
+0109F770  add      x8, x19, #0x188                       
+0109F774  b        #0x109f77c                            
+0109F778  add      x8, x19, #0x190                       
+0109F77C  ldr      x8, [x8]                              
+0109F780  str      x8, [x19, #0x1c0]                      // self.prefabAgua
+0109F784  mov      x0, x19                               
+0109F788  bl       #0x10a0154                             // FuenteTest1$$doInstanciarAgua
+0109F78C  ldr      x0, [x19, #0x2b8]                      // self.conOri
+0109F790  ldr      x1, [x20]                             
+0109F794  mov      x2, xzr                               
+0109F798  bl       #0x1960c80                             // System.String$$op_Inequality
+0109F79C  tbz      w0, #0, #0x109f8b4                    
+0109F7A0  adrp     x21, #0x236a000                       
+0109F7A4  ldr      x0, [x19, #0x2b8]                      // self.conOri
+0109F7A8  ldr      x21, [x21, #0x6f0]                     // [0x236A6F0] 'A'
+0109F7AC  mov      x2, xzr                               
+0109F7B0  ldr      x1, [x21]                             
+0109F7B4  bl       #0x1960c7c                             // System.String$$op_Equality
+0109F7B8  tbnz     w0, #0, #0x109f7d8                    
+0109F7BC  adrp     x8, #0x236a000                        
+0109F7C0  ldr      x0, [x19, #0x2b8]                      // self.conOri
+0109F7C4  ldr      x8, [x8, #0x6c0]                       // [0x236A6C0] 'B'
+0109F7C8  mov      x2, xzr                               
+0109F7CC  ldr      x1, [x8]                              
+0109F7D0  bl       #0x1960c7c                             // System.String$$op_Equality
+0109F7D4  tbz      w0, #0, #0x109f8ac                    
+0109F7D8  ldr      x0, [x19, #0x2b8]                      // self.conOri
+0109F7DC  ldr      x1, [x21]                             
+0109F7E0  mov      x2, xzr                               
+0109F7E4  bl       #0x1960c7c                             // System.String$$op_Equality
+0109F7E8  tbz      w0, #0, #0x109f800                    
+0109F7EC  adrp     x8, #0x236a000                        
+0109F7F0  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+0109F7F4  ldr      x0, [x8]                              
+0109F7F8  str      x0, [x19, #0x2b8]                      // self.conOri
+0109F7FC  b        #0x109f804                            
+0109F800  ldr      x0, [x19, #0x2b8]                      // self.conOri
+0109F804  adrp     x22, #0x236a000                       
+0109F808  ldr      x22, [x22, #0x6c0]                     // [0x236A6C0] 'B'
+0109F80C  mov      x2, xzr                               
+0109F810  ldr      x1, [x22]                             
+0109F814  bl       #0x1960c7c                             // System.String$$op_Equality
+0109F818  tbz      w0, #0, #0x109f82c                    
+0109F81C  adrp     x8, #0x236a000                        
+0109F820  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+0109F824  ldr      x8, [x8]                              
+0109F828  str      x8, [x19, #0x2b8]                      // self.conOri
+0109F82C  ldr      w23, [x19, #0x304]                     // self.faseMech
+0109F830  mov      x0, x19                               
+0109F834  bl       #0x10a0988                             // FuenteTest1$$doTratarCylind
+0109F838  mov      x0, x19                               
+0109F83C  cmp      w23, #1                               
+0109F840  b.ne     #0x109f850                            
+0109F844  bl       #0x10a0b74                             // FuenteTest1$$doActivarMech
+0109F848  mov      w8, #2                                
+0109F84C  b        #0x109f858                            
+0109F850  bl       #0x10a0d5c                             // FuenteTest1$$doDesactivarMech
+0109F854  mov      w8, #1                                
+0109F858  str      w8, [x19, #0x304]                      // self.faseMech
+0109F85C  adrp     x8, #0x236a000                        
+0109F860  ldr      x0, [x19, #0x2b8]                      // self.conOri
+0109F864  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+0109F868  mov      x2, xzr                               
+0109F86C  ldr      x1, [x8]                              
+0109F870  bl       #0x1960c7c                             // System.String$$op_Equality
+0109F874  tbz      w0, #0, #0x109f884                    
+0109F878  ldr      x0, [x21]                             
+0109F87C  str      x0, [x19, #0x2b8]                      // self.conOri
+0109F880  b        #0x109f888                            
+0109F884  ldr      x0, [x19, #0x2b8]                      // self.conOri
+0109F888  adrp     x8, #0x236a000                        
+0109F88C  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+0109F890  mov      x2, xzr                               
+0109F894  ldr      x1, [x8]                              
+0109F898  bl       #0x1960c7c                             // System.String$$op_Equality
+0109F89C  tbz      w0, #0, #0x109f8b4                    
+0109F8A0  ldr      x8, [x22]                             
+0109F8A4  str      x8, [x19, #0x2b8]                      // self.conOri
+0109F8A8  b        #0x109f8b4                            
+0109F8AC  mov      x0, x19                               
+0109F8B0  bl       #0x10a0b74                             // FuenteTest1$$doActivarMech
+0109F8B4  ldr      x8, [x19, #0x280]                      // self.tagcolor
+0109F8B8  ldr      x0, [x19, #0x2c0]                      // self.conHole
+0109F8BC  mov      x2, xzr                               
+0109F8C0  str      x8, [x19, #0x1e8]                      // self.tagName
+0109F8C4  ldr      x1, [x20]                             
+0109F8C8  adrp     x20, #0x236d000                       
+0109F8CC  ldr      x20, [x20, #0x570]                     // [0x236D570] 'doActivarEsfera'
+0109F8D0  bl       #0x1960c80                             // System.String$$op_Inequality
+0109F8D4  tbz      w0, #0, #0x109f8e0                    
+0109F8D8  mov      x0, x19                               
+0109F8DC  bl       #0x10a0f44                             // FuenteTest1$$doActivarDoor
+0109F8E0  ldr      s0, [x19, #0xb8]                       // self.espera
+0109F8E4  ldr      x1, [x20]                             
+0109F8E8  mov      x0, x19                               
+0109F8EC  ldp      x20, x19, [sp, #0x20]                 
+0109F8F0  ldp      x22, x21, [sp, #0x10]                 
+0109F8F4  mov      x2, xzr                               
+0109F8F8  ldp      x30, x23, [sp], #0x30                 
+0109F8FC  b        #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+0109F900  bl       #0xe61da0                             

@@ -1,0 +1,127 @@
+// SaveLoadManager$$okSteps VA 0x1020E98, inferred length 500
+void SaveLoadManager__okSteps (SaveLoadManager_o* __this, const MethodInfo* method);
+01020E98  stp      d9, d8, [sp, #-0x40]!                 
+01020E9C  str      x30, [sp, #0x10]                      
+01020EA0  stp      x22, x21, [sp, #0x20]                 
+01020EA4  stp      x20, x19, [sp, #0x30]                 
+01020EA8  adrp     x20, #0x24fb000                       
+01020EAC  ldrb     w8, [x20, #0xcb4]                     
+01020EB0  mov      x19, x0                               
+01020EB4  tbnz     w8, #0, #0x1020efc                    
+01020EB8  adrp     x0, #0x236a000                        
+01020EBC  ldr      x0, [x0, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01020EC0  bl       #0xe61b78                             
+01020EC4  adrp     x0, #0x236b000                        
+01020EC8  ldr      x0, [x0, #0x530]                       // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+01020ECC  bl       #0xe61b78                             
+01020ED0  adrp     x0, #0x236a000                        
+01020ED4  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+01020ED8  bl       #0xe61b78                             
+01020EDC  adrp     x0, #0x236b000                        
+01020EE0  ldr      x0, [x0, #0x840]                       // [0x236B840] 'backbutton2'
+01020EE4  bl       #0xe61b78                             
+01020EE8  adrp     x0, #0x236b000                        
+01020EEC  ldr      x0, [x0, #0x848]                       // [0x236B848] 'doMoveBloque2'
+01020EF0  bl       #0xe61b78                             
+01020EF4  mov      w8, #1                                
+01020EF8  strb     w8, [x20, #0xcb4]                     
+01020EFC  ldr      x0, [x19, #0x198]                      // self.audioManager
+01020F00  cbz      x0, #0x1021088                        
+01020F04  ldr      x1, [x19, #0x188]                      // self.click
+01020F08  mov      x2, xzr                               
+01020F0C  bl       #0x1028540                             // AudioManager$$PlaySound
+01020F10  ldr      x0, [x19, #0xb8]                       // self.stepsButton
+01020F14  mov      w8, #1                                
+01020F18  strb     w8, [x19, #0x3cc]                      // self.dosteps
+01020F1C  cbz      x0, #0x1021088                        
+01020F20  mov      w1, #1                                
+01020F24  mov      x2, xzr                               
+01020F28  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01020F2C  ldr      x0, [x19, #0xb8]                       // self.stepsButton
+01020F30  cbz      x0, #0x1021088                        
+01020F34  adrp     x20, #0x236a000                       
+01020F38  ldr      x20, [x20, #0xf48]                     // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01020F3C  ldr      x1, [x20]                             
+01020F40  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01020F44  cbz      x0, #0x1021088                        
+01020F48  mov      w1, wzr                               
+01020F4C  mov      x2, xzr                               
+01020F50  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01020F54  ldr      x0, [x19, #0xd0]                       // self.steps1
+01020F58  cbz      x0, #0x1021088                        
+01020F5C  adrp     x21, #0x236b000                       
+01020F60  ldr      x21, [x21, #0x530]                     // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+01020F64  ldr      x1, [x21]                             
+01020F68  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01020F6C  cbz      x0, #0x1021088                        
+01020F70  ldr      x8, [x0]                              
+01020F74  adrp     x10, #0x600000                        
+01020F78  ldr      s8, [x10, #0x1a0]                     
+01020F7C  ldr      x9, [x8, #0x2a8]                      
+01020F80  ldr      x1, [x8, #0x2b0]                      
+01020F84  adrp     x8, #0x5ff000                         
+01020F88  ldr      s9, [x8, #0xc88]                      
+01020F8C  mov      v3.16b, v8.16b                        
+01020F90  mov      v0.16b, v9.16b                        
+01020F94  mov      v1.16b, v9.16b                        
+01020F98  mov      v2.16b, v9.16b                        
+01020F9C  blr      x9                                    
+01020FA0  ldr      x0, [x19, #0xb0]                       // self.backButton1
+01020FA4  cbz      x0, #0x1021088                        
+01020FA8  mov      w1, #1                                
+01020FAC  mov      x2, xzr                               
+01020FB0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01020FB4  ldr      x0, [x19, #0xb0]                       // self.backButton1
+01020FB8  cbz      x0, #0x1021088                        
+01020FBC  ldr      x1, [x20]                             
+01020FC0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01020FC4  cbz      x0, #0x1021088                        
+01020FC8  mov      w1, wzr                               
+01020FCC  mov      x2, xzr                               
+01020FD0  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01020FD4  ldr      x0, [x19, #0xc8]                       // self.back1
+01020FD8  cbz      x0, #0x1021088                        
+01020FDC  ldr      x1, [x21]                             
+01020FE0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01020FE4  cbz      x0, #0x1021088                        
+01020FE8  ldr      x8, [x0]                              
+01020FEC  adrp     x20, #0x236a000                       
+01020FF0  adrp     x21, #0x236b000                       
+01020FF4  adrp     x22, #0x236b000                       
+01020FF8  ldr      x9, [x8, #0x2a8]                      
+01020FFC  ldr      x1, [x8, #0x2b0]                      
+01021000  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+01021004  ldr      x21, [x21, #0x840]                     // [0x236B840] 'backbutton2'
+01021008  ldr      x22, [x22, #0x848]                     // [0x236B848] 'doMoveBloque2'
+0102100C  mov      v0.16b, v9.16b                        
+01021010  mov      v1.16b, v9.16b                        
+01021014  mov      v2.16b, v9.16b                        
+01021018  mov      v3.16b, v8.16b                        
+0102101C  blr      x9                                    
+01021020  mov      x0, x19                               
+01021024  bl       #0x102108c                             // SaveLoadManager$$doInicializar
+01021028  mov      x0, x19                               
+0102102C  bl       #0x101f914                             // SaveLoadManager$$doBorradoPiezas
+01021030  ldr      x8, [x20]                             
+01021034  mov      w9, #1                                
+01021038  mov      x0, x19                               
+0102103C  ldr      x8, [x8, #0xb8]                       
+01021040  strb     w9, [x8, #0x9d]                       
+01021044  strb     wzr, [x19, #0x381]                     // self.recuperarSuelo
+01021048  str      wzr, [x19, #0x3a8]                     // self.modoProceso
+0102104C  bl       #0x10138d0                             // SaveLoadManager$$doCargarEscena
+01021050  ldr      x1, [x21]                             
+01021054  fmov     s0, #6.00000000                       
+01021058  mov      x0, x19                               
+0102105C  mov      x2, xzr                               
+01021060  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01021064  ldr      x1, [x22]                             
+01021068  mov      x0, x19                               
+0102106C  ldp      x20, x19, [sp, #0x30]                 
+01021070  ldp      x22, x21, [sp, #0x20]                 
+01021074  ldr      x30, [sp, #0x10]                      
+01021078  fmov     s0, #2.00000000                       
+0102107C  mov      x2, xzr                               
+01021080  ldp      d9, d8, [sp], #0x40                   
+01021084  b        #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01021088  bl       #0xe61da0                             

@@ -1,0 +1,106 @@
+// ObservadorResorte$$doNumPiezasEncima VA 0x10CCC78, inferred length 416
+void ObservadorResorte__doNumPiezasEncima (ObservadorResorte_o* __this, const MethodInfo* method);
+010CCC78  str      d8, [sp, #-0x20]!                     
+010CCC7C  str      x30, [sp, #8]                         
+010CCC80  stp      x20, x19, [sp, #0x10]                 
+010CCC84  adrp     x20, #0x24fc000                       
+010CCC88  ldrb     w8, [x20, #3]                         
+010CCC8C  mov      x19, x0                               
+010CCC90  tbnz     w8, #0, #0x10ccca8                    
+010CCC94  adrp     x0, #0x236b000                        
+010CCC98  ldr      x0, [x0, #0x498]                       // [0x236B498] MoveBloque_TypeInfo
+010CCC9C  bl       #0xe61b78                             
+010CCCA0  mov      w8, #1                                
+010CCCA4  strb     w8, [x20, #3]                         
+010CCCA8  mov      w8, #0x3333                           
+010CCCAC  movi     v0.2d, #0000000000000000              
+010CCCB0  movk     w8, #0x40f3, lsl #16                  
+010CCCB4  mov      x0, x19                               
+010CCCB8  str      wzr, [x19, #0xf4]                      // self.numPiezas
+010CCCBC  str      q0, [x19, #0x210]                      // self.objeto1
+010CCCC0  str      w8, [x19, #0x1e4]                      // self.variay
+010CCCC4  strh     wzr, [x19, #0x19e]                     // self.sw_obj1
+010CCCC8  bl       #0x10cead4                             // ObservadorResorte$$docheckPlanoguia
+010CCCCC  ldrb     w8, [x19, #0x1a7]                      // self.checkCollision3
+010CCCD0  cbz      w8, #0x10ccd00                        
+010CCCD4  adrp     x20, #0x236b000                       
+010CCCD8  ldr      x20, [x20, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+010CCCDC  ldr      x0, [x20]                             
+010CCCE0  ldr      w8, [x0, #0xe0]                       
+010CCCE4  cbnz     w8, #0x10cccf0                        
+010CCCE8  bl       #0xe61c80                             
+010CCCEC  ldr      x0, [x20]                             
+010CCCF0  ldr      x8, [x0, #0xb8]                       
+010CCCF4  ldrb     w8, [x8, #0xe]                        
+010CCCF8  cbz      w8, #0x10ccdf4                        
+010CCCFC  strb     wzr, [x19, #0x1a7]                     // self.checkCollision3
+010CCD00  mov      x0, x19                               
+010CCD04  strb     wzr, [x19, #0x1a9]                     // self.checkCollisionFijo
+010CCD08  bl       #0x10ceb3c                             // ObservadorResorte$$doCheckCollision1
+010CCD0C  ldrb     w8, [x19, #0x1a5]                      // self.checkCollision1
+010CCD10  cbz      w8, #0x10cce04                        
+010CCD14  ldr      x0, [x19, #0x208]                      // self.otherObject
+010CCD18  mov      w8, #1                                
+010CCD1C  str      w8, [x19, #0xf4]                       // self.numPiezas
+010CCD20  str      x0, [x19, #0x210]                      // self.objeto1
+010CCD24  cbz      x0, #0x10cce14                        
+010CCD28  mov      x1, xzr                               
+010CCD2C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CCD30  cbz      x0, #0x10cce14                        
+010CCD34  mov      x1, xzr                               
+010CCD38  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CCD3C  cbz      x0, #0x10cce14                        
+010CCD40  mov      x1, xzr                               
+010CCD44  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010CCD48  adrp     x8, #0x600000                         
+010CCD4C  str      s0, [x19, #0x154]                      // self.puntoInicial1
+010CCD50  ldr      s0, [x19, #0x1e4]                      // self.variay
+010CCD54  ldr      s8, [x8, #0x198]                      
+010CCD58  mov      w8, #1                                
+010CCD5C  mov      x0, x19                               
+010CCD60  str      s1, [x19, #0x158]                     
+010CCD64  fadd     s0, s0, s8                            
+010CCD68  str      s2, [x19, #0x15c]                     
+010CCD6C  strb     w8, [x19, #0x19e]                      // self.sw_obj1
+010CCD70  str      s0, [x19, #0x1e4]                      // self.variay
+010CCD74  bl       #0x10ceb3c                             // ObservadorResorte$$doCheckCollision1
+010CCD78  ldrb     w8, [x19, #0x1a5]                      // self.checkCollision1
+010CCD7C  cbz      w8, #0x10cce04                        
+010CCD80  ldr      x0, [x19, #0x208]                      // self.otherObject
+010CCD84  mov      w8, #2                                
+010CCD88  str      w8, [x19, #0xf4]                       // self.numPiezas
+010CCD8C  str      x0, [x19, #0x218]                      // self.objeto2
+010CCD90  cbz      x0, #0x10cce14                        
+010CCD94  mov      x1, xzr                               
+010CCD98  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010CCD9C  cbz      x0, #0x10cce14                        
+010CCDA0  mov      x1, xzr                               
+010CCDA4  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010CCDA8  cbz      x0, #0x10cce14                        
+010CCDAC  mov      x1, xzr                               
+010CCDB0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010CCDB4  str      s0, [x19, #0x160]                      // self.puntoInicial2
+010CCDB8  ldr      s0, [x19, #0x1e4]                      // self.variay
+010CCDBC  mov      w8, #1                                
+010CCDC0  mov      x0, x19                               
+010CCDC4  str      s1, [x19, #0x164]                     
+010CCDC8  fadd     s0, s0, s8                            
+010CCDCC  str      s2, [x19, #0x168]                     
+010CCDD0  strb     w8, [x19, #0x19f]                      // self.sw_obj2
+010CCDD4  str      s0, [x19, #0x1e4]                      // self.variay
+010CCDD8  bl       #0x10ceb3c                             // ObservadorResorte$$doCheckCollision1
+010CCDDC  ldrb     w8, [x19, #0x1a5]                      // self.checkCollision1
+010CCDE0  cbz      w8, #0x10cce04                        
+010CCDE4  mov      w8, #3                                
+010CCDE8  str      w8, [x19, #0xf4]                       // self.numPiezas
+010CCDEC  strh     wzr, [x19, #0x19e]                     // self.sw_obj1
+010CCDF0  b        #0x10cce04                            
+010CCDF4  ldrb     w8, [x19, #0x1a7]                      // self.checkCollision3
+010CCDF8  cbz      w8, #0x10ccd00                        
+010CCDFC  mov      w8, #3                                
+010CCE00  str      w8, [x19, #0xf4]                       // self.numPiezas
+010CCE04  ldp      x20, x19, [sp, #0x10]                 
+010CCE08  ldr      x30, [sp, #8]                         
+010CCE0C  ldr      d8, [sp], #0x20                       
+010CCE10  ret                                            
+010CCE14  bl       #0xe61da0                             

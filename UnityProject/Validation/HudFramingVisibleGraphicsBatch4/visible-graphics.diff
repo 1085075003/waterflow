@@ -1,0 +1,60 @@
+--- a/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
++++ b/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
+@@ -24,6 +24,7 @@
+     readonly List<Vector3[]> structuralBoxes = new List<Vector3[]>();
+     int structuralBoxCount;
+     readonly List<SaveLoadManager> hudLoaders = new List<SaveLoadManager>();
++    readonly List<UnityEngine.UI.Graphic> hudGraphics = new List<UnityEngine.UI.Graphic>();
+     readonly Vector3[] hudWorldCorners = new Vector3[4];
+     readonly List<HudRegion> hudRegionPool = new List<HudRegion>();
+     readonly Dictionary<RectTransform,string> hudPaths = new Dictionary<RectTransform,string>();
+@@ -63,8 +64,13 @@
+         basePosition=transform.position; hasApplied=false;
+         ground.Clear();
+         Scene scene=SceneManager.GetActiveScene();
+-        hudLoaders.Clear(); hudPaths.Clear();
+-        foreach(SaveLoadManager loader in OriginalScenePresentation.Components<SaveLoadManager>(scene)) hudLoaders.Add(loader);
++        hudLoaders.Clear(); hudPaths.Clear(); hudGraphics.Clear();
++        foreach(SaveLoadManager loader in OriginalScenePresentation.Components<SaveLoadManager>(scene))
++        {
++            hudLoaders.Add(loader);
++            CacheHudGraphics(CommonAncestor(loader.MusicButton,loader.SoundButton));
++            CacheHudGraphics(CommonAncestor(loader.backButton1,loader.stepsButton));
++        }
+         foreach(ConfigSuelo floor in OriginalScenePresentation.Components<ConfigSuelo>(scene))
+         {
+             Renderer renderer=floor.GetComponent<Renderer>(); if(renderer!=null) ground.Add(renderer);
+@@ -153,12 +159,12 @@
+             AddHudControl(loader.stepsButton); AddHudControl(loader.botonNumSol);
+             AddHudControl(loader.barra==null ? null : loader.barra.gameObject);
+             AddHudControl(loader.barra1==null ? null : loader.barra1.gameObject);
+-            // The source scene's panel2 draws the visible backdrop around these
+-            // controls. Stop at their lowest shared ancestor; reject screen-sized
+-            // wrappers below, even if a different original scene uses one.
+-            Transform common=CommonAncestor(loader.MusicButton,loader.SoundButton);
+-            if(common!=null) AddHudControl(common.gameObject);
+-        }
++        }
++        // Source panel2 itself is an invisible layout container (Image disabled).
++        // Protect its real enabled artwork, including the cuadro frame, instead
++        // of treating unused container padding as an obstruction.
++        foreach(UnityEngine.UI.Graphic graphic in hudGraphics)
++            if(graphic!=null && graphic.isActiveAndEnabled && graphic.color.a>0) AddHudControl(graphic.gameObject);
+         foreach(RectTransform control in hudControls)
+         {
+             Rect rect;
+@@ -178,6 +184,14 @@
+             region.path=path; region.viewport=rect; output.Add(region);
+         }
+     }
++    void CacheHudGraphics(Transform root)
++    {
++        // All four original gameplay scenes name this exact shared HUD group
++        // panel2. A Canvas or broader common ancestor must never admit modals.
++        if(root==null || root.name!="panel2" || root.GetComponent<Canvas>()!=null) return;
++        foreach(UnityEngine.UI.Graphic graphic in root.GetComponentsInChildren<UnityEngine.UI.Graphic>(true))
++            if(!hudGraphics.Contains(graphic)) hudGraphics.Add(graphic);
++    }
+     void AddHudControl(GameObject item)
+     {
+         if(item==null || !item.activeInHierarchy) return;

@@ -1,0 +1,635 @@
+// Resorte2$$OnEnable VA 0x100C688, inferred length 2532
+void Resorte2__OnEnable (Resorte2_o* __this, const MethodInfo* method);
+0100C688  str      d10, [sp, #-0x40]!                    
+0100C68C  stp      d9, d8, [sp, #0x10]                   
+0100C690  stp      x30, x21, [sp, #0x20]                 
+0100C694  stp      x20, x19, [sp, #0x30]                 
+0100C698  adrp     x20, #0x24fb000                       
+0100C69C  adrp     x21, #0x236a000                       
+0100C6A0  ldrb     w8, [x20, #0xc95]                     
+0100C6A4  ldr      x21, [x21, #0x9d0]                     // [0x236A9D0] AudioManager_TypeInfo
+0100C6A8  mov      x19, x0                               
+0100C6AC  tbnz     w8, #0, #0x100c6d0                    
+0100C6B0  adrp     x0, #0x236a000                        
+0100C6B4  ldr      x0, [x0, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+0100C6B8  bl       #0xe61b78                             
+0100C6BC  adrp     x0, #0x236b000                        
+0100C6C0  ldr      x0, [x0, #0x4c0]                       // [0x236B4C0] 'activarComienzo'
+0100C6C4  bl       #0xe61b78                             
+0100C6C8  mov      w8, #1                                
+0100C6CC  strb     w8, [x20, #0xc95]                     
+0100C6D0  ldr      x8, [x21]                             
+0100C6D4  ldr      x0, [x19, #0x20]                       // self.objeto1
+0100C6D8  movi     v0.2d, #0000000000000000              
+0100C6DC  ldr      x8, [x8, #0xb8]                       
+0100C6E0  ldr      x8, [x8]                              
+0100C6E4  str      d0, [x19, #0x328]                      // self.empezar
+0100C6E8  str      x8, [x19, #0x320]                      // self.audioManager
+0100C6EC  cbz      x0, #0x100d068                        
+0100C6F0  mov      x1, xzr                               
+0100C6F4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C6F8  cbz      x0, #0x100d068                        
+0100C6FC  adrp     x8, #0x5ff000                         
+0100C700  ldr      s8, [x8, #0xda0]                      
+0100C704  mov      w8, #0x42200000                       
+0100C708  fmov     s0, wzr                               
+0100C70C  fmov     s2, w8                                
+0100C710  mov      v1.16b, v8.16b                        
+0100C714  mov      x1, xzr                               
+0100C718  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100C71C  ldr      x0, [x19, #0x20]                       // self.objeto1
+0100C720  cbz      x0, #0x100d068                        
+0100C724  mov      x1, xzr                               
+0100C728  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C72C  cbz      x0, #0x100d068                        
+0100C730  mov      x1, xzr                               
+0100C734  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100C738  ldr      x0, [x19, #0x20]                       // self.objeto1
+0100C73C  str      s0, [x19, #0x80]                       // self.objeto1_x1
+0100C740  cbz      x0, #0x100d068                        
+0100C744  mov      x1, xzr                               
+0100C748  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C74C  cbz      x0, #0x100d068                        
+0100C750  mov      x1, xzr                               
+0100C754  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100C758  ldr      x0, [x19, #0x20]                       // self.objeto1
+0100C75C  str      s1, [x19, #0x84]                       // self.objeto1_y1
+0100C760  cbz      x0, #0x100d068                        
+0100C764  mov      x1, xzr                               
+0100C768  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C76C  cbz      x0, #0x100d068                        
+0100C770  mov      x1, xzr                               
+0100C774  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100C778  adrp     x8, #0x600000                         
+0100C77C  ldr      s9, [x8, #0x198]                      
+0100C780  adrp     x8, #0x5ff000                         
+0100C784  ldp      s0, s1, [x19, #0x80]                   // self.objeto1_x1
+0100C788  ldr      s10, [x8, #0xf10]                     
+0100C78C  ldr      x0, [x19, #0x28]                       // self.objeto2
+0100C790  str      s2, [x19, #0x88]                       // self.objeto1_z1
+0100C794  str      s0, [x19, #0x110]                      // self.fin1_0
+0100C798  str      s1, [x19, #0x114]                     
+0100C79C  str      s0, [x19, #0x11c]                      // self.fin1_1
+0100C7A0  str      s0, [x19, #0x128]                      // self.fin1_2
+0100C7A4  fadd     s0, s1, s9                            
+0100C7A8  fadd     s1, s1, s10                           
+0100C7AC  str      s2, [x19, #0x118]                     
+0100C7B0  str      s2, [x19, #0x124]                     
+0100C7B4  str      s0, [x19, #0x120]                     
+0100C7B8  str      s1, [x19, #0x12c]                     
+0100C7BC  str      s2, [x19, #0x130]                     
+0100C7C0  cbz      x0, #0x100d068                        
+0100C7C4  mov      x1, xzr                               
+0100C7C8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C7CC  cbz      x0, #0x100d068                        
+0100C7D0  adrp     x8, #0x5ff000                         
+0100C7D4  ldr      s1, [x8, #0xc1c]                      
+0100C7D8  mov      w8, #0x42200000                       
+0100C7DC  fmov     s0, wzr                               
+0100C7E0  fmov     s2, w8                                
+0100C7E4  mov      x1, xzr                               
+0100C7E8  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100C7EC  ldr      x0, [x19, #0x28]                       // self.objeto2
+0100C7F0  cbz      x0, #0x100d068                        
+0100C7F4  mov      x1, xzr                               
+0100C7F8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C7FC  cbz      x0, #0x100d068                        
+0100C800  mov      x1, xzr                               
+0100C804  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100C808  ldr      x0, [x19, #0x28]                       // self.objeto2
+0100C80C  str      s0, [x19, #0x8c]                       // self.objeto2_x1
+0100C810  cbz      x0, #0x100d068                        
+0100C814  mov      x1, xzr                               
+0100C818  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C81C  cbz      x0, #0x100d068                        
+0100C820  mov      x1, xzr                               
+0100C824  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100C828  ldr      x0, [x19, #0x28]                       // self.objeto2
+0100C82C  str      s1, [x19, #0x90]                       // self.objeto2_y1
+0100C830  cbz      x0, #0x100d068                        
+0100C834  mov      x1, xzr                               
+0100C838  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C83C  cbz      x0, #0x100d068                        
+0100C840  mov      x1, xzr                               
+0100C844  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100C848  ldp      s0, s1, [x19, #0x8c]                   // self.objeto2_x1
+0100C84C  ldr      x0, [x19, #0x78]                       // self.objeto12
+0100C850  str      s2, [x19, #0x94]                       // self.objeto2_z1
+0100C854  str      s2, [x19, #0x13c]                     
+0100C858  str      s1, [x19, #0x138]                     
+0100C85C  fadd     s3, s1, s9                            
+0100C860  fadd     s1, s1, s10                           
+0100C864  str      s2, [x19, #0x148]                     
+0100C868  str      s0, [x19, #0x134]                      // self.fin2_0
+0100C86C  str      s0, [x19, #0x140]                      // self.fin2_1
+0100C870  str      s0, [x19, #0x14c]                      // self.fin2_2
+0100C874  str      s3, [x19, #0x144]                     
+0100C878  str      s1, [x19, #0x150]                     
+0100C87C  str      s2, [x19, #0x154]                     
+0100C880  cbz      x0, #0x100d068                        
+0100C884  mov      x1, xzr                               
+0100C888  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C88C  cbz      x0, #0x100d068                        
+0100C890  adrp     x8, #0x5ff000                         
+0100C894  ldr      s1, [x8, #0xc7c]                      
+0100C898  mov      w8, #0x42200000                       
+0100C89C  fmov     s0, wzr                               
+0100C8A0  fmov     s2, w8                                
+0100C8A4  mov      x1, xzr                               
+0100C8A8  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100C8AC  ldr      x0, [x19, #0x78]                       // self.objeto12
+0100C8B0  cbz      x0, #0x100d068                        
+0100C8B4  mov      x1, xzr                               
+0100C8B8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C8BC  cbz      x0, #0x100d068                        
+0100C8C0  mov      x1, xzr                               
+0100C8C4  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100C8C8  ldr      x0, [x19, #0x78]                       // self.objeto12
+0100C8CC  str      s0, [x19, #0x104]                      // self.objeto12_x1
+0100C8D0  cbz      x0, #0x100d068                        
+0100C8D4  mov      x1, xzr                               
+0100C8D8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C8DC  cbz      x0, #0x100d068                        
+0100C8E0  mov      x1, xzr                               
+0100C8E4  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100C8E8  ldr      x0, [x19, #0x78]                       // self.objeto12
+0100C8EC  str      s1, [x19, #0x108]                      // self.objeto12_y1
+0100C8F0  cbz      x0, #0x100d068                        
+0100C8F4  mov      x1, xzr                               
+0100C8F8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C8FC  cbz      x0, #0x100d068                        
+0100C900  mov      x1, xzr                               
+0100C904  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100C908  ldr      s1, [x19, #0x108]                      // self.objeto12_y1
+0100C90C  ldr      s0, [x19, #0x104]                      // self.objeto12_x1
+0100C910  ldr      x0, [x19, #0x30]                       // self.objeto3
+0100C914  str      s2, [x19, #0x10c]                      // self.objeto12_z1
+0100C918  str      s1, [x19, #0x2ac]                     
+0100C91C  fadd     s3, s1, s9                            
+0100C920  fadd     s1, s1, s10                           
+0100C924  str      s2, [x19, #0x2b0]                     
+0100C928  str      s2, [x19, #0x2bc]                     
+0100C92C  str      s0, [x19, #0x2a8]                      // self.fin12_0
+0100C930  str      s0, [x19, #0x2b4]                      // self.fin12_1
+0100C934  str      s0, [x19, #0x2c0]                      // self.fin12_2
+0100C938  str      s3, [x19, #0x2b8]                     
+0100C93C  str      s1, [x19, #0x2c4]                     
+0100C940  str      s2, [x19, #0x2c8]                     
+0100C944  cbz      x0, #0x100d068                        
+0100C948  mov      x1, xzr                               
+0100C94C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C950  cbz      x0, #0x100d068                        
+0100C954  adrp     x8, #0x5ff000                         
+0100C958  ldr      s1, [x8, #0xc80]                      
+0100C95C  mov      w8, #0x42200000                       
+0100C960  fmov     s0, wzr                               
+0100C964  fmov     s2, w8                                
+0100C968  mov      x1, xzr                               
+0100C96C  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100C970  ldr      x0, [x19, #0x30]                       // self.objeto3
+0100C974  cbz      x0, #0x100d068                        
+0100C978  mov      x1, xzr                               
+0100C97C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C980  mov      x20, x0                               
+0100C984  fmov     s0, wzr                               
+0100C988  fmov     s1, wzr                               
+0100C98C  fmov     s2, wzr                               
+0100C990  mov      x0, xzr                               
+0100C994  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0100C998  cbz      x20, #0x100d068                       
+0100C99C  mov      x0, x20                               
+0100C9A0  mov      x1, xzr                               
+0100C9A4  bl       #0x200edcc                             // UnityEngine.Transform$$set_localRotation
+0100C9A8  ldr      x0, [x19, #0x30]                       // self.objeto3
+0100C9AC  cbz      x0, #0x100d068                        
+0100C9B0  mov      x1, xzr                               
+0100C9B4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C9B8  cbz      x0, #0x100d068                        
+0100C9BC  mov      x1, xzr                               
+0100C9C0  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100C9C4  ldr      x0, [x19, #0x30]                       // self.objeto3
+0100C9C8  str      s0, [x19, #0x98]                       // self.objeto3_x1
+0100C9CC  cbz      x0, #0x100d068                        
+0100C9D0  mov      x1, xzr                               
+0100C9D4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C9D8  cbz      x0, #0x100d068                        
+0100C9DC  mov      x1, xzr                               
+0100C9E0  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100C9E4  ldr      x0, [x19, #0x30]                       // self.objeto3
+0100C9E8  str      s1, [x19, #0x9c]                       // self.objeto3_y1
+0100C9EC  cbz      x0, #0x100d068                        
+0100C9F0  mov      x1, xzr                               
+0100C9F4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100C9F8  cbz      x0, #0x100d068                        
+0100C9FC  mov      x1, xzr                               
+0100CA00  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CA04  ldp      s0, s1, [x19, #0x98]                   // self.objeto3_x1
+0100CA08  ldr      x0, [x19, #0x38]                       // self.objeto4
+0100CA0C  str      s2, [x19, #0xa0]                       // self.objeto3_z1
+0100CA10  str      s2, [x19, #0x160]                     
+0100CA14  str      s1, [x19, #0x15c]                     
+0100CA18  fadd     s3, s1, s9                            
+0100CA1C  fadd     s1, s1, s10                           
+0100CA20  str      s2, [x19, #0x16c]                     
+0100CA24  str      s0, [x19, #0x158]                      // self.fin3_0
+0100CA28  str      s0, [x19, #0x164]                      // self.fin3_1
+0100CA2C  str      s0, [x19, #0x170]                      // self.fin3_2
+0100CA30  str      s3, [x19, #0x168]                     
+0100CA34  str      s1, [x19, #0x174]                     
+0100CA38  str      s2, [x19, #0x178]                     
+0100CA3C  cbz      x0, #0x100d068                        
+0100CA40  mov      x1, xzr                               
+0100CA44  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CA48  cbz      x0, #0x100d068                        
+0100CA4C  mov      w8, #0x42700000                       
+0100CA50  fmov     s2, #20.00000000                      
+0100CA54  fmov     s0, w8                                
+0100CA58  mov      v1.16b, v8.16b                        
+0100CA5C  mov      x1, xzr                               
+0100CA60  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100CA64  ldr      x0, [x19, #0x38]                       // self.objeto4
+0100CA68  cbz      x0, #0x100d068                        
+0100CA6C  mov      x1, xzr                               
+0100CA70  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CA74  cbz      x0, #0x100d068                        
+0100CA78  mov      x1, xzr                               
+0100CA7C  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CA80  ldr      x0, [x19, #0x38]                       // self.objeto4
+0100CA84  str      s0, [x19, #0xa4]                       // self.objeto4_x1
+0100CA88  cbz      x0, #0x100d068                        
+0100CA8C  mov      x1, xzr                               
+0100CA90  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CA94  cbz      x0, #0x100d068                        
+0100CA98  mov      x1, xzr                               
+0100CA9C  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CAA0  ldr      x0, [x19, #0x38]                       // self.objeto4
+0100CAA4  str      s1, [x19, #0xa8]                       // self.objeto4_y1
+0100CAA8  cbz      x0, #0x100d068                        
+0100CAAC  mov      x1, xzr                               
+0100CAB0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CAB4  cbz      x0, #0x100d068                        
+0100CAB8  mov      x1, xzr                               
+0100CABC  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CAC0  ldp      s0, s1, [x19, #0xa4]                   // self.objeto4_x1
+0100CAC4  ldr      x0, [x19, #0x40]                       // self.objeto5
+0100CAC8  fmov     s3, #20.00000000                      
+0100CACC  str      s2, [x19, #0xac]                       // self.objeto4_z1
+0100CAD0  str      s2, [x19, #0x190]                     
+0100CAD4  fadd     s2, s2, s3                            
+0100CAD8  str      s0, [x19, #0x188]                      // self.fin4_0
+0100CADC  str      s1, [x19, #0x18c]                     
+0100CAE0  str      s0, [x19, #0x194]                      // self.fin4_1
+0100CAE4  str      s1, [x19, #0x198]                     
+0100CAE8  str      s2, [x19, #0x19c]                     
+0100CAEC  cbz      x0, #0x100d068                        
+0100CAF0  mov      x1, xzr                               
+0100CAF4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CAF8  cbz      x0, #0x100d068                        
+0100CAFC  adrp     x8, #0x5ff000                         
+0100CB00  ldr      s9, [x8, #0xb68]                      
+0100CB04  mov      w8, #0x42700000                       
+0100CB08  fmov     s2, #20.00000000                      
+0100CB0C  fmov     s0, w8                                
+0100CB10  mov      v1.16b, v9.16b                        
+0100CB14  mov      x1, xzr                               
+0100CB18  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100CB1C  ldr      x0, [x19, #0x40]                       // self.objeto5
+0100CB20  cbz      x0, #0x100d068                        
+0100CB24  mov      x1, xzr                               
+0100CB28  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CB2C  cbz      x0, #0x100d068                        
+0100CB30  mov      x1, xzr                               
+0100CB34  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CB38  ldr      x0, [x19, #0x40]                       // self.objeto5
+0100CB3C  str      s0, [x19, #0xb0]                       // self.objeto5_x1
+0100CB40  cbz      x0, #0x100d068                        
+0100CB44  mov      x1, xzr                               
+0100CB48  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CB4C  cbz      x0, #0x100d068                        
+0100CB50  mov      x1, xzr                               
+0100CB54  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CB58  ldr      x0, [x19, #0x40]                       // self.objeto5
+0100CB5C  str      s1, [x19, #0xb4]                       // self.objeto5_y1
+0100CB60  cbz      x0, #0x100d068                        
+0100CB64  mov      x1, xzr                               
+0100CB68  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CB6C  cbz      x0, #0x100d068                        
+0100CB70  mov      x1, xzr                               
+0100CB74  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CB78  ldp      s0, s1, [x19, #0xb0]                   // self.objeto5_x1
+0100CB7C  ldr      x0, [x19, #0x48]                       // self.objeto6
+0100CB80  fmov     s3, #20.00000000                      
+0100CB84  str      s2, [x19, #0xb8]                       // self.objeto5_z1
+0100CB88  str      s2, [x19, #0x1b4]                     
+0100CB8C  fadd     s2, s2, s3                            
+0100CB90  str      s0, [x19, #0x1ac]                      // self.fin5_0
+0100CB94  str      s1, [x19, #0x1b0]                     
+0100CB98  str      s0, [x19, #0x1b8]                      // self.fin5_1
+0100CB9C  str      s1, [x19, #0x1bc]                     
+0100CBA0  str      s2, [x19, #0x1c0]                     
+0100CBA4  cbz      x0, #0x100d068                        
+0100CBA8  mov      x1, xzr                               
+0100CBAC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CBB0  cbz      x0, #0x100d068                        
+0100CBB4  adrp     x8, #0x600000                         
+0100CBB8  ldr      s1, [x8, #0x50]                       
+0100CBBC  mov      w8, #0x42700000                       
+0100CBC0  fmov     s2, #20.00000000                      
+0100CBC4  fmov     s0, w8                                
+0100CBC8  mov      x1, xzr                               
+0100CBCC  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100CBD0  ldr      x0, [x19, #0x48]                       // self.objeto6
+0100CBD4  cbz      x0, #0x100d068                        
+0100CBD8  mov      x1, xzr                               
+0100CBDC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CBE0  cbz      x0, #0x100d068                        
+0100CBE4  mov      x1, xzr                               
+0100CBE8  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CBEC  ldr      x0, [x19, #0x48]                       // self.objeto6
+0100CBF0  str      s0, [x19, #0xbc]                       // self.objeto6_x1
+0100CBF4  cbz      x0, #0x100d068                        
+0100CBF8  mov      x1, xzr                               
+0100CBFC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CC00  cbz      x0, #0x100d068                        
+0100CC04  mov      x1, xzr                               
+0100CC08  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CC0C  ldr      x0, [x19, #0x48]                       // self.objeto6
+0100CC10  str      s1, [x19, #0xc0]                       // self.objeto6_y1
+0100CC14  cbz      x0, #0x100d068                        
+0100CC18  mov      x1, xzr                               
+0100CC1C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CC20  cbz      x0, #0x100d068                        
+0100CC24  mov      x1, xzr                               
+0100CC28  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CC2C  ldp      s0, s1, [x19, #0xbc]                   // self.objeto6_x1
+0100CC30  ldr      x0, [x19, #0x50]                       // self.objeto7
+0100CC34  fmov     s3, #20.00000000                      
+0100CC38  str      s2, [x19, #0xc4]                       // self.objeto6_z1
+0100CC3C  str      s2, [x19, #0x1d8]                     
+0100CC40  fadd     s2, s2, s3                            
+0100CC44  str      s0, [x19, #0x1d0]                      // self.fin6_0
+0100CC48  str      s1, [x19, #0x1d4]                     
+0100CC4C  str      s0, [x19, #0x1dc]                      // self.fin6_1
+0100CC50  str      s1, [x19, #0x1e0]                     
+0100CC54  str      s2, [x19, #0x1e4]                     
+0100CC58  cbz      x0, #0x100d068                        
+0100CC5C  mov      x1, xzr                               
+0100CC60  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CC64  cbz      x0, #0x100d068                        
+0100CC68  mov      w8, #0x42700000                       
+0100CC6C  mov      w9, #0x41d60000                       
+0100CC70  fmov     s2, #20.00000000                      
+0100CC74  fmov     s0, w8                                
+0100CC78  fmov     s1, w9                                
+0100CC7C  mov      x1, xzr                               
+0100CC80  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100CC84  ldr      x0, [x19, #0x50]                       // self.objeto7
+0100CC88  cbz      x0, #0x100d068                        
+0100CC8C  mov      x1, xzr                               
+0100CC90  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CC94  mov      x20, x0                               
+0100CC98  fmov     s0, wzr                               
+0100CC9C  fmov     s1, wzr                               
+0100CCA0  fmov     s2, wzr                               
+0100CCA4  mov      x0, xzr                               
+0100CCA8  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0100CCAC  cbz      x20, #0x100d068                       
+0100CCB0  mov      x0, x20                               
+0100CCB4  mov      x1, xzr                               
+0100CCB8  bl       #0x200edcc                             // UnityEngine.Transform$$set_localRotation
+0100CCBC  ldr      x0, [x19, #0x50]                       // self.objeto7
+0100CCC0  cbz      x0, #0x100d068                        
+0100CCC4  mov      x1, xzr                               
+0100CCC8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CCCC  cbz      x0, #0x100d068                        
+0100CCD0  mov      x1, xzr                               
+0100CCD4  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CCD8  ldr      x0, [x19, #0x50]                       // self.objeto7
+0100CCDC  str      s0, [x19, #0xc8]                       // self.objeto7_x1
+0100CCE0  cbz      x0, #0x100d068                        
+0100CCE4  mov      x1, xzr                               
+0100CCE8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CCEC  cbz      x0, #0x100d068                        
+0100CCF0  mov      x1, xzr                               
+0100CCF4  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CCF8  ldr      x0, [x19, #0x50]                       // self.objeto7
+0100CCFC  str      s1, [x19, #0xcc]                       // self.objeto7_y1
+0100CD00  cbz      x0, #0x100d068                        
+0100CD04  mov      x1, xzr                               
+0100CD08  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CD0C  cbz      x0, #0x100d068                        
+0100CD10  mov      x1, xzr                               
+0100CD14  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CD18  ldp      s0, s1, [x19, #0xc8]                   // self.objeto7_x1
+0100CD1C  ldr      x0, [x19, #0x58]                       // self.objeto8
+0100CD20  fmov     s3, #20.00000000                      
+0100CD24  str      s2, [x19, #0xd0]                       // self.objeto7_z1
+0100CD28  str      s2, [x19, #0x1fc]                     
+0100CD2C  fadd     s2, s2, s3                            
+0100CD30  str      s0, [x19, #0x1f4]                      // self.fin7_0
+0100CD34  str      s1, [x19, #0x1f8]                     
+0100CD38  str      s0, [x19, #0x200]                      // self.fin7_1
+0100CD3C  str      s1, [x19, #0x204]                     
+0100CD40  str      s2, [x19, #0x208]                     
+0100CD44  cbz      x0, #0x100d068                        
+0100CD48  mov      x1, xzr                               
+0100CD4C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CD50  cbz      x0, #0x100d068                        
+0100CD54  mov      w8, #0x42200000                       
+0100CD58  fmov     s2, #20.00000000                      
+0100CD5C  fmov     s0, w8                                
+0100CD60  mov      v1.16b, v8.16b                        
+0100CD64  mov      x1, xzr                               
+0100CD68  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100CD6C  ldr      x0, [x19, #0x58]                       // self.objeto8
+0100CD70  cbz      x0, #0x100d068                        
+0100CD74  mov      x1, xzr                               
+0100CD78  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CD7C  cbz      x0, #0x100d068                        
+0100CD80  mov      x1, xzr                               
+0100CD84  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CD88  ldr      x0, [x19, #0x58]                       // self.objeto8
+0100CD8C  str      s0, [x19, #0xd4]                       // self.objeto8_x1
+0100CD90  cbz      x0, #0x100d068                        
+0100CD94  mov      x1, xzr                               
+0100CD98  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CD9C  cbz      x0, #0x100d068                        
+0100CDA0  mov      x1, xzr                               
+0100CDA4  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CDA8  ldr      x0, [x19, #0x58]                       // self.objeto8
+0100CDAC  str      s1, [x19, #0xd8]                       // self.objeto8_y1
+0100CDB0  cbz      x0, #0x100d068                        
+0100CDB4  mov      x1, xzr                               
+0100CDB8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CDBC  cbz      x0, #0x100d068                        
+0100CDC0  mov      x1, xzr                               
+0100CDC4  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CDC8  ldp      s0, s1, [x19, #0xd4]                   // self.objeto8_x1
+0100CDCC  ldr      x0, [x19, #0x60]                       // self.objeto9
+0100CDD0  fmov     s3, #20.00000000                      
+0100CDD4  str      s2, [x19, #0xdc]                       // self.objeto8_z1
+0100CDD8  str      s0, [x19, #0x218]                      // self.fin8_0
+0100CDDC  fadd     s0, s0, s3                            
+0100CDE0  str      s2, [x19, #0x220]                     
+0100CDE4  str      s1, [x19, #0x21c]                     
+0100CDE8  str      s1, [x19, #0x228]                     
+0100CDEC  str      s0, [x19, #0x224]                      // self.fin8_1
+0100CDF0  str      s2, [x19, #0x22c]                     
+0100CDF4  cbz      x0, #0x100d068                        
+0100CDF8  mov      x1, xzr                               
+0100CDFC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CE00  cbz      x0, #0x100d068                        
+0100CE04  mov      w8, #0x42200000                       
+0100CE08  fmov     s2, #20.00000000                      
+0100CE0C  fmov     s0, w8                                
+0100CE10  mov      v1.16b, v9.16b                        
+0100CE14  mov      x1, xzr                               
+0100CE18  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100CE1C  ldr      x0, [x19, #0x60]                       // self.objeto9
+0100CE20  cbz      x0, #0x100d068                        
+0100CE24  mov      x1, xzr                               
+0100CE28  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CE2C  cbz      x0, #0x100d068                        
+0100CE30  mov      x1, xzr                               
+0100CE34  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CE38  ldr      x0, [x19, #0x60]                       // self.objeto9
+0100CE3C  str      s0, [x19, #0xe0]                       // self.objeto9_x1
+0100CE40  cbz      x0, #0x100d068                        
+0100CE44  mov      x1, xzr                               
+0100CE48  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CE4C  cbz      x0, #0x100d068                        
+0100CE50  mov      x1, xzr                               
+0100CE54  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CE58  ldr      x0, [x19, #0x60]                       // self.objeto9
+0100CE5C  str      s1, [x19, #0xe4]                       // self.objeto9_y1
+0100CE60  cbz      x0, #0x100d068                        
+0100CE64  mov      x1, xzr                               
+0100CE68  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CE6C  cbz      x0, #0x100d068                        
+0100CE70  mov      x1, xzr                               
+0100CE74  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CE78  ldp      s0, s1, [x19, #0xe0]                   // self.objeto9_x1
+0100CE7C  ldr      x0, [x19, #0x68]                       // self.objeto10
+0100CE80  fmov     s3, #20.00000000                      
+0100CE84  str      s2, [x19, #0xe8]                       // self.objeto9_z1
+0100CE88  str      s0, [x19, #0x23c]                      // self.fin9_0
+0100CE8C  fadd     s0, s0, s3                            
+0100CE90  str      s2, [x19, #0x244]                     
+0100CE94  str      s1, [x19, #0x240]                     
+0100CE98  str      s1, [x19, #0x24c]                     
+0100CE9C  str      s0, [x19, #0x248]                      // self.fin9_1
+0100CEA0  str      s2, [x19, #0x250]                     
+0100CEA4  cbz      x0, #0x100d068                        
+0100CEA8  mov      x1, xzr                               
+0100CEAC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CEB0  cbz      x0, #0x100d068                        
+0100CEB4  mov      w8, #0x42200000                       
+0100CEB8  fmov     s2, wzr                               
+0100CEBC  fmov     s0, w8                                
+0100CEC0  mov      v1.16b, v8.16b                        
+0100CEC4  mov      x1, xzr                               
+0100CEC8  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100CECC  ldr      x0, [x19, #0x68]                       // self.objeto10
+0100CED0  cbz      x0, #0x100d068                        
+0100CED4  mov      x1, xzr                               
+0100CED8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CEDC  cbz      x0, #0x100d068                        
+0100CEE0  mov      x1, xzr                               
+0100CEE4  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CEE8  ldr      x0, [x19, #0x68]                       // self.objeto10
+0100CEEC  str      s0, [x19, #0xec]                       // self.objeto10_x1
+0100CEF0  cbz      x0, #0x100d068                        
+0100CEF4  mov      x1, xzr                               
+0100CEF8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CEFC  cbz      x0, #0x100d068                        
+0100CF00  mov      x1, xzr                               
+0100CF04  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CF08  ldr      x0, [x19, #0x68]                       // self.objeto10
+0100CF0C  str      s1, [x19, #0xf0]                       // self.objeto10_y1
+0100CF10  cbz      x0, #0x100d068                        
+0100CF14  mov      x1, xzr                               
+0100CF18  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CF1C  cbz      x0, #0x100d068                        
+0100CF20  mov      x1, xzr                               
+0100CF24  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CF28  ldp      s0, s1, [x19, #0xec]                   // self.objeto10_x1
+0100CF2C  ldr      x0, [x19, #0x70]                       // self.objeto11
+0100CF30  fmov     s3, #20.00000000                      
+0100CF34  str      s2, [x19, #0xf4]                       // self.objeto10_z1
+0100CF38  str      s2, [x19, #0x268]                     
+0100CF3C  fadd     s2, s2, s3                            
+0100CF40  str      s0, [x19, #0x260]                      // self.fin10_0
+0100CF44  str      s1, [x19, #0x264]                     
+0100CF48  str      s0, [x19, #0x26c]                      // self.fin10_1
+0100CF4C  str      s1, [x19, #0x270]                     
+0100CF50  str      s2, [x19, #0x274]                     
+0100CF54  cbz      x0, #0x100d068                        
+0100CF58  mov      x1, xzr                               
+0100CF5C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CF60  cbz      x0, #0x100d068                        
+0100CF64  mov      w8, #0x42200000                       
+0100CF68  fmov     s2, wzr                               
+0100CF6C  fmov     s0, w8                                
+0100CF70  mov      v1.16b, v9.16b                        
+0100CF74  mov      x1, xzr                               
+0100CF78  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0100CF7C  ldr      x0, [x19, #0x70]                       // self.objeto11
+0100CF80  cbz      x0, #0x100d068                        
+0100CF84  mov      x1, xzr                               
+0100CF88  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CF8C  cbz      x0, #0x100d068                        
+0100CF90  mov      x1, xzr                               
+0100CF94  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CF98  ldr      x0, [x19, #0x70]                       // self.objeto11
+0100CF9C  str      s0, [x19, #0xf8]                       // self.objeto11_x1
+0100CFA0  cbz      x0, #0x100d068                        
+0100CFA4  mov      x1, xzr                               
+0100CFA8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CFAC  cbz      x0, #0x100d068                        
+0100CFB0  mov      x1, xzr                               
+0100CFB4  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CFB8  ldr      x0, [x19, #0x70]                       // self.objeto11
+0100CFBC  str      s1, [x19, #0xfc]                       // self.objeto11_y1
+0100CFC0  cbz      x0, #0x100d068                        
+0100CFC4  mov      x1, xzr                               
+0100CFC8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100CFCC  cbz      x0, #0x100d068                        
+0100CFD0  adrp     x20, #0x236b000                       
+0100CFD4  ldr      x20, [x20, #0x4c0]                     // [0x236B4C0] 'activarComienzo'
+0100CFD8  mov      x1, xzr                               
+0100CFDC  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+0100CFE0  ldp      s0, s1, [x19, #0xf8]                   // self.objeto11_x1
+0100CFE4  fmov     s3, #20.00000000                      
+0100CFE8  str      s2, [x19, #0x100]                      // self.objeto11_z1
+0100CFEC  str      s2, [x19, #0x28c]                     
+0100CFF0  mov      w21, #1                               
+0100CFF4  add      x8, x19, #0x2f2                       
+0100CFF8  fadd     s2, s2, s3                            
+0100CFFC  mov      x0, x19                               
+0100D000  strh     wzr, [x19, #0x2f0]                     // self.swfinMovimiento1
+0100D004  str      w21, [x19, #0x2ec]                     // self.swfin0
+0100D008  str      s2, [x19, #0x298]                     
+0100D00C  str      s0, [x19, #0x284]                      // self.fin11_0
+0100D010  str      s1, [x19, #0x288]                     
+0100D014  str      s0, [x19, #0x290]                      // self.fin11_1
+0100D018  str      s1, [x19, #0x294]                     
+0100D01C  str      wzr, [x8]                             
+0100D020  stur     wzr, [x8, #3]                         
+0100D024  bl       #0x100d06c                             // Resorte2$$doInactivarAguas1
+0100D028  mov      x0, x19                               
+0100D02C  bl       #0x100d0a4                             // Resorte2$$doInactivarAguas2
+0100D030  mov      x0, x19                               
+0100D034  bl       #0x100d0dc                             // Resorte2$$doActivarAguas1
+0100D038  mov      x0, x19                               
+0100D03C  bl       #0x100d0fc                             // Resorte2$$doActivarAguas2
+0100D040  strb     w21, [x19, #0x2f9]                     // self.primeraVezAguas
+0100D044  ldr      x1, [x20]                             
+0100D048  mov      x0, x19                               
+0100D04C  ldp      x20, x19, [sp, #0x30]                 
+0100D050  ldp      x30, x21, [sp, #0x20]                 
+0100D054  ldp      d9, d8, [sp, #0x10]                   
+0100D058  fmov     s0, #5.00000000                       
+0100D05C  mov      x2, xzr                               
+0100D060  ldr      d10, [sp], #0x40                      
+0100D064  b        #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+0100D068  bl       #0xe61da0                             

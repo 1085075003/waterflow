@@ -1,0 +1,139 @@
+// SaveLoadManager$$doCargarEscenaResources VA 0x10187A8, inferred length 548
+void SaveLoadManager__doCargarEscenaResources (SaveLoadManager_o* __this, const MethodInfo* method);
+010187A8  stp      x30, x23, [sp, #-0x30]!               
+010187AC  stp      x22, x21, [sp, #0x10]                 
+010187B0  stp      x20, x19, [sp, #0x20]                 
+010187B4  adrp     x21, #0x24fb000                       
+010187B8  adrp     x20, #0x236a000                       
+010187BC  ldrb     w8, [x21, #0xc9f]                     
+010187C0  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010187C4  mov      x19, x0                               
+010187C8  tbnz     w8, #0, #0x1018828                    
+010187CC  adrp     x0, #0x236a000                        
+010187D0  ldr      x0, [x0, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+010187D4  bl       #0xe61b78                             
+010187D8  adrp     x0, #0x236a000                        
+010187DC  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+010187E0  bl       #0xe61b78                             
+010187E4  adrp     x0, #0x236a000                        
+010187E8  ldr      x0, [x0, #0x920]                       // [0x236A920] System.IO.MemoryStream_TypeInfo
+010187EC  bl       #0xe61b78                             
+010187F0  adrp     x0, #0x2368000                        
+010187F4  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010187F8  bl       #0xe61b78                             
+010187FC  adrp     x0, #0x236a000                        
+01018800  ldr      x0, [x0, #0x928]                       // [0x236A928] Method$UnityEngine.Resources.Load<TextAsset>()
+01018804  bl       #0xe61b78                             
+01018808  adrp     x0, #0x236a000                        
+0101880C  ldr      x0, [x0, #0x970]                       // [0x236A970] Save_TypeInfo
+01018810  bl       #0xe61b78                             
+01018814  adrp     x0, #0x236a000                        
+01018818  ldr      x0, [x0, #0xbd0]                       // [0x236ABD0] 'gm'
+0101881C  bl       #0xe61b78                             
+01018820  mov      w8, #1                                
+01018824  strb     w8, [x21, #0xc9f]                     
+01018828  mov      w8, #1                                
+0101882C  strb     w8, [x19, #0x21]                       // self.checkCargar
+01018830  ldr      x0, [x20]                             
+01018834  ldr      w8, [x0, #0xe0]                       
+01018838  cbnz     w8, #0x1018844                        
+0101883C  bl       #0xe61c80                             
+01018840  ldr      x0, [x20]                             
+01018844  ldr      x8, [x0, #0xb8]                       
+01018848  adrp     x23, #0x236a000                       
+0101884C  adrp     x22, #0x236a000                       
+01018850  adrp     x21, #0x2368000                       
+01018854  ldr      w9, [x8]                              
+01018858  ldr      x23, [x23, #0xbd0]                     // [0x236ABD0] 'gm'
+0101885C  ldr      x22, [x22, #0x928]                     // [0x236A928] Method$UnityEngine.Resources.Load<TextAsset>()
+01018860  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+01018864  cbz      w9, #0x10188a0                        
+01018868  ldr      w9, [x0, #0xe0]                       
+0101886C  cbnz     w9, #0x101887c                        
+01018870  bl       #0xe61c80                             
+01018874  ldr      x8, [x20]                             
+01018878  ldr      x8, [x8, #0xb8]                       
+0101887C  mov      x0, x8                                
+01018880  mov      x1, xzr                               
+01018884  bl       #0x1ab3994                             // System.Int32$$ToString
+01018888  ldr      x8, [x23]                             
+0101888C  mov      x1, x0                                
+01018890  mov      x2, xzr                               
+01018894  mov      x0, x8                                
+01018898  bl       #0x1958280                             // System.String$$Concat
+0101889C  b        #0x10188a4                            
+010188A0  ldr      x0, [x23]                             
+010188A4  ldr      x1, [x22]                             
+010188A8  bl       #0x118a2a8                             // UnityEngine.Resources$$Load<object>
+010188AC  ldr      x8, [x21]                             
+010188B0  mov      x20, x0                               
+010188B4  ldr      w9, [x8, #0xe0]                       
+010188B8  cbnz     w9, #0x10188c4                        
+010188BC  mov      x0, x8                                
+010188C0  bl       #0xe61c80                             
+010188C4  mov      x0, x20                               
+010188C8  mov      x1, xzr                               
+010188CC  mov      x2, xzr                               
+010188D0  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010188D4  tbz      w0, #0, #0x10189a0                    
+010188D8  cbz      x20, #0x10189c8                       
+010188DC  mov      x0, x20                               
+010188E0  mov      x1, xzr                               
+010188E4  bl       #0x2008b8c                             // UnityEngine.TextAsset$$get_bytes
+010188E8  adrp     x8, #0x236a000                        
+010188EC  ldr      x8, [x8, #0x920]                       // [0x236A920] System.IO.MemoryStream_TypeInfo
+010188F0  mov      x21, x0                               
+010188F4  ldr      x8, [x8]                              
+010188F8  mov      x0, x8                                
+010188FC  bl       #0xe61d94                             
+01018900  mov      x1, x21                               
+01018904  mov      x2, xzr                               
+01018908  mov      x20, x0                               
+0101890C  bl       #0x1a18520                             // System.IO.MemoryStream$$.ctor
+01018910  adrp     x8, #0x236a000                        
+01018914  ldr      x8, [x8, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+01018918  ldr      x0, [x8]                              
+0101891C  bl       #0xe61d94                             
+01018920  mov      x1, xzr                               
+01018924  mov      x21, x0                               
+01018928  bl       #0x19e726c                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$.ctor
+0101892C  cbz      x21, #0x10189c8                       
+01018930  mov      x0, x21                               
+01018934  mov      x1, x20                               
+01018938  mov      x2, xzr                               
+0101893C  bl       #0x19e72ec                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$Deserialize
+01018940  cbz      x0, #0x10189b0                        
+01018944  adrp     x8, #0x236a000                        
+01018948  ldr      x8, [x8, #0x970]                       // [0x236A970] Save_TypeInfo
+0101894C  ldr      x9, [x0]                              
+01018950  ldr      x1, [x8]                              
+01018954  ldrb     w10, [x9, #0x130]                     
+01018958  ldrb     w8, [x1, #0x130]                      
+0101895C  cmp      w10, w8                               
+01018960  b.lo     #0x101899c                            
+01018964  ldr      x10, [x9, #0xc8]                      
+01018968  sub      x9, x8, #1                            
+0101896C  ldr      x10, [x10, x9, lsl #3]                
+01018970  cmp      x10, x1                               
+01018974  b.ne     #0x101899c                            
+01018978  str      x0, [x19, #0x80]                       // self.save
+0101897C  ldr      x10, [x0]                             
+01018980  ldrb     w11, [x10, #0x130]                    
+01018984  cmp      w11, w8                               
+01018988  b.lo     #0x101899c                            
+0101898C  ldr      x8, [x10, #0xc8]                      
+01018990  ldr      x8, [x8, x9, lsl #3]                  
+01018994  cmp      x8, x1                                
+01018998  b.eq     #0x10189b4                            
+0101899C  bl       #0xe6213c                             
+010189A0  ldp      x20, x19, [sp, #0x20]                 
+010189A4  ldp      x22, x21, [sp, #0x10]                 
+010189A8  ldp      x30, x23, [sp], #0x30                 
+010189AC  ret                                            
+010189B0  str      xzr, [x19, #0x80]                      // self.save
+010189B4  mov      x0, x19                               
+010189B8  ldp      x20, x19, [sp, #0x20]                 
+010189BC  ldp      x22, x21, [sp, #0x10]                 
+010189C0  ldp      x30, x23, [sp], #0x30                 
+010189C4  b        #0x10189cc                             // SaveLoadManager$$doProcesoPiezas
+010189C8  bl       #0xe61da0                             

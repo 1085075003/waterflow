@@ -1,0 +1,14 @@
+// CascadaTest1$$doControlObjetoArriba VA 0xFD3AF0, inferred length 48
+void CascadaTest1__doControlObjetoArriba (CascadaTest1_o* __this, const MethodInfo* method);
+00FD3AF0  stp      x30, x19, [sp, #-0x10]!               
+00FD3AF4  ldr      s0, [x0, #0x6c]                       
+00FD3AF8  mov      x19, x0                               
+00FD3AFC  sturh    wzr, [x0, #0x69]                      
+00FD3B00  bl       #0xfd3c94                              // CascadaTest1$$CheckCollision
+00FD3B04  and      w8, w0, #1                            
+00FD3B08  strb     w8, [x19, #0x6a]                       // self.checkObjetoArriba
+00FD3B0C  tbz      w0, #0, #0xfd3b18                     
+00FD3B10  mov      w8, #1                                
+00FD3B14  strb     w8, [x19, #0x69]                       // self.ObjetoArriba
+00FD3B18  ldp      x30, x19, [sp], #0x10                 
+00FD3B1C  ret                                            

@@ -1,0 +1,27 @@
+// CascadaTestE$$doControlChorro VA 0xFDA5D4, inferred length 100
+void CascadaTestE__doControlChorro (CascadaTestE_o* __this, const MethodInfo* method);
+00FDA5D4  stp      x30, x19, [sp, #-0x10]!               
+00FDA5D8  ldrb     w8, [x0, #0x130]                      
+00FDA5DC  cbz      w8, #0xfda618                         
+00FDA5E0  mov      x19, x0                               
+00FDA5E4  bl       #0xfdb944                              // CascadaTestE$$doCrearChorro
+00FDA5E8  ldrb     w8, [x19, #0x191]                      // self.diagonal
+00FDA5EC  cbz      w8, #0xfda5fc                         
+00FDA5F0  mov      x0, x19                               
+00FDA5F4  bl       #0xfdbba8                              // CascadaTestE$$doControlDiagonal
+00FDA5F8  b        #0xfda604                             
+00FDA5FC  mov      x0, x19                               
+00FDA600  bl       #0xfdbcf8                              // CascadaTestE$$doControlNormal
+00FDA604  ldrb     w8, [x19, #0x1c0]                      // self.checkWater
+00FDA608  cbz      w8, #0xfda620                         
+00FDA60C  ldr      w8, [x19, #0x114]                      // self.altura
+00FDA610  cmp      w8, #2                                
+00FDA614  b.le     #0xfda62c                             
+00FDA618  ldp      x30, x19, [sp], #0x10                 
+00FDA61C  ret                                            
+00FDA620  mov      x0, x19                               
+00FDA624  ldp      x30, x19, [sp], #0x10                 
+00FDA628  b        #0xfdbff4                              // CascadaTestE$$doDesactivarSalidas
+00FDA62C  mov      x0, x19                               
+00FDA630  ldp      x30, x19, [sp], #0x10                 
+00FDA634  b        #0xfdbe48                              // CascadaTestE$$doActivarEsferaSalida

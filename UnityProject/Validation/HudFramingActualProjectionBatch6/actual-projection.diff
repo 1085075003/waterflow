@@ -1,0 +1,35 @@
+--- a/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
++++ b/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
+@@ -222,17 +222,26 @@
+         if(rootRect==null || pixels.width<=0 || pixels.height<=0) return false;
+         Rect logical=rootRect.rect;
+         if(logical.width<=0 || logical.height<=0) return false;
+-        Rect canvasViewport=root.renderMode==RenderMode.ScreenSpaceCamera && root.worldCamera!=null ? root.worldCamera.rect : new Rect(0,0,1,1);
++        Camera canvasCamera=root.renderMode==RenderMode.ScreenSpaceCamera ? root.worldCamera : null;
++        Rect canvasViewport=canvasCamera!=null ? canvasCamera.rect : new Rect(0,0,1,1);
+         control.GetWorldCorners(hudWorldCorners);
+         Vector2 low=new Vector2(float.PositiveInfinity,float.PositiveInfinity),high=-low;
+         foreach(Vector3 corner in hudWorldCorners)
+         {
+-            // Original gameplay Canvas is ScreenSpaceCamera at depth600.
+-            // Its world pose can still reflect the previous fitted camera when
+-            // OnPreCull restores the base pose. Root-local UI coordinates avoid
+-            // a camera/Canvas feedback loop and work for Overlay capture too.
+             Vector3 local=rootRect.InverseTransformPoint(corner);
+-            Vector2 normalized=new Vector2((local.x-logical.xMin)/logical.width,(local.y-logical.yMin)/logical.height);
++            Vector2 normalized;
++            if(canvasCamera!=null)
++            {
++                // Preserve the actual authored Canvas world scale and plane
++                // depth. Its root Rect need not fill the camera viewport.
++                // Project through an ideal camera-relative Canvas pose so the
++                // old Canvas world position cannot feed back into FitNow.
++                Vector3 offset=Quaternion.Inverse(rootRect.rotation)*rootRect.TransformVector(local-(Vector3)logical.center);
++                offset.z+=root.planeDistance;
++                Vector3 screen=canvasCamera.WorldToViewportPoint(canvasCamera.transform.position+canvasCamera.transform.rotation*offset);
++                normalized=new Vector2(screen.x,screen.y);
++            }
++            else normalized=new Vector2((local.x-logical.xMin)/logical.width,(local.y-logical.yMin)/logical.height);
+             normalized=canvasViewport.position+Vector2.Scale(normalized,canvasViewport.size);
+             Vector2 viewport=new Vector2((normalized.x-view.rect.xMin)/view.rect.width,(normalized.y-view.rect.yMin)/view.rect.height);
+             low=Vector2.Min(low,viewport); high=Vector2.Max(high,viewport);

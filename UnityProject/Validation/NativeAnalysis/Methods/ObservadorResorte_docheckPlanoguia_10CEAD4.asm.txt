@@ -1,0 +1,28 @@
+// ObservadorResorte$$docheckPlanoguia VA 0x10CEAD4, inferred length 104
+void ObservadorResorte__docheckPlanoguia (ObservadorResorte_o* __this, const MethodInfo* method);
+010CEAD4  stp      x30, x19, [sp, #-0x10]!               
+010CEAD8  ldp      s0, s1, [x0, #0x6c]                   
+010CEADC  ldr      s2, [x0, #0x74]                       
+010CEAE0  mov      x19, x0                               
+010CEAE4  bl       #0x10cf078                             // ObservadorResorte$$doCheckCollision3
+010CEAE8  ldrb     w8, [x19, #0x1a7]                      // self.checkCollision3
+010CEAEC  cbnz     w8, #0x10ceb14                        
+010CEAF0  adrp     x8, #0x600000                         
+010CEAF4  ldp      s0, s1, [x19, #0x6c]                   // self.posx
+010CEAF8  ldr      s3, [x8, #0x198]                      
+010CEAFC  ldr      s2, [x19, #0x74]                       // self.posz
+010CEB00  mov      x0, x19                               
+010CEB04  fadd     s1, s1, s3                            
+010CEB08  bl       #0x10cf078                             // ObservadorResorte$$doCheckCollision3
+010CEB0C  ldrb     w8, [x19, #0x1a7]                      // self.checkCollision3
+010CEB10  cbz      w8, #0x10ceb1c                        
+010CEB14  ldp      x30, x19, [sp], #0x10                 
+010CEB18  ret                                            
+010CEB1C  adrp     x8, #0x5ff000                         
+010CEB20  ldp      s0, s1, [x19, #0x6c]                   // self.posx
+010CEB24  ldr      s3, [x8, #0xf10]                      
+010CEB28  ldr      s2, [x19, #0x74]                       // self.posz
+010CEB2C  mov      x0, x19                               
+010CEB30  fadd     s1, s1, s3                            
+010CEB34  ldp      x30, x19, [sp], #0x10                 
+010CEB38  b        #0x10cf078                             // ObservadorResorte$$doCheckCollision3

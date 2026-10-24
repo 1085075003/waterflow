@@ -1,0 +1,35 @@
+// Resorte2d$$desactivarMech VA 0x10267FC, inferred length 132
+void Resorte2d__desactivarMech (Resorte2d_o* __this, const MethodInfo* method);
+010267FC  str      x30, [sp, #-0x20]!                    
+01026800  stp      x20, x19, [sp, #0x10]                 
+01026804  adrp     x20, #0x24fb000                       
+01026808  ldrb     w8, [x20, #0xcdc]                     
+0102680C  mov      x19, x0                               
+01026810  tbnz     w8, #0, #0x1026828                    
+01026814  adrp     x0, #0x236a000                        
+01026818  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0102681C  bl       #0xe61b78                             
+01026820  mov      w8, #1                                
+01026824  strb     w8, [x20, #0xcdc]                     
+01026828  ldr      w8, [x19, #0x220]                      // self.empezar
+0102682C  cmp      w8, #1                                
+01026830  b.ne     #0x1026874                            
+01026834  adrp     x8, #0x236a000                        
+01026838  ldr      x8, [x8, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0102683C  mov      w9, #0x100                            
+01026840  mov      w10, #1                               
+01026844  mov      w11, #4                               
+01026848  ldr      x8, [x8]                              
+0102684C  ldr      x8, [x8, #0xb8]                       
+01026850  str      wzr, [x8, #0x14]                      
+01026854  strb     wzr, [x19, #0x1ef]                     // self.swfin1_1
+01026858  strb     wzr, [x19, #0x1f1]                     // self.swfin2_1
+0102685C  strb     wzr, [x19, #0x1f3]                     // self.swfin3_1
+01026860  strb     wzr, [x19, #0x1f5]                     // self.swfin4_1
+01026864  str      wzr, [x19, #0x1e8]                     // self.swfin0
+01026868  strh     w9, [x19, #0x1ec]                      // self.swfin4
+0102686C  strb     w10, [x19, #0x1f7]                     // self.primeraVezAguas
+01026870  str      w11, [x19, #0x220]                     // self.empezar
+01026874  ldp      x20, x19, [sp, #0x10]                 
+01026878  ldr      x30, [sp], #0x20                      
+0102687C  ret                                            

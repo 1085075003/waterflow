@@ -1,0 +1,297 @@
+// Resorte3$$Update VA 0x1027D94, inferred length 1180
+void Resorte3__Update (Resorte3_o* __this, const MethodInfo* method);
+01027D94  stp      x30, x21, [sp, #-0x20]!               
+01027D98  stp      x20, x19, [sp, #0x10]                 
+01027D9C  adrp     x21, #0x24fb000                       
+01027DA0  adrp     x20, #0x236a000                       
+01027DA4  ldrb     w8, [x21, #0xce2]                     
+01027DA8  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+01027DAC  mov      x19, x0                               
+01027DB0  tbnz     w8, #0, #0x1027e04                    
+01027DB4  adrp     x0, #0x236a000                        
+01027DB8  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+01027DBC  bl       #0xe61b78                             
+01027DC0  adrp     x0, #0x236a000                        
+01027DC4  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+01027DC8  bl       #0xe61b78                             
+01027DCC  adrp     x0, #0x236b000                        
+01027DD0  ldr      x0, [x0, #0x930]                       // [0x236B930] 'doSubirPieza'
+01027DD4  bl       #0xe61b78                             
+01027DD8  adrp     x0, #0x236b000                        
+01027DDC  ldr      x0, [x0, #0x480]                       // [0x236B480] 'doDesactivarMech'
+01027DE0  bl       #0xe61b78                             
+01027DE4  adrp     x0, #0x236b000                        
+01027DE8  ldr      x0, [x0, #0x488]                       // [0x236B488] 'doBajarPieza'
+01027DEC  bl       #0xe61b78                             
+01027DF0  adrp     x0, #0x236a000                        
+01027DF4  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+01027DF8  bl       #0xe61b78                             
+01027DFC  mov      w8, #1                                
+01027E00  strb     w8, [x21, #0xce2]                     
+01027E04  ldr      x8, [x20]                             
+01027E08  ldr      x8, [x8, #0xb8]                       
+01027E0C  ldrb     w8, [x8, #0x9d]                       
+01027E10  cbz      w8, #0x1028220                        
+01027E14  ldrb     w8, [x19, #0xe1]                       // self.chequear
+01027E18  cbz      w8, #0x1028220                        
+01027E1C  mov      x0, x19                               
+01027E20  bl       #0x1028230                             // Resorte3$$doCheckLayer
+01027E24  ldrb     w8, [x19, #0xec]                       // self.checkPieza
+01027E28  cbz      w8, #0x1028220                        
+01027E2C  mov      x0, x19                               
+01027E30  bl       #0x1028304                             // Resorte3$$doCheckCollision
+01027E34  ldrb     w9, [x19, #0x7c]                       // self.checkCollision
+01027E38  ldrb     w8, [x19, #0x7d]                       // self.checkCollision_old
+01027E3C  cbz      w9, #0x1027f28                        
+01027E40  cbnz     w8, #0x1028220                        
+01027E44  ldr      w8, [x19, #0xfc]                       // self.modo
+01027E48  cbnz     w8, #0x1027e9c                        
+01027E4C  mov      w8, #1                                
+01027E50  strb     wzr, [x19, #0xe1]                      // self.chequear
+01027E54  strb     w8, [x19, #0x7d]                       // self.checkCollision_old
+01027E58  ldr      x8, [x20]                             
+01027E5C  ldr      x8, [x8, #0xb8]                       
+01027E60  ldr      w8, [x8, #4]                          
+01027E64  cmp      w8, #1                                
+01027E68  b.ne     #0x1027e7c                            
+01027E6C  ldr      x0, [x19, #0x108]                      // self.audioManager
+01027E70  cbz      x0, #0x102822c                        
+01027E74  ldr      x1, [x19, #0x100]                      // self.SoundResorte
+01027E78  bl       #0x1028540                             // AudioManager$$PlaySound
+01027E7C  adrp     x8, #0x236b000                        
+01027E80  ldr      s0, [x19, #0x38]                       // self.tiempo1
+01027E84  ldr      x8, [x8, #0x488]                       // [0x236B488] 'doBajarPieza'
+01027E88  mov      x0, x19                               
+01027E8C  mov      x2, xzr                               
+01027E90  ldr      x1, [x8]                              
+01027E94  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01027E98  ldr      w8, [x19, #0xfc]                       // self.modo
+01027E9C  cmp      w8, #1                                
+01027EA0  b.ne     #0x1027fa8                            
+01027EA4  ldr      w8, [x19, #0xf8]                       // self.fase
+01027EA8  mov      w9, #1                                
+01027EAC  strb     w9, [x19, #0x7d]                       // self.checkCollision_old
+01027EB0  cmp      w8, #1                                
+01027EB4  b.ne     #0x1027f60                            
+01027EB8  strb     wzr, [x19, #0xe1]                      // self.chequear
+01027EBC  adrp     x8, #0x236a000                        
+01027EC0  ldr      x0, [x19, #0x110]                      // self.check1
+01027EC4  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+01027EC8  mov      x2, xzr                               
+01027ECC  ldr      x1, [x8]                              
+01027ED0  bl       #0x1958280                             // System.String$$Concat
+01027ED4  str      x0, [x19, #0x110]                      // self.check1
+01027ED8  ldr      x8, [x20]                             
+01027EDC  ldr      x8, [x8, #0xb8]                       
+01027EE0  ldr      w8, [x8, #4]                          
+01027EE4  cmp      w8, #1                                
+01027EE8  b.ne     #0x1027efc                            
+01027EEC  ldr      x0, [x19, #0x108]                      // self.audioManager
+01027EF0  cbz      x0, #0x102822c                        
+01027EF4  ldr      x1, [x19, #0x100]                      // self.SoundResorte
+01027EF8  bl       #0x1028540                             // AudioManager$$PlaySound
+01027EFC  adrp     x8, #0x236b000                        
+01027F00  ldr      s0, [x19, #0x38]                       // self.tiempo1
+01027F04  ldr      x8, [x8, #0x488]                       // [0x236B488] 'doBajarPieza'
+01027F08  mov      x0, x19                               
+01027F0C  mov      x2, xzr                               
+01027F10  ldr      x1, [x8]                              
+01027F14  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01027F18  mov      x0, x19                               
+01027F1C  bl       #0x102868c                             // Resorte3$$doTextura2
+01027F20  mov      w8, #2                                
+01027F24  b        #0x1027fa4                            
+01027F28  cbz      w8, #0x1028220                        
+01027F2C  ldr      w8, [x19, #0xfc]                       // self.modo
+01027F30  strb     wzr, [x19, #0x7d]                      // self.checkCollision_old
+01027F34  cbnz     w8, #0x1028220                        
+01027F38  strb     wzr, [x19, #0xe1]                      // self.chequear
+01027F3C  adrp     x8, #0x236b000                        
+01027F40  ldr      s0, [x19, #0x3c]                       // self.tiempo2
+01027F44  ldr      x8, [x8, #0x480]                       // [0x236B480] 'doDesactivarMech'
+01027F48  mov      x0, x19                               
+01027F4C  ldp      x20, x19, [sp, #0x10]                 
+01027F50  mov      x2, xzr                               
+01027F54  ldr      x1, [x8]                              
+01027F58  ldp      x30, x21, [sp], #0x20                 
+01027F5C  b        #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01027F60  adrp     x8, #0x236a000                        
+01027F64  ldr      x0, [x19, #0x110]                      // self.check1
+01027F68  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+01027F6C  mov      x2, xzr                               
+01027F70  ldr      x1, [x8]                              
+01027F74  bl       #0x1958280                             // System.String$$Concat
+01027F78  str      x0, [x19, #0x110]                      // self.check1
+01027F7C  adrp     x8, #0x236b000                        
+01027F80  ldr      s0, [x19, #0x3c]                       // self.tiempo2
+01027F84  ldr      x8, [x8, #0x930]                       // [0x236B930] 'doSubirPieza'
+01027F88  mov      x0, x19                               
+01027F8C  mov      x2, xzr                               
+01027F90  ldr      x1, [x8]                              
+01027F94  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01027F98  mov      x0, x19                               
+01027F9C  bl       #0x1027d14                             // Resorte3$$doTextura1
+01027FA0  mov      w8, #1                                
+01027FA4  str      w8, [x19, #0xf8]                       // self.fase
+01027FA8  ldr      w8, [x19, #0xfc]                       // self.modo
+01027FAC  cmp      w8, #2                                
+01027FB0  b.ne     #0x1028138                            
+01027FB4  ldr      w8, [x19, #0xf8]                       // self.fase
+01027FB8  sub      w8, w8, #1                            
+01027FBC  cmp      w8, #3                                
+01027FC0  b.hi     #0x102812c                            
+01027FC4  adrp     x9, #0x621000                         
+01027FC8  add      x9, x9, #0x478                        
+01027FCC  adr      x10, #0x1027fdc                       
+01027FD0  ldrb     w11, [x9, x8]                         
+01027FD4  add      x10, x10, x11, lsl #2                 
+01027FD8  br       x10                                   
+01027FDC  ldr      x8, [x19, #0xd8]                       // self.conRes2
+01027FE0  mov      x0, x19                               
+01027FE4  str      x8, [x19, #0xc0]                       // self.conResorte1
+01027FE8  bl       #0x102870c                             // Resorte3$$docheckTerminado
+01027FEC  ldrb     w8, [x19, #0x120]                      // self.movimientoTerminado
+01027FF0  cbz      w8, #0x102812c                        
+01027FF4  strb     wzr, [x19, #0xe1]                      // self.chequear
+01027FF8  ldr      x8, [x20]                             
+01027FFC  ldr      x8, [x8, #0xb8]                       
+01028000  ldr      w8, [x8, #4]                          
+01028004  cmp      w8, #1                                
+01028008  b.ne     #0x102801c                            
+0102800C  ldr      x0, [x19, #0x108]                      // self.audioManager
+01028010  cbz      x0, #0x102822c                        
+01028014  ldr      x1, [x19, #0x100]                      // self.SoundResorte
+01028018  bl       #0x1028540                             // AudioManager$$PlaySound
+0102801C  ldr      x8, [x19, #0xd0]                       // self.conRes1
+01028020  ldr      s0, [x19, #0x38]                       // self.tiempo1
+01028024  mov      x0, x19                               
+01028028  mov      x2, xzr                               
+0102802C  str      x8, [x19, #0xc0]                       // self.conResorte1
+01028030  adrp     x8, #0x236b000                        
+01028034  ldr      x8, [x8, #0x488]                       // [0x236B488] 'doBajarPieza'
+01028038  ldr      x1, [x8]                              
+0102803C  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01028040  mov      x0, x19                               
+01028044  bl       #0x102868c                             // Resorte3$$doTextura2
+01028048  mov      w8, #2                                
+0102804C  b        #0x10280f0                            
+01028050  ldr      x8, [x19, #0xd0]                       // self.conRes1
+01028054  ldr      s0, [x19, #0x3c]                       // self.tiempo2
+01028058  mov      x0, x19                               
+0102805C  mov      x2, xzr                               
+01028060  str      x8, [x19, #0xc0]                       // self.conResorte1
+01028064  adrp     x8, #0x236b000                        
+01028068  ldr      x8, [x8, #0x930]                       // [0x236B930] 'doSubirPieza'
+0102806C  ldr      x1, [x8]                              
+01028070  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01028074  mov      w8, #3                                
+01028078  mov      x0, x19                               
+0102807C  str      w8, [x19, #0xf8]                       // self.fase
+01028080  bl       #0x1028a2c                             // Resorte3$$doTextura3
+01028084  b        #0x102812c                            
+01028088  mov      x0, x19                               
+0102808C  bl       #0x102870c                             // Resorte3$$docheckTerminado
+01028090  ldrb     w8, [x19, #0x120]                      // self.movimientoTerminado
+01028094  cbz      w8, #0x102812c                        
+01028098  strb     wzr, [x19, #0xe1]                      // self.chequear
+0102809C  ldr      x8, [x20]                             
+010280A0  ldr      x8, [x8, #0xb8]                       
+010280A4  ldr      w8, [x8, #4]                          
+010280A8  cmp      w8, #1                                
+010280AC  b.ne     #0x10280c0                            
+010280B0  ldr      x0, [x19, #0x108]                      // self.audioManager
+010280B4  cbz      x0, #0x102822c                        
+010280B8  ldr      x1, [x19, #0x100]                      // self.SoundResorte
+010280BC  bl       #0x1028540                             // AudioManager$$PlaySound
+010280C0  ldr      x8, [x19, #0xd8]                       // self.conRes2
+010280C4  ldr      s0, [x19, #0x38]                       // self.tiempo1
+010280C8  mov      x0, x19                               
+010280CC  mov      x2, xzr                               
+010280D0  str      x8, [x19, #0xc0]                       // self.conResorte1
+010280D4  adrp     x8, #0x236b000                        
+010280D8  ldr      x8, [x8, #0x488]                       // [0x236B488] 'doBajarPieza'
+010280DC  ldr      x1, [x8]                              
+010280E0  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+010280E4  mov      x0, x19                               
+010280E8  bl       #0x102868c                             // Resorte3$$doTextura2
+010280EC  mov      w8, #4                                
+010280F0  str      w8, [x19, #0xf8]                       // self.fase
+010280F4  b        #0x102812c                            
+010280F8  ldr      x8, [x19, #0xd8]                       // self.conRes2
+010280FC  ldr      s0, [x19, #0x3c]                       // self.tiempo2
+01028100  mov      x0, x19                               
+01028104  mov      x2, xzr                               
+01028108  str      x8, [x19, #0xc0]                       // self.conResorte1
+0102810C  adrp     x8, #0x236b000                        
+01028110  ldr      x8, [x8, #0x930]                       // [0x236B930] 'doSubirPieza'
+01028114  ldr      x1, [x8]                              
+01028118  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+0102811C  mov      w8, #1                                
+01028120  mov      x0, x19                               
+01028124  str      w8, [x19, #0xf8]                       // self.fase
+01028128  bl       #0x1027d14                             // Resorte3$$doTextura1
+0102812C  ldr      w8, [x19, #0xfc]                       // self.modo
+01028130  mov      w9, #1                                
+01028134  strb     w9, [x19, #0x7d]                       // self.checkCollision_old
+01028138  cmp      w8, #3                                
+0102813C  b.ne     #0x1028220                            
+01028140  ldr      w21, [x19, #0xf8]                      // self.fase
+01028144  mov      w8, #1                                
+01028148  mov      x0, x19                               
+0102814C  strb     w8, [x19, #0x7d]                       // self.checkCollision_old
+01028150  bl       #0x1028aac                             // Resorte3$$docheckTerminado1
+01028154  ldrb     w8, [x19, #0x120]                      // self.movimientoTerminado
+01028158  cmp      w21, #1                               
+0102815C  b.ne     #0x10281d4                            
+01028160  cbz      w8, #0x1028220                        
+01028164  strb     wzr, [x19, #0xe1]                      // self.chequear
+01028168  adrp     x8, #0x236a000                        
+0102816C  ldr      x0, [x19, #0x110]                      // self.check1
+01028170  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+01028174  mov      x2, xzr                               
+01028178  ldr      x1, [x8]                              
+0102817C  bl       #0x1958280                             // System.String$$Concat
+01028180  str      x0, [x19, #0x110]                      // self.check1
+01028184  ldr      x8, [x20]                             
+01028188  ldr      x8, [x8, #0xb8]                       
+0102818C  ldr      w8, [x8, #4]                          
+01028190  cmp      w8, #1                                
+01028194  b.ne     #0x10281a8                            
+01028198  ldr      x0, [x19, #0x108]                      // self.audioManager
+0102819C  cbz      x0, #0x102822c                        
+010281A0  ldr      x1, [x19, #0x100]                      // self.SoundResorte
+010281A4  bl       #0x1028540                             // AudioManager$$PlaySound
+010281A8  adrp     x8, #0x236b000                        
+010281AC  ldr      s0, [x19, #0x38]                       // self.tiempo1
+010281B0  ldr      x8, [x8, #0x488]                       // [0x236B488] 'doBajarPieza'
+010281B4  mov      x0, x19                               
+010281B8  mov      x2, xzr                               
+010281BC  ldr      x1, [x8]                              
+010281C0  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+010281C4  mov      x0, x19                               
+010281C8  bl       #0x102868c                             // Resorte3$$doTextura2
+010281CC  mov      w8, #2                                
+010281D0  b        #0x102821c                            
+010281D4  cbz      w8, #0x1028220                        
+010281D8  adrp     x8, #0x236a000                        
+010281DC  ldr      x0, [x19, #0x110]                      // self.check1
+010281E0  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+010281E4  mov      x2, xzr                               
+010281E8  ldr      x1, [x8]                              
+010281EC  bl       #0x1958280                             // System.String$$Concat
+010281F0  str      x0, [x19, #0x110]                      // self.check1
+010281F4  adrp     x8, #0x236b000                        
+010281F8  ldr      s0, [x19, #0x3c]                       // self.tiempo2
+010281FC  ldr      x8, [x8, #0x930]                       // [0x236B930] 'doSubirPieza'
+01028200  mov      x0, x19                               
+01028204  mov      x2, xzr                               
+01028208  ldr      x1, [x8]                              
+0102820C  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01028210  mov      x0, x19                               
+01028214  bl       #0x1027d14                             // Resorte3$$doTextura1
+01028218  mov      w8, #1                                
+0102821C  str      w8, [x19, #0xf8]                       // self.fase
+01028220  ldp      x20, x19, [sp, #0x10]                 
+01028224  ldp      x30, x21, [sp], #0x20                 
+01028228  ret                                            
+0102822C  bl       #0xe61da0                             

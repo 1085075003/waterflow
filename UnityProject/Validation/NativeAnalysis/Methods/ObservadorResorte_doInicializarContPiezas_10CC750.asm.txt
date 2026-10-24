@@ -1,0 +1,154 @@
+// ObservadorResorte$$doInicializarContPiezas VA 0x10CC750, inferred length 608
+void ObservadorResorte__doInicializarContPiezas (ObservadorResorte_o* __this, const MethodInfo* method);
+010CC750  stp      x30, x21, [sp, #-0x20]!               
+010CC754  stp      x20, x19, [sp, #0x10]                 
+010CC758  adrp     x21, #0x24fc000                       
+010CC75C  adrp     x20, #0x236a000                       
+010CC760  ldrb     w8, [x21, #0x10]                      
+010CC764  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+010CC768  mov      x19, x0                               
+010CC76C  tbnz     w8, #0, #0x10cc7e4                    
+010CC770  adrp     x0, #0x236a000                        
+010CC774  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010CC778  bl       #0xe61b78                             
+010CC77C  adrp     x0, #0x236a000                        
+010CC780  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+010CC784  bl       #0xe61b78                             
+010CC788  adrp     x0, #0x236a000                        
+010CC78C  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+010CC790  bl       #0xe61b78                             
+010CC794  adrp     x0, #0x236a000                        
+010CC798  ldr      x0, [x0, #0x670]                       // [0x236A670] '6'
+010CC79C  bl       #0xe61b78                             
+010CC7A0  adrp     x0, #0x236a000                        
+010CC7A4  ldr      x0, [x0, #0x6a0]                       // [0x236A6A0] '7'
+010CC7A8  bl       #0xe61b78                             
+010CC7AC  adrp     x0, #0x236a000                        
+010CC7B0  ldr      x0, [x0, #0x6a8]                       // [0x236A6A8] '4'
+010CC7B4  bl       #0xe61b78                             
+010CC7B8  adrp     x0, #0x236a000                        
+010CC7BC  ldr      x0, [x0, #0x798]                       // [0x236A798] '8'
+010CC7C0  bl       #0xe61b78                             
+010CC7C4  adrp     x0, #0x236a000                        
+010CC7C8  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+010CC7CC  bl       #0xe61b78                             
+010CC7D0  adrp     x0, #0x236a000                        
+010CC7D4  ldr      x0, [x0, #0x6f8]                       // [0x236A6F8] '5'
+010CC7D8  bl       #0xe61b78                             
+010CC7DC  mov      w8, #1                                
+010CC7E0  strb     w8, [x21, #0x10]                      
+010CC7E4  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CC7E8  ldr      x1, [x20]                             
+010CC7EC  adrp     x21, #0x236a000                       
+010CC7F0  adrp     x20, #0x236a000                       
+010CC7F4  ldr      x21, [x21, #0x658]                     // [0x236A658] '2'
+010CC7F8  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+010CC7FC  mov      x2, xzr                               
+010CC800  bl       #0x1960c7c                             // System.String$$op_Equality
+010CC804  tbz      w0, #0, #0x10cc824                    
+010CC808  ldr      x8, [x20]                             
+010CC80C  ldr      x8, [x8, #0xb8]                       
+010CC810  ldr      w9, [x8, #0x54]                       
+010CC814  ldr      w10, [x8, #0x34]                      
+010CC818  cmp      w9, w10                               
+010CC81C  b.ne     #0x10cc824                            
+010CC820  str      wzr, [x8, #0x54]                      
+010CC824  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CC828  ldr      x1, [x21]                             
+010CC82C  adrp     x21, #0x236a000                       
+010CC830  ldr      x21, [x21, #0x650]                     // [0x236A650] '3'
+010CC834  mov      x2, xzr                               
+010CC838  bl       #0x1960c7c                             // System.String$$op_Equality
+010CC83C  tbz      w0, #0, #0x10cc85c                    
+010CC840  ldr      x8, [x20]                             
+010CC844  ldr      x8, [x8, #0xb8]                       
+010CC848  ldr      w9, [x8, #0x58]                       
+010CC84C  ldr      w10, [x8, #0x38]                      
+010CC850  cmp      w9, w10                               
+010CC854  b.ne     #0x10cc85c                            
+010CC858  str      wzr, [x8, #0x58]                      
+010CC85C  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CC860  ldr      x1, [x21]                             
+010CC864  adrp     x21, #0x236a000                       
+010CC868  ldr      x21, [x21, #0x6a8]                     // [0x236A6A8] '4'
+010CC86C  mov      x2, xzr                               
+010CC870  bl       #0x1960c7c                             // System.String$$op_Equality
+010CC874  tbz      w0, #0, #0x10cc894                    
+010CC878  ldr      x8, [x20]                             
+010CC87C  ldr      x8, [x8, #0xb8]                       
+010CC880  ldr      w9, [x8, #0x5c]                       
+010CC884  ldr      w10, [x8, #0x3c]                      
+010CC888  cmp      w9, w10                               
+010CC88C  b.ne     #0x10cc894                            
+010CC890  str      wzr, [x8, #0x5c]                      
+010CC894  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CC898  ldr      x1, [x21]                             
+010CC89C  adrp     x21, #0x236a000                       
+010CC8A0  ldr      x21, [x21, #0x6f8]                     // [0x236A6F8] '5'
+010CC8A4  mov      x2, xzr                               
+010CC8A8  bl       #0x1960c7c                             // System.String$$op_Equality
+010CC8AC  tbz      w0, #0, #0x10cc8cc                    
+010CC8B0  ldr      x8, [x20]                             
+010CC8B4  ldr      x8, [x8, #0xb8]                       
+010CC8B8  ldr      w9, [x8, #0x60]                       
+010CC8BC  ldr      w10, [x8, #0x40]                      
+010CC8C0  cmp      w9, w10                               
+010CC8C4  b.ne     #0x10cc8cc                            
+010CC8C8  str      wzr, [x8, #0x60]                      
+010CC8CC  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CC8D0  ldr      x1, [x21]                             
+010CC8D4  adrp     x21, #0x236a000                       
+010CC8D8  ldr      x21, [x21, #0x670]                     // [0x236A670] '6'
+010CC8DC  mov      x2, xzr                               
+010CC8E0  bl       #0x1960c7c                             // System.String$$op_Equality
+010CC8E4  tbz      w0, #0, #0x10cc904                    
+010CC8E8  ldr      x8, [x20]                             
+010CC8EC  ldr      x8, [x8, #0xb8]                       
+010CC8F0  ldr      w9, [x8, #0x64]                       
+010CC8F4  ldr      w10, [x8, #0x44]                      
+010CC8F8  cmp      w9, w10                               
+010CC8FC  b.ne     #0x10cc904                            
+010CC900  str      wzr, [x8, #0x64]                      
+010CC904  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CC908  ldr      x1, [x21]                             
+010CC90C  adrp     x21, #0x236a000                       
+010CC910  ldr      x21, [x21, #0x6a0]                     // [0x236A6A0] '7'
+010CC914  mov      x2, xzr                               
+010CC918  bl       #0x1960c7c                             // System.String$$op_Equality
+010CC91C  tbz      w0, #0, #0x10cc93c                    
+010CC920  ldr      x8, [x20]                             
+010CC924  ldr      x8, [x8, #0xb8]                       
+010CC928  ldr      w9, [x8, #0x68]                       
+010CC92C  ldr      w10, [x8, #0x48]                      
+010CC930  cmp      w9, w10                               
+010CC934  b.ne     #0x10cc93c                            
+010CC938  str      wzr, [x8, #0x68]                      
+010CC93C  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CC940  ldr      x1, [x21]                             
+010CC944  adrp     x21, #0x236a000                       
+010CC948  ldr      x21, [x21, #0x798]                     // [0x236A798] '8'
+010CC94C  mov      x2, xzr                               
+010CC950  bl       #0x1960c7c                             // System.String$$op_Equality
+010CC954  tbz      w0, #0, #0x10cc974                    
+010CC958  ldr      x8, [x20]                             
+010CC95C  ldr      x8, [x8, #0xb8]                       
+010CC960  ldr      w9, [x8, #0x6c]                       
+010CC964  ldr      w10, [x8, #0x4c]                      
+010CC968  cmp      w9, w10                               
+010CC96C  b.ne     #0x10cc974                            
+010CC970  str      wzr, [x8, #0x6c]                      
+010CC974  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CC978  ldr      x1, [x21]                             
+010CC97C  mov      x2, xzr                               
+010CC980  bl       #0x1960c7c                             // System.String$$op_Equality
+010CC984  tbz      w0, #0, #0x10cc9a4                    
+010CC988  ldr      x8, [x20]                             
+010CC98C  ldr      x8, [x8, #0xb8]                       
+010CC990  ldr      w9, [x8, #0x70]                       
+010CC994  ldr      w10, [x8, #0x50]                      
+010CC998  cmp      w9, w10                               
+010CC99C  b.ne     #0x10cc9a4                            
+010CC9A0  str      wzr, [x8, #0x70]                      
+010CC9A4  ldp      x20, x19, [sp, #0x10]                 
+010CC9A8  ldp      x30, x21, [sp], #0x20                 
+010CC9AC  ret                                            

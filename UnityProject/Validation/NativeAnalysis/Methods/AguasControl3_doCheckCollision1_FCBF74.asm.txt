@@ -1,0 +1,185 @@
+// AguasControl3$$doCheckCollision1 VA 0xFCBF74, inferred length 732
+void AguasControl3__doCheckCollision1 (AguasControl3_o* __this, float distan_x, float distan_z, const MethodInfo* method);
+00FCBF74  stp      d11, d10, [sp, #-0x70]!               
+00FCBF78  stp      d9, d8, [sp, #0x10]                   
+00FCBF7C  stp      x30, x27, [sp, #0x20]                 
+00FCBF80  stp      x26, x25, [sp, #0x30]                 
+00FCBF84  stp      x24, x23, [sp, #0x40]                 
+00FCBF88  stp      x22, x21, [sp, #0x50]                 
+00FCBF8C  stp      x20, x19, [sp, #0x60]                 
+00FCBF90  adrp     x20, #0x24fb000                       
+00FCBF94  ldrb     w8, [x20, #0xb3e]                     
+00FCBF98  mov      v8.16b, v1.16b                        
+00FCBF9C  mov      v9.16b, v0.16b                        
+00FCBFA0  mov      x19, x0                               
+00FCBFA4  tbnz     w8, #0, #0xfcbfec                     
+00FCBFA8  adrp     x0, #0x2368000                        
+00FCBFAC  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FCBFB0  bl       #0xe61b78                             
+00FCBFB4  adrp     x0, #0x236a000                        
+00FCBFB8  ldr      x0, [x0, #0x5f0]                       // [0x236A5F0] 'color3'
+00FCBFBC  bl       #0xe61b78                             
+00FCBFC0  adrp     x0, #0x236a000                        
+00FCBFC4  ldr      x0, [x0, #0x5f8]                       // [0x236A5F8] 'color2'
+00FCBFC8  bl       #0xe61b78                             
+00FCBFCC  adrp     x0, #0x236a000                        
+00FCBFD0  ldr      x0, [x0, #0x600]                       // [0x236A600] 'color1'
+00FCBFD4  bl       #0xe61b78                             
+00FCBFD8  adrp     x0, #0x236a000                        
+00FCBFDC  ldr      x0, [x0, #0x608]                       // [0x236A608] 'color4'
+00FCBFE0  bl       #0xe61b78                             
+00FCBFE4  mov      w8, #1                                
+00FCBFE8  strb     w8, [x20, #0xb3e]                     
+00FCBFEC  mov      x0, x19                               
+00FCBFF0  mov      x1, xzr                               
+00FCBFF4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FCBFF8  cbz      x0, #0xfcc248                         
+00FCBFFC  mov      x1, xzr                               
+00FCC000  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FCC004  mov      x0, x19                               
+00FCC008  mov      x1, xzr                               
+00FCC00C  mov      v11.16b, v0.16b                       
+00FCC010  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FCC014  cbz      x0, #0xfcc248                         
+00FCC018  mov      x1, xzr                               
+00FCC01C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FCC020  mov      x0, x19                               
+00FCC024  mov      x1, xzr                               
+00FCC028  mov      v10.16b, v1.16b                       
+00FCC02C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FCC030  cbz      x0, #0xfcc248                         
+00FCC034  adrp     x20, #0x2368000                       
+00FCC038  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FCC03C  mov      x1, xzr                               
+00FCC040  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FCC044  ldr      w0, [x19, #0x74]                       // self.mascaraObjeto
+00FCC048  fadd     s9, s11, s9                           
+00FCC04C  ldr      s11, [x19, #0x84]                      // self.sphereRadius
+00FCC050  fadd     s8, s2, s8                            
+00FCC054  mov      x1, xzr                               
+00FCC058  stp      s9, s10, [x19, #0x78]                  // self.vector2
+00FCC05C  str      s8, [x19, #0x80]                      
+00FCC060  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+00FCC064  ldr      x8, [x20]                             
+00FCC068  mov      w20, w0                               
+00FCC06C  ldr      w9, [x8, #0xe0]                       
+00FCC070  cbnz     w9, #0xfcc07c                         
+00FCC074  mov      x0, x8                                
+00FCC078  bl       #0xe61c80                             
+00FCC07C  mov      v0.16b, v9.16b                        
+00FCC080  mov      v1.16b, v10.16b                       
+00FCC084  mov      v2.16b, v8.16b                        
+00FCC088  mov      v3.16b, v11.16b                       
+00FCC08C  mov      w0, w20                               
+00FCC090  mov      x1, xzr                               
+00FCC094  bl       #0x20406ec                             // UnityEngine.Physics$$OverlapSphere
+00FCC098  cbz      x0, #0xfcc248                         
+00FCC09C  ldr      w8, [x0, #0x18]                       
+00FCC0A0  mov      x20, x0                               
+00FCC0A4  cmp      w8, #1                                
+00FCC0A8  b.lt     #0xfcc228                             
+00FCC0AC  adrp     x22, #0x236a000                       
+00FCC0B0  adrp     x23, #0x236a000                       
+00FCC0B4  adrp     x24, #0x236a000                       
+00FCC0B8  adrp     x25, #0x236a000                       
+00FCC0BC  ldr      x22, [x22, #0x600]                     // [0x236A600] 'color1'
+00FCC0C0  ldr      x23, [x23, #0x5f8]                     // [0x236A5F8] 'color2'
+00FCC0C4  ldr      x24, [x24, #0x5f0]                     // [0x236A5F0] 'color3'
+00FCC0C8  ldr      x25, [x25, #0x608]                     // [0x236A608] 'color4'
+00FCC0CC  mov      x21, xzr                              
+00FCC0D0  add      x26, x20, #0x20                       
+00FCC0D4  mov      w27, #1                               
+00FCC0D8  cmp      w21, w8                               
+00FCC0DC  strb     w27, [x19, #0x37]                      // self.checkCollision
+00FCC0E0  b.hs     #0xfcc24c                             
+00FCC0E4  ldr      x0, [x26, x21, lsl #3]                
+00FCC0E8  cbz      x0, #0xfcc248                         
+00FCC0EC  mov      x1, xzr                               
+00FCC0F0  bl       #0x2003eec                             // UnityEngine.Component$$get_tag
+00FCC0F4  ldr      x1, [x22]                             
+00FCC0F8  mov      x2, xzr                               
+00FCC0FC  bl       #0x1960c7c                             // System.String$$op_Equality
+00FCC100  tbz      w0, #0, #0xfcc128                     
+00FCC104  ldr      w8, [x20, #0x18]                      
+00FCC108  cmp      w21, w8                               
+00FCC10C  b.hs     #0xfcc24c                             
+00FCC110  ldr      x0, [x26, x21, lsl #3]                
+00FCC114  cbz      x0, #0xfcc248                         
+00FCC118  mov      x1, xzr                               
+00FCC11C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FCC120  ldr      x8, [x22]                             
+00FCC124  stp      x8, x0, [x19, #0x98]                   // self.tag1
+00FCC128  ldr      w8, [x20, #0x18]                      
+00FCC12C  cmp      w21, w8                               
+00FCC130  b.hs     #0xfcc24c                             
+00FCC134  ldr      x0, [x26, x21, lsl #3]                
+00FCC138  cbz      x0, #0xfcc248                         
+00FCC13C  mov      x1, xzr                               
+00FCC140  bl       #0x2003eec                             // UnityEngine.Component$$get_tag
+00FCC144  ldr      x1, [x23]                             
+00FCC148  mov      x2, xzr                               
+00FCC14C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FCC150  tbz      w0, #0, #0xfcc178                     
+00FCC154  ldr      w8, [x20, #0x18]                      
+00FCC158  cmp      w21, w8                               
+00FCC15C  b.hs     #0xfcc24c                             
+00FCC160  ldr      x0, [x26, x21, lsl #3]                
+00FCC164  cbz      x0, #0xfcc248                         
+00FCC168  mov      x1, xzr                               
+00FCC16C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FCC170  ldr      x8, [x23]                             
+00FCC174  stp      x8, x0, [x19, #0x98]                   // self.tag1
+00FCC178  ldr      w8, [x20, #0x18]                      
+00FCC17C  cmp      w21, w8                               
+00FCC180  b.hs     #0xfcc24c                             
+00FCC184  ldr      x0, [x26, x21, lsl #3]                
+00FCC188  cbz      x0, #0xfcc248                         
+00FCC18C  mov      x1, xzr                               
+00FCC190  bl       #0x2003eec                             // UnityEngine.Component$$get_tag
+00FCC194  ldr      x1, [x24]                             
+00FCC198  mov      x2, xzr                               
+00FCC19C  bl       #0x1960c7c                             // System.String$$op_Equality
+00FCC1A0  tbz      w0, #0, #0xfcc1c8                     
+00FCC1A4  ldr      w8, [x20, #0x18]                      
+00FCC1A8  cmp      w21, w8                               
+00FCC1AC  b.hs     #0xfcc24c                             
+00FCC1B0  ldr      x0, [x26, x21, lsl #3]                
+00FCC1B4  cbz      x0, #0xfcc248                         
+00FCC1B8  mov      x1, xzr                               
+00FCC1BC  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FCC1C0  ldr      x8, [x24]                             
+00FCC1C4  stp      x8, x0, [x19, #0x98]                   // self.tag1
+00FCC1C8  ldr      w8, [x20, #0x18]                      
+00FCC1CC  cmp      w21, w8                               
+00FCC1D0  b.hs     #0xfcc24c                             
+00FCC1D4  ldr      x0, [x26, x21, lsl #3]                
+00FCC1D8  cbz      x0, #0xfcc248                         
+00FCC1DC  mov      x1, xzr                               
+00FCC1E0  bl       #0x2003eec                             // UnityEngine.Component$$get_tag
+00FCC1E4  ldr      x1, [x25]                             
+00FCC1E8  mov      x2, xzr                               
+00FCC1EC  bl       #0x1960c7c                             // System.String$$op_Equality
+00FCC1F0  tbz      w0, #0, #0xfcc218                     
+00FCC1F4  ldr      w8, [x20, #0x18]                      
+00FCC1F8  cmp      w21, w8                               
+00FCC1FC  b.hs     #0xfcc24c                             
+00FCC200  ldr      x0, [x26, x21, lsl #3]                
+00FCC204  cbz      x0, #0xfcc248                         
+00FCC208  mov      x1, xzr                               
+00FCC20C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FCC210  ldr      x8, [x25]                             
+00FCC214  stp      x8, x0, [x19, #0x98]                   // self.tag1
+00FCC218  ldr      w8, [x20, #0x18]                      
+00FCC21C  add      x21, x21, #1                          
+00FCC220  cmp      w21, w8                               
+00FCC224  b.lt     #0xfcc0d8                             
+00FCC228  ldp      x20, x19, [sp, #0x60]                 
+00FCC22C  ldp      x22, x21, [sp, #0x50]                 
+00FCC230  ldp      x24, x23, [sp, #0x40]                 
+00FCC234  ldp      x26, x25, [sp, #0x30]                 
+00FCC238  ldp      x30, x27, [sp, #0x20]                 
+00FCC23C  ldp      d9, d8, [sp, #0x10]                   
+00FCC240  ldp      d11, d10, [sp], #0x70                 
+00FCC244  ret                                            
+00FCC248  bl       #0xe61da0                             
+00FCC24C  bl       #0xe61da8                             

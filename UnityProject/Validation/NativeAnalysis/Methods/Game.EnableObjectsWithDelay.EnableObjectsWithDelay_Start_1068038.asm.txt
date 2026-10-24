@@ -1,0 +1,160 @@
+// Game.EnableObjectsWithDelay.EnableObjectsWithDelay$$Start VA 0x1068038, inferred length 632
+void Game_EnableObjectsWithDelay_EnableObjectsWithDelay__Start (Game_EnableObjectsWithDelay_EnableObjectsWithDelay_o* __this, const MethodInfo* method);
+01068038  sub      sp, sp, #0x80                         
+0106803C  stp      x30, x25, [sp, #0x40]                 
+01068040  stp      x24, x23, [sp, #0x50]                 
+01068044  stp      x22, x21, [sp, #0x60]                 
+01068048  stp      x20, x19, [sp, #0x70]                 
+0106804C  adrp     x20, #0x24fb000                       
+01068050  ldrb     w8, [x20, #0xe67]                     
+01068054  mov      x19, x0                               
+01068058  tbnz     w8, #0, #0x10680d0                    
+0106805C  adrp     x0, #0x2368000                        
+01068060  ldr      x0, [x0, #0x178]                       // [0x2368178] UnityEngine.Debug_TypeInfo
+01068064  bl       #0xe61b78                             
+01068068  adrp     x0, #0x236d000                        
+0106806C  ldr      x0, [x0, #0x298]                       // [0x236D298] Method$System.Collections.Generic.List.Enumerator<EnableObjectsWithDelay.ObjectDelay>.Dispose()
+01068070  bl       #0xe61b78                             
+01068074  adrp     x0, #0x236d000                        
+01068078  ldr      x0, [x0, #0x2a0]                       // [0x236D2A0] Method$System.Collections.Generic.List.Enumerator<EnableObjectsWithDelay.ObjectDelay>.MoveNext()
+0106807C  bl       #0xe61b78                             
+01068080  adrp     x0, #0x236d000                        
+01068084  ldr      x0, [x0, #0x2a8]                       // [0x236D2A8] Method$System.Collections.Generic.List.Enumerator<EnableObjectsWithDelay.ObjectDelay>.get_Current()
+01068088  bl       #0xe61b78                             
+0106808C  adrp     x0, #0x236d000                        
+01068090  ldr      x0, [x0, #0x2b0]                       // [0x236D2B0] Method$System.Collections.Generic.List<EnableObjectsWithDelay.ObjectDelay>.GetEnumerator()
+01068094  bl       #0xe61b78                             
+01068098  adrp     x0, #0x236d000                        
+0106809C  ldr      x0, [x0, #0x2b8]                       // [0x236D2B8] Method$System.Collections.Generic.List<EnableObjectsWithDelay.ObjectDelay>.get_Count()
+010680A0  bl       #0xe61b78                             
+010680A4  adrp     x0, #0x2368000                        
+010680A8  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010680AC  bl       #0xe61b78                             
+010680B0  adrp     x0, #0x236d000                        
+010680B4  ldr      x0, [x0, #0x2c0]                       // [0x236D2C0] 'Target object is not assigned!'
+010680B8  bl       #0xe61b78                             
+010680BC  adrp     x0, #0x236d000                        
+010680C0  ldr      x0, [x0, #0x2c8]                       // [0x236D2C8] 'The list of objects with delays is empty.'
+010680C4  bl       #0xe61b78                             
+010680C8  mov      w8, #1                                
+010680CC  strb     w8, [x20, #0xe67]                     
+010680D0  stp      xzr, xzr, [sp, #0x20]                 
+010680D4  str      xzr, [sp, #0x30]                      
+010680D8  adrp     x21, #0x2368000                       
+010680DC  ldr      x0, [x19, #0x20]                      
+010680E0  ldr      x21, [x21, #0x178]                     // [0x2368178] UnityEngine.Debug_TypeInfo
+010680E4  cbz      x0, #0x10681c0                        
+010680E8  ldr      w8, [x0, #0x18]                       
+010680EC  cbz      w8, #0x10681c0                        
+010680F0  adrp     x8, #0x236d000                        
+010680F4  ldr      x8, [x8, #0x2b0]                       // [0x236D2B0] Method$System.Collections.Generic.List<EnableObjectsWithDelay.ObjectDelay>.GetEnumerator()
+010680F8  ldr      x1, [x8]                              
+010680FC  add      x8, sp, #8                            
+01068100  bl       #0x1572678                             // System.Collections.Generic.List<object>$$GetEnumerator
+01068104  ldur     q0, [sp, #8]                          
+01068108  ldr      x8, [sp, #0x18]                       
+0106810C  adrp     x22, #0x236d000                       
+01068110  adrp     x23, #0x2368000                       
+01068114  ldr      x22, [x22, #0x2a0]                     // [0x236D2A0] Method$System.Collections.Generic.List.Enumerator<EnableObjectsWithDelay.ObjectDelay>.MoveNext()
+01068118  ldr      x23, [x23, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+0106811C  str      q0, [sp, #0x20]                       
+01068120  str      x8, [sp, #0x30]                       
+01068124  adrp     x24, #0x236d000                       
+01068128  ldr      x24, [x24, #0x2c0]                     // [0x236D2C0] 'Target object is not assigned!'
+0106812C  ldr      x1, [x22]                             
+01068130  add      x0, sp, #0x20                         
+01068134  bl       #0x13dc58c                             // System.Collections.Generic.List.Enumerator<object>$$MoveNext
+01068138  tbz      w0, #0, #0x10681e8                    
+0106813C  ldr      x25, [sp, #0x30]                      
+01068140  cbz      x25, #0x1068214                       
+01068144  ldr      x0, [x23]                             
+01068148  ldr      x20, [x25, #0x10]                     
+0106814C  ldr      w8, [x0, #0xe0]                       
+01068150  cbnz     w8, #0x1068158                        
+01068154  bl       #0xe61c80                             
+01068158  mov      x0, x20                               
+0106815C  mov      x1, xzr                               
+01068160  mov      x2, xzr                               
+01068164  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01068168  tbz      w0, #0, #0x10681a0                    
+0106816C  ldr      x0, [x25, #0x10]                      
+01068170  cbz      x0, #0x1068218                        
+01068174  mov      w1, wzr                               
+01068178  mov      x2, xzr                               
+0106817C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01068180  ldr      x1, [x25, #0x10]                      
+01068184  ldr      s0, [x25, #0x18]                      
+01068188  bl       #0x10682b0                             // Game.EnableObjectsWithDelay.EnableObjectsWithDelay$$EnableObjectAfterDelay
+0106818C  mov      x1, x0                                
+01068190  mov      x0, x19                               
+01068194  mov      x2, xzr                               
+01068198  bl       #0x2007508                             // UnityEngine.MonoBehaviour$$StartCoroutine
+0106819C  b        #0x106812c                            
+010681A0  ldr      x0, [x21]                             
+010681A4  ldr      w8, [x0, #0xe0]                       
+010681A8  cbnz     w8, #0x10681b0                        
+010681AC  bl       #0xe61c80                             
+010681B0  ldr      x0, [x24]                             
+010681B4  mov      x1, xzr                               
+010681B8  bl       #0x1fe3a94                             // UnityEngine.Debug$$LogWarning
+010681BC  b        #0x106812c                            
+010681C0  ldr      x0, [x21]                             
+010681C4  adrp     x19, #0x236d000                       
+010681C8  ldr      w8, [x0, #0xe0]                       
+010681CC  ldr      x19, [x19, #0x2c8]                     // [0x236D2C8] 'The list of objects with delays is empty.'
+010681D0  cbnz     w8, #0x10681d8                        
+010681D4  bl       #0xe61c80                             
+010681D8  ldr      x0, [x19]                             
+010681DC  mov      x1, xzr                               
+010681E0  bl       #0x1fe3a94                             // UnityEngine.Debug$$LogWarning
+010681E4  b        #0x10681fc                            
+010681E8  adrp     x8, #0x236d000                        
+010681EC  ldr      x8, [x8, #0x298]                       // [0x236D298] Method$System.Collections.Generic.List.Enumerator<EnableObjectsWithDelay.ObjectDelay>.Dispose()
+010681F0  add      x0, sp, #0x20                         
+010681F4  ldr      x1, [x8]                              
+010681F8  bl       #0x13dc588                             // System.Collections.Generic.List.Enumerator<object>$$Dispose
+010681FC  ldp      x20, x19, [sp, #0x70]                 
+01068200  ldp      x22, x21, [sp, #0x60]                 
+01068204  ldp      x24, x23, [sp, #0x50]                 
+01068208  ldp      x30, x25, [sp, #0x40]                 
+0106820C  add      sp, sp, #0x80                         
+01068210  ret                                            
+01068214  bl       #0xe61da0                             
+01068218  bl       #0xe61da0                             
+0106821C  b        #0x106823c                            
+01068220  b        #0x106823c                            
+01068224  b        #0x106823c                            
+01068228  b        #0x106823c                            
+0106822C  b        #0x106823c                            
+01068230  b        #0x106823c                            
+01068234  b        #0x106823c                            
+01068238  b        #0x106823c                            
+0106823C  mov      x19, x0                               
+01068240  cmp      w1, #1                                
+01068244  b.ne     #0x1068278                            
+01068248  mov      x0, x19                               
+0106824C  bl       #0x224d2d0                            
+01068250  ldr      x20, [x0]                             
+01068254  bl       #0x224d2e0                            
+01068258  adrp     x8, #0x236d000                        
+0106825C  ldr      x8, [x8, #0x298]                       // [0x236D298] Method$System.Collections.Generic.List.Enumerator<EnableObjectsWithDelay.ObjectDelay>.Dispose()
+01068260  add      x0, sp, #0x20                         
+01068264  ldr      x1, [x8]                              
+01068268  bl       #0x13dc588                             // System.Collections.Generic.List.Enumerator<object>$$Dispose
+0106826C  cbz      x20, #0x10681fc                       
+01068270  mov      x0, x20                               
+01068274  bl       #0xe61d98                             
+01068278  mov      x20, xzr                              
+0106827C  b        #0x1068284                            
+01068280  mov      x19, x0                               
+01068284  adrp     x8, #0x236d000                        
+01068288  ldr      x8, [x8, #0x298]                       // [0x236D298] Method$System.Collections.Generic.List.Enumerator<EnableObjectsWithDelay.ObjectDelay>.Dispose()
+0106828C  ldr      x1, [x8]                              
+01068290  add      x0, sp, #0x20                         
+01068294  bl       #0x13dc588                             // System.Collections.Generic.List.Enumerator<object>$$Dispose
+01068298  cbnz     x20, #0x10682a4                       
+0106829C  mov      x0, x19                               
+010682A0  bl       #0xf5dd7c                             
+010682A4  mov      x0, x20                               
+010682A8  bl       #0xe61d98                             
+010682AC  bl       #0xd2eb98                             

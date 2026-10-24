@@ -1,0 +1,41 @@
+// CajaComplete$$doLanguage VA 0x102B514, inferred length 156
+void CajaComplete__doLanguage (CajaComplete_o* __this, const MethodInfo* method);
+0102B514  str      x30, [sp, #-0x30]!                    
+0102B518  stp      x22, x21, [sp, #0x10]                 
+0102B51C  stp      x20, x19, [sp, #0x20]                 
+0102B520  adrp     x20, #0x24fb000                       
+0102B524  adrp     x21, #0x236b000                       
+0102B528  adrp     x22, #0x236b000                       
+0102B52C  ldrb     w8, [x20, #0xd03]                     
+0102B530  ldr      x21, [x21, #0x208]                     // [0x236B208] 'language'
+0102B534  ldr      x22, [x22, #0x210]                     // [0x236B210] 'en'
+0102B538  mov      x19, x0                               
+0102B53C  tbnz     w8, #0, #0x102b560                    
+0102B540  adrp     x0, #0x236b000                        
+0102B544  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+0102B548  bl       #0xe61b78                             
+0102B54C  adrp     x0, #0x236b000                        
+0102B550  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+0102B554  bl       #0xe61b78                             
+0102B558  mov      w8, #1                                
+0102B55C  strb     w8, [x20, #0xd03]                     
+0102B560  ldr      x0, [x21]                             
+0102B564  ldr      x1, [x22]                             
+0102B568  mov      x2, xzr                               
+0102B56C  bl       #0x2001644                             // UnityEngine.PlayerPrefs$$GetString
+0102B570  str      x0, [x19, #0x60]                       // self.idioma
+0102B574  mov      x0, x19                               
+0102B578  bl       #0x102b740                             // CajaComplete$$ObtenerTexto2
+0102B57C  ldr      x8, [x19, #0x68]                       // self.text2
+0102B580  str      x0, [x19, #0x58]                       // self.texto2
+0102B584  cbz      x8, #0x102b5ac                        
+0102B588  ldr      x9, [x8]                              
+0102B58C  ldp      x20, x19, [sp, #0x20]                 
+0102B590  ldp      x22, x21, [sp, #0x10]                 
+0102B594  mov      x1, x0                                
+0102B598  ldr      x3, [x9, #0x5e8]                      
+0102B59C  ldr      x2, [x9, #0x5f0]                      
+0102B5A0  mov      x0, x8                                
+0102B5A4  ldr      x30, [sp], #0x30                      
+0102B5A8  br       x3                                    
+0102B5AC  bl       #0xe61da0                             

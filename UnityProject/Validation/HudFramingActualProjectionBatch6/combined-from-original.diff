@@ -1,0 +1,228 @@
+--- a/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
++++ b/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
+@@ -6,14 +6,30 @@
+ /// <summary>
+ /// Reconstructed desktop framing safeguard, not an original native method.
+ /// Keeps the authored perspective/rotation and moves only backward along its
+-/// viewing direction, by the minimum distance needed to contain visible board meshes.
++/// viewing direction, by the minimum distance needed to contain visible board meshes clear of the original gameplay HUD.
+ /// </summary>
+ [RequireComponent(typeof(Camera))]
+ public sealed class RecoveredBoardFraming : MonoBehaviour
+ {
+     public float LastBackwardDistance { get; private set; }
+     public int MeshCount { get; private set; }
++    [System.Serializable]
++    public sealed class HudRegion
++    {
++        public string path;
++        public Rect viewport;
++    }
+     const float EdgeMargin = .015f;
++    readonly List<HudRegion> hudRegions = new List<HudRegion>();
++    readonly List<Vector3[]> structuralBoxes = new List<Vector3[]>();
++    int structuralBoxCount;
++    readonly List<SaveLoadManager> hudLoaders = new List<SaveLoadManager>();
++    readonly List<Leveltexto2> hudTitles = new List<Leveltexto2>();
++    readonly List<UnityEngine.UI.Graphic> hudGraphics = new List<UnityEngine.UI.Graphic>();
++    readonly Vector3[] hudWorldCorners = new Vector3[4];
++    readonly List<HudRegion> hudRegionPool = new List<HudRegion>();
++    readonly Dictionary<RectTransform,string> hudPaths = new Dictionary<RectTransform,string>();
++    readonly List<RectTransform> hudControls = new List<RectTransform>();
+     Camera view;
+     Transform pieceRoot;
+     Vector3 authoredLocalPosition;
+@@ -49,6 +65,14 @@
+         basePosition=transform.position; hasApplied=false;
+         ground.Clear();
+         Scene scene=SceneManager.GetActiveScene();
++        hudLoaders.Clear(); hudPaths.Clear(); hudGraphics.Clear(); hudTitles.Clear();
++        foreach(Leveltexto2 title in OriginalScenePresentation.Components<Leveltexto2>(scene)) hudTitles.Add(title);
++        foreach(SaveLoadManager loader in OriginalScenePresentation.Components<SaveLoadManager>(scene))
++        {
++            hudLoaders.Add(loader);
++            CacheHudGraphics(CommonAncestor(loader.MusicButton,loader.SoundButton));
++            CacheHudGraphics(CommonAncestor(loader.backButton1,loader.stepsButton));
++        }
+         foreach(ConfigSuelo floor in OriginalScenePresentation.Components<ConfigSuelo>(scene))
+         {
+             Renderer renderer=floor.GetComponent<Renderer>(); if(renderer!=null) ground.Add(renderer);
+@@ -73,9 +97,22 @@
+         { pieces=pieceRoot.GetComponentsInChildren<Renderer>(true); refreshAt=Time.unscaledTime+.25f; }
+         float tanY=Mathf.Tan(view.fieldOfView*.5f*Mathf.Deg2Rad)*(1-2*EdgeMargin);
+         float tanX=tanY*view.aspect;
+-        float backward=0; MeshCount=0;
++        float backward=0; MeshCount=0; structuralBoxCount=0;
+         foreach(Renderer renderer in pieces) Measure(renderer,tanX,tanY,ref backward);
+         foreach(Renderer renderer in ground) Measure(renderer,tanX,tanY,ref backward);
++        GetProtectedHudRegions(hudRegions);
++        // A point moves toward the viewport centre when the camera retreats.
++        // Clear each actual HUD rectangle toward that centre, rather than
++        // inventing a fixed-height full-width band which would shrink clear levels.
++        for(int pass=0;pass<=hudRegions.Count;pass++)
++        {
++            float previous=backward;
++            foreach(HudRegion region in hudRegions)
++                for(int i=0;i<structuralBoxCount;i++)
++                    if(OverlapsHud(structuralBoxes[i],region.viewport,backward))
++                        backward=Mathf.Max(backward,ClearHud(structuralBoxes[i],region.viewport,backward));
++            if(backward<=previous+.00001f) break;
++        }
+         if(backward>.0001f) { transform.position-=transform.forward*backward; LastBackwardDistance=backward; }
+         RecordAppliedPose();
+     }
+@@ -97,13 +134,154 @@
+         // Per-mesh local boxes avoid inventing empty corners in one huge world
+         // AABB spanning an elevated source and a diagonally opposite low border.
+         MeshCount++;
++        if(structuralBoxCount==structuralBoxes.Count) structuralBoxes.Add(new Vector3[8]);
++        Vector3[] box=structuralBoxes[structuralBoxCount++]; int index=0;
+         for(int x=-1;x<=1;x+=2) for(int y=-1;y<=1;y+=2) for(int z=-1;z<=1;z+=2)
+         {
+             Vector3 corner=bounds.center+Vector3.Scale(bounds.extents,new Vector3(x,y,z));
+             Vector3 p=view.transform.InverseTransformPoint(mesh.transform.TransformPoint(corner));
++            box[index++]=p;
+             backward=Mathf.Max(backward,Mathf.Abs(p.x)/tanX-p.z);
+             backward=Mathf.Max(backward,Mathf.Abs(p.y)/tanY-p.z);
+             backward=Mathf.Max(backward,view.nearClipPlane+.01f-p.z);
+         }
+     }
++
++    /// <summary>Only authored gameplay control references, never modal/tutorial roots.</summary>
++    public void GetProtectedHudRegions(List<HudRegion> output)
++    {
++        output.Clear(); hudControls.Clear();
++        foreach(SaveLoadManager loader in hudLoaders)
++        {
++            if(loader==null) continue;
++            AddHudControl(loader.MenuButton); AddHudControl(loader.MusicButton);
++            AddHudControl(loader.SoundButton); AddHudControl(loader.RestartButton);
++            AddHudControl(loader.solutionButton); AddHudControl(loader.NextButton);
++            AddHudControl(loader.backButton); AddHudControl(loader.backButton1);
++            AddHudControl(loader.stepsButton); AddHudControl(loader.botonNumSol);
++            AddHudControl(loader.barra==null ? null : loader.barra.gameObject);
++            AddHudControl(loader.barra1==null ? null : loader.barra1.gameObject);
++        }
++        // barra/barra1 are original progress separators, not the level name.
++        // The native Leveltexto2 serialized Text is the actual authored title.
++        foreach(Leveltexto2 title in hudTitles)
++            if(title!=null && title.texto1!=null && title.texto1.isActiveAndEnabled) AddHudControl(title.texto1.gameObject);
++        // Source panel2 itself is an invisible layout container (Image disabled).
++        // Protect its real enabled artwork, including the cuadro frame, instead
++        // of treating unused container padding as an obstruction.
++        foreach(UnityEngine.UI.Graphic graphic in hudGraphics)
++            if(graphic!=null && graphic.isActiveAndEnabled && graphic.color.a>0) AddHudControl(graphic.gameObject);
++        foreach(RectTransform control in hudControls)
++        {
++            Rect rect;
++            if(!TryHudViewportRect(control,out rect)) continue;
++            float padX=2f/Mathf.Max(1,view.pixelWidth), padY=2f/Mathf.Max(1,view.pixelHeight);
++            rect=Rect.MinMaxRect(Mathf.Max(0,rect.xMin-padX),Mathf.Max(0,rect.yMin-padY),
++                Mathf.Min(1,rect.xMax+padX),Mathf.Min(1,rect.yMax+padY));
++            HudRegion region; string path;
++            if(object.ReferenceEquals(output,hudRegions))
++            {
++                int index=output.Count;
++                if(index==hudRegionPool.Count) hudRegionPool.Add(new HudRegion());
++                region=hudRegionPool[index];
++                if(!hudPaths.TryGetValue(control,out path)) { path=Hierarchy(control); hudPaths.Add(control,path); }
++            }
++            else { region=new HudRegion(); path=Hierarchy(control); }
++            region.path=path; region.viewport=rect; output.Add(region);
++        }
++    }
++    void CacheHudGraphics(Transform root)
++    {
++        // All four original gameplay scenes name this exact shared HUD group
++        // panel2. A Canvas or broader common ancestor must never admit modals.
++        if(root==null || root.name!="panel2" || root.GetComponent<Canvas>()!=null) return;
++        foreach(UnityEngine.UI.Graphic graphic in root.GetComponentsInChildren<UnityEngine.UI.Graphic>(true))
++            if(!hudGraphics.Contains(graphic)) hudGraphics.Add(graphic);
++    }
++    void AddHudControl(GameObject item)
++    {
++        if(item==null || !item.activeInHierarchy) return;
++        RectTransform rect=item.GetComponent<RectTransform>();
++        if(rect!=null && !hudControls.Contains(rect)) hudControls.Add(rect);
++    }
++    static Transform CommonAncestor(GameObject a,GameObject b)
++    {
++        if(a==null || b==null) return null;
++        for(Transform node=a.transform;node!=null;node=node.parent)
++            if(b.transform.IsChildOf(node)) return node;
++        return null;
++    }
++    bool TryHudViewportRect(RectTransform control,out Rect rect)
++    {
++        rect=new Rect(); Canvas canvas=control.GetComponentInParent<Canvas>();
++        if(canvas==null || !canvas.isActiveAndEnabled) return false;
++        Canvas root=canvas.rootCanvas;
++        if(root.renderMode==RenderMode.WorldSpace) return false;
++        RectTransform rootRect=root.transform as RectTransform;
++        Rect pixels=root.pixelRect;
++        if(rootRect==null || pixels.width<=0 || pixels.height<=0) return false;
++        Rect logical=rootRect.rect;
++        if(logical.width<=0 || logical.height<=0) return false;
++        Camera canvasCamera=root.renderMode==RenderMode.ScreenSpaceCamera ? root.worldCamera : null;
++        Rect canvasViewport=canvasCamera!=null ? canvasCamera.rect : new Rect(0,0,1,1);
++        control.GetWorldCorners(hudWorldCorners);
++        Vector2 low=new Vector2(float.PositiveInfinity,float.PositiveInfinity),high=-low;
++        foreach(Vector3 corner in hudWorldCorners)
++        {
++            Vector3 local=rootRect.InverseTransformPoint(corner);
++            Vector2 normalized;
++            if(canvasCamera!=null)
++            {
++                // Preserve the actual authored Canvas world scale and plane
++                // depth. Its root Rect need not fill the camera viewport.
++                // Project through an ideal camera-relative Canvas pose so the
++                // old Canvas world position cannot feed back into FitNow.
++                Vector3 offset=Quaternion.Inverse(rootRect.rotation)*rootRect.TransformVector(local-(Vector3)logical.center);
++                offset.z+=root.planeDistance;
++                Vector3 screen=canvasCamera.WorldToViewportPoint(canvasCamera.transform.position+canvasCamera.transform.rotation*offset);
++                normalized=new Vector2(screen.x,screen.y);
++            }
++            else normalized=new Vector2((local.x-logical.xMin)/logical.width,(local.y-logical.yMin)/logical.height);
++            normalized=canvasViewport.position+Vector2.Scale(normalized,canvasViewport.size);
++            Vector2 viewport=new Vector2((normalized.x-view.rect.xMin)/view.rect.width,(normalized.y-view.rect.yMin)/view.rect.height);
++            low=Vector2.Min(low,viewport); high=Vector2.Max(high,viewport);
++        }
++        rect=Rect.MinMaxRect(Mathf.Max(0,low.x),Mathf.Max(0,low.y),Mathf.Min(1,high.x),Mathf.Min(1,high.y));
++        // Whitelisted controls can still reference a full-screen container.
++        // Only the actual upper HUD, outside the centre, can constrain framing.
++        return rect.width>0 && rect.height>0 && rect.width<.95f && rect.height<.4f && rect.yMin>.5f;
++    }
++    bool OverlapsHud(Vector3[] box,Rect hud,float backward)
++    {
++        float tanY=Mathf.Tan(view.fieldOfView*.5f*Mathf.Deg2Rad),tanX=tanY*view.aspect;
++        Vector2 low=new Vector2(float.PositiveInfinity,float.PositiveInfinity),high=-low;
++        foreach(Vector3 p in box)
++        {
++            float depth=p.z+backward;
++            Vector2 point=new Vector2(.5f+p.x/(2*tanX*depth),.5f+p.y/(2*tanY*depth));
++            low=Vector2.Min(low,point); high=Vector2.Max(high,point);
++        }
++        return low.x<hud.xMax && high.x>hud.xMin && low.y<hud.yMax && high.y>hud.yMin;
++    }
++    float ClearHud(Vector3[] box,Rect hud,float current)
++    {
++        float tanY=Mathf.Tan(view.fieldOfView*.5f*Mathf.Deg2Rad),tanX=tanY*view.aspect;
++        float best=float.PositiveInfinity;
++        if(hud.xMin>.5f) best=Mathf.Min(best,ClearToEdge(box,0,2*tanX*(hud.xMin-.5f),1,current));
++        if(hud.xMax<.5f) best=Mathf.Min(best,ClearToEdge(box,0,2*tanX*(.5f-hud.xMax),-1,current));
++        if(hud.yMin>.5f) best=Mathf.Min(best,ClearToEdge(box,1,2*tanY*(hud.yMin-.5f),1,current));
++        if(hud.yMax<.5f) best=Mathf.Min(best,ClearToEdge(box,1,2*tanY*(.5f-hud.yMax),-1,current));
++        return float.IsInfinity(best) ? current : best+.01f;
++    }
++    static float ClearToEdge(Vector3[] box,int axis,float divisor,float sign,float current)
++    {
++        foreach(Vector3 p in box) current=Mathf.Max(current,sign*p[axis]/divisor-p.z);
++        return current;
++    }
++    static string Hierarchy(Transform node)
++    {
++        string path=node.name;
++        while(node.parent!=null) { node=node.parent; path=node.name+"/"+path; }
++        return path;
++    }
+ }

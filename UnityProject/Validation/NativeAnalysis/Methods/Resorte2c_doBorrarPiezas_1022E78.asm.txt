@@ -1,0 +1,110 @@
+// Resorte2c$$doBorrarPiezas VA 0x1022E78, inferred length 432
+void Resorte2c__doBorrarPiezas (Resorte2c_o* __this, const MethodInfo* method);
+01022E78  stp      x30, x21, [sp, #-0x20]!               
+01022E7C  stp      x20, x19, [sp, #0x10]                 
+01022E80  adrp     x20, #0x24fb000                       
+01022E84  adrp     x21, #0x2368000                       
+01022E88  ldrb     w8, [x20, #0xcd2]                     
+01022E8C  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+01022E90  mov      x19, x0                               
+01022E94  tbnz     w8, #0, #0x1022eac                    
+01022E98  adrp     x0, #0x2368000                        
+01022E9C  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+01022EA0  bl       #0xe61b78                             
+01022EA4  mov      w8, #1                                
+01022EA8  strb     w8, [x20, #0xcd2]                     
+01022EAC  ldr      x0, [x21]                             
+01022EB0  ldr      x20, [x19, #0x20]                      // self.objeto1
+01022EB4  ldr      w8, [x0, #0xe0]                       
+01022EB8  cbnz     w8, #0x1022ec0                        
+01022EBC  bl       #0xe61c80                             
+01022EC0  mov      x0, x20                               
+01022EC4  mov      x1, xzr                               
+01022EC8  mov      x2, xzr                               
+01022ECC  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01022ED0  tbz      w0, #0, #0x1022ef4                    
+01022ED4  ldr      x0, [x21]                             
+01022ED8  ldr      x20, [x19, #0x20]                      // self.objeto1
+01022EDC  ldr      w8, [x0, #0xe0]                       
+01022EE0  cbnz     w8, #0x1022ee8                        
+01022EE4  bl       #0xe61c80                             
+01022EE8  mov      x0, x20                               
+01022EEC  mov      x1, xzr                               
+01022EF0  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+01022EF4  ldr      x0, [x21]                             
+01022EF8  ldr      x20, [x19, #0xd8]                      // self.objeto14
+01022EFC  ldr      w8, [x0, #0xe0]                       
+01022F00  cbnz     w8, #0x1022f08                        
+01022F04  bl       #0xe61c80                             
+01022F08  mov      x0, x20                               
+01022F0C  mov      x1, xzr                               
+01022F10  mov      x2, xzr                               
+01022F14  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01022F18  tbz      w0, #0, #0x1022f3c                    
+01022F1C  ldr      x0, [x21]                             
+01022F20  ldr      x19, [x19, #0xd8]                      // self.objeto14
+01022F24  ldr      w8, [x0, #0xe0]                       
+01022F28  cbnz     w8, #0x1022f30                        
+01022F2C  bl       #0xe61c80                             
+01022F30  mov      x0, x19                               
+01022F34  mov      x1, xzr                               
+01022F38  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+01022F3C  ldp      x20, x19, [sp, #0x10]                 
+01022F40  ldp      x30, x21, [sp], #0x20                 
+01022F44  ret                                            
+01022F48  cmp      w1, #1                                
+01022F4C  mov      x20, x0                               
+01022F50  b.ne     #0x102301c                            
+01022F54  mov      x0, x20                               
+01022F58  bl       #0x224d2d0                            
+01022F5C  mov      x19, x0                               
+01022F60  adrp     x0, #0x2368000                        
+01022F64  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+01022F68  bl       #0xe61b8c                             
+01022F6C  ldr      x8, [x19]                             
+01022F70  ldr      x1, [x8]                              
+01022F74  bl       #0xe621cc                             
+01022F78  tbz      w0, #0, #0x1022f88                    
+01022F7C  ldp      x20, x19, [sp, #0x10]                 
+01022F80  ldp      x30, x21, [sp], #0x20                 
+01022F84  b        #0x224d2e0                            
+01022F88  mov      w0, #8                                
+01022F8C  bl       #0x224d320                            
+01022F90  ldr      x8, [x19]                             
+01022F94  str      x8, [x0]                              
+01022F98  adrp     x1, #0x2253000                        
+01022F9C  add      x1, x1, #0x618                        
+01022FA0  mov      x2, xzr                               
+01022FA4  bl       #0x224d330                            
+01022FA8  b        #0x1023014                            
+01022FAC  mov      x20, x0                               
+01022FB0  bl       #0x224d2e0                            
+01022FB4  b        #0x102301c                            
+01022FB8  cmp      w1, #1                                
+01022FBC  mov      x20, x0                               
+01022FC0  b.ne     #0x102301c                            
+01022FC4  mov      x0, x20                               
+01022FC8  bl       #0x224d2d0                            
+01022FCC  mov      x20, x0                               
+01022FD0  adrp     x0, #0x2368000                        
+01022FD4  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+01022FD8  bl       #0xe61b8c                             
+01022FDC  ldr      x8, [x20]                             
+01022FE0  ldr      x1, [x8]                              
+01022FE4  bl       #0xe621cc                             
+01022FE8  tbz      w0, #0, #0x1022ff4                    
+01022FEC  bl       #0x224d2e0                            
+01022FF0  b        #0x1022ef4                            
+01022FF4  mov      w0, #8                                
+01022FF8  bl       #0x224d320                            
+01022FFC  ldr      x8, [x20]                             
+01023000  str      x8, [x0]                              
+01023004  adrp     x1, #0x2253000                        
+01023008  add      x1, x1, #0x618                        
+0102300C  mov      x2, xzr                               
+01023010  bl       #0x224d330                            
+01023014  mov      x20, x0                               
+01023018  bl       #0x224d2e0                            
+0102301C  mov      x0, x20                               
+01023020  bl       #0xf5dd7c                             
+01023024  bl       #0xd2eb98                             

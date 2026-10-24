@@ -1,0 +1,38 @@
+// SaveLoadManager$$doNotNow VA 0x101B910, inferred length 144
+void SaveLoadManager__doNotNow (SaveLoadManager_o* __this, const MethodInfo* method);
+0101B910  str      x30, [sp, #-0x20]!                    
+0101B914  stp      x20, x19, [sp, #0x10]                 
+0101B918  adrp     x20, #0x24fb000                       
+0101B91C  ldrb     w8, [x20, #0xca3]                     
+0101B920  mov      x19, x0                               
+0101B924  tbnz     w8, #0, #0x101b93c                    
+0101B928  adrp     x0, #0x236a000                        
+0101B92C  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0101B930  bl       #0xe61b78                             
+0101B934  mov      w8, #1                                
+0101B938  strb     w8, [x20, #0xca3]                     
+0101B93C  ldr      x0, [x19, #0x198]                      // self.audioManager
+0101B940  cbz      x0, #0x101b99c                        
+0101B944  ldr      x1, [x19, #0x188]                      // self.click
+0101B948  mov      x2, xzr                               
+0101B94C  bl       #0x1028540                             // AudioManager$$PlaySound
+0101B950  ldr      x0, [x19, #0x170]                      // self.cajaRate
+0101B954  cbz      x0, #0x101b99c                        
+0101B958  adrp     x20, #0x236a000                       
+0101B95C  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0101B960  mov      w1, wzr                               
+0101B964  mov      x2, xzr                               
+0101B968  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0101B96C  ldr      x0, [x20]                             
+0101B970  ldr      w8, [x0, #0xe0]                       
+0101B974  cbnz     w8, #0x101b980                        
+0101B978  bl       #0xe61c80                             
+0101B97C  ldr      x0, [x20]                             
+0101B980  ldr      x8, [x0, #0xb8]                       
+0101B984  mov      x0, x19                               
+0101B988  ldp      x20, x19, [sp, #0x10]                 
+0101B98C  mov      w9, #1                                
+0101B990  strb     w9, [x8, #0x16]                       
+0101B994  ldr      x30, [sp], #0x20                      
+0101B998  b        #0x101b9a0                             // SaveLoadManager$$doActivarBotones
+0101B99C  bl       #0xe61da0                             

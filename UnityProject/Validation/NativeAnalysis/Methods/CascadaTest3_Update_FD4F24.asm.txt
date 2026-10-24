@@ -1,0 +1,60 @@
+// CascadaTest3$$Update VA 0xFD4F24, inferred length 232
+void CascadaTest3__Update (CascadaTest3_o* __this, const MethodInfo* method);
+00FD4F24  stp      x30, x21, [sp, #-0x20]!               
+00FD4F28  stp      x20, x19, [sp, #0x10]                 
+00FD4F2C  adrp     x20, #0x24fb000                       
+00FD4F30  ldrb     w8, [x20, #0xb68]                     
+00FD4F34  mov      x19, x0                               
+00FD4F38  tbnz     w8, #0, #0xfd4f50                     
+00FD4F3C  adrp     x0, #0x2368000                        
+00FD4F40  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD4F44  bl       #0xe61b78                             
+00FD4F48  mov      w8, #1                                
+00FD4F4C  strb     w8, [x20, #0xb68]                     
+00FD4F50  ldr      w8, [x19, #0x8c]                       // self.activa
+00FD4F54  cmp      w8, #1                                
+00FD4F58  b.ne     #0xfd5000                             
+00FD4F5C  ldr      s0, [x19, #0x70]                       // self.distan_y
+00FD4F60  mov      x0, x19                               
+00FD4F64  sturh    wzr, [x19, #0x6d]                      // self.ObjetoArriba
+00FD4F68  bl       #0xfd5244                              // CascadaTest3$$CheckCollision
+00FD4F6C  and      w8, w0, #1                            
+00FD4F70  strb     w8, [x19, #0x6e]                       // self.checkObjetoArriba
+00FD4F74  tbz      w0, #0, #0xfd4f84                     
+00FD4F78  mov      w8, #1                                
+00FD4F7C  strb     w8, [x19, #0x6d]                       // self.ObjetoArriba
+00FD4F80  b        #0xfd4f8c                             
+00FD4F84  ldrb     w8, [x19, #0x6d]                       // self.ObjetoArriba
+00FD4F88  cbz      w8, #0xfd4fe4                         
+00FD4F8C  adrp     x21, #0x2368000                       
+00FD4F90  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD4F94  ldr      x20, [x19, #0x58]                      // self.fuente
+00FD4F98  ldr      x0, [x21]                             
+00FD4F9C  ldr      w8, [x0, #0xe0]                       
+00FD4FA0  cbnz     w8, #0xfd4fa8                         
+00FD4FA4  bl       #0xe61c80                             
+00FD4FA8  mov      x0, x20                               
+00FD4FAC  mov      x1, xzr                               
+00FD4FB0  mov      x2, xzr                               
+00FD4FB4  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FD4FB8  tbz      w0, #0, #0xfd5000                     
+00FD4FBC  ldr      x0, [x21]                             
+00FD4FC0  ldr      x20, [x19, #0x58]                      // self.fuente
+00FD4FC4  ldr      w8, [x0, #0xe0]                       
+00FD4FC8  cbnz     w8, #0xfd4fd0                         
+00FD4FCC  bl       #0xe61c80                             
+00FD4FD0  mov      x0, x20                               
+00FD4FD4  mov      x1, xzr                               
+00FD4FD8  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FD4FDC  strb     wzr, [x19, #0x90]                      // self.creada
+00FD4FE0  b        #0xfd5000                             
+00FD4FE4  ldrb     w8, [x19, #0x90]                       // self.creada
+00FD4FE8  cbnz     w8, #0xfd5000                         
+00FD4FEC  mov      w20, #1                               
+00FD4FF0  mov      x0, x19                               
+00FD4FF4  strb     w20, [x19, #0x6c]                      // self.instanciar
+00FD4FF8  bl       #0xfd503c                              // CascadaTest3$$doCrearFuente
+00FD4FFC  strb     w20, [x19, #0x90]                      // self.creada
+00FD5000  ldp      x20, x19, [sp, #0x10]                 
+00FD5004  ldp      x30, x21, [sp], #0x20                 
+00FD5008  ret                                            

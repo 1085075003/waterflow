@@ -1,0 +1,33 @@
+// Helper$$GetMouseAxis VA 0x1058390, inferred length 124
+float Helper__GetMouseAxis (int32_t axis, const MethodInfo* method);
+01058390  str      x30, [sp, #-0x20]!                    
+01058394  stp      x20, x19, [sp, #0x10]                 
+01058398  adrp     x20, #0x24fb000                       
+0105839C  ldrb     w8, [x20, #0xe33]                     
+010583A0  mov      w19, w0                               
+010583A4  tbnz     w8, #0, #0x10583c8                    
+010583A8  adrp     x0, #0x2368000                        
+010583AC  ldr      x0, [x0, #0xae8]                       // [0x2368AE8] 'Mouse Y'
+010583B0  bl       #0xe61b78                             
+010583B4  adrp     x0, #0x2368000                        
+010583B8  ldr      x0, [x0, #0xaf0]                       // [0x2368AF0] 'Mouse X'
+010583BC  bl       #0xe61b78                             
+010583C0  mov      w8, #1                                
+010583C4  strb     w8, [x20, #0xe33]                     
+010583C8  cbz      w19, #0x10583e0                       
+010583CC  cmp      w19, #1                               
+010583D0  b.ne     #0x10583fc                            
+010583D4  adrp     x8, #0x2368000                        
+010583D8  ldr      x8, [x8, #0xae8]                       // [0x2368AE8] 'Mouse Y'
+010583DC  b        #0x10583e8                            
+010583E0  adrp     x8, #0x2368000                        
+010583E4  ldr      x8, [x8, #0xaf0]                       // [0x2368AF0] 'Mouse X'
+010583E8  ldr      x0, [x8]                              
+010583EC  ldp      x20, x19, [sp, #0x10]                 
+010583F0  mov      x1, xzr                               
+010583F4  ldr      x30, [sp], #0x20                      
+010583F8  b        #0x203a470                             // UnityEngine.Input$$GetAxis
+010583FC  ldp      x20, x19, [sp, #0x10]                 
+01058400  fmov     s0, wzr                               
+01058404  ldr      x30, [sp], #0x20                      
+01058408  ret                                            

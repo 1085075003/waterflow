@@ -1,0 +1,145 @@
+// ObservadorResorte2$$doInactivarPieza VA 0xFE1F90, inferred length 572
+void ObservadorResorte2__doInactivarPieza (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE1F90  stp      x30, x21, [sp, #-0x20]!               
+00FE1F94  stp      x20, x19, [sp, #0x10]                 
+00FE1F98  adrp     x20, #0x24fb000                       
+00FE1F9C  ldrb     w8, [x20, #0xbb2]                     
+00FE1FA0  mov      x19, x0                               
+00FE1FA4  tbnz     w8, #0, #0xfe201c                     
+00FE1FA8  adrp     x0, #0x236a000                        
+00FE1FAC  ldr      x0, [x0, #0x800]                       // [0x236A800] Method$UnityEngine.GameObject.GetComponent<ControlFijo>()
+00FE1FB0  bl       #0xe61b78                             
+00FE1FB4  adrp     x0, #0x236a000                        
+00FE1FB8  ldr      x0, [x0, #0x808]                       // [0x236A808] Method$UnityEngine.GameObject.GetComponent<ControlPiezaC>()
+00FE1FBC  bl       #0xe61b78                             
+00FE1FC0  adrp     x0, #0x236a000                        
+00FE1FC4  ldr      x0, [x0, #0x810]                       // [0x236A810] Method$UnityEngine.GameObject.GetComponent<ControlPiezaFuente>()
+00FE1FC8  bl       #0xe61b78                             
+00FE1FCC  adrp     x0, #0x236a000                        
+00FE1FD0  ldr      x0, [x0, #0x818]                       // [0x236A818] Method$UnityEngine.GameObject.GetComponent<ControlPieza>()
+00FE1FD4  bl       #0xe61b78                             
+00FE1FD8  adrp     x0, #0x236a000                        
+00FE1FDC  ldr      x0, [x0, #0x820]                       // [0x236A820] 'BloqueFijo'
+00FE1FE0  bl       #0xe61b78                             
+00FE1FE4  adrp     x0, #0x236a000                        
+00FE1FE8  ldr      x0, [x0, #0x828]                       // [0x236A828] 'Bloque'
+00FE1FEC  bl       #0xe61b78                             
+00FE1FF0  adrp     x0, #0x236a000                        
+00FE1FF4  ldr      x0, [x0, #0x628]                       // [0x236A628] 'Suelo1'
+00FE1FF8  bl       #0xe61b78                             
+00FE1FFC  adrp     x0, #0x236a000                        
+00FE2000  ldr      x0, [x0, #0x830]                       // [0x236A830] 'CuFuenteED'
+00FE2004  bl       #0xe61b78                             
+00FE2008  adrp     x0, #0x236a000                        
+00FE200C  ldr      x0, [x0, #0x838]                       // [0x236A838] 'Fuente'
+00FE2010  bl       #0xe61b78                             
+00FE2014  mov      w8, #1                                
+00FE2018  strb     w8, [x20, #0xbb2]                     
+00FE201C  mov      x0, x19                               
+00FE2020  mov      x1, xzr                               
+00FE2024  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FE2028  cbz      x0, #0xfe21c8                         
+00FE202C  mov      x1, xzr                               
+00FE2030  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE2034  cbz      x0, #0xfe21c8                         
+00FE2038  mov      x1, xzr                               
+00FE203C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FE2040  str      x0, [x19, #0x1e0]                      // self.objeto3
+00FE2044  cbz      x0, #0xfe21c8                         
+00FE2048  mov      x1, xzr                               
+00FE204C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE2050  cbz      x0, #0xfe21c8                         
+00FE2054  mov      x1, xzr                               
+00FE2058  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FE205C  cbz      x0, #0xfe21c8                         
+00FE2060  adrp     x8, #0x236a000                        
+00FE2064  ldr      x8, [x8, #0x820]                       // [0x236A820] 'BloqueFijo'
+00FE2068  mov      x2, xzr                               
+00FE206C  ldr      x1, [x8]                              
+00FE2070  bl       #0x19651dc                             // System.String$$Contains
+00FE2074  ldr      x8, [x19, #0x1e0]                      // self.objeto3
+00FE2078  cbz      x8, #0xfe21c8                         
+00FE207C  tbz      w0, #0, #0xfe208c                     
+00FE2080  adrp     x9, #0x236a000                        
+00FE2084  ldr      x9, [x9, #0x800]                       // [0x236A800] Method$UnityEngine.GameObject.GetComponent<ControlFijo>()
+00FE2088  b        #0xfe2148                             
+00FE208C  mov      x0, x8                                
+00FE2090  mov      x1, xzr                               
+00FE2094  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE2098  cbz      x0, #0xfe21c8                         
+00FE209C  mov      x1, xzr                               
+00FE20A0  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FE20A4  cbz      x0, #0xfe21c8                         
+00FE20A8  adrp     x8, #0x236a000                        
+00FE20AC  ldr      x8, [x8, #0x828]                       // [0x236A828] 'Bloque'
+00FE20B0  mov      x2, xzr                               
+00FE20B4  ldr      x1, [x8]                              
+00FE20B8  bl       #0x19651dc                             // System.String$$Contains
+00FE20BC  ldr      x8, [x19, #0x1e0]                      // self.objeto3
+00FE20C0  cbz      x8, #0xfe21c8                         
+00FE20C4  mov      w20, w0                               
+00FE20C8  mov      x0, x8                                
+00FE20CC  mov      x1, xzr                               
+00FE20D0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE20D4  cbz      x0, #0xfe21c8                         
+00FE20D8  mov      x1, xzr                               
+00FE20DC  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FE20E0  cbz      x0, #0xfe21c8                         
+00FE20E4  tbz      w20, #0, #0xfe2120                    
+00FE20E8  adrp     x8, #0x236a000                        
+00FE20EC  ldr      x8, [x8, #0x838]                       // [0x236A838] 'Fuente'
+00FE20F0  mov      x2, xzr                               
+00FE20F4  ldr      x1, [x8]                              
+00FE20F8  bl       #0x19651dc                             // System.String$$Contains
+00FE20FC  ldr      x8, [x19, #0x1e0]                      // self.objeto3
+00FE2100  cbz      x8, #0xfe21c8                         
+00FE2104  adrp     x9, #0x236a000                        
+00FE2108  adrp     x10, #0x236a000                       
+00FE210C  ldr      x9, [x9, #0x818]                       // [0x236A818] Method$UnityEngine.GameObject.GetComponent<ControlPieza>()
+00FE2110  ldr      x10, [x10, #0x810]                     // [0x236A810] Method$UnityEngine.GameObject.GetComponent<ControlPiezaFuente>()
+00FE2114  tst      w0, #1                                
+00FE2118  csel     x9, x10, x9, ne                       
+00FE211C  b        #0xfe2148                             
+00FE2120  adrp     x8, #0x236a000                        
+00FE2124  ldr      x8, [x8, #0x830]                       // [0x236A830] 'CuFuenteED'
+00FE2128  mov      x2, xzr                               
+00FE212C  ldr      x1, [x8]                              
+00FE2130  bl       #0x19651dc                             // System.String$$Contains
+00FE2134  tbz      w0, #0, #0xfe2154                     
+00FE2138  ldr      x8, [x19, #0x1e0]                      // self.objeto3
+00FE213C  cbz      x8, #0xfe21c8                         
+00FE2140  adrp     x9, #0x236a000                        
+00FE2144  ldr      x9, [x9, #0x808]                       // [0x236A808] Method$UnityEngine.GameObject.GetComponent<ControlPiezaC>()
+00FE2148  ldr      x1, [x9]                              
+00FE214C  mov      x0, x8                                
+00FE2150  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FE2154  adrp     x21, #0x236a000                       
+00FE2158  ldrb     w8, [x19, #0x166]                      // self.sw_obj1
+00FE215C  ldr      x21, [x21, #0x628]                     // [0x236A628] 'Suelo1'
+00FE2160  cbz      w8, #0xfe2188                         
+00FE2164  ldr      x0, [x21]                             
+00FE2168  ldr      x20, [x19, #0x1d0]                     // self.objeto1
+00FE216C  mov      x1, xzr                               
+00FE2170  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+00FE2174  cbz      x20, #0xfe21c8                        
+00FE2178  mov      w1, w0                                
+00FE217C  mov      x0, x20                               
+00FE2180  mov      x2, xzr                               
+00FE2184  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+00FE2188  ldrb     w8, [x19, #0x167]                      // self.sw_obj2
+00FE218C  cbz      w8, #0xfe21bc                         
+00FE2190  ldr      x0, [x21]                             
+00FE2194  ldr      x19, [x19, #0x1d8]                     // self.objeto2
+00FE2198  mov      x1, xzr                               
+00FE219C  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+00FE21A0  cbz      x19, #0xfe21c8                        
+00FE21A4  mov      w1, w0                                
+00FE21A8  mov      x0, x19                               
+00FE21AC  ldp      x20, x19, [sp, #0x10]                 
+00FE21B0  mov      x2, xzr                               
+00FE21B4  ldp      x30, x21, [sp], #0x20                 
+00FE21B8  b        #0x2006350                             // UnityEngine.GameObject$$set_layer
+00FE21BC  ldp      x20, x19, [sp, #0x10]                 
+00FE21C0  ldp      x30, x21, [sp], #0x20                 
+00FE21C4  ret                                            
+00FE21C8  bl       #0xe61da0                             

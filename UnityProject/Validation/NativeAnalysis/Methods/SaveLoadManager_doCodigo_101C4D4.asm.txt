@@ -1,0 +1,82 @@
+// SaveLoadManager$$doCodigo VA 0x101C4D4, inferred length 320
+void SaveLoadManager__doCodigo (SaveLoadManager_o* __this, System_String_o* code1, const MethodInfo* method);
+0101C4D4  sub      sp, sp, #0x30                         
+0101C4D8  stp      x30, x21, [sp, #0x10]                 
+0101C4DC  stp      x20, x19, [sp, #0x20]                 
+0101C4E0  adrp     x21, #0x24fb000                       
+0101C4E4  ldrb     w8, [x21, #0xcab]                     
+0101C4E8  mov      x20, x1                               
+0101C4EC  mov      x19, x0                               
+0101C4F0  tbnz     w8, #0, #0x101c520                    
+0101C4F4  adrp     x0, #0x236a000                        
+0101C4F8  ldr      x0, [x0, #0xc38]                       // [0x236AC38] 'sq'
+0101C4FC  bl       #0xe61b78                             
+0101C500  adrp     x0, #0x236a000                        
+0101C504  ldr      x0, [x0, #0xba8]                       // [0x236ABA8] 'Col'
+0101C508  bl       #0xe61b78                             
+0101C50C  adrp     x0, #0x236a000                        
+0101C510  ldr      x0, [x0, #0xca0]                       // [0x236ACA0] 'eq'
+0101C514  bl       #0xe61b78                             
+0101C518  mov      w8, #1                                
+0101C51C  strb     w8, [x21, #0xcab]                     
+0101C520  str      wzr, [sp, #0xc]                       
+0101C524  cbz      x20, #0x101c60c                       
+0101C528  adrp     x8, #0x236a000                        
+0101C52C  ldr      x8, [x8, #0xc38]                       // [0x236AC38] 'sq'
+0101C530  adrp     x21, #0x236a000                       
+0101C534  mov      x0, x20                               
+0101C538  mov      x2, xzr                               
+0101C53C  ldr      x1, [x8]                              
+0101C540  ldr      x21, [x21, #0xca0]                     // [0x236ACA0] 'eq'
+0101C544  bl       #0x196578c                             // System.String$$IndexOf
+0101C548  str      w0, [x19, #0x1c0]                      // self.posicionChar
+0101C54C  ldr      x1, [x21]                             
+0101C550  mov      x0, x20                               
+0101C554  mov      x2, xzr                               
+0101C558  bl       #0x196578c                             // System.String$$IndexOf
+0101C55C  ldr      w8, [x19, #0x1c0]                      // self.posicionChar
+0101C560  str      w0, [x19, #0x1c4]                      // self.posicionChar1
+0101C564  cmn      w8, #1                                
+0101C568  b.eq     #0x101c5fc                            
+0101C56C  adrp     x8, #0x236a000                        
+0101C570  ldr      x8, [x8, #0xba8]                       // [0x236ABA8] 'Col'
+0101C574  mov      w9, #1                                
+0101C578  strb     w9, [x19, #0x380]                      // self.codigoNew
+0101C57C  mov      x0, x20                               
+0101C580  ldr      x1, [x8]                              
+0101C584  mov      x2, xzr                               
+0101C588  bl       #0x19651dc                             // System.String$$Contains
+0101C58C  ldr      w8, [x19, #0x1c4]                      // self.posicionChar1
+0101C590  ldr      w9, [x19, #0x1c0]                      // self.posicionChar
+0101C594  tst      w0, #1                                
+0101C598  mov      w10, #-2                              
+0101C59C  mov      w11, #-6                              
+0101C5A0  csel     w10, w11, w10, ne                     
+0101C5A4  sub      w8, w8, w9                            
+0101C5A8  add      w2, w8, w10                           
+0101C5AC  add      w1, w9, #2                            
+0101C5B0  mov      x0, x20                               
+0101C5B4  mov      x3, xzr                               
+0101C5B8  str      w2, [x19, #0x1c8]                      // self.longChar
+0101C5BC  bl       #0x196288c                             // System.String$$Substring
+0101C5C0  add      x1, sp, #0xc                          
+0101C5C4  mov      x2, xzr                               
+0101C5C8  bl       #0x1ab40a8                             // System.Int32$$TryParse
+0101C5CC  ldr      x8, [x19, #0x28]                       // self.prefabPiezas
+0101C5D0  cbz      x8, #0x101c60c                        
+0101C5D4  ldrsw    x9, [sp, #0xc]                        
+0101C5D8  ldr      w10, [x8, #0x18]                      
+0101C5DC  cmp      w9, w10                               
+0101C5E0  b.hs     #0x101c610                            
+0101C5E4  add      x8, x8, x9, lsl #3                    
+0101C5E8  ldr      x0, [x8, #0x20]                       
+0101C5EC  cbz      x0, #0x101c60c                        
+0101C5F0  mov      x1, xzr                               
+0101C5F4  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+0101C5F8  str      x0, [x19, #0x378]                      // self.nombrePieza
+0101C5FC  ldp      x20, x19, [sp, #0x20]                 
+0101C600  ldp      x30, x21, [sp, #0x10]                 
+0101C604  add      sp, sp, #0x30                         
+0101C608  ret                                            
+0101C60C  bl       #0xe61da0                             
+0101C610  bl       #0xe61da8                             

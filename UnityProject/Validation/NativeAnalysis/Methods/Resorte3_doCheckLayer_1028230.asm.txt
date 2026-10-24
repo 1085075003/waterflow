@@ -1,0 +1,55 @@
+// Resorte3$$doCheckLayer VA 0x1028230, inferred length 212
+void Resorte3__doCheckLayer (Resorte3_o* __this, const MethodInfo* method);
+01028230  stp      x30, x21, [sp, #-0x20]!               
+01028234  stp      x20, x19, [sp, #0x10]                 
+01028238  adrp     x21, #0x24fb000                       
+0102823C  adrp     x20, #0x2368000                       
+01028240  ldrb     w8, [x21, #0xce3]                     
+01028244  ldr      x20, [x20, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+01028248  mov      x19, x0                               
+0102824C  tbnz     w8, #0, #0x1028264                    
+01028250  adrp     x0, #0x2368000                        
+01028254  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+01028258  bl       #0xe61b78                             
+0102825C  mov      w8, #1                                
+01028260  strb     w8, [x21, #0xce3]                     
+01028264  strb     wzr, [x19, #0xec]                      // self.checkPieza
+01028268  ldr      x0, [x20]                             
+0102826C  ldr      x20, [x19, #0xb0]                      // self.otherObject
+01028270  ldr      w8, [x0, #0xe0]                       
+01028274  cbnz     w8, #0x102827c                        
+01028278  bl       #0xe61c80                             
+0102827C  mov      x0, x20                               
+01028280  mov      x1, xzr                               
+01028284  mov      x2, xzr                               
+01028288  bl       #0x2006e54                             // UnityEngine.Object$$op_Equality
+0102828C  tbnz     w0, #0, #0x10282ec                    
+01028290  ldr      x0, [x19, #0xb0]                       // self.otherObject
+01028294  cbz      x0, #0x1028300                        
+01028298  mov      x1, xzr                               
+0102829C  bl       #0x2006314                             // UnityEngine.GameObject$$get_layer
+010282A0  cmp      w0, #0xc                              
+010282A4  b.eq     #0x10282ec                            
+010282A8  ldr      x0, [x19, #0xb0]                       // self.otherObject
+010282AC  cbz      x0, #0x1028300                        
+010282B0  mov      x1, xzr                               
+010282B4  bl       #0x2006314                             // UnityEngine.GameObject$$get_layer
+010282B8  cmp      w0, #0xb                              
+010282BC  b.eq     #0x10282ec                            
+010282C0  ldr      x0, [x19, #0xb0]                       // self.otherObject
+010282C4  cbz      x0, #0x1028300                        
+010282C8  mov      x1, xzr                               
+010282CC  bl       #0x2006314                             // UnityEngine.GameObject$$get_layer
+010282D0  cbz      w0, #0x10282ec                        
+010282D4  ldr      x0, [x19, #0xb0]                       // self.otherObject
+010282D8  cbz      x0, #0x1028300                        
+010282DC  mov      x1, xzr                               
+010282E0  bl       #0x2006314                             // UnityEngine.GameObject$$get_layer
+010282E4  cmp      w0, #2                                
+010282E8  b.ne     #0x10282f4                            
+010282EC  mov      w8, #1                                
+010282F0  strb     w8, [x19, #0xec]                       // self.checkPieza
+010282F4  ldp      x20, x19, [sp, #0x10]                 
+010282F8  ldp      x30, x21, [sp], #0x20                 
+010282FC  ret                                            
+01028300  bl       #0xe61da0                             

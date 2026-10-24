@@ -1,0 +1,22 @@
+// ObservadorResorte$$doPrevio VA 0x10C8B30, inferred length 80
+void ObservadorResorte__doPrevio (ObservadorResorte_o* __this, const MethodInfo* method);
+010C8B30  stp      x30, x19, [sp, #-0x10]!               
+010C8B34  ldr      w8, [x0, #0x328]                      
+010C8B38  ldr      w9, [x0, #0x32c]                      
+010C8B3C  mov      x19, x0                               
+010C8B40  cmp      w8, w9                                
+010C8B44  b.ne     #0x10c8b58                            
+010C8B48  ldr      w9, [x19, #0x320]                      // self.managerResorte
+010C8B4C  ldr      w10, [x19, #0x324]                     // self.managerResorte_old
+010C8B50  cmp      w9, w10                               
+010C8B54  b.eq     #0x10c8b78                            
+010C8B58  mov      x0, x19                               
+010C8B5C  str      w8, [x19, #0x2cc]                      // self.position
+010C8B60  str      w8, [x19, #0x3cc]                      // self.check10
+010C8B64  bl       #0x10c9a68                             // ObservadorResorte$$doResorte
+010C8B68  ldr      w8, [x19, #0x328]                      // self.positionRes
+010C8B6C  ldr      w9, [x19, #0x320]                      // self.managerResorte
+010C8B70  str      w8, [x19, #0x32c]                      // self.positionRes_old
+010C8B74  str      w9, [x19, #0x324]                      // self.managerResorte_old
+010C8B78  ldp      x30, x19, [sp], #0x10                 
+010C8B7C  ret                                            

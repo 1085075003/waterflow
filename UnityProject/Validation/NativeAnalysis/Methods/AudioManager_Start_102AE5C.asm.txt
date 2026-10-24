@@ -1,0 +1,165 @@
+// AudioManager$$Start VA 0x102AE5C, inferred length 652
+void AudioManager__Start (AudioManager_o* __this, const MethodInfo* method);
+0102AE5C  sub      sp, sp, #0xa0                         
+0102AE60  stp      x29, x30, [sp, #0x40]                 
+0102AE64  stp      x28, x27, [sp, #0x50]                 
+0102AE68  stp      x26, x25, [sp, #0x60]                 
+0102AE6C  stp      x24, x23, [sp, #0x70]                 
+0102AE70  stp      x22, x21, [sp, #0x80]                 
+0102AE74  stp      x20, x19, [sp, #0x90]                 
+0102AE78  adrp     x20, #0x24fb000                       
+0102AE7C  ldrb     w8, [x20, #0xcfe]                     
+0102AE80  mov      x19, x0                               
+0102AE84  tbnz     w8, #0, #0x102aee4                    
+0102AE88  adrp     x0, #0x2368000                        
+0102AE8C  ldr      x0, [x0, #0x560]                       // [0x2368560] Method$UnityEngine.GameObject.AddComponent<AudioSource>()
+0102AE90  bl       #0xe61b78                             
+0102AE94  adrp     x0, #0x2368000                        
+0102AE98  ldr      x0, [x0, #0x5b0]                       // [0x23685B0] UnityEngine.GameObject_TypeInfo
+0102AE9C  bl       #0xe61b78                             
+0102AEA0  adrp     x0, #0x2368000                        
+0102AEA4  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0102AEA8  bl       #0xe61b78                             
+0102AEAC  adrp     x0, #0x236b000                        
+0102AEB0  ldr      x0, [x0, #0x898]                       // [0x236B898] 'Chill'
+0102AEB4  bl       #0xe61b78                             
+0102AEB8  adrp     x0, #0x236b000                        
+0102AEBC  ldr      x0, [x0, #0x4f8]                       // [0x236B4F8] 'Soundlevel'
+0102AEC0  bl       #0xe61b78                             
+0102AEC4  adrp     x0, #0x2368000                        
+0102AEC8  ldr      x0, [x0, #0xf80]                       // [0x2368F80] '_'
+0102AECC  bl       #0xe61b78                             
+0102AED0  adrp     x0, #0x236b000                        
+0102AED4  ldr      x0, [x0, #0x990]                       // [0x236B990] 'Sound_'
+0102AED8  bl       #0xe61b78                             
+0102AEDC  mov      w8, #1                                
+0102AEE0  strb     w8, [x20, #0xcfe]                     
+0102AEE4  str      wzr, [sp, #0x3c]                      
+0102AEE8  ldr      x9, [x19, #0x20]                       // self.sounds
+0102AEEC  cbz      x9, #0x102b08c                        
+0102AEF0  adrp     x22, #0x236b000                       
+0102AEF4  adrp     x23, #0x2368000                       
+0102AEF8  adrp     x24, #0x2368000                       
+0102AEFC  adrp     x25, #0x2368000                       
+0102AF00  adrp     x27, #0x2368000                       
+0102AF04  ldr      x22, [x22, #0x990]                     // [0x236B990] 'Sound_'
+0102AF08  ldr      x23, [x23, #0xf80]                     // [0x2368F80] '_'
+0102AF0C  ldr      x24, [x24, #0x5b0]                     // [0x23685B0] UnityEngine.GameObject_TypeInfo
+0102AF10  ldr      x25, [x25, #0x560]                     // [0x2368560] Method$UnityEngine.GameObject.AddComponent<AudioSource>()
+0102AF14  ldr      x27, [x27, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+0102AF18  add      x11, x19, #0x68                       
+0102AF1C  add      x10, x19, #0x60                       
+0102AF20  stp      x10, x11, [sp, #0x28]                 
+0102AF24  add      x11, x19, #0x58                       
+0102AF28  add      x10, x19, #0x50                       
+0102AF2C  stp      x10, x11, [sp, #0x18]                 
+0102AF30  add      x11, x19, #0x48                       
+0102AF34  add      x10, x19, #0x40                       
+0102AF38  adrp     x26, #0x621000                        
+0102AF3C  mov      w8, wzr                               
+0102AF40  stp      x10, x11, [sp, #8]                    
+0102AF44  add      x28, x19, #0x38                       
+0102AF48  add      x29, x19, #0x30                       
+0102AF4C  add      x26, x26, #0x47c                      
+0102AF50  ldr      w9, [x9, #0x18]                       
+0102AF54  cmp      w8, w9                                
+0102AF58  b.ge     #0x102b090                            
+0102AF5C  add      x0, sp, #0x3c                         
+0102AF60  mov      x1, xzr                               
+0102AF64  bl       #0x1ab3994                             // System.Int32$$ToString
+0102AF68  ldr      x8, [x19, #0x20]                       // self.sounds
+0102AF6C  cbz      x8, #0x102b08c                        
+0102AF70  ldrsw    x9, [sp, #0x3c]                       
+0102AF74  ldr      w10, [x8, #0x18]                      
+0102AF78  cmp      w9, w10                               
+0102AF7C  b.hs     #0x102b0e4                            
+0102AF80  add      x8, x8, x9, lsl #3                    
+0102AF84  ldr      x8, [x8, #0x20]                       
+0102AF88  cbz      x8, #0x102b08c                        
+0102AF8C  mov      x1, x0                                
+0102AF90  ldr      x3, [x8, #0x10]                       
+0102AF94  ldr      x0, [x22]                             
+0102AF98  ldr      x2, [x23]                             
+0102AF9C  mov      x4, xzr                               
+0102AFA0  bl       #0x196126c                             // System.String$$Concat
+0102AFA4  ldr      x8, [x24]                             
+0102AFA8  mov      x21, x0                               
+0102AFAC  mov      x0, x8                                
+0102AFB0  bl       #0xe61d94                             
+0102AFB4  mov      x1, x21                               
+0102AFB8  mov      x2, xzr                               
+0102AFBC  mov      x20, x0                               
+0102AFC0  bl       #0x20065b4                             // UnityEngine.GameObject$$.ctor
+0102AFC4  ldr      x8, [x19, #0x20]                       // self.sounds
+0102AFC8  cbz      x8, #0x102b08c                        
+0102AFCC  ldrsw    x9, [sp, #0x3c]                       
+0102AFD0  ldr      w10, [x8, #0x18]                      
+0102AFD4  cmp      w9, w10                               
+0102AFD8  b.hs     #0x102b0e4                            
+0102AFDC  cbz      x20, #0x102b08c                       
+0102AFE0  add      x8, x8, x9, lsl #3                    
+0102AFE4  ldr      x1, [x25]                             
+0102AFE8  ldr      x21, [x8, #0x20]                      
+0102AFEC  mov      x0, x20                               
+0102AFF0  bl       #0x1161ee8                             // UnityEngine.GameObject$$AddComponent<object>
+0102AFF4  cbz      x21, #0x102b08c                       
+0102AFF8  mov      x1, x0                                
+0102AFFC  mov      x0, x21                               
+0102B000  bl       #0x102a948                             // Sound2$$SetSource
+0102B004  ldr      w8, [sp, #0x3c]                       
+0102B008  cmp      w8, #7                                
+0102B00C  b.hi     #0x102b05c                            
+0102B010  adr      x9, #0x102b024                        
+0102B014  ldrb     w10, [x26, x8]                        
+0102B018  add      x9, x9, x10, lsl #2                   
+0102B01C  mov      x8, x29                               
+0102B020  br       x9                                    
+0102B024  mov      x8, x28                               
+0102B028  b        #0x102b058                            
+0102B02C  ldr      x8, [sp, #8]                          
+0102B030  b        #0x102b058                            
+0102B034  ldr      x8, [sp, #0x10]                       
+0102B038  b        #0x102b058                            
+0102B03C  ldr      x8, [sp, #0x18]                       
+0102B040  b        #0x102b058                            
+0102B044  ldr      x8, [sp, #0x20]                       
+0102B048  b        #0x102b058                            
+0102B04C  ldr      x8, [sp, #0x28]                       
+0102B050  b        #0x102b058                            
+0102B054  ldr      x8, [sp, #0x30]                       
+0102B058  str      x20, [x8]                             
+0102B05C  ldr      x0, [x27]                             
+0102B060  ldr      w8, [x0, #0xe0]                       
+0102B064  cbnz     w8, #0x102b06c                        
+0102B068  bl       #0xe61c80                             
+0102B06C  mov      x0, x20                               
+0102B070  mov      x1, xzr                               
+0102B074  bl       #0x200a384                             // UnityEngine.Object$$DontDestroyOnLoad
+0102B078  ldr      w8, [sp, #0x3c]                       
+0102B07C  add      w8, w8, #1                            
+0102B080  str      w8, [sp, #0x3c]                       
+0102B084  ldr      x9, [x19, #0x20]                       // self.sounds
+0102B088  cbnz     x9, #0x102af50                        
+0102B08C  bl       #0xe61da0                             
+0102B090  adrp     x8, #0x236b000                        
+0102B094  ldr      x8, [x8, #0x4f8]                       // [0x236B4F8] 'Soundlevel'
+0102B098  mov      w1, #1                                
+0102B09C  mov      x2, xzr                               
+0102B0A0  ldr      x0, [x8]                              
+0102B0A4  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+0102B0A8  cmp      w0, #1                                
+0102B0AC  b.ne     #0x102b0c4                            
+0102B0B0  adrp     x8, #0x236b000                        
+0102B0B4  ldr      x8, [x8, #0x898]                       // [0x236B898] 'Chill'
+0102B0B8  mov      x0, x19                               
+0102B0BC  ldr      x1, [x8]                              
+0102B0C0  bl       #0x1028540                             // AudioManager$$PlaySound
+0102B0C4  ldp      x20, x19, [sp, #0x90]                 
+0102B0C8  ldp      x22, x21, [sp, #0x80]                 
+0102B0CC  ldp      x24, x23, [sp, #0x70]                 
+0102B0D0  ldp      x26, x25, [sp, #0x60]                 
+0102B0D4  ldp      x28, x27, [sp, #0x50]                 
+0102B0D8  ldp      x29, x30, [sp, #0x40]                 
+0102B0DC  add      sp, sp, #0xa0                         
+0102B0E0  ret                                            
+0102B0E4  bl       #0xe61da8                             

@@ -1,0 +1,20 @@
+// Sound2$$Play VA 0x102A988, inferred length 72
+void Sound2__Play (Sound2_o* __this, float volume, const MethodInfo* method);
+0102A988  stp      x30, x19, [sp, #-0x10]!               
+0102A98C  mov      x19, x0                               
+0102A990  ldr      x0, [x0, #0x30]                       
+0102A994  cbz      x0, #0x102a9cc                        
+0102A998  ldr      s0, [x19, #0x20]                      
+0102A99C  mov      x1, xzr                               
+0102A9A0  bl       #0x1fdd604                             // UnityEngine.AudioSource$$set_volume
+0102A9A4  ldr      x0, [x19, #0x30]                      
+0102A9A8  cbz      x0, #0x102a9cc                        
+0102A9AC  ldr      s0, [x19, #0x24]                      
+0102A9B0  mov      x1, xzr                               
+0102A9B4  bl       #0x1fdd68c                             // UnityEngine.AudioSource$$set_pitch
+0102A9B8  ldr      x0, [x19, #0x30]                      
+0102A9BC  cbz      x0, #0x102a9cc                        
+0102A9C0  mov      x1, xzr                               
+0102A9C4  ldp      x30, x19, [sp], #0x10                 
+0102A9C8  b        #0x1fdd758                             // UnityEngine.AudioSource$$Play
+0102A9CC  bl       #0xe61da0                             

@@ -1,0 +1,205 @@
+// FuenteTest1$$doTratarDirecciones1 VA 0x10A2D40, inferred length 812
+void FuenteTest1__doTratarDirecciones1 (FuenteTest1_o* __this, const MethodInfo* method);
+010A2D40  str      x30, [sp, #-0x30]!                    
+010A2D44  stp      x22, x21, [sp, #0x10]                 
+010A2D48  stp      x20, x19, [sp, #0x20]                 
+010A2D4C  adrp     x20, #0x24fb000                       
+010A2D50  ldrb     w8, [x20, #0xf52]                     
+010A2D54  mov      x19, x0                               
+010A2D58  tbnz     w8, #0, #0x10a2d70                    
+010A2D5C  adrp     x0, #0x236d000                        
+010A2D60  ldr      x0, [x0, #0x5c0]                       // [0x236D5C0] Method$UnityEngine.GameObject.GetComponent<scrollTest1>()
+010A2D64  bl       #0xe61b78                             
+010A2D68  mov      w8, #1                                
+010A2D6C  strb     w8, [x20, #0xf52]                     
+010A2D70  ldrb     w8, [x19, #0x258]                      // self.triggered
+010A2D74  cbz      w8, #0x10a3038                        
+010A2D78  adrp     x22, #0x236d000                       
+010A2D7C  ldrb     w8, [x19, #0x1d9]                      // self.esf1
+010A2D80  ldr      x22, [x22, #0x5c0]                     // [0x236D5C0] Method$UnityEngine.GameObject.GetComponent<scrollTest1>()
+010A2D84  mov      w9, #0xcccd                           
+010A2D88  movk     w9, #0x3f4c, lsl #16                  
+010A2D8C  str      w9, [x19, #0x2dc]                      // self.vScroll
+010A2D90  cbnz     w8, #0x10a2da0                        
+010A2D94  ldr      w8, [x19, #0x34]                       // self.origen
+010A2D98  cmp      w8, #1                                
+010A2D9C  b.ne     #0x10a2e68                            
+010A2DA0  ldr      x0, [x19, #0xc8]                       // self.plano1
+010A2DA4  cbz      x0, #0x10a3068                        
+010A2DA8  ldr      x1, [x22]                             
+010A2DAC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A2DB0  cbz      x0, #0x10a3068                        
+010A2DB4  ldr      s0, [x19, #0x2dc]                      // self.vScroll
+010A2DB8  str      wzr, [x0, #0x24]                      
+010A2DBC  mov      x20, x0                               
+010A2DC0  str      s0, [x0, #0x20]                       
+010A2DC4  ldr      w8, [x19, #0xf8]                       // self.dirPlano1
+010A2DC8  cmp      w8, #1                                
+010A2DCC  b.ne     #0x10a2e0c                            
+010A2DD0  mov      x0, x20                               
+010A2DD4  mov      x1, xzr                               
+010A2DD8  str      wzr, [x20, #0x40]                     
+010A2DDC  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010A2DE0  mov      x21, x0                               
+010A2DE4  fmov     s0, wzr                               
+010A2DE8  fmov     s1, wzr                               
+010A2DEC  fmov     s2, wzr                               
+010A2DF0  mov      x0, xzr                               
+010A2DF4  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+010A2DF8  cbz      x21, #0x10a3068                       
+010A2DFC  mov      x0, x21                               
+010A2E00  mov      x1, xzr                               
+010A2E04  bl       #0x200eccc                             // UnityEngine.Transform$$set_rotation
+010A2E08  ldr      w8, [x19, #0xf8]                       // self.dirPlano1
+010A2E0C  cmp      w8, #5                                
+010A2E10  b.ne     #0x10a2e54                            
+010A2E14  mov      w8, #0x3f000000                       
+010A2E18  mov      x0, x20                               
+010A2E1C  mov      x1, xzr                               
+010A2E20  str      w8, [x20, #0x40]                      
+010A2E24  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010A2E28  adrp     x8, #0x5ff000                         
+010A2E2C  ldr      s1, [x8, #0xb20]                      
+010A2E30  mov      x20, x0                               
+010A2E34  fmov     s0, wzr                               
+010A2E38  fmov     s2, wzr                               
+010A2E3C  mov      x0, xzr                               
+010A2E40  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+010A2E44  cbz      x20, #0x10a3068                       
+010A2E48  mov      x0, x20                               
+010A2E4C  mov      x1, xzr                               
+010A2E50  bl       #0x200eccc                             // UnityEngine.Transform$$set_rotation
+010A2E54  ldr      x0, [x19, #0xc8]                       // self.plano1
+010A2E58  cbz      x0, #0x10a3068                        
+010A2E5C  mov      w1, #1                                
+010A2E60  mov      x2, xzr                               
+010A2E64  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A2E68  ldrb     w8, [x19, #0x1da]                      // self.esf2
+010A2E6C  cbnz     w8, #0x10a2e7c                        
+010A2E70  ldr      w8, [x19, #0x34]                       // self.origen
+010A2E74  cmp      w8, #2                                
+010A2E78  b.ne     #0x10a2f5c                            
+010A2E7C  ldr      x0, [x19, #0xd0]                       // self.plano2
+010A2E80  cbz      x0, #0x10a3068                        
+010A2E84  ldr      x1, [x22]                             
+010A2E88  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A2E8C  cbz      x0, #0x10a3068                        
+010A2E90  ldr      s0, [x19, #0x2dc]                      // self.vScroll
+010A2E94  str      wzr, [x0, #0x24]                      
+010A2E98  mov      x20, x0                               
+010A2E9C  str      s0, [x0, #0x20]                       
+010A2EA0  ldr      w8, [x19, #0xfc]                       // self.dirPlano2
+010A2EA4  cmp      w8, #3                                
+010A2EA8  b.ne     #0x10a2eec                            
+010A2EAC  mov      x0, x20                               
+010A2EB0  mov      x1, xzr                               
+010A2EB4  str      wzr, [x20, #0x40]                     
+010A2EB8  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010A2EBC  adrp     x8, #0x5ff000                         
+010A2EC0  ldr      s1, [x8, #0xe08]                      
+010A2EC4  mov      x21, x0                               
+010A2EC8  fmov     s0, wzr                               
+010A2ECC  fmov     s2, wzr                               
+010A2ED0  mov      x0, xzr                               
+010A2ED4  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+010A2ED8  cbz      x21, #0x10a3068                       
+010A2EDC  mov      x0, x21                               
+010A2EE0  mov      x1, xzr                               
+010A2EE4  bl       #0x200eccc                             // UnityEngine.Transform$$set_rotation
+010A2EE8  ldr      w8, [x19, #0xfc]                       // self.dirPlano2
+010A2EEC  cmp      w8, #7                                
+010A2EF0  b.ne     #0x10a2f34                            
+010A2EF4  mov      w8, #0x3f000000                       
+010A2EF8  mov      x0, x20                               
+010A2EFC  mov      x1, xzr                               
+010A2F00  str      w8, [x20, #0x40]                      
+010A2F04  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010A2F08  adrp     x8, #0x5ff000                         
+010A2F0C  ldr      s1, [x8, #0xe38]                      
+010A2F10  mov      x20, x0                               
+010A2F14  fmov     s0, wzr                               
+010A2F18  fmov     s2, wzr                               
+010A2F1C  mov      x0, xzr                               
+010A2F20  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+010A2F24  cbz      x20, #0x10a3068                       
+010A2F28  mov      x0, x20                               
+010A2F2C  mov      x1, xzr                               
+010A2F30  bl       #0x200eccc                             // UnityEngine.Transform$$set_rotation
+010A2F34  ldr      x0, [x19, #0x118]                      // self.planoCas2
+010A2F38  cbz      x0, #0x10a3068                        
+010A2F3C  mov      x1, xzr                               
+010A2F40  bl       #0x20063d8                             // UnityEngine.GameObject$$get_activeSelf
+010A2F44  tbnz     w0, #0, #0x10a2f5c                    
+010A2F48  ldr      x0, [x19, #0xd0]                       // self.plano2
+010A2F4C  cbz      x0, #0x10a3068                        
+010A2F50  mov      w1, #1                                
+010A2F54  mov      x2, xzr                               
+010A2F58  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A2F5C  ldrb     w8, [x19, #0x1db]                      // self.esf3
+010A2F60  cbnz     w8, #0x10a2f70                        
+010A2F64  ldr      w8, [x19, #0x34]                       // self.origen
+010A2F68  cmp      w8, #3                                
+010A2F6C  b.ne     #0x10a3038                            
+010A2F70  ldr      x0, [x19, #0xd8]                       // self.plano3
+010A2F74  cbz      x0, #0x10a3068                        
+010A2F78  ldr      x1, [x22]                             
+010A2F7C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A2F80  cbz      x0, #0x10a3068                        
+010A2F84  ldr      s0, [x19, #0x2dc]                      // self.vScroll
+010A2F88  str      wzr, [x0, #0x24]                      
+010A2F8C  mov      x20, x0                               
+010A2F90  str      s0, [x0, #0x20]                       
+010A2F94  ldr      w8, [x19, #0x100]                      // self.dirPlano3
+010A2F98  cmp      w8, #1                                
+010A2F9C  b.ne     #0x10a2fe0                            
+010A2FA0  mov      w8, #0x3f000000                       
+010A2FA4  mov      x0, x20                               
+010A2FA8  mov      x1, xzr                               
+010A2FAC  str      w8, [x20, #0x40]                      
+010A2FB0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010A2FB4  mov      x21, x0                               
+010A2FB8  fmov     s0, wzr                               
+010A2FBC  fmov     s1, wzr                               
+010A2FC0  fmov     s2, wzr                               
+010A2FC4  mov      x0, xzr                               
+010A2FC8  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+010A2FCC  cbz      x21, #0x10a3068                       
+010A2FD0  mov      x0, x21                               
+010A2FD4  mov      x1, xzr                               
+010A2FD8  bl       #0x200eccc                             // UnityEngine.Transform$$set_rotation
+010A2FDC  ldr      w8, [x19, #0x100]                      // self.dirPlano3
+010A2FE0  cmp      w8, #5                                
+010A2FE4  b.ne     #0x10a3024                            
+010A2FE8  mov      x0, x20                               
+010A2FEC  mov      x1, xzr                               
+010A2FF0  str      wzr, [x20, #0x40]                     
+010A2FF4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010A2FF8  adrp     x8, #0x5ff000                         
+010A2FFC  ldr      s1, [x8, #0xb20]                      
+010A3000  mov      x20, x0                               
+010A3004  fmov     s0, wzr                               
+010A3008  fmov     s2, wzr                               
+010A300C  mov      x0, xzr                               
+010A3010  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+010A3014  cbz      x20, #0x10a3068                       
+010A3018  mov      x0, x20                               
+010A301C  mov      x1, xzr                               
+010A3020  bl       #0x200eccc                             // UnityEngine.Transform$$set_rotation
+010A3024  ldr      x0, [x19, #0x120]                      // self.planoCas3
+010A3028  cbz      x0, #0x10a3068                        
+010A302C  mov      x1, xzr                               
+010A3030  bl       #0x20063d8                             // UnityEngine.GameObject$$get_activeSelf
+010A3034  tbz      w0, #0, #0x10a3048                    
+010A3038  ldp      x20, x19, [sp, #0x20]                 
+010A303C  ldp      x22, x21, [sp, #0x10]                 
+010A3040  ldr      x30, [sp], #0x30                      
+010A3044  ret                                            
+010A3048  ldr      x0, [x19, #0xd8]                       // self.plano3
+010A304C  cbz      x0, #0x10a3068                        
+010A3050  ldp      x20, x19, [sp, #0x20]                 
+010A3054  ldp      x22, x21, [sp, #0x10]                 
+010A3058  mov      w1, #1                                
+010A305C  mov      x2, xzr                               
+010A3060  ldr      x30, [sp], #0x30                      
+010A3064  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A3068  bl       #0xe61da0                             

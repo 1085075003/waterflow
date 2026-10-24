@@ -1,0 +1,338 @@
+// FuenteTest1$$doTratarColores VA 0x10A1D38, inferred length 1344
+void FuenteTest1__doTratarColores (FuenteTest1_o* __this, const MethodInfo* method);
+010A1D38  str      x30, [sp, #-0x20]!                    
+010A1D3C  stp      x20, x19, [sp, #0x10]                 
+010A1D40  adrp     x20, #0x24fb000                       
+010A1D44  ldrb     w8, [x20, #0xf50]                     
+010A1D48  mov      x19, x0                               
+010A1D4C  tbnz     w8, #0, #0x10a1d70                    
+010A1D50  adrp     x0, #0x2368000                        
+010A1D54  ldr      x0, [x0, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A1D58  bl       #0xe61b78                             
+010A1D5C  adrp     x0, #0x236d000                        
+010A1D60  ldr      x0, [x0, #0x5b8]                       // [0x236D5B8] 'Fall'
+010A1D64  bl       #0xe61b78                             
+010A1D68  mov      w8, #1                                
+010A1D6C  strb     w8, [x20, #0xf50]                     
+010A1D70  ldr      w8, [x19, #0x1f0]                      // self.color
+010A1D74  cmp      w8, #1                                
+010A1D78  b.ne     #0x10a1e08                            
+010A1D7C  ldr      x0, [x19, #0xc8]                       // self.plano1
+010A1D80  cbz      x0, #0x10a2268                        
+010A1D84  adrp     x20, #0x2368000                       
+010A1D88  ldr      x20, [x20, #0x2a8]                     // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A1D8C  ldr      x1, [x20]                             
+010A1D90  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1D94  cbz      x0, #0x10a2268                        
+010A1D98  ldr      x1, [x19, #0x200]                      // self.materialColor1_1
+010A1D9C  mov      x2, xzr                               
+010A1DA0  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1DA4  ldr      x0, [x19, #0xd0]                       // self.plano2
+010A1DA8  cbz      x0, #0x10a2268                        
+010A1DAC  ldr      x1, [x20]                             
+010A1DB0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1DB4  cbz      x0, #0x10a2268                        
+010A1DB8  ldr      x1, [x19, #0x200]                      // self.materialColor1_1
+010A1DBC  mov      x2, xzr                               
+010A1DC0  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1DC4  ldr      x0, [x19, #0xd8]                       // self.plano3
+010A1DC8  cbz      x0, #0x10a2268                        
+010A1DCC  ldr      x1, [x20]                             
+010A1DD0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1DD4  cbz      x0, #0x10a2268                        
+010A1DD8  ldr      x1, [x19, #0x200]                      // self.materialColor1_1
+010A1DDC  mov      x2, xzr                               
+010A1DE0  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1DE4  ldr      x0, [x19, #0xe0]                       // self.plano4
+010A1DE8  cbz      x0, #0x10a2268                        
+010A1DEC  ldr      x1, [x20]                             
+010A1DF0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1DF4  cbz      x0, #0x10a2268                        
+010A1DF8  ldr      x1, [x19, #0x200]                      // self.materialColor1_1
+010A1DFC  mov      x2, xzr                               
+010A1E00  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1E04  ldr      w8, [x19, #0x1f0]                      // self.color
+010A1E08  cmp      w8, #2                                
+010A1E0C  b.ne     #0x10a1e9c                            
+010A1E10  ldr      x0, [x19, #0xc8]                       // self.plano1
+010A1E14  cbz      x0, #0x10a2268                        
+010A1E18  adrp     x20, #0x2368000                       
+010A1E1C  ldr      x20, [x20, #0x2a8]                     // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A1E20  ldr      x1, [x20]                             
+010A1E24  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1E28  cbz      x0, #0x10a2268                        
+010A1E2C  ldr      x1, [x19, #0x210]                      // self.materialColor2_1
+010A1E30  mov      x2, xzr                               
+010A1E34  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1E38  ldr      x0, [x19, #0xd0]                       // self.plano2
+010A1E3C  cbz      x0, #0x10a2268                        
+010A1E40  ldr      x1, [x20]                             
+010A1E44  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1E48  cbz      x0, #0x10a2268                        
+010A1E4C  ldr      x1, [x19, #0x210]                      // self.materialColor2_1
+010A1E50  mov      x2, xzr                               
+010A1E54  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1E58  ldr      x0, [x19, #0xd8]                       // self.plano3
+010A1E5C  cbz      x0, #0x10a2268                        
+010A1E60  ldr      x1, [x20]                             
+010A1E64  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1E68  cbz      x0, #0x10a2268                        
+010A1E6C  ldr      x1, [x19, #0x210]                      // self.materialColor2_1
+010A1E70  mov      x2, xzr                               
+010A1E74  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1E78  ldr      x0, [x19, #0xe0]                       // self.plano4
+010A1E7C  cbz      x0, #0x10a2268                        
+010A1E80  ldr      x1, [x20]                             
+010A1E84  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1E88  cbz      x0, #0x10a2268                        
+010A1E8C  ldr      x1, [x19, #0x210]                      // self.materialColor2_1
+010A1E90  mov      x2, xzr                               
+010A1E94  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1E98  ldr      w8, [x19, #0x1f0]                      // self.color
+010A1E9C  cmp      w8, #3                                
+010A1EA0  b.ne     #0x10a1f30                            
+010A1EA4  ldr      x0, [x19, #0xc8]                       // self.plano1
+010A1EA8  cbz      x0, #0x10a2268                        
+010A1EAC  adrp     x20, #0x2368000                       
+010A1EB0  ldr      x20, [x20, #0x2a8]                     // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A1EB4  ldr      x1, [x20]                             
+010A1EB8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1EBC  cbz      x0, #0x10a2268                        
+010A1EC0  ldr      x1, [x19, #0x220]                      // self.materialColor3_1
+010A1EC4  mov      x2, xzr                               
+010A1EC8  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1ECC  ldr      x0, [x19, #0xd0]                       // self.plano2
+010A1ED0  cbz      x0, #0x10a2268                        
+010A1ED4  ldr      x1, [x20]                             
+010A1ED8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1EDC  cbz      x0, #0x10a2268                        
+010A1EE0  ldr      x1, [x19, #0x220]                      // self.materialColor3_1
+010A1EE4  mov      x2, xzr                               
+010A1EE8  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1EEC  ldr      x0, [x19, #0xd8]                       // self.plano3
+010A1EF0  cbz      x0, #0x10a2268                        
+010A1EF4  ldr      x1, [x20]                             
+010A1EF8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1EFC  cbz      x0, #0x10a2268                        
+010A1F00  ldr      x1, [x19, #0x220]                      // self.materialColor3_1
+010A1F04  mov      x2, xzr                               
+010A1F08  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1F0C  ldr      x0, [x19, #0xe0]                       // self.plano4
+010A1F10  cbz      x0, #0x10a2268                        
+010A1F14  ldr      x1, [x20]                             
+010A1F18  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1F1C  cbz      x0, #0x10a2268                        
+010A1F20  ldr      x1, [x19, #0x220]                      // self.materialColor3_1
+010A1F24  mov      x2, xzr                               
+010A1F28  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1F2C  ldr      w8, [x19, #0x1f0]                      // self.color
+010A1F30  cmp      w8, #4                                
+010A1F34  b.ne     #0x10a1fc0                            
+010A1F38  ldr      x0, [x19, #0xc8]                       // self.plano1
+010A1F3C  cbz      x0, #0x10a2268                        
+010A1F40  adrp     x20, #0x2368000                       
+010A1F44  ldr      x20, [x20, #0x2a8]                     // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A1F48  ldr      x1, [x20]                             
+010A1F4C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1F50  cbz      x0, #0x10a2268                        
+010A1F54  ldr      x1, [x19, #0x230]                      // self.materialColor4_1
+010A1F58  mov      x2, xzr                               
+010A1F5C  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1F60  ldr      x0, [x19, #0xd0]                       // self.plano2
+010A1F64  cbz      x0, #0x10a2268                        
+010A1F68  ldr      x1, [x20]                             
+010A1F6C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1F70  cbz      x0, #0x10a2268                        
+010A1F74  ldr      x1, [x19, #0x230]                      // self.materialColor4_1
+010A1F78  mov      x2, xzr                               
+010A1F7C  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1F80  ldr      x0, [x19, #0xd8]                       // self.plano3
+010A1F84  cbz      x0, #0x10a2268                        
+010A1F88  ldr      x1, [x20]                             
+010A1F8C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1F90  cbz      x0, #0x10a2268                        
+010A1F94  ldr      x1, [x19, #0x230]                      // self.materialColor4_1
+010A1F98  mov      x2, xzr                               
+010A1F9C  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1FA0  ldr      x0, [x19, #0xe0]                       // self.plano4
+010A1FA4  cbz      x0, #0x10a2268                        
+010A1FA8  ldr      x1, [x20]                             
+010A1FAC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A1FB0  cbz      x0, #0x10a2268                        
+010A1FB4  ldr      x1, [x19, #0x230]                      // self.materialColor4_1
+010A1FB8  mov      x2, xzr                               
+010A1FBC  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A1FC0  ldr      w8, [x19, #0x34]                       // self.origen
+010A1FC4  sub      w8, w8, #5                            
+010A1FC8  cmp      w8, #2                                
+010A1FCC  b.lo     #0x10a226c                            
+010A1FD0  ldr      w8, [x19, #0x108]                      // self.dirPlanoCentro
+010A1FD4  cmp      w8, #7                                
+010A1FD8  b.hi     #0x10a20bc                            
+010A1FDC  mov      w9, #1                                
+010A1FE0  lsl      w8, w9, w8                            
+010A1FE4  mov      w9, #0xaa                             
+010A1FE8  tst      w8, w9                                
+010A1FEC  b.eq     #0x10a20bc                            
+010A1FF0  ldr      w8, [x19, #0x1f0]                      // self.color
+010A1FF4  cmp      w8, #1                                
+010A1FF8  b.ne     #0x10a2028                            
+010A1FFC  ldr      x0, [x19, #0xe8]                       // self.planoCentro
+010A2000  cbz      x0, #0x10a2268                        
+010A2004  adrp     x8, #0x2368000                        
+010A2008  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A200C  ldr      x1, [x8]                              
+010A2010  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A2014  cbz      x0, #0x10a2268                        
+010A2018  ldr      x1, [x19, #0x208]                      // self.materialColor1_C
+010A201C  mov      x2, xzr                               
+010A2020  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A2024  ldr      w8, [x19, #0x1f0]                      // self.color
+010A2028  cmp      w8, #2                                
+010A202C  b.ne     #0x10a205c                            
+010A2030  ldr      x0, [x19, #0xe8]                       // self.planoCentro
+010A2034  cbz      x0, #0x10a2268                        
+010A2038  adrp     x8, #0x2368000                        
+010A203C  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A2040  ldr      x1, [x8]                              
+010A2044  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A2048  cbz      x0, #0x10a2268                        
+010A204C  ldr      x1, [x19, #0x218]                      // self.materialColor2_C
+010A2050  mov      x2, xzr                               
+010A2054  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A2058  ldr      w8, [x19, #0x1f0]                      // self.color
+010A205C  cmp      w8, #3                                
+010A2060  b.ne     #0x10a21a0                            
+010A2064  ldr      x0, [x19, #0x260]                      // self.otherObject
+010A2068  cbz      x0, #0x10a2268                        
+010A206C  mov      x1, xzr                               
+010A2070  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010A2074  cbz      x0, #0x10a2268                        
+010A2078  adrp     x8, #0x236d000                        
+010A207C  ldr      x8, [x8, #0x5b8]                       // [0x236D5B8] 'Fall'
+010A2080  mov      x2, xzr                               
+010A2084  ldr      x1, [x8]                              
+010A2088  bl       #0x19651dc                             // System.String$$Contains
+010A208C  ldr      x8, [x19, #0xe8]                       // self.planoCentro
+010A2090  cbz      x8, #0x10a2268                        
+010A2094  adrp     x9, #0x2368000                        
+010A2098  ldr      x9, [x9, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A209C  mov      w20, w0                               
+010A20A0  mov      x0, x8                                
+010A20A4  ldr      x1, [x9]                              
+010A20A8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A20AC  tbz      w20, #0, #0x10a2188                   
+010A20B0  cbz      x0, #0x10a2268                        
+010A20B4  add      x8, x19, #0x240                       
+010A20B8  b        #0x10a2190                            
+010A20BC  ldr      w8, [x19, #0x1f0]                      // self.color
+010A20C0  cmp      w8, #1                                
+010A20C4  b.ne     #0x10a20f4                            
+010A20C8  ldr      x0, [x19, #0xf0]                       // self.planoCentro1
+010A20CC  cbz      x0, #0x10a2268                        
+010A20D0  adrp     x8, #0x2368000                        
+010A20D4  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A20D8  ldr      x1, [x8]                              
+010A20DC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A20E0  cbz      x0, #0x10a2268                        
+010A20E4  ldr      x1, [x19, #0x208]                      // self.materialColor1_C
+010A20E8  mov      x2, xzr                               
+010A20EC  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A20F0  ldr      w8, [x19, #0x1f0]                      // self.color
+010A20F4  cmp      w8, #2                                
+010A20F8  b.ne     #0x10a2128                            
+010A20FC  ldr      x0, [x19, #0xf0]                       // self.planoCentro1
+010A2100  cbz      x0, #0x10a2268                        
+010A2104  adrp     x8, #0x2368000                        
+010A2108  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A210C  ldr      x1, [x8]                              
+010A2110  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A2114  cbz      x0, #0x10a2268                        
+010A2118  ldr      x1, [x19, #0x218]                      // self.materialColor2_C
+010A211C  mov      x2, xzr                               
+010A2120  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A2124  ldr      w8, [x19, #0x1f0]                      // self.color
+010A2128  cmp      w8, #3                                
+010A212C  b.ne     #0x10a2230                            
+010A2130  ldr      x0, [x19, #0x260]                      // self.otherObject
+010A2134  cbz      x0, #0x10a2268                        
+010A2138  mov      x1, xzr                               
+010A213C  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010A2140  cbz      x0, #0x10a2268                        
+010A2144  adrp     x8, #0x236d000                        
+010A2148  ldr      x8, [x8, #0x5b8]                       // [0x236D5B8] 'Fall'
+010A214C  mov      x2, xzr                               
+010A2150  ldr      x1, [x8]                              
+010A2154  bl       #0x19651dc                             // System.String$$Contains
+010A2158  ldr      x8, [x19, #0xf0]                       // self.planoCentro1
+010A215C  cbz      x8, #0x10a2268                        
+010A2160  adrp     x9, #0x2368000                        
+010A2164  ldr      x9, [x9, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A2168  mov      w20, w0                               
+010A216C  mov      x0, x8                                
+010A2170  ldr      x1, [x9]                              
+010A2174  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A2178  tbz      w20, #0, #0x10a2218                   
+010A217C  cbz      x0, #0x10a2268                        
+010A2180  add      x8, x19, #0x240                       
+010A2184  b        #0x10a2220                            
+010A2188  cbz      x0, #0x10a2268                        
+010A218C  add      x8, x19, #0x228                       
+010A2190  ldr      x1, [x8]                              
+010A2194  mov      x2, xzr                               
+010A2198  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A219C  ldr      w8, [x19, #0x1f0]                      // self.color
+010A21A0  cmp      w8, #4                                
+010A21A4  b.ne     #0x10a226c                            
+010A21A8  ldr      x0, [x19, #0x260]                      // self.otherObject
+010A21AC  cbz      x0, #0x10a2268                        
+010A21B0  mov      x1, xzr                               
+010A21B4  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010A21B8  cbz      x0, #0x10a2268                        
+010A21BC  adrp     x8, #0x236d000                        
+010A21C0  ldr      x8, [x8, #0x5b8]                       // [0x236D5B8] 'Fall'
+010A21C4  mov      x2, xzr                               
+010A21C8  ldr      x1, [x8]                              
+010A21CC  bl       #0x19651dc                             // System.String$$Contains
+010A21D0  ldr      x8, [x19, #0xe8]                       // self.planoCentro
+010A21D4  cbz      x8, #0x10a2268                        
+010A21D8  adrp     x9, #0x2368000                        
+010A21DC  ldr      x9, [x9, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010A21E0  mov      w20, w0                               
+010A21E4  mov      x0, x8                                
+010A21E8  ldr      x1, [x9]                              
+010A21EC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A21F0  tbz      w20, #0, #0x10a2200                   
+010A21F4  cbz      x0, #0x10a2268                        
+010A21F8  ldr      x1, [x19, #0x248]                      // self.materialColor4_chorro3
+010A21FC  b        #0x10a2208                            
+010A2200  cbz      x0, #0x10a2268                        
+010A2204  ldr      x1, [x19, #0x238]                      // self.materialColor4_C
+010A2208  ldp      x20, x19, [sp, #0x10]                 
+010A220C  mov      x2, xzr                               
+010A2210  ldr      x30, [sp], #0x20                      
+010A2214  b        #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A2218  cbz      x0, #0x10a2268                        
+010A221C  add      x8, x19, #0x228                       
+010A2220  ldr      x1, [x8]                              
+010A2224  mov      x2, xzr                               
+010A2228  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+010A222C  ldr      w8, [x19, #0x1f0]                      // self.color
+010A2230  cmp      w8, #4                                
+010A2234  b.ne     #0x10a226c                            
+010A2238  ldr      x0, [x19, #0x260]                      // self.otherObject
+010A223C  cbz      x0, #0x10a2268                        
+010A2240  mov      x1, xzr                               
+010A2244  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010A2248  cbz      x0, #0x10a2268                        
+010A224C  adrp     x8, #0x236d000                        
+010A2250  ldr      x8, [x8, #0x5b8]                       // [0x236D5B8] 'Fall'
+010A2254  mov      x2, xzr                               
+010A2258  ldr      x1, [x8]                              
+010A225C  bl       #0x19651dc                             // System.String$$Contains
+010A2260  ldr      x8, [x19, #0xf0]                       // self.planoCentro1
+010A2264  cbnz     x8, #0x10a21d8                        
+010A2268  bl       #0xe61da0                             
+010A226C  ldp      x20, x19, [sp, #0x10]                 
+010A2270  ldr      x30, [sp], #0x20                      
+010A2274  ret                                            

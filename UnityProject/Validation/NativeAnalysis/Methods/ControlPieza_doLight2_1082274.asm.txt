@@ -1,0 +1,126 @@
+// ControlPieza$$doLight2 VA 0x1082274, inferred length 496
+void ControlPieza__doLight2 (ControlPieza_o* __this, const MethodInfo* method);
+01082274  stp      d13, d12, [sp, #-0x60]!               
+01082278  stp      d11, d10, [sp, #0x10]                 
+0108227C  stp      d9, d8, [sp, #0x20]                   
+01082280  str      x30, [sp, #0x30]                      
+01082284  stp      x22, x21, [sp, #0x40]                 
+01082288  stp      x20, x19, [sp, #0x50]                 
+0108228C  adrp     x20, #0x24fb000                       
+01082290  adrp     x22, #0x2368000                       
+01082294  ldrb     w8, [x20, #0xede]                     
+01082298  ldr      x22, [x22, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+0108229C  mov      x19, x0                               
+010822A0  tbnz     w8, #0, #0x10822c4                    
+010822A4  adrp     x0, #0x2368000                        
+010822A8  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+010822AC  bl       #0xe61b78                             
+010822B0  adrp     x0, #0x2368000                        
+010822B4  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010822B8  bl       #0xe61b78                             
+010822BC  mov      w8, #1                                
+010822C0  strb     w8, [x20, #0xede]                     
+010822C4  adrp     x21, #0x2368000                       
+010822C8  ldr      x20, [x19, #0x258]                     // self.prefabLight1
+010822CC  ldr      s8, [x19, #0x31c]                      // self.valy
+010822D0  ldr      s9, [x19, #0x320]                      // self.valz
+010822D4  ldr      x21, [x21, #0x900]                     // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+010822D8  fmov     s0, wzr                               
+010822DC  fmov     s1, wzr                               
+010822E0  fmov     s2, wzr                               
+010822E4  mov      x0, xzr                               
+010822E8  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+010822EC  ldr      x0, [x22]                             
+010822F0  mov      v10.16b, v0.16b                       
+010822F4  mov      v11.16b, v1.16b                       
+010822F8  mov      v12.16b, v2.16b                       
+010822FC  ldr      w8, [x0, #0xe0]                       
+01082300  mov      v13.16b, v3.16b                       
+01082304  cbnz     w8, #0x108230c                        
+01082308  bl       #0xe61c80                             
+0108230C  ldr      x1, [x21]                             
+01082310  fmov     s0, wzr                               
+01082314  mov      x0, x20                               
+01082318  mov      v1.16b, v8.16b                        
+0108231C  mov      v2.16b, v9.16b                        
+01082320  mov      v3.16b, v10.16b                       
+01082324  mov      v4.16b, v11.16b                       
+01082328  mov      v5.16b, v12.16b                       
+0108232C  mov      v6.16b, v13.16b                       
+01082330  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+01082334  str      x0, [x19, #0x2d0]                      // self.Lights2
+01082338  cbz      x0, #0x1082460                        
+0108233C  mov      x1, xzr                               
+01082340  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01082344  mov      x20, x0                               
+01082348  mov      x0, x19                               
+0108234C  mov      x1, xzr                               
+01082350  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+01082354  cbz      x20, #0x1082460                       
+01082358  mov      x1, x0                                
+0108235C  mov      x0, x20                               
+01082360  mov      x2, xzr                               
+01082364  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+01082368  ldr      x0, [x19, #0x2d0]                      // self.Lights2
+0108236C  cbz      x0, #0x1082460                        
+01082370  mov      x1, xzr                               
+01082374  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01082378  cbz      x0, #0x1082460                        
+0108237C  ldr      s2, [x19, #0x320]                      // self.valz
+01082380  ldr      s1, [x19, #0x31c]                      // self.valy
+01082384  fmov     s0, wzr                               
+01082388  mov      x1, xzr                               
+0108238C  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+01082390  adrp     x8, #0x5ff000                         
+01082394  ldr      s1, [x8, #0xb20]                      
+01082398  ldr      x20, [x19, #0x260]                     // self.prefabFoco1
+0108239C  fmov     s0, wzr                               
+010823A0  fmov     s2, wzr                               
+010823A4  mov      x0, xzr                               
+010823A8  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+010823AC  adrp     x8, #0x5ff000                         
+010823B0  ldr      s8, [x8, #0xd04]                      
+010823B4  ldr      x1, [x21]                             
+010823B8  mov      v4.16b, v0.16b                        
+010823BC  mov      v5.16b, v1.16b                        
+010823C0  mov      v6.16b, v2.16b                        
+010823C4  mov      v7.16b, v3.16b                        
+010823C8  fmov     s0, wzr                               
+010823CC  fmov     s1, wzr                               
+010823D0  mov      x0, x20                               
+010823D4  mov      v2.16b, v8.16b                        
+010823D8  mov      v3.16b, v4.16b                        
+010823DC  mov      v4.16b, v5.16b                        
+010823E0  mov      v5.16b, v6.16b                        
+010823E4  mov      v6.16b, v7.16b                        
+010823E8  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+010823EC  str      x0, [x19, #0x2f0]                      // self.Foco2
+010823F0  cbz      x0, #0x1082460                        
+010823F4  mov      x1, xzr                               
+010823F8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010823FC  mov      x20, x0                               
+01082400  mov      x0, x19                               
+01082404  mov      x1, xzr                               
+01082408  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0108240C  cbz      x20, #0x1082460                       
+01082410  mov      x1, x0                                
+01082414  mov      x0, x20                               
+01082418  mov      x2, xzr                               
+0108241C  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+01082420  ldr      x0, [x19, #0x2f0]                      // self.Foco2
+01082424  cbz      x0, #0x1082460                        
+01082428  mov      x1, xzr                               
+0108242C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01082430  cbz      x0, #0x1082460                        
+01082434  mov      v2.16b, v8.16b                        
+01082438  ldp      x20, x19, [sp, #0x50]                 
+0108243C  ldp      x22, x21, [sp, #0x40]                 
+01082440  ldr      x30, [sp, #0x30]                      
+01082444  ldp      d9, d8, [sp, #0x20]                   
+01082448  ldp      d11, d10, [sp, #0x10]                 
+0108244C  fmov     s0, wzr                               
+01082450  fmov     s1, wzr                               
+01082454  mov      x1, xzr                               
+01082458  ldp      d13, d12, [sp], #0x60                 
+0108245C  b        #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+01082460  bl       #0xe61da0                             

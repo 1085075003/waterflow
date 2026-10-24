@@ -1,0 +1,24 @@
+// FuenteTest3$$Awake VA 0x10A3D4C, inferred length 88
+void FuenteTest3__Awake (FuenteTest3_o* __this, const MethodInfo* method);
+010A3D4C  str      x30, [sp, #-0x20]!                    
+010A3D50  stp      x20, x19, [sp, #0x10]                 
+010A3D54  adrp     x20, #0x24fb000                       
+010A3D58  ldrb     w8, [x20, #0xf60]                     
+010A3D5C  mov      x19, x0                               
+010A3D60  tbnz     w8, #0, #0x10a3d78                    
+010A3D64  adrp     x0, #0x236a000                        
+010A3D68  ldr      x0, [x0, #0x5c8]                       // [0x236A5C8] Method$UnityEngine.GameObject.GetComponent<AguasControl3>()
+010A3D6C  bl       #0xe61b78                             
+010A3D70  mov      w8, #1                                
+010A3D74  strb     w8, [x20, #0xf60]                     
+010A3D78  ldr      x0, [x19, #0x220]                      // self.Aguas
+010A3D7C  cbz      x0, #0x10a3da0                        
+010A3D80  adrp     x8, #0x236a000                        
+010A3D84  ldr      x8, [x8, #0x5c8]                       // [0x236A5C8] Method$UnityEngine.GameObject.GetComponent<AguasControl3>()
+010A3D88  ldr      x1, [x8]                              
+010A3D8C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010A3D90  str      x0, [x19, #0x5a0]                      // self.agscr
+010A3D94  ldp      x20, x19, [sp, #0x10]                 
+010A3D98  ldr      x30, [sp], #0x20                      
+010A3D9C  ret                                            
+010A3DA0  bl       #0xe61da0                             

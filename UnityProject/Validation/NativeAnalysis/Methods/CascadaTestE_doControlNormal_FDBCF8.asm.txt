@@ -1,0 +1,86 @@
+// CascadaTestE$$doControlNormal VA 0xFDBCF8, inferred length 336
+void CascadaTestE__doControlNormal (CascadaTestE_o* __this, const MethodInfo* method);
+00FDBCF8  sub      sp, sp, #0x30                         
+00FDBCFC  stp      x30, x21, [sp, #0x10]                 
+00FDBD00  stp      x20, x19, [sp, #0x20]                 
+00FDBD04  adrp     x21, #0x24fb000                       
+00FDBD08  adrp     x20, #0x236a000                       
+00FDBD0C  ldrb     w8, [x21, #0xb8d]                     
+00FDBD10  ldr      x20, [x20, #0x700]                     // [0x236A700] '0'
+00FDBD14  mov      x19, x0                               
+00FDBD18  tbnz     w8, #0, #0xfdbd60                     
+00FDBD1C  adrp     x0, #0x236a000                        
+00FDBD20  ldr      x0, [x0, #0x7b8]                       // [0x236A7B8] Method$UnityEngine.GameObject.GetComponent<ParticleSystemRenderer>()
+00FDBD24  bl       #0xe61b78                             
+00FDBD28  adrp     x0, #0x236a000                        
+00FDBD2C  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+00FDBD30  bl       #0xe61b78                             
+00FDBD34  adrp     x0, #0x236a000                        
+00FDBD38  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+00FDBD3C  bl       #0xe61b78                             
+00FDBD40  adrp     x0, #0x236a000                        
+00FDBD44  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FDBD48  bl       #0xe61b78                             
+00FDBD4C  adrp     x0, #0x236a000                        
+00FDBD50  ldr      x0, [x0, #0x700]                       // [0x236A700] '0'
+00FDBD54  bl       #0xe61b78                             
+00FDBD58  mov      w8, #1                                
+00FDBD5C  strb     w8, [x21, #0xb8d]                     
+00FDBD60  str      wzr, [sp, #0xc]                       
+00FDBD64  ldr      x0, [x19, #0x38]                       // self.pitValor4
+00FDBD68  ldr      x1, [x20]                             
+00FDBD6C  mov      x2, xzr                               
+00FDBD70  bl       #0x1960c80                             // System.String$$op_Inequality
+00FDBD74  tbz      w0, #0, #0xfdbdbc                     
+00FDBD78  ldr      x0, [x19, #0x80]                       // self.Chorro
+00FDBD7C  cbz      x0, #0xfdbe44                         
+00FDBD80  adrp     x8, #0x236a000                        
+00FDBD84  ldr      x8, [x8, #0x7b8]                       // [0x236A7B8] Method$UnityEngine.GameObject.GetComponent<ParticleSystemRenderer>()
+00FDBD88  ldr      x1, [x8]                              
+00FDBD8C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FDBD90  str      x0, [x19, #0x188]                      // self.psr
+00FDBD94  str      wzr, [sp, #0xc]                       
+00FDBD98  ldr      x0, [x19, #0x38]                       // self.pitValor4
+00FDBD9C  add      x1, sp, #0xc                          
+00FDBDA0  mov      x2, xzr                               
+00FDBDA4  bl       #0x1ab40a8                             // System.Int32$$TryParse
+00FDBDA8  ldr      x0, [x19, #0x188]                      // self.psr
+00FDBDAC  cbz      x0, #0xfdbe44                         
+00FDBDB0  ldr      w1, [sp, #0xc]                        
+00FDBDB4  mov      x2, xzr                               
+00FDBDB8  bl       #0x1fec3ac                             // UnityEngine.Renderer$$set_sortingOrder
+00FDBDBC  adrp     x8, #0x236a000                        
+00FDBDC0  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+00FDBDC4  ldr      x20, [x19, #0x50]                      // self.pit1
+00FDBDC8  mov      x2, xzr                               
+00FDBDCC  ldr      x1, [x8]                              
+00FDBDD0  mov      x0, x20                               
+00FDBDD4  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDBDD8  tbz      w0, #0, #0xfdbde8                     
+00FDBDDC  mov      x0, x19                               
+00FDBDE0  bl       #0xfdd52c                              // CascadaTestE$$doControlNormalLargo
+00FDBDE4  b        #0xfdbe34                             
+00FDBDE8  adrp     x8, #0x236a000                        
+00FDBDEC  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+00FDBDF0  mov      x0, x20                               
+00FDBDF4  mov      x2, xzr                               
+00FDBDF8  ldr      x1, [x8]                              
+00FDBDFC  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDBE00  tbz      w0, #0, #0xfdbe10                     
+00FDBE04  mov      x0, x19                               
+00FDBE08  bl       #0xfdd91c                              // CascadaTestE$$doControlNormalCorto
+00FDBE0C  b        #0xfdbe34                             
+00FDBE10  adrp     x8, #0x236a000                        
+00FDBE14  ldr      x8, [x8, #0x650]                       // [0x236A650] '3'
+00FDBE18  mov      x0, x20                               
+00FDBE1C  mov      x2, xzr                               
+00FDBE20  ldr      x1, [x8]                              
+00FDBE24  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDBE28  tbz      w0, #0, #0xfdbe34                     
+00FDBE2C  mov      x0, x19                               
+00FDBE30  bl       #0xfddf20                              // CascadaTestE$$doControlNormalCorto1
+00FDBE34  ldp      x20, x19, [sp, #0x20]                 
+00FDBE38  ldp      x30, x21, [sp, #0x10]                 
+00FDBE3C  add      sp, sp, #0x30                         
+00FDBE40  ret                                            
+00FDBE44  bl       #0xe61da0                             

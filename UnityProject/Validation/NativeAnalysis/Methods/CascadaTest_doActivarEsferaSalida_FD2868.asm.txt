@@ -1,0 +1,100 @@
+// CascadaTest$$doActivarEsferaSalida VA 0xFD2868, inferred length 392
+void CascadaTest__doActivarEsferaSalida (CascadaTest_o* __this, const MethodInfo* method);
+00FD2868  str      x30, [sp, #-0x20]!                    
+00FD286C  stp      x20, x19, [sp, #0x10]                 
+00FD2870  adrp     x20, #0x24fb000                       
+00FD2874  ldrb     w8, [x20, #0xb55]                     
+00FD2878  mov      x19, x0                               
+00FD287C  tbnz     w8, #0, #0xfd28b8                     
+00FD2880  adrp     x0, #0x236a000                        
+00FD2884  ldr      x0, [x0, #0x5f0]                       // [0x236A5F0] 'color3'
+00FD2888  bl       #0xe61b78                             
+00FD288C  adrp     x0, #0x236a000                        
+00FD2890  ldr      x0, [x0, #0x5f8]                       // [0x236A5F8] 'color2'
+00FD2894  bl       #0xe61b78                             
+00FD2898  adrp     x0, #0x236a000                        
+00FD289C  ldr      x0, [x0, #0x600]                       // [0x236A600] 'color1'
+00FD28A0  bl       #0xe61b78                             
+00FD28A4  adrp     x0, #0x236a000                        
+00FD28A8  ldr      x0, [x0, #0x608]                       // [0x236A608] 'color4'
+00FD28AC  bl       #0xe61b78                             
+00FD28B0  mov      w8, #1                                
+00FD28B4  strb     w8, [x20, #0xb55]                     
+00FD28B8  ldr      w8, [x19, #0x150]                      // self.altura
+00FD28BC  cmp      w8, #1                                
+00FD28C0  b.lt     #0xfd29e0                             
+00FD28C4  mov      x0, x19                               
+00FD28C8  bl       #0xfd29f0                              // CascadaTest$$doCheckSuelo
+00FD28CC  ldr      x0, [x19, #0x28]                       // self.esferaSalida
+00FD28D0  cbz      x0, #0xfd29ec                         
+00FD28D4  mov      w1, #1                                
+00FD28D8  mov      x2, xzr                               
+00FD28DC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD28E0  ldr      x0, [x19, #0x28]                       // self.esferaSalida
+00FD28E4  cbz      x0, #0xfd29ec                         
+00FD28E8  mov      x1, xzr                               
+00FD28EC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD28F0  cbz      x0, #0xfd29ec                         
+00FD28F4  ldr      s2, [x19, #0x21c]                      // self.varz_esfera
+00FD28F8  ldr      s1, [x19, #0x218]                      // self.vary_esfera
+00FD28FC  ldr      s0, [x19, #0x214]                      // self.varx_esfera
+00FD2900  mov      x1, xzr                               
+00FD2904  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD2908  ldr      w8, [x19, #0xf8]                       // self.color
+00FD290C  cmp      w8, #1                                
+00FD2910  b.ne     #0xfd2940                             
+00FD2914  ldr      x0, [x19, #0x28]                       // self.esferaSalida
+00FD2918  cbz      x0, #0xfd29ec                         
+00FD291C  mov      x1, xzr                               
+00FD2920  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+00FD2924  cbz      x0, #0xfd29ec                         
+00FD2928  adrp     x8, #0x236a000                        
+00FD292C  ldr      x8, [x8, #0x600]                       // [0x236A600] 'color1'
+00FD2930  mov      x2, xzr                               
+00FD2934  ldr      x1, [x8]                              
+00FD2938  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+00FD293C  ldr      w8, [x19, #0xf8]                       // self.color
+00FD2940  cmp      w8, #2                                
+00FD2944  b.ne     #0xfd2974                             
+00FD2948  ldr      x0, [x19, #0x28]                       // self.esferaSalida
+00FD294C  cbz      x0, #0xfd29ec                         
+00FD2950  mov      x1, xzr                               
+00FD2954  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+00FD2958  cbz      x0, #0xfd29ec                         
+00FD295C  adrp     x8, #0x236a000                        
+00FD2960  ldr      x8, [x8, #0x5f8]                       // [0x236A5F8] 'color2'
+00FD2964  mov      x2, xzr                               
+00FD2968  ldr      x1, [x8]                              
+00FD296C  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+00FD2970  ldr      w8, [x19, #0xf8]                       // self.color
+00FD2974  cmp      w8, #3                                
+00FD2978  b.ne     #0xfd29a8                             
+00FD297C  ldr      x0, [x19, #0x28]                       // self.esferaSalida
+00FD2980  cbz      x0, #0xfd29ec                         
+00FD2984  mov      x1, xzr                               
+00FD2988  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+00FD298C  cbz      x0, #0xfd29ec                         
+00FD2990  adrp     x8, #0x236a000                        
+00FD2994  ldr      x8, [x8, #0x5f0]                       // [0x236A5F0] 'color3'
+00FD2998  mov      x2, xzr                               
+00FD299C  ldr      x1, [x8]                              
+00FD29A0  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+00FD29A4  ldr      w8, [x19, #0xf8]                       // self.color
+00FD29A8  cmp      w8, #4                                
+00FD29AC  b.ne     #0xfd29e0                             
+00FD29B0  ldr      x0, [x19, #0x28]                       // self.esferaSalida
+00FD29B4  cbz      x0, #0xfd29ec                         
+00FD29B8  mov      x1, xzr                               
+00FD29BC  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+00FD29C0  cbz      x0, #0xfd29ec                         
+00FD29C4  adrp     x8, #0x236a000                        
+00FD29C8  ldr      x8, [x8, #0x608]                       // [0x236A608] 'color4'
+00FD29CC  ldp      x20, x19, [sp, #0x10]                 
+00FD29D0  mov      x2, xzr                               
+00FD29D4  ldr      x1, [x8]                              
+00FD29D8  ldr      x30, [sp], #0x20                      
+00FD29DC  b        #0x2006450                             // UnityEngine.GameObject$$set_tag
+00FD29E0  ldp      x20, x19, [sp, #0x10]                 
+00FD29E4  ldr      x30, [sp], #0x20                      
+00FD29E8  ret                                            
+00FD29EC  bl       #0xe61da0                             

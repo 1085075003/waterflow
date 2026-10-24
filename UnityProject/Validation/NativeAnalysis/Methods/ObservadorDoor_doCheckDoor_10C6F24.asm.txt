@@ -1,0 +1,64 @@
+// ObservadorDoor$$doCheckDoor VA 0x10C6F24, inferred length 248
+void ObservadorDoor__doCheckDoor (ObservadorDoor_o* __this, const MethodInfo* method);
+010C6F24  str      x30, [sp, #-0x20]!                    
+010C6F28  stp      x20, x19, [sp, #0x10]                 
+010C6F2C  adrp     x20, #0x24fb000                       
+010C6F30  ldrb     w8, [x20, #0xff0]                     
+010C6F34  mov      x19, x0                               
+010C6F38  tbnz     w8, #0, #0x10c6f68                    
+010C6F3C  adrp     x0, #0x236d000                        
+010C6F40  ldr      x0, [x0, #0x948]                       // [0x236D948] 'openDoor'
+010C6F44  bl       #0xe61b78                             
+010C6F48  adrp     x0, #0x236d000                        
+010C6F4C  ldr      x0, [x0, #0x9a0]                       // [0x236D9A0] 'doEstadoAbierto'
+010C6F50  bl       #0xe61b78                             
+010C6F54  adrp     x0, #0x236d000                        
+010C6F58  ldr      x0, [x0, #0x9a8]                       // [0x236D9A8] 'doEstadoCerrado'
+010C6F5C  bl       #0xe61b78                             
+010C6F60  mov      w8, #1                                
+010C6F64  strb     w8, [x20, #0xff0]                     
+010C6F68  mov      x0, x19                               
+010C6F6C  bl       #0x10c701c                             // ObservadorDoor$$getEstadoDoor
+010C6F70  ldp      w9, w8, [x19, #0xc4]                   // self.estado_old
+010C6F74  cmp      w9, #2                                
+010C6F78  b.ne     #0x10c6fbc                            
+010C6F7C  cmp      w8, #1                                
+010C6F80  b.ne     #0x10c700c                            
+010C6F84  ldr      x0, [x19, #0x20]                       // self.anim_door
+010C6F88  str      w8, [x19, #0xc4]                       // self.estado_old
+010C6F8C  cbz      x0, #0x10c7018                        
+010C6F90  adrp     x8, #0x236d000                        
+010C6F94  ldr      x8, [x8, #0x948]                       // [0x236D948] 'openDoor'
+010C6F98  mov      w2, #1                                
+010C6F9C  mov      x3, xzr                               
+010C6FA0  ldr      x1, [x8]                              
+010C6FA4  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+010C6FA8  adrp     x8, #0x236d000                        
+010C6FAC  ldr      x8, [x8, #0x9a0]                       // [0x236D9A0] 'doEstadoAbierto'
+010C6FB0  adrp     x9, #0x600000                         
+010C6FB4  ldr      s0, [x9, #0xc]                        
+010C6FB8  b        #0x10c6ff4                            
+010C6FBC  cmp      w8, #2                                
+010C6FC0  b.ne     #0x10c700c                            
+010C6FC4  ldr      x0, [x19, #0x20]                       // self.anim_door
+010C6FC8  str      w8, [x19, #0xc4]                       // self.estado_old
+010C6FCC  cbz      x0, #0x10c7018                        
+010C6FD0  adrp     x8, #0x236d000                        
+010C6FD4  ldr      x8, [x8, #0x948]                       // [0x236D948] 'openDoor'
+010C6FD8  mov      w2, wzr                               
+010C6FDC  mov      x3, xzr                               
+010C6FE0  ldr      x1, [x8]                              
+010C6FE4  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+010C6FE8  adrp     x8, #0x236d000                        
+010C6FEC  ldr      x8, [x8, #0x9a8]                       // [0x236D9A8] 'doEstadoCerrado'
+010C6FF0  fmov     s0, #0.50000000                       
+010C6FF4  ldr      x1, [x8]                              
+010C6FF8  mov      x0, x19                               
+010C6FFC  ldp      x20, x19, [sp, #0x10]                 
+010C7000  mov      x2, xzr                               
+010C7004  ldr      x30, [sp], #0x20                      
+010C7008  b        #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+010C700C  ldp      x20, x19, [sp, #0x10]                 
+010C7010  ldr      x30, [sp], #0x20                      
+010C7014  ret                                            
+010C7018  bl       #0xe61da0                             

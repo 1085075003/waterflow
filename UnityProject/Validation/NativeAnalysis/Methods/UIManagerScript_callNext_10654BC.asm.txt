@@ -1,0 +1,110 @@
+// UIManagerScript$$callNext VA 0x10654BC, inferred length 432
+void UIManagerScript__callNext (const MethodInfo* method);
+010654BC  str      x30, [sp, #-0x20]!                    
+010654C0  stp      x20, x19, [sp, #0x10]                 
+010654C4  adrp     x20, #0x24fb000                       
+010654C8  adrp     x19, #0x236a000                       
+010654CC  ldrb     w8, [x20, #0xe42]                     
+010654D0  ldr      x19, [x19, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010654D4  tbnz     w8, #0, #0x1065534                    
+010654D8  adrp     x0, #0x236a000                        
+010654DC  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+010654E0  bl       #0xe61b78                             
+010654E4  adrp     x0, #0x2368000                        
+010654E8  ldr      x0, [x0, #0xb28]                       // [0x2368B28] UnityEngine.SceneManagement.SceneManager_TypeInfo
+010654EC  bl       #0xe61b78                             
+010654F0  adrp     x0, #0x236a000                        
+010654F4  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+010654F8  bl       #0xe61b78                             
+010654FC  adrp     x0, #0x236a000                        
+01065500  ldr      x0, [x0, #0x9e8]                       // [0x236A9E8] 'Levely5_7x7'
+01065504  bl       #0xe61b78                             
+01065508  adrp     x0, #0x236a000                        
+0106550C  ldr      x0, [x0, #0x9f0]                       // [0x236A9F0] 'Levely5_6x6'
+01065510  bl       #0xe61b78                             
+01065514  adrp     x0, #0x236a000                        
+01065518  ldr      x0, [x0, #0x9f8]                       // [0x236A9F8] 'Levely5'
+0106551C  bl       #0xe61b78                             
+01065520  adrp     x0, #0x236a000                        
+01065524  ldr      x0, [x0, #0xa00]                       // [0x236AA00] 'Levely5_basic'
+01065528  bl       #0xe61b78                             
+0106552C  mov      w8, #1                                
+01065530  strb     w8, [x20, #0xe42]                     
+01065534  ldr      x0, [x19]                             
+01065538  adrp     x20, #0x236a000                       
+0106553C  ldr      w8, [x0, #0xe0]                       
+01065540  ldr      x20, [x20, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+01065544  cbnz     w8, #0x1065550                        
+01065548  bl       #0xe61c80                             
+0106554C  ldr      x0, [x19]                             
+01065550  ldr      x8, [x0, #0xb8]                       
+01065554  ldr      w9, [x8]                              
+01065558  strh     wzr, [x8, #4]                         
+0106555C  add      w9, w9, #1                            
+01065560  str      w9, [x8]                              
+01065564  ldr      x8, [x20]                             
+01065568  ldr      x8, [x8, #0xb8]                       
+0106556C  ldr      w8, [x8]                              
+01065570  cmp      w8, #0x27                             
+01065574  b.hi     #0x1065648                            
+01065578  mov      x10, #0xc840                          
+0106557C  mov      w9, #1                                
+01065580  movk     x10, #0x62, lsl #16                   
+01065584  lsl      x9, x9, x8                            
+01065588  movk     x10, #0x66, lsl #32                   
+0106558C  tst      x9, x10                               
+01065590  b.ne     #0x10655f0                            
+01065594  mov      x10, #0x2600                          
+01065598  mov      w9, #1                                
+0106559C  movk     x10, #0x10, lsl #16                   
+010655A0  lsl      x9, x9, x8                            
+010655A4  movk     x10, #0x11, lsl #32                   
+010655A8  tst      x9, x10                               
+010655AC  b.ne     #0x1065614                            
+010655B0  mov      w9, #1                                
+010655B4  lsl      x8, x9, x8                            
+010655B8  mov      x9, #0x1100                           
+010655BC  movk     x9, #0x81, lsl #16                    
+010655C0  movk     x9, #0x88, lsl #32                    
+010655C4  tst      x8, x9                                
+010655C8  b.eq     #0x1065648                            
+010655CC  adrp     x8, #0x2368000                        
+010655D0  ldr      x8, [x8, #0xb28]                       // [0x2368B28] UnityEngine.SceneManagement.SceneManager_TypeInfo
+010655D4  ldr      x0, [x8]                              
+010655D8  ldr      w8, [x0, #0xe0]                       
+010655DC  cbnz     w8, #0x10655e4                        
+010655E0  bl       #0xe61c80                             
+010655E4  adrp     x8, #0x236a000                        
+010655E8  ldr      x8, [x8, #0x9e8]                       // [0x236A9E8] 'Levely5_7x7'
+010655EC  b        #0x1065634                            
+010655F0  adrp     x8, #0x2368000                        
+010655F4  ldr      x8, [x8, #0xb28]                       // [0x2368B28] UnityEngine.SceneManagement.SceneManager_TypeInfo
+010655F8  ldr      x0, [x8]                              
+010655FC  ldr      w8, [x0, #0xe0]                       
+01065600  cbnz     w8, #0x1065608                        
+01065604  bl       #0xe61c80                             
+01065608  adrp     x8, #0x236a000                        
+0106560C  ldr      x8, [x8, #0x9f0]                       // [0x236A9F0] 'Levely5_6x6'
+01065610  b        #0x1065634                            
+01065614  adrp     x8, #0x2368000                        
+01065618  ldr      x8, [x8, #0xb28]                       // [0x2368B28] UnityEngine.SceneManagement.SceneManager_TypeInfo
+0106561C  ldr      x0, [x8]                              
+01065620  ldr      w8, [x0, #0xe0]                       
+01065624  cbnz     w8, #0x106562c                        
+01065628  bl       #0xe61c80                             
+0106562C  adrp     x8, #0x236a000                        
+01065630  ldr      x8, [x8, #0xa00]                       // [0x236AA00] 'Levely5_basic'
+01065634  ldr      x0, [x8]                              
+01065638  ldp      x20, x19, [sp, #0x10]                 
+0106563C  mov      x1, xzr                               
+01065640  ldr      x30, [sp], #0x20                      
+01065644  b        #0x2014924                             // UnityEngine.SceneManagement.SceneManager$$LoadScene
+01065648  adrp     x8, #0x2368000                        
+0106564C  ldr      x8, [x8, #0xb28]                       // [0x2368B28] UnityEngine.SceneManagement.SceneManager_TypeInfo
+01065650  ldr      x0, [x8]                              
+01065654  ldr      w8, [x0, #0xe0]                       
+01065658  cbnz     w8, #0x1065660                        
+0106565C  bl       #0xe61c80                             
+01065660  adrp     x8, #0x236a000                        
+01065664  ldr      x8, [x8, #0x9f8]                       // [0x236A9F8] 'Levely5'
+01065668  b        #0x1065634                            

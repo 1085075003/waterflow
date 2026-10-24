@@ -1,0 +1,23 @@
+// Resorte2c$$doMover3_1 VA 0x1025000, inferred length 84
+void Resorte2c__doMover3_1 (Resorte2c_o* __this, const MethodInfo* method);
+01025000  stp      x30, x21, [sp, #-0x20]!               
+01025004  stp      x20, x19, [sp, #0x10]                 
+01025008  adrp     x20, #0x24fb000                       
+0102500C  adrp     x21, #0x236a000                       
+01025010  ldrb     w8, [x20, #0xcd6]                     
+01025014  ldr      x21, [x21, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+01025018  mov      x19, x0                               
+0102501C  tbnz     w8, #0, #0x1025034                    
+01025020  adrp     x0, #0x236a000                        
+01025024  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+01025028  bl       #0xe61b78                             
+0102502C  mov      w8, #1                                
+01025030  strb     w8, [x20, #0xcd6]                     
+01025034  ldr      x8, [x21]                             
+01025038  mov      w9, #1                                
+0102503C  ldr      x8, [x8, #0xb8]                       
+01025040  str      w9, [x8, #0x14]                       
+01025044  strb     w9, [x19, #0x1db]                      // self.swfin3_1
+01025048  ldp      x20, x19, [sp, #0x10]                 
+0102504C  ldp      x30, x21, [sp], #0x20                 
+01025050  ret                                            

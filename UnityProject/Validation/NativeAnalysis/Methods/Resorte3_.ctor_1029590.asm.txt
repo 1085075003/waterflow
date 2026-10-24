@@ -1,0 +1,36 @@
+// Resorte3$$.ctor VA 0x1029590, inferred length 136
+void Resorte3___ctor (Resorte3_o* __this, const MethodInfo* method);
+01029590  str      x30, [sp, #-0x30]!                    
+01029594  stp      x22, x21, [sp, #0x10]                 
+01029598  stp      x20, x19, [sp, #0x20]                 
+0102959C  adrp     x22, #0x24fb000                       
+010295A0  adrp     x21, #0x236b000                       
+010295A4  adrp     x20, #0x236a000                       
+010295A8  ldrb     w8, [x22, #0xcee]                     
+010295AC  ldr      x21, [x21, #0x4a0]                     // [0x236B4A0] 'SonidoResorte'
+010295B0  ldr      x20, [x20, #0x700]                     // [0x236A700] '0'
+010295B4  mov      x19, x0                               
+010295B8  tbnz     w8, #0, #0x10295dc                    
+010295BC  adrp     x0, #0x236b000                        
+010295C0  ldr      x0, [x0, #0x4a0]                       // [0x236B4A0] 'SonidoResorte'
+010295C4  bl       #0xe61b78                             
+010295C8  adrp     x0, #0x236a000                        
+010295CC  ldr      x0, [x0, #0x700]                       // [0x236A700] '0'
+010295D0  bl       #0xe61b78                             
+010295D4  mov      w8, #1                                
+010295D8  strb     w8, [x22, #0xcee]                     
+010295DC  mov      w8, #0x3f800000                       
+010295E0  mov      w9, #1                                
+010295E4  str      w8, [x19, #0x54]                       // self.sphereRadius
+010295E8  strb     w9, [x19, #0xe1]                       // self.chequear
+010295EC  str      w9, [x19, #0xf8]                       // self.fase
+010295F0  ldr      x8, [x21]                             
+010295F4  mov      x0, x19                               
+010295F8  ldp      x22, x21, [sp, #0x10]                 
+010295FC  mov      x1, xzr                               
+01029600  str      x8, [x19, #0x100]                      // self.SoundResorte
+01029604  ldr      x8, [x20]                             
+01029608  str      x8, [x19, #0x110]                      // self.check1
+0102960C  ldp      x20, x19, [sp, #0x20]                 
+01029610  ldr      x30, [sp], #0x30                      
+01029614  b        #0x2007a3c                             // UnityEngine.MonoBehaviour$$.ctor

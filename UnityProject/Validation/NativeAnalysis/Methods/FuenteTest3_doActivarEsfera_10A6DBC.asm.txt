@@ -1,0 +1,179 @@
+// FuenteTest3$$doActivarEsfera VA 0x10A6DBC, inferred length 708
+void FuenteTest3__doActivarEsfera (FuenteTest3_o* __this, const MethodInfo* method);
+010A6DBC  stp      x30, x21, [sp, #-0x20]!               
+010A6DC0  stp      x20, x19, [sp, #0x10]                 
+010A6DC4  adrp     x20, #0x24fb000                       
+010A6DC8  ldrb     w8, [x20, #0xf68]                     
+010A6DCC  mov      x19, x0                               
+010A6DD0  tbnz     w8, #0, #0x10a6df4                    
+010A6DD4  adrp     x0, #0x236d000                        
+010A6DD8  ldr      x0, [x0, #0x5d8]                       // [0x236D5D8] 'doActivarEsfera0'
+010A6DDC  bl       #0xe61b78                             
+010A6DE0  adrp     x0, #0x236c000                        
+010A6DE4  ldr      x0, [x0, #0x7d8]                       // [0x236C7D8] 'esferaCas'
+010A6DE8  bl       #0xe61b78                             
+010A6DEC  mov      w8, #1                                
+010A6DF0  strb     w8, [x20, #0xf68]                     
+010A6DF4  ldrb     w8, [x19, #0x5a8]                      // self.triggered
+010A6DF8  cbz      w8, #0x10a7070                        
+010A6DFC  ldr      x8, [x19, #0x5a0]                      // self.agscr
+010A6E00  cbz      x8, #0x10a707c                        
+010A6E04  mov      w9, #1                                
+010A6E08  strb     w9, [x8, #0x30]                       
+010A6E0C  ldr      x0, [x19, #0x20]                       // self.nombreObjeto
+010A6E10  cbz      x0, #0x10a707c                        
+010A6E14  adrp     x8, #0x236c000                        
+010A6E18  ldr      x8, [x8, #0x7d8]                       // [0x236C7D8] 'esferaCas'
+010A6E1C  mov      x2, xzr                               
+010A6E20  ldr      x1, [x8]                              
+010A6E24  bl       #0x19651dc                             // System.String$$Contains
+010A6E28  ldr      w8, [x19, #0x3c]                       // self.origen
+010A6E2C  tbz      w0, #0, #0x10a6e5c                    
+010A6E30  sub      w9, w8, #1                            
+010A6E34  cmp      w9, #3                                
+010A6E38  b.hi     #0x10a6e5c                            
+010A6E3C  adrp     x8, #0x621000                         
+010A6E40  add      x8, x8, #0xcb6                        
+010A6E44  adr      x10, #0x10a6e54                       
+010A6E48  ldrb     w11, [x8, x9]                         
+010A6E4C  add      x10, x10, x11, lsl #2                 
+010A6E50  br       x10                                   
+010A6E54  add      x8, x19, #0x519                       
+010A6E58  b        #0x10a6e90                            
+010A6E5C  cmp      w8, #6                                
+010A6E60  add      x20, x19, #0x3c                       
+010A6E64  b.hi     #0x10a6f34                            
+010A6E68  mov      w9, #1                                
+010A6E6C  lsl      w8, w9, w8                            
+010A6E70  mov      w9, #0x6a                             
+010A6E74  tst      w8, w9                                
+010A6E78  b.ne     #0x10a6e9c                            
+010A6E7C  b        #0x10a6f34                            
+010A6E80  mov      w8, #1                                
+010A6E84  strb     w8, [x19, #0x51a]                      // self.esf2
+010A6E88  b        #0x10a6f30                            
+010A6E8C  add      x8, x19, #0x51b                       
+010A6E90  mov      w9, #1                                
+010A6E94  strb     w9, [x8]                              
+010A6E98  add      x20, x19, #0x3c                       
+010A6E9C  ldrb     w8, [x19, #0x519]                      // self.esf1
+010A6EA0  cbz      w8, #0x10a6ee0                        
+010A6EA4  ldr      x0, [x19, #0x68]                       // self.esfera1
+010A6EA8  cbz      x0, #0x10a707c                        
+010A6EAC  mov      x1, xzr                               
+010A6EB0  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A6EB4  cbz      x0, #0x10a707c                        
+010A6EB8  ldr      x1, [x19, #0x530]                      // self.tagName
+010A6EBC  mov      x2, xzr                               
+010A6EC0  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A6EC4  ldr      x0, [x19, #0x68]                       // self.esfera1
+010A6EC8  cbz      x0, #0x10a707c                        
+010A6ECC  mov      w1, #1                                
+010A6ED0  mov      x2, xzr                               
+010A6ED4  mov      w21, #1                               
+010A6ED8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A6EDC  strb     w21, [x19, #0x528]                     // self.esf1Activada
+010A6EE0  ldrb     w8, [x19, #0x51b]                      // self.esf3
+010A6EE4  cbz      w8, #0x10a6f34                        
+010A6EE8  ldr      x0, [x19, #0x78]                       // self.esfera3
+010A6EEC  cbz      x0, #0x10a707c                        
+010A6EF0  mov      x1, xzr                               
+010A6EF4  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A6EF8  cbz      x0, #0x10a707c                        
+010A6EFC  ldr      x1, [x19, #0x530]                      // self.tagName
+010A6F00  mov      x2, xzr                               
+010A6F04  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A6F08  ldr      x0, [x19, #0x78]                       // self.esfera3
+010A6F0C  cbz      x0, #0x10a707c                        
+010A6F10  mov      w1, #1                                
+010A6F14  mov      x2, xzr                               
+010A6F18  mov      w21, #1                               
+010A6F1C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A6F20  strb     w21, [x19, #0x52a]                     // self.esf3Activada
+010A6F24  b        #0x10a6f34                            
+010A6F28  mov      w8, #1                                
+010A6F2C  strb     w8, [x19, #0x51c]                      // self.esf4
+010A6F30  add      x20, x19, #0x3c                       
+010A6F34  ldr      w8, [x20]                             
+010A6F38  cmp      w8, #4                                
+010A6F3C  b.eq     #0x10a6f48                            
+010A6F40  cmp      w8, #2                                
+010A6F44  b.ne     #0x10a6fd0                            
+010A6F48  ldrb     w8, [x19, #0x51a]                      // self.esf2
+010A6F4C  cbz      w8, #0x10a6f8c                        
+010A6F50  ldr      x0, [x19, #0x70]                       // self.esfera2
+010A6F54  cbz      x0, #0x10a707c                        
+010A6F58  mov      x1, xzr                               
+010A6F5C  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A6F60  cbz      x0, #0x10a707c                        
+010A6F64  ldr      x1, [x19, #0x530]                      // self.tagName
+010A6F68  mov      x2, xzr                               
+010A6F6C  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A6F70  ldr      x0, [x19, #0x70]                       // self.esfera2
+010A6F74  cbz      x0, #0x10a707c                        
+010A6F78  mov      w1, #1                                
+010A6F7C  mov      x2, xzr                               
+010A6F80  mov      w20, #1                               
+010A6F84  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A6F88  strb     w20, [x19, #0x529]                     // self.esf2Activada
+010A6F8C  ldrb     w8, [x19, #0x51c]                      // self.esf4
+010A6F90  cbz      w8, #0x10a6fd0                        
+010A6F94  ldr      x0, [x19, #0x80]                       // self.esfera4
+010A6F98  cbz      x0, #0x10a707c                        
+010A6F9C  mov      x1, xzr                               
+010A6FA0  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A6FA4  cbz      x0, #0x10a707c                        
+010A6FA8  ldr      x1, [x19, #0x530]                      // self.tagName
+010A6FAC  mov      x2, xzr                               
+010A6FB0  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A6FB4  ldr      x0, [x19, #0x80]                       // self.esfera4
+010A6FB8  cbz      x0, #0x10a707c                        
+010A6FBC  mov      w1, #1                                
+010A6FC0  mov      x2, xzr                               
+010A6FC4  mov      w20, #1                               
+010A6FC8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A6FCC  strb     w20, [x19, #0x52b]                     // self.esf4Activada
+010A6FD0  ldrb     w8, [x19, #0x51d]                      // self.esf6
+010A6FD4  cbz      w8, #0x10a7014                        
+010A6FD8  ldr      x0, [x19, #0x88]                       // self.esfera6
+010A6FDC  cbz      x0, #0x10a707c                        
+010A6FE0  mov      x1, xzr                               
+010A6FE4  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A6FE8  cbz      x0, #0x10a707c                        
+010A6FEC  ldr      x1, [x19, #0x530]                      // self.tagName
+010A6FF0  mov      x2, xzr                               
+010A6FF4  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A6FF8  ldr      x0, [x19, #0x88]                       // self.esfera6
+010A6FFC  cbz      x0, #0x10a707c                        
+010A7000  mov      w1, #1                                
+010A7004  mov      x2, xzr                               
+010A7008  mov      w20, #1                               
+010A700C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A7010  strb     w20, [x19, #0x52c]                     // self.esf6Activada
+010A7014  adrp     x8, #0x236d000                        
+010A7018  ldr      x8, [x8, #0x5d8]                       // [0x236D5D8] 'doActivarEsfera0'
+010A701C  mov      x0, x19                               
+010A7020  mov      x2, xzr                               
+010A7024  ldr      x1, [x8]                              
+010A7028  adrp     x8, #0x5ff000                         
+010A702C  ldr      s0, [x8, #0xd2c]                      
+010A7030  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+010A7034  ldrb     w8, [x19, #0x51e]                      // self.activar
+010A7038  cbz      w8, #0x10a7044                        
+010A703C  mov      x0, x19                               
+010A7040  bl       #0x10a7080                             // FuenteTest3$$doActivarCascada
+010A7044  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A7048  and      w8, w8, #0xfffffffe                   
+010A704C  cmp      w8, #8                                
+010A7050  b.eq     #0x10a7060                            
+010A7054  ldr      w8, [x19, #0x614]                      // self.configFuenteB
+010A7058  cmp      w8, #9                                
+010A705C  b.ne     #0x10a7070                            
+010A7060  mov      x0, x19                               
+010A7064  ldp      x20, x19, [sp, #0x10]                 
+010A7068  ldp      x30, x21, [sp], #0x20                 
+010A706C  b        #0x10a72e4                             // FuenteTest3$$doActivarChorro
+010A7070  ldp      x20, x19, [sp, #0x10]                 
+010A7074  ldp      x30, x21, [sp], #0x20                 
+010A7078  ret                                            
+010A707C  bl       #0xe61da0                             

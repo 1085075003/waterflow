@@ -1,0 +1,82 @@
+// Resorte3$$doSubirPieza VA 0x1029064, inferred length 320
+void Resorte3__doSubirPieza (Resorte3_o* __this, const MethodInfo* method);
+01029064  stp      d9, d8, [sp, #-0x30]!                 
+01029068  str      x30, [sp, #0x10]                      
+0102906C  stp      x20, x19, [sp, #0x20]                 
+01029070  adrp     x20, #0x24fb000                       
+01029074  ldrb     w8, [x20, #0xce7]                     
+01029078  mov      x19, x0                               
+0102907C  tbnz     w8, #0, #0x1029094                    
+01029080  adrp     x0, #0x236b000                        
+01029084  ldr      x0, [x0, #0x948]                       // [0x236B948] 'Piezatrans'
+01029088  bl       #0xe61b78                             
+0102908C  mov      w8, #1                                
+01029090  strb     w8, [x20, #0xce7]                     
+01029094  mov      x0, x19                               
+01029098  mov      x1, xzr                               
+0102909C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010290A0  cbz      x0, #0x10291a0                        
+010290A4  mov      x1, xzr                               
+010290A8  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010290AC  cbz      x0, #0x10291a0                        
+010290B0  mov      x1, xzr                               
+010290B4  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010290B8  mov      x0, x19                               
+010290BC  mov      x1, xzr                               
+010290C0  mov      v8.16b, v0.16b                        
+010290C4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010290C8  cbz      x0, #0x10291a0                        
+010290CC  mov      x1, xzr                               
+010290D0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010290D4  adrp     x8, #0x600000                         
+010290D8  ldr      s0, [x8, #0x198]                      
+010290DC  mov      x0, x19                               
+010290E0  mov      x1, xzr                               
+010290E4  fadd     s0, s1, s0                            
+010290E8  str      s0, [x19, #0xe4]                       // self.valorY
+010290EC  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010290F0  cbz      x0, #0x10291a0                        
+010290F4  mov      x1, xzr                               
+010290F8  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010290FC  cbz      x0, #0x10291a0                        
+01029100  mov      x1, xzr                               
+01029104  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+01029108  mov      x0, x19                               
+0102910C  mov      x1, xzr                               
+01029110  mov      v9.16b, v2.16b                        
+01029114  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+01029118  cbz      x0, #0x10291a0                        
+0102911C  mov      x1, xzr                               
+01029120  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+01029124  cbz      x0, #0x10291a0                        
+01029128  mov      x1, xzr                               
+0102912C  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+01029130  cbz      x0, #0x10291a0                        
+01029134  adrp     x8, #0x236b000                        
+01029138  ldr      x8, [x8, #0x948]                       // [0x236B948] 'Piezatrans'
+0102913C  mov      x2, xzr                               
+01029140  ldr      x1, [x8]                              
+01029144  bl       #0x19651dc                             // System.String$$Contains
+01029148  tbnz     w0, #0, #0x1029180                    
+0102914C  ldr      x0, [x19, #0xb0]                       // self.otherObject
+01029150  cbz      x0, #0x10291a0                        
+01029154  mov      x1, xzr                               
+01029158  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0102915C  cbz      x0, #0x10291a0                        
+01029160  mov      x1, xzr                               
+01029164  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+01029168  cbz      x0, #0x10291a0                        
+0102916C  ldr      s1, [x19, #0xe4]                       // self.valorY
+01029170  mov      v0.16b, v8.16b                        
+01029174  mov      v2.16b, v9.16b                        
+01029178  mov      x1, xzr                               
+0102917C  bl       #0x200ea50                             // UnityEngine.Transform$$set_position
+01029180  mov      x0, x19                               
+01029184  bl       #0x10291a4                             // Resorte3$$doDesactivarMech
+01029188  mov      w8, #1                                
+0102918C  strb     w8, [x19, #0xe1]                       // self.chequear
+01029190  ldp      x20, x19, [sp, #0x20]                 
+01029194  ldr      x30, [sp, #0x10]                      
+01029198  ldp      d9, d8, [sp], #0x30                   
+0102919C  ret                                            
+010291A0  bl       #0xe61da0                             

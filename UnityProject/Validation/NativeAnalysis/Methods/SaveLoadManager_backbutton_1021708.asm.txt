@@ -1,0 +1,45 @@
+// SaveLoadManager$$backbutton VA 0x1021708, inferred length 172
+void SaveLoadManager__backbutton (SaveLoadManager_o* __this, const MethodInfo* method);
+01021708  str      x30, [sp, #-0x20]!                    
+0102170C  stp      x20, x19, [sp, #0x10]                 
+01021710  adrp     x20, #0x24fb000                       
+01021714  ldrb     w8, [x20, #0xcb8]                     
+01021718  mov      x19, x0                               
+0102171C  tbnz     w8, #0, #0x1021740                    
+01021720  adrp     x0, #0x236a000                        
+01021724  ldr      x0, [x0, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01021728  bl       #0xe61b78                             
+0102172C  adrp     x0, #0x236b000                        
+01021730  ldr      x0, [x0, #0x530]                       // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+01021734  bl       #0xe61b78                             
+01021738  mov      w8, #1                                
+0102173C  strb     w8, [x20, #0xcb8]                     
+01021740  ldr      x0, [x19, #0xa8]                       // self.backButton
+01021744  cbz      x0, #0x10217b0                        
+01021748  adrp     x8, #0x236a000                        
+0102174C  ldr      x8, [x8, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01021750  ldr      x1, [x8]                              
+01021754  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01021758  cbz      x0, #0x10217b0                        
+0102175C  mov      w1, #1                                
+01021760  mov      x2, xzr                               
+01021764  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01021768  ldr      x0, [x19, #0xc0]                       // self.flecha1
+0102176C  cbz      x0, #0x10217b0                        
+01021770  adrp     x8, #0x236b000                        
+01021774  ldr      x8, [x8, #0x530]                       // [0x236B530] Method$UnityEngine.GameObject.GetComponent<Image>()
+01021778  ldr      x1, [x8]                              
+0102177C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01021780  cbz      x0, #0x10217b0                        
+01021784  ldr      x8, [x0]                              
+01021788  adrp     x9, #0x5ff000                         
+0102178C  ldr      s0, [x9, #0xc88]                      
+01021790  ldp      x20, x19, [sp, #0x10]                 
+01021794  ldr      x2, [x8, #0x2a8]                      
+01021798  ldr      x1, [x8, #0x2b0]                      
+0102179C  fmov     s3, #1.00000000                       
+010217A0  mov      v1.16b, v0.16b                        
+010217A4  mov      v2.16b, v0.16b                        
+010217A8  ldr      x30, [sp], #0x20                      
+010217AC  br       x2                                    
+010217B0  bl       #0xe61da0                             

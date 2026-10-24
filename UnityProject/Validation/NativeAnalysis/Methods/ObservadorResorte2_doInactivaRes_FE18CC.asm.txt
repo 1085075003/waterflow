@@ -1,0 +1,31 @@
+// ObservadorResorte2$$doInactivaRes VA 0xFE18CC, inferred length 116
+void ObservadorResorte2__doInactivaRes (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE18CC  stp      x30, x21, [sp, #-0x20]!               
+00FE18D0  stp      x20, x19, [sp, #0x10]                 
+00FE18D4  adrp     x21, #0x24fb000                       
+00FE18D8  adrp     x20, #0x236a000                       
+00FE18DC  ldrb     w8, [x21, #0xbb9]                     
+00FE18E0  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FE18E4  mov      x19, x0                               
+00FE18E8  tbnz     w8, #0, #0xfe190c                     
+00FE18EC  adrp     x0, #0x236a000                        
+00FE18F0  ldr      x0, [x0, #0x7c8]                       // [0x236A7C8] Resorte1_TypeInfo
+00FE18F4  bl       #0xe61b78                             
+00FE18F8  adrp     x0, #0x236a000                        
+00FE18FC  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FE1900  bl       #0xe61b78                             
+00FE1904  mov      w8, #1                                
+00FE1908  strb     w8, [x21, #0xbb9]                     
+00FE190C  ldr      x0, [x19, #0x260]                      // self.conResor
+00FE1910  ldr      x1, [x20]                             
+00FE1914  mov      x2, xzr                               
+00FE1918  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE191C  tbz      w0, #0, #0xfe1934                     
+00FE1920  adrp     x8, #0x236a000                        
+00FE1924  ldr      x8, [x8, #0x7c8]                       // [0x236A7C8] Resorte1_TypeInfo
+00FE1928  ldr      x8, [x8]                              
+00FE192C  ldr      x8, [x8, #0xb8]                       
+00FE1930  strb     wzr, [x8, #0x10]                      
+00FE1934  ldp      x20, x19, [sp, #0x10]                 
+00FE1938  ldp      x30, x21, [sp], #0x20                 
+00FE193C  ret                                            

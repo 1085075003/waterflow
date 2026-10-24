@@ -1,0 +1,203 @@
+// FuenteTest3$$doInstanciarFuente VA 0x10A6724, inferred length 804
+void FuenteTest3__doInstanciarFuente (FuenteTest3_o* __this, const MethodInfo* method);
+010A6724  stp      d11, d10, [sp, #-0x50]!               
+010A6728  stp      d9, d8, [sp, #0x10]                   
+010A672C  str      x30, [sp, #0x20]                      
+010A6730  stp      x22, x21, [sp, #0x30]                 
+010A6734  stp      x20, x19, [sp, #0x40]                 
+010A6738  adrp     x20, #0x24fb000                       
+010A673C  ldrb     w8, [x20, #0xf6a]                     
+010A6740  mov      x19, x0                               
+010A6744  tbnz     w8, #0, #0x10a6798                    
+010A6748  adrp     x0, #0x2368000                        
+010A674C  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+010A6750  bl       #0xe61b78                             
+010A6754  adrp     x0, #0x2368000                        
+010A6758  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010A675C  bl       #0xe61b78                             
+010A6760  adrp     x0, #0x236a000                        
+010A6764  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010A6768  bl       #0xe61b78                             
+010A676C  adrp     x0, #0x236d000                        
+010A6770  ldr      x0, [x0, #0x4c0]                       // [0x236D4C0] '6000'
+010A6774  bl       #0xe61b78                             
+010A6778  adrp     x0, #0x236d000                        
+010A677C  ldr      x0, [x0, #0x4d0]                       // [0x236D4D0] '5000'
+010A6780  bl       #0xe61b78                             
+010A6784  adrp     x0, #0x2368000                        
+010A6788  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+010A678C  bl       #0xe61b78                             
+010A6790  mov      w8, #1                                
+010A6794  strb     w8, [x20, #0xf6a]                     
+010A6798  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A679C  strb     wzr, [x19, #0x710]                     // self.pieza2confuentes
+010A67A0  sub      w9, w8, #3                            
+010A67A4  cmp      w9, #2                                
+010A67A8  b.hi     #0x10a67cc                            
+010A67AC  mov      x0, x19                               
+010A67B0  bl       #0x10a8c58                             // FuenteTest3$$doInstanciarChorros
+010A67B4  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A67B8  cmp      w8, #4                                
+010A67BC  b.ne     #0x10a67cc                            
+010A67C0  mov      x0, x19                               
+010A67C4  bl       #0x10a8f6c                             // FuenteTest3$$doFuente3
+010A67C8  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A67CC  cmp      w8, #2                                
+010A67D0  b.ne     #0x10a68ac                            
+010A67D4  ldr      w8, [x19, #0x610]                      // self.configFuente
+010A67D8  cbz      w8, #0x10a67f8                        
+010A67DC  mov      w8, #1                                
+010A67E0  mov      x0, x19                               
+010A67E4  strb     w8, [x19, #0x710]                      // self.pieza2confuentes
+010A67E8  bl       #0x10a969c                             // FuenteTest3$$doConfigFuentes
+010A67EC  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A67F0  cmp      w8, #2                                
+010A67F4  b.ne     #0x10a68ac                            
+010A67F8  ldr      w8, [x19, #0x614]                      // self.configFuenteB
+010A67FC  cbz      w8, #0x10a6824                        
+010A6800  cmp      w8, #9                                
+010A6804  b.eq     #0x10a6824                            
+010A6808  mov      w8, #1                                
+010A680C  mov      x0, x19                               
+010A6810  strb     w8, [x19, #0x710]                      // self.pieza2confuentes
+010A6814  bl       #0x10a989c                             // FuenteTest3$$doConfigFuentesB
+010A6818  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A681C  cmp      w8, #2                                
+010A6820  b.ne     #0x10a68ac                            
+010A6824  ldr      w8, [x19, #0x618]                      // self.configFuenteCentro
+010A6828  cbz      w8, #0x10a6848                        
+010A682C  mov      w8, #1                                
+010A6830  mov      x0, x19                               
+010A6834  strb     w8, [x19, #0x710]                      // self.pieza2confuentes
+010A6838  bl       #0x10a9c6c                             // FuenteTest3$$doConfigFuentesCentro
+010A683C  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A6840  cmp      w8, #2                                
+010A6844  b.ne     #0x10a68b0                            
+010A6848  adrp     x8, #0x236d000                        
+010A684C  ldr      x0, [x19, #0x620]                      // self.configPit1
+010A6850  ldr      x8, [x8, #0x4d0]                       // [0x236D4D0] '5000'
+010A6854  mov      x2, xzr                               
+010A6858  ldr      x1, [x8]                              
+010A685C  bl       #0x1960c80                             // System.String$$op_Inequality
+010A6860  tbz      w0, #0, #0x10a68ac                    
+010A6864  adrp     x8, #0x236d000                        
+010A6868  ldr      x0, [x19, #0x620]                      // self.configPit1
+010A686C  ldr      x8, [x8, #0x4c0]                       // [0x236D4C0] '6000'
+010A6870  mov      x2, xzr                               
+010A6874  ldr      x1, [x8]                              
+010A6878  bl       #0x1960c80                             // System.String$$op_Inequality
+010A687C  tbz      w0, #0, #0x10a68ac                    
+010A6880  adrp     x8, #0x2368000                        
+010A6884  ldr      x0, [x19, #0x620]                      // self.configPit1
+010A6888  ldr      x8, [x8, #0xf50]                       // [0x2368F50] ''
+010A688C  mov      x2, xzr                               
+010A6890  ldr      x1, [x8]                              
+010A6894  bl       #0x1960c80                             // System.String$$op_Inequality
+010A6898  tbz      w0, #0, #0x10a68ac                    
+010A689C  mov      w8, #1                                
+010A68A0  mov      x0, x19                               
+010A68A4  strb     w8, [x19, #0x710]                      // self.pieza2confuentes
+010A68A8  bl       #0x10a8c58                             // FuenteTest3$$doInstanciarChorros
+010A68AC  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A68B0  cmp      w8, #6                                
+010A68B4  b.ne     #0x10a69d4                            
+010A68B8  ldr      w8, [x19, #0x538]                      // self.color
+010A68BC  adrp     x21, #0x2368000                       
+010A68C0  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+010A68C4  sub      w8, w8, #1                            
+010A68C8  cmp      w8, #3                                
+010A68CC  b.hi     #0x10a68f0                            
+010A68D0  adrp     x9, #0x621000                         
+010A68D4  add      x9, x9, #0x159                        
+010A68D8  adr      x10, #0x10a68e8                       
+010A68DC  ldrb     w11, [x9, x8]                         
+010A68E0  add      x10, x10, x11, lsl #2                 
+010A68E4  br       x10                                   
+010A68E8  ldr      x20, [x19, #0x348]                     // self.prefabBigAzul
+010A68EC  b        #0x10a690c                            
+010A68F0  ldr      x20, [x19, #0x4e8]                     // self.prefabFuenteBig
+010A68F4  b        #0x10a6910                            
+010A68F8  ldr      x20, [x19, #0x350]                     // self.prefabBigVerde
+010A68FC  b        #0x10a690c                            
+010A6900  ldr      x20, [x19, #0x358]                     // self.prefabBigZ
+010A6904  b        #0x10a690c                            
+010A6908  ldr      x20, [x19, #0x360]                     // self.prefabBigRo
+010A690C  str      x20, [x19, #0x4e8]                     // self.prefabFuenteBig
+010A6910  adrp     x22, #0x2368000                       
+010A6914  ldr      x22, [x22, #0x900]                     // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+010A6918  fmov     s0, wzr                               
+010A691C  fmov     s1, wzr                               
+010A6920  fmov     s2, wzr                               
+010A6924  mov      x0, xzr                               
+010A6928  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+010A692C  ldr      x0, [x21]                             
+010A6930  mov      v8.16b, v0.16b                        
+010A6934  mov      v9.16b, v1.16b                        
+010A6938  mov      v10.16b, v2.16b                       
+010A693C  ldr      w8, [x0, #0xe0]                       
+010A6940  mov      v11.16b, v3.16b                       
+010A6944  cbnz     w8, #0x10a694c                        
+010A6948  bl       #0xe61c80                             
+010A694C  ldr      x1, [x22]                             
+010A6950  fmov     s0, wzr                               
+010A6954  fmov     s1, #25.00000000                      
+010A6958  fmov     s2, wzr                               
+010A695C  mov      x0, x20                               
+010A6960  mov      v3.16b, v8.16b                        
+010A6964  mov      v4.16b, v9.16b                        
+010A6968  mov      v5.16b, v10.16b                       
+010A696C  mov      v6.16b, v11.16b                       
+010A6970  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+010A6974  str      x0, [x19, #0x180]                      // self.Agua8
+010A6978  cbz      x0, #0x10a6a44                        
+010A697C  mov      x1, xzr                               
+010A6980  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010A6984  mov      x20, x0                               
+010A6988  mov      x0, x19                               
+010A698C  mov      x1, xzr                               
+010A6990  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010A6994  cbz      x20, #0x10a6a44                       
+010A6998  mov      x1, x0                                
+010A699C  mov      x0, x20                               
+010A69A0  mov      x2, xzr                               
+010A69A4  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+010A69A8  ldr      x0, [x19, #0x180]                      // self.Agua8
+010A69AC  cbz      x0, #0x10a6a44                        
+010A69B0  mov      x1, xzr                               
+010A69B4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010A69B8  cbz      x0, #0x10a6a44                        
+010A69BC  fmov     s0, wzr                               
+010A69C0  fmov     s1, #25.00000000                      
+010A69C4  fmov     s2, wzr                               
+010A69C8  mov      x1, xzr                               
+010A69CC  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+010A69D0  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A69D4  sub      w8, w8, #3                            
+010A69D8  cmp      w8, #3                                
+010A69DC  b.lo     #0x10a69e8                            
+010A69E0  ldrb     w8, [x19, #0x710]                      // self.pieza2confuentes
+010A69E4  cbz      w8, #0x10a6a2c                        
+010A69E8  adrp     x8, #0x236a000                        
+010A69EC  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010A69F0  ldr      x8, [x8]                              
+010A69F4  ldr      x8, [x8, #0xb8]                       
+010A69F8  ldr      w8, [x8, #4]                          
+010A69FC  cmp      w8, #1                                
+010A6A00  b.ne     #0x10a6a2c                            
+010A6A04  ldr      x0, [x19, #0x768]                      // self.audioManager
+010A6A08  cbz      x0, #0x10a6a44                        
+010A6A0C  ldr      x1, [x19, #0x760]                      // self.SonidoFuente
+010A6A10  ldp      x20, x19, [sp, #0x40]                 
+010A6A14  ldp      x22, x21, [sp, #0x30]                 
+010A6A18  ldr      x30, [sp, #0x20]                      
+010A6A1C  ldp      d9, d8, [sp, #0x10]                   
+010A6A20  mov      x2, xzr                               
+010A6A24  ldp      d11, d10, [sp], #0x50                 
+010A6A28  b        #0x1028540                             // AudioManager$$PlaySound
+010A6A2C  ldp      x20, x19, [sp, #0x40]                 
+010A6A30  ldp      x22, x21, [sp, #0x30]                 
+010A6A34  ldr      x30, [sp, #0x20]                      
+010A6A38  ldp      d9, d8, [sp, #0x10]                   
+010A6A3C  ldp      d11, d10, [sp], #0x50                 
+010A6A40  ret                                            
+010A6A44  bl       #0xe61da0                             

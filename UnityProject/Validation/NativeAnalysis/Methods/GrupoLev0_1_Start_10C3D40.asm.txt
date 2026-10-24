@@ -1,0 +1,58 @@
+// GrupoLev0_1$$Start VA 0x10C3D40, inferred length 224
+void GrupoLev0_1__Start (GrupoLev0_1_o* __this, const MethodInfo* method);
+010C3D40  stp      d9, d8, [sp, #-0x30]!                 
+010C3D44  str      x30, [sp, #0x10]                      
+010C3D48  stp      x20, x19, [sp, #0x20]                 
+010C3D4C  mov      x19, x0                               
+010C3D50  str      wzr, [x0, #0x30]                      
+010C3D54  str      xzr, [x0, #0x28]                      
+010C3D58  mov      x0, xzr                               
+010C3D5C  bl       #0x1fe21ec                             // UnityEngine.Camera$$get_main
+010C3D60  str      x0, [x19, #0x38]                       // self.c
+010C3D64  mov      x0, xzr                               
+010C3D68  bl       #0x1fe9f30                             // UnityEngine.Screen$$get_width
+010C3D6C  scvtf    s0, w0                                
+010C3D70  fmov     s8, #0.50000000                       
+010C3D74  fmul     s0, s0, s8                            
+010C3D78  mov      x0, xzr                               
+010C3D7C  str      s0, [x19, #0x20]                       // self.halfWidth
+010C3D80  bl       #0x1fe9f58                             // UnityEngine.Screen$$get_height
+010C3D84  ldr      x20, [x19, #0x38]                      // self.c
+010C3D88  scvtf    s0, w0                                
+010C3D8C  fmul     s8, s0, s8                            
+010C3D90  str      s8, [x19, #0x24]                       // self.halfHeight
+010C3D94  cbz      x20, #0x10c3e1c                       
+010C3D98  ldr      s9, [x19, #0x20]                       // self.halfWidth
+010C3D9C  mov      x0, x20                               
+010C3DA0  mov      x1, xzr                               
+010C3DA4  bl       #0x1fe1184                             // UnityEngine.Camera$$get_nearClipPlane
+010C3DA8  mov      v2.16b, v0.16b                        
+010C3DAC  mov      x0, x20                               
+010C3DB0  mov      v0.16b, v9.16b                        
+010C3DB4  mov      v1.16b, v8.16b                        
+010C3DB8  mov      x1, xzr                               
+010C3DBC  bl       #0x1fe1fd8                             // UnityEngine.Camera$$ScreenToWorldPoint
+010C3DC0  ldr      x0, [x19, #0x40]                       // self.esferaControl
+010C3DC4  stp      s0, s1, [x19, #0x28]                   // self.p
+010C3DC8  str      s2, [x19, #0x30]                      
+010C3DCC  cbz      x0, #0x10c3e1c                        
+010C3DD0  mov      x1, xzr                               
+010C3DD4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C3DD8  ldr      x8, [x19, #0x38]                       // self.c
+010C3DDC  cbz      x8, #0x10c3e1c                        
+010C3DE0  ldp      s8, s9, [x19, #0x20]                   // self.halfWidth
+010C3DE4  mov      x20, x0                               
+010C3DE8  mov      x0, x8                                
+010C3DEC  mov      x1, xzr                               
+010C3DF0  bl       #0x1fe1184                             // UnityEngine.Camera$$get_nearClipPlane
+010C3DF4  cbz      x20, #0x10c3e1c                       
+010C3DF8  mov      x0, x20                               
+010C3DFC  ldp      x20, x19, [sp, #0x20]                 
+010C3E00  ldr      x30, [sp, #0x10]                      
+010C3E04  mov      v2.16b, v0.16b                        
+010C3E08  mov      v0.16b, v8.16b                        
+010C3E0C  mov      v1.16b, v9.16b                        
+010C3E10  mov      x1, xzr                               
+010C3E14  ldp      d9, d8, [sp], #0x30                   
+010C3E18  b        #0x200ea50                             // UnityEngine.Transform$$set_position
+010C3E1C  bl       #0xe61da0                             

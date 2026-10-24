@@ -1,0 +1,27 @@
+// AudioManager0$$Update VA 0x1039DA4, inferred length 100
+void AudioManager0__Update (AudioManager0_o* __this, const MethodInfo* method);
+01039DA4  stp      x30, x21, [sp, #-0x20]!               
+01039DA8  stp      x20, x19, [sp, #0x10]                 
+01039DAC  adrp     x21, #0x24fb000                       
+01039DB0  adrp     x20, #0x236a000                       
+01039DB4  ldrb     w8, [x21, #0xd5b]                     
+01039DB8  ldr      x20, [x20, #0xf40]                     // [0x236AF40] AudioManager0_TypeInfo
+01039DBC  mov      x19, x0                               
+01039DC0  tbnz     w8, #0, #0x1039dd8                    
+01039DC4  adrp     x0, #0x236a000                        
+01039DC8  ldr      x0, [x0, #0xf40]                       // [0x236AF40] AudioManager0_TypeInfo
+01039DCC  bl       #0xe61b78                             
+01039DD0  mov      w8, #1                                
+01039DD4  strb     w8, [x21, #0xd5b]                     
+01039DD8  ldr      x8, [x20]                             
+01039DDC  ldr      x8, [x8, #0xb8]                       
+01039DE0  ldrb     w8, [x8, #8]                          
+01039DE4  cbz      w8, #0x1039dfc                        
+01039DE8  mov      x0, x19                               
+01039DEC  bl       #0x1039e08                             // AudioManager0$$ChangeVolume
+01039DF0  ldr      x8, [x20]                             
+01039DF4  ldr      x8, [x8, #0xb8]                       
+01039DF8  strb     wzr, [x8, #8]                         
+01039DFC  ldp      x20, x19, [sp, #0x10]                 
+01039E00  ldp      x30, x21, [sp], #0x20                 
+01039E04  ret                                            

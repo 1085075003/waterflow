@@ -1,0 +1,172 @@
+// Resorte2c$$OnEnable VA 0x1022BD0, inferred length 680
+void Resorte2c__OnEnable (Resorte2c_o* __this, const MethodInfo* method);
+01022BD0  str      x30, [sp, #-0x30]!                    
+01022BD4  stp      x22, x21, [sp, #0x10]                 
+01022BD8  stp      x20, x19, [sp, #0x20]                 
+01022BDC  adrp     x20, #0x24fb000                       
+01022BE0  adrp     x21, #0x236a000                       
+01022BE4  ldrb     w8, [x20, #0xccf]                     
+01022BE8  ldr      x21, [x21, #0x9d0]                     // [0x236A9D0] AudioManager_TypeInfo
+01022BEC  mov      x19, x0                               
+01022BF0  tbnz     w8, #0, #0x1022c2c                    
+01022BF4  adrp     x0, #0x236a000                        
+01022BF8  ldr      x0, [x0, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+01022BFC  bl       #0xe61b78                             
+01022C00  adrp     x0, #0x236a000                        
+01022C04  ldr      x0, [x0, #0x810]                       // [0x236A810] Method$UnityEngine.GameObject.GetComponent<ControlPiezaFuente>()
+01022C08  bl       #0xe61b78                             
+01022C0C  adrp     x0, #0x236a000                        
+01022C10  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+01022C14  bl       #0xe61b78                             
+01022C18  adrp     x0, #0x236b000                        
+01022C1C  ldr      x0, [x0, #0x4c0]                       // [0x236B4C0] 'activarComienzo'
+01022C20  bl       #0xe61b78                             
+01022C24  mov      w8, #1                                
+01022C28  strb     w8, [x20, #0xccf]                     
+01022C2C  ldr      x8, [x21]                             
+01022C30  movi     v0.2d, #0000000000000000              
+01022C34  mov      w9, #1                                
+01022C38  mov      x0, x19                               
+01022C3C  ldr      x8, [x8, #0xb8]                       
+01022C40  ldr      x8, [x8]                              
+01022C44  str      d0, [x19, #0x208]                      // self.empezar
+01022C48  str      w9, [x19, #0x2f0]                      // self.vez
+01022C4C  str      x8, [x19, #0x200]                      // self.audioManager
+01022C50  bl       #0x1022e78                             // Resorte2c$$doBorrarPiezas
+01022C54  mov      x0, x19                               
+01022C58  bl       #0x1023028                             // Resorte2c$$doInstanPiezas
+01022C5C  ldr      x0, [x19, #0x20]                       // self.objeto1
+01022C60  cbz      x0, #0x1022e74                        
+01022C64  mov      x1, xzr                               
+01022C68  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01022C6C  cbz      x0, #0x1022e74                        
+01022C70  fmov     s0, wzr                               
+01022C74  fmov     s1, wzr                               
+01022C78  fmov     s2, wzr                               
+01022C7C  mov      x1, xzr                               
+01022C80  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+01022C84  ldr      x0, [x19, #0x20]                       // self.objeto1
+01022C88  cbz      x0, #0x1022e74                        
+01022C8C  mov      x1, xzr                               
+01022C90  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01022C94  cbz      x0, #0x1022e74                        
+01022C98  mov      x1, xzr                               
+01022C9C  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+01022CA0  ldr      x0, [x19, #0x20]                       // self.objeto1
+01022CA4  str      s0, [x19, #0xe8]                       // self.objeto1_x1
+01022CA8  cbz      x0, #0x1022e74                        
+01022CAC  mov      x1, xzr                               
+01022CB0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01022CB4  cbz      x0, #0x1022e74                        
+01022CB8  mov      x1, xzr                               
+01022CBC  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+01022CC0  ldr      x0, [x19, #0x20]                       // self.objeto1
+01022CC4  str      s1, [x19, #0xec]                       // self.objeto1_y1
+01022CC8  cbz      x0, #0x1022e74                        
+01022CCC  mov      x1, xzr                               
+01022CD0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01022CD4  cbz      x0, #0x1022e74                        
+01022CD8  mov      x1, xzr                               
+01022CDC  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+01022CE0  ldp      s0, s1, [x19, #0xe8]                   // self.objeto1_x1
+01022CE4  ldr      x0, [x19, #0x28]                       // self.objeto2
+01022CE8  fmov     s3, #20.00000000                      
+01022CEC  str      s2, [x19, #0xf0]                       // self.objeto1_z1
+01022CF0  str      s0, [x19, #0x130]                      // self.fin1_0
+01022CF4  fadd     s0, s0, s3                            
+01022CF8  str      s2, [x19, #0x138]                     
+01022CFC  str      s1, [x19, #0x134]                     
+01022D00  str      s1, [x19, #0x140]                     
+01022D04  str      s0, [x19, #0x13c]                      // self.fin1_1
+01022D08  str      s2, [x19, #0x144]                     
+01022D0C  cbz      x0, #0x1022e74                        
+01022D10  mov      x1, xzr                               
+01022D14  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01022D18  cbz      x0, #0x1022e74                        
+01022D1C  adrp     x8, #0x5ff000                         
+01022D20  ldr      s1, [x8, #0xda0]                      
+01022D24  fmov     s0, wzr                               
+01022D28  fmov     s2, wzr                               
+01022D2C  mov      x1, xzr                               
+01022D30  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+01022D34  ldr      x0, [x19, #0x28]                       // self.objeto2
+01022D38  cbz      x0, #0x1022e74                        
+01022D3C  mov      x1, xzr                               
+01022D40  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01022D44  cbz      x0, #0x1022e74                        
+01022D48  mov      x1, xzr                               
+01022D4C  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+01022D50  ldr      x0, [x19, #0x28]                       // self.objeto2
+01022D54  str      s0, [x19, #0xf4]                       // self.objeto2_x1
+01022D58  cbz      x0, #0x1022e74                        
+01022D5C  mov      x1, xzr                               
+01022D60  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01022D64  cbz      x0, #0x1022e74                        
+01022D68  mov      x1, xzr                               
+01022D6C  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+01022D70  ldr      x0, [x19, #0x28]                       // self.objeto2
+01022D74  str      s1, [x19, #0xf8]                       // self.objeto2_y1
+01022D78  cbz      x0, #0x1022e74                        
+01022D7C  mov      x1, xzr                               
+01022D80  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01022D84  cbz      x0, #0x1022e74                        
+01022D88  mov      x1, xzr                               
+01022D8C  bl       #0x200eae8                             // UnityEngine.Transform$$get_localPosition
+01022D90  ldp      s0, s1, [x19, #0xf4]                   // self.objeto2_x1
+01022D94  ldr      x0, [x19, #0x50]                       // self.objeto7
+01022D98  fmov     s3, #20.00000000                      
+01022D9C  str      s2, [x19, #0xfc]                       // self.objeto2_z1
+01022DA0  str      s2, [x19, #0x150]                     
+01022DA4  fadd     s2, s2, s3                            
+01022DA8  str      s0, [x19, #0x148]                      // self.fin2_0
+01022DAC  str      s1, [x19, #0x14c]                     
+01022DB0  str      s0, [x19, #0x154]                      // self.fin2_1
+01022DB4  str      s1, [x19, #0x158]                     
+01022DB8  str      s2, [x19, #0x15c]                     
+01022DBC  cbz      x0, #0x1022e74                        
+01022DC0  adrp     x20, #0x236a000                       
+01022DC4  ldr      x20, [x20, #0x810]                     // [0x236A810] Method$UnityEngine.GameObject.GetComponent<ControlPiezaFuente>()
+01022DC8  ldr      x1, [x20]                             
+01022DCC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01022DD0  ldr      x8, [x19, #0x58]                       // self.objeto8
+01022DD4  str      x0, [x19, #0x308]                      // self.ctrlF7
+01022DD8  cbz      x8, #0x1022e74                        
+01022DDC  ldr      x1, [x20]                             
+01022DE0  mov      x0, x8                                
+01022DE4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01022DE8  ldr      x8, [x19, #0x1f8]                      // self.esfera4
+01022DEC  str      x0, [x19, #0x310]                      // self.ctrlF8
+01022DF0  cbz      x8, #0x1022e74                        
+01022DF4  adrp     x21, #0x236a000                       
+01022DF8  adrp     x22, #0x236b000                       
+01022DFC  ldr      x21, [x21, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+01022E00  ldr      x22, [x22, #0x4c0]                     // [0x236B4C0] 'activarComienzo'
+01022E04  mov      x0, x8                                
+01022E08  mov      w1, wzr                               
+01022E0C  mov      x2, xzr                               
+01022E10  add      x20, x19, #0x1d1                      
+01022E14  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01022E18  mov      x0, x19                               
+01022E1C  bl       #0x1023268                             // Resorte2c$$doConfigureColors
+01022E20  add      x8, x19, #0x1d5                       
+01022E24  mov      w9, #1                                
+01022E28  mov      x0, x19                               
+01022E2C  strh     wzr, [x8]                             
+01022E30  strb     w9, [x19, #0x1d0]                      // self.swfin0
+01022E34  str      wzr, [x20]                            
+01022E38  stur     xzr, [x20, #6]                        
+01022E3C  strb     w9, [x19, #0x1df]                      // self.primeraVezAguas
+01022E40  str      wzr, [x19, #0x318]                     // self.numero
+01022E44  bl       #0x10236e8                             // Resorte2c$$doBorrarChorros
+01022E48  ldr      x8, [x21]                             
+01022E4C  mov      x0, x19                               
+01022E50  ldp      x20, x19, [sp, #0x20]                 
+01022E54  fmov     s0, #5.00000000                       
+01022E58  ldr      x8, [x8, #0xb8]                       
+01022E5C  mov      x2, xzr                               
+01022E60  str      wzr, [x8, #0x14]                      
+01022E64  ldr      x1, [x22]                             
+01022E68  ldp      x22, x21, [sp, #0x10]                 
+01022E6C  ldr      x30, [sp], #0x30                      
+01022E70  b        #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+01022E74  bl       #0xe61da0                             

@@ -1,0 +1,69 @@
+// Resorte2$$Update VA 0x100D12C, inferred length 268
+void Resorte2__Update (Resorte2_o* __this, const MethodInfo* method);
+0100D12C  str      x30, [sp, #-0x20]!                    
+0100D130  stp      x20, x19, [sp, #0x10]                 
+0100D134  adrp     x20, #0x24fb000                       
+0100D138  ldrb     w8, [x20, #0xc96]                     
+0100D13C  mov      x19, x0                               
+0100D140  tbnz     w8, #0, #0x100d164                    
+0100D144  adrp     x0, #0x236b000                        
+0100D148  ldr      x0, [x0, #0x4c8]                       // [0x236B4C8] 'desactivarMech'
+0100D14C  bl       #0xe61b78                             
+0100D150  adrp     x0, #0x236b000                        
+0100D154  ldr      x0, [x0, #0x4d0]                       // [0x236B4D0] 'activarMech'
+0100D158  bl       #0xe61b78                             
+0100D15C  mov      w8, #1                                
+0100D160  strb     w8, [x20, #0xc96]                     
+0100D164  ldr      w8, [x19, #0x328]                      // self.empezar
+0100D168  cmp      w8, #1                                
+0100D16C  b.ne     #0x100d1cc                            
+0100D170  ldrb     w8, [x19, #0x2ec]                      // self.swfin0
+0100D174  cbz      w8, #0x100d180                        
+0100D178  mov      x0, x19                               
+0100D17C  bl       #0x100d238                             // Resorte2$$doMovimiento1
+0100D180  ldrb     w8, [x19, #0x2ed]                      // self.swfin1
+0100D184  cbz      w8, #0x100d190                        
+0100D188  mov      x0, x19                               
+0100D18C  bl       #0x100d26c                             // Resorte2$$doMovimiento2
+0100D190  ldrb     w8, [x19, #0x2ee]                      // self.swfin2
+0100D194  cbz      w8, #0x100d1a0                        
+0100D198  mov      x0, x19                               
+0100D19C  bl       #0x100d2c8                             // Resorte2$$doMovimiento3
+0100D1A0  ldrb     w8, [x19, #0x2f0]                      // self.swfinMovimiento1
+0100D1A4  cbz      w8, #0x100d1c8                        
+0100D1A8  adrp     x8, #0x236b000                        
+0100D1AC  ldr      x8, [x8, #0x4c8]                       // [0x236B4C8] 'desactivarMech'
+0100D1B0  fmov     s0, #25.00000000                      
+0100D1B4  mov      x0, x19                               
+0100D1B8  mov      x2, xzr                               
+0100D1BC  ldr      x1, [x8]                              
+0100D1C0  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+0100D1C4  strb     wzr, [x19, #0x2f0]                     // self.swfinMovimiento1
+0100D1C8  ldr      w8, [x19, #0x328]                      // self.empezar
+0100D1CC  cmp      w8, #4                                
+0100D1D0  b.ne     #0x100d22c                            
+0100D1D4  ldrb     w8, [x19, #0x2f0]                      // self.swfinMovimiento1
+0100D1D8  cbz      w8, #0x100d1e4                        
+0100D1DC  mov      x0, x19                               
+0100D1E0  bl       #0x100d330                             // Resorte2$$doMovimiento3b
+0100D1E4  ldrb     w8, [x19, #0x2ef]                      // self.swfin3
+0100D1E8  cbz      w8, #0x100d1f4                        
+0100D1EC  mov      x0, x19                               
+0100D1F0  bl       #0x100d394                             // Resorte2$$doMovimiento2b
+0100D1F4  ldrb     w8, [x19, #0x2ee]                      // self.swfin2
+0100D1F8  cbz      w8, #0x100d204                        
+0100D1FC  mov      x0, x19                               
+0100D200  bl       #0x100d400                             // Resorte2$$doMovimiento1b
+0100D204  ldrb     w8, [x19, #0x2f1]                      // self.swfinMovimiento2
+0100D208  cbz      w8, #0x100d22c                        
+0100D20C  adrp     x8, #0x236b000                        
+0100D210  ldr      x8, [x8, #0x4d0]                       // [0x236B4D0] 'activarMech'
+0100D214  fmov     s0, #10.00000000                      
+0100D218  mov      x0, x19                               
+0100D21C  mov      x2, xzr                               
+0100D220  ldr      x1, [x8]                              
+0100D224  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+0100D228  strb     wzr, [x19, #0x2f1]                     // self.swfinMovimiento2
+0100D22C  ldp      x20, x19, [sp, #0x10]                 
+0100D230  ldr      x30, [sp], #0x20                      
+0100D234  ret                                            

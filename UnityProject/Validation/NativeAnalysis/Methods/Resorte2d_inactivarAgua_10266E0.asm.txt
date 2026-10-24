@@ -1,0 +1,65 @@
+// Resorte2d$$inactivarAgua VA 0x10266E0, inferred length 252
+void Resorte2d__inactivarAgua (Resorte2d_o* __this, const MethodInfo* method);
+010266E0  stp      x30, x21, [sp, #-0x20]!               
+010266E4  stp      x20, x19, [sp, #0x10]                 
+010266E8  adrp     x20, #0x24fb000                       
+010266EC  adrp     x21, #0x2368000                       
+010266F0  ldrb     w8, [x20, #0xcdb]                     
+010266F4  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+010266F8  mov      x19, x0                               
+010266FC  tbnz     w8, #0, #0x1026714                    
+01026700  adrp     x0, #0x2368000                        
+01026704  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+01026708  bl       #0xe61b78                             
+0102670C  mov      w8, #1                                
+01026710  strb     w8, [x20, #0xcdb]                     
+01026714  ldr      x0, [x21]                             
+01026718  ldr      x20, [x19, #0xd8]                      // self.objeto14
+0102671C  ldr      w8, [x0, #0xe0]                       
+01026720  cbnz     w8, #0x1026728                        
+01026724  bl       #0xe61c80                             
+01026728  mov      x0, x20                               
+0102672C  mov      x1, xzr                               
+01026730  mov      x2, xzr                               
+01026734  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01026738  tbz      w0, #0, #0x102675c                    
+0102673C  ldr      x0, [x21]                             
+01026740  ldr      x19, [x19, #0xd8]                      // self.objeto14
+01026744  ldr      w8, [x0, #0xe0]                       
+01026748  cbnz     w8, #0x1026750                        
+0102674C  bl       #0xe61c80                             
+01026750  mov      x0, x19                               
+01026754  mov      x1, xzr                               
+01026758  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+0102675C  ldp      x20, x19, [sp, #0x10]                 
+01026760  ldp      x30, x21, [sp], #0x20                 
+01026764  ret                                            
+01026768  cmp      w1, #1                                
+0102676C  mov      x19, x0                               
+01026770  b.ne     #0x10267d0                            
+01026774  mov      x0, x19                               
+01026778  bl       #0x224d2d0                            
+0102677C  mov      x19, x0                               
+01026780  adrp     x0, #0x2368000                        
+01026784  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+01026788  bl       #0xe61b8c                             
+0102678C  ldr      x8, [x19]                             
+01026790  ldr      x1, [x8]                              
+01026794  bl       #0xe621cc                             
+01026798  tbz      w0, #0, #0x10267a8                    
+0102679C  ldp      x20, x19, [sp, #0x10]                 
+010267A0  ldp      x30, x21, [sp], #0x20                 
+010267A4  b        #0x224d2e0                            
+010267A8  mov      w0, #8                                
+010267AC  bl       #0x224d320                            
+010267B0  ldr      x8, [x19]                             
+010267B4  str      x8, [x0]                              
+010267B8  adrp     x1, #0x2253000                        
+010267BC  add      x1, x1, #0x618                        
+010267C0  mov      x2, xzr                               
+010267C4  bl       #0x224d330                            
+010267C8  mov      x19, x0                               
+010267CC  bl       #0x224d2e0                            
+010267D0  mov      x0, x19                               
+010267D4  bl       #0xf5dd7c                             
+010267D8  bl       #0xd2eb98                             

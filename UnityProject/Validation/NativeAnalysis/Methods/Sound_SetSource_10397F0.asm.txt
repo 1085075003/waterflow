@@ -1,0 +1,18 @@
+// Sound$$SetSource VA 0x10397F0, inferred length 64
+void Sound__SetSource (Sound_o* __this, UnityEngine_AudioSource_o* _source, const MethodInfo* method);
+010397F0  stp      x30, x19, [sp, #-0x10]!               
+010397F4  str      x1, [x0, #0x30]                       
+010397F8  cbz      x1, #0x103982c                        
+010397FC  ldr      x8, [x0, #0x18]                       
+01039800  mov      x19, x0                               
+01039804  mov      x0, x1                                
+01039808  mov      x2, xzr                               
+0103980C  mov      x1, x8                                
+01039810  bl       #0x1fdd714                             // UnityEngine.AudioSource$$set_clip
+01039814  ldr      x0, [x19, #0x30]                      
+01039818  cbz      x0, #0x103982c                        
+0103981C  ldrb     w1, [x19, #0x28]                      
+01039820  mov      x2, xzr                               
+01039824  ldp      x30, x19, [sp], #0x10                 
+01039828  b        #0x1fdd918                             // UnityEngine.AudioSource$$set_loop
+0103982C  bl       #0xe61da0                             

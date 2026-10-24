@@ -1,0 +1,158 @@
+// AguasControl3$$doBuscarOrigen VA 0xFCBC1C, inferred length 624
+void AguasControl3__doBuscarOrigen (AguasControl3_o* __this, const MethodInfo* method);
+00FCBC1C  str      x30, [sp, #-0x20]!                    
+00FCBC20  stp      x20, x19, [sp, #0x10]                 
+00FCBC24  adrp     x20, #0x24fb000                       
+00FCBC28  ldrb     w8, [x20, #0xb3d]                     
+00FCBC2C  mov      x19, x0                               
+00FCBC30  tbnz     w8, #0, #0xfcbc48                     
+00FCBC34  adrp     x0, #0x236a000                        
+00FCBC38  ldr      x0, [x0, #0x5d0]                       // [0x236A5D0] Method$UnityEngine.GameObject.GetComponent<FuenteTest3>()
+00FCBC3C  bl       #0xe61b78                             
+00FCBC40  mov      w8, #1                                
+00FCBC44  strb     w8, [x20, #0xb3d]                     
+00FCBC48  ldrb     w8, [x19, #0x31]                       // self.origen1
+00FCBC4C  str      wzr, [x19, #0x20]                      // self.hayOrigen
+00FCBC50  strb     wzr, [x19, #0x90]                      // self.encontrado
+00FCBC54  stur     wzr, [x19, #0x37]                      // self.checkCollision
+00FCBC58  sturh    wzr, [x19, #0x3b]                      // self.checkCollision4
+00FCBC5C  cbz      w8, #0xfcbcc4                         
+00FCBC60  adrp     x8, #0x600000                         
+00FCBC64  ldr      d0, [x8, #0x850]                      
+00FCBC68  fmov     s1, wzr                               
+00FCBC6C  mov      x0, x19                               
+00FCBC70  str      d0, [x19, #0x88]                       // self.distan_x
+00FCBC74  fmov     s0, #-8.00000000                      
+00FCBC78  bl       #0xfcbf74                              // AguasControl3$$doCheckCollision1
+00FCBC7C  ldrb     w8, [x19, #0x37]                       // self.checkCollision
+00FCBC80  strb     w8, [x19, #0x38]                       // self.checkCollision1
+00FCBC84  cbz      w8, #0xfcbcc4                         
+00FCBC88  ldr      x0, [x19, #0x40]                       // self.orig1
+00FCBC8C  mov      w8, #1                                
+00FCBC90  strb     w8, [x19, #0x90]                       // self.encontrado
+00FCBC94  cbz      x0, #0xfcbe88                         
+00FCBC98  adrp     x8, #0x236a000                        
+00FCBC9C  ldr      x8, [x8, #0x5d0]                       // [0x236A5D0] Method$UnityEngine.GameObject.GetComponent<FuenteTest3>()
+00FCBCA0  ldr      x1, [x8]                              
+00FCBCA4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCBCA8  cbz      x0, #0xfcbe88                         
+00FCBCAC  ldr      x8, [x19, #0x98]                       // self.tag1
+00FCBCB0  mov      x1, xzr                               
+00FCBCB4  str      x8, [x0, #0x5c8]                      
+00FCBCB8  ldr      x8, [x19, #0xa0]                       // self.otherObject
+00FCBCBC  str      x8, [x0, #0x5b0]                      
+00FCBCC0  bl       #0x10a566c                             // FuenteTest3$$doReceivefromAguas
+00FCBCC4  ldrb     w8, [x19, #0x90]                       // self.encontrado
+00FCBCC8  cbnz     w8, #0xfcbe10                         
+00FCBCCC  ldrb     w8, [x19, #0x32]                       // self.origen2
+00FCBCD0  cbz      w8, #0xfcbd30                         
+00FCBCD4  adrp     x8, #0x600000                         
+00FCBCD8  ldr      d0, [x8, #0x750]                      
+00FCBCDC  fmov     s1, #8.00000000                       
+00FCBCE0  mov      x0, x19                               
+00FCBCE4  str      d0, [x19, #0x88]                       // self.distan_x
+00FCBCE8  fmov     s0, wzr                               
+00FCBCEC  bl       #0xfcbf74                              // AguasControl3$$doCheckCollision1
+00FCBCF0  ldrb     w8, [x19, #0x37]                       // self.checkCollision
+00FCBCF4  strb     w8, [x19, #0x39]                       // self.checkCollision2
+00FCBCF8  cbz      w8, #0xfcbd30                         
+00FCBCFC  ldr      x0, [x19, #0x48]                       // self.orig2
+00FCBD00  mov      w8, #1                                
+00FCBD04  strb     w8, [x19, #0x90]                       // self.encontrado
+00FCBD08  cbz      x0, #0xfcbe88                         
+00FCBD0C  adrp     x8, #0x236a000                        
+00FCBD10  ldr      x8, [x8, #0x5d0]                       // [0x236A5D0] Method$UnityEngine.GameObject.GetComponent<FuenteTest3>()
+00FCBD14  ldr      x1, [x8]                              
+00FCBD18  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCBD1C  cbz      x0, #0xfcbe88                         
+00FCBD20  ldr      x8, [x19, #0x98]                       // self.tag1
+00FCBD24  mov      x1, xzr                               
+00FCBD28  str      x8, [x0, #0x5c8]                      
+00FCBD2C  bl       #0x10a566c                             // FuenteTest3$$doReceivefromAguas
+00FCBD30  ldrb     w8, [x19, #0x90]                       // self.encontrado
+00FCBD34  cbnz     w8, #0xfcbe10                         
+00FCBD38  ldrb     w8, [x19, #0x33]                       // self.origen3
+00FCBD3C  cbz      w8, #0xfcbd9c                         
+00FCBD40  adrp     x8, #0x600000                         
+00FCBD44  ldr      d0, [x8, #0x470]                      
+00FCBD48  fmov     s1, wzr                               
+00FCBD4C  mov      x0, x19                               
+00FCBD50  str      d0, [x19, #0x88]                       // self.distan_x
+00FCBD54  fmov     s0, #8.00000000                       
+00FCBD58  bl       #0xfcbf74                              // AguasControl3$$doCheckCollision1
+00FCBD5C  ldrb     w8, [x19, #0x37]                       // self.checkCollision
+00FCBD60  strb     w8, [x19, #0x3a]                       // self.checkCollision3
+00FCBD64  cbz      w8, #0xfcbd9c                         
+00FCBD68  ldr      x0, [x19, #0x50]                       // self.orig3
+00FCBD6C  mov      w8, #1                                
+00FCBD70  strb     w8, [x19, #0x90]                       // self.encontrado
+00FCBD74  cbz      x0, #0xfcbe88                         
+00FCBD78  adrp     x8, #0x236a000                        
+00FCBD7C  ldr      x8, [x8, #0x5d0]                       // [0x236A5D0] Method$UnityEngine.GameObject.GetComponent<FuenteTest3>()
+00FCBD80  ldr      x1, [x8]                              
+00FCBD84  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCBD88  cbz      x0, #0xfcbe88                         
+00FCBD8C  ldr      x8, [x19, #0x98]                       // self.tag1
+00FCBD90  mov      x1, xzr                               
+00FCBD94  str      x8, [x0, #0x5c8]                      
+00FCBD98  bl       #0x10a566c                             // FuenteTest3$$doReceivefromAguas
+00FCBD9C  ldrb     w8, [x19, #0x90]                       // self.encontrado
+00FCBDA0  cbnz     w8, #0xfcbe10                         
+00FCBDA4  ldrb     w8, [x19, #0x34]                       // self.origen4
+00FCBDA8  cbz      w8, #0xfcbe08                         
+00FCBDAC  adrp     x8, #0x600000                         
+00FCBDB0  ldr      d0, [x8, #0x9f0]                      
+00FCBDB4  fmov     s1, #-8.00000000                      
+00FCBDB8  mov      x0, x19                               
+00FCBDBC  str      d0, [x19, #0x88]                       // self.distan_x
+00FCBDC0  fmov     s0, wzr                               
+00FCBDC4  bl       #0xfcbf74                              // AguasControl3$$doCheckCollision1
+00FCBDC8  ldrb     w8, [x19, #0x37]                       // self.checkCollision
+00FCBDCC  strb     w8, [x19, #0x3b]                       // self.checkCollision4
+00FCBDD0  cbz      w8, #0xfcbe08                         
+00FCBDD4  ldr      x0, [x19, #0x58]                       // self.orig4
+00FCBDD8  mov      w8, #1                                
+00FCBDDC  strb     w8, [x19, #0x90]                       // self.encontrado
+00FCBDE0  cbz      x0, #0xfcbe88                         
+00FCBDE4  adrp     x8, #0x236a000                        
+00FCBDE8  ldr      x8, [x8, #0x5d0]                       // [0x236A5D0] Method$UnityEngine.GameObject.GetComponent<FuenteTest3>()
+00FCBDEC  ldr      x1, [x8]                              
+00FCBDF0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCBDF4  cbz      x0, #0xfcbe88                         
+00FCBDF8  ldr      x8, [x19, #0x98]                       // self.tag1
+00FCBDFC  mov      x1, xzr                               
+00FCBE00  str      x8, [x0, #0x5c8]                      
+00FCBE04  bl       #0x10a566c                             // FuenteTest3$$doReceivefromAguas
+00FCBE08  ldrb     w8, [x19, #0x90]                       // self.encontrado
+00FCBE0C  cbz      w8, #0xfcbe1c                         
+00FCBE10  ldp      x20, x19, [sp, #0x10]                 
+00FCBE14  ldr      x30, [sp], #0x20                      
+00FCBE18  ret                                            
+00FCBE1C  ldrb     w8, [x19, #0x35]                       // self.origen5
+00FCBE20  cbz      w8, #0xfcbe10                         
+00FCBE24  fmov     s0, wzr                               
+00FCBE28  fmov     s1, wzr                               
+00FCBE2C  mov      x0, x19                               
+00FCBE30  str      xzr, [x19, #0x88]                      // self.distan_x
+00FCBE34  bl       #0xfcbf74                              // AguasControl3$$doCheckCollision1
+00FCBE38  ldrb     w8, [x19, #0x37]                       // self.checkCollision
+00FCBE3C  strb     w8, [x19, #0x3c]                       // self.checkCollision5
+00FCBE40  cbz      w8, #0xfcbe10                         
+00FCBE44  ldr      x0, [x19, #0x60]                       // self.orig5
+00FCBE48  mov      w8, #1                                
+00FCBE4C  strb     w8, [x19, #0x90]                       // self.encontrado
+00FCBE50  cbz      x0, #0xfcbe88                         
+00FCBE54  adrp     x8, #0x236a000                        
+00FCBE58  ldr      x8, [x8, #0x5d0]                       // [0x236A5D0] Method$UnityEngine.GameObject.GetComponent<FuenteTest3>()
+00FCBE5C  ldr      x1, [x8]                              
+00FCBE60  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCBE64  cbz      x0, #0xfcbe88                         
+00FCBE68  ldr      x8, [x19, #0x98]                       // self.tag1
+00FCBE6C  mov      x1, xzr                               
+00FCBE70  str      x8, [x0, #0x5c8]                      
+00FCBE74  ldr      x8, [x19, #0xa0]                       // self.otherObject
+00FCBE78  ldp      x20, x19, [sp, #0x10]                 
+00FCBE7C  str      x8, [x0, #0x5b0]                      
+00FCBE80  ldr      x30, [sp], #0x20                      
+00FCBE84  b        #0x10a566c                             // FuenteTest3$$doReceivefromAguas
+00FCBE88  bl       #0xe61da0                             

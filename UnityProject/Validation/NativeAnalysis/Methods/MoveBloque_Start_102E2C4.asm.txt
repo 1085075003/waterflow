@@ -1,0 +1,73 @@
+// MoveBloque$$Start VA 0x102E2C4, inferred length 284
+void MoveBloque__Start (MoveBloque_o* __this, const MethodInfo* method);
+0102E2C4  str      x30, [sp, #-0x30]!                    
+0102E2C8  stp      x22, x21, [sp, #0x10]                 
+0102E2CC  stp      x20, x19, [sp, #0x20]                 
+0102E2D0  adrp     x22, #0x24fb000                       
+0102E2D4  adrp     x21, #0x236a000                       
+0102E2D8  adrp     x20, #0x236b000                       
+0102E2DC  ldrb     w8, [x22, #0xd0c]                     
+0102E2E0  ldr      x21, [x21, #0x9d0]                     // [0x236A9D0] AudioManager_TypeInfo
+0102E2E4  ldr      x20, [x20, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+0102E2E8  mov      x19, x0                               
+0102E2EC  tbnz     w8, #0, #0x102e328                    
+0102E2F0  adrp     x0, #0x236a000                        
+0102E2F4  ldr      x0, [x0, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+0102E2F8  bl       #0xe61b78                             
+0102E2FC  adrp     x0, #0x236a000                        
+0102E300  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0102E304  bl       #0xe61b78                             
+0102E308  adrp     x0, #0x236b000                        
+0102E30C  ldr      x0, [x0, #0x498]                       // [0x236B498] MoveBloque_TypeInfo
+0102E310  bl       #0xe61b78                             
+0102E314  adrp     x0, #0x236b000                        
+0102E318  ldr      x0, [x0, #0xb30]                       // [0x236BB30] 'MainCamera'
+0102E31C  bl       #0xe61b78                             
+0102E320  mov      w8, #1                                
+0102E324  strb     w8, [x22, #0xd0c]                     
+0102E328  ldr      x8, [x21]                             
+0102E32C  adrp     x21, #0x236b000                       
+0102E330  ldr      x8, [x8, #0xb8]                       
+0102E334  ldr      x8, [x8]                              
+0102E338  str      x8, [x19, #0x410]                      // self.audioManager
+0102E33C  ldr      x0, [x20]                             
+0102E340  ldr      w8, [x0, #0xe0]                       
+0102E344  ldr      x21, [x21, #0xb30]                     // [0x236BB30] 'MainCamera'
+0102E348  cbnz     w8, #0x102e354                        
+0102E34C  bl       #0xe61c80                             
+0102E350  ldr      x0, [x20]                             
+0102E354  ldr      x8, [x0, #0xb8]                       
+0102E358  mov      w9, #1                                
+0102E35C  mov      x0, x19                               
+0102E360  strb     w9, [x8, #9]                          
+0102E364  strb     w9, [x19, #0x24]                       // self.moveactivo_old
+0102E368  bl       #0x102e3e0                             // MoveBloque$$doInicializar
+0102E36C  ldr      x0, [x21]                             
+0102E370  mov      x1, xzr                               
+0102E374  bl       #0x2006494                             // UnityEngine.GameObject$$FindGameObjectWithTag
+0102E378  str      x0, [x19, #0x220]                      // self.MCamera
+0102E37C  cbz      x0, #0x102e3dc                        
+0102E380  mov      x1, xzr                               
+0102E384  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0102E388  cbz      x0, #0x102e3dc                        
+0102E38C  mov      x1, xzr                               
+0102E390  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+0102E394  cbz      x0, #0x102e3dc                        
+0102E398  adrp     x20, #0x236a000                       
+0102E39C  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102E3A0  mov      x1, xzr                               
+0102E3A4  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+0102E3A8  str      x0, [x19, #0x228]                      // self.padre
+0102E3AC  ldr      x0, [x20]                             
+0102E3B0  ldr      w8, [x0, #0xe0]                       
+0102E3B4  cbnz     w8, #0x102e3c0                        
+0102E3B8  bl       #0xe61c80                             
+0102E3BC  ldr      x0, [x20]                             
+0102E3C0  ldr      x8, [x0, #0xb8]                       
+0102E3C4  ldp      x20, x19, [sp, #0x20]                 
+0102E3C8  ldp      x22, x21, [sp, #0x10]                 
+0102E3CC  mov      w9, #1                                
+0102E3D0  strb     w9, [x8, #0x16]                       
+0102E3D4  ldr      x30, [sp], #0x30                      
+0102E3D8  ret                                            
+0102E3DC  bl       #0xe61da0                             

@@ -1,0 +1,227 @@
+// UIManagerScript$$doChecks VA 0x1063DC4, inferred length 900
+void UIManagerScript__doChecks (UIManagerScript_o* __this, const MethodInfo* method);
+01063DC4  str      x30, [sp, #-0x30]!                    
+01063DC8  stp      x22, x21, [sp, #0x10]                 
+01063DCC  stp      x20, x19, [sp, #0x20]                 
+01063DD0  adrp     x20, #0x24fb000                       
+01063DD4  adrp     x21, #0x236d000                       
+01063DD8  ldrb     w8, [x20, #0xe50]                     
+01063DDC  ldr      x21, [x21, #0x148]                     // [0x236D148] GoogleMobileAdsDemoScript1_TypeInfo
+01063DE0  mov      x19, x0                               
+01063DE4  tbnz     w8, #0, #0x1063e80                    
+01063DE8  adrp     x0, #0x236d000                        
+01063DEC  ldr      x0, [x0, #0x148]                       // [0x236D148] GoogleMobileAdsDemoScript1_TypeInfo
+01063DF0  bl       #0xe61b78                             
+01063DF4  adrp     x0, #0x236c000                        
+01063DF8  ldr      x0, [x0, #0x7f8]                       // [0x236C7F8] InicializarInterstitial_TypeInfo
+01063DFC  bl       #0xe61b78                             
+01063E00  adrp     x0, #0x236d000                        
+01063E04  ldr      x0, [x0, #0x150]                       // [0x236D150] 'Earned'
+01063E08  bl       #0xe61b78                             
+01063E0C  adrp     x0, #0x236d000                        
+01063E10  ldr      x0, [x0, #0x158]                       // [0x236D158] 'Opened'
+01063E14  bl       #0xe61b78                             
+01063E18  adrp     x0, #0x236d000                        
+01063E1C  ldr      x0, [x0, #0x160]                       // [0x236D160] 'Skip?'
+01063E20  bl       #0xe61b78                             
+01063E24  adrp     x0, #0x236d000                        
+01063E28  ldr      x0, [x0, #0x168]                       // [0x236D168] 'adm '
+01063E2C  bl       #0xe61b78                             
+01063E30  adrp     x0, #0x236c000                        
+01063E34  ldr      x0, [x0, #0x968]                       // [0x236C968] 'Closed'
+01063E38  bl       #0xe61b78                             
+01063E3C  adrp     x0, #0x236d000                        
+01063E40  ldr      x0, [x0, #0x170]                       // [0x236D170] 'ErrShow'
+01063E44  bl       #0xe61b78                             
+01063E48  adrp     x0, #0x236d000                        
+01063E4C  ldr      x0, [x0, #0x178]                       // [0x236D178] 'ErrLoad'
+01063E50  bl       #0xe61b78                             
+01063E54  adrp     x0, #0x2368000                        
+01063E58  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+01063E5C  bl       #0xe61b78                             
+01063E60  adrp     x0, #0x236d000                        
+01063E64  ldr      x0, [x0, #0x180]                       // [0x236D180] 'Failed'
+01063E68  bl       #0xe61b78                             
+01063E6C  adrp     x0, #0x236d000                        
+01063E70  ldr      x0, [x0, #0x188]                       // [0x236D188] 'Loaded'
+01063E74  bl       #0xe61b78                             
+01063E78  mov      w8, #1                                
+01063E7C  strb     w8, [x20, #0xe50]                     
+01063E80  ldr      x0, [x21]                             
+01063E84  ldr      x20, [x19, #0x100]                     // self.text1a
+01063E88  ldr      w8, [x0, #0xe0]                       
+01063E8C  cbnz     w8, #0x1063e98                        
+01063E90  bl       #0xe61c80                             
+01063E94  ldr      x0, [x21]                             
+01063E98  ldr      x8, [x0, #0xb8]                       
+01063E9C  mov      x1, xzr                               
+01063EA0  add      x0, x8, #0xc                          
+01063EA4  bl       #0x1ab3994                             // System.Int32$$ToString
+01063EA8  cbz      x20, #0x1064144                       
+01063EAC  adrp     x9, #0x2368000                        
+01063EB0  ldr      x8, [x20]                             
+01063EB4  ldr      x9, [x9, #0xf50]                       // [0x2368F50] ''
+01063EB8  cmp      x0, #0                                
+01063EBC  ldr      x10, [x8, #0x5e8]                     
+01063EC0  ldr      x9, [x9]                              
+01063EC4  ldr      x2, [x8, #0x5f0]                      
+01063EC8  csel     x1, x9, x0, eq                        
+01063ECC  mov      x0, x20                               
+01063ED0  blr      x10                                   
+01063ED4  ldr      x0, [x21]                             
+01063ED8  ldr      w8, [x0, #0xe0]                       
+01063EDC  cbnz     w8, #0x1063ee8                        
+01063EE0  bl       #0xe61c80                             
+01063EE4  ldr      x0, [x21]                             
+01063EE8  ldr      x8, [x0, #0xb8]                       
+01063EEC  ldr      w8, [x8, #0xc]                        
+01063EF0  cmp      w8, #1                                
+01063EF4  b.ne     #0x1063f10                            
+01063EF8  ldr      x0, [x19, #0x100]                      // self.text1a
+01063EFC  cbz      x0, #0x1064144                        
+01063F00  adrp     x9, #0x236d000                        
+01063F04  ldr      x8, [x0]                              
+01063F08  ldr      x9, [x9, #0x188]                       // [0x236D188] 'Loaded'
+01063F0C  b        #0x1064024                            
+01063F10  ldr      w9, [x0, #0xe0]                       
+01063F14  cbnz     w9, #0x1063f28                        
+01063F18  bl       #0xe61c80                             
+01063F1C  ldr      x0, [x21]                             
+01063F20  ldr      x8, [x0, #0xb8]                       
+01063F24  ldr      w8, [x8, #0xc]                        
+01063F28  cmp      w8, #2                                
+01063F2C  b.ne     #0x1063f48                            
+01063F30  ldr      x0, [x19, #0x100]                      // self.text1a
+01063F34  cbz      x0, #0x1064144                        
+01063F38  adrp     x9, #0x236d000                        
+01063F3C  ldr      x8, [x0]                              
+01063F40  ldr      x9, [x9, #0x160]                       // [0x236D160] 'Skip?'
+01063F44  b        #0x1064024                            
+01063F48  ldr      w9, [x0, #0xe0]                       
+01063F4C  cbnz     w9, #0x1063f60                        
+01063F50  bl       #0xe61c80                             
+01063F54  ldr      x0, [x21]                             
+01063F58  ldr      x8, [x0, #0xb8]                       
+01063F5C  ldr      w8, [x8, #0xc]                        
+01063F60  cmp      w8, #3                                
+01063F64  b.ne     #0x1063f80                            
+01063F68  ldr      x0, [x19, #0x100]                      // self.text1a
+01063F6C  cbz      x0, #0x1064144                        
+01063F70  adrp     x9, #0x236d000                        
+01063F74  ldr      x8, [x0]                              
+01063F78  ldr      x9, [x9, #0x150]                       // [0x236D150] 'Earned'
+01063F7C  b        #0x1064024                            
+01063F80  ldr      w9, [x0, #0xe0]                       
+01063F84  cbnz     w9, #0x1063f98                        
+01063F88  bl       #0xe61c80                             
+01063F8C  ldr      x0, [x21]                             
+01063F90  ldr      x8, [x0, #0xb8]                       
+01063F94  ldr      w8, [x8, #0xc]                        
+01063F98  cmp      w8, #4                                
+01063F9C  b.ne     #0x1063fb8                            
+01063FA0  ldr      x0, [x19, #0x100]                      // self.text1a
+01063FA4  cbz      x0, #0x1064144                        
+01063FA8  adrp     x9, #0x236c000                        
+01063FAC  ldr      x8, [x0]                              
+01063FB0  ldr      x9, [x9, #0x968]                       // [0x236C968] 'Closed'
+01063FB4  b        #0x1064024                            
+01063FB8  ldr      w9, [x0, #0xe0]                       
+01063FBC  cbnz     w9, #0x1063fd0                        
+01063FC0  bl       #0xe61c80                             
+01063FC4  ldr      x0, [x21]                             
+01063FC8  ldr      x8, [x0, #0xb8]                       
+01063FCC  ldr      w8, [x8, #0xc]                        
+01063FD0  cmp      w8, #5                                
+01063FD4  b.ne     #0x1063ff0                            
+01063FD8  ldr      x0, [x19, #0x100]                      // self.text1a
+01063FDC  cbz      x0, #0x1064144                        
+01063FE0  adrp     x9, #0x236d000                        
+01063FE4  ldr      x8, [x0]                              
+01063FE8  ldr      x9, [x9, #0x178]                       // [0x236D178] 'ErrLoad'
+01063FEC  b        #0x1064024                            
+01063FF0  ldr      w9, [x0, #0xe0]                       
+01063FF4  cbnz     w9, #0x1064008                        
+01063FF8  bl       #0xe61c80                             
+01063FFC  ldr      x8, [x21]                             
+01064000  ldr      x8, [x8, #0xb8]                       
+01064004  ldr      w8, [x8, #0xc]                        
+01064008  cmp      w8, #6                                
+0106400C  b.ne     #0x1064034                            
+01064010  ldr      x0, [x19, #0x100]                      // self.text1a
+01064014  cbz      x0, #0x1064144                        
+01064018  adrp     x9, #0x236d000                        
+0106401C  ldr      x8, [x0]                              
+01064020  b        #0x224ce70                            
+01064024  ldr      x1, [x9]                               // [0x236D000] ' Επιπλέον λύσεις'
+01064028  ldr      x9, [x8, #0x5e8]                      
+0106402C  ldr      x2, [x8, #0x5f0]                      
+01064030  blr      x9                                    
+01064034  adrp     x21, #0x236c000                       
+01064038  ldr      x21, [x21, #0x7f8]                     // [0x236C7F8] InicializarInterstitial_TypeInfo
+0106403C  adrp     x22, #0x236d000                       
+01064040  ldr      x20, [x19, #0x118]                     // self.text1b
+01064044  mov      x1, xzr                               
+01064048  ldr      x8, [x21]                             
+0106404C  ldr      x8, [x8, #0xb8]                       
+01064050  ldr      x22, [x22, #0x168]                     // [0x236D168] 'adm '
+01064054  add      x0, x8, #0xc                          
+01064058  bl       #0x1ab3994                             // System.Int32$$ToString
+0106405C  ldr      x8, [x22]                             
+01064060  mov      x1, x0                                
+01064064  mov      x2, xzr                               
+01064068  mov      x0, x8                                
+0106406C  bl       #0x1958280                             // System.String$$Concat
+01064070  cbz      x20, #0x1064144                       
+01064074  ldr      x8, [x20]                             
+01064078  mov      x1, x0                                
+0106407C  mov      x0, x20                               
+01064080  ldr      x9, [x8, #0x5e8]                      
+01064084  ldr      x2, [x8, #0x5f0]                      
+01064088  blr      x9                                    
+0106408C  ldr      x8, [x21]                             
+01064090  ldr      x8, [x8, #0xb8]                       
+01064094  ldr      w8, [x8, #0xc]                        
+01064098  sub      w8, w8, #1                            
+0106409C  cmp      w8, #3                                
+010640A0  b.hi     #0x10640d4                            
+010640A4  adrp     x9, #0x621000                         
+010640A8  add      x9, x9, #0x697                        
+010640AC  adr      x10, #0x10640bc                       
+010640B0  ldrb     w11, [x9, x8]                         
+010640B4  add      x10, x10, x11, lsl #2                 
+010640B8  br       x10                                   
+010640BC  ldr      x0, [x19, #0x118]                      // self.text1b
+010640C0  cbz      x0, #0x1064144                        
+010640C4  adrp     x9, #0x236d000                        
+010640C8  ldr      x8, [x0]                              
+010640CC  ldr      x9, [x9, #0x188]                       // [0x236D188] 'Loaded'
+010640D0  b        #0x1064128                            
+010640D4  ldp      x20, x19, [sp, #0x20]                 
+010640D8  ldp      x22, x21, [sp, #0x10]                 
+010640DC  ldr      x30, [sp], #0x30                      
+010640E0  ret                                            
+010640E4  ldr      x0, [x19, #0x118]                      // self.text1b
+010640E8  cbz      x0, #0x1064144                        
+010640EC  adrp     x9, #0x236c000                        
+010640F0  ldr      x8, [x0]                              
+010640F4  ldr      x9, [x9, #0x968]                       // [0x236C968] 'Closed'
+010640F8  b        #0x1064128                            
+010640FC  ldr      x0, [x19, #0x118]                      // self.text1b
+01064100  cbz      x0, #0x1064144                        
+01064104  adrp     x9, #0x236d000                        
+01064108  ldr      x8, [x0]                              
+0106410C  ldr      x9, [x9, #0x180]                       // [0x236D180] 'Failed'
+01064110  b        #0x1064128                            
+01064114  ldr      x0, [x19, #0x118]                      // self.text1b
+01064118  cbz      x0, #0x1064144                        
+0106411C  adrp     x9, #0x236d000                        
+01064120  ldr      x8, [x0]                              
+01064124  ldr      x9, [x9, #0x158]                       // [0x236D158] 'Opened'
+01064128  ldr      x1, [x9]                              
+0106412C  ldr      x3, [x8, #0x5e8]                      
+01064130  ldr      x2, [x8, #0x5f0]                      
+01064134  ldp      x20, x19, [sp, #0x20]                 
+01064138  ldp      x22, x21, [sp, #0x10]                 
+0106413C  ldr      x30, [sp], #0x30                      
+01064140  br       x3                                    
+01064144  bl       #0xe61da0                             

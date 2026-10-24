@@ -1,0 +1,21 @@
+// SaveLoadManager$$doCambioPanel VA 0x1021558, inferred length 76
+void SaveLoadManager__doCambioPanel (SaveLoadManager_o* __this, const MethodInfo* method);
+01021558  stp      x30, x19, [sp, #-0x10]!               
+0102155C  mov      x19, x0                               
+01021560  ldr      x0, [x0, #0x3e0]                      
+01021564  cbz      x0, #0x10215a0                        
+01021568  mov      w1, wzr                               
+0102156C  mov      x2, xzr                               
+01021570  bl       #0x2002f88                             // UnityEngine.Behaviour$$set_enabled
+01021574  ldr      x0, [x19, #0x388]                      // self.panel2
+01021578  cbz      x0, #0x10215a0                        
+0102157C  mov      w1, wzr                               
+01021580  mov      x2, xzr                               
+01021584  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01021588  ldr      x0, [x19, #0x390]                      // self.panel3
+0102158C  cbz      x0, #0x10215a0                        
+01021590  mov      w1, #1                                
+01021594  mov      x2, xzr                               
+01021598  ldp      x30, x19, [sp], #0x10                 
+0102159C  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+010215A0  bl       #0xe61da0                             

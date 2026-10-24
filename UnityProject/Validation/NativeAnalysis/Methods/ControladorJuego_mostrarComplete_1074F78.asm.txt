@@ -1,0 +1,99 @@
+// ControladorJuego$$mostrarComplete VA 0x1074F78, inferred length 388
+void ControladorJuego__mostrarComplete (ControladorJuego_o* __this, const MethodInfo* method);
+01074F78  stp      x30, x21, [sp, #-0x20]!               
+01074F7C  stp      x20, x19, [sp, #0x10]                 
+01074F80  adrp     x21, #0x24fb000                       
+01074F84  adrp     x20, #0x2368000                       
+01074F88  ldrb     w8, [x21, #0xec6]                     
+01074F8C  ldr      x20, [x20, #0x178]                     // [0x2368178] UnityEngine.Debug_TypeInfo
+01074F90  mov      x19, x0                               
+01074F94  tbnz     w8, #0, #0x1075000                    
+01074F98  adrp     x0, #0x2368000                        
+01074F9C  ldr      x0, [x0, #0x178]                       // [0x2368178] UnityEngine.Debug_TypeInfo
+01074FA0  bl       #0xe61b78                             
+01074FA4  adrp     x0, #0x236b000                        
+01074FA8  ldr      x0, [x0, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+01074FAC  bl       #0xe61b78                             
+01074FB0  adrp     x0, #0x236b000                        
+01074FB4  ldr      x0, [x0, #0x4e8]                       // [0x236B4E8] 'esTablet'
+01074FB8  bl       #0xe61b78                             
+01074FBC  adrp     x0, #0x236d000                        
+01074FC0  ldr      x0, [x0, #0x418]                       // [0x236D418] 'tagu101 an_complete'
+01074FC4  bl       #0xe61b78                             
+01074FC8  adrp     x0, #0x236d000                        
+01074FCC  ldr      x0, [x0, #0x420]                       // [0x236D420] 'tagu101 mostrarComplete'
+01074FD0  bl       #0xe61b78                             
+01074FD4  adrp     x0, #0x236b000                        
+01074FD8  ldr      x0, [x0, #0x680]                       // [0x236B680] 'an_complete'
+01074FDC  bl       #0xe61b78                             
+01074FE0  adrp     x0, #0x236d000                        
+01074FE4  ldr      x0, [x0, #0x428]                       // [0x236D428] 'tagu101 an_complete2d'
+01074FE8  bl       #0xe61b78                             
+01074FEC  adrp     x0, #0x236b000                        
+01074FF0  ldr      x0, [x0, #0x688]                       // [0x236B688] 'an_complete2d'
+01074FF4  bl       #0xe61b78                             
+01074FF8  mov      w8, #1                                
+01074FFC  strb     w8, [x21, #0xec6]                     
+01075000  ldr      x0, [x20]                             
+01075004  adrp     x21, #0x236d000                       
+01075008  ldr      w8, [x0, #0xe0]                       
+0107500C  ldr      x21, [x21, #0x420]                     // [0x236D420] 'tagu101 mostrarComplete'
+01075010  cbnz     w8, #0x1075018                        
+01075014  bl       #0xe61c80                             
+01075018  ldr      x0, [x21]                             
+0107501C  mov      x1, xzr                               
+01075020  bl       #0x1fe3034                             // UnityEngine.Debug$$Log
+01075024  ldr      x0, [x19, #0xa0]                       // self.cajaComplete
+01075028  cbz      x0, #0x10750f8                        
+0107502C  mov      w1, #1                                
+01075030  mov      x2, xzr                               
+01075034  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01075038  ldr      x0, [x19, #0xa0]                       // self.cajaComplete
+0107503C  cbz      x0, #0x10750f8                        
+01075040  adrp     x8, #0x236b000                        
+01075044  ldr      x8, [x8, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+01075048  adrp     x19, #0x236b000                       
+0107504C  ldr      x1, [x8]                              
+01075050  ldr      x19, [x19, #0x4e8]                     // [0x236B4E8] 'esTablet'
+01075054  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01075058  ldr      x8, [x19]                             
+0107505C  mov      x19, x0                               
+01075060  mov      w1, wzr                               
+01075064  mov      x2, xzr                               
+01075068  mov      x0, x8                                
+0107506C  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+01075070  ldr      x8, [x20]                             
+01075074  mov      w20, w0                               
+01075078  ldr      w9, [x8, #0xe0]                       
+0107507C  cbnz     w9, #0x1075088                        
+01075080  mov      x0, x8                                
+01075084  bl       #0xe61c80                             
+01075088  cmp      w20, #1                               
+0107508C  b.ne     #0x10750b4                            
+01075090  adrp     x8, #0x236d000                        
+01075094  ldr      x8, [x8, #0x428]                       // [0x236D428] 'tagu101 an_complete2d'
+01075098  mov      x1, xzr                               
+0107509C  ldr      x0, [x8]                              
+010750A0  bl       #0x1fe3034                             // UnityEngine.Debug$$Log
+010750A4  cbz      x19, #0x10750f8                       
+010750A8  adrp     x8, #0x236b000                        
+010750AC  ldr      x8, [x8, #0x688]                       // [0x236B688] 'an_complete2d'
+010750B0  b        #0x10750d4                            
+010750B4  adrp     x8, #0x236d000                        
+010750B8  ldr      x8, [x8, #0x418]                       // [0x236D418] 'tagu101 an_complete'
+010750BC  mov      x1, xzr                               
+010750C0  ldr      x0, [x8]                              
+010750C4  bl       #0x1fe3034                             // UnityEngine.Debug$$Log
+010750C8  cbz      x19, #0x10750f8                       
+010750CC  adrp     x8, #0x236b000                        
+010750D0  ldr      x8, [x8, #0x680]                       // [0x236B680] 'an_complete'
+010750D4  ldr      x1, [x8]                              
+010750D8  fmov     s0, wzr                               
+010750DC  mov      x0, x19                               
+010750E0  mov      w2, wzr                               
+010750E4  mov      x3, xzr                               
+010750E8  bl       #0x1fdb684                             // UnityEngine.Animator$$Play
+010750EC  ldp      x20, x19, [sp, #0x10]                 
+010750F0  ldp      x30, x21, [sp], #0x20                 
+010750F4  b        #0x10750fc                             // ControladorJuego$$doStandardEvents
+010750F8  bl       #0xe61da0                             

@@ -1,0 +1,757 @@
+// SaveLoadManager$$botonCompleteOff VA 0x1021AC4, inferred length 3020
+void SaveLoadManager__botonCompleteOff (SaveLoadManager_o* __this, const MethodInfo* method);
+01021AC4  stp      x30, x21, [sp, #-0x20]!               
+01021AC8  stp      x20, x19, [sp, #0x10]                 
+01021ACC  adrp     x20, #0x24fb000                       
+01021AD0  ldrb     w8, [x20, #0xcbe]                     
+01021AD4  mov      x19, x0                               
+01021AD8  tbnz     w8, #0, #0x1021b20                    
+01021ADC  adrp     x0, #0x236a000                        
+01021AE0  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+01021AE4  bl       #0xe61b78                             
+01021AE8  adrp     x0, #0x236b000                        
+01021AEC  ldr      x0, [x0, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+01021AF0  bl       #0xe61b78                             
+01021AF4  adrp     x0, #0x236a000                        
+01021AF8  ldr      x0, [x0, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01021AFC  bl       #0xe61b78                             
+01021B00  adrp     x0, #0x236a000                        
+01021B04  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+01021B08  bl       #0xe61b78                             
+01021B0C  adrp     x0, #0x236b000                        
+01021B10  ldr      x0, [x0, #0x850]                       // [0x236B850] 'an_completeOff'
+01021B14  bl       #0xe61b78                             
+01021B18  mov      w8, #1                                
+01021B1C  strb     w8, [x20, #0xcbe]                     
+01021B20  ldr      x0, [x19, #0x198]                      // self.audioManager
+01021B24  cbz      x0, #0x102268c                        
+01021B28  ldr      x1, [x19, #0x188]                      // self.click
+01021B2C  mov      x2, xzr                               
+01021B30  bl       #0x1028540                             // AudioManager$$PlaySound
+01021B34  ldr      x0, [x19, #0xa0]                       // self.solutionButton
+01021B38  cbz      x0, #0x102268c                        
+01021B3C  mov      w1, wzr                               
+01021B40  mov      x2, xzr                               
+01021B44  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01021B48  ldr      x0, [x19, #0x140]                      // self.botonNumSol
+01021B4C  cbz      x0, #0x102268c                        
+01021B50  mov      w1, wzr                               
+01021B54  mov      x2, xzr                               
+01021B58  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01021B5C  ldr      x0, [x19, #0xa8]                       // self.backButton
+01021B60  cbz      x0, #0x102268c                        
+01021B64  mov      w1, wzr                               
+01021B68  mov      x2, xzr                               
+01021B6C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01021B70  ldr      x0, [x19, #0x168]                      // self.cajaComplete
+01021B74  cbz      x0, #0x102268c                        
+01021B78  adrp     x8, #0x236b000                        
+01021B7C  ldr      x8, [x8, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+01021B80  ldr      x1, [x8]                              
+01021B84  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01021B88  cbz      x0, #0x102268c                        
+01021B8C  adrp     x8, #0x236b000                        
+01021B90  ldr      x8, [x8, #0x850]                       // [0x236B850] 'an_completeOff'
+01021B94  fmov     s0, wzr                               
+01021B98  mov      w2, wzr                               
+01021B9C  mov      x3, xzr                               
+01021BA0  ldr      x1, [x8]                              
+01021BA4  bl       #0x1fdb684                             // UnityEngine.Animator$$Play
+01021BA8  ldr      x0, [x19, #0x118]                      // self.MenuButton
+01021BAC  cbz      x0, #0x102268c                        
+01021BB0  adrp     x8, #0x236a000                        
+01021BB4  ldr      x8, [x8, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01021BB8  ldr      x1, [x8]                              
+01021BBC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01021BC0  cbz      x0, #0x102268c                        
+01021BC4  mov      w1, #1                                
+01021BC8  mov      x2, xzr                               
+01021BCC  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01021BD0  ldr      x0, [x19, #0x3f0]                      // self.menuIcon
+01021BD4  cbz      x0, #0x102268c                        
+01021BD8  ldr      x8, [x0]                              
+01021BDC  adrp     x10, #0x5ff000                        
+01021BE0  adrp     x11, #0x5ff000                        
+01021BE4  adrp     x20, #0x236a000                       
+01021BE8  ldr      x9, [x8, #0x2a8]                      
+01021BEC  ldr      x1, [x8, #0x2b0]                      
+01021BF0  adrp     x8, #0x5ff000                         
+01021BF4  ldr      s0, [x8, #0xda8]                      
+01021BF8  ldr      s1, [x10, #0xb6c]                     
+01021BFC  ldr      s2, [x11, #0xfe8]                     
+01021C00  ldr      x20, [x20, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+01021C04  fmov     s3, #1.00000000                       
+01021C08  blr      x9                                    
+01021C0C  ldr      x8, [x20]                             
+01021C10  ldr      x8, [x8, #0xb8]                       
+01021C14  ldr      w8, [x8]                              
+01021C18  cmp      w8, #1                                
+01021C1C  b.ne     #0x1021c5c                            
+01021C20  adrp     x21, #0x236a000                       
+01021C24  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021C28  ldr      x0, [x21]                             
+01021C2C  ldr      w8, [x0, #0xe0]                       
+01021C30  cbz      w8, #0x1021c3c                        
+01021C34  mov      w8, #1                                
+01021C38  b        #0x1021c50                            
+01021C3C  bl       #0xe61c80                             
+01021C40  ldr      x8, [x20]                             
+01021C44  ldr      x0, [x21]                             
+01021C48  ldr      x8, [x8, #0xb8]                       
+01021C4C  ldr      w8, [x8]                              
+01021C50  ldr      x9, [x0, #0xb8]                       
+01021C54  ldr      w9, [x9]                              
+01021C58  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021C5C  cmp      w8, #2                                
+01021C60  b.ne     #0x1021ca4                            
+01021C64  adrp     x21, #0x236a000                       
+01021C68  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021C6C  ldr      x0, [x21]                             
+01021C70  ldr      w8, [x0, #0xe0]                       
+01021C74  cbz      w8, #0x1021c80                        
+01021C78  mov      w8, #2                                
+01021C7C  b        #0x1021c94                            
+01021C80  bl       #0xe61c80                             
+01021C84  ldr      x8, [x20]                             
+01021C88  ldr      x0, [x21]                             
+01021C8C  ldr      x8, [x8, #0xb8]                       
+01021C90  ldr      w8, [x8]                              
+01021C94  ldr      x9, [x0, #0xb8]                       
+01021C98  ldr      w9, [x9]                              
+01021C9C  sub      w9, w9, #0x32                         
+01021CA0  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021CA4  cmp      w8, #3                                
+01021CA8  b.ne     #0x1021cec                            
+01021CAC  adrp     x21, #0x236a000                       
+01021CB0  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021CB4  ldr      x0, [x21]                             
+01021CB8  ldr      w8, [x0, #0xe0]                       
+01021CBC  cbz      w8, #0x1021cc8                        
+01021CC0  mov      w8, #3                                
+01021CC4  b        #0x1021cdc                            
+01021CC8  bl       #0xe61c80                             
+01021CCC  ldr      x8, [x20]                             
+01021CD0  ldr      x0, [x21]                             
+01021CD4  ldr      x8, [x8, #0xb8]                       
+01021CD8  ldr      w8, [x8]                              
+01021CDC  ldr      x9, [x0, #0xb8]                       
+01021CE0  ldr      w9, [x9]                              
+01021CE4  sub      w9, w9, #0x64                         
+01021CE8  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021CEC  cmp      w8, #4                                
+01021CF0  b.ne     #0x1021d34                            
+01021CF4  adrp     x21, #0x236a000                       
+01021CF8  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021CFC  ldr      x0, [x21]                             
+01021D00  ldr      w8, [x0, #0xe0]                       
+01021D04  cbz      w8, #0x1021d10                        
+01021D08  mov      w8, #4                                
+01021D0C  b        #0x1021d24                            
+01021D10  bl       #0xe61c80                             
+01021D14  ldr      x8, [x20]                             
+01021D18  ldr      x0, [x21]                             
+01021D1C  ldr      x8, [x8, #0xb8]                       
+01021D20  ldr      w8, [x8]                              
+01021D24  ldr      x9, [x0, #0xb8]                       
+01021D28  ldr      w9, [x9]                              
+01021D2C  sub      w9, w9, #0x96                         
+01021D30  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021D34  cmp      w8, #5                                
+01021D38  b.ne     #0x1021d7c                            
+01021D3C  adrp     x21, #0x236a000                       
+01021D40  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021D44  ldr      x0, [x21]                             
+01021D48  ldr      w8, [x0, #0xe0]                       
+01021D4C  cbz      w8, #0x1021d58                        
+01021D50  mov      w8, #5                                
+01021D54  b        #0x1021d6c                            
+01021D58  bl       #0xe61c80                             
+01021D5C  ldr      x8, [x20]                             
+01021D60  ldr      x0, [x21]                             
+01021D64  ldr      x8, [x8, #0xb8]                       
+01021D68  ldr      w8, [x8]                              
+01021D6C  ldr      x9, [x0, #0xb8]                       
+01021D70  ldr      w9, [x9]                              
+01021D74  sub      w9, w9, #0xc8                         
+01021D78  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021D7C  cmp      w8, #6                                
+01021D80  b.ne     #0x1021dc4                            
+01021D84  adrp     x21, #0x236a000                       
+01021D88  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021D8C  ldr      x0, [x21]                             
+01021D90  ldr      w8, [x0, #0xe0]                       
+01021D94  cbz      w8, #0x1021da0                        
+01021D98  mov      w8, #6                                
+01021D9C  b        #0x1021db4                            
+01021DA0  bl       #0xe61c80                             
+01021DA4  ldr      x8, [x20]                             
+01021DA8  ldr      x0, [x21]                             
+01021DAC  ldr      x8, [x8, #0xb8]                       
+01021DB0  ldr      w8, [x8]                              
+01021DB4  ldr      x9, [x0, #0xb8]                       
+01021DB8  ldr      w9, [x9]                              
+01021DBC  sub      w9, w9, #0xfa                         
+01021DC0  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021DC4  cmp      w8, #7                                
+01021DC8  b.ne     #0x1021e0c                            
+01021DCC  adrp     x21, #0x236a000                       
+01021DD0  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021DD4  ldr      x0, [x21]                             
+01021DD8  ldr      w8, [x0, #0xe0]                       
+01021DDC  cbz      w8, #0x1021de8                        
+01021DE0  mov      w8, #7                                
+01021DE4  b        #0x1021dfc                            
+01021DE8  bl       #0xe61c80                             
+01021DEC  ldr      x8, [x20]                             
+01021DF0  ldr      x0, [x21]                             
+01021DF4  ldr      x8, [x8, #0xb8]                       
+01021DF8  ldr      w8, [x8]                              
+01021DFC  ldr      x9, [x0, #0xb8]                       
+01021E00  ldr      w9, [x9]                              
+01021E04  sub      w9, w9, #0x12c                        
+01021E08  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021E0C  cmp      w8, #8                                
+01021E10  b.ne     #0x1021e54                            
+01021E14  adrp     x21, #0x236a000                       
+01021E18  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021E1C  ldr      x0, [x21]                             
+01021E20  ldr      w8, [x0, #0xe0]                       
+01021E24  cbz      w8, #0x1021e30                        
+01021E28  mov      w8, #8                                
+01021E2C  b        #0x1021e44                            
+01021E30  bl       #0xe61c80                             
+01021E34  ldr      x8, [x20]                             
+01021E38  ldr      x0, [x21]                             
+01021E3C  ldr      x8, [x8, #0xb8]                       
+01021E40  ldr      w8, [x8]                              
+01021E44  ldr      x9, [x0, #0xb8]                       
+01021E48  ldr      w9, [x9]                              
+01021E4C  sub      w9, w9, #0x15e                        
+01021E50  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021E54  cmp      w8, #9                                
+01021E58  b.ne     #0x1021e9c                            
+01021E5C  adrp     x21, #0x236a000                       
+01021E60  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021E64  ldr      x0, [x21]                             
+01021E68  ldr      w8, [x0, #0xe0]                       
+01021E6C  cbz      w8, #0x1021e78                        
+01021E70  mov      w8, #9                                
+01021E74  b        #0x1021e8c                            
+01021E78  bl       #0xe61c80                             
+01021E7C  ldr      x8, [x20]                             
+01021E80  ldr      x0, [x21]                             
+01021E84  ldr      x8, [x8, #0xb8]                       
+01021E88  ldr      w8, [x8]                              
+01021E8C  ldr      x9, [x0, #0xb8]                       
+01021E90  ldr      w9, [x9]                              
+01021E94  sub      w9, w9, #0x190                        
+01021E98  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021E9C  cmp      w8, #0xa                              
+01021EA0  b.ne     #0x1021ee4                            
+01021EA4  adrp     x21, #0x236a000                       
+01021EA8  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021EAC  ldr      x0, [x21]                             
+01021EB0  ldr      w8, [x0, #0xe0]                       
+01021EB4  cbz      w8, #0x1021ec0                        
+01021EB8  mov      w8, #0xa                              
+01021EBC  b        #0x1021ed4                            
+01021EC0  bl       #0xe61c80                             
+01021EC4  ldr      x8, [x20]                             
+01021EC8  ldr      x0, [x21]                             
+01021ECC  ldr      x8, [x8, #0xb8]                       
+01021ED0  ldr      w8, [x8]                              
+01021ED4  ldr      x9, [x0, #0xb8]                       
+01021ED8  ldr      w9, [x9]                              
+01021EDC  sub      w9, w9, #0x1c2                        
+01021EE0  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021EE4  cmp      w8, #0xb                              
+01021EE8  b.ne     #0x1021f2c                            
+01021EEC  adrp     x21, #0x236a000                       
+01021EF0  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021EF4  ldr      x0, [x21]                             
+01021EF8  ldr      w8, [x0, #0xe0]                       
+01021EFC  cbz      w8, #0x1021f08                        
+01021F00  mov      w8, #0xb                              
+01021F04  b        #0x1021f1c                            
+01021F08  bl       #0xe61c80                             
+01021F0C  ldr      x8, [x20]                             
+01021F10  ldr      x0, [x21]                             
+01021F14  ldr      x8, [x8, #0xb8]                       
+01021F18  ldr      w8, [x8]                              
+01021F1C  ldr      x9, [x0, #0xb8]                       
+01021F20  ldr      w9, [x9]                              
+01021F24  sub      w9, w9, #0x1f4                        
+01021F28  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021F2C  cmp      w8, #0xc                              
+01021F30  b.ne     #0x1021f74                            
+01021F34  adrp     x21, #0x236a000                       
+01021F38  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021F3C  ldr      x0, [x21]                             
+01021F40  ldr      w8, [x0, #0xe0]                       
+01021F44  cbz      w8, #0x1021f50                        
+01021F48  mov      w8, #0xc                              
+01021F4C  b        #0x1021f64                            
+01021F50  bl       #0xe61c80                             
+01021F54  ldr      x8, [x20]                             
+01021F58  ldr      x0, [x21]                             
+01021F5C  ldr      x8, [x8, #0xb8]                       
+01021F60  ldr      w8, [x8]                              
+01021F64  ldr      x9, [x0, #0xb8]                       
+01021F68  ldr      w9, [x9]                              
+01021F6C  sub      w9, w9, #0x226                        
+01021F70  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021F74  cmp      w8, #0xd                              
+01021F78  b.ne     #0x1021fbc                            
+01021F7C  adrp     x21, #0x236a000                       
+01021F80  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021F84  ldr      x0, [x21]                             
+01021F88  ldr      w8, [x0, #0xe0]                       
+01021F8C  cbz      w8, #0x1021f98                        
+01021F90  mov      w8, #0xd                              
+01021F94  b        #0x1021fac                            
+01021F98  bl       #0xe61c80                             
+01021F9C  ldr      x8, [x20]                             
+01021FA0  ldr      x0, [x21]                             
+01021FA4  ldr      x8, [x8, #0xb8]                       
+01021FA8  ldr      w8, [x8]                              
+01021FAC  ldr      x9, [x0, #0xb8]                       
+01021FB0  ldr      w9, [x9]                              
+01021FB4  sub      w9, w9, #0x258                        
+01021FB8  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01021FBC  cmp      w8, #0xe                              
+01021FC0  b.ne     #0x1022004                            
+01021FC4  adrp     x21, #0x236a000                       
+01021FC8  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021FCC  ldr      x0, [x21]                             
+01021FD0  ldr      w8, [x0, #0xe0]                       
+01021FD4  cbz      w8, #0x1021fe0                        
+01021FD8  mov      w8, #0xe                              
+01021FDC  b        #0x1021ff4                            
+01021FE0  bl       #0xe61c80                             
+01021FE4  ldr      x8, [x20]                             
+01021FE8  ldr      x0, [x21]                             
+01021FEC  ldr      x8, [x8, #0xb8]                       
+01021FF0  ldr      w8, [x8]                              
+01021FF4  ldr      x9, [x0, #0xb8]                       
+01021FF8  ldr      w9, [x9]                              
+01021FFC  sub      w9, w9, #0x28a                        
+01022000  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01022004  cmp      w8, #0xf                              
+01022008  b.ne     #0x102204c                            
+0102200C  adrp     x21, #0x236a000                       
+01022010  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01022014  ldr      x0, [x21]                             
+01022018  ldr      w8, [x0, #0xe0]                       
+0102201C  cbz      w8, #0x1022028                        
+01022020  mov      w8, #0xf                              
+01022024  b        #0x102203c                            
+01022028  bl       #0xe61c80                             
+0102202C  ldr      x8, [x20]                             
+01022030  ldr      x0, [x21]                             
+01022034  ldr      x8, [x8, #0xb8]                       
+01022038  ldr      w8, [x8]                              
+0102203C  ldr      x9, [x0, #0xb8]                       
+01022040  ldr      w9, [x9]                              
+01022044  sub      w9, w9, #0x2bc                        
+01022048  str      w9, [x19, #0x1a8]                      // self.nivelPack
+0102204C  cmp      w8, #0x10                             
+01022050  b.ne     #0x1022094                            
+01022054  adrp     x21, #0x236a000                       
+01022058  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102205C  ldr      x0, [x21]                             
+01022060  ldr      w8, [x0, #0xe0]                       
+01022064  cbz      w8, #0x1022070                        
+01022068  mov      w8, #0x10                             
+0102206C  b        #0x1022084                            
+01022070  bl       #0xe61c80                             
+01022074  ldr      x8, [x20]                             
+01022078  ldr      x0, [x21]                             
+0102207C  ldr      x8, [x8, #0xb8]                       
+01022080  ldr      w8, [x8]                              
+01022084  ldr      x9, [x0, #0xb8]                       
+01022088  ldr      w9, [x9]                              
+0102208C  sub      w9, w9, #0x2ee                        
+01022090  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01022094  cmp      w8, #0x11                             
+01022098  b.ne     #0x10220dc                            
+0102209C  adrp     x21, #0x236a000                       
+010220A0  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010220A4  ldr      x0, [x21]                             
+010220A8  ldr      w8, [x0, #0xe0]                       
+010220AC  cbz      w8, #0x10220b8                        
+010220B0  mov      w8, #0x11                             
+010220B4  b        #0x10220cc                            
+010220B8  bl       #0xe61c80                             
+010220BC  ldr      x8, [x20]                             
+010220C0  ldr      x0, [x21]                             
+010220C4  ldr      x8, [x8, #0xb8]                       
+010220C8  ldr      w8, [x8]                              
+010220CC  ldr      x9, [x0, #0xb8]                       
+010220D0  ldr      w9, [x9]                              
+010220D4  sub      w9, w9, #0x3e8                        
+010220D8  str      w9, [x19, #0x1a8]                      // self.nivelPack
+010220DC  cmp      w8, #0x14                             
+010220E0  b.ne     #0x1022124                            
+010220E4  adrp     x21, #0x236a000                       
+010220E8  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010220EC  ldr      x0, [x21]                             
+010220F0  ldr      w8, [x0, #0xe0]                       
+010220F4  cbz      w8, #0x1022100                        
+010220F8  mov      w8, #0x14                             
+010220FC  b        #0x1022114                            
+01022100  bl       #0xe61c80                             
+01022104  ldr      x8, [x20]                             
+01022108  ldr      x0, [x21]                             
+0102210C  ldr      x8, [x8, #0xb8]                       
+01022110  ldr      w8, [x8]                              
+01022114  ldr      x9, [x0, #0xb8]                       
+01022118  ldr      w9, [x9]                              
+0102211C  sub      w9, w9, #0x41a                        
+01022120  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01022124  cmp      w8, #0x15                             
+01022128  b.ne     #0x102216c                            
+0102212C  adrp     x21, #0x236a000                       
+01022130  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01022134  ldr      x0, [x21]                             
+01022138  ldr      w8, [x0, #0xe0]                       
+0102213C  cbz      w8, #0x1022148                        
+01022140  mov      w8, #0x15                             
+01022144  b        #0x102215c                            
+01022148  bl       #0xe61c80                             
+0102214C  ldr      x8, [x20]                             
+01022150  ldr      x0, [x21]                             
+01022154  ldr      x8, [x8, #0xb8]                       
+01022158  ldr      w8, [x8]                              
+0102215C  ldr      x9, [x0, #0xb8]                       
+01022160  ldr      w9, [x9]                              
+01022164  sub      w9, w9, #0x44c                        
+01022168  str      w9, [x19, #0x1a8]                      // self.nivelPack
+0102216C  cmp      w8, #0x16                             
+01022170  b.ne     #0x10221b4                            
+01022174  adrp     x21, #0x236a000                       
+01022178  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102217C  ldr      x0, [x21]                             
+01022180  ldr      w8, [x0, #0xe0]                       
+01022184  cbz      w8, #0x1022190                        
+01022188  mov      w8, #0x16                             
+0102218C  b        #0x10221a4                            
+01022190  bl       #0xe61c80                             
+01022194  ldr      x8, [x20]                             
+01022198  ldr      x0, [x21]                             
+0102219C  ldr      x8, [x8, #0xb8]                       
+010221A0  ldr      w8, [x8]                              
+010221A4  ldr      x9, [x0, #0xb8]                       
+010221A8  ldr      w9, [x9]                              
+010221AC  sub      w9, w9, #0x47e                        
+010221B0  str      w9, [x19, #0x1a8]                      // self.nivelPack
+010221B4  cmp      w8, #0x17                             
+010221B8  b.ne     #0x10221fc                            
+010221BC  adrp     x21, #0x236a000                       
+010221C0  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010221C4  ldr      x0, [x21]                             
+010221C8  ldr      w8, [x0, #0xe0]                       
+010221CC  cbz      w8, #0x10221d8                        
+010221D0  mov      w8, #0x17                             
+010221D4  b        #0x10221ec                            
+010221D8  bl       #0xe61c80                             
+010221DC  ldr      x8, [x20]                             
+010221E0  ldr      x0, [x21]                             
+010221E4  ldr      x8, [x8, #0xb8]                       
+010221E8  ldr      w8, [x8]                              
+010221EC  ldr      x9, [x0, #0xb8]                       
+010221F0  ldr      w9, [x9]                              
+010221F4  sub      w9, w9, #0x4b0                        
+010221F8  str      w9, [x19, #0x1a8]                      // self.nivelPack
+010221FC  cmp      w8, #0x19                             
+01022200  b.ne     #0x1022244                            
+01022204  adrp     x21, #0x236a000                       
+01022208  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102220C  ldr      x0, [x21]                             
+01022210  ldr      w8, [x0, #0xe0]                       
+01022214  cbz      w8, #0x1022220                        
+01022218  mov      w8, #0x19                             
+0102221C  b        #0x1022234                            
+01022220  bl       #0xe61c80                             
+01022224  ldr      x8, [x20]                             
+01022228  ldr      x0, [x21]                             
+0102222C  ldr      x8, [x8, #0xb8]                       
+01022230  ldr      w8, [x8]                              
+01022234  ldr      x9, [x0, #0xb8]                       
+01022238  ldr      w9, [x9]                              
+0102223C  sub      w9, w9, #0x514                        
+01022240  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01022244  cmp      w8, #0x1a                             
+01022248  b.ne     #0x102228c                            
+0102224C  adrp     x21, #0x236a000                       
+01022250  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01022254  ldr      x0, [x21]                             
+01022258  ldr      w8, [x0, #0xe0]                       
+0102225C  cbz      w8, #0x1022268                        
+01022260  mov      w8, #0x1a                             
+01022264  b        #0x102227c                            
+01022268  bl       #0xe61c80                             
+0102226C  ldr      x8, [x20]                             
+01022270  ldr      x0, [x21]                             
+01022274  ldr      x8, [x8, #0xb8]                       
+01022278  ldr      w8, [x8]                              
+0102227C  ldr      x9, [x0, #0xb8]                       
+01022280  ldr      w9, [x9]                              
+01022284  sub      w9, w9, #0x546                        
+01022288  str      w9, [x19, #0x1a8]                      // self.nivelPack
+0102228C  cmp      w8, #0x1b                             
+01022290  b.ne     #0x10222d4                            
+01022294  adrp     x21, #0x236a000                       
+01022298  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102229C  ldr      x0, [x21]                             
+010222A0  ldr      w8, [x0, #0xe0]                       
+010222A4  cbz      w8, #0x10222b0                        
+010222A8  mov      w8, #0x1b                             
+010222AC  b        #0x10222c4                            
+010222B0  bl       #0xe61c80                             
+010222B4  ldr      x8, [x20]                             
+010222B8  ldr      x0, [x21]                             
+010222BC  ldr      x8, [x8, #0xb8]                       
+010222C0  ldr      w8, [x8]                              
+010222C4  ldr      x9, [x0, #0xb8]                       
+010222C8  ldr      w9, [x9]                              
+010222CC  sub      w9, w9, #0x578                        
+010222D0  str      w9, [x19, #0x1a8]                      // self.nivelPack
+010222D4  cmp      w8, #0x1c                             
+010222D8  b.ne     #0x102231c                            
+010222DC  adrp     x21, #0x236a000                       
+010222E0  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010222E4  ldr      x0, [x21]                             
+010222E8  ldr      w8, [x0, #0xe0]                       
+010222EC  cbz      w8, #0x10222f8                        
+010222F0  mov      w8, #0x1c                             
+010222F4  b        #0x102230c                            
+010222F8  bl       #0xe61c80                             
+010222FC  ldr      x8, [x20]                             
+01022300  ldr      x0, [x21]                             
+01022304  ldr      x8, [x8, #0xb8]                       
+01022308  ldr      w8, [x8]                              
+0102230C  ldr      x9, [x0, #0xb8]                       
+01022310  ldr      w9, [x9]                              
+01022314  sub      w9, w9, #0x5aa                        
+01022318  str      w9, [x19, #0x1a8]                      // self.nivelPack
+0102231C  cmp      w8, #0x1d                             
+01022320  b.ne     #0x1022364                            
+01022324  adrp     x21, #0x236a000                       
+01022328  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102232C  ldr      x0, [x21]                             
+01022330  ldr      w8, [x0, #0xe0]                       
+01022334  cbz      w8, #0x1022340                        
+01022338  mov      w8, #0x1d                             
+0102233C  b        #0x1022354                            
+01022340  bl       #0xe61c80                             
+01022344  ldr      x8, [x20]                             
+01022348  ldr      x0, [x21]                             
+0102234C  ldr      x8, [x8, #0xb8]                       
+01022350  ldr      w8, [x8]                              
+01022354  ldr      x9, [x0, #0xb8]                       
+01022358  ldr      w9, [x9]                              
+0102235C  sub      w9, w9, #0x5dc                        
+01022360  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01022364  cmp      w8, #0x1e                             
+01022368  b.ne     #0x10223ac                            
+0102236C  adrp     x21, #0x236a000                       
+01022370  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01022374  ldr      x0, [x21]                             
+01022378  ldr      w8, [x0, #0xe0]                       
+0102237C  cbz      w8, #0x1022388                        
+01022380  mov      w8, #0x1e                             
+01022384  b        #0x102239c                            
+01022388  bl       #0xe61c80                             
+0102238C  ldr      x8, [x20]                             
+01022390  ldr      x0, [x21]                             
+01022394  ldr      x8, [x8, #0xb8]                       
+01022398  ldr      w8, [x8]                              
+0102239C  ldr      x9, [x0, #0xb8]                       
+010223A0  ldr      w9, [x9]                              
+010223A4  sub      w9, w9, #0x60e                        
+010223A8  str      w9, [x19, #0x1a8]                      // self.nivelPack
+010223AC  cmp      w8, #0x1f                             
+010223B0  b.ne     #0x10223f4                            
+010223B4  adrp     x21, #0x236a000                       
+010223B8  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010223BC  ldr      x0, [x21]                             
+010223C0  ldr      w8, [x0, #0xe0]                       
+010223C4  cbz      w8, #0x10223d0                        
+010223C8  mov      w8, #0x1f                             
+010223CC  b        #0x10223e4                            
+010223D0  bl       #0xe61c80                             
+010223D4  ldr      x8, [x20]                             
+010223D8  ldr      x0, [x21]                             
+010223DC  ldr      x8, [x8, #0xb8]                       
+010223E0  ldr      w8, [x8]                              
+010223E4  ldr      x9, [x0, #0xb8]                       
+010223E8  ldr      w9, [x9]                              
+010223EC  sub      w9, w9, #0x640                        
+010223F0  str      w9, [x19, #0x1a8]                      // self.nivelPack
+010223F4  cmp      w8, #0x20                             
+010223F8  b.ne     #0x102243c                            
+010223FC  adrp     x21, #0x236a000                       
+01022400  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01022404  ldr      x0, [x21]                             
+01022408  ldr      w8, [x0, #0xe0]                       
+0102240C  cbz      w8, #0x1022418                        
+01022410  mov      w8, #0x20                             
+01022414  b        #0x102242c                            
+01022418  bl       #0xe61c80                             
+0102241C  ldr      x8, [x20]                             
+01022420  ldr      x0, [x21]                             
+01022424  ldr      x8, [x8, #0xb8]                       
+01022428  ldr      w8, [x8]                              
+0102242C  ldr      x9, [x0, #0xb8]                       
+01022430  ldr      w9, [x9]                              
+01022434  sub      w9, w9, #0x672                        
+01022438  str      w9, [x19, #0x1a8]                      // self.nivelPack
+0102243C  cmp      w8, #0x21                             
+01022440  b.ne     #0x1022484                            
+01022444  adrp     x21, #0x236a000                       
+01022448  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102244C  ldr      x0, [x21]                             
+01022450  ldr      w8, [x0, #0xe0]                       
+01022454  cbz      w8, #0x1022460                        
+01022458  mov      w8, #0x21                             
+0102245C  b        #0x1022474                            
+01022460  bl       #0xe61c80                             
+01022464  ldr      x8, [x20]                             
+01022468  ldr      x0, [x21]                             
+0102246C  ldr      x8, [x8, #0xb8]                       
+01022470  ldr      w8, [x8]                              
+01022474  ldr      x9, [x0, #0xb8]                       
+01022478  ldr      w9, [x9]                              
+0102247C  sub      w9, w9, #0x6a4                        
+01022480  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01022484  cmp      w8, #0x22                             
+01022488  b.ne     #0x10224cc                            
+0102248C  adrp     x21, #0x236a000                       
+01022490  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01022494  ldr      x0, [x21]                             
+01022498  ldr      w8, [x0, #0xe0]                       
+0102249C  cbz      w8, #0x10224a8                        
+010224A0  mov      w8, #0x22                             
+010224A4  b        #0x10224bc                            
+010224A8  bl       #0xe61c80                             
+010224AC  ldr      x8, [x20]                             
+010224B0  ldr      x0, [x21]                             
+010224B4  ldr      x8, [x8, #0xb8]                       
+010224B8  ldr      w8, [x8]                              
+010224BC  ldr      x9, [x0, #0xb8]                       
+010224C0  ldr      w9, [x9]                              
+010224C4  sub      w9, w9, #0x6d6                        
+010224C8  str      w9, [x19, #0x1a8]                      // self.nivelPack
+010224CC  cmp      w8, #0x23                             
+010224D0  b.ne     #0x1022514                            
+010224D4  adrp     x21, #0x236a000                       
+010224D8  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010224DC  ldr      x0, [x21]                             
+010224E0  ldr      w8, [x0, #0xe0]                       
+010224E4  cbz      w8, #0x10224f0                        
+010224E8  mov      w8, #0x23                             
+010224EC  b        #0x1022504                            
+010224F0  bl       #0xe61c80                             
+010224F4  ldr      x8, [x20]                             
+010224F8  ldr      x0, [x21]                             
+010224FC  ldr      x8, [x8, #0xb8]                       
+01022500  ldr      w8, [x8]                              
+01022504  ldr      x9, [x0, #0xb8]                       
+01022508  ldr      w9, [x9]                              
+0102250C  sub      w9, w9, #0x708                        
+01022510  str      w9, [x19, #0x1a8]                      // self.nivelPack
+01022514  cmp      w8, #0x24                             
+01022518  b.ne     #0x102255c                            
+0102251C  adrp     x21, #0x236a000                       
+01022520  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01022524  ldr      x0, [x21]                             
+01022528  ldr      w8, [x0, #0xe0]                       
+0102252C  cbz      w8, #0x1022538                        
+01022530  mov      w8, #0x24                             
+01022534  b        #0x102254c                            
+01022538  bl       #0xe61c80                             
+0102253C  ldr      x8, [x20]                             
+01022540  ldr      x0, [x21]                             
+01022544  ldr      x8, [x8, #0xb8]                       
+01022548  ldr      w8, [x8]                              
+0102254C  ldr      x9, [x0, #0xb8]                       
+01022550  ldr      w9, [x9]                              
+01022554  sub      w9, w9, #0x73a                        
+01022558  str      w9, [x19, #0x1a8]                      // self.nivelPack
+0102255C  cmp      w8, #0x25                             
+01022560  b.ne     #0x10225a4                            
+01022564  adrp     x21, #0x236a000                       
+01022568  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102256C  ldr      x0, [x21]                             
+01022570  ldr      w8, [x0, #0xe0]                       
+01022574  cbz      w8, #0x1022580                        
+01022578  mov      w8, #0x25                             
+0102257C  b        #0x1022594                            
+01022580  bl       #0xe61c80                             
+01022584  ldr      x8, [x20]                             
+01022588  ldr      x0, [x21]                             
+0102258C  ldr      x8, [x8, #0xb8]                       
+01022590  ldr      w8, [x8]                              
+01022594  ldr      x9, [x0, #0xb8]                       
+01022598  ldr      w9, [x9]                              
+0102259C  sub      w9, w9, #0x76c                        
+010225A0  str      w9, [x19, #0x1a8]                      // self.nivelPack
+010225A4  cmp      w8, #0x26                             
+010225A8  b.ne     #0x10225ec                            
+010225AC  adrp     x21, #0x236a000                       
+010225B0  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010225B4  ldr      x0, [x21]                             
+010225B8  ldr      w8, [x0, #0xe0]                       
+010225BC  cbz      w8, #0x10225c8                        
+010225C0  mov      w8, #0x26                             
+010225C4  b        #0x10225dc                            
+010225C8  bl       #0xe61c80                             
+010225CC  ldr      x8, [x20]                             
+010225D0  ldr      x0, [x21]                             
+010225D4  ldr      x8, [x8, #0xb8]                       
+010225D8  ldr      w8, [x8]                              
+010225DC  ldr      x9, [x0, #0xb8]                       
+010225E0  ldr      w9, [x9]                              
+010225E4  sub      w9, w9, #0x79e                        
+010225E8  str      w9, [x19, #0x1a8]                      // self.nivelPack
+010225EC  cmp      w8, #0x27                             
+010225F0  b.ne     #0x1022620                            
+010225F4  adrp     x20, #0x236a000                       
+010225F8  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+010225FC  ldr      x0, [x20]                             
+01022600  ldr      w8, [x0, #0xe0]                       
+01022604  cbnz     w8, #0x1022610                        
+01022608  bl       #0xe61c80                             
+0102260C  ldr      x0, [x20]                             
+01022610  ldr      x8, [x0, #0xb8]                       
+01022614  ldr      w8, [x8]                              
+01022618  sub      w8, w8, #0x7d0                        
+0102261C  str      w8, [x19, #0x1a8]                      // self.nivelPack
+01022620  ldr      x0, [x19, #0x138]                      // self.NextButton
+01022624  cbz      x0, #0x102268c                        
+01022628  ldr      w8, [x19, #0x1a8]                      // self.nivelPack
+0102262C  cmp      w8, #0x32                             
+01022630  b.ne     #0x1022670                            
+01022634  mov      w1, wzr                               
+01022638  mov      x2, xzr                               
+0102263C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01022640  ldr      x0, [x19, #0xa0]                       // self.solutionButton
+01022644  cbz      x0, #0x102268c                        
+01022648  mov      w1, #1                                
+0102264C  mov      x2, xzr                               
+01022650  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01022654  ldr      x0, [x19, #0x140]                      // self.botonNumSol
+01022658  cbz      x0, #0x102268c                        
+0102265C  ldp      x20, x19, [sp, #0x10]                 
+01022660  mov      w1, #1                                
+01022664  mov      x2, xzr                               
+01022668  ldp      x30, x21, [sp], #0x20                 
+0102266C  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+01022670  mov      w1, #1                                
+01022674  mov      x2, xzr                               
+01022678  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0102267C  mov      x0, x19                               
+01022680  ldp      x20, x19, [sp, #0x10]                 
+01022684  ldp      x30, x21, [sp], #0x20                 
+01022688  b        #0x1022690                             // SaveLoadManager$$doCheckComplete
+0102268C  bl       #0xe61da0                             

@@ -1,0 +1,393 @@
+// CascadaTest$$doInstanciarSplash VA 0xFD2BD8, inferred length 1564
+void CascadaTest__doInstanciarSplash (CascadaTest_o* __this, const MethodInfo* method);
+00FD2BD8  stp      d15, d14, [sp, #-0x80]!               
+00FD2BDC  stp      d13, d12, [sp, #0x10]                 
+00FD2BE0  stp      d11, d10, [sp, #0x20]                 
+00FD2BE4  stp      d9, d8, [sp, #0x30]                   
+00FD2BE8  stp      x30, x25, [sp, #0x40]                 
+00FD2BEC  stp      x24, x23, [sp, #0x50]                 
+00FD2BF0  stp      x22, x21, [sp, #0x60]                 
+00FD2BF4  stp      x20, x19, [sp, #0x70]                 
+00FD2BF8  adrp     x20, #0x24fb000                       
+00FD2BFC  adrp     x24, #0x2368000                       
+00FD2C00  ldrb     w8, [x20, #0xb56]                     
+00FD2C04  ldr      x24, [x24, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD2C08  mov      x19, x0                               
+00FD2C0C  tbnz     w8, #0, #0xfd2c30                     
+00FD2C10  adrp     x0, #0x2368000                        
+00FD2C14  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FD2C18  bl       #0xe61b78                             
+00FD2C1C  adrp     x0, #0x2368000                        
+00FD2C20  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FD2C24  bl       #0xe61b78                             
+00FD2C28  mov      w8, #1                                
+00FD2C2C  strb     w8, [x20, #0xb56]                     
+00FD2C30  ldr      w8, [x19, #0x150]                      // self.altura
+00FD2C34  adrp     x9, #0x5ff000                         
+00FD2C38  adrp     x10, #0x600000                        
+00FD2C3C  adrp     x11, #0x600000                        
+00FD2C40  ldr      s1, [x9, #0xc5c]                      
+00FD2C44  ldr      s2, [x10, #0x8c]                      
+00FD2C48  ldr      s3, [x11, #0x10]                      
+00FD2C4C  fmov     s0, wzr                               
+00FD2C50  adrp     x9, #0x5ff000                         
+00FD2C54  cmp      w8, #1                                
+00FD2C58  adrp     x10, #0x5ff000                        
+00FD2C5C  fcsel    s1, s1, s0, eq                        
+00FD2C60  fcsel    s0, s2, s0, eq                        
+00FD2C64  ldr      s2, [x9, #0xf9c]                      
+00FD2C68  cmp      w8, #2                                
+00FD2C6C  fcsel    s1, s3, s1, eq                        
+00FD2C70  ldr      s3, [x10, #0xba0]                     
+00FD2C74  adrp     x9, #0x600000                         
+00FD2C78  fcsel    s0, s2, s0, eq                        
+00FD2C7C  cmp      w8, #3                                
+00FD2C80  fcsel    s1, s3, s1, eq                        
+00FD2C84  ldr      s3, [x9, #0x3c]                       
+00FD2C88  ldr      x0, [x24]                             
+00FD2C8C  adrp     x9, #0x600000                         
+00FD2C90  ldr      x20, [x19, #0x168]                     // self.splash
+00FD2C94  fcsel    s0, s3, s0, eq                        
+00FD2C98  ldr      s3, [x9, #0x1d8]                      
+00FD2C9C  ldr      w9, [x0, #0xe0]                       
+00FD2CA0  and      w8, w8, #0xfffffffe                   
+00FD2CA4  cmp      w8, #4                                
+00FD2CA8  fcsel    s9, s3, s1, eq                        
+00FD2CAC  fcsel    s8, s2, s0, eq                        
+00FD2CB0  cbnz     w9, #0xfd2cb8                         
+00FD2CB4  bl       #0xe61c80                             
+00FD2CB8  mov      x0, x20                               
+00FD2CBC  mov      x1, xzr                               
+00FD2CC0  mov      x2, xzr                               
+00FD2CC4  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FD2CC8  tbz      w0, #0, #0xfd2cec                     
+00FD2CCC  ldr      x0, [x24]                             
+00FD2CD0  ldr      x20, [x19, #0x168]                     // self.splash
+00FD2CD4  ldr      w8, [x0, #0xe0]                       
+00FD2CD8  cbnz     w8, #0xfd2ce0                         
+00FD2CDC  bl       #0xe61c80                             
+00FD2CE0  mov      x0, x20                               
+00FD2CE4  mov      x1, xzr                               
+00FD2CE8  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+00FD2CEC  adrp     x25, #0x2368000                       
+00FD2CF0  ldrb     w8, [x19, #0x108]                      // self.cascada1
+00FD2CF4  ldr      x25, [x25, #0x900]                     // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+00FD2CF8  adrp     x21, #0x5ff000                        
+00FD2CFC  adrp     x22, #0x5ff000                        
+00FD2D00  adrp     x23, #0x5ff000                        
+00FD2D04  cbz      w8, #0xfd2e2c                         
+00FD2D08  adrp     x8, #0x5ff000                         
+00FD2D0C  ldr      s10, [x8, #0xb20]                     
+00FD2D10  ldr      x20, [x19, #0xb0]                      // self.prefabSplash_1
+00FD2D14  fmov     s0, wzr                               
+00FD2D18  fmov     s2, wzr                               
+00FD2D1C  mov      v1.16b, v10.16b                       
+00FD2D20  mov      x0, xzr                               
+00FD2D24  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD2D28  ldr      x0, [x24]                             
+00FD2D2C  mov      v11.16b, v0.16b                       
+00FD2D30  mov      v12.16b, v1.16b                       
+00FD2D34  mov      v13.16b, v2.16b                       
+00FD2D38  ldr      w8, [x0, #0xe0]                       
+00FD2D3C  mov      v14.16b, v3.16b                       
+00FD2D40  cbnz     w8, #0xfd2d48                         
+00FD2D44  bl       #0xe61c80                             
+00FD2D48  ldr      x1, [x25]                             
+00FD2D4C  fmov     s2, wzr                               
+00FD2D50  mov      x0, x20                               
+00FD2D54  mov      v0.16b, v8.16b                        
+00FD2D58  mov      v1.16b, v9.16b                        
+00FD2D5C  mov      v3.16b, v11.16b                       
+00FD2D60  mov      v4.16b, v12.16b                       
+00FD2D64  mov      v5.16b, v13.16b                       
+00FD2D68  mov      v6.16b, v14.16b                       
+00FD2D6C  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FD2D70  str      x0, [x19, #0x168]                      // self.splash
+00FD2D74  cbz      x0, #0xfd31f0                         
+00FD2D78  mov      x1, xzr                               
+00FD2D7C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD2D80  mov      x20, x0                               
+00FD2D84  mov      x0, x19                               
+00FD2D88  mov      x1, xzr                               
+00FD2D8C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD2D90  cbz      x20, #0xfd31f0                        
+00FD2D94  mov      x1, x0                                
+00FD2D98  mov      x0, x20                               
+00FD2D9C  mov      x2, xzr                               
+00FD2DA0  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+00FD2DA4  ldr      x0, [x19, #0x168]                      // self.splash
+00FD2DA8  cbz      x0, #0xfd31f0                         
+00FD2DAC  mov      x1, xzr                               
+00FD2DB0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD2DB4  cbz      x0, #0xfd31f0                         
+00FD2DB8  fmov     s2, wzr                               
+00FD2DBC  mov      v0.16b, v8.16b                        
+00FD2DC0  mov      v1.16b, v9.16b                        
+00FD2DC4  mov      x1, xzr                               
+00FD2DC8  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD2DCC  ldr      x0, [x19, #0x168]                      // self.splash
+00FD2DD0  cbz      x0, #0xfd31f0                         
+00FD2DD4  mov      x1, xzr                               
+00FD2DD8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD2DDC  mov      x20, x0                               
+00FD2DE0  fmov     s0, wzr                               
+00FD2DE4  fmov     s2, wzr                               
+00FD2DE8  mov      v1.16b, v10.16b                       
+00FD2DEC  mov      x0, xzr                               
+00FD2DF0  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD2DF4  cbz      x20, #0xfd31f0                        
+00FD2DF8  mov      x0, x20                               
+00FD2DFC  mov      x1, xzr                               
+00FD2E00  bl       #0x200edcc                             // UnityEngine.Transform$$set_localRotation
+00FD2E04  ldr      x0, [x19, #0x168]                      // self.splash
+00FD2E08  cbz      x0, #0xfd31f0                         
+00FD2E0C  mov      x1, xzr                               
+00FD2E10  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD2E14  cbz      x0, #0xfd31f0                         
+00FD2E18  ldr      s0, [x21, #0xc60]                     
+00FD2E1C  ldr      s1, [x22, #0xafc]                     
+00FD2E20  ldr      s2, [x23, #0xc64]                     
+00FD2E24  mov      x1, xzr                               
+00FD2E28  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+00FD2E2C  ldrb     w8, [x19, #0x109]                      // self.cascada2
+00FD2E30  fneg     s10, s8                               
+00FD2E34  cbz      w8, #0xfd2f5c                         
+00FD2E38  adrp     x8, #0x5ff000                         
+00FD2E3C  ldr      s11, [x8, #0xe38]                     
+00FD2E40  ldr      x20, [x19, #0xb0]                      // self.prefabSplash_1
+00FD2E44  fmov     s0, wzr                               
+00FD2E48  fmov     s2, wzr                               
+00FD2E4C  mov      v1.16b, v11.16b                       
+00FD2E50  mov      x0, xzr                               
+00FD2E54  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD2E58  ldr      x0, [x24]                             
+00FD2E5C  mov      v12.16b, v0.16b                       
+00FD2E60  mov      v13.16b, v1.16b                       
+00FD2E64  mov      v14.16b, v2.16b                       
+00FD2E68  ldr      w8, [x0, #0xe0]                       
+00FD2E6C  mov      v15.16b, v3.16b                       
+00FD2E70  cbnz     w8, #0xfd2e78                         
+00FD2E74  bl       #0xe61c80                             
+00FD2E78  ldr      x1, [x25]                             
+00FD2E7C  fmov     s0, wzr                               
+00FD2E80  mov      x0, x20                               
+00FD2E84  mov      v1.16b, v9.16b                        
+00FD2E88  mov      v2.16b, v10.16b                       
+00FD2E8C  mov      v3.16b, v12.16b                       
+00FD2E90  mov      v4.16b, v13.16b                       
+00FD2E94  mov      v5.16b, v14.16b                       
+00FD2E98  mov      v6.16b, v15.16b                       
+00FD2E9C  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FD2EA0  str      x0, [x19, #0x168]                      // self.splash
+00FD2EA4  cbz      x0, #0xfd31f0                         
+00FD2EA8  mov      x1, xzr                               
+00FD2EAC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD2EB0  mov      x20, x0                               
+00FD2EB4  mov      x0, x19                               
+00FD2EB8  mov      x1, xzr                               
+00FD2EBC  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD2EC0  cbz      x20, #0xfd31f0                        
+00FD2EC4  mov      x1, x0                                
+00FD2EC8  mov      x0, x20                               
+00FD2ECC  mov      x2, xzr                               
+00FD2ED0  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+00FD2ED4  ldr      x0, [x19, #0x168]                      // self.splash
+00FD2ED8  cbz      x0, #0xfd31f0                         
+00FD2EDC  mov      x1, xzr                               
+00FD2EE0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD2EE4  cbz      x0, #0xfd31f0                         
+00FD2EE8  fmov     s0, wzr                               
+00FD2EEC  mov      v1.16b, v9.16b                        
+00FD2EF0  mov      v2.16b, v10.16b                       
+00FD2EF4  mov      x1, xzr                               
+00FD2EF8  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD2EFC  ldr      x0, [x19, #0x168]                      // self.splash
+00FD2F00  cbz      x0, #0xfd31f0                         
+00FD2F04  mov      x1, xzr                               
+00FD2F08  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD2F0C  mov      x20, x0                               
+00FD2F10  fmov     s0, wzr                               
+00FD2F14  fmov     s2, wzr                               
+00FD2F18  mov      v1.16b, v11.16b                       
+00FD2F1C  mov      x0, xzr                               
+00FD2F20  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD2F24  cbz      x20, #0xfd31f0                        
+00FD2F28  mov      x0, x20                               
+00FD2F2C  mov      x1, xzr                               
+00FD2F30  bl       #0x200edcc                             // UnityEngine.Transform$$set_localRotation
+00FD2F34  ldr      x0, [x19, #0x168]                      // self.splash
+00FD2F38  cbz      x0, #0xfd31f0                         
+00FD2F3C  mov      x1, xzr                               
+00FD2F40  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD2F44  cbz      x0, #0xfd31f0                         
+00FD2F48  ldr      s0, [x21, #0xc60]                     
+00FD2F4C  ldr      s1, [x22, #0xafc]                     
+00FD2F50  ldr      s2, [x23, #0xc64]                     
+00FD2F54  mov      x1, xzr                               
+00FD2F58  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+00FD2F5C  ldrb     w8, [x19, #0x10a]                      // self.cascada3
+00FD2F60  cbz      w8, #0xfd3080                         
+00FD2F64  ldr      x20, [x19, #0xb0]                      // self.prefabSplash_1
+00FD2F68  fmov     s0, wzr                               
+00FD2F6C  fmov     s1, wzr                               
+00FD2F70  fmov     s2, wzr                               
+00FD2F74  mov      x0, xzr                               
+00FD2F78  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD2F7C  ldr      x0, [x24]                             
+00FD2F80  mov      v11.16b, v0.16b                       
+00FD2F84  mov      v12.16b, v1.16b                       
+00FD2F88  mov      v13.16b, v2.16b                       
+00FD2F8C  ldr      w8, [x0, #0xe0]                       
+00FD2F90  mov      v14.16b, v3.16b                       
+00FD2F94  cbnz     w8, #0xfd2f9c                         
+00FD2F98  bl       #0xe61c80                             
+00FD2F9C  ldr      x1, [x25]                             
+00FD2FA0  fmov     s2, wzr                               
+00FD2FA4  mov      x0, x20                               
+00FD2FA8  mov      v0.16b, v10.16b                       
+00FD2FAC  mov      v1.16b, v9.16b                        
+00FD2FB0  mov      v3.16b, v11.16b                       
+00FD2FB4  mov      v4.16b, v12.16b                       
+00FD2FB8  mov      v5.16b, v13.16b                       
+00FD2FBC  mov      v6.16b, v14.16b                       
+00FD2FC0  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FD2FC4  str      x0, [x19, #0x168]                      // self.splash
+00FD2FC8  cbz      x0, #0xfd31f0                         
+00FD2FCC  mov      x1, xzr                               
+00FD2FD0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD2FD4  mov      x20, x0                               
+00FD2FD8  mov      x0, x19                               
+00FD2FDC  mov      x1, xzr                               
+00FD2FE0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD2FE4  cbz      x20, #0xfd31f0                        
+00FD2FE8  mov      x1, x0                                
+00FD2FEC  mov      x0, x20                               
+00FD2FF0  mov      x2, xzr                               
+00FD2FF4  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+00FD2FF8  ldr      x0, [x19, #0x168]                      // self.splash
+00FD2FFC  cbz      x0, #0xfd31f0                         
+00FD3000  mov      x1, xzr                               
+00FD3004  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD3008  cbz      x0, #0xfd31f0                         
+00FD300C  fmov     s2, wzr                               
+00FD3010  mov      v0.16b, v10.16b                       
+00FD3014  mov      v1.16b, v9.16b                        
+00FD3018  mov      x1, xzr                               
+00FD301C  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD3020  ldr      x0, [x19, #0x168]                      // self.splash
+00FD3024  cbz      x0, #0xfd31f0                         
+00FD3028  mov      x1, xzr                               
+00FD302C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD3030  mov      x20, x0                               
+00FD3034  fmov     s0, wzr                               
+00FD3038  fmov     s1, wzr                               
+00FD303C  fmov     s2, wzr                               
+00FD3040  mov      x0, xzr                               
+00FD3044  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD3048  cbz      x20, #0xfd31f0                        
+00FD304C  mov      x0, x20                               
+00FD3050  mov      x1, xzr                               
+00FD3054  bl       #0x200edcc                             // UnityEngine.Transform$$set_localRotation
+00FD3058  ldr      x0, [x19, #0x168]                      // self.splash
+00FD305C  cbz      x0, #0xfd31f0                         
+00FD3060  mov      x1, xzr                               
+00FD3064  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD3068  cbz      x0, #0xfd31f0                         
+00FD306C  ldr      s0, [x21, #0xc60]                     
+00FD3070  ldr      s1, [x22, #0xafc]                     
+00FD3074  ldr      s2, [x23, #0xc64]                     
+00FD3078  mov      x1, xzr                               
+00FD307C  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+00FD3080  ldrb     w8, [x19, #0x10b]                      // self.cascada4
+00FD3084  cbz      w8, #0xfd31cc                         
+00FD3088  adrp     x8, #0x5ff000                         
+00FD308C  ldr      s10, [x8, #0xe08]                     
+00FD3090  ldr      x20, [x19, #0xb0]                      // self.prefabSplash_1
+00FD3094  fmov     s0, wzr                               
+00FD3098  fmov     s2, wzr                               
+00FD309C  mov      v1.16b, v10.16b                       
+00FD30A0  mov      x0, xzr                               
+00FD30A4  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD30A8  ldr      x0, [x24]                             
+00FD30AC  mov      v11.16b, v0.16b                       
+00FD30B0  mov      v12.16b, v1.16b                       
+00FD30B4  mov      v13.16b, v2.16b                       
+00FD30B8  ldr      w8, [x0, #0xe0]                       
+00FD30BC  mov      v14.16b, v3.16b                       
+00FD30C0  cbnz     w8, #0xfd30c8                         
+00FD30C4  bl       #0xe61c80                             
+00FD30C8  ldr      x1, [x25]                             
+00FD30CC  fmov     s0, wzr                               
+00FD30D0  mov      x0, x20                               
+00FD30D4  mov      v1.16b, v9.16b                        
+00FD30D8  mov      v2.16b, v8.16b                        
+00FD30DC  mov      v3.16b, v11.16b                       
+00FD30E0  mov      v4.16b, v12.16b                       
+00FD30E4  mov      v5.16b, v13.16b                       
+00FD30E8  mov      v6.16b, v14.16b                       
+00FD30EC  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+00FD30F0  str      x0, [x19, #0x168]                      // self.splash
+00FD30F4  cbz      x0, #0xfd31f0                         
+00FD30F8  mov      x1, xzr                               
+00FD30FC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD3100  mov      x20, x0                               
+00FD3104  mov      x0, x19                               
+00FD3108  mov      x1, xzr                               
+00FD310C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FD3110  cbz      x20, #0xfd31f0                        
+00FD3114  mov      x1, x0                                
+00FD3118  mov      x0, x20                               
+00FD311C  mov      x2, xzr                               
+00FD3120  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+00FD3124  ldr      x0, [x19, #0x168]                      // self.splash
+00FD3128  cbz      x0, #0xfd31f0                         
+00FD312C  mov      x1, xzr                               
+00FD3130  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD3134  cbz      x0, #0xfd31f0                         
+00FD3138  fmov     s0, wzr                               
+00FD313C  mov      v1.16b, v9.16b                        
+00FD3140  mov      v2.16b, v8.16b                        
+00FD3144  mov      x1, xzr                               
+00FD3148  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD314C  ldr      x0, [x19, #0x168]                      // self.splash
+00FD3150  cbz      x0, #0xfd31f0                         
+00FD3154  mov      x1, xzr                               
+00FD3158  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD315C  mov      x20, x0                               
+00FD3160  fmov     s0, wzr                               
+00FD3164  fmov     s2, wzr                               
+00FD3168  mov      v1.16b, v10.16b                       
+00FD316C  mov      x0, xzr                               
+00FD3170  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD3174  cbz      x20, #0xfd31f0                        
+00FD3178  mov      x0, x20                               
+00FD317C  mov      x1, xzr                               
+00FD3180  bl       #0x200edcc                             // UnityEngine.Transform$$set_localRotation
+00FD3184  ldr      x0, [x19, #0x168]                      // self.splash
+00FD3188  cbz      x0, #0xfd31f0                         
+00FD318C  mov      x1, xzr                               
+00FD3190  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD3194  cbz      x0, #0xfd31f0                         
+00FD3198  ldr      s0, [x21, #0xc60]                     
+00FD319C  ldr      s1, [x22, #0xafc]                     
+00FD31A0  ldr      s2, [x23, #0xc64]                     
+00FD31A4  ldp      x20, x19, [sp, #0x70]                 
+00FD31A8  ldp      x22, x21, [sp, #0x60]                 
+00FD31AC  ldp      x24, x23, [sp, #0x50]                 
+00FD31B0  ldp      x30, x25, [sp, #0x40]                 
+00FD31B4  ldp      d9, d8, [sp, #0x30]                   
+00FD31B8  ldp      d11, d10, [sp, #0x20]                 
+00FD31BC  ldp      d13, d12, [sp, #0x10]                 
+00FD31C0  mov      x1, xzr                               
+00FD31C4  ldp      d15, d14, [sp], #0x80                 
+00FD31C8  b        #0x200f138                             // UnityEngine.Transform$$set_localScale
+00FD31CC  ldp      x20, x19, [sp, #0x70]                 
+00FD31D0  ldp      x22, x21, [sp, #0x60]                 
+00FD31D4  ldp      x24, x23, [sp, #0x50]                 
+00FD31D8  ldp      x30, x25, [sp, #0x40]                 
+00FD31DC  ldp      d9, d8, [sp, #0x30]                   
+00FD31E0  ldp      d11, d10, [sp, #0x20]                 
+00FD31E4  ldp      d13, d12, [sp, #0x10]                 
+00FD31E8  ldp      d15, d14, [sp], #0x80                 
+00FD31EC  ret                                            
+00FD31F0  bl       #0xe61da0                             

@@ -1,0 +1,145 @@
+// UIManagerSelScript0$$CheckMostrarPopupSpinBall VA 0x10478DC, inferred length 572
+void UIManagerSelScript0__CheckMostrarPopupSpinBall (UIManagerSelScript0_o* __this, const MethodInfo* method);
+010478DC  sub      sp, sp, #0x30                         
+010478E0  stp      x30, x21, [sp, #0x10]                 
+010478E4  stp      x20, x19, [sp, #0x20]                 
+010478E8  adrp     x20, #0x24fb000                       
+010478EC  ldrb     w8, [x20, #0xd89]                     
+010478F0  mov      x19, x0                               
+010478F4  tbnz     w8, #0, #0x1047954                    
+010478F8  adrp     x0, #0x2368000                        
+010478FC  ldr      x0, [x0, #0x290]                       // [0x2368290] bool_TypeInfo
+01047900  bl       #0xe61b78                             
+01047904  adrp     x0, #0x2368000                        
+01047908  ldr      x0, [x0, #0x178]                       // [0x2368178] UnityEngine.Debug_TypeInfo
+0104790C  bl       #0xe61b78                             
+01047910  adrp     x0, #0x236c000                        
+01047914  ldr      x0, [x0, #0x4e0]                       // [0x236C4E0] Method$UnityEngine.GameObject.GetComponentInChildren<Animator>()
+01047918  bl       #0xe61b78                             
+0104791C  adrp     x0, #0x236c000                        
+01047920  ldr      x0, [x0, #0x4e8]                       // [0x236C4E8] Method$UnityEngine.GameObject.GetComponent<RectTransform>()
+01047924  bl       #0xe61b78                             
+01047928  adrp     x0, #0x236c000                        
+0104792C  ldr      x0, [x0, #0x4f0]                       // [0x236C4F0] 'popupNoMore'
+01047930  bl       #0xe61b78                             
+01047934  adrp     x0, #0x236c000                        
+01047938  ldr      x0, [x0, #0x4f8]                       // [0x236C4F8] 'tagu001 IsSpinBallInstalled() '
+0104793C  bl       #0xe61b78                             
+01047940  adrp     x0, #0x236c000                        
+01047944  ldr      x0, [x0, #0x500]                       // [0x236C500] 'an_sb'
+01047948  bl       #0xe61b78                             
+0104794C  mov      w8, #1                                
+01047950  strb     w8, [x20, #0xd89]                     
+01047954  ldr      w8, [x19, #0x198]                      // self.accesoAllGame
+01047958  cmp      w8, #1                                
+0104795C  b.ne     #0x1047970                            
+01047960  ldr      w8, [x19, #0x658]                      // self.packsFinished
+01047964  cmp      w8, #0xc                              
+01047968  b.ge     #0x1047978                            
+0104796C  b        #0x1047b04                            
+01047970  bl       #0x1047eb8                             // UIManagerSelScript0$$EsPaisObjetivo
+01047974  tbz      w0, #0, #0x1047b04                    
+01047978  adrp     x8, #0x236c000                        
+0104797C  ldr      x8, [x8, #0x4f0]                       // [0x236C4F0] 'popupNoMore'
+01047980  mov      w1, wzr                               
+01047984  mov      x2, xzr                               
+01047988  ldr      x0, [x8]                              
+0104798C  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+01047990  orr      w8, w0, #2                            
+01047994  cmp      w8, #2                                
+01047998  b.ne     #0x1047b04                            
+0104799C  mov      w20, w0                               
+010479A0  bl       #0x1047b50                             // UIManagerSelScript0$$IsSpinBallInstalled
+010479A4  adrp     x8, #0x2368000                        
+010479A8  ldr      x8, [x8, #0x290]                       // [0x2368290] bool_TypeInfo
+010479AC  and      w9, w0, #1                            
+010479B0  strb     w9, [sp, #0xc]                        
+010479B4  ldr      x8, [x8]                              
+010479B8  ldr      w9, [x8, #0xe0]                       
+010479BC  cbnz     w9, #0x10479c8                        
+010479C0  mov      x0, x8                                
+010479C4  bl       #0xe61c80                             
+010479C8  add      x0, sp, #0xc                          
+010479CC  mov      x1, xzr                               
+010479D0  bl       #0x1a4b628                             // System.Boolean$$ToString
+010479D4  adrp     x8, #0x236c000                        
+010479D8  ldr      x8, [x8, #0x4f8]                       // [0x236C4F8] 'tagu001 IsSpinBallInstalled() '
+010479DC  mov      x1, x0                                
+010479E0  mov      x2, xzr                               
+010479E4  ldr      x8, [x8]                              
+010479E8  mov      x0, x8                                
+010479EC  bl       #0x1958280                             // System.String$$Concat
+010479F0  adrp     x8, #0x2368000                        
+010479F4  ldr      x8, [x8, #0x178]                       // [0x2368178] UnityEngine.Debug_TypeInfo
+010479F8  mov      x21, x0                               
+010479FC  ldr      x8, [x8]                              
+01047A00  ldr      w9, [x8, #0xe0]                       
+01047A04  cbnz     w9, #0x1047a10                        
+01047A08  mov      x0, x8                                
+01047A0C  bl       #0xe61c80                             
+01047A10  mov      x0, x21                               
+01047A14  mov      x1, xzr                               
+01047A18  bl       #0x1fe3034                             // UnityEngine.Debug$$Log
+01047A1C  bl       #0x1047b50                             // UIManagerSelScript0$$IsSpinBallInstalled
+01047A20  tbnz     w0, #0, #0x1047b04                    
+01047A24  ldrb     w8, [x19, #0x5c8]                      // self.esTablet
+01047A28  cbz      w8, #0x1047a84                        
+01047A2C  ldr      x0, [x19, #0x640]                      // self.iconSpinBall
+01047A30  cbz      x0, #0x1047b14                        
+01047A34  adrp     x8, #0x236c000                        
+01047A38  ldr      x8, [x8, #0x4e8]                       // [0x236C4E8] Method$UnityEngine.GameObject.GetComponent<RectTransform>()
+01047A3C  ldr      x1, [x8]                              
+01047A40  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01047A44  cbz      x0, #0x1047b14                        
+01047A48  mov      x1, xzr                               
+01047A4C  mov      x21, x0                               
+01047A50  bl       #0x200e0b4                             // UnityEngine.RectTransform$$get_offsetMin
+01047A54  fmov     s1, wzr                               
+01047A58  mov      x0, x21                               
+01047A5C  mov      x1, xzr                               
+01047A60  bl       #0x200e29c                             // UnityEngine.RectTransform$$set_offsetMax
+01047A64  mov      x0, x21                               
+01047A68  mov      x1, xzr                               
+01047A6C  bl       #0x200e0b4                             // UnityEngine.RectTransform$$get_offsetMin
+01047A70  mov      w8, #0x42480000                       
+01047A74  fmov     s1, w8                                
+01047A78  mov      x0, x21                               
+01047A7C  mov      x1, xzr                               
+01047A80  bl       #0x200e108                             // UnityEngine.RectTransform$$set_offsetMin
+01047A84  ldr      x0, [x19, #0x640]                      // self.iconSpinBall
+01047A88  cbz      x0, #0x1047b14                        
+01047A8C  mov      w1, #1                                
+01047A90  mov      x2, xzr                               
+01047A94  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01047A98  ldr      x0, [x19, #0x640]                      // self.iconSpinBall
+01047A9C  cbz      x0, #0x1047b14                        
+01047AA0  adrp     x8, #0x236c000                        
+01047AA4  ldr      x8, [x8, #0x4e0]                       // [0x236C4E0] Method$UnityEngine.GameObject.GetComponentInChildren<Animator>()
+01047AA8  mov      w1, #1                                
+01047AAC  ldr      x2, [x8]                              
+01047AB0  bl       #0x1162378                             // UnityEngine.GameObject$$GetComponentInChildren<object>
+01047AB4  cbz      x0, #0x1047b14                        
+01047AB8  mov      x19, x0                               
+01047ABC  cbz      w20, #0x1047ad4                       
+01047AC0  mov      x0, x19                               
+01047AC4  mov      w1, wzr                               
+01047AC8  mov      x2, xzr                               
+01047ACC  bl       #0x2002f88                             // UnityEngine.Behaviour$$set_enabled
+01047AD0  b        #0x1047b04                            
+01047AD4  mov      w1, #1                                
+01047AD8  mov      x0, x19                               
+01047ADC  mov      x2, xzr                               
+01047AE0  bl       #0x2002f88                             // UnityEngine.Behaviour$$set_enabled
+01047AE4  adrp     x8, #0x236c000                        
+01047AE8  ldr      x8, [x8, #0x500]                       // [0x236C500] 'an_sb'
+01047AEC  fmov     s0, wzr                               
+01047AF0  mov      x0, x19                               
+01047AF4  mov      w2, wzr                               
+01047AF8  ldr      x1, [x8]                              
+01047AFC  mov      x3, xzr                               
+01047B00  bl       #0x1fdb684                             // UnityEngine.Animator$$Play
+01047B04  ldp      x20, x19, [sp, #0x20]                 
+01047B08  ldp      x30, x21, [sp, #0x10]                 
+01047B0C  add      sp, sp, #0x30                         
+01047B10  ret                                            
+01047B14  bl       #0xe61da0                             

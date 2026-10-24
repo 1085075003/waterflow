@@ -1,0 +1,65 @@
+// AguasControl3$$CheckCollision2 VA 0xFCC250, inferred length 252
+bool AguasControl3__CheckCollision2 (AguasControl3_o* __this, float distan_x, float distan_z, const MethodInfo* method);
+00FCC250  stp      d11, d10, [sp, #-0x40]!               
+00FCC254  stp      d9, d8, [sp, #0x10]                   
+00FCC258  str      x30, [sp, #0x20]                      
+00FCC25C  stp      x20, x19, [sp, #0x30]                 
+00FCC260  adrp     x20, #0x24fb000                       
+00FCC264  ldrb     w8, [x20, #0xb3f]                     
+00FCC268  mov      v8.16b, v1.16b                        
+00FCC26C  mov      v9.16b, v0.16b                        
+00FCC270  mov      x19, x0                               
+00FCC274  tbnz     w8, #0, #0xfcc28c                     
+00FCC278  adrp     x0, #0x2368000                        
+00FCC27C  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FCC280  bl       #0xe61b78                             
+00FCC284  mov      w8, #1                                
+00FCC288  strb     w8, [x20, #0xb3f]                     
+00FCC28C  mov      x0, x19                               
+00FCC290  mov      x1, xzr                               
+00FCC294  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FCC298  cbz      x0, #0xfcc348                         
+00FCC29C  mov      x1, xzr                               
+00FCC2A0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FCC2A4  mov      x0, x19                               
+00FCC2A8  mov      x1, xzr                               
+00FCC2AC  mov      v11.16b, v0.16b                       
+00FCC2B0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FCC2B4  cbz      x0, #0xfcc348                         
+00FCC2B8  mov      x1, xzr                               
+00FCC2BC  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FCC2C0  mov      x0, x19                               
+00FCC2C4  mov      x1, xzr                               
+00FCC2C8  mov      v10.16b, v1.16b                       
+00FCC2CC  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FCC2D0  cbz      x0, #0xfcc348                         
+00FCC2D4  adrp     x20, #0x2368000                       
+00FCC2D8  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FCC2DC  mov      x1, xzr                               
+00FCC2E0  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FCC2E4  ldr      w0, [x19, #0x74]                       // self.mascaraObjeto
+00FCC2E8  fadd     s9, s11, s9                           
+00FCC2EC  ldr      s11, [x19, #0x84]                      // self.sphereRadius
+00FCC2F0  fadd     s8, s2, s8                            
+00FCC2F4  mov      x1, xzr                               
+00FCC2F8  stp      s9, s10, [x19, #0x78]                  // self.vector2
+00FCC2FC  str      s8, [x19, #0x80]                      
+00FCC300  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+00FCC304  ldr      x8, [x20]                             
+00FCC308  mov      w19, w0                               
+00FCC30C  ldr      w9, [x8, #0xe0]                       
+00FCC310  cbnz     w9, #0xfcc31c                         
+00FCC314  mov      x0, x8                                
+00FCC318  bl       #0xe61c80                             
+00FCC31C  mov      v0.16b, v9.16b                        
+00FCC320  mov      v2.16b, v8.16b                        
+00FCC324  mov      w0, w19                               
+00FCC328  ldp      x20, x19, [sp, #0x30]                 
+00FCC32C  ldr      x30, [sp, #0x20]                      
+00FCC330  ldp      d9, d8, [sp, #0x10]                   
+00FCC334  mov      v1.16b, v10.16b                       
+00FCC338  mov      v3.16b, v11.16b                       
+00FCC33C  mov      x1, xzr                               
+00FCC340  ldp      d11, d10, [sp], #0x40                 
+00FCC344  b        #0x20409e0                             // UnityEngine.Physics$$CheckSphere
+00FCC348  bl       #0xe61da0                             

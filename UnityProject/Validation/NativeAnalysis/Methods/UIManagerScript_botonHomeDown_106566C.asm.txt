@@ -1,0 +1,74 @@
+// UIManagerScript$$botonHomeDown VA 0x106566C, inferred length 288
+void UIManagerScript__botonHomeDown (UIManagerScript_o* __this, const MethodInfo* method);
+0106566C  stp      x30, x21, [sp, #-0x20]!               
+01065670  stp      x20, x19, [sp, #0x10]                 
+01065674  adrp     x20, #0x24fb000                       
+01065678  adrp     x21, #0x236a000                       
+0106567C  ldrb     w8, [x20, #0xe43]                     
+01065680  ldr      x21, [x21, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+01065684  mov      x19, x0                               
+01065688  tbnz     w8, #0, #0x10656ac                    
+0106568C  adrp     x0, #0x236a000                        
+01065690  ldr      x0, [x0, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01065694  bl       #0xe61b78                             
+01065698  adrp     x0, #0x236a000                        
+0106569C  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010656A0  bl       #0xe61b78                             
+010656A4  mov      w8, #1                                
+010656A8  strb     w8, [x20, #0xe43]                     
+010656AC  ldr      x8, [x21]                             
+010656B0  mov      w9, #1                                
+010656B4  ldr      x8, [x8, #0xb8]                       
+010656B8  str      w9, [x8, #0xb4]                       
+010656BC  ldr      x0, [x19, #0x70]                       // self.audioManager
+010656C0  cbz      x0, #0x1065788                        
+010656C4  ldr      x1, [x19, #0x50]                       // self.click
+010656C8  mov      x2, xzr                               
+010656CC  bl       #0x1028540                             // AudioManager$$PlaySound
+010656D0  ldr      x0, [x19, #0x180]                      // self.homeButton
+010656D4  cbz      x0, #0x1065788                        
+010656D8  adrp     x20, #0x236a000                       
+010656DC  ldr      x20, [x20, #0xf48]                     // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+010656E0  ldr      x1, [x20]                             
+010656E4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010656E8  cbz      x0, #0x1065788                        
+010656EC  mov      w1, wzr                               
+010656F0  mov      x2, xzr                               
+010656F4  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+010656F8  ldr      x0, [x19, #0x188]                      // self.home1Button
+010656FC  cbz      x0, #0x1065788                        
+01065700  ldr      x1, [x20]                             
+01065704  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01065708  cbz      x0, #0x1065788                        
+0106570C  mov      w1, wzr                               
+01065710  mov      x2, xzr                               
+01065714  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01065718  ldr      x0, [x19, #0x190]                      // self.menuButton
+0106571C  cbz      x0, #0x1065788                        
+01065720  ldr      x1, [x20]                             
+01065724  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01065728  cbz      x0, #0x1065788                        
+0106572C  mov      w1, wzr                               
+01065730  mov      x2, xzr                               
+01065734  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01065738  ldr      x0, [x19, #0xc0]                       // self.nextButton
+0106573C  cbz      x0, #0x1065788                        
+01065740  ldr      x1, [x20]                             
+01065744  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01065748  cbz      x0, #0x1065788                        
+0106574C  mov      w1, wzr                               
+01065750  mov      x2, xzr                               
+01065754  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01065758  ldr      x0, [x19, #0x198]                      // self.next1Button
+0106575C  cbz      x0, #0x1065788                        
+01065760  ldr      x1, [x20]                             
+01065764  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01065768  cbz      x0, #0x1065788                        
+0106576C  mov      w1, wzr                               
+01065770  mov      x2, xzr                               
+01065774  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01065778  mov      x0, x19                               
+0106577C  ldp      x20, x19, [sp, #0x10]                 
+01065780  ldp      x30, x21, [sp], #0x20                 
+01065784  b        #0x10652dc                             // UIManagerScript$$doInterstitial
+01065788  bl       #0xe61da0                             

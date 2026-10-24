@@ -1,0 +1,255 @@
+// MoveBloque$$doProcessMoveSolu VA 0x10352BC, inferred length 1012
+void MoveBloque__doProcessMoveSolu (MoveBloque_o* __this, const MethodInfo* method);
+010352BC  str      d14, [sp, #-0x60]!                    
+010352C0  stp      d13, d12, [sp, #8]                    
+010352C4  stp      d11, d10, [sp, #0x18]                 
+010352C8  stp      d9, d8, [sp, #0x28]                   
+010352CC  str      x30, [sp, #0x38]                      
+010352D0  stp      x22, x21, [sp, #0x40]                 
+010352D4  stp      x20, x19, [sp, #0x50]                 
+010352D8  adrp     x20, #0x24fb000                       
+010352DC  ldrb     w8, [x20, #0xd33]                     
+010352E0  mov      x19, x0                               
+010352E4  tbnz     w8, #0, #0x10352fc                    
+010352E8  adrp     x0, #0x236a000                        
+010352EC  ldr      x0, [x0, #0x618]                       // [0x236A618] 'bloque'
+010352F0  bl       #0xe61b78                             
+010352F4  mov      w8, #1                                
+010352F8  strb     w8, [x20, #0xd33]                     
+010352FC  ldr      x0, [x19, #0x30]                       // self.getTarget
+01035300  cbz      x0, #0x10356ac                        
+01035304  mov      x1, xzr                               
+01035308  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0103530C  cbz      x0, #0x10356ac                        
+01035310  mov      x1, xzr                               
+01035314  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+01035318  ldr      x8, [x19, #0x30]                       // self.getTarget
+0103531C  cbz      x8, #0x10356ac                        
+01035320  mov      x20, x0                               
+01035324  mov      x0, x8                                
+01035328  mov      x1, xzr                               
+0103532C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01035330  cbz      x0, #0x10356ac                        
+01035334  mov      x1, xzr                               
+01035338  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+0103533C  cbz      x0, #0x10356ac                        
+01035340  mov      x1, xzr                               
+01035344  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+01035348  ldp      s11, s12, [x19, #0xb8]                 // self.hitPosition1
+0103534C  ldr      s13, [x19, #0xc0]                     
+01035350  ldr      s14, [x19, #0xd0]                      // self.smoothSpeed3
+01035354  mov      x0, xzr                               
+01035358  mov      v8.16b, v0.16b                        
+0103535C  mov      v9.16b, v1.16b                        
+01035360  mov      v10.16b, v2.16b                       
+01035364  bl       #0x1ffb6c8                             // UnityEngine.Time$$get_deltaTime
+01035368  fmul     s0, s14, s0                           
+0103536C  fmov     s1, #1.00000000                       
+01035370  fmin     s1, s0, s1                            
+01035374  fcmp     s0, #0.0                              
+01035378  fmov     s0, wzr                               
+0103537C  fcsel    s0, s1, s0, pl                        
+01035380  cbz      x20, #0x10356ac                       
+01035384  fsub     s1, s13, s10                          
+01035388  fsub     s2, s12, s9                           
+0103538C  fsub     s3, s11, s8                           
+01035390  fmul     s1, s1, s0                            
+01035394  fmul     s4, s2, s0                            
+01035398  fmul     s0, s3, s0                            
+0103539C  fadd     s2, s10, s1                           
+010353A0  fadd     s1, s9, s4                            
+010353A4  fadd     s0, s8, s0                            
+010353A8  mov      x0, x20                               
+010353AC  mov      x1, xzr                               
+010353B0  bl       #0x200ea50                             // UnityEngine.Transform$$set_position
+010353B4  ldr      x0, [x19, #0x30]                       // self.getTarget
+010353B8  cbz      x0, #0x10356ac                        
+010353BC  mov      x1, xzr                               
+010353C0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010353C4  cbz      x0, #0x10356ac                        
+010353C8  mov      x1, xzr                               
+010353CC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010353D0  cbz      x0, #0x10356ac                        
+010353D4  mov      x1, xzr                               
+010353D8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010353DC  adrp     x21, #0x24fb000                       
+010353E0  ldp      s11, s12, [x19, #0xb8]                 // self.hitPosition1
+010353E4  ldrb     w8, [x21, #0x8ae]                     
+010353E8  ldr      s13, [x19, #0xc0]                     
+010353EC  mov      v8.16b, v0.16b                        
+010353F0  mov      v9.16b, v1.16b                        
+010353F4  mov      v10.16b, v2.16b                       
+010353F8  cbnz     w8, #0x1035410                        
+010353FC  adrp     x0, #0x2368000                        
+01035400  ldr      x0, [x0, #0x4d0]                       // [0x23684D0] System.Math_TypeInfo
+01035404  bl       #0xe61b78                             
+01035408  mov      w8, #1                                
+0103540C  strb     w8, [x21, #0x8ae]                     
+01035410  adrp     x22, #0x2368000                       
+01035414  ldr      x22, [x22, #0x4d0]                     // [0x23684D0] System.Math_TypeInfo
+01035418  fsub     s11, s8, s11                          
+0103541C  fsub     s9, s9, s12                           
+01035420  fsub     s8, s10, s13                          
+01035424  ldr      x0, [x22]                             
+01035428  ldr      w8, [x0, #0xe0]                       
+0103542C  cbnz     w8, #0x1035434                        
+01035430  bl       #0xe61c80                             
+01035434  fmul     s0, s11, s11                          
+01035438  fmul     s1, s9, s9                            
+0103543C  adrp     x8, #0x5ff000                         
+01035440  fadd     s0, s0, s1                            
+01035444  ldr      s1, [x8, #0xccc]                      
+01035448  fmul     s2, s8, s8                            
+0103544C  fadd     s0, s2, s0                            
+01035450  fsqrt    s0, s0                                
+01035454  fcmp     s0, s1                                
+01035458  b.pl     #0x1035488                            
+0103545C  adrp     x8, #0x236a000                        
+01035460  ldr      x20, [x19, #0x30]                      // self.getTarget
+01035464  ldr      x8, [x8, #0x618]                       // [0x236A618] 'bloque'
+01035468  mov      x1, xzr                               
+0103546C  ldr      x0, [x8]                              
+01035470  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+01035474  cbz      x20, #0x10356ac                       
+01035478  mov      w1, w0                                
+0103547C  mov      x0, x20                               
+01035480  mov      x2, xzr                               
+01035484  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+01035488  ldr      w8, [x19, #0x388]                      // self.faseSol
+0103548C  cmp      w8, #3                                
+01035490  b.ne     #0x1035550                            
+01035494  ldr      x0, [x19, #0x30]                       // self.getTarget
+01035498  cbz      x0, #0x10356ac                        
+0103549C  mov      x1, xzr                               
+010354A0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010354A4  cbz      x0, #0x10356ac                        
+010354A8  mov      x1, xzr                               
+010354AC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010354B0  cbz      x0, #0x10356ac                        
+010354B4  mov      x1, xzr                               
+010354B8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010354BC  ldp      s11, s12, [x19, #0xb8]                 // self.hitPosition1
+010354C0  ldrb     w8, [x21, #0x8ae]                     
+010354C4  ldr      s13, [x19, #0xc0]                     
+010354C8  mov      v8.16b, v0.16b                        
+010354CC  mov      v9.16b, v1.16b                        
+010354D0  mov      v10.16b, v2.16b                       
+010354D4  cbnz     w8, #0x10354ec                        
+010354D8  adrp     x0, #0x2368000                        
+010354DC  ldr      x0, [x0, #0x4d0]                       // [0x23684D0] System.Math_TypeInfo
+010354E0  bl       #0xe61b78                             
+010354E4  mov      w8, #1                                
+010354E8  strb     w8, [x21, #0x8ae]                     
+010354EC  ldr      x0, [x22]                             
+010354F0  fsub     s11, s8, s11                          
+010354F4  fsub     s9, s9, s12                           
+010354F8  fsub     s8, s10, s13                          
+010354FC  ldr      w8, [x0, #0xe0]                       
+01035500  cbnz     w8, #0x1035508                        
+01035504  bl       #0xe61c80                             
+01035508  fmul     s0, s11, s11                          
+0103550C  fmul     s1, s9, s9                            
+01035510  fmul     s2, s8, s8                            
+01035514  fadd     s0, s0, s1                            
+01035518  fadd     s0, s2, s0                            
+0103551C  fsqrt    s0, s0                                
+01035520  fmov     s1, #0.50000000                       
+01035524  fcmp     s0, s1                                
+01035528  b.pl     #0x1035550                            
+0103552C  ldrb     w8, [x19, #0x23d]                      // self.noDesbloqueado
+01035530  cbz      w8, #0x1035550                        
+01035534  mov      x0, x19                               
+01035538  bl       #0x10314ec                             // MoveBloque$$doDesbloquearCascadasTarget
+0103553C  ldr      x0, [x19, #0x410]                      // self.audioManager
+01035540  cbz      x0, #0x10356ac                        
+01035544  ldr      x1, [x19, #0x288]                      // self.SoundBlock
+01035548  bl       #0x1028540                             // AudioManager$$PlaySound
+0103554C  strb     wzr, [x19, #0x23d]                     // self.noDesbloqueado
+01035550  ldr      x0, [x19, #0x30]                       // self.getTarget
+01035554  cbz      x0, #0x10356ac                        
+01035558  mov      x1, xzr                               
+0103555C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01035560  cbz      x0, #0x10356ac                        
+01035564  mov      x1, xzr                               
+01035568  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+0103556C  cbz      x0, #0x10356ac                        
+01035570  mov      x1, xzr                               
+01035574  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+01035578  ldp      s11, s12, [x19, #0xb8]                 // self.hitPosition1
+0103557C  ldrb     w8, [x21, #0x8ae]                     
+01035580  ldr      s13, [x19, #0xc0]                     
+01035584  mov      v8.16b, v0.16b                        
+01035588  mov      v9.16b, v1.16b                        
+0103558C  mov      v10.16b, v2.16b                       
+01035590  cbnz     w8, #0x10355a8                        
+01035594  adrp     x0, #0x2368000                        
+01035598  ldr      x0, [x0, #0x4d0]                       // [0x23684D0] System.Math_TypeInfo
+0103559C  bl       #0xe61b78                             
+010355A0  mov      w8, #1                                
+010355A4  strb     w8, [x21, #0x8ae]                     
+010355A8  ldr      x0, [x22]                             
+010355AC  fsub     s11, s8, s11                          
+010355B0  fsub     s9, s9, s12                           
+010355B4  fsub     s8, s10, s13                          
+010355B8  ldr      w8, [x0, #0xe0]                       
+010355BC  cbnz     w8, #0x10355c4                        
+010355C0  bl       #0xe61c80                             
+010355C4  fmul     s0, s11, s11                          
+010355C8  fmul     s1, s9, s9                            
+010355CC  adrp     x8, #0x5ff000                         
+010355D0  fadd     s0, s0, s1                            
+010355D4  ldr      s1, [x8, #0xd2c]                      
+010355D8  fmul     s2, s8, s8                            
+010355DC  fadd     s0, s2, s0                            
+010355E0  fsqrt    s0, s0                                
+010355E4  fcmp     s0, s1                                
+010355E8  b.pl     #0x103568c                            
+010355EC  ldr      w8, [x19, #0x388]                      // self.faseSol
+010355F0  mov      w9, #1                                
+010355F4  strb     w9, [x19, #0x3cc]                      // self.cambiofase
+010355F8  cmp      w8, #3                                
+010355FC  b.eq     #0x1035628                            
+01035600  cmp      w8, #2                                
+01035604  b.eq     #0x1035684                            
+01035608  cmp      w8, #1                                
+0103560C  b.ne     #0x103568c                            
+01035610  ldr      x0, [x19, #0x410]                      // self.audioManager
+01035614  cbz      x0, #0x10356ac                        
+01035618  ldr      x1, [x19, #0x288]                      // self.SoundBlock
+0103561C  bl       #0x1028540                             // AudioManager$$PlaySound
+01035620  mov      w8, #2                                
+01035624  b        #0x1035688                            
+01035628  ldr      x0, [x19, #0x30]                       // self.getTarget
+0103562C  cbz      x0, #0x10356ac                        
+01035630  mov      x1, xzr                               
+01035634  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01035638  cbz      x0, #0x10356ac                        
+0103563C  mov      x1, xzr                               
+01035640  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+01035644  cbz      x0, #0x10356ac                        
+01035648  ldp      s1, s2, [x19, #0xbc]                  
+0103564C  ldr      s0, [x19, #0xb8]                       // self.hitPosition1
+01035650  mov      x1, xzr                               
+01035654  bl       #0x200ea50                             // UnityEngine.Transform$$set_position
+01035658  ldr      x0, [x19, #0xa0]                       // self.planoGuia2
+0103565C  cbz      x0, #0x10356ac                        
+01035660  mov      w1, wzr                               
+01035664  mov      x2, xzr                               
+01035668  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0103566C  ldr      x0, [x19, #0x410]                      // self.audioManager
+01035670  cbz      x0, #0x10356ac                        
+01035674  ldr      x1, [x19, #0x288]                      // self.SoundBlock
+01035678  bl       #0x1028540                             // AudioManager$$PlaySound
+0103567C  mov      w8, #9                                
+01035680  b        #0x1035688                            
+01035684  mov      w8, #3                                
+01035688  str      w8, [x19, #0x388]                      // self.faseSol
+0103568C  ldp      x20, x19, [sp, #0x50]                 
+01035690  ldp      x22, x21, [sp, #0x40]                 
+01035694  ldr      x30, [sp, #0x38]                      
+01035698  ldp      d9, d8, [sp, #0x28]                   
+0103569C  ldp      d11, d10, [sp, #0x18]                 
+010356A0  ldp      d13, d12, [sp, #8]                    
+010356A4  ldr      d14, [sp], #0x60                      
+010356A8  ret                                            
+010356AC  bl       #0xe61da0                             

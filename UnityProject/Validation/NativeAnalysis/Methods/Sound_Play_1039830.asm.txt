@@ -1,0 +1,19 @@
+// Sound$$Play VA 0x1039830, inferred length 68
+void Sound__Play (Sound_o* __this, float volume, const MethodInfo* method);
+01039830  stp      x30, x19, [sp, #-0x10]!               
+01039834  mov      x19, x0                               
+01039838  ldr      x0, [x0, #0x30]                       
+0103983C  cbz      x0, #0x1039870                        
+01039840  mov      x1, xzr                               
+01039844  bl       #0x1fdd604                             // UnityEngine.AudioSource$$set_volume
+01039848  ldr      x0, [x19, #0x30]                      
+0103984C  cbz      x0, #0x1039870                        
+01039850  ldr      s0, [x19, #0x24]                      
+01039854  mov      x1, xzr                               
+01039858  bl       #0x1fdd68c                             // UnityEngine.AudioSource$$set_pitch
+0103985C  ldr      x0, [x19, #0x30]                      
+01039860  cbz      x0, #0x1039870                        
+01039864  mov      x1, xzr                               
+01039868  ldp      x30, x19, [sp], #0x10                 
+0103986C  b        #0x1fdd758                             // UnityEngine.AudioSource$$Play
+01039870  bl       #0xe61da0                             

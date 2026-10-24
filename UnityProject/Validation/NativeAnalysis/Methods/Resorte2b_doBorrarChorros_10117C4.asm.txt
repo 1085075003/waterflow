@@ -1,0 +1,383 @@
+// Resorte2b$$doBorrarChorros VA 0x10117C4, inferred length 1524
+void Resorte2b__doBorrarChorros (Resorte2b_o* __this, const MethodInfo* method);
+010117C4  sub      sp, sp, #0x30                         
+010117C8  stp      x30, x21, [sp, #0x10]                 
+010117CC  stp      x20, x19, [sp, #0x20]                 
+010117D0  adrp     x20, #0x24fb000                       
+010117D4  ldrb     w8, [x20, #0xc9a]                     
+010117D8  mov      x19, x0                               
+010117DC  tbnz     w8, #0, #0x1011800                    
+010117E0  adrp     x0, #0x2368000                        
+010117E4  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010117E8  bl       #0xe61b78                             
+010117EC  adrp     x0, #0x2369000                        
+010117F0  ldr      x0, [x0, #0x900]                       // [0x2369900] 'close'
+010117F4  bl       #0xe61b78                             
+010117F8  mov      w8, #1                                
+010117FC  strb     w8, [x20, #0xc9a]                     
+01011800  str      wzr, [sp, #8]                         
+01011804  ldr      x0, [x19, #0x60]                       // self.objeto9
+01011808  cbz      x0, #0x10119b8                        
+0101180C  mov      x1, xzr                               
+01011810  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01011814  cbz      x0, #0x10119c8                        
+01011818  mov      w1, #1                                
+0101181C  mov      x2, xzr                               
+01011820  bl       #0x20102bc                             // UnityEngine.Transform$$GetChild
+01011824  cbz      x0, #0x10119d8                        
+01011828  mov      x1, xzr                               
+0101182C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01011830  str      x0, [x19, #0x98]                       // self.chorro1
+01011834  ldr      x0, [x19, #0x68]                       // self.objeto10
+01011838  cbz      x0, #0x10119bc                        
+0101183C  mov      x1, xzr                               
+01011840  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01011844  cbz      x0, #0x10119cc                        
+01011848  mov      w1, wzr                               
+0101184C  mov      x2, xzr                               
+01011850  bl       #0x20102bc                             // UnityEngine.Transform$$GetChild
+01011854  cbz      x0, #0x10119dc                        
+01011858  mov      x1, xzr                               
+0101185C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01011860  str      x0, [x19, #0xa0]                       // self.chorro2
+01011864  ldr      x0, [x19, #0x88]                       // self.objeto14
+01011868  cbz      x0, #0x10119c0                        
+0101186C  mov      x1, xzr                               
+01011870  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01011874  cbz      x0, #0x10119d0                        
+01011878  mov      w1, wzr                               
+0101187C  mov      x2, xzr                               
+01011880  bl       #0x20102bc                             // UnityEngine.Transform$$GetChild
+01011884  cbz      x0, #0x10119e0                        
+01011888  mov      x1, xzr                               
+0101188C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01011890  str      x0, [x19, #0xa8]                       // self.chorro3
+01011894  adrp     x21, #0x2368000                       
+01011898  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+0101189C  ldr      x20, [x19, #0x98]                      // self.chorro1
+010118A0  ldr      x0, [x21]                             
+010118A4  ldr      w8, [x0, #0xe0]                       
+010118A8  cbnz     w8, #0x10118b0                        
+010118AC  bl       #0xe61c80                             
+010118B0  mov      x0, x20                               
+010118B4  mov      x1, xzr                               
+010118B8  mov      x2, xzr                               
+010118BC  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010118C0  tbz      w0, #0, #0x10118e4                    
+010118C4  ldr      x0, [x21]                             
+010118C8  ldr      x20, [x19, #0x98]                      // self.chorro1
+010118CC  ldr      w8, [x0, #0xe0]                       
+010118D0  cbnz     w8, #0x10118d8                        
+010118D4  bl       #0xe61c80                             
+010118D8  mov      x0, x20                               
+010118DC  mov      x1, xzr                               
+010118E0  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010118E4  ldr      x0, [x21]                             
+010118E8  ldr      x20, [x19, #0xa0]                      // self.chorro2
+010118EC  ldr      w8, [x0, #0xe0]                       
+010118F0  cbnz     w8, #0x10118f8                        
+010118F4  bl       #0xe61c80                             
+010118F8  mov      x0, x20                               
+010118FC  mov      x1, xzr                               
+01011900  mov      x2, xzr                               
+01011904  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01011908  tbz      w0, #0, #0x101192c                    
+0101190C  ldr      x0, [x21]                             
+01011910  ldr      x20, [x19, #0xa0]                      // self.chorro2
+01011914  ldr      w8, [x0, #0xe0]                       
+01011918  cbnz     w8, #0x1011920                        
+0101191C  bl       #0xe61c80                             
+01011920  mov      x0, x20                               
+01011924  mov      x1, xzr                               
+01011928  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+0101192C  ldr      x0, [x21]                             
+01011930  ldr      x20, [x19, #0xa8]                      // self.chorro3
+01011934  ldr      w8, [x0, #0xe0]                       
+01011938  cbnz     w8, #0x1011940                        
+0101193C  bl       #0xe61c80                             
+01011940  mov      x0, x20                               
+01011944  mov      x1, xzr                               
+01011948  mov      x2, xzr                               
+0101194C  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01011950  tbz      w0, #0, #0x1011974                    
+01011954  ldr      x0, [x21]                             
+01011958  ldr      x20, [x19, #0xa8]                      // self.chorro3
+0101195C  ldr      w8, [x0, #0xe0]                       
+01011960  cbnz     w8, #0x1011968                        
+01011964  bl       #0xe61c80                             
+01011968  mov      x0, x20                               
+0101196C  mov      x1, xzr                               
+01011970  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+01011974  ldr      x0, [x19, #0xb0]                       // self.anim_door
+01011978  cbz      x0, #0x10119c4                        
+0101197C  mov      w1, #1                                
+01011980  mov      x2, xzr                               
+01011984  bl       #0x2002f88                             // UnityEngine.Behaviour$$set_enabled
+01011988  ldr      x0, [x19, #0xb0]                       // self.anim_door
+0101198C  cbz      x0, #0x10119d4                        
+01011990  adrp     x8, #0x2369000                        
+01011994  ldr      x8, [x8, #0x900]                       // [0x2369900] 'close'
+01011998  ldr      x1, [x8]                              
+0101199C  mov      w2, #1                                
+010119A0  mov      x3, xzr                               
+010119A4  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+010119A8  ldp      x20, x19, [sp, #0x20]                 
+010119AC  ldp      x30, x21, [sp, #0x10]                 
+010119B0  add      sp, sp, #0x30                         
+010119B4  ret                                            
+010119B8  bl       #0xe61da0                             
+010119BC  bl       #0xe61da0                             
+010119C0  bl       #0xe61da0                             
+010119C4  bl       #0xe61da0                             
+010119C8  bl       #0xe61da0                             
+010119CC  bl       #0xe61da0                             
+010119D0  bl       #0xe61da0                             
+010119D4  bl       #0xe61da0                             
+010119D8  bl       #0xe61da0                             
+010119DC  bl       #0xe61da0                             
+010119E0  bl       #0xe61da0                             
+010119E4  cmp      w1, #1                                
+010119E8  mov      x20, x0                               
+010119EC  b.ne     #0x1011dac                            
+010119F0  mov      x0, x20                               
+010119F4  bl       #0x224d2d0                            
+010119F8  mov      x20, x0                               
+010119FC  adrp     x0, #0x2368000                        
+01011A00  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+01011A04  bl       #0xe61b8c                             
+01011A08  ldr      x8, [x20]                             
+01011A0C  ldr      x1, [x8]                              
+01011A10  bl       #0xe621cc                             
+01011A14  tbz      w0, #0, #0x1011a34                    
+01011A18  ldr      x8, [x20]                             
+01011A1C  ldrsw    x20, [sp, #8]                         
+01011A20  mov      x9, sp                                
+01011A24  str      x8, [x9, x20, lsl #3]                 
+01011A28  bl       #0x224d2e0                            
+01011A2C  str      w20, [sp, #8]                         
+01011A30  b        #0x1011974                            
+01011A34  mov      w0, #8                                
+01011A38  bl       #0x224d320                            
+01011A3C  ldr      x8, [x20]                             
+01011A40  str      x8, [x0]                              
+01011A44  adrp     x1, #0x2253000                        
+01011A48  add      x1, x1, #0x618                        
+01011A4C  mov      x2, xzr                               
+01011A50  bl       #0x224d330                            
+01011A54  b        #0x1011da4                            
+01011A58  mov      x20, x0                               
+01011A5C  bl       #0x224d2e0                            
+01011A60  b        #0x1011dac                            
+01011A64  cmp      w1, #1                                
+01011A68  mov      x20, x0                               
+01011A6C  b.ne     #0x1011dac                            
+01011A70  mov      x0, x20                               
+01011A74  bl       #0x224d2d0                            
+01011A78  mov      x20, x0                               
+01011A7C  adrp     x0, #0x2368000                        
+01011A80  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+01011A84  bl       #0xe61b8c                             
+01011A88  ldr      x8, [x20]                             
+01011A8C  ldr      x1, [x8]                              
+01011A90  bl       #0xe621cc                             
+01011A94  tbz      w0, #0, #0x1011ab4                    
+01011A98  ldr      x8, [x20]                             
+01011A9C  ldrsw    x20, [sp, #8]                         
+01011AA0  mov      x9, sp                                
+01011AA4  str      x8, [x9, x20, lsl #3]                 
+01011AA8  bl       #0x224d2e0                            
+01011AAC  str      w20, [sp, #8]                         
+01011AB0  b        #0x101192c                            
+01011AB4  mov      w0, #8                                
+01011AB8  bl       #0x224d320                            
+01011ABC  ldr      x8, [x20]                             
+01011AC0  str      x8, [x0]                              
+01011AC4  adrp     x1, #0x2253000                        
+01011AC8  add      x1, x1, #0x618                        
+01011ACC  mov      x2, xzr                               
+01011AD0  bl       #0x224d330                            
+01011AD4  b        #0x1011da4                            
+01011AD8  mov      x20, x0                               
+01011ADC  bl       #0x224d2e0                            
+01011AE0  b        #0x1011dac                            
+01011AE4  cmp      w1, #1                                
+01011AE8  mov      x20, x0                               
+01011AEC  b.ne     #0x1011dac                            
+01011AF0  mov      x0, x20                               
+01011AF4  bl       #0x224d2d0                            
+01011AF8  mov      x20, x0                               
+01011AFC  adrp     x0, #0x2368000                        
+01011B00  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+01011B04  bl       #0xe61b8c                             
+01011B08  ldr      x8, [x20]                             
+01011B0C  ldr      x1, [x8]                              
+01011B10  bl       #0xe621cc                             
+01011B14  tbz      w0, #0, #0x1011b34                    
+01011B18  ldr      x8, [x20]                             
+01011B1C  ldrsw    x20, [sp, #8]                         
+01011B20  mov      x9, sp                                
+01011B24  str      x8, [x9, x20, lsl #3]                 
+01011B28  bl       #0x224d2e0                            
+01011B2C  str      w20, [sp, #8]                         
+01011B30  b        #0x10118e4                            
+01011B34  mov      w0, #8                                
+01011B38  bl       #0x224d320                            
+01011B3C  ldr      x8, [x20]                             
+01011B40  str      x8, [x0]                              
+01011B44  adrp     x1, #0x2253000                        
+01011B48  add      x1, x1, #0x618                        
+01011B4C  mov      x2, xzr                               
+01011B50  bl       #0x224d330                            
+01011B54  b        #0x1011da4                            
+01011B58  mov      x20, x0                               
+01011B5C  bl       #0x224d2e0                            
+01011B60  b        #0x1011dac                            
+01011B64  b        #0x1011b8c                            
+01011B68  b        #0x1011c0c                            
+01011B6C  b        #0x1011c8c                            
+01011B70  b        #0x1011b8c                            
+01011B74  b        #0x1011c0c                            
+01011B78  b        #0x1011c8c                            
+01011B7C  b        #0x1011b8c                            
+01011B80  b        #0x1011c0c                            
+01011B84  b        #0x1011c8c                            
+01011B88  b        #0x1011d0c                            
+01011B8C  mov      x20, x0                               
+01011B90  cmp      w1, #1                                
+01011B94  b.ne     #0x1011dac                            
+01011B98  mov      x0, x20                               
+01011B9C  bl       #0x224d2d0                            
+01011BA0  mov      x20, x0                               
+01011BA4  adrp     x0, #0x2368000                        
+01011BA8  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+01011BAC  bl       #0xe61b8c                             
+01011BB0  ldr      x8, [x20]                             
+01011BB4  ldr      x1, [x8]                              
+01011BB8  bl       #0xe621cc                             
+01011BBC  tbz      w0, #0, #0x1011bdc                    
+01011BC0  ldr      x8, [x20]                             
+01011BC4  ldrsw    x20, [sp, #8]                         
+01011BC8  mov      x9, sp                                
+01011BCC  str      x8, [x9, x20, lsl #3]                 
+01011BD0  bl       #0x224d2e0                            
+01011BD4  str      w20, [sp, #8]                         
+01011BD8  b        #0x1011894                            
+01011BDC  mov      w0, #8                                
+01011BE0  bl       #0x224d320                            
+01011BE4  ldr      x8, [x20]                             
+01011BE8  str      x8, [x0]                              
+01011BEC  adrp     x1, #0x2253000                        
+01011BF0  add      x1, x1, #0x618                        
+01011BF4  mov      x2, xzr                               
+01011BF8  bl       #0x224d330                            
+01011BFC  b        #0x1011da4                            
+01011C00  mov      x20, x0                               
+01011C04  bl       #0x224d2e0                            
+01011C08  b        #0x1011dac                            
+01011C0C  mov      x20, x0                               
+01011C10  cmp      w1, #1                                
+01011C14  b.ne     #0x1011dac                            
+01011C18  mov      x0, x20                               
+01011C1C  bl       #0x224d2d0                            
+01011C20  mov      x20, x0                               
+01011C24  adrp     x0, #0x2368000                        
+01011C28  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+01011C2C  bl       #0xe61b8c                             
+01011C30  ldr      x8, [x20]                             
+01011C34  ldr      x1, [x8]                              
+01011C38  bl       #0xe621cc                             
+01011C3C  tbz      w0, #0, #0x1011c5c                    
+01011C40  ldr      x8, [x20]                             
+01011C44  ldrsw    x20, [sp, #8]                         
+01011C48  mov      x9, sp                                
+01011C4C  str      x8, [x9, x20, lsl #3]                 
+01011C50  bl       #0x224d2e0                            
+01011C54  str      w20, [sp, #8]                         
+01011C58  b        #0x1011864                            
+01011C5C  mov      w0, #8                                
+01011C60  bl       #0x224d320                            
+01011C64  ldr      x8, [x20]                             
+01011C68  str      x8, [x0]                              
+01011C6C  adrp     x1, #0x2253000                        
+01011C70  add      x1, x1, #0x618                        
+01011C74  mov      x2, xzr                               
+01011C78  bl       #0x224d330                            
+01011C7C  b        #0x1011da4                            
+01011C80  mov      x20, x0                               
+01011C84  bl       #0x224d2e0                            
+01011C88  b        #0x1011dac                            
+01011C8C  mov      x20, x0                               
+01011C90  cmp      w1, #1                                
+01011C94  b.ne     #0x1011dac                            
+01011C98  mov      x0, x20                               
+01011C9C  bl       #0x224d2d0                            
+01011CA0  mov      x20, x0                               
+01011CA4  adrp     x0, #0x2368000                        
+01011CA8  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+01011CAC  bl       #0xe61b8c                             
+01011CB0  ldr      x8, [x20]                             
+01011CB4  ldr      x1, [x8]                              
+01011CB8  bl       #0xe621cc                             
+01011CBC  tbz      w0, #0, #0x1011cdc                    
+01011CC0  ldr      x8, [x20]                             
+01011CC4  ldrsw    x20, [sp, #8]                         
+01011CC8  mov      x9, sp                                
+01011CCC  str      x8, [x9, x20, lsl #3]                 
+01011CD0  bl       #0x224d2e0                            
+01011CD4  str      w20, [sp, #8]                         
+01011CD8  b        #0x1011834                            
+01011CDC  mov      w0, #8                                
+01011CE0  bl       #0x224d320                            
+01011CE4  ldr      x8, [x20]                             
+01011CE8  str      x8, [x0]                              
+01011CEC  adrp     x1, #0x2253000                        
+01011CF0  add      x1, x1, #0x618                        
+01011CF4  mov      x2, xzr                               
+01011CF8  bl       #0x224d330                            
+01011CFC  b        #0x1011da4                            
+01011D00  mov      x20, x0                               
+01011D04  bl       #0x224d2e0                            
+01011D08  b        #0x1011dac                            
+01011D0C  mov      x20, x0                               
+01011D10  cmp      w1, #1                                
+01011D14  b.ne     #0x1011dac                            
+01011D18  mov      x0, x20                               
+01011D1C  bl       #0x224d2d0                            
+01011D20  mov      x19, x0                               
+01011D24  adrp     x0, #0x2368000                        
+01011D28  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+01011D2C  bl       #0xe61b8c                             
+01011D30  ldr      x8, [x19]                             
+01011D34  ldr      x1, [x8]                              
+01011D38  bl       #0xe621cc                             
+01011D3C  tbz      w0, #0, #0x1011d84                    
+01011D40  ldr      x8, [x19]                             
+01011D44  ldrsw    x9, [sp, #8]                          
+01011D48  mov      x10, sp                               
+01011D4C  str      x8, [x10, x9, lsl #3]                 
+01011D50  bl       #0x224d2e0                            
+01011D54  adrp     x0, #0x2368000                        
+01011D58  ldr      x0, [x0, #0x178]                       // [0x2368178] UnityEngine.Debug_TypeInfo
+01011D5C  bl       #0xe61b8c                             
+01011D60  ldr      w8, [x0, #0xe0]                       
+01011D64  cbnz     w8, #0x1011d6c                        
+01011D68  bl       #0xe61c80                             
+01011D6C  adrp     x0, #0x236b000                        
+01011D70  ldr      x0, [x0, #0x4e0]                       // [0x236B4E0] 'tagk13 doBorrarChorros1 error 4'
+01011D74  bl       #0xe61b8c                             
+01011D78  mov      x1, xzr                               
+01011D7C  bl       #0x1fe3034                             // UnityEngine.Debug$$Log
+01011D80  b        #0x10119a8                            
+01011D84  mov      w0, #8                                
+01011D88  bl       #0x224d320                            
+01011D8C  ldr      x8, [x19]                             
+01011D90  str      x8, [x0]                              
+01011D94  adrp     x1, #0x2253000                        
+01011D98  add      x1, x1, #0x618                        
+01011D9C  mov      x2, xzr                               
+01011DA0  bl       #0x224d330                            
+01011DA4  mov      x20, x0                               
+01011DA8  bl       #0x224d2e0                            
+01011DAC  mov      x0, x20                               
+01011DB0  bl       #0xf5dd7c                             
+01011DB4  bl       #0xd2eb98                             

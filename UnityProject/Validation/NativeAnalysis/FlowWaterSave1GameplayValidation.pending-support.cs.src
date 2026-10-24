@@ -1,0 +1,466 @@
+#if UNITY_EDITOR
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+
+namespace Recovered.FlowWater.Editor
+{
+    // Replays the player's original Save1 placements in mode0. It never calls Solve,
+    // ApplyHint, a switch setter, a water override, or writes any actor transform.
+    [InitializeOnLoad]
+    public static class FlowWaterSave1GameplayValidation
+    {
+        const string ActiveKey = "FlowWater.Save1GameplayValidation.Active";
+        const string PrefsKey = "FlowWater.Save1GameplayValidation.Preferences";
+        const string ScenesKey = "FlowWater.Save1GameplayValidation.Scenes";
+        const string ExitKey = "FlowWater.Save1GameplayValidation.Exit";
+        const string CasesKey = "FlowWater.Save1GameplayValidation.Cases";
+        const string TimeKey = "FlowWater.Save1GameplayValidation.TimeScale";
+        static readonly int[] FocusedCases = { 609, 622, 614, 1851, 656, 1057, 2001 };
+        static int[] Cases { get { string value = SessionState.GetString(CasesKey, ""); return String.IsNullOrEmpty(value) ? FocusedCases : value.Split(',').Select(Int32.Parse).ToArray(); } }
+        [Serializable] public sealed class SavedPreference { public string key; public bool existed, isFloat; public int intValue; public float floatValue; }
+        [Serializable] public sealed class Preferences { public List<SavedPreference> values = new List<SavedPreference>(); }
+        [Serializable] public sealed class SavedScene { public string path; public bool loaded, active; }
+        [Serializable] public sealed class SavedScenes { public SavedScene[] scenes; }
+        [Serializable] public sealed class Check { public string name, detail; public bool passed; }
+        [Serializable] public sealed class Step
+        {
+            public int number, sourceRecord = -1, actorIndex = -1, beforeMoves, afterMoves;
+            public string exception, actor, status, switchesAfter;
+            public Vector3 origin, destination, actualBefore, actualAfter, nativeLanding;
+            public bool applied, marker, movable, sameCellPickup, followsMovingSupport;
+            public float waitedSeconds;
+        }
+        [Serializable] public sealed class Level
+        {
+            public int id, nativeRequired, initialRequired, finalRequired, finalActive, actors, observers, proxies;
+            public int firstAllWetFrame = -1, completedFrame = -1, stableWetFrames, nativePollingFrames = 51;
+            public bool passed, normalGameplay, complete, nativeMissionComplete, springsBusy;
+            public bool waterPending;
+            public int pendingWaterEvents, maximumPendingWaterEvents;
+            public float lastScheduledWaterEventTime, finalWaitRealSeconds, stableDrySeconds;
+            public string failure, screenshot;
+            public List<Step> steps = new List<Step>();
+            public List<string> failureActorPositions = new List<string>();
+            public string[] blockedFlowDiagnostics;
+            public string[] switchEventDiagnostics;
+            public string[] pendingWaterDiagnostics, waterRebuildDiagnostics;
+            public string switches;
+            public List<string> waterGraph = new List<string>();
+            public List<string> springDiagnostics = new List<string>();
+        }
+        [Serializable] public sealed class Report
+        {
+            public string startedUtc, finishedUtc, unityVersion;
+            public bool passed, preferencesRestored;
+            public float simulationTimeScale, originalTimeScale;
+            public int plannedLevels;
+            public List<Check> checks = new List<Check>();
+            public List<Level> levels = new List<Level>();
+            public List<string> runtimeErrors = new List<string>();
+            public List<string> notes = new List<string>();
+        }
+        static Report report;
+        static IEnumerator routine;
+        static bool busy, importsLocked;
+        static double deadline;
+        static RecoveredFlowGame Game { get { return RecoveredFlowGame.Instance; } }
+        static RecoveredWaterNetwork Water { get { return RecoveredWaterNetwork.Instance; } }
+        static RecoveredNativeSprings Springs { get { return Game == null ? null : Game.GetComponent<RecoveredNativeSprings>(); } }
+        static string Output { get { return Path.Combine(Directory.GetParent(Application.dataPath).FullName, "Validation", "Save1Gameplay"); } }
+
+        static FlowWaterSave1GameplayValidation()
+        {
+            EditorApplication.update += Update;
+            EditorApplication.playModeStateChanged += OnPlayMode;
+            Application.logMessageReceived += OnLog;
+        }
+        [MenuItem("Tools/Flow Water/Validate Save1 Normal Gameplay")]
+        public static void Run() { RunFocused(); }
+        public static void RunFocused() { Begin(FocusedCases); }
+        public static void Run622() { Begin(new[] { 622 }); }
+        public static void RunPendingSpringRegressions() { Begin(new[] { 630, 678, 693, 695, 746, 750, 785, 1055, 1065, 1075, 1079, 1088, 1090, 1095, 1097, 1098, 1100 }); }
+        public static void RunFailuresAndFocused()
+        {
+            string path=Path.Combine(Output,"BaselinePartial","save1-gameplay-validation.json");
+            Report previous=JsonUtility.FromJson<Report>(File.ReadAllText(path));
+            int[] cases=previous.levels.Where(l=>!l.passed && !String.IsNullOrEmpty(l.failure)).Select(l=>l.id).Concat(FocusedCases).Distinct().OrderBy(id=>id).ToArray();
+            Begin(cases);
+        }
+        public static void RunFailed()
+        {
+            string path=Path.Combine(Output,"save1-gameplay-validation.json");
+            Report previous=JsonUtility.FromJson<Report>(File.ReadAllText(path));
+            int[] cases=previous.levels.Where(l=>!l.passed && !String.IsNullOrEmpty(l.failure)).Select(l=>l.id).Distinct().OrderBy(id=>id).ToArray();
+            if(cases.Length==0) throw new InvalidOperationException("No completed failed cases in the previous report.");
+            Begin(cases);
+        }
+        [MenuItem("Tools/Flow Water/Validate All Save1 Normal Gameplay")]
+        public static void RunAll()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Start Save1 validation from Edit mode.");
+            RecoveryCatalogBuilder.Build();
+            Begin(RecoveryCatalog.Load().levels.Where(e => e.solution != null && JsonUtility.FromJson<RecoveryEnvelope>(e.solution.text).data.IsValidSteps()).Select(e => e.assetId).OrderBy(id => id).ToArray());
+        }
+        static void Begin(int[] cases)
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Start Save1 validation from Edit mode.");
+            foreach (SceneSetup setup in EditorSceneManager.GetSceneManagerSetup())
+                if (UnityEngine.SceneManagement.SceneManager.GetSceneByPath(setup.path).isDirty) throw new InvalidOperationException("Save edited scenes before running validation.");
+            RecoveryCatalogBuilder.Build(); Directory.CreateDirectory(Output);
+            SessionState.SetString(CasesKey, String.Join(",", cases));
+            SessionState.SetFloat(TimeKey, Time.timeScale);
+            var keys = new List<string> { "Recovery.LastLevelId", "esTablet", "OptionSelLev", "primeraVez", "MusicaON", "Soundlevel", "Conf_music", "Conf_sound" };
+            foreach (int id in Cases) { keys.Add("Recovery.Complete." + id); keys.Add("Recovery.Completed.gm" + id); }
+            var backup = new Preferences();
+            foreach (string key in keys)
+            {
+                bool isFloat = key == "Conf_music" || key == "Conf_sound";
+                backup.values.Add(new SavedPreference { key = key, existed = PlayerPrefs.HasKey(key), isFloat = isFloat,
+                    intValue = isFloat ? 0 : PlayerPrefs.GetInt(key), floatValue = isFloat ? PlayerPrefs.GetFloat(key) : 0 });
+            }
+            string preferences = JsonUtility.ToJson(backup, true);
+            SessionState.SetString(PrefsKey, preferences);
+            File.WriteAllText(Path.Combine(Output, "preferences-before.json"), preferences);
+            SessionState.SetString(ScenesKey, JsonUtility.ToJson(new SavedScenes { scenes = EditorSceneManager.GetSceneManagerSetup().Select(s => new SavedScene { path = s.path, loaded = s.isLoaded, active = s.isActive }).ToArray() }));
+            SessionState.SetBool(ActiveKey, true);
+            try
+            {
+                string scene = OriginalScenePresentation.SceneForLevel(Cases[0]);
+                string path = AssetDatabase.FindAssets(scene + " t:Scene", new[] { "Assets/Scenes" }).Select(AssetDatabase.GUIDToAssetPath).FirstOrDefault(p => Path.GetFileNameWithoutExtension(p) == scene);
+                if (String.IsNullOrEmpty(path)) throw new FileNotFoundException("Original scene missing: " + scene);
+                PlayerPrefs.SetInt("Recovery.LastLevelId", Cases[0]);
+                EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+                EditorApplication.EnterPlaymode();
+            }
+            catch { RestorePreferences(); RestoreScenes(); SessionState.EraseBool(ActiveKey); throw; }
+        }
+        static void Update()
+        {
+            if (busy || !SessionState.GetBool(ActiveKey, false) || !EditorApplication.isPlaying || EditorApplication.isCompiling) return;
+            busy = true;
+            try
+            {
+                if (report == null)
+                {
+                    AssetDatabase.DisallowAutoRefresh(); EditorApplication.LockReloadAssemblies(); importsLocked = true;
+                    report = new Report { startedUtc = DateTime.UtcNow.ToString("o"), unityVersion = Application.unityVersion, simulationTimeScale = 10, originalTimeScale = SessionState.GetFloat(TimeKey, 1), plannedLevels = Cases.Length };
+                    Time.timeScale = report.simulationTimeScale;
+                    report.notes.Add("All cases load original gm mode0 through the production UI adapter and replay original Save1 destinations with public TryMove. No Solve/preview, ApplyHint, fabricated switch/water state, proxy target count, or direct transform placement is used. Screen picking and drag motion are covered by the separate interaction validation.");
+                    report.notes.Add("A same-cell drag first verifies the original guide equals the recorded drop. If its real support moves during released settling, final placement is checked against that production Motion.Target (original support transform+4.2), with both recorded destination and dynamic target logged. No actor coordinates, switches, collision tolerance or water target standards are changed.");
+                    report.notes.Add("Recovery.MoveCount counts successful undoable transactions, including a legal same-cell pickup/release. The original game has no visible player MoveCount field; this internal recovery counter is not presented as native UI scoring.");
+                    report.notes.Add("609 must fill four real moving CuFuente targets; 622 must fill two. st9 preview actors are forbidden in every case. A legal 0/0 final preview is not gameplay completion.");
+                    report.notes.Add("Native doSolucionLevel clears chequearFuentes while in preview (101FEC8). Native ControladorJuego.Update polls numFuentes>=requiredFuentes after counter reaches 51. Actual wet/completion frame timings are observed after all recorded steps, without requiring 51 consecutive wet frames as an original rule.");
+                    report.notes.Add("Save1 z skips actor capture in doProcess1Solution. Same-cell non-z actions with an actual movable capture execute production pickup/release, including the native layer2/12 cycle; empty capture same-position markers remain legal no-ops. w enables the original wait before its real pickup. r has a +1.2 Y adjustment only in HandleSolutionTotal; normal player placement uses the native pressure-plate grid height. Original a/b/c/d codes alter transient preview lift rather than the player's destination.");
+                    report.notes.Add("Simulation runs at Time.timeScale=10; every player placement allows at least .18 real seconds for the water network (unscaled .12-second cadence), then waits for real mechanism motion to settle. Water propagation is allowed to continue between moves. Final validation waits up to120 real seconds and requires HasPendingPropagation=false in addition to real positive matching-color targets, settled mechanisms and the production51-frame completion poll. Original imported timeScale4 is restored.");
+                    deadline = EditorApplication.timeSinceStartup + Math.Max(600, Cases.Length * 120); routine = Exercise();
+                }
+                if (EditorApplication.timeSinceStartup > deadline) throw new TimeoutException("Save1 gameplay validation exceeded its per-case wall-clock allowance.");
+                if (!routine.MoveNext()) Finish();
+            }
+            catch (Exception e) { if (report != null) report.runtimeErrors.Add(e.ToString()); Finish(); }
+            finally { busy = false; }
+        }
+        static IEnumerator Exercise()
+        {
+            CheckState("unity-version", Application.unityVersion == "2022.3.28f1", Application.unityVersion);
+            foreach (int id in Cases)
+            {
+                var level = new Level { id = id }; report.levels.Add(level);
+                IEnumerator stage = ExerciseLevel(level);
+                while (true)
+                {
+                    bool next; object current = null;
+                    try { next = stage.MoveNext(); if (next) current = stage.Current; }
+                    catch (Exception e)
+                    {
+                        level.failure = e.ToString();
+                        if (Game != null && Game.CurrentLevelId == id)
+                        {
+                            level.complete = Game.IsComplete; level.springsBusy = Springs != null && Springs.IsBusy;
+                            level.nativeMissionComplete = ControladorJuego.misionComplete && ControladorJuego.misionCompleteAd;
+                            if (Water != null) { level.finalActive = Water.ActiveFountainCount; level.finalRequired = Water.RequiredFountainCount; level.blockedFlowDiagnostics = Water.BlockedFlowDiagnostics; CapturePendingWater(level); }
+                            foreach (RecoveryPiece actor in Game.Pieces) if (actor != null) level.failureActorPositions.Add("record" + actor.SourceRecordIndex + " " + actor.OriginalName + " " + actor.transform.position.ToString("F3") + " yaw=" + actor.transform.eulerAngles.y + " movable=" + actor.CanMove);
+                            CaptureDiagnostics(level);
+                            level.screenshot = Capture("gm" + id + "-failed-gameplay.png");
+                        }
+                        CheckState("gm" + id + "-normal-gameplay", false, e.Message); break;
+                    }
+                    if (!next) break;
+                    yield return current;
+                }
+                Persist();
+            }
+        }
+        static IEnumerator ExerciseLevel(Level level)
+        {
+            double until = EditorApplication.timeSinceStartup + 20;
+            while (Game == null || FlowWaterRecoveryUI.Instance == null)
+            { if (EditorApplication.timeSinceStartup > until) throw new TimeoutException("Recovery game/UI not ready."); yield return null; }
+            FlowWaterRecoveryUI.Instance.StartGame(level.id);
+            while (Game == null || Game.CurrentLevelId != level.id || !Game.IsLevelActive || Water == null || Water.CurrentPieceRoot != Game.PieceRoot)
+            { if (EditorApplication.timeSinceStartup > until) throw new TimeoutException("gm" + level.id + " failed to load."); yield return null; }
+            foreach (object wait in Wait(.6f)) yield return wait;
+            Require("gm" + level.id + "-production-water-propagation-api", typeof(RecoveredWaterNetwork).GetProperty("HasPendingPropagation") != null && typeof(RecoveredWaterNetwork).GetProperty("PendingWaterEventCount") != null, "The production pending-water queue must be observable; an absent queue API cannot qualify as settled propagation.");
+            RecoveryLevelEntry entry = RecoveryCatalog.Load().levels.First(e => e.assetId == level.id);
+            RecoverySave layout = JsonUtility.FromJson<RecoveryEnvelope>(entry.layout.text).data;
+            RecoverySave solution = JsonUtility.FromJson<RecoveryEnvelope>(entry.solution.text).data;
+            if (!solution.IsValidSteps()) throw new InvalidOperationException("Original solution is not Save1.");
+            level.nativeRequired = CountNativeTargets(layout);
+            level.initialRequired = Water.RequiredFountainCount; level.actors = Game.PieceCount;
+            level.observers = Springs == null ? 0 : Springs.ObserverCount;
+            level.proxies = Game.Pieces.Count(p => SpringToken(layout.fijo[p.SourceRecordIndex]) == "9");
+            level.normalGameplay = !Game.IsSolutionPreview && !Game.IsShowingFinalSolution && level.proxies == 0;
+            Require("gm" + level.id + "-mode0-real-targets", level.normalGameplay && level.nativeRequired > 0 && level.initialRequired == level.nativeRequired,
+                "normal=" + level.normalGameplay + ", proxies=" + level.proxies + ", nativeRequired=" + level.nativeRequired + ", networkRequired=" + level.initialRequired);
+            if (level.id == 609 || level.id == 622) Require("gm" + level.id + "-original-target-number", level.nativeRequired == (level.id == 609 ? 4 : 2), "Original non-st9 target count.");
+            for (int i = 0; i < solution.move.Count; i++)
+            {
+                var step = new Step { number = i + 1, exception = solution.excep != null && i < solution.excep.Count ? solution.excep[i] : "",
+                    origin = RecoveredFlowGame.StepPosition(solution.orix[i], solution.oriy[i], solution.oriz[i]),
+                    destination = RecoveredFlowGame.StepPosition(solution.desx[i], solution.desy[i], solution.desz[i]), beforeMoves = Game.MoveCount };
+                level.steps.Add(step); float start = Time.time;
+                bool sameCell=(step.origin-step.destination).sqrMagnitude<.01f;
+                RecoveryPiece sameCellActor=sameCell?Game.Pieces.Where(p=>p!=null && p.CanMove && Near(p.transform.position,step.origin)).OrderBy(p=>(p.transform.position-step.origin).sqrMagnitude).FirstOrDefault():null;
+                step.sameCellPickup=sameCell && step.exception!="z" && sameCellActor!=null;
+                // Only z skips native capture. A same-position w still picks
+                // up layer2 and releases layer12, re-arming the physical plate.
+                // Empty capture at a same position is the native legal no-op.
+                step.marker=step.exception=="z" || (sameCell && sameCellActor==null);
+                if (step.marker)
+                {
+                    // A native z marker must be satisfied by the mechanism, never by teleporting its actor.
+                    foreach (object wait in Wait(.35f)) yield return wait;
+                    until = EditorApplication.timeSinceStartup + 35;
+                    while (Springs != null && Springs.IsBusy && EditorApplication.timeSinceStartup < until) yield return null;
+                    step.applied = Springs == null || !Springs.IsBusy; step.status = "Original wait marker; no manual actor move.";
+                }
+                else if(step.sameCellPickup)
+                {
+                    RecoveryPiece actor=sameCellActor;
+                    step.sourceRecord=actor.SourceRecordIndex; step.actorIndex=actor.Index; step.actor=actor.OriginalName;
+                    step.movable=actor.CanMove; step.actualBefore=actor.transform.position;
+                    Vector3 screen;
+                    Require("gm"+level.id+"-same-cell-original-screen-pick-"+step.number,TryOriginalPickPoint(actor,out screen),"Same-cell recorded action must select the real authored collider through the production camera query.");
+                    NativeInput("BeginDrag",screen);
+                    RecoveredNativeDragMotion motion=Game.GetComponent<RecoveredNativeDragMotion>();
+                    Require("gm"+level.id+"-same-cell-production-pickup-"+step.number,motion!=null && motion.IsActive,"Production BeginDrag selects and lifts the actor without a fabricated switch write.");
+                    Require("gm"+level.id+"-same-cell-original-guide-"+step.number,Near(motion.Target,step.destination),"Before any automatic mechanism response, the native guide must equal the recorded same-cell drop.");
+                    foreach(object wait in WaitReal(.18f)) yield return wait;
+                    NativeInput("EndDrag");
+                    Transform support=Read(motion,"finalSupport") as Transform;
+                    step.followsMovingSupport=support!=null && support.GetComponentInParent<RecoveryPiece>()!=actor;
+                    until=EditorApplication.timeSinceStartup+15;
+                    while(motion!=null && motion.IsActive && EditorApplication.timeSinceStartup<until) yield return null;
+                    step.actualAfter=actor.transform.position;
+                    step.nativeLanding=step.followsMovingSupport?motion.Target:step.destination;
+                    step.applied=motion!=null && !motion.IsActive && Game.MoveCount==step.beforeMoves+1 && Near(step.actualAfter,step.nativeLanding);
+                    step.status="Original same-cell pickup/release through production BeginDrag/EndDrag; "+Game.Status;
+                }
+                else
+                {
+                    until = EditorApplication.timeSinceStartup + 15;
+                    while (EditorApplication.timeSinceStartup < until)
+                    {
+                        if (step.exception == "w" && Springs != null && Springs.IsBusy) { yield return null; continue; }
+                        RecoveryPiece actor = Game.Pieces.Where(p => p != null && p.CanMove && Near(p.transform.position, step.origin)).OrderBy(p => (p.transform.position - step.origin).sqrMagnitude).FirstOrDefault();
+                        if (actor != null)
+                        {
+                            step.sourceRecord = actor.SourceRecordIndex; step.actorIndex = actor.Index; step.actor = actor.OriginalName;
+                            step.movable = actor.CanMove; step.actualBefore = actor.transform.position;
+                            if (Game.TryMove(actor.Index, step.destination))
+                            { step.applied = true; step.actualAfter = actor.transform.position; step.status = Game.Status; break; }
+                        }
+                        yield return null;
+                    }
+                }
+                step.waitedSeconds = Time.time - start; step.afterMoves = Game.MoveCount;
+                Require("gm" + level.id + "-player-step-" + step.number, step.applied && (step.marker || (step.movable && step.afterMoves == step.beforeMoves + 1 && Near(step.actualAfter, step.followsMovingSupport ? step.nativeLanding : step.destination))),
+                    "exception=" + step.exception + ", record=" + step.sourceRecord + ", from=" + step.origin + ", to=" + step.destination + ", actual=" + step.actualAfter + (step.followsMovingSupport ? ", nativeMovingSupport="+step.nativeLanding : "") + "; " + (step.status ?? Game.Status));
+                foreach (object wait in WaitReal(.18f)) yield return wait;
+                until = EditorApplication.timeSinceStartup + 35;
+                while (Springs != null && Springs.IsBusy && EditorApplication.timeSinceStartup < until) yield return null;
+                step.switchesAfter = SwitchState();
+            }
+            double finalWaitStarted = EditorApplication.timeSinceStartup;
+            double drySince = -1;
+            int dryActive = -1, dryRequired = -1;
+            until = finalWaitStarted + 120;
+            int lastFrame = -1;
+            while (EditorApplication.timeSinceStartup < until)
+            {
+                if (Time.frameCount != lastFrame)
+                {
+                    lastFrame = Time.frameCount;
+                    CapturePendingWater(level);
+                    bool wet = Water != null && Water.CurrentPieceRoot == Game.PieceRoot && Water.RequiredFountainCount == level.nativeRequired && Water.ActiveFountainCount >= level.nativeRequired;
+                    if (wet) { if (level.firstAllWetFrame < 0) level.firstAllWetFrame = Time.frameCount; level.stableWetFrames++; } else level.stableWetFrames = 0;
+                    if (Game.IsComplete && level.completedFrame < 0) level.completedFrame = Time.frameCount;
+                    if (Game.IsComplete && level.stableWetFrames >= 3 && !level.waterPending && (Springs == null || !Springs.IsBusy)) break;
+                    bool settledDry = !Game.IsComplete && !level.waterPending && (Springs == null || !Springs.IsBusy) && Water != null && Water.RequiredFountainCount == level.nativeRequired && Water.ActiveFountainCount < level.nativeRequired;
+                    if(settledDry)
+                    {
+                        if(drySince<0 || dryActive!=Water.ActiveFountainCount || dryRequired!=Water.RequiredFountainCount)
+                        { drySince=EditorApplication.timeSinceStartup; dryActive=Water.ActiveFountainCount; dryRequired=Water.RequiredFountainCount; }
+                        level.stableDrySeconds=(float)(EditorApplication.timeSinceStartup-drySince);
+                        if(level.stableDrySeconds>=5)
+                        { report.notes.Add("gm"+level.id+" failed early after"+level.stableDrySeconds+" real seconds with unchanged dry targets"+dryActive+"/"+dryRequired+", no pending water and no spring motion. This only terminates a failed case; it cannot satisfy completion."); break; }
+                    }
+                    else { drySince=-1; level.stableDrySeconds=0; }
+                }
+                yield return null;
+            }
+            level.finalRequired = Water.RequiredFountainCount; level.finalActive = Water.ActiveFountainCount;
+            level.complete = Game.IsComplete; level.nativeMissionComplete = ControladorJuego.misionComplete && ControladorJuego.misionCompleteAd;
+            level.springsBusy = Springs != null && Springs.IsBusy;
+            level.finalWaitRealSeconds = (float)(EditorApplication.timeSinceStartup - finalWaitStarted);
+            CapturePendingWater(level);
+            level.passed = level.normalGameplay && level.finalRequired == level.nativeRequired && level.finalRequired > 0 && level.finalActive >= level.finalRequired && level.complete && level.nativeMissionComplete && level.stableWetFrames >= 3 && !level.springsBusy && !level.waterPending;
+            level.screenshot = Capture("gm" + level.id + "-normal-gameplay.png");
+            Require("gm" + level.id + "-actual-water-and-completion", level.passed, "active=" + level.finalActive + "/" + level.finalRequired + ", stableWetFrames=" + level.stableWetFrames + ", complete=" + level.complete + ", nativeMission=" + level.nativeMissionComplete + ", springsBusy=" + level.springsBusy + ", waterPending=" + level.waterPending + ", pendingEvents=" + level.pendingWaterEvents + ", lastScheduledGameTime=" + level.lastScheduledWaterEventTime + ", finalWaitReal=" + level.finalWaitRealSeconds + ", stableDryReal=" + level.stableDrySeconds);
+        }
+        const BindingFlags AllFields = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+        static object Read(object source, string field) { if (source == null) return null; FieldInfo f = source.GetType().GetField(field, AllFields); return f == null ? null : f.GetValue(source); }
+        static void CapturePendingWater(Level level)
+        {
+            if(Water==null) { level.waterPending=true; level.pendingWaterEvents=-1; return; }
+            PropertyInfo pending=Water.GetType().GetProperty("HasPendingPropagation"),count=Water.GetType().GetProperty("PendingWaterEventCount"),last=Water.GetType().GetProperty("LastScheduledWaterEventTime");
+            level.waterPending=pending==null || (bool)pending.GetValue(Water,null);
+            level.pendingWaterEvents=count==null?-1:(int)count.GetValue(Water,null);
+            level.maximumPendingWaterEvents=Math.Max(level.maximumPendingWaterEvents,level.pendingWaterEvents);
+            if(last!=null) level.lastScheduledWaterEventTime=Convert.ToSingle(last.GetValue(Water,null));
+        }
+        static string SwitchState()
+        {
+            var values = new List<string>();
+            for (int i = 1; i <= 8; i++)
+                foreach (string prefix in new[] { "conResorte", "positionRes", "activadoRes", "numPiezas", "contPiezas" })
+                { FieldInfo field = typeof(UIManagerScript).GetField(prefix + i, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic); if (field != null) values.Add(prefix + i + "=" + field.GetValue(null)); }
+            return String.Join(",", values);
+        }
+        static void CaptureDiagnostics(Level level)
+        {
+            level.switches = SwitchState();
+            RuntimeWaterMechanisms bus = Water == null ? null : Water.GetComponent<RuntimeWaterMechanisms>();
+            if (bus != null) level.switchEventDiagnostics = bus.SwitchEventDiagnostics;
+            if (Water != null)
+            {
+                level.pendingWaterDiagnostics = Water.PendingWaterDiagnostics;
+                level.waterRebuildDiagnostics = Water.WaterRebuildDiagnostics;
+                IEnumerable nodes = Read(Water, "nodes") as IEnumerable;
+                if (nodes != null) foreach (object node in nodes)
+                {
+                    RecoveryPiece piece = Read(node, "piece") as RecoveryPiece; MonoBehaviour controller = Read(node, "controller") as MonoBehaviour;
+                    bool[] ports = Read(node, "ports") as bool[]; Array links = Read(node, "links") as Array;
+                    var routes = new List<string>();
+                    if (links != null) for (int i = 0; i < links.Length; i++) { RecoveryPiece linked = Read(links.GetValue(i), "piece") as RecoveryPiece; routes.Add((i + 1) + ":" + (linked == null ? "-" : linked.SourceRecordIndex.ToString())); }
+                    var controls = new List<string>();
+                    if (controller != null) for (int i = 1; i <= 6; i++) controls.Add("conOrigen" + i + "=" + Read(controller, "conOrigen" + i) + "/wet=" + Water.IsControllerPortWet(controller, i));
+                    level.waterGraph.Add("record=" + (piece == null ? -1 : piece.SourceRecordIndex) + " controller=" + (controller == null ? "null" : controller.GetType().Name) + " pos=" + (controller == null ? "null" : controller.transform.position.ToString("F3")) + " ports=" + (ports == null ? "null" : String.Join("", ports.Select(p => p ? "1" : "0"))) + " source=" + Read(node, "source") + " target=" + Read(node, "target") + " color=" + Read(node, "waterColor") + " expected=" + Read(node, "expectedColor") + " incoming=" + Read(node, "incoming") + " links=" + String.Join(",", routes) + " " + String.Join(",", controls));
+                }
+            }
+            if (Springs != null)
+            {
+                IEnumerable collisions = Read(Springs, "collisionDiagnostics") as IEnumerable;
+                if (collisions != null) foreach (object collision in collisions) level.springDiagnostics.Add("collision: " + collision);
+                IEnumerable channels = Read(Springs, "channels") as IEnumerable;
+                if (channels != null) foreach (object channel in channels) if (channel != null) level.springDiagnostics.Add("channel=" + Read(channel, "index") + " position=" + Read(channel, "position") + " maximum=" + Read(channel, "maximum") + " direction=" + Read(channel, "direction") + " moving=" + Read(channel, "moving") + " blocked=" + Read(channel, "blocked") + " wasActive=" + Read(channel, "wasActive"));
+                IEnumerable actors = Read(Springs, "actors") as IEnumerable;
+                if (actors != null) foreach (object actor in actors)
+                { RecoveryPiece piece = Read(actor, "piece") as RecoveryPiece; level.springDiagnostics.Add("actor=" + (piece == null ? -1 : piece.SourceRecordIndex) + " moving=" + Read(actor, "moving") + " blocked=" + Read(actor, "blocked") + " turning=" + Read(actor, "turning") + " target=" + Read(actor, "target") + " direction=" + Read(actor, "direction")); }
+            }
+        }
+        static void NativeInput(string method,Vector3 screen) { typeof(RecoveredFlowGame).GetMethod(method,BindingFlags.Instance|BindingFlags.NonPublic).Invoke(Game,new object[] { new Vector2(screen.x,screen.y) }); }
+        static void NativeInput(string method) { typeof(RecoveredFlowGame).GetMethod(method,BindingFlags.Instance|BindingFlags.NonPublic).Invoke(Game,null); }
+        static bool TryOriginalPickPoint(RecoveryPiece actor,out Vector3 screen)
+        {
+            foreach(Collider collider in actor.OriginalCaptureColliders??new Collider[0])
+            {
+                if(collider==null || !collider.gameObject.activeInHierarchy || collider.gameObject.layer!=LayerMask.NameToLayer("bloque")) continue;
+                Vector3 center=collider.transform.position;
+                if(collider is BoxCollider) center=collider.transform.TransformPoint(((BoxCollider)collider).center);
+                else if(collider is SphereCollider) center=collider.transform.TransformPoint(((SphereCollider)collider).center);
+                else if(collider is MeshCollider && ((MeshCollider)collider).sharedMesh!=null) center=collider.transform.TransformPoint(((MeshCollider)collider).sharedMesh.bounds.center);
+                foreach(Vector3 delta in new[] { Vector3.zero,Vector3.right*3,Vector3.left*3,Vector3.forward*3,Vector3.back*3,Vector3.up*2 })
+                {
+                    Vector3 point=Game.GameCamera.WorldToScreenPoint(center+delta); RecoveryPiece picked; RaycastHit hit;
+                    if(point.z>0 && RecoveredNativeInteraction.TryPick(Game.GameCamera,point,Game,out picked,out hit) && picked==actor)
+                    { screen=point; return true; }
+                }
+            }
+            screen=Vector3.zero; return false;
+        }
+        static bool Near(Vector3 a, Vector3 b) { return (a - b).sqrMagnitude < .64f; }
+        static string SpringToken(string value) { Match match = Regex.Match(value ?? "", "st(.*?)et"); return match.Success ? match.Groups[1].Value : ""; }
+        static int CountNativeTargets(RecoverySave layout)
+        {
+            int count = 0;
+            RecoveryCatalog catalog = RecoveryCatalog.Load();
+            RecoveryAliasFile aliasFile = catalog.aliases == null ? null : JsonUtility.FromJson<RecoveryAliasFile>(catalog.aliases.text);
+            var aliases = aliasFile == null || aliasFile.aliases == null ? new Dictionary<string, RecoveryAlias>(StringComparer.Ordinal) : aliasFile.aliases.ToDictionary(a => a.originalName, a => a, StringComparer.Ordinal);
+            for (int i = 0; i < layout.pieza.Count; i++)
+            {
+                string name = layout.pieza[i]; RecoveryAlias alias;
+                if (aliases.TryGetValue(name, out alias)) name = alias.basePrefab;
+                if (SpringToken(layout.fijo[i]) == "9") continue;
+                if ((name.Contains("Cu") && (name.Contains("CubaFuente") || name.Contains("CuFuente") || name.Contains("CubFuente"))) || name.Contains("BloqueChorro1")) count++;
+            }
+            return count;
+        }
+        static IEnumerable WaitReal(float seconds) { double until = EditorApplication.timeSinceStartup + seconds; while (EditorApplication.timeSinceStartup < until) yield return null; }
+        static IEnumerable Wait(float seconds) { float until = Time.time + seconds; while (Time.time < until) yield return null; }
+        static void Require(string name, bool passed, string detail) { CheckState(name, passed, detail); if (!passed) throw new InvalidOperationException(name + ": " + detail); }
+        static void CheckState(string name, bool passed, string detail) { report.checks.Add(new Check { name = name, passed = passed, detail = detail }); Persist(); }
+        static void Persist() { if (report != null) File.WriteAllText(Path.Combine(Output, "save1-gameplay-validation.json"), JsonUtility.ToJson(report, true)); }
+        static string Capture(string file)
+        {
+            Camera camera = Game.GameCamera; if (camera == null) return "";
+            string path = Path.Combine(Output, file); RenderTexture old = camera.targetTexture, active = RenderTexture.active; float aspect = camera.aspect;
+            RenderTexture target = RenderTexture.GetTemporary(1280, 800, 24); Texture2D texture = new Texture2D(1280, 800, TextureFormat.RGB24, false);
+            try { camera.targetTexture = target; camera.aspect = 1.6f; Canvas.ForceUpdateCanvases(); camera.Render(); RenderTexture.active = target; texture.ReadPixels(new Rect(0, 0, 1280, 800), 0, 0); texture.Apply(); File.WriteAllBytes(path, texture.EncodeToPNG()); return path; }
+            finally { camera.targetTexture = old; camera.aspect = aspect; RenderTexture.active = active; RenderTexture.ReleaseTemporary(target); UnityEngine.Object.DestroyImmediate(texture); }
+        }
+        static bool RestorePreferences()
+        {
+            string json = SessionState.GetString(PrefsKey, ""); if (String.IsNullOrEmpty(json)) return false;
+            Preferences backup = JsonUtility.FromJson<Preferences>(json);
+            foreach (SavedPreference value in backup.values) if (!value.existed) PlayerPrefs.DeleteKey(value.key); else if (value.isFloat) PlayerPrefs.SetFloat(value.key, value.floatValue); else PlayerPrefs.SetInt(value.key, value.intValue);
+            PlayerPrefs.Save(); SessionState.EraseString(PrefsKey);
+            return backup.values.All(v => PlayerPrefs.HasKey(v.key) == v.existed && (!v.existed || (v.isFloat ? PlayerPrefs.GetFloat(v.key) == v.floatValue : PlayerPrefs.GetInt(v.key) == v.intValue)));
+        }
+        static void RestoreScenes()
+        {
+            string json = SessionState.GetString(ScenesKey, ""); SessionState.EraseString(ScenesKey);
+            if (!String.IsNullOrEmpty(json)) { SavedScenes saved = JsonUtility.FromJson<SavedScenes>(json); if (saved.scenes != null && saved.scenes.Length > 0) EditorSceneManager.RestoreSceneManagerSetup(saved.scenes.Select(s => new SceneSetup { path = s.path, isLoaded = s.loaded, isActive = s.active }).ToArray()); }
+        }
+        static void OnLog(string message, string stack, LogType type) { if (report != null && (type == LogType.Error || type == LogType.Exception || type == LogType.Assert)) report.runtimeErrors.Add(message + "\n" + stack); }
+        static void ReleaseImports() { if (!importsLocked) return; importsLocked = false; EditorApplication.UnlockReloadAssemblies(); AssetDatabase.AllowAutoRefresh(); }
+        static void OnPlayMode(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode) ReleaseImports();
+            if (state != PlayModeStateChange.EnteredEditMode) return;
+            if (SessionState.GetBool(ActiveKey, false)) { RestorePreferences(); SessionState.EraseBool(ActiveKey); report = null; routine = null; }
+            RestoreScenes(); Time.timeScale = SessionState.GetFloat(TimeKey, 1);
+            int exit = SessionState.GetInt(ExitKey, -1); SessionState.EraseInt(ExitKey);
+            if (Application.isBatchMode && exit >= 0) EditorApplication.Exit(exit);
+        }
+        static void Finish()
+        {
+            if (report == null) report = new Report();
+            Time.timeScale = report.originalTimeScale;
+            report.preferencesRestored = RestorePreferences(); report.finishedUtc = DateTime.UtcNow.ToString("o");
+            report.passed = report.preferencesRestored && report.levels.Count == Cases.Length && report.levels.All(l => l.passed) && report.checks.All(c => c.passed) && report.runtimeErrors.Count == 0;
+            Persist(); bool passed = report.passed;
+            Debug.Log("Save1 normal gameplay validation " + (passed ? "PASS" : "FAIL") + "; levels=" + report.levels.Count(l => l.passed) + "/" + Cases.Length + "; checks=" + report.checks.Count + "; errors=" + report.runtimeErrors.Count);
+            SessionState.EraseBool(ActiveKey); SessionState.SetInt(ExitKey, passed ? 0 : 1); report = null; routine = null; ReleaseImports(); EditorApplication.isPlaying = false;
+        }
+    }
+}
+#endif

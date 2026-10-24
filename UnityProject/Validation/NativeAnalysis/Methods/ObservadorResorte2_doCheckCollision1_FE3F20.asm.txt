@@ -1,0 +1,223 @@
+// ObservadorResorte2$$doCheckCollision1 VA 0xFE3F20, inferred length 884
+void ObservadorResorte2__doCheckCollision1 (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE3F20  stp      d11, d10, [sp, #-0x80]!               
+00FE3F24  stp      d9, d8, [sp, #0x10]                   
+00FE3F28  stp      x29, x30, [sp, #0x20]                 
+00FE3F2C  stp      x28, x27, [sp, #0x30]                 
+00FE3F30  stp      x26, x25, [sp, #0x40]                 
+00FE3F34  stp      x24, x23, [sp, #0x50]                 
+00FE3F38  stp      x22, x21, [sp, #0x60]                 
+00FE3F3C  stp      x20, x19, [sp, #0x70]                 
+00FE3F40  adrp     x21, #0x24fb000                       
+00FE3F44  adrp     x20, #0x2368000                       
+00FE3F48  ldrb     w8, [x21, #0xbac]                     
+00FE3F4C  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FE3F50  mov      x19, x0                               
+00FE3F54  tbnz     w8, #0, #0xfe3fb4                     
+00FE3F58  adrp     x0, #0x236a000                        
+00FE3F5C  ldr      x0, [x0, #0x840]                       // [0x236A840] Method$UnityEngine.Component.GetComponent<ControlFijo>()
+00FE3F60  bl       #0xe61b78                             
+00FE3F64  adrp     x0, #0x236a000                        
+00FE3F68  ldr      x0, [x0, #0x858]                       // [0x236A858] Method$UnityEngine.Component.GetComponent<ControlPieza>()
+00FE3F6C  bl       #0xe61b78                             
+00FE3F70  adrp     x0, #0x2368000                        
+00FE3F74  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+00FE3F78  bl       #0xe61b78                             
+00FE3F7C  adrp     x0, #0x236a000                        
+00FE3F80  ldr      x0, [x0, #0x878]                       // [0x236A878] 'Rec'
+00FE3F84  bl       #0xe61b78                             
+00FE3F88  adrp     x0, #0x236a000                        
+00FE3F8C  ldr      x0, [x0, #0x820]                       // [0x236A820] 'BloqueFijo'
+00FE3F90  bl       #0xe61b78                             
+00FE3F94  adrp     x0, #0x236a000                        
+00FE3F98  ldr      x0, [x0, #0x828]                       // [0x236A828] 'Bloque'
+00FE3F9C  bl       #0xe61b78                             
+00FE3FA0  adrp     x0, #0x236a000                        
+00FE3FA4  ldr      x0, [x0, #0x880]                       // [0x236A880] 'Curva'
+00FE3FA8  bl       #0xe61b78                             
+00FE3FAC  mov      w8, #1                                
+00FE3FB0  strb     w8, [x21, #0xbac]                     
+00FE3FB4  ldp      s8, s0, [x19, #0x64]                   // self.posx
+00FE3FB8  ldr      s1, [x19, #0x1a8]                      // self.variay
+00FE3FBC  ldr      s9, [x19, #0x6c]                       // self.posz
+00FE3FC0  ldr      w0, [x19, #0x188]                      // self.mascaraBloque2
+00FE3FC4  ldr      s10, [x19, #0x180]                     // self.sphereRadius
+00FE3FC8  fadd     s11, s0, s1                           
+00FE3FCC  mov      x1, xzr                               
+00FE3FD0  strb     wzr, [x19, #0x16d]                     // self.checkCollision1
+00FE3FD4  str      s8, [x19, #0x198]                      // self.valorx
+00FE3FD8  str      s9, [x19, #0x1a0]                      // self.valorz
+00FE3FDC  str      s8, [x19, #0x174]                      // self.vector
+00FE3FE0  str      s11, [x19, #0x19c]                     // self.valory
+00FE3FE4  str      s11, [x19, #0x178]                    
+00FE3FE8  str      s9, [x19, #0x17c]                     
+00FE3FEC  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+00FE3FF0  ldr      x8, [x20]                             
+00FE3FF4  mov      w20, w0                               
+00FE3FF8  ldr      w9, [x8, #0xe0]                       
+00FE3FFC  cbnz     w9, #0xfe4008                         
+00FE4000  mov      x0, x8                                
+00FE4004  bl       #0xe61c80                             
+00FE4008  mov      v0.16b, v8.16b                        
+00FE400C  mov      v1.16b, v11.16b                       
+00FE4010  mov      v2.16b, v9.16b                        
+00FE4014  mov      v3.16b, v10.16b                       
+00FE4018  mov      w0, w20                               
+00FE401C  mov      x1, xzr                               
+00FE4020  bl       #0x20406ec                             // UnityEngine.Physics$$OverlapSphere
+00FE4024  cbz      x0, #0xfe428c                         
+00FE4028  ldr      x8, [x0, #0x18]                       
+00FE402C  mov      x20, x0                               
+00FE4030  cbz      x8, #0xfe4268                         
+00FE4034  cmp      w8, #1                                
+00FE4038  b.lt     #0xfe4268                             
+00FE403C  adrp     x23, #0x236a000                       
+00FE4040  adrp     x24, #0x236a000                       
+00FE4044  adrp     x26, #0x236a000                       
+00FE4048  adrp     x27, #0x236a000                       
+00FE404C  adrp     x28, #0x236a000                       
+00FE4050  ldr      x23, [x23, #0x820]                     // [0x236A820] 'BloqueFijo'
+00FE4054  ldr      x24, [x24, #0x840]                     // [0x236A840] Method$UnityEngine.Component.GetComponent<ControlFijo>()
+00FE4058  ldr      x26, [x26, #0x828]                     // [0x236A828] 'Bloque'
+00FE405C  ldr      x27, [x27, #0x858]                     // [0x236A858] Method$UnityEngine.Component.GetComponent<ControlPieza>()
+00FE4060  ldr      x28, [x28, #0x878]                     // [0x236A878] 'Rec'
+00FE4064  mov      w22, wzr                              
+00FE4068  mov      w25, #1                               
+00FE406C  cmp      w22, w8                               
+00FE4070  b.hs     #0xfe4290                             
+00FE4074  add      x29, x20, w22, sxtw #3                
+00FE4078  ldr      x0, [x29, #0x20]!                     
+00FE407C  cbz      x0, #0xfe428c                         
+00FE4080  mov      x1, xzr                               
+00FE4084  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FE4088  cbz      x0, #0xfe428c                         
+00FE408C  mov      x1, xzr                               
+00FE4090  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE4094  cbz      x0, #0xfe428c                         
+00FE4098  mov      x1, xzr                               
+00FE409C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE40A0  cbz      x0, #0xfe428c                         
+00FE40A4  mov      x1, xzr                               
+00FE40A8  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FE40AC  cbz      x0, #0xfe428c                         
+00FE40B0  ldr      x1, [x23]                             
+00FE40B4  mov      x2, xzr                               
+00FE40B8  bl       #0x19651dc                             // System.String$$Contains
+00FE40BC  ldr      w8, [x20, #0x18]                      
+00FE40C0  cmp      w22, w8                               
+00FE40C4  b.hs     #0xfe4290                             
+00FE40C8  mov      w21, w0                               
+00FE40CC  ldr      x0, [x29]                             
+00FE40D0  cbz      x0, #0xfe428c                         
+00FE40D4  mov      x1, xzr                               
+00FE40D8  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FE40DC  cbz      x0, #0xfe428c                         
+00FE40E0  mov      x1, xzr                               
+00FE40E4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE40E8  cbz      x0, #0xfe428c                         
+00FE40EC  mov      x1, xzr                               
+00FE40F0  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE40F4  cbz      x0, #0xfe428c                         
+00FE40F8  tbz      w21, #0, #0xfe4118                    
+00FE40FC  ldr      x1, [x24]                             
+00FE4100  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+00FE4104  cbz      x0, #0xfe428c                         
+00FE4108  ldrb     w8, [x0, #0x50]                       
+00FE410C  cbz      w8, #0xfe4234                         
+00FE4110  strb     w25, [x19, #0x170]                     // self.checkCollisionFijo
+00FE4114  b        #0xfe4258                             
+00FE4118  mov      x1, xzr                               
+00FE411C  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FE4120  cbz      x0, #0xfe428c                         
+00FE4124  ldr      x1, [x26]                             
+00FE4128  mov      x2, xzr                               
+00FE412C  bl       #0x19651dc                             // System.String$$Contains
+00FE4130  ldr      w8, [x20, #0x18]                      
+00FE4134  cmp      w22, w8                               
+00FE4138  b.hs     #0xfe4290                             
+00FE413C  mov      w21, w0                               
+00FE4140  ldr      x0, [x29]                             
+00FE4144  cbz      x0, #0xfe428c                         
+00FE4148  mov      x1, xzr                               
+00FE414C  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FE4150  cbz      x0, #0xfe428c                         
+00FE4154  mov      x1, xzr                               
+00FE4158  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE415C  cbz      x0, #0xfe428c                         
+00FE4160  mov      x1, xzr                               
+00FE4164  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE4168  cbz      x0, #0xfe428c                         
+00FE416C  tbnz     w21, #0, #0xfe4220                    
+00FE4170  mov      x1, xzr                               
+00FE4174  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FE4178  cbz      x0, #0xfe428c                         
+00FE417C  ldr      x1, [x28]                             
+00FE4180  mov      x2, xzr                               
+00FE4184  bl       #0x19651dc                             // System.String$$Contains
+00FE4188  tbnz     w0, #0, #0xfe41e8                     
+00FE418C  ldr      w8, [x20, #0x18]                      
+00FE4190  cmp      w22, w8                               
+00FE4194  b.hs     #0xfe4290                             
+00FE4198  ldr      x0, [x29]                             
+00FE419C  cbz      x0, #0xfe428c                         
+00FE41A0  mov      x1, xzr                               
+00FE41A4  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FE41A8  cbz      x0, #0xfe428c                         
+00FE41AC  mov      x1, xzr                               
+00FE41B0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE41B4  cbz      x0, #0xfe428c                         
+00FE41B8  mov      x1, xzr                               
+00FE41BC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE41C0  cbz      x0, #0xfe428c                         
+00FE41C4  mov      x1, xzr                               
+00FE41C8  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FE41CC  cbz      x0, #0xfe428c                         
+00FE41D0  adrp     x8, #0x236a000                        
+00FE41D4  ldr      x8, [x8, #0x880]                       // [0x236A880] 'Curva'
+00FE41D8  mov      x2, xzr                               
+00FE41DC  ldr      x1, [x8]                              
+00FE41E0  bl       #0x19651dc                             // System.String$$Contains
+00FE41E4  tbz      w0, #0, #0xfe4258                     
+00FE41E8  ldr      w8, [x20, #0x18]                      
+00FE41EC  cmp      w22, w8                               
+00FE41F0  b.hs     #0xfe4290                             
+00FE41F4  ldr      x0, [x29]                             
+00FE41F8  cbz      x0, #0xfe428c                         
+00FE41FC  mov      x1, xzr                               
+00FE4200  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FE4204  cbz      x0, #0xfe428c                         
+00FE4208  mov      x1, xzr                               
+00FE420C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FE4210  cbz      x0, #0xfe428c                         
+00FE4214  mov      x1, xzr                               
+00FE4218  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE421C  cbz      x0, #0xfe428c                         
+00FE4220  ldr      x1, [x27]                             
+00FE4224  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+00FE4228  cbz      x0, #0xfe428c                         
+00FE422C  ldrb     w8, [x0, #0x60]                       
+00FE4230  cbnz     w8, #0xfe4110                         
+00FE4234  strb     w25, [x19, #0x16d]                     // self.checkCollision1
+00FE4238  ldr      w8, [x20, #0x18]                      
+00FE423C  cmp      w22, w8                               
+00FE4240  b.hs     #0xfe4290                             
+00FE4244  ldr      x0, [x29]                             
+00FE4248  cbz      x0, #0xfe428c                         
+00FE424C  mov      x1, xzr                               
+00FE4250  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FE4254  str      x0, [x19, #0x1c8]                      // self.otherObject
+00FE4258  ldr      w8, [x20, #0x18]                      
+00FE425C  add      w22, w22, #1                          
+00FE4260  cmp      w22, w8                               
+00FE4264  b.lt     #0xfe406c                             
+00FE4268  ldp      x20, x19, [sp, #0x70]                 
+00FE426C  ldp      x22, x21, [sp, #0x60]                 
+00FE4270  ldp      x24, x23, [sp, #0x50]                 
+00FE4274  ldp      x26, x25, [sp, #0x40]                 
+00FE4278  ldp      x28, x27, [sp, #0x30]                 
+00FE427C  ldp      x29, x30, [sp, #0x20]                 
+00FE4280  ldp      d9, d8, [sp, #0x10]                   
+00FE4284  ldp      d11, d10, [sp], #0x80                 
+00FE4288  ret                                            
+00FE428C  bl       #0xe61da0                             
+00FE4290  bl       #0xe61da8                             

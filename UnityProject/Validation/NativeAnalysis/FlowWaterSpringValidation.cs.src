@@ -1,0 +1,238 @@
+#if UNITY_EDITOR
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+
+namespace Recovered.FlowWater.Editor
+{
+    // Runs the real LateUpdate simulation, not a substitute mechanism solver.
+    [InitializeOnLoad]
+    public static class FlowWaterSpringValidation
+    {
+        const string ActiveKey = "FlowWater.SpringValidation.Active";
+        const string PrefsKey = "FlowWater.SpringValidation.Preferences";
+        const BindingFlags Private = BindingFlags.Instance | BindingFlags.NonPublic;
+        [Serializable] public sealed class Check { public string name, detail; public bool passed; }
+        [Serializable] public sealed class SavedPreference { public string key; public bool existed; public int value; }
+        [Serializable] public sealed class Preferences { public List<SavedPreference> values = new List<SavedPreference>(); }
+        [Serializable] public sealed class Report
+        {
+            public string startedUtc, finishedUtc, unityVersion;
+            public bool passed, preferencesRestored;
+            public List<Check> checks = new List<Check>();
+            public List<string> runtimeErrors = new List<string>();
+            public List<string> screenshots = new List<string>();
+            public List<string> notes = new List<string>();
+        }
+        sealed class Delay { public float seconds; public Delay(float seconds) { this.seconds = seconds; } }
+        static Report report;
+        static IEnumerator routine;
+        static float resumeAt;
+        static double deadline;
+        static bool busy, importsLocked;
+        static string Output { get { return Path.Combine(Directory.GetParent(Application.dataPath).FullName, "Validation", "Springs"); } }
+        static RecoveredFlowGame Game { get { return RecoveredFlowGame.Instance; } }
+        static RecoveredNativeSprings Springs { get { return Game == null ? null : Game.GetComponent<RecoveredNativeSprings>(); } }
+        static RuntimeWaterMechanisms Bus { get { return RecoveredWaterNetwork.Instance == null ? null : RecoveredWaterNetwork.Instance.GetComponent<RuntimeWaterMechanisms>(); } }
+
+        static FlowWaterSpringValidation()
+        {
+            EditorApplication.update += Update;
+            EditorApplication.playModeStateChanged += OnPlayMode;
+            Application.logMessageReceived += OnLog;
+        }
+        [MenuItem("Tools/Flow Water/Validate Native Springs and Carry")]
+        public static void Run()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Start the spring validation from Edit mode.");
+            Directory.CreateDirectory(Output);
+            var backup = new Preferences();
+            var keys = new List<string> { "Recovery.LastLevelId" };
+            foreach (int id in new[] { 1851, 601, 614, 656 })
+            { keys.Add("Recovery.Complete." + id); keys.Add("Recovery.Completed.gm" + id); }
+            foreach (string key in keys) backup.values.Add(new SavedPreference { key = key, existed = PlayerPrefs.HasKey(key), value = PlayerPrefs.GetInt(key) });
+            SessionState.SetString(PrefsKey, JsonUtility.ToJson(backup));
+            SessionState.SetBool(ActiveKey, true);
+            PlayerPrefs.SetInt("Recovery.LastLevelId", 1851);
+            EditorSceneManager.OpenScene("Assets/Scenes/" + OriginalScenePresentation.SceneForLevel(1851) + ".unity", OpenSceneMode.Single);
+            EditorApplication.EnterPlaymode();
+        }
+        static void Update()
+        {
+            if (busy || !SessionState.GetBool(ActiveKey, false) || !EditorApplication.isPlaying || EditorApplication.isCompiling) return;
+            busy = true;
+            try
+            {
+                if (report == null)
+                {
+                    AssetDatabase.DisallowAutoRefresh(); EditorApplication.LockReloadAssemblies(); importsLocked = true;
+                    report = new Report { startedUtc = DateTime.UtcNow.ToString("o"), unityVersion = Application.unityVersion };
+                    report.notes.Add("gm1851 and gm601 use the original first Save1 placement through TryMove, followed by real game-time waits. Undo uses the game's public Undo and an in-flight capture uses the same private snapshot methods as Undo.");
+                    report.notes.Add("gm614 applies all six original Save1 player moves to exercise actual water-port wetness -> native switch bus -> moving spring. No final-solution preview or fabricated source is used.");
+                    report.notes.Add("gm656 isolates two-channel action ordering using SetPhysicalSwitch after moving one obstructing ordinary pipe to an empty cell. This checks bus/action/snapshot integration; it does not prove every original manager3/4/5 collision transition.");
+                    routine = Exercise(); deadline = EditorApplication.timeSinceStartup + 300; resumeAt = Time.time + .3f;
+                }
+                if (EditorApplication.timeSinceStartup > deadline) throw new TimeoutException("Spring validation exceeded 300 seconds.");
+                if (Time.time < resumeAt) return;
+                if (!routine.MoveNext()) { Finish(); return; }
+                Delay delay = routine.Current as Delay; resumeAt = Time.time + (delay == null ? 0 : delay.seconds);
+            }
+            catch (Exception exception) { if (report != null) report.runtimeErrors.Add(exception.ToString()); Finish(); }
+            finally { busy = false; }
+        }
+        static IEnumerator Exercise()
+        {
+            CheckState("unity-version", Application.unityVersion == "2022.3.28f1", Application.unityVersion);
+            yield return new Delay(.5f);
+            Require("gm1851-direct-play-initialized", Game != null && Game.CurrentLevelId == 1851 && Game.IsLevelActive, "Direct Play in the original gameplay scene, before any manual LoadLevel.");
+            RecoveryPiece carrier = Record(19), pipe = At(new Vector3(40, 3.95f, 60));
+            Require("gm1851-original-actors", carrier != null && pipe != null && Springs != null && Springs.ObserverCount > 0 && Springs.PhysicalSwitchCount > 0, "Original record19 spring, first recorded pipe, observer and plate are present.");
+            Vector3 baseStart = carrier.transform.position, pipeStart = pipe.transform.position;
+            CheckState("direct-play-bus-attached", typeof(RecoveredNativeSprings).GetField("bus", Private).GetValue(Springs) == (object)Bus && Bus != null, "LateUpdate connected the current network bus.");
+            Require("gm1851-first-original-placement", Game.TryMove(pipe.Index, baseStart + Vector3.up * 7.6f), Game.Status);
+            yield return new Delay(5.3f);
+            Vector3 baseEnd = baseStart + Vector3.forward * 20, pipeEnd = baseEnd + Vector3.up * 7.6f;
+            CheckState("gm1851-carry-forward", Near(carrier.transform.position, baseEnd) && Near(pipe.transform.position, pipeEnd), Positions(carrier, pipe));
+            CheckState("gm1851-completion-barrier", UIManagerScript.positionRes1 == 1 && !UIManagerScript.activadoRes1 && !Springs.IsBusy, "position=" + UIManagerScript.positionRes1 + ", busy=" + Springs.IsBusy);
+            Capture("01-gm1851-carried.png");
+            Game.Undo(); yield return new Delay(.3f);
+            CheckState("gm1851-undo-mechanism", Near(carrier.transform.position, baseStart) && Near(pipe.transform.position, pipeStart) && UIManagerScript.positionRes1 == 0 && Game.MoveCount == 0 && !Springs.IsBusy, Positions(carrier, pipe));
+            Require("gm1851-repress-after-undo", Game.TryMove(pipe.Index, baseStart + Vector3.up * 7.6f), Game.Status);
+            yield return new Delay(1.2f);
+            object inFlight = typeof(RecoveredFlowGame).GetMethod("CaptureSnapshot", Private).Invoke(Game, null);
+            Vector3 movingBase = carrier.transform.position;
+            CheckState("gm1851-midflight-lock", Springs.IsBusy && !carrier.CanMove && !pipe.CanMove, Positions(carrier, pipe));
+            yield return new Delay(4.5f);
+            typeof(RecoveredFlowGame).GetMethod("RestoreSnapshot", Private).Invoke(Game, new[] { inFlight });
+            CheckState("gm1851-midflight-restore-pose", Near(carrier.transform.position, movingBase) && Springs.IsBusy, Positions(carrier, pipe));
+            yield return new Delay(4.5f);
+            CheckState("gm1851-midflight-resumes", Near(carrier.transform.position, baseEnd) && Near(pipe.transform.position, pipeEnd) && !Springs.IsBusy && UIManagerScript.positionRes1 == 1 && pipe.CanMove, Positions(carrier, pipe));
+            Require("gm1851-release-toggle-plate", Game.TryMove(pipe.Index, baseStart), Game.Status);
+            yield return new Delay(.35f);
+            CheckState("gm1851-toggle-holds-after-release", Near(carrier.transform.position, baseEnd) && UIManagerScript.conResorte1 == 1, "conResorte1=" + UIManagerScript.conResorte1);
+            Require("gm1851-second-press", Game.TryMove(pipe.Index, pipeEnd), Game.Status);
+            yield return new Delay(5.3f);
+            CheckState("gm1851-carry-reverse", Near(carrier.transform.position, baseStart) && Near(pipe.transform.position, baseStart + Vector3.up * 7.6f) && UIManagerScript.positionRes1 == 0 && !Springs.IsBusy, Positions(carrier, pipe));
+            Capture("02-gm1851-returned.png");
+
+            foreach (object wait in Load(601)) yield return wait;
+            RecoveryPiece rotary = Record(11), press = Record(3);
+            Require("gm601-original-rotator-and-plate", rotary != null && press != null && press.CanMove && Record(12) != null, "Original Save1 first move onto BloqueResorte record12. " + Positions(rotary, press, Record(12)) + "; pressing piece movable=" + (press != null && press.CanMove));
+            Quaternion rotaryStart = rotary.transform.rotation;
+            Vector3 pressStart = press.transform.position;
+            Require("gm601-first-original-placement", Game.TryMove(press.Index, new Vector3(60, 3.95f, 60)), Game.Status);
+            yield return new Delay(6.5f);
+            Quaternion rotated = Quaternion.Euler(0, rotaryStart.eulerAngles.y + 90, 0);
+            CheckState("gm601-native-yaw90", Quaternion.Angle(rotary.transform.rotation, rotated) < .1f && UIManagerScript.positionRes1 == 1 && !Springs.IsBusy, "yaw=" + rotary.transform.eulerAngles.y + ", position=" + UIManagerScript.positionRes1);
+            Capture("03-gm601-rotated.png");
+            Game.Undo(); yield return new Delay(.35f);
+            CheckState("gm601-rotation-undo", Quaternion.Angle(rotary.transform.rotation, rotaryStart) < .1f && Near(press.transform.position, pressStart) && UIManagerScript.positionRes1 == 0, "yaw=" + rotary.transform.eulerAngles.y);
+            Require("gm601-press-again", Game.TryMove(press.Index, new Vector3(60, 3.95f, 60)), Game.Status);
+            yield return new Delay(6.5f);
+            Require("gm601-release-momentary", Game.TryMove(press.Index, pressStart), Game.Status);
+            yield return new Delay(6.5f);
+            CheckState("gm601-rotation-reverse", Quaternion.Angle(rotary.transform.rotation, rotaryStart) < .1f && UIManagerScript.positionRes1 == 0 && !Springs.IsBusy, "yaw=" + rotary.transform.eulerAngles.y);
+
+            foreach (object wait in Load(614)) yield return wait;
+            RecoveryPiece waterActor = Record(3), switchPiece = Record(2);
+            Require("gm614-original-water-switch", waterActor != null && switchPiece != null && switchPiece.GetComponent<ControlPieza>() != null && switchPiece.GetComponent<ControlPieza>().conOrigen1 == "1", "record2 Fj1 -> conOrigen1=1; record3 st1/sz7 -> X-20.");
+            Vector3 waterActorStart = waterActor.transform.position;
+            RecoverySave solution = Solution(614);
+            for (int i = 0; i < solution.move.Count; i++)
+            {
+                Vector3 origin = RecoveredFlowGame.StepPosition(solution.orix[i], solution.oriy[i], solution.oriz[i]);
+                Vector3 destination = RecoveredFlowGame.StepPosition(solution.desx[i], solution.desy[i], solution.desz[i]);
+                RecoveryPiece moving = At(origin); bool moved = false; float until = Time.time + 7;
+                while (Time.time < until)
+                {
+                    if (moving != null && Game.TryMove(moving.Index, destination)) { moved = true; break; }
+                    yield return new Delay(.15f);
+                }
+                Require("gm614-recorded-player-move-" + (i + 1), moved, "origin=" + origin + ", destination=" + destination + "; " + Game.Status);
+                yield return new Delay(.3f);
+            }
+            yield return new Delay(5.3f);
+            CheckState("gm614-water-switch-wet", RecoveredWaterNetwork.Instance.IsControllerPortWet(switchPiece.GetComponent<ControlPieza>(), 1), "Original configured port1 receives network water.");
+            CheckState("gm614-water-activates-spring", UIManagerScript.conResorte1 == 1 && UIManagerScript.positionRes1 == 1 && Near(waterActor.transform.position, waterActorStart + Vector3.left * 20) && !Springs.IsBusy, Positions(waterActor) + ", conResorte1=" + UIManagerScript.conResorte1);
+            Capture("04-gm614-water-triggered.png");
+
+            foreach (object wait in Load(656)) yield return wait;
+            RecoveryPiece multi = Record(6), multiTop = Record(35), obstruction = Record(19);
+            Require("gm656-original-two-channel-actors", multi != null && multiTop != null && obstruction != null && Bus != null, "st12/sz4c4 actor pair.");
+            Vector3 multiStart = multi.transform.position, multiTopStart = multiTop.transform.position;
+            Require("gm656-arrange-empty-action-destination", Game.TryMove(obstruction.Index, new Vector3(80, 11.55f, 0)), Game.Status);
+            Bus.SetPhysicalSwitch(1, true); yield return new Delay(4.7f);
+            CheckState("gm656-channel1-action", Near(multi.transform.position, multiStart + Vector3.back * 20) && Near(multiTop.transform.position, multiTopStart + Vector3.back * 20) && UIManagerScript.positionRes1 == 1, Positions(multi, multiTop));
+            Bus.SetPhysicalSwitch(2, true); yield return new Delay(4.7f);
+            CheckState("gm656-channel2-preserves-channel1-pose", Near(multi.transform.position, multiStart + Vector3.back * 40) && Near(multiTop.transform.position, multiTopStart + Vector3.back * 40) && UIManagerScript.positionRes2 == 1, Positions(multi, multiTop));
+            Bus.SetPhysicalSwitch(1, false); yield return new Delay(4.7f);
+            CheckState("gm656-channel1-reverse-preserves-channel2", Near(multi.transform.position, multiStart + Vector3.back * 20) && UIManagerScript.positionRes1 == 0 && UIManagerScript.positionRes2 == 1, Positions(multi, multiTop));
+            Bus.SetPhysicalSwitch(2, false); yield return new Delay(4.7f);
+            CheckState("gm656-channel2-reverse", Near(multi.transform.position, multiStart) && Near(multiTop.transform.position, multiTopStart) && UIManagerScript.positionRes2 == 0 && !Springs.IsBusy, Positions(multi, multiTop));
+            Capture("05-gm656-two-channel-returned.png");
+        }
+        static IEnumerable Load(int id)
+        {
+            Require("ui-ready-gm" + id, FlowWaterRecoveryUI.Instance != null, "Original UI adapter starts the native scene.");
+            FlowWaterRecoveryUI.Instance.StartGame(id);
+            double until = EditorApplication.timeSinceStartup + 20;
+            while (Game == null || Game.CurrentLevelId != id || !Game.IsLevelActive)
+            { if (EditorApplication.timeSinceStartup > until) throw new TimeoutException("gm" + id + " did not load."); yield return null; }
+            yield return new Delay(.6f);
+            CheckState("gm" + id + "-original-mechanism-models", Springs != null && Springs.ObserverCount > 0, "Observers=" + (Springs == null ? 0 : Springs.ObserverCount) + ", plates=" + (Springs == null ? 0 : Springs.PhysicalSwitchCount));
+        }
+        static RecoveryPiece Record(int index) { return Game.Pieces.FirstOrDefault(p => p != null && p.SourceRecordIndex == index); }
+        static RecoveryPiece At(Vector3 position) { return Game.Pieces.Where(p => p != null && p.CanMove && Near(p.transform.position, position)).OrderBy(p => (p.transform.position-position).sqrMagnitude).FirstOrDefault(); }
+        static RecoverySave Solution(int id) { return JsonUtility.FromJson<RecoveryEnvelope>(RecoveryCatalog.Load().levels.First(e => e.assetId == id).solution.text).data; }
+        static bool Near(Vector3 a, Vector3 b) { return (a-b).sqrMagnitude < .04f; }
+        static string Positions(params RecoveryPiece[] pieces) { return String.Join("; ", pieces.Select(p => p == null ? "missing" : "record" + p.SourceRecordIndex + "=" + p.transform.position.ToString("F3")).ToArray()); }
+        static void Require(string name, bool passed, string detail) { CheckState(name, passed, detail); if (!passed) throw new InvalidOperationException(name + ": " + detail); }
+        static void CheckState(string name, bool passed, string detail)
+        {
+            report.checks.Add(new Check { name = name, passed = passed, detail = detail });
+            File.WriteAllText(Path.Combine(Output, "spring-validation.json"), JsonUtility.ToJson(report, true));
+        }
+        static void Capture(string file)
+        {
+            Camera camera = Game.GameCamera; if (camera == null) return;
+            string path = Path.Combine(Output, file);
+            RenderTexture target = RenderTexture.GetTemporary(1280, 800, 24);
+            RenderTexture old = camera.targetTexture, active = RenderTexture.active; float aspect = camera.aspect;
+            Texture2D texture = new Texture2D(1280, 800, TextureFormat.RGB24, false);
+            try { camera.targetTexture = target; camera.aspect = 1.6f; Canvas.ForceUpdateCanvases(); camera.Render(); RenderTexture.active = target; texture.ReadPixels(new Rect(0,0,1280,800),0,0); texture.Apply(); File.WriteAllBytes(path, texture.EncodeToPNG()); report.screenshots.Add(path); }
+            finally { camera.targetTexture = old; camera.aspect = aspect; RenderTexture.active = active; RenderTexture.ReleaseTemporary(target); UnityEngine.Object.DestroyImmediate(texture); }
+        }
+        static bool RestorePreferences()
+        {
+            string json = SessionState.GetString(PrefsKey, ""); if (String.IsNullOrEmpty(json)) return false;
+            Preferences backup = JsonUtility.FromJson<Preferences>(json);
+            foreach (SavedPreference saved in backup.values) if (saved.existed) PlayerPrefs.SetInt(saved.key, saved.value); else PlayerPrefs.DeleteKey(saved.key);
+            PlayerPrefs.Save(); SessionState.EraseString(PrefsKey);
+            return backup.values.All(s => PlayerPrefs.HasKey(s.key) == s.existed && (!s.existed || PlayerPrefs.GetInt(s.key) == s.value));
+        }
+        static void OnLog(string message, string stack, LogType type) { if (report != null && (type == LogType.Error || type == LogType.Exception || type == LogType.Assert)) report.runtimeErrors.Add(message + "\n" + stack); }
+        static void OnPlayMode(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode) ReleaseImports();
+            if (state == PlayModeStateChange.EnteredEditMode && SessionState.GetBool(ActiveKey,false)) { RestorePreferences(); SessionState.EraseBool(ActiveKey); report = null; routine = null; }
+        }
+        static void ReleaseImports() { if (!importsLocked) return; importsLocked = false; EditorApplication.UnlockReloadAssemblies(); AssetDatabase.AllowAutoRefresh(); }
+        static void Finish()
+        {
+            if (report == null) report = new Report();
+            report.preferencesRestored = RestorePreferences(); report.finishedUtc = DateTime.UtcNow.ToString("o");
+            report.passed = report.preferencesRestored && report.checks.Count > 0 && report.checks.All(c => c.passed) && report.runtimeErrors.Count == 0;
+            Directory.CreateDirectory(Output); File.WriteAllText(Path.Combine(Output, "spring-validation.json"), JsonUtility.ToJson(report,true));
+            bool passed = report.passed; Debug.Log("Native spring validation " + (passed ? "PASS" : "FAIL") + "; checks=" + report.checks.Count + "; errors=" + report.runtimeErrors.Count);
+            SessionState.EraseBool(ActiveKey); report = null; routine = null; ReleaseImports();
+            if (Application.isBatchMode) EditorApplication.Exit(passed ? 0 : 1); else EditorApplication.isPlaying = false;
+        }
+    }
+}
+#endif

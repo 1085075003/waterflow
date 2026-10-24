@@ -1,0 +1,87 @@
+// ObservadorResorte2$$doValidarPos3 VA 0xFE2874, inferred length 340
+void ObservadorResorte2__doValidarPos3 (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE2874  stp      x30, x21, [sp, #-0x20]!               
+00FE2878  stp      x20, x19, [sp, #0x10]                 
+00FE287C  adrp     x21, #0x24fb000                       
+00FE2880  adrp     x20, #0x236a000                       
+00FE2884  ldrb     w8, [x21, #0xba3]                     
+00FE2888  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FE288C  mov      x19, x0                               
+00FE2890  tbnz     w8, #0, #0xfe28c0                     
+00FE2894  adrp     x0, #0x236a000                        
+00FE2898  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+00FE289C  bl       #0xe61b78                             
+00FE28A0  adrp     x0, #0x236a000                        
+00FE28A4  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+00FE28A8  bl       #0xe61b78                             
+00FE28AC  adrp     x0, #0x236a000                        
+00FE28B0  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FE28B4  bl       #0xe61b78                             
+00FE28B8  mov      w8, #1                                
+00FE28BC  strb     w8, [x21, #0xba3]                     
+00FE28C0  ldr      x0, [x19, #0x248]                      // self.tipoResor3
+00FE28C4  mov      x2, xzr                               
+00FE28C8  str      x0, [x19, #0x230]                      // self.tipoResor
+00FE28CC  ldr      x1, [x20]                             
+00FE28D0  bl       #0x1960c80                             // System.String$$op_Inequality
+00FE28D4  tbz      w0, #0, #0xfe2988                     
+00FE28D8  adrp     x8, #0x236a000                        
+00FE28DC  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE28E0  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+00FE28E4  mov      x2, xzr                               
+00FE28E8  ldr      x1, [x8]                              
+00FE28EC  bl       #0x1960c80                             // System.String$$op_Inequality
+00FE28F0  tbz      w0, #0, #0xfe2988                     
+00FE28F4  adrp     x8, #0x236a000                        
+00FE28F8  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE28FC  ldr      x8, [x8, #0x650]                       // [0x236A650] '3'
+00FE2900  mov      x2, xzr                               
+00FE2904  ldr      x1, [x8]                              
+00FE2908  bl       #0x1960c80                             // System.String$$op_Inequality
+00FE290C  tbz      w0, #0, #0xfe2988                     
+00FE2910  ldr      w8, [x19, #0x1b4]                      // self.comprueba
+00FE2914  mov      w9, #0xac                             
+00FE2918  mov      w10, #0x9c                            
+00FE291C  mov      w11, #0xb0                            
+00FE2920  cmp      w8, #1                                
+00FE2924  mov      w8, #0xa0                             
+00FE2928  csel     x9, x10, x9, eq                       
+00FE292C  mov      w10, #0xb4                            
+00FE2930  csel     x8, x8, x11, eq                       
+00FE2934  mov      w11, #0xa4                            
+00FE2938  csel     x10, x11, x10, eq                     
+00FE293C  ldr      s0, [x19, x9]                         
+00FE2940  ldr      s1, [x19, x8]                         
+00FE2944  ldr      s2, [x19, x10]                        
+00FE2948  mov      x0, x19                               
+00FE294C  stp      s0, s1, [x19, #0xbc]                   // self.parx
+00FE2950  str      s2, [x19, #0xc4]                       // self.parz
+00FE2954  bl       #0xfe2b2c                              // ObservadorResorte2$$doValidarNext
+00FE2958  ldrb     w8, [x19, #0xe8]                       // self.ocupado
+00FE295C  cbnz     w8, #0xfe29a8                         
+00FE2960  ldr      w8, [x19, #0x1b4]                      // self.comprueba
+00FE2964  ldr      s0, [x19, #0xcc]                       // self.parnextx
+00FE2968  cmp      w8, #1                                
+00FE296C  b.ne     #0xfe29b4                             
+00FE2970  ldr      d1, [x19, #0xd0]                       // self.parnexty
+00FE2974  mov      w8, #3                                
+00FE2978  str      s0, [x19, #0xac]                       // self.inix3
+00FE297C  str      w8, [x19, #0x31c]                      // self.posiMax
+00FE2980  str      d1, [x19, #0xb0]                       // self.iniy3
+00FE2984  b        #0xfe29a8                             
+00FE2988  ldr      w8, [x19, #0x1b4]                      // self.comprueba
+00FE298C  cmp      w8, #1                                
+00FE2990  b.ne     #0xfe29a0                             
+00FE2994  mov      w8, #3                                
+00FE2998  str      w8, [x19, #0x31c]                      // self.posiMax
+00FE299C  b        #0xfe29a8                             
+00FE29A0  mov      w8, #2                                
+00FE29A4  str      w8, [x19, #0x320]                      // self.posiMin
+00FE29A8  ldp      x20, x19, [sp, #0x10]                 
+00FE29AC  ldp      x30, x21, [sp], #0x20                 
+00FE29B0  ret                                            
+00FE29B4  ldr      d1, [x19, #0xd0]                       // self.parnexty
+00FE29B8  str      s0, [x19, #0x9c]                       // self.inix2
+00FE29BC  mov      w8, #2                                
+00FE29C0  str      d1, [x19, #0xa0]                       // self.iniy2
+00FE29C4  b        #0xfe29a4                             

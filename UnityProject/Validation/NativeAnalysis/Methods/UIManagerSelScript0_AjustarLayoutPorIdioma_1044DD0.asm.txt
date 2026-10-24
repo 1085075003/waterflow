@@ -1,0 +1,312 @@
+// UIManagerSelScript0$$AjustarLayoutPorIdioma VA 0x1044DD0, inferred length 1240
+void UIManagerSelScript0__AjustarLayoutPorIdioma (UIManagerSelScript0_o* __this, System_String_o* idioma, const MethodInfo* method);
+01044DD0  str      x30, [sp, #-0x30]!                    
+01044DD4  stp      x22, x21, [sp, #0x10]                 
+01044DD8  stp      x20, x19, [sp, #0x20]                 
+01044DDC  adrp     x19, #0x24fb000                       
+01044DE0  ldrb     w8, [x19, #0xd92]                     
+01044DE4  mov      x22, x1                               
+01044DE8  mov      x20, x0                               
+01044DEC  tbnz     w8, #0, #0x1044e70                    
+01044DF0  adrp     x0, #0x236b000                        
+01044DF4  ldr      x0, [x0, #0xb68]                       // [0x236BB68] Method$UnityEngine.Component.GetComponent<RectTransform>()
+01044DF8  bl       #0xe61b78                             
+01044DFC  adrp     x0, #0x236b000                        
+01044E00  ldr      x0, [x0, #0x238]                       // [0x236B238] 'it'
+01044E04  bl       #0xe61b78                             
+01044E08  adrp     x0, #0x236b000                        
+01044E0C  ldr      x0, [x0, #0x248]                       // [0x236B248] 'fr'
+01044E10  bl       #0xe61b78                             
+01044E14  adrp     x0, #0x236b000                        
+01044E18  ldr      x0, [x0, #0x270]                       // [0x236B270] 'ko'
+01044E1C  bl       #0xe61b78                             
+01044E20  adrp     x0, #0x236b000                        
+01044E24  ldr      x0, [x0, #0x280]                       // [0x236B280] 'el'
+01044E28  bl       #0xe61b78                             
+01044E2C  adrp     x0, #0x236b000                        
+01044E30  ldr      x0, [x0, #0x2a0]                       // [0x236B2A0] 'es'
+01044E34  bl       #0xe61b78                             
+01044E38  adrp     x0, #0x236b000                        
+01044E3C  ldr      x0, [x0, #0x2f0]                       // [0x236B2F0] 'ru'
+01044E40  bl       #0xe61b78                             
+01044E44  adrp     x0, #0x236b000                        
+01044E48  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+01044E4C  bl       #0xe61b78                             
+01044E50  adrp     x0, #0x236b000                        
+01044E54  ldr      x0, [x0, #0x320]                       // [0x236B320] 'zh'
+01044E58  bl       #0xe61b78                             
+01044E5C  adrp     x0, #0x236b000                        
+01044E60  ldr      x0, [x0, #0x330]                       // [0x236B330] 'hi'
+01044E64  bl       #0xe61b78                             
+01044E68  mov      w8, #1                                
+01044E6C  strb     w8, [x19, #0xd92]                     
+01044E70  ldr      x0, [x20, #0x1d8]                     
+01044E74  cbz      x0, #0x10452a4                        
+01044E78  adrp     x21, #0x236b000                       
+01044E7C  ldr      x21, [x21, #0xb68]                     // [0x236BB68] Method$UnityEngine.Component.GetComponent<RectTransform>()
+01044E80  ldr      x1, [x21]                             
+01044E84  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+01044E88  ldr      x8, [x20, #0x1e0]                     
+01044E8C  cbz      x8, #0x10452a4                        
+01044E90  ldr      x1, [x21]                             
+01044E94  mov      x19, x0                               
+01044E98  mov      x0, x8                                
+01044E9C  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+01044EA0  mov      x21, x0                               
+01044EA4  mov      x0, x22                               
+01044EA8  mov      x1, xzr                               
+01044EAC  bl       #0x1067aac                             // <PrivateImplementationDetails>$$ComputeStringHash
+01044EB0  mov      w8, #0xdf1f                           
+01044EB4  movk     w8, #0x4567, lsl #16                  
+01044EB8  cmp      w0, w8                                
+01044EBC  b.hi     #0x1044f30                            
+01044EC0  mov      w8, #0x658a                           
+01044EC4  movk     w8, #0x411a, lsl #16                  
+01044EC8  cmp      w0, w8                                
+01044ECC  b.hi     #0x1044f6c                            
+01044ED0  mov      w8, #0x6264                           
+01044ED4  movk     w8, #0x3f1a, lsl #16                  
+01044ED8  cmp      w0, w8                                
+01044EDC  b.eq     #0x104504c                            
+01044EE0  mov      w8, #0x658a                           
+01044EE4  movk     w8, #0x411a, lsl #16                  
+01044EE8  cmp      w0, w8                                
+01044EEC  b.ne     #0x1045270                            
+01044EF0  adrp     x8, #0x236b000                        
+01044EF4  ldr      x8, [x8, #0x210]                       // [0x236B210] 'en'
+01044EF8  mov      x0, x22                               
+01044EFC  mov      x2, xzr                               
+01044F00  ldr      x1, [x8]                              
+01044F04  bl       #0x1960c7c                             // System.String$$op_Equality
+01044F08  tbz      w0, #0, #0x1045270                    
+01044F0C  ldr      x0, [x20, #0x1e0]                     
+01044F10  cbz      x0, #0x10452a4                        
+01044F14  mov      w1, #0x4e                             
+01044F18  mov      x2, xzr                               
+01044F1C  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+01044F20  ldr      x0, [x20, #0x1e0]                     
+01044F24  cbz      x0, #0x10452a4                        
+01044F28  mov      w1, #0x4e                             
+01044F2C  b        #0x10450c0                            
+01044F30  mov      w8, #0x8410                           
+01044F34  movk     w8, #0x4738, lsl #16                  
+01044F38  cmp      w0, w8                                
+01044F3C  b.hi     #0x1045010                            
+01044F40  mov      w8, #0x6d69                           
+01044F44  movk     w8, #0x461a, lsl #16                  
+01044F48  cmp      w0, w8                                
+01044F4C  b.eq     #0x1045084                            
+01044F50  mov      w8, #0x8410                           
+01044F54  movk     w8, #0x4738, lsl #16                  
+01044F58  cmp      w0, w8                                
+01044F5C  b.ne     #0x1045270                            
+01044F60  adrp     x8, #0x236b000                        
+01044F64  ldr      x8, [x8, #0x238]                       // [0x236B238] 'it'
+01044F68  b        #0x104508c                            
+01044F6C  mov      w8, #0xf95f                           
+01044F70  movk     w8, #0x423c, lsl #16                  
+01044F74  cmp      w0, w8                                
+01044F78  b.eq     #0x10450e8                            
+01044F7C  mov      w8, #0xdf1f                           
+01044F80  movk     w8, #0x4567, lsl #16                  
+01044F84  cmp      w0, w8                                
+01044F88  b.ne     #0x1045270                            
+01044F8C  adrp     x8, #0x236b000                        
+01044F90  ldr      x8, [x8, #0x320]                       // [0x236B320] 'zh'
+01044F94  mov      x0, x22                               
+01044F98  mov      x2, xzr                               
+01044F9C  ldr      x1, [x8]                              
+01044FA0  bl       #0x1960c7c                             // System.String$$op_Equality
+01044FA4  tbz      w0, #0, #0x1045270                    
+01044FA8  ldr      x0, [x20, #0x1e0]                     
+01044FAC  cbz      x0, #0x10452a4                        
+01044FB0  mov      w1, #0x46                             
+01044FB4  mov      x2, xzr                               
+01044FB8  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+01044FBC  ldr      x0, [x20, #0x1e0]                     
+01044FC0  cbz      x0, #0x10452a4                        
+01044FC4  mov      w1, #0x46                             
+01044FC8  mov      x2, xzr                               
+01044FCC  bl       #0x223203c                             // UnityEngine.UI.Text$$set_resizeTextMaxSize
+01044FD0  cbz      x19, #0x10452a4                       
+01044FD4  mov      x0, x19                               
+01044FD8  mov      x1, xzr                               
+01044FDC  bl       #0x200e1fc                             // UnityEngine.RectTransform$$get_offsetMax
+01044FE0  adrp     x8, #0x600000                         
+01044FE4  ldr      s1, [x8, #0x18]                       
+01044FE8  mov      x0, x19                               
+01044FEC  mov      x1, xzr                               
+01044FF0  bl       #0x200e29c                             // UnityEngine.RectTransform$$set_offsetMax
+01044FF4  cbz      x21, #0x10452a4                       
+01044FF8  mov      x0, x21                               
+01044FFC  mov      x1, xzr                               
+01045000  bl       #0x200e1fc                             // UnityEngine.RectTransform$$get_offsetMax
+01045004  adrp     x8, #0x5ff000                         
+01045008  ldr      s1, [x8, #0xc2c]                      
+0104500C  b        #0x1045258                            
+01045010  mov      w8, #0x5c20                           
+01045014  movk     w8, #0x4854, lsl #16                  
+01045018  cmp      w0, w8                                
+0104501C  b.eq     #0x10451a0                            
+01045020  mov      w8, #0xd6f1                           
+01045024  movk     w8, #0x5722, lsl #16                  
+01045028  cmp      w0, w8                                
+0104502C  b.eq     #0x10451d8                            
+01045030  mov      w8, #0xf69a                           
+01045034  movk     w8, #0x683a, lsl #16                  
+01045038  cmp      w0, w8                                
+0104503C  b.ne     #0x1045270                            
+01045040  adrp     x8, #0x236b000                        
+01045044  ldr      x8, [x8, #0x330]                       // [0x236B330] 'hi'
+01045048  b        #0x10450f0                            
+0104504C  adrp     x8, #0x236b000                        
+01045050  ldr      x8, [x8, #0x280]                       // [0x236B280] 'el'
+01045054  mov      x0, x22                               
+01045058  mov      x2, xzr                               
+0104505C  ldr      x1, [x8]                              
+01045060  bl       #0x1960c7c                             // System.String$$op_Equality
+01045064  tbz      w0, #0, #0x1045270                    
+01045068  cbz      x19, #0x10452a4                       
+0104506C  mov      x0, x19                               
+01045070  mov      x1, xzr                               
+01045074  bl       #0x200e1fc                             // UnityEngine.RectTransform$$get_offsetMax
+01045078  adrp     x8, #0x5ff000                         
+0104507C  ldr      s1, [x8, #0xeec]                      
+01045080  b        #0x10450e0                            
+01045084  adrp     x8, #0x236b000                        
+01045088  ldr      x8, [x8, #0x2a0]                       // [0x236B2A0] 'es'
+0104508C  ldr      x1, [x8]                              
+01045090  mov      x0, x22                               
+01045094  mov      x2, xzr                               
+01045098  bl       #0x1960c7c                             // System.String$$op_Equality
+0104509C  tbz      w0, #0, #0x1045270                    
+010450A0  ldr      x0, [x20, #0x1e0]                     
+010450A4  cbz      x0, #0x10452a4                        
+010450A8  mov      w1, #0x46                             
+010450AC  mov      x2, xzr                               
+010450B0  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+010450B4  ldr      x0, [x20, #0x1e0]                     
+010450B8  cbz      x0, #0x10452a4                        
+010450BC  mov      w1, #0x46                             
+010450C0  mov      x2, xzr                               
+010450C4  bl       #0x223203c                             // UnityEngine.UI.Text$$set_resizeTextMaxSize
+010450C8  cbz      x19, #0x10452a4                       
+010450CC  mov      x0, x19                               
+010450D0  mov      x1, xzr                               
+010450D4  bl       #0x200e1fc                             // UnityEngine.RectTransform$$get_offsetMax
+010450D8  adrp     x8, #0x600000                         
+010450DC  ldr      s1, [x8, #0x18]                       
+010450E0  mov      x0, x19                               
+010450E4  b        #0x104525c                            
+010450E8  adrp     x8, #0x236b000                        
+010450EC  ldr      x8, [x8, #0x270]                       // [0x236B270] 'ko'
+010450F0  ldr      x1, [x8]                              
+010450F4  mov      x0, x22                               
+010450F8  mov      x2, xzr                               
+010450FC  bl       #0x1960c7c                             // System.String$$op_Equality
+01045100  tbz      w0, #0, #0x1045270                    
+01045104  ldr      x0, [x20, #0x1e0]                     
+01045108  cbz      x0, #0x10452a4                        
+0104510C  mov      w1, #0x3e                             
+01045110  mov      x2, xzr                               
+01045114  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+01045118  ldr      x0, [x20, #0x1e0]                     
+0104511C  cbz      x0, #0x10452a4                        
+01045120  mov      w1, #0x3e                             
+01045124  mov      x2, xzr                               
+01045128  bl       #0x223203c                             // UnityEngine.UI.Text$$set_resizeTextMaxSize
+0104512C  cbz      x19, #0x10452a4                       
+01045130  mov      x0, x19                               
+01045134  mov      x1, xzr                               
+01045138  bl       #0x200e1fc                             // UnityEngine.RectTransform$$get_offsetMax
+0104513C  adrp     x8, #0x600000                         
+01045140  ldr      s1, [x8, #0xe4]                       
+01045144  mov      x0, x19                               
+01045148  mov      x1, xzr                               
+0104514C  bl       #0x200e29c                             // UnityEngine.RectTransform$$set_offsetMax
+01045150  cbz      x21, #0x10452a4                       
+01045154  mov      x0, x21                               
+01045158  mov      x1, xzr                               
+0104515C  bl       #0x200e1fc                             // UnityEngine.RectTransform$$get_offsetMax
+01045160  adrp     x8, #0x5ff000                         
+01045164  ldr      s1, [x8, #0xc2c]                      
+01045168  mov      x0, x21                               
+0104516C  mov      x1, xzr                               
+01045170  bl       #0x200e29c                             // UnityEngine.RectTransform$$set_offsetMax
+01045174  mov      x0, x19                               
+01045178  mov      x1, xzr                               
+0104517C  bl       #0x200e0b4                             // UnityEngine.RectTransform$$get_offsetMin
+01045180  adrp     x8, #0x5ff000                         
+01045184  ldr      s1, [x8, #0xb44]                      
+01045188  mov      x0, x21                               
+0104518C  ldp      x20, x19, [sp, #0x20]                 
+01045190  ldp      x22, x21, [sp, #0x10]                 
+01045194  mov      x1, xzr                               
+01045198  ldr      x30, [sp], #0x30                      
+0104519C  b        #0x200e108                             // UnityEngine.RectTransform$$set_offsetMin
+010451A0  adrp     x8, #0x236b000                        
+010451A4  ldr      x8, [x8, #0x2f0]                       // [0x236B2F0] 'ru'
+010451A8  mov      x0, x22                               
+010451AC  mov      x2, xzr                               
+010451B0  ldr      x1, [x8]                              
+010451B4  bl       #0x1960c7c                             // System.String$$op_Equality
+010451B8  tbz      w0, #0, #0x1045270                    
+010451BC  cbz      x19, #0x10452a4                       
+010451C0  mov      x0, x19                               
+010451C4  mov      x1, xzr                               
+010451C8  bl       #0x200e1fc                             // UnityEngine.RectTransform$$get_offsetMax
+010451CC  mov      w8, #0x42dc0000                       
+010451D0  fmov     s1, w8                                
+010451D4  b        #0x10450e0                            
+010451D8  adrp     x8, #0x236b000                        
+010451DC  ldr      x8, [x8, #0x248]                       // [0x236B248] 'fr'
+010451E0  mov      x0, x22                               
+010451E4  mov      x2, xzr                               
+010451E8  ldr      x1, [x8]                              
+010451EC  bl       #0x1960c7c                             // System.String$$op_Equality
+010451F0  tbz      w0, #0, #0x1045270                    
+010451F4  ldr      x0, [x20, #0x1e0]                     
+010451F8  cbz      x0, #0x10452a4                        
+010451FC  mov      w1, #0x46                             
+01045200  mov      x2, xzr                               
+01045204  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+01045208  ldr      x0, [x20, #0x1e0]                     
+0104520C  cbz      x0, #0x10452a4                        
+01045210  mov      w1, #0x46                             
+01045214  mov      x2, xzr                               
+01045218  bl       #0x223203c                             // UnityEngine.UI.Text$$set_resizeTextMaxSize
+0104521C  cbz      x19, #0x10452a4                       
+01045220  mov      x0, x19                               
+01045224  mov      x1, xzr                               
+01045228  bl       #0x200e1fc                             // UnityEngine.RectTransform$$get_offsetMax
+0104522C  adrp     x8, #0x600000                         
+01045230  ldr      s1, [x8, #0x1ac]                      
+01045234  mov      x0, x19                               
+01045238  mov      x1, xzr                               
+0104523C  bl       #0x200e29c                             // UnityEngine.RectTransform$$set_offsetMax
+01045240  cbz      x21, #0x10452a4                       
+01045244  mov      x0, x21                               
+01045248  mov      x1, xzr                               
+0104524C  bl       #0x200e1fc                             // UnityEngine.RectTransform$$get_offsetMax
+01045250  adrp     x8, #0x5ff000                         
+01045254  ldr      s1, [x8, #0xe54]                      
+01045258  mov      x0, x21                               
+0104525C  ldp      x20, x19, [sp, #0x20]                 
+01045260  ldp      x22, x21, [sp, #0x10]                 
+01045264  mov      x1, xzr                               
+01045268  ldr      x30, [sp], #0x30                      
+0104526C  b        #0x200e29c                             // UnityEngine.RectTransform$$set_offsetMax
+01045270  ldr      x0, [x20, #0x1e0]                     
+01045274  cbz      x0, #0x10452a4                        
+01045278  mov      w1, #0x4e                             
+0104527C  mov      x2, xzr                               
+01045280  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+01045284  ldr      x0, [x20, #0x1e0]                     
+01045288  cbz      x0, #0x10452a4                        
+0104528C  ldp      x20, x19, [sp, #0x20]                 
+01045290  ldp      x22, x21, [sp, #0x10]                 
+01045294  mov      w1, #0x4e                             
+01045298  mov      x2, xzr                               
+0104529C  ldr      x30, [sp], #0x30                      
+010452A0  b        #0x223203c                             // UnityEngine.UI.Text$$set_resizeTextMaxSize
+010452A4  bl       #0xe61da0                             

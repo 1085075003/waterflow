@@ -1,0 +1,37 @@
+// ObservadorResorte$$.ctor VA 0x10CF14C, inferred length 140
+void ObservadorResorte___ctor (ObservadorResorte_o* __this, const MethodInfo* method);
+010CF14C  str      x30, [sp, #-0x30]!                    
+010CF150  stp      x22, x21, [sp, #0x10]                 
+010CF154  stp      x20, x19, [sp, #0x20]                 
+010CF158  adrp     x22, #0x24fc000                       
+010CF15C  adrp     x21, #0x2368000                       
+010CF160  adrp     x20, #0x236d000                       
+010CF164  ldrb     w8, [x22, #0x15]                      
+010CF168  ldr      x21, [x21, #0xf50]                     // [0x2368F50] ''
+010CF16C  ldr      x20, [x20, #0x9b8]                     // [0x236D9B8] 'Piedra'
+010CF170  mov      x19, x0                               
+010CF174  tbnz     w8, #0, #0x10cf198                    
+010CF178  adrp     x0, #0x236d000                        
+010CF17C  ldr      x0, [x0, #0x9b8]                       // [0x236D9B8] 'Piedra'
+010CF180  bl       #0xe61b78                             
+010CF184  adrp     x0, #0x2368000                        
+010CF188  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+010CF18C  bl       #0xe61b78                             
+010CF190  mov      w8, #1                                
+010CF194  strb     w8, [x22, #0x15]                      
+010CF198  fmov     v0.2s, #2.50000000                    
+010CF19C  mov      w8, #0x3f800000                       
+010CF1A0  mov      w9, #1                                
+010CF1A4  str      d0, [x19, #0x128]                      // self.rotationSpeed
+010CF1A8  str      w8, [x19, #0x1b8]                      // self.sphereRadius
+010CF1AC  strb     w9, [x19, #0x37c]                      // self.validarmove
+010CF1B0  ldr      x8, [x21]                             
+010CF1B4  mov      x0, x19                               
+010CF1B8  ldp      x22, x21, [sp, #0x10]                 
+010CF1BC  mov      x1, xzr                               
+010CF1C0  str      x8, [x19, #0x388]                      // self.testsound
+010CF1C4  ldr      x8, [x20]                             
+010CF1C8  str      x8, [x19, #0x398]                      // self.SoundPiedra
+010CF1CC  ldp      x20, x19, [sp, #0x20]                 
+010CF1D0  ldr      x30, [sp], #0x30                      
+010CF1D4  b        #0x2007a3c                             // UnityEngine.MonoBehaviour$$.ctor

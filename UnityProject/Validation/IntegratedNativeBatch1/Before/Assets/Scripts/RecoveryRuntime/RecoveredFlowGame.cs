@@ -1,0 +1,1004 @@
+// Recovery implementation created for this export. This is not recovered original source.
+// Layouts and solutions use decoded gm/so records. Presentation, configuration and
+// fountain victory rules are transcribed from the original resources and native methods.
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+
+namespace Recovered.FlowWater
+{
+    public sealed class RecoveredFlowGame : MonoBehaviour
+    {
+        public static RecoveredFlowGame Instance { get; private set; }
+        public event Action StateChanged;
+        public int[] AvailableLevelIds { get; private set; } = new int[0];
+        public int CurrentLevelId { get; private set; }
+        public int MoveCount { get; private set; }
+        public int PieceCount { get { return pieces.Count; } }
+        public int UnresolvedPrefabCount { get; private set; }
+        public bool IsComplete { get; private set; }
+        public bool MatchesSavedSolution { get; private set; }
+        public bool HasSolution { get; private set; }
+        public bool IsSolutionPreview { get; private set; }
+        public bool IsShowingFinalSolution { get { return solutionBoard; } }
+        public string Status { get; private set; } = "Select a recovered level.";
+        public Transform PieceRoot { get; private set; }
+        public IReadOnlyList<RecoveryPiece> Pieces { get { return pieces; } }
+        public Camera GameCamera { get; private set; }
+        public int SelectedPieceIndex { get; private set; } = -1;
+        public int SolutionStepCount { get { return steps.Count; } }
+        public int AppliedSolutionSteps { get { return stepCursor; } }
+        public int SolutionCaptureMisses { get; private set; }
+        public string[] SolutionCaptureTrace { get { return solutionCaptureTrace.ToArray(); } }
+        public bool IsLevelActive { get { return boardRoot != null && boardRoot.activeSelf; } }
+        public float MinimumHeight { get { return Mathf.Min(BaseHeight, boardMin.y); } }
+
+        const float Cell = 20f;
+        const float Storey = 7.6f;
+        const float BaseHeight = 3.95f;
+        const float PositionTolerance = .7f;
+        readonly List<RecoveryPiece> pieces = new List<RecoveryPiece>();
+        readonly List<GameObject> hiddenRoots = new List<GameObject>();
+        readonly Dictionary<int, RecoveryLevelEntry> levels = new Dictionary<int, RecoveryLevelEntry>();
+        readonly Dictionary<string, GameObject> prefabs = new Dictionary<string, GameObject>(StringComparer.Ordinal);
+        readonly Dictionary<string, RecoveryAlias> aliases = new Dictionary<string, RecoveryAlias>(StringComparer.Ordinal);
+        readonly Stack<Snapshot> history = new Stack<Snapshot>();
+        readonly List<RecordedStep> steps = new List<RecordedStep>();
+        readonly List<string> solutionCaptureTrace = new List<string>();
+        readonly List<Material> ownedMaterials = new List<Material>();
+        GameObject boardRoot;
+        RecoverySave layout;
+        RecoverySave solution;
+        int stepCursor;
+        bool stepSolution;
+        bool solutionInventoryMatches;
+        string solutionWarning;
+        Vector3 boardMin, boardMax;
+        RecoveryPiece dragging;
+        Collider dragCollider;
+        RecoveredNativeDragMotion dragMotion;
+        Vector3 dragStart;
+        bool touchDragging;
+        LineRenderer selectedOutline;
+        Vector3 viewCenter;
+        float viewYaw = -40f;
+        Snapshot previewOrigin;
+        Snapshot[] previewHistory;
+        bool previewSteps;
+        bool solutionBoard;
+        int victoryFrames, lastVictoryFrame = -1;
+
+        sealed class RecordedStep
+        {
+            public int pieceIndex;
+            public Vector3 origin, destination;
+            public string exception;
+            public bool marker;
+        }
+
+        sealed class Snapshot
+        {
+            public Vector3[] positions;
+            public Quaternion[] rotations;
+            public int moves, cursor;
+            public bool complete;
+            public bool solutionBoard;
+            public object mechanismState;
+            public object springState;
+            public object waterState;
+        }
+
+        public static RecoveredFlowGame EnsureCreated()
+        {
+            if (Instance == null)
+            {
+                var root = new GameObject("Recovery Runtime");
+                DontDestroyOnLoad(root);
+                Instance = root.AddComponent<RecoveredFlowGame>();
+            }
+            return Instance;
+        }
+
+        public static RecoveryDataValidationReport ValidateAllData()
+        {
+            return RecoveryDataValidation.ValidateAllData();
+        }
+
+        void Awake()
+        {
+            if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            LoadCatalog();
+        }
+
+        void LoadCatalog()
+        {
+            RecoveryCatalog catalog = RecoveryCatalog.Load();
+#if UNITY_EDITOR
+            if (catalog == null)
+            {
+                RecoveryCatalogBuilder.Build();
+                catalog = RecoveryCatalog.Load();
+            }
+#endif
+            if (catalog == null)
+            {
+                Status = "Runtime catalog is missing. Build it with Tools > Flow Water > Build Runtime Recovery Catalog.";
+                Debug.LogError(Status);
+                return;
+            }
+            levels.Clear(); prefabs.Clear(); aliases.Clear();
+            foreach (RecoveryLevelEntry entry in catalog.levels) levels[entry.assetId] = entry;
+            var ids = new List<int>(levels.Keys);
+            ids.Sort(); AvailableLevelIds = ids.ToArray();
+            // SaveLoadManager stores original GameObject names, which are case
+            // sensitive. The catalog preserves the original reference name:
+            // BloqueFijo_0 is the playable BloqueFijo; bloqueFijo is decoration.
+            foreach (RecoveryPrefabEntry entry in catalog.prefabs)
+                if (entry.prefab != null && !prefabs.ContainsKey(entry.name)) prefabs.Add(entry.name, entry.prefab);
+            if (catalog.aliases != null)
+            {
+                RecoveryAliasFile file = JsonUtility.FromJson<RecoveryAliasFile>(catalog.aliases.text);
+                if (file != null && file.aliases != null)
+                    foreach (RecoveryAlias alias in file.aliases) aliases[alias.originalName] = alias;
+            }
+        }
+
+        public void LoadLevel(int assetId)
+        {
+            if (!OriginalScenePresentation.IsGameplayScene(SceneManager.GetActiveScene()) && FlowWaterRecoveryUI.Instance != null)
+            {
+                FlowWaterRecoveryUI.Instance.StartGame(assetId);
+                return;
+            }
+            RecoveryLevelEntry entry;
+            if (!levels.TryGetValue(assetId, out entry) || entry.layout == null)
+            {
+                Status = "No decoded gm" + assetId + " level exists.";
+                Notify(); return;
+            }
+            RecoveryEnvelope envelope = JsonUtility.FromJson<RecoveryEnvelope>(entry.layout.text);
+            if (envelope == null || envelope.data == null || !envelope.data.IsValidLayout())
+            {
+                Status = "Invalid layout in gm" + assetId + ".";
+                Debug.LogError(Status); Notify(); return;
+            }
+            CancelDrag();
+            IsSolutionPreview = false; previewOrigin = null; previewHistory = null;
+            ControladorJuego.chequearFuentes = ControladorJuego.piezasMovibles = true;
+            ClearBoard();
+            HideOriginalSceneRoots();
+            layout = envelope.data;
+            RecoveryEnvelope solutionEnvelope = entry.solution == null ? null : JsonUtility.FromJson<RecoveryEnvelope>(entry.solution.text);
+            solution = solutionEnvelope == null ? null : solutionEnvelope.data;
+            CurrentLevelId = assetId; MoveCount = 0; IsComplete = false; MatchesSavedSolution = false; victoryFrames = 0;
+            ControladorJuego.misionComplete = ControladorJuego.misionCompleteAd = false;
+            UnresolvedPrefabCount = 0; stepCursor = 0; solutionWarning = "";
+            history.Clear(); steps.Clear();
+            BuildBoard(layout, false);
+            ConfigureSolution();
+            foreach (RecoveryPiece piece in pieces)
+            {
+                if (!piece.HasGoal) continue;
+                boardMin = Vector3.Min(boardMin, piece.GoalPosition);
+                boardMax = Vector3.Max(boardMax, piece.GoalPosition);
+            }
+            CreateBoardAndView();
+            SelectedPieceIndex = -1;
+            Status = "gm" + assetId + " · Drag pieces onto the grid. " +
+                (HasSolution ? (stepSolution ? "Recorded move solution available." : "Original solution layout available.") : "Original solution is unavailable.");
+            CheckComplete(false);
+            Debug.Log("Recovery loaded gm" + assetId + ": " + pieces.Count + " pieces, " + UnresolvedPrefabCount + " unresolved prefabs. " + Status);
+            Notify();
+        }
+
+        void BuildBoard(RecoverySave state, bool isSolutionBoard)
+        {
+            ClearBoard();
+            solutionBoard = isSolutionBoard;
+            UnresolvedPrefabCount = 0;
+            boardRoot = new GameObject("RECOVERED Board " + (isSolutionBoard ? "so" : "gm") + CurrentLevelId);
+            boardRoot.transform.SetParent(transform, false);
+            PieceRoot = new GameObject("RECOVERED Original Prefab Pieces").transform;
+            PieceRoot.SetParent(boardRoot.transform, false);
+            boardMin = new Vector3(0, BaseHeight, 0);
+            boardMax = new Vector3(80, BaseHeight, 80);
+            for (int i = 0; i < state.pieza.Count; i++)
+            {
+                RecoveryAlias alias;
+                aliases.TryGetValue(state.pieza[i], out alias);
+                string prefabName = alias == null ? NormalizeName(state.pieza[i]) : alias.basePrefab;
+                if (alias != null && alias.scene292exception && SceneManager.GetActiveScene().name == "Levely5") prefabName = "BloqueChorro2";
+                if (!InstantiateRecord(state.fijo[i], prefabName, isSolutionBoard)) continue;
+                GameObject prefab;
+                GameObject instance;
+                if (prefabs.TryGetValue(prefabName, out prefab)) instance = Instantiate(prefab, PieceRoot);
+                else
+                {
+                    instance = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    instance.transform.SetParent(PieceRoot, false);
+                    instance.transform.localScale = new Vector3(18, 7.6f, 18);
+                    UnresolvedPrefabCount++;
+                    Debug.LogError("Missing recovery prefab: " + state.pieza[i] + " -> " + prefabName);
+                }
+                instance.name = "[" + i.ToString("D3") + "] " + state.pieza[i];
+                instance.transform.position = state.Position(i);
+                var baseColliders = new HashSet<Collider>(instance.GetComponentsInChildren<Collider>(true));
+                var captureColliders = new List<Collider>();
+                foreach (Collider collider in baseColliders) if (collider.enabled) captureColliders.Add(collider);
+                MakeInert(instance);
+                RecoveryPiece piece = instance.AddComponent<RecoveryPiece>();
+                piece.Index = pieces.Count; piece.SourceRecordIndex = i;
+                piece.OriginalName = state.pieza[i]; piece.BasePrefab = prefabName;
+                piece.OriginalConfiguration = state.fijo[i]; piece.ColorVariant = alias == null ? 0 : alias.colorSuffix;
+                piece.InitialPosition = instance.transform.position;
+                piece.InitialRotation = instance.transform.rotation;
+                boardMin.y = Mathf.Min(boardMin.y, piece.InitialPosition.y);
+                boardMax.y = Mathf.Max(boardMax.y, piece.InitialPosition.y);
+                RecoveredPieceConfiguration.Apply(piece);
+                RecoveredNativePalette.Apply(piece);
+                RecoveredNativeCollision.Apply(piece);
+                RecoveredNativeGeometry.Apply(piece);
+                RecoveredNativeFixedGeometry.Apply(piece);
+                RecoveredNativeDecorations.Apply(piece);
+                RecoveredNativePalette.Apply(piece);
+                foreach (Collider collider in instance.GetComponentsInChildren<Collider>(true))
+                {
+                    if (baseColliders.Contains(collider)) continue;
+                    bool originallyEnabled;
+                    if ((RecoveredNativeGeometry.TryGetOriginalColliderEnabled(collider, out originallyEnabled) ||
+                        RecoveredNativeFixedGeometry.TryGetOriginalColliderEnabled(collider, out originallyEnabled)) && !originallyEnabled) continue;
+                    captureColliders.Add(collider);
+                }
+                piece.OriginalCaptureColliders = captureColliders.ToArray();
+                pieces.Add(piece);
+                if (piece.CanMove)
+                {
+                    boardMin = Vector3.Min(boardMin, piece.InitialPosition);
+                    boardMax = Vector3.Max(boardMax, piece.InitialPosition);
+                }
+                AddPickingCollider(piece);
+            }
+            OriginalGroundConfiguration.Apply(PieceRoot, CurrentLevelId);
+        }
+
+        bool InstantiateRecord(string configuration, string prefabName, bool finalPreview)
+        {
+            // SaveLoadManager.Start selects parteSteps for these native parts.
+            int part = OriginalScenePresentation.PartForLevel(CurrentLevelId);
+            bool nativeSteps = part >= 13 && part <= 16 || part >= 20 && part <= 23 || part >= 25 && part <= 39;
+            if (!nativeSteps) return true;
+            string spring = ConfigurationValue(configuration, "st", "et");
+            if (!finalPreview) return spring != "9";
+            bool process = spring == "" || spring == "9";
+            if (ConfigurationValue(configuration, "<x", "x>").Length > 0) process = false;
+            return prefabName.Contains("BloqueResorte") || process;
+        }
+
+        static string ConfigurationValue(string text, string opening, string closing)
+        {
+            if (String.IsNullOrEmpty(text)) return "";
+            int start = text.IndexOf(opening, StringComparison.Ordinal);
+            if (start < 0) return "";
+            start += opening.Length;
+            int end = text.IndexOf(closing, start, StringComparison.Ordinal);
+            return end < start ? "" : text.Substring(start, end - start);
+        }
+
+        static string NormalizeName(string value)
+        {
+            return value == null ? "" : value.Replace("(Clone)", "").Trim();
+        }
+
+        string GeometryKey(string originalName)
+        {
+            RecoveryAlias alias;
+            if (aliases.TryGetValue(originalName, out alias)) return alias.basePrefab + "#" + alias.colorSuffix;
+            return NormalizeName(originalName);
+        }
+
+        void ConfigureSolution()
+        {
+            steps.Clear();
+            stepSolution = solution != null && solution.IsValidSteps();
+            solutionInventoryMatches = false;
+            HasSolution = false;
+            if (stepSolution)
+            {
+                var positions = new Vector3[pieces.Count];
+                for (int i = 0; i < pieces.Count; i++) positions[i] = pieces[i].InitialPosition;
+                for (int i = 0; i < solution.move.Count; i++)
+                {
+                    Vector3 origin = StepPosition(solution.orix[i], solution.oriy[i], solution.oriz[i]);
+                    Vector3 destination = StepPosition(solution.desx[i], solution.desy[i], solution.desz[i]);
+                    int pieceIndex = FindAt(positions, origin, PositionTolerance);
+                    string exception = solution.excep != null && i < solution.excep.Count ? solution.excep[i] : "";
+                    // Step mode skips z while the mechanism moves; total
+                    // preview still applies z's recorded destination if a
+                    // piece exists (so1851). Missing z captures are legal.
+                    bool marker = exception == "z" || (origin - destination).sqrMagnitude < .01f;
+                    // HandleSolutionTotal skips captures absent from this
+                    // mode's actor set. Spring actors and st9 proxies differ.
+                    var step = new RecordedStep
+                    {
+                        pieceIndex = pieceIndex, origin = origin, destination = destination,
+                        exception = exception,
+                        marker = marker
+                    };
+                    steps.Add(step);
+                    if (pieceIndex >= 0 && (origin - destination).sqrMagnitude >= .01f)
+                    {
+                        positions[pieceIndex] = destination;
+                    }
+                }
+                for (int i = 0; i < pieces.Count; i++)
+                {
+                    pieces[i].GoalPosition = positions[i];
+                    pieces[i].HasGoal = true;
+                }
+                solutionInventoryMatches = true;
+                HasSolution = true;
+                return;
+            }
+            if (solution == null || !solution.IsValidLayout()) return;
+            var used = new bool[solution.pieza.Count];
+            var matches = new int[pieces.Count];
+            for (int i = 0; i < matches.Length; i++) matches[i] = -1;
+            // Unity serialization order can change between two saves even for fixed, identical blocks.
+            // Reserve unchanged geometry/positions first so those blocks retain their fixed state.
+            for (int i = 0; i < pieces.Count; i++)
+                for (int j = 0; j < solution.pieza.Count; j++)
+                {
+                    if (used[j] || GeometryKey(pieces[i].OriginalName) != GeometryKey(solution.pieza[j]) ||
+                        (pieces[i].InitialPosition - solution.Position(j)).sqrMagnitude > PositionTolerance * PositionTolerance) continue;
+                    matches[i] = j; used[j] = true; break;
+                }
+            int assigned = 0;
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                RecoveryPiece piece = pieces[i];
+                int match = matches[i];
+                if (match < 0)
+                {
+                    float nearest = float.PositiveInfinity;
+                    for (int j = 0; j < solution.pieza.Count; j++)
+                    {
+                        if (used[j] || GeometryKey(piece.OriginalName) != GeometryKey(solution.pieza[j])) continue;
+                        float distance = (piece.InitialPosition - solution.Position(j)).sqrMagnitude;
+                        if (distance < nearest) { nearest = distance; match = j; }
+                    }
+                }
+                if (match < 0) continue;
+                used[match] = true; assigned++;
+                piece.GoalPosition = solution.Position(match); piece.HasGoal = true;
+            }
+            solutionInventoryMatches = assigned == pieces.Count && assigned == solution.pieza.Count;
+            // Native doCargarSolucionResources deserializes Save and calls
+            // doProcesoPiezas. The solution inventory need not equal gm.
+            HasSolution = true;
+            if (!solutionInventoryMatches)
+                solutionWarning = "Original gm/so piece inventories differ; unmatched records are preserved and completion is withheld.";
+        }
+
+        public static Vector3 StepPosition(int x, int y, int z)
+        {
+            return new Vector3((x - 3) * Cell, BaseHeight + (y - 1) * Storey, (z - 3) * Cell);
+        }
+
+        static int FindAt(Vector3[] positions, Vector3 target, float tolerance)
+        {
+            int found = -1; float best = tolerance * tolerance;
+            for (int i = 0; i < positions.Length; i++)
+            {
+                float distance = (positions[i] - target).sqrMagnitude;
+                if (distance <= best) { best = distance; found = i; }
+            }
+            return found;
+        }
+
+        void MakeInert(GameObject instance)
+        {
+            foreach (MonoBehaviour behaviour in instance.GetComponentsInChildren<MonoBehaviour>(true))
+                if (behaviour != null) behaviour.enabled = false;
+            foreach (Animator animator in instance.GetComponentsInChildren<Animator>(true)) animator.enabled = false;
+            foreach (Animation animation in instance.GetComponentsInChildren<Animation>(true)) animation.enabled = false;
+            foreach (Rigidbody body in instance.GetComponentsInChildren<Rigidbody>(true)) { body.isKinematic = true; body.useGravity = false; }
+            foreach (Collider collider in instance.GetComponentsInChildren<Collider>(true)) collider.enabled = false;
+            foreach (ParticleSystem particles in instance.GetComponentsInChildren<ParticleSystem>(true))
+                particles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            foreach (AudioSource audioSource in instance.GetComponentsInChildren<AudioSource>(true)) { audioSource.Stop(); audioSource.playOnAwake = false; }
+        }
+
+        void AddPickingCollider(RecoveryPiece piece)
+        {
+            Bounds bounds = new Bounds(piece.transform.position, new Vector3(18, 7, 18));
+            bool found = false;
+            foreach (MeshRenderer renderer in piece.GetComponentsInChildren<MeshRenderer>(false))
+            {
+                if (!found) { bounds = renderer.bounds; found = true; }
+                else bounds.Encapsulate(renderer.bounds);
+            }
+            var proxy = new GameObject("Recovery Pick Collider");
+            proxy.transform.position = bounds.center;
+            proxy.transform.SetParent(piece.transform, true);
+            // Keep the proxy's world scale independent of the heterogeneous authored prefab scales.
+            Vector3 scale = piece.transform.lossyScale;
+            proxy.transform.localScale = new Vector3(1 / Mathf.Max(Mathf.Abs(scale.x), .0001f),
+                1 / Mathf.Max(Mathf.Abs(scale.y), .0001f), 1 / Mathf.Max(Mathf.Abs(scale.z), .0001f));
+            proxy.transform.rotation = Quaternion.identity;
+            BoxCollider pick = proxy.AddComponent<BoxCollider>();
+            pick.size = new Vector3(Mathf.Clamp(bounds.size.x, 10, 19), Mathf.Clamp(bounds.size.y, 6, 18), Mathf.Clamp(bounds.size.z, 10, 19));
+        }
+
+        void CreateBoardAndView()
+        {
+            Camera originalCamera;
+            if (!OriginalScenePresentation.TryPrepareCurrentScene(out originalCamera))
+                throw new InvalidOperationException("The original gameplay scene and authored camera must be loaded before placing a level.");
+            GameCamera = originalCamera;
+            foreach (MoveBloque movement in OriginalScenePresentation.Components<MoveBloque>(SceneManager.GetActiveScene()))
+            {
+                boardMin.x = movement.minX2; boardMin.z = movement.minZ2;
+                boardMax.x = movement.maxX2; boardMax.z = movement.maxZ2;
+                break;
+            }
+            viewCenter = GameCamera.transform.parent != null ? GameCamera.transform.parent.position :
+                new Vector3((boardMin.x + boardMax.x) * .5f, 0, (boardMin.z + boardMax.z) * .5f);
+            // The original scene owns its ground, perspective camera, lighting, background and UI.
+            // No substitute board, orthographic camera or technical HUD is generated.
+            selectedOutline = null;
+            RecoveredBoardFraming.Apply(GameCamera, PieceRoot);
+            Physics.SyncTransforms();
+            RecoveredNativeSprings.Attach(this);
+        }
+        Material NewMaterial(Color color, bool unlit = false)
+        {
+            Shader shader = Shader.Find(unlit ? "Unlit/Color" : "Standard");
+            if (shader == null) shader = Shader.Find("Sprites/Default");
+            Material material = new Material(shader); material.color = color; ownedMaterials.Add(material); return material;
+        }
+
+        void UpdateCameraPosition()
+        {
+            if (GameCamera == null) return;
+            Vector3 direction = Quaternion.Euler(0, viewYaw, 0) * new Vector3(0, 1.15f, -1.2f);
+            GameCamera.transform.position = viewCenter + direction.normalized * 450;
+            GameCamera.transform.LookAt(viewCenter);
+            float aspect = Mathf.Max(.2f, GameCamera.aspect);
+            // Wider boards stay visible in portrait game views as well.
+            if (aspect < 1) GameCamera.orthographicSize = Mathf.Max(GameCamera.orthographicSize, (boardMax.x - boardMin.x + 50) / (2 * aspect));
+        }
+
+        public bool TryMove(int pieceIndex, Vector3 destination)
+        {
+            return TryMoveCore(pieceIndex, destination, false);
+        }
+
+        bool TryMoveCore(int pieceIndex, Vector3 destination, bool nativeLanding)
+        {
+            if (IsSolutionPreview) return false;
+            if (pieceIndex < 0 || pieceIndex >= pieces.Count || !IsLevelActive) return false;
+            RecoveryPiece piece = pieces[pieceIndex];
+            // A drag selected this actor while movable. Its released landing
+            // may already have activated a carrying spring, which temporarily
+            // locks CanMove; that must not cancel the pending legal release.
+            if (!piece.CanMove && !nativeLanding) { Status = "This piece is fixed in the recovered records."; Notify(); return false; }
+            if (float.IsNaN(destination.x) || float.IsNaN(destination.y) || float.IsNaN(destination.z) ||
+                float.IsInfinity(destination.x) || float.IsInfinity(destination.y) || float.IsInfinity(destination.z)) return false;
+            // A native surface guide already contains the exact authored
+            // offset. Resorte lowers its initial +1.2 landing after .2s;
+            // snapping that height here would remove the original action.
+            if (!nativeLanding) destination = Snap(piece, destination);
+            if (!nativeLanding && (piece.transform.position - destination).sqrMagnitude < .05f) return false;
+            if (destination.x < boardMin.x - .1f || destination.x > boardMax.x + .1f || destination.z < boardMin.z - .1f ||
+                destination.z > boardMax.z + .1f || destination.y < MinimumHeight - .5f || destination.y > Mathf.Max(boardMax.y + Storey, 57.2f))
+            { Status = "Place the piece inside the grid."; Notify(); return false; }
+            if (Occupant(destination, pieceIndex) >= 0)
+            { Status = "That grid position is occupied. Use an empty position or another height."; Notify(); return false; }
+            PushSnapshot();
+            piece.transform.position = destination;
+            if (AudioManager.instance != null) AudioManager.instance.PlaySound("Piedra");
+            MoveCount++; SelectedPieceIndex = pieceIndex;
+            Status = "Piece moved.";
+            CheckComplete(true); Physics.SyncTransforms(); Notify(); return true;
+        }
+
+        Vector3 Snap(RecoveryPiece piece, Vector3 value)
+        {
+            return new Vector3(Mathf.Round(value.x / Cell) * Cell,
+                piece.InitialPosition.y + Mathf.Round((value.y - piece.InitialPosition.y) / Storey) * Storey,
+                Mathf.Round(value.z / Cell) * Cell);
+        }
+
+        int Occupant(Vector3 position, int except)
+        {
+            // Native doCheckTarget probes the actual authored colliders at
+            // guideY+subeRayo, before doEnd adds4.2 to the landing guide.
+            // A thin Piezatrans support may share the actor root position.
+            float offset = 2f - 4.199999809265137f, radius = 1f;
+            int mask = 4097;
+            foreach (MoveBloque movement in UnityEngine.Object.FindObjectsOfType<MoveBloque>(true))
+                if (movement != null && GameCamera != null && movement.gameObject.scene == GameCamera.gameObject.scene)
+                { offset = movement.subeRayo - 4.199999809265137f; radius = movement.sphereRadius; mask = movement.mascaraSuelo.value; break; }
+            using (RecoveredNativeInteraction.QueryOriginalColliders(this))
+                foreach (Collider collider in Physics.OverlapSphere(position + Vector3.up * offset, radius, mask, QueryTriggerInteraction.UseGlobal))
+                {
+                    if (collider.name.IndexOf("OrigenCentro", StringComparison.Ordinal) >= 0 ||
+                        collider.name.IndexOf("Origen6", StringComparison.Ordinal) >= 0 ||
+                        collider.name.IndexOf("CuboResorte", StringComparison.Ordinal) >= 0) continue;
+                    RecoveryPiece occupant = collider.GetComponentInParent<RecoveryPiece>();
+                    if (occupant == null || occupant.Index == except || occupant.GetComponent<Resorte>() != null) continue;
+                    return occupant.Index;
+                }
+            return -1;
+        }
+
+        public void ApplyHint()
+        {
+            CancelDrag();
+            if (!HasSolution || IsComplete) { Notify(); return; }
+            if (stepSolution)
+            {
+                if (stepCursor >= steps.Count)
+                {
+                    Status = "Recorded steps were applied. Restart to replay the original sequence from its initial layout.";
+                    Notify(); return;
+                }
+                RecordedStep step = steps[stepCursor];
+                if (step.exception == "w" && RecoveredNativeSprings.Attach(this).IsBusy)
+                { Status = "Waiting for the original mechanism to finish."; Notify(); return; }
+                PushSnapshot();
+                stepCursor++;
+                int capturedIndex = -1;
+                if (!step.marker)
+                {
+                    List<Collider> colliders = EnableNativeCaptureColliders();
+                    try
+                    {
+                        RecoveryPiece captured = CaptureNativePiece(step.origin, colliders);
+                        if (captured != null) { captured.transform.position = step.destination; capturedIndex = captured.Index; }
+                    }
+                    finally { foreach (Collider collider in colliders) if (collider != null) collider.enabled = false; }
+                }
+                MoveCount++;
+                SelectedPieceIndex = capturedIndex;
+                Status = "Recorded hint " + stepCursor + "/" + steps.Count +
+                    (string.IsNullOrEmpty(step.exception) ? "." : " (original mechanism code: " + step.exception + "; placement replay).");
+                CheckComplete(true); Physics.SyncTransforms(); Notify(); return;
+            }
+            // Prefer a goal with no occupant. This avoids overlap and produces an actionable move.
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                RecoveryPiece piece = pieces[i];
+                if (!piece.HasGoal || AtGoal(piece) || Occupant(piece.GoalPosition, i) >= 0) continue;
+                PushSnapshot(); piece.transform.position = piece.GoalPosition;
+                MoveCount++; SelectedPieceIndex = i;
+                Status = "Hint placed one piece at its recorded solution position.";
+                CheckComplete(true); Physics.SyncTransforms(); Notify(); return;
+            }
+            // A cycle of interchangeable pieces can occupy every goal. Move one obstructing movable
+            // piece into a genuine empty cell, so following hints can finish the placement cycle.
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                RecoveryPiece piece = pieces[i];
+                if (!piece.HasGoal || AtGoal(piece) || !piece.CanMove) continue;
+                for (float x = boardMin.x; x <= boardMax.x; x += Cell)
+                    for (float z = boardMin.z; z <= boardMax.z; z += Cell)
+                    {
+                        Vector3 empty = new Vector3(x, piece.InitialPosition.y, z);
+                        if (Occupant(empty, i) >= 0 || (empty - piece.transform.position).sqrMagnitude < 1) continue;
+                        PushSnapshot(); piece.transform.position = empty;
+                        MoveCount++; SelectedPieceIndex = i;
+                        Status = "Hint cleared an occupied target; apply another hint to continue.";
+                        CheckComplete(true); Physics.SyncTransforms(); Notify(); return;
+                    }
+            }
+            Status = "No empty position is available for the next hint."; Notify();
+        }
+
+        /// <summary>Applies the recorded solution. Victory still requires actual matching-color water.</summary>
+        public void Solve()
+        {
+            CancelDrag();
+            if (!HasSolution || IsComplete) return;
+            PushSnapshot();
+            int changed = pieces.Count;
+            // Native Save1 preview rebuilds gm in modoProceso=1, selects
+            // its proxy actors, and only then applies all recorded captures.
+            BuildBoard(stepSolution ? layout : solution, true);
+            ConfigureSolution();
+            CreateBoardAndView();
+            SolutionCaptureMisses = 0;
+            solutionCaptureTrace.Clear();
+            if (stepSolution)
+            {
+                List<Collider> colliders = EnableNativeCaptureColliders();
+                try
+                {
+                    for (int stepIndex = 0; stepIndex < steps.Count; stepIndex++)
+                    {
+                        RecordedStep step = steps[stepIndex];
+                        RecoveryPiece captured = CaptureNativePiece(step.origin, colliders);
+                        solutionCaptureTrace.Add((stepIndex + 1) + ": " + step.origin.ToString("F2") + " -> " + step.destination.ToString("F2") +
+                            (captured == null ? " MISS" : " record" + captured.SourceRecordIndex + ":" + captured.BasePrefab));
+                        if (captured == null) { SolutionCaptureMisses++; continue; }
+                        // Native HandleSolutionTotal1034114 adds1.2 only for
+                        // r plate previews. Player moves and step hints keep
+                        // their original recorded landing coordinates.
+                        captured.transform.position = step.destination + (step.exception == "r" ? Vector3.up * 1.2f : Vector3.zero);
+                        Physics.SyncTransforms();
+                    }
+                }
+                finally { foreach (Collider collider in colliders) if (collider != null) collider.enabled = false; }
+                foreach (RecoveryPiece piece in pieces) { piece.GoalPosition = piece.transform.position; piece.HasGoal = true; }
+            }
+            else foreach (RecoveryPiece piece in pieces)
+                if (piece.HasGoal && !AtGoal(piece)) { piece.transform.position = piece.GoalPosition; changed++; }
+            MoveCount += Mathf.Max(1, changed); stepCursor = steps.Count;
+            Status = "Recorded solution preview applied.";
+            CheckComplete(true); Physics.SyncTransforms(); Notify();
+        }
+
+        List<Collider> EnableNativeCaptureColliders()
+        {
+            var result = new List<Collider>();
+            foreach (RecoveryPiece piece in pieces)
+                if (piece.OriginalCaptureColliders != null)
+                    foreach (Collider collider in piece.OriginalCaptureColliders)
+                        if (collider != null && collider.gameObject.activeInHierarchy) { collider.enabled = true; result.Add(collider); }
+            Physics.SyncTransforms();
+            return result;
+        }
+
+        RecoveryPiece CaptureNativePiece(Vector3 origin, List<Collider> colliders)
+        {
+            MoveBloque original = null;
+            foreach (MoveBloque candidate in OriginalScenePresentation.Components<MoveBloque>(SceneManager.GetActiveScene())) { original = candidate; break; }
+            int mask = original == null ? 4096 : original.mascaraBloque.value;
+            float radius = original == null ? 1 : original.sphereRadius;
+            RecoveryPiece captured = null;
+            foreach (Collider collider in Physics.OverlapSphere(origin, radius, mask, QueryTriggerInteraction.UseGlobal))
+            {
+                if (!colliders.Contains(collider) || collider.name.Contains("OrigenCentro")) continue;
+                RecoveryPiece piece = collider.GetComponentInParent<RecoveryPiece>();
+                if (piece == null) continue;
+                ControlPieza pipe = collider.GetComponentInParent<ControlPieza>();
+                if (collider.name.Contains("ladrillo") && pipe != null && pipe.esPiezaFija) continue;
+                ControlFijo solid = collider.GetComponentInParent<ControlFijo>();
+                if (piece.BasePrefab.Contains("BloqueFijo") && solid != null && solid.esPiezaFija) continue;
+                captured = piece;
+            }
+            return captured;
+        }
+
+        bool AtGoal(RecoveryPiece piece)
+        {
+            return (piece.transform.position - piece.GoalPosition).sqrMagnitude <= PositionTolerance * PositionTolerance;
+        }
+
+        void CheckComplete(bool report)
+        {
+            bool complete = HasSolution && solutionInventoryMatches && pieces.Count > 0 && UnresolvedPrefabCount == 0;
+            if (complete)
+            {
+                // Equal prefab/color pieces are interchangeable. Compare the actual geometry/position
+                // multiset rather than object identities, otherwise swapping identical pipes cannot win.
+                var matched = new bool[pieces.Count];
+                foreach (RecoveryPiece goal in pieces)
+                {
+                    if (!goal.HasGoal) { complete = false; break; }
+                    int found = -1;
+                    for (int i = 0; i < pieces.Count; i++)
+                        if (!matched[i] && GeometryKey(pieces[i].OriginalName) == GeometryKey(goal.OriginalName) &&
+                            (pieces[i].transform.position - goal.GoalPosition).sqrMagnitude <= PositionTolerance * PositionTolerance)
+                        { found = i; break; }
+                    if (found < 0) { complete = false; break; }
+                    matched[found] = true;
+                }
+            }
+            MatchesSavedSolution = complete;
+            CheckWaterVictory();
+        }
+
+        void CheckWaterVictory()
+        {
+            if (IsSolutionPreview || !IsLevelActive) return;
+            RecoveredWaterNetwork water = RecoveredWaterNetwork.Instance;
+            if (water == null || water.CurrentPieceRoot != PieceRoot) return;
+            ControladorJuego.requiredFuentes = water.RequiredFountainCount;
+            ControladorJuego.numFuentes = water.ActiveFountainCount;
+            if (lastVictoryFrame == Time.frameCount || IsComplete) return;
+            lastVictoryFrame = Time.frameCount;
+            victoryFrames++;
+            if (victoryFrames < 51) return;
+            // Update1074990..1074A80 polls every51 frames and resets to1
+            // after an unsuccessful poll; it does not require51 wet frames.
+            victoryFrames = 1;
+            bool ready = water.RequiredFountainCount > 0 && water.ActiveFountainCount >= water.RequiredFountainCount;
+            if (!ready) return;
+            IsComplete = true;
+            if (AudioManager.instance != null) AudioManager.instance.PlaySound("SonidoCompleted");
+            ControladorJuego.misionComplete = ControladorJuego.misionCompleteAd = true;
+            Status = "LEVEL COMPLETE!";
+            PlayerPrefs.SetInt("Recovery.Completed.gm" + CurrentLevelId, 1);
+            PlayerPrefs.Save();
+            Notify();
+        }
+        void PushSnapshot()
+        {
+            history.Push(CaptureSnapshot());
+        }
+
+        Snapshot CaptureSnapshot()
+        {
+            var positions = new Vector3[pieces.Count];
+            var rotations = new Quaternion[pieces.Count];
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                positions[i] = pieces[i].transform.position;
+                rotations[i] = pieces[i].transform.rotation;
+            }
+            var water = RecoveredWaterNetwork.Instance;
+            var mechanisms = water == null ? null : water.GetComponent<RuntimeWaterMechanisms>();
+            var springs = RecoveredNativeSprings.Attach(this);
+            return new Snapshot { positions = positions, rotations = rotations, moves = MoveCount, cursor = stepCursor,
+                complete = IsComplete, solutionBoard = solutionBoard, mechanismState = mechanisms == null ? null : mechanisms.CaptureState(), springState = springs.CaptureState(), waterState = water == null ? null : water.CaptureState() };
+        }
+
+        void RestoreSnapshot(Snapshot saved)
+        {
+            if (solutionBoard != saved.solutionBoard)
+            {
+                // Save1 contains steps rather than prefab records. Its native
+                // total preview instantiates gm's mode1 actor set, then moves
+                // those actors; restore the same set before applying poses.
+                BuildBoard(saved.solutionBoard && solution != null && solution.IsValidLayout() ? solution : layout, saved.solutionBoard);
+                ConfigureSolution();
+                CreateBoardAndView();
+            }
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                pieces[i].transform.position = saved.positions[i];
+                pieces[i].transform.rotation = saved.rotations[i];
+            }
+            MoveCount = saved.moves; stepCursor = saved.cursor; IsComplete = saved.complete;
+            victoryFrames = 0;
+            ControladorJuego.misionComplete = ControladorJuego.misionCompleteAd = saved.complete;
+            var water = RecoveredWaterNetwork.Instance;
+            var mechanisms = water == null ? null : water.GetComponent<RuntimeWaterMechanisms>();
+            if (mechanisms != null) mechanisms.RestoreState(saved.mechanismState);
+            RecoveredNativeSprings.Attach(this).RestoreState(saved.springState);
+            Physics.SyncTransforms();
+            if (water != null) water.RestoreState(saved.waterState);
+        }
+
+        public void Undo()
+        {
+            CancelDrag();
+            if (history.Count == 0) return;
+            Snapshot saved = history.Pop();
+            RestoreSnapshot(saved);
+            Status = "Last move undone."; CheckComplete(false); Physics.SyncTransforms(); Notify();
+        }
+
+        public void RestartLevel()
+        {
+            if (CurrentLevelId > 0) LoadLevel(CurrentLevelId);
+        }
+
+        public void EnterSolutionPreview(bool stepsMode)
+        {
+            if (IsSolutionPreview || !HasSolution) return;
+            CancelDrag();
+            previewOrigin = CaptureSnapshot();
+            previewHistory = history.ToArray();
+            IsSolutionPreview = true; previewSteps = stepsMode;
+            ControladorJuego.chequearFuentes = ControladorJuego.piezasMovibles = false;
+            if (stepsMode)
+            {
+                for (int i = 0; i < pieces.Count; i++)
+                {
+                    pieces[i].transform.position = pieces[i].InitialPosition;
+                    pieces[i].transform.rotation = pieces[i].InitialRotation;
+                }
+                MoveCount = 0; stepCursor = 0; IsComplete = false; history.Clear();
+                Physics.SyncTransforms(); Notify();
+            }
+            else Solve();
+        }
+
+        public void AdvanceSolutionPreview()
+        {
+            if (!IsSolutionPreview) EnterSolutionPreview(true);
+            if (IsSolutionPreview && previewSteps) ApplyHint();
+        }
+
+        public void ExitSolutionPreview()
+        {
+            if (!IsSolutionPreview || previewOrigin == null) return;
+            CancelDrag();
+            RestoreSnapshot(previewOrigin);
+            history.Clear();
+            if (previewHistory != null) for (int i = previewHistory.Length - 1; i >= 0; i--) history.Push(previewHistory[i]);
+            IsSolutionPreview = false; previewOrigin = null; previewHistory = null;
+            ControladorJuego.chequearFuentes = ControladorJuego.piezasMovibles = true;
+            Physics.SyncTransforms(); Notify();
+        }
+
+        public void NextLevel()
+        {
+            for (int i = 0; i < AvailableLevelIds.Length; i++)
+                if (AvailableLevelIds[i] > CurrentLevelId) { if (FlowWaterRecoveryUI.Instance != null) FlowWaterRecoveryUI.Instance.StartGame(AvailableLevelIds[i]); else LoadLevel(AvailableLevelIds[i]); return; }
+            Status = "This is the last recovered asset ID."; Notify();
+        }
+
+        public void RaiseSelectedPiece() { MoveSelectedHeight(Storey); }
+        public void LowerSelectedPiece() { MoveSelectedHeight(-Storey); }
+
+        void MoveSelectedHeight(float delta)
+        {
+            if (dragging != null)
+                return;
+            if (SelectedPieceIndex >= 0 && SelectedPieceIndex < pieces.Count)
+                TryMove(SelectedPieceIndex, pieces[SelectedPieceIndex].transform.position + Vector3.up * delta);
+        }
+
+        public void ReturnToOriginalScene()
+        {
+            CancelDrag(); ClearBoard();
+            foreach (GameObject root in hiddenRoots) if (root != null) root.SetActive(true);
+            hiddenRoots.Clear();
+            Status = "Select a recovered level."; Notify();
+        }
+
+        void HideOriginalSceneRoots()
+        {
+            if (OriginalScenePresentation.IsGameplayScene(SceneManager.GetActiveScene())) return;
+            for (int sceneIndex = 0; sceneIndex < SceneManager.sceneCount; sceneIndex++)
+            {
+                Scene scene = SceneManager.GetSceneAt(sceneIndex);
+                if (!scene.isLoaded) continue;
+                foreach (GameObject root in scene.GetRootGameObjects())
+                {
+                    if (!root.activeSelf || root == gameObject || root.name.StartsWith("Recovery", StringComparison.OrdinalIgnoreCase) ||
+                        root.name.StartsWith("RECOVERED", StringComparison.OrdinalIgnoreCase) || root.GetComponentInChildren<EventSystem>(true) != null) continue;
+                    hiddenRoots.Add(root); root.SetActive(false);
+                }
+            }
+        }
+
+        void ClearBoard()
+        {
+            if (boardRoot != null) { boardRoot.SetActive(false); Destroy(boardRoot); }
+            boardRoot = null; PieceRoot = null; GameCamera = null; selectedOutline = null;
+            pieces.Clear(); SelectedPieceIndex = -1;
+            foreach (Material material in ownedMaterials) if (material != null) Destroy(material);
+            ownedMaterials.Clear();
+        }
+
+        void Update()
+        {
+            if (!IsLevelActive || GameCamera == null) return;
+            CheckWaterVictory();
+            if (Input.GetKeyDown(KeyCode.H)) ApplyHint();
+            if (Input.GetKeyDown(KeyCode.R)) RestartLevel();
+            if (Input.GetKeyDown(KeyCode.Z) && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))) Undo();
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    if (EventSystem.current == null || !EventSystem.current.IsPointerOverGameObject(touch.fingerId)) BeginDrag(touch.position);
+                    touchDragging = true;
+                }
+                else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary) ContinueDrag(touch.position);
+                else if (touch.phase == TouchPhase.Ended) { EndDrag(); touchDragging = false; }
+                else if (touch.phase == TouchPhase.Canceled) { CancelDrag(); touchDragging = false; }
+            }
+            else if (!touchDragging)
+            {
+                if (Input.GetMouseButtonDown(0) && (EventSystem.current == null || !EventSystem.current.IsPointerOverGameObject())) BeginDrag(Input.mousePosition);
+                if (Input.GetMouseButton(0)) ContinueDrag(Input.mousePosition);
+                if (Input.GetMouseButtonUp(0)) EndDrag();
+                float wheel = Input.mouseScrollDelta.y;
+                if (Mathf.Abs(wheel) > .01f && dragging == null)
+                {
+                    if (GameCamera.orthographic) GameCamera.orthographicSize = Mathf.Clamp(GameCamera.orthographicSize - wheel * 5, 35, 250); else GameCamera.fieldOfView = Mathf.Clamp(GameCamera.fieldOfView - wheel, 14, 45);
+                }
+                if (Input.GetMouseButton(1)) GameCamera.transform.RotateAround(viewCenter, Vector3.up, Input.GetAxis("Mouse X") * 3);
+            }
+            if (SelectedPieceIndex >= 0 && SelectedPieceIndex < pieces.Count && dragging == null && (dragMotion == null || !dragMotion.IsActive))
+            {
+                float dy = Input.GetKeyDown(KeyCode.PageUp) ? Storey : Input.GetKeyDown(KeyCode.PageDown) ? -Storey : 0;
+                if (dy != 0) TryMove(SelectedPieceIndex, pieces[SelectedPieceIndex].transform.position + Vector3.up * dy);
+            }
+            UpdateSelectionOutline();
+        }
+
+        void BeginDrag(Vector2 pointer)
+        {
+            if (IsSolutionPreview) return;
+            if (dragMotion != null && dragMotion.IsActive) return;
+            if (!GameCamera.pixelRect.Contains(pointer)) return;
+            RecoveryPiece piece; RaycastHit hit;
+            if (!RecoveredNativeInteraction.TryPick(GameCamera, pointer, this, out piece, out hit)) return;
+            SelectedPieceIndex = piece.Index;
+            if (!RecoveredNativeInteraction.BeginSelection(hit.collider)) return;
+            dragCollider = hit.collider;
+            MoveBloque.MoviendoBloque = true;
+            dragging = piece; dragStart = piece.transform.position;
+            dragMotion = RecoveredNativeDragMotion.Begin(this, piece, hit, pointer);
+            if (dragMotion == null) { CancelDrag(); return; }
+            Status = "Drag onto an original board surface; release to place."; Notify();
+        }
+
+        void ContinueDrag(Vector2 pointer)
+        {
+            if (dragging == null || dragMotion == null || dragMotion.IsReleased) return;
+            Vector3 destination; RaycastHit surface;
+            if (RecoveredNativeInteraction.TryGetDropPoint(GameCamera, pointer, this, out destination, out surface))
+                dragMotion.SetTarget(destination, surface, pointer);
+            else if (surface.collider != null) dragMotion.SetPointer(surface, pointer);
+        }
+
+        void EndDrag()
+        {
+            if (dragging == null) return;
+            if (dragMotion != null && dragMotion.IsActive)
+            {
+                Snapshot before = dragMotion.BeforeState as Snapshot;
+                dragging = null; dragCollider = null;
+                dragMotion.Release((index, landing) =>
+                {
+                    if (TryMoveCore(index, landing, true))
+                    {
+                        // Preserve the state before pickup, including physical
+                        // switches that can change during the landing animation.
+                        if (before != null) { history.Pop(); history.Push(before); }
+                    }
+                    else if (before != null) { RestoreSnapshot(before); Physics.SyncTransforms(); Notify(); }
+                });
+                return;
+            }
+            RecoveryPiece piece = dragging; Vector3 destination = piece.transform.position;
+            piece.transform.position = dragStart; dragging = null;
+            RecoveredNativeInteraction.EndSelection(dragCollider); dragCollider = null;
+            MoveBloque.MoviendoBloque = false;
+            TryMove(piece.Index, destination);
+        }
+
+        void CancelDrag()
+        {
+            if (dragMotion != null && dragMotion.IsActive)
+            {
+                Snapshot before = dragMotion.BeforeState as Snapshot;
+                dragMotion.Cancel();
+                if (before != null) RestoreSnapshot(before);
+            }
+            else if (dragging != null) dragging.transform.position = dragStart;
+            RecoveredNativeInteraction.EndSelection(dragCollider); dragCollider = null;
+            MoveBloque.MoviendoBloque = false;
+            dragging = null; touchDragging = false;
+        }
+
+        void UpdateSelectionOutline()
+        {
+            if (selectedOutline == null) return;
+            selectedOutline.enabled = SelectedPieceIndex >= 0 && SelectedPieceIndex < pieces.Count;
+            if (!selectedOutline.enabled) return;
+            Vector3 p = pieces[SelectedPieceIndex].transform.position + Vector3.up * 4.4f;
+            selectedOutline.SetPositions(new[] { p + new Vector3(-9.5f, 0, -9.5f), p + new Vector3(9.5f, 0, -9.5f),
+                p + new Vector3(9.5f, 0, 9.5f), p + new Vector3(-9.5f, 0, 9.5f), p + new Vector3(-9.5f, 0, -9.5f) });
+        }
+
+        void Notify() { if (StateChanged != null) StateChanged(); }
+
+        void OnDestroy()
+        {
+            if (Instance == this) Instance = null;
+        }
+    }
+}

@@ -1,0 +1,179 @@
+// ControladorJuego$$doQuitaBotones VA 0x1074CB4, inferred length 708
+void ControladorJuego__doQuitaBotones (ControladorJuego_o* __this, const MethodInfo* method);
+01074CB4  str      d10, [sp, #-0x30]!                    
+01074CB8  stp      d9, d8, [sp, #8]                      
+01074CBC  str      x30, [sp, #0x18]                      
+01074CC0  stp      x20, x19, [sp, #0x20]                 
+01074CC4  adrp     x20, #0x24fb000                       
+01074CC8  ldrb     w8, [x20, #0xec5]                     
+01074CCC  mov      x19, x0                               
+01074CD0  tbnz     w8, #0, #0x1074ce8                    
+01074CD4  adrp     x0, #0x236a000                        
+01074CD8  ldr      x0, [x0, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01074CDC  bl       #0xe61b78                             
+01074CE0  mov      w8, #1                                
+01074CE4  strb     w8, [x20, #0xec5]                     
+01074CE8  ldr      x0, [x19, #0x38]                       // self.menubutton
+01074CEC  cbz      x0, #0x1074f74                        
+01074CF0  adrp     x20, #0x236a000                       
+01074CF4  ldr      x20, [x20, #0xf48]                     // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+01074CF8  ldr      x1, [x20]                             
+01074CFC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01074D00  cbz      x0, #0x1074f74                        
+01074D04  mov      w1, wzr                               
+01074D08  mov      x2, xzr                               
+01074D0C  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01074D10  ldr      x0, [x19, #0x40]                       // self.menuIcon
+01074D14  cbz      x0, #0x1074f74                        
+01074D18  ldr      x8, [x0]                              
+01074D1C  adrp     x10, #0x5ff000                        
+01074D20  adrp     x11, #0x5ff000                        
+01074D24  ldr      s8, [x10, #0xb6c]                     
+01074D28  ldr      x9, [x8, #0x2a8]                      
+01074D2C  ldr      x1, [x8, #0x2b0]                      
+01074D30  adrp     x8, #0x5ff000                         
+01074D34  ldr      s9, [x8, #0xd84]                      
+01074D38  ldr      s10, [x11, #0xef8]                    
+01074D3C  mov      v1.16b, v8.16b                        
+01074D40  mov      v2.16b, v8.16b                        
+01074D44  mov      v0.16b, v9.16b                        
+01074D48  mov      v3.16b, v10.16b                       
+01074D4C  blr      x9                                    
+01074D50  ldr      x0, [x19, #0x58]                       // self.soundbutton
+01074D54  cbz      x0, #0x1074f74                        
+01074D58  ldr      x1, [x20]                             
+01074D5C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01074D60  cbz      x0, #0x1074f74                        
+01074D64  mov      w1, wzr                               
+01074D68  mov      x2, xzr                               
+01074D6C  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01074D70  ldr      x0, [x19, #0x60]                       // self.soundIcon
+01074D74  cbz      x0, #0x1074f74                        
+01074D78  ldr      x8, [x0]                              
+01074D7C  mov      v0.16b, v9.16b                        
+01074D80  mov      v1.16b, v8.16b                        
+01074D84  mov      v2.16b, v8.16b                        
+01074D88  ldr      x9, [x8, #0x2a8]                      
+01074D8C  ldr      x1, [x8, #0x2b0]                      
+01074D90  mov      v3.16b, v10.16b                       
+01074D94  blr      x9                                    
+01074D98  ldr      x0, [x19, #0x48]                       // self.musicbutton
+01074D9C  cbz      x0, #0x1074f74                        
+01074DA0  ldr      x1, [x20]                             
+01074DA4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01074DA8  cbz      x0, #0x1074f74                        
+01074DAC  mov      w1, wzr                               
+01074DB0  mov      x2, xzr                               
+01074DB4  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01074DB8  ldr      x0, [x19, #0x50]                       // self.musicIcon
+01074DBC  cbz      x0, #0x1074f74                        
+01074DC0  ldr      x8, [x0]                              
+01074DC4  mov      v0.16b, v9.16b                        
+01074DC8  mov      v1.16b, v8.16b                        
+01074DCC  mov      v2.16b, v8.16b                        
+01074DD0  ldr      x9, [x8, #0x2a8]                      
+01074DD4  ldr      x1, [x8, #0x2b0]                      
+01074DD8  mov      v3.16b, v10.16b                       
+01074DDC  blr      x9                                    
+01074DE0  ldr      x0, [x19, #0xb0]                       // self.barra
+01074DE4  cbz      x0, #0x1074f74                        
+01074DE8  ldr      x8, [x0]                              
+01074DEC  adrp     x10, #0x5ff000                        
+01074DF0  ldr      s2, [x10, #0xfe8]                     
+01074DF4  mov      v1.16b, v8.16b                        
+01074DF8  ldr      x9, [x8, #0x2a8]                      
+01074DFC  ldr      x1, [x8, #0x2b0]                      
+01074E00  adrp     x8, #0x5ff000                         
+01074E04  ldr      s0, [x8, #0xda8]                      
+01074E08  mov      v3.16b, v10.16b                       
+01074E0C  blr      x9                                    
+01074E10  ldr      x0, [x19, #0xb8]                       // self.barra1
+01074E14  cbz      x0, #0x1074f74                        
+01074E18  ldr      x8, [x0]                              
+01074E1C  mov      v0.16b, v9.16b                        
+01074E20  mov      v1.16b, v8.16b                        
+01074E24  mov      v2.16b, v8.16b                        
+01074E28  ldr      x9, [x8, #0x2a8]                      
+01074E2C  ldr      x1, [x8, #0x2b0]                      
+01074E30  mov      v3.16b, v10.16b                       
+01074E34  blr      x9                                    
+01074E38  ldr      x0, [x19, #0x68]                       // self.restartbutton
+01074E3C  cbz      x0, #0x1074f74                        
+01074E40  ldr      x1, [x20]                             
+01074E44  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01074E48  cbz      x0, #0x1074f74                        
+01074E4C  mov      w1, wzr                               
+01074E50  mov      x2, xzr                               
+01074E54  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01074E58  ldr      x0, [x19, #0x70]                       // self.restartIcon
+01074E5C  cbz      x0, #0x1074f74                        
+01074E60  ldr      x8, [x0]                              
+01074E64  mov      v0.16b, v9.16b                        
+01074E68  mov      v1.16b, v8.16b                        
+01074E6C  mov      v2.16b, v8.16b                        
+01074E70  ldr      x9, [x8, #0x2a8]                      
+01074E74  ldr      x1, [x8, #0x2b0]                      
+01074E78  mov      v3.16b, v10.16b                       
+01074E7C  blr      x9                                    
+01074E80  ldr      x0, [x19, #0x78]                       // self.botonSolutions
+01074E84  cbz      x0, #0x1074f74                        
+01074E88  ldr      x1, [x20]                             
+01074E8C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01074E90  cbz      x0, #0x1074f74                        
+01074E94  mov      w1, wzr                               
+01074E98  mov      x2, xzr                               
+01074E9C  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01074EA0  ldr      x0, [x19, #0x80]                       // self.bulb
+01074EA4  cbz      x0, #0x1074f74                        
+01074EA8  ldr      x8, [x0]                              
+01074EAC  adrp     x10, #0x600000                        
+01074EB0  ldr      s3, [x10, #0x1a0]                     
+01074EB4  ldr      x9, [x8, #0x2a8]                      
+01074EB8  ldr      x1, [x8, #0x2b0]                      
+01074EBC  adrp     x8, #0x5ff000                         
+01074EC0  ldr      s0, [x8, #0xc84]                      
+01074EC4  mov      v1.16b, v0.16b                        
+01074EC8  mov      v2.16b, v0.16b                        
+01074ECC  blr      x9                                    
+01074ED0  ldr      x0, [x19, #0x88]                       // self.aro
+01074ED4  cbz      x0, #0x1074f74                        
+01074ED8  ldr      x8, [x0]                              
+01074EDC  adrp     x10, #0x5ff000                        
+01074EE0  ldr      s10, [x10, #0xb70]                    
+01074EE4  ldr      x9, [x8, #0x2a8]                      
+01074EE8  ldr      x1, [x8, #0x2b0]                      
+01074EEC  adrp     x8, #0x5ff000                         
+01074EF0  ldr      s0, [x8, #0xdac]                      
+01074EF4  mov      v3.16b, v10.16b                       
+01074EF8  mov      v1.16b, v0.16b                        
+01074EFC  mov      v2.16b, v0.16b                        
+01074F00  blr      x9                                    
+01074F04  ldr      x0, [x19, #0x90]                       // self.botonNumSol
+01074F08  cbz      x0, #0x1074f74                        
+01074F0C  ldr      x8, [x0]                              
+01074F10  adrp     x10, #0x5ff000                        
+01074F14  adrp     x11, #0x5ff000                        
+01074F18  adrp     x12, #0x600000                        
+01074F1C  ldr      x9, [x8, #0x2a8]                      
+01074F20  ldr      x1, [x8, #0x2b0]                      
+01074F24  adrp     x8, #0x5ff000                         
+01074F28  ldr      s0, [x8, #0xe90]                      
+01074F2C  ldr      s1, [x10, #0xd54]                     
+01074F30  ldr      s2, [x11, #0xd8c]                     
+01074F34  ldr      s3, [x12, #0xf4]                      
+01074F38  blr      x9                                    
+01074F3C  ldr      x0, [x19, #0x98]                       // self.numSol
+01074F40  cbz      x0, #0x1074f74                        
+01074F44  ldr      x8, [x0]                              
+01074F48  mov      v0.16b, v9.16b                        
+01074F4C  mov      v1.16b, v8.16b                        
+01074F50  mov      v2.16b, v8.16b                        
+01074F54  ldr      x2, [x8, #0x2a8]                      
+01074F58  ldr      x1, [x8, #0x2b0]                      
+01074F5C  ldp      x20, x19, [sp, #0x20]                 
+01074F60  ldr      x30, [sp, #0x18]                      
+01074F64  ldp      d9, d8, [sp, #8]                      
+01074F68  mov      v3.16b, v10.16b                       
+01074F6C  ldr      d10, [sp], #0x30                      
+01074F70  br       x2                                    
+01074F74  bl       #0xe61da0                             

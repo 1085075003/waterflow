@@ -1,0 +1,113 @@
+// MoveBloque$$doEnd VA 0x102EC58, inferred length 444
+void MoveBloque__doEnd (MoveBloque_o* __this, const MethodInfo* method);
+0102EC58  stp      d9, d8, [sp, #-0x30]!                 
+0102EC5C  stp      x30, x21, [sp, #0x10]                 
+0102EC60  stp      x20, x19, [sp, #0x20]                 
+0102EC64  adrp     x21, #0x24fb000                       
+0102EC68  adrp     x20, #0x2368000                       
+0102EC6C  ldrb     w8, [x21, #0xd12]                     
+0102EC70  ldr      x20, [x20, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+0102EC74  mov      x19, x0                               
+0102EC78  tbnz     w8, #0, #0x102eca8                    
+0102EC7C  adrp     x0, #0x236b000                        
+0102EC80  ldr      x0, [x0, #0x498]                       // [0x236B498] MoveBloque_TypeInfo
+0102EC84  bl       #0xe61b78                             
+0102EC88  adrp     x0, #0x2368000                        
+0102EC8C  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0102EC90  bl       #0xe61b78                             
+0102EC94  adrp     x0, #0x236a000                        
+0102EC98  ldr      x0, [x0, #0x618]                       // [0x236A618] 'bloque'
+0102EC9C  bl       #0xe61b78                             
+0102ECA0  mov      w8, #1                                
+0102ECA4  strb     w8, [x21, #0xd12]                     
+0102ECA8  strb     wzr, [x19, #0xa8]                      // self.isMouseDragging
+0102ECAC  strb     wzr, [x19, #0x158]                     // self.faseA
+0102ECB0  ldr      x0, [x20]                             
+0102ECB4  ldr      x20, [x19, #0x30]                      // self.getTarget
+0102ECB8  ldr      w8, [x0, #0xe0]                       
+0102ECBC  cbnz     w8, #0x102ecc4                        
+0102ECC0  bl       #0xe61c80                             
+0102ECC4  mov      x0, x20                               
+0102ECC8  mov      x1, xzr                               
+0102ECCC  mov      x2, xzr                               
+0102ECD0  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+0102ECD4  tbz      w0, #0, #0x102ee00                    
+0102ECD8  adrp     x8, #0x236a000                        
+0102ECDC  ldr      x8, [x8, #0x618]                       // [0x236A618] 'bloque'
+0102ECE0  ldr      x20, [x19, #0x30]                      // self.getTarget
+0102ECE4  mov      x1, xzr                               
+0102ECE8  ldr      x0, [x8]                              
+0102ECEC  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+0102ECF0  cbz      x20, #0x102ee10                       
+0102ECF4  mov      w1, w0                                
+0102ECF8  mov      x0, x20                               
+0102ECFC  mov      x2, xzr                               
+0102ED00  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+0102ED04  ldr      x0, [x19, #0x90]                       // self.planoGuia
+0102ED08  cbz      x0, #0x102ee10                        
+0102ED0C  mov      x1, xzr                               
+0102ED10  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0102ED14  cbz      x0, #0x102ee10                        
+0102ED18  mov      x1, xzr                               
+0102ED1C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0102ED20  ldr      x0, [x19, #0x90]                       // self.planoGuia
+0102ED24  cbz      x0, #0x102ee10                        
+0102ED28  mov      x1, xzr                               
+0102ED2C  mov      v8.16b, v0.16b                        
+0102ED30  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0102ED34  cbz      x0, #0x102ee10                        
+0102ED38  mov      x1, xzr                               
+0102ED3C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0102ED40  ldr      x0, [x19, #0x90]                       // self.planoGuia
+0102ED44  cbz      x0, #0x102ee10                        
+0102ED48  mov      x1, xzr                               
+0102ED4C  mov      v9.16b, v1.16b                        
+0102ED50  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0102ED54  cbz      x0, #0x102ee10                        
+0102ED58  mov      x1, xzr                               
+0102ED5C  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0102ED60  adrp     x8, #0x5ff000                         
+0102ED64  ldr      s0, [x8, #0xc78]                      
+0102ED68  str      s8, [x19, #0x1c8]                      // self.puntoFinal
+0102ED6C  str      s2, [x19, #0x1d0]                     
+0102ED70  adrp     x20, #0x236b000                       
+0102ED74  fadd     s0, s9, s0                            
+0102ED78  str      s0, [x19, #0x1cc]                     
+0102ED7C  ldr      x20, [x20, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+0102ED80  ldr      x0, [x20]                             
+0102ED84  ldr      w8, [x0, #0xe0]                       
+0102ED88  cbnz     w8, #0x102ed94                        
+0102ED8C  bl       #0xe61c80                             
+0102ED90  ldr      x0, [x20]                             
+0102ED94  ldr      x8, [x0, #0xb8]                       
+0102ED98  mov      w9, #1                                
+0102ED9C  strb     w9, [x8, #0xb]                        
+0102EDA0  strb     w9, [x8]                              
+0102EDA4  ldrb     w8, [x19, #0x2c4]                      // self.moviendoRuta1
+0102EDA8  strb     w9, [x19, #0x2c]                       // self.cambiado
+0102EDAC  strb     w9, [x19, #0x140]                      // self.procesoCheck
+0102EDB0  strb     w9, [x19, #0x23c]                      // self.inicioFijacion
+0102EDB4  cbz      w8, #0x102ee00                        
+0102EDB8  ldr      w8, [x19, #0x290]                      // self.paso
+0102EDBC  sub      w8, w8, #1                            
+0102EDC0  cmp      w8, #3                                
+0102EDC4  b.hi     #0x102ee00                            
+0102EDC8  adrp     x9, #0x621000                         
+0102EDCC  add      x9, x9, #0x135                        
+0102EDD0  adr      x10, #0x102ede0                       
+0102EDD4  ldrb     w11, [x9, x8]                         
+0102EDD8  add      x10, x10, x11, lsl #2                 
+0102EDDC  br       x10                                   
+0102EDE0  mov      w8, #4                                
+0102EDE4  b        #0x102edfc                            
+0102EDE8  mov      w8, #3                                
+0102EDEC  b        #0x102edfc                            
+0102EDF0  mov      w8, #2                                
+0102EDF4  b        #0x102edfc                            
+0102EDF8  mov      w8, #1                                
+0102EDFC  str      w8, [x19, #0x290]                      // self.paso
+0102EE00  ldp      x20, x19, [sp, #0x20]                 
+0102EE04  ldp      x30, x21, [sp, #0x10]                 
+0102EE08  ldp      d9, d8, [sp], #0x30                   
+0102EE0C  ret                                            
+0102EE10  bl       #0xe61da0                             

@@ -1,0 +1,242 @@
+// UIManagerScriptDesign$$doCargarFichss VA 0xFFFE68, inferred length 960
+void UIManagerScriptDesign__doCargarFichss (UIManagerScriptDesign_o* __this, const MethodInfo* method);
+00FFFE68  stp      x30, x23, [sp, #-0x30]!               
+00FFFE6C  stp      x22, x21, [sp, #0x10]                 
+00FFFE70  stp      x20, x19, [sp, #0x20]                 
+00FFFE74  adrp     x21, #0x24fb000                       
+00FFFE78  adrp     x20, #0x2368000                       
+00FFFE7C  ldrb     w8, [x21, #0xc32]                     
+00FFFE80  ldr      x20, [x20, #0x878]                     // [0x2368878] UnityEngine.Application_TypeInfo
+00FFFE84  mov      x19, x0                               
+00FFFE88  tbnz     w8, #0, #0xffff18                     
+00FFFE8C  adrp     x0, #0x2368000                        
+00FFFE90  ldr      x0, [x0, #0x878]                       // [0x2368878] UnityEngine.Application_TypeInfo
+00FFFE94  bl       #0xe61b78                             
+00FFFE98  adrp     x0, #0x236a000                        
+00FFFE9C  ldr      x0, [x0, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+00FFFEA0  bl       #0xe61b78                             
+00FFFEA4  adrp     x0, #0x236a000                        
+00FFFEA8  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+00FFFEAC  bl       #0xe61b78                             
+00FFFEB0  adrp     x0, #0x2368000                        
+00FFFEB4  ldr      x0, [x0, #0x178]                       // [0x2368178] UnityEngine.Debug_TypeInfo
+00FFFEB8  bl       #0xe61b78                             
+00FFFEBC  adrp     x0, #0x236a000                        
+00FFFEC0  ldr      x0, [x0, #0x910]                       // [0x236A910] System.IO.FileStream_TypeInfo
+00FFFEC4  bl       #0xe61b78                             
+00FFFEC8  adrp     x0, #0x236a000                        
+00FFFECC  ldr      x0, [x0, #0x970]                       // [0x236A970] Save_TypeInfo
+00FFFED0  bl       #0xe61b78                             
+00FFFED4  adrp     x0, #0x236a000                        
+00FFFED8  ldr      x0, [x0, #0xf08]                       // [0x236AF08] 'tagy61 no encontrado'
+00FFFEDC  bl       #0xe61b78                             
+00FFFEE0  adrp     x0, #0x236a000                        
+00FFFEE4  ldr      x0, [x0, #0xec8]                       // [0x236AEC8] 'C:/GM/Unity/waterfall/NUEVOS/niveles3/'
+00FFFEE8  bl       #0xe61b78                             
+00FFFEEC  adrp     x0, #0x236a000                        
+00FFFEF0  ldr      x0, [x0, #0xee8]                       // [0x236AEE8] 'ss'
+00FFFEF4  bl       #0xe61b78                             
+00FFFEF8  adrp     x0, #0x236a000                        
+00FFFEFC  ldr      x0, [x0, #0xef0]                       // [0x236AEF0] '/ss'
+00FFFF00  bl       #0xe61b78                             
+00FFFF04  adrp     x0, #0x236a000                        
+00FFFF08  ldr      x0, [x0, #0x900]                       // [0x236A900] '.bytes'
+00FFFF0C  bl       #0xe61b78                             
+00FFFF10  mov      w8, #1                                
+00FFFF14  strb     w8, [x21, #0xc32]                     
+00FFFF18  mov      w8, #1                                
+00FFFF1C  strb     w8, [x19, #0x4c1]                      // self.checkCargar
+00FFFF20  ldr      x0, [x20]                             
+00FFFF24  ldr      w8, [x0, #0xe0]                       
+00FFFF28  cbnz     w8, #0xffff30                         
+00FFFF2C  bl       #0xe61c80                             
+00FFFF30  adrp     x22, #0x236a000                       
+00FFFF34  adrp     x21, #0x236a000                       
+00FFFF38  ldr      x22, [x22, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+00FFFF3C  ldr      x21, [x21, #0x900]                     // [0x236A900] '.bytes'
+00FFFF40  mov      x0, xzr                               
+00FFFF44  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+00FFFF48  cmp      w0, #0xb                              
+00FFFF4C  b.ne     #0xffffb8                             
+00FFFF50  ldr      x0, [x22]                             
+00FFFF54  adrp     x23, #0x236a000                       
+00FFFF58  ldr      w8, [x0, #0xe0]                       
+00FFFF5C  ldr      x23, [x23, #0xef0]                     // [0x236AEF0] '/ss'
+00FFFF60  cbnz     w8, #0xffff6c                         
+00FFFF64  bl       #0xe61c80                             
+00FFFF68  ldr      x0, [x22]                             
+00FFFF6C  ldr      x0, [x0, #0xb8]                       
+00FFFF70  mov      x1, xzr                               
+00FFFF74  bl       #0x1ab3994                             // System.Int32$$ToString
+00FFFF78  ldr      x8, [x23]                             
+00FFFF7C  ldr      x2, [x21]                             
+00FFFF80  mov      x1, x0                                
+00FFFF84  mov      x3, xzr                               
+00FFFF88  mov      x0, x8                                
+00FFFF8C  bl       #0x196118c                             // System.String$$Concat
+00FFFF90  ldr      x8, [x20]                             
+00FFFF94  mov      x20, x0                               
+00FFFF98  ldr      w9, [x8, #0xe0]                       
+00FFFF9C  cbnz     w9, #0xffffa8                         
+00FFFFA0  mov      x0, x8                                
+00FFFFA4  bl       #0xe61c80                             
+00FFFFA8  mov      x0, xzr                               
+00FFFFAC  bl       #0x1fdfef0                             // UnityEngine.Application$$get_persistentDataPath
+00FFFFB0  mov      x1, x20                               
+00FFFFB4  b        #0x1000044                            
+00FFFFB8  ldr      x0, [x20]                             
+00FFFFBC  ldr      w8, [x0, #0xe0]                       
+00FFFFC0  cbnz     w8, #0xffffc8                         
+00FFFFC4  bl       #0xe61c80                             
+00FFFFC8  mov      x0, xzr                               
+00FFFFCC  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+00FFFFD0  cbz      w0, #0xfffff0                         
+00FFFFD4  ldr      x0, [x20]                             
+00FFFFD8  ldr      w8, [x0, #0xe0]                       
+00FFFFDC  cbnz     w8, #0xffffe4                         
+00FFFFE0  bl       #0xe61c80                             
+00FFFFE4  mov      x0, xzr                               
+00FFFFE8  bl       #0x1fe006c                             // UnityEngine.Application$$get_platform
+00FFFFEC  cmp      w0, #7                                
+00FFFFF0  ldr      x0, [x22]                             
+00FFFFF4  ldr      w8, [x0, #0xe0]                       
+00FFFFF8  cbnz     w8, #0x1000004                        
+00FFFFFC  bl       #0xe61c80                             
+01000000  ldr      x0, [x22]                             
+01000004  ldr      x0, [x0, #0xb8]                       
+01000008  mov      x1, xzr                               
+0100000C  bl       #0x1ab3994                             // System.Int32$$ToString
+01000010  adrp     x8, #0x236a000                        
+01000014  ldr      x8, [x8, #0xee8]                       // [0x236AEE8] 'ss'
+01000018  ldr      x2, [x21]                             
+0100001C  mov      x1, x0                                
+01000020  mov      x3, xzr                               
+01000024  ldr      x8, [x8]                              
+01000028  mov      x0, x8                                
+0100002C  bl       #0x196118c                             // System.String$$Concat
+01000030  adrp     x8, #0x236a000                        
+01000034  ldr      x8, [x8, #0xec8]                       // [0x236AEC8] 'C:/GM/Unity/waterfall/NUEVOS/niveles3/'
+01000038  mov      x1, x0                                
+0100003C  ldr      x8, [x8]                              
+01000040  mov      x0, x8                                
+01000044  mov      x2, xzr                               
+01000048  bl       #0x1958280                             // System.String$$Concat
+0100004C  mov      x1, xzr                               
+01000050  mov      x21, x0                               
+01000054  bl       #0x1a1ae04                             // System.IO.File$$Exists
+01000058  tbz      w0, #0, #0x1000134                    
+0100005C  adrp     x8, #0x236a000                        
+01000060  ldr      x8, [x8, #0x910]                       // [0x236A910] System.IO.FileStream_TypeInfo
+01000064  ldr      x0, [x8]                              
+01000068  bl       #0xe61d94                             
+0100006C  mov      x20, x0                               
+01000070  mov      w2, #3                                
+01000074  mov      x1, x21                               
+01000078  mov      x3, xzr                               
+0100007C  bl       #0x1a2bca8                             // System.IO.FileStream$$.ctor
+01000080  adrp     x8, #0x236a000                        
+01000084  ldr      x8, [x8, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+01000088  ldr      x0, [x8]                              
+0100008C  bl       #0xe61d94                             
+01000090  mov      x21, x0                               
+01000094  mov      x1, xzr                               
+01000098  bl       #0x19e726c                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$.ctor
+0100009C  cbz      x21, #0x1000180                       
+010000A0  mov      x0, x21                               
+010000A4  mov      x1, x20                               
+010000A8  mov      x2, xzr                               
+010000AC  bl       #0x19e72ec                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$Deserialize
+010000B0  cbz      x0, #0x100016c                        
+010000B4  adrp     x8, #0x236a000                        
+010000B8  ldr      x8, [x8, #0x970]                       // [0x236A970] Save_TypeInfo
+010000BC  ldr      x9, [x0]                              
+010000C0  ldr      x1, [x8]                              
+010000C4  ldrb     w10, [x9, #0x130]                     
+010000C8  ldrb     w8, [x1, #0x130]                      
+010000CC  cmp      w10, w8                               
+010000D0  b.lo     #0x1000178                            
+010000D4  ldr      x10, [x9, #0xc8]                      
+010000D8  sub      x9, x8, #1                            
+010000DC  ldr      x10, [x10, x9, lsl #3]                
+010000E0  cmp      x10, x1                               
+010000E4  b.ne     #0x1000178                            
+010000E8  str      x0, [x19, #0x568]                      // self.save1
+010000EC  ldr      x10, [x0]                             
+010000F0  ldrb     w11, [x10, #0x130]                    
+010000F4  cmp      w11, w8                               
+010000F8  b.lo     #0x100017c                            
+010000FC  ldr      x8, [x10, #0xc8]                      
+01000100  ldr      x8, [x8, x9, lsl #3]                  
+01000104  cmp      x8, x1                                
+01000108  b.ne     #0x100017c                            
+0100010C  cbz      x20, #0x1000174                       
+01000110  ldr      x8, [x20]                             
+01000114  ldr      x1, [x8, #0x260]                      
+01000118  ldr      x9, [x8, #0x258]                      
+0100011C  mov      x0, x20                               
+01000120  blr      x9                                    
+01000124  ldp      x20, x19, [sp, #0x20]                 
+01000128  ldp      x22, x21, [sp, #0x10]                 
+0100012C  ldp      x30, x23, [sp], #0x30                 
+01000130  ret                                            
+01000134  adrp     x8, #0x2368000                        
+01000138  ldr      x8, [x8, #0x178]                       // [0x2368178] UnityEngine.Debug_TypeInfo
+0100013C  adrp     x19, #0x236a000                       
+01000140  ldr      x0, [x8]                              
+01000144  ldr      w8, [x0, #0xe0]                       
+01000148  ldr      x19, [x19, #0xf08]                     // [0x236AF08] 'tagy61 no encontrado'
+0100014C  cbnz     w8, #0x1000154                        
+01000150  bl       #0xe61c80                             
+01000154  ldr      x0, [x19]                             
+01000158  ldp      x20, x19, [sp, #0x20]                 
+0100015C  ldp      x22, x21, [sp, #0x10]                 
+01000160  mov      x1, xzr                               
+01000164  ldp      x30, x23, [sp], #0x30                 
+01000168  b        #0x1fe3034                             // UnityEngine.Debug$$Log
+0100016C  str      xzr, [x19, #0x568]                     // self.save1
+01000170  cbnz     x20, #0x1000110                       
+01000174  bl       #0xe61da0                             
+01000178  bl       #0xe6213c                             
+0100017C  bl       #0xe6213c                             
+01000180  bl       #0xe61da0                             
+01000184  b        #0x1000194                            
+01000188  b        #0x1000194                            
+0100018C  b        #0x1000194                            
+01000190  b        #0x1000194                            
+01000194  mov      x19, x0                               
+01000198  cmp      w1, #1                                
+0100019C  b.ne     #0x100021c                            
+010001A0  mov      x0, x19                               
+010001A4  bl       #0x224d2d0                            
+010001A8  mov      x19, x0                               
+010001AC  adrp     x0, #0x2368000                        
+010001B0  ldr      x0, [x0, #0x6d8]                       // [0x23686D8] object_TypeInfo
+010001B4  bl       #0xe61b8c                             
+010001B8  ldr      x8, [x19]                             
+010001BC  ldr      x1, [x8]                              
+010001C0  bl       #0xe621cc                             
+010001C4  tbz      w0, #0, #0x10001f4                    
+010001C8  bl       #0x224d2e0                            
+010001CC  adrp     x0, #0x2368000                        
+010001D0  ldr      x0, [x0, #0x178]                       // [0x2368178] UnityEngine.Debug_TypeInfo
+010001D4  bl       #0xe61b8c                             
+010001D8  ldr      w8, [x0, #0xe0]                       
+010001DC  cbnz     w8, #0x10001e4                        
+010001E0  bl       #0xe61c80                             
+010001E4  adrp     x0, #0x236a000                        
+010001E8  ldr      x0, [x0, #0xf10]                       // [0x236AF10] 'tagy61 error FileStream'
+010001EC  bl       #0xe61b8c                             
+010001F0  b        #0x1000158                            
+010001F4  mov      w0, #8                                
+010001F8  bl       #0x224d320                            
+010001FC  ldr      x8, [x19]                             
+01000200  str      x8, [x0]                              
+01000204  adrp     x1, #0x2253000                        
+01000208  add      x1, x1, #0x618                        
+0100020C  mov      x2, xzr                               
+01000210  bl       #0x224d330                            
+01000214  mov      x19, x0                               
+01000218  bl       #0x224d2e0                            
+0100021C  mov      x0, x19                               
+01000220  bl       #0xf5dd7c                             
+01000224  bl       #0xd2eb98                             

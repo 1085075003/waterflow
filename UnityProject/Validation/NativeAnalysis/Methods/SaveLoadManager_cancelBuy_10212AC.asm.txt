@@ -1,0 +1,49 @@
+// SaveLoadManager$$cancelBuy VA 0x10212AC, inferred length 188
+void SaveLoadManager__cancelBuy (SaveLoadManager_o* __this, const MethodInfo* method);
+010212AC  str      x30, [sp, #-0x20]!                    
+010212B0  stp      x20, x19, [sp, #0x10]                 
+010212B4  adrp     x20, #0x24fb000                       
+010212B8  ldrb     w8, [x20, #0xcb6]                     
+010212BC  mov      x19, x0                               
+010212C0  tbnz     w8, #0, #0x10212e4                    
+010212C4  adrp     x0, #0x236a000                        
+010212C8  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+010212CC  bl       #0xe61b78                             
+010212D0  adrp     x0, #0x236b000                        
+010212D4  ldr      x0, [x0, #0x720]                       // [0x236B720] 'completeOff'
+010212D8  bl       #0xe61b78                             
+010212DC  mov      w8, #1                                
+010212E0  strb     w8, [x20, #0xcb6]                     
+010212E4  ldr      x0, [x19, #0x198]                      // self.audioManager
+010212E8  cbz      x0, #0x1021364                        
+010212EC  ldr      x1, [x19, #0x188]                      // self.click
+010212F0  mov      x2, xzr                               
+010212F4  bl       #0x1028540                             // AudioManager$$PlaySound
+010212F8  ldr      x0, [x19, #0xf0]                       // self.noMoreOff
+010212FC  cbz      x0, #0x1021364                        
+01021300  adrp     x8, #0x236b000                        
+01021304  ldr      x8, [x8, #0x720]                       // [0x236B720] 'completeOff'
+01021308  mov      w2, #1                                
+0102130C  mov      x3, xzr                               
+01021310  ldr      x1, [x8]                              
+01021314  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+01021318  ldr      x0, [x19, #0xf8]                       // self.cajaNoMore
+0102131C  cbz      x0, #0x1021364                        
+01021320  adrp     x20, #0x236a000                       
+01021324  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01021328  mov      w1, wzr                               
+0102132C  mov      x2, xzr                               
+01021330  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01021334  ldr      x0, [x20]                             
+01021338  ldr      w8, [x0, #0xe0]                       
+0102133C  cbnz     w8, #0x1021348                        
+01021340  bl       #0xe61c80                             
+01021344  ldr      x0, [x20]                             
+01021348  ldr      x8, [x0, #0xb8]                       
+0102134C  mov      x0, x19                               
+01021350  ldp      x20, x19, [sp, #0x10]                 
+01021354  mov      w9, #1                                
+01021358  strb     w9, [x8, #0x16]                       
+0102135C  ldr      x30, [sp], #0x20                      
+01021360  b        #0x101b9a0                             // SaveLoadManager$$doActivarBotones
+01021364  bl       #0xe61da0                             

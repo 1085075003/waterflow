@@ -1,0 +1,59 @@
+// ObservadorResorte2$$doValidarMovimientos1 VA 0xFE29C8, inferred length 228
+void ObservadorResorte2__doValidarMovimientos1 (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE29C8  stp      x30, x21, [sp, #-0x20]!               
+00FE29CC  stp      x20, x19, [sp, #0x10]                 
+00FE29D0  adrp     x21, #0x24fb000                       
+00FE29D4  adrp     x20, #0x236a000                       
+00FE29D8  ldrb     w8, [x21, #0xba0]                     
+00FE29DC  ldr      x20, [x20, #0x700]                     // [0x236A700] '0'
+00FE29E0  mov      x19, x0                               
+00FE29E4  tbnz     w8, #0, #0xfe29fc                     
+00FE29E8  adrp     x0, #0x236a000                        
+00FE29EC  ldr      x0, [x0, #0x700]                       // [0x236A700] '0'
+00FE29F0  bl       #0xe61b78                             
+00FE29F4  mov      w8, #1                                
+00FE29F8  strb     w8, [x21, #0xba0]                     
+00FE29FC  strb     wzr, [x19, #0xe8]                      // self.ocupado
+00FE2A00  ldr      x0, [x19, #0x230]                      // self.tipoResor
+00FE2A04  ldr      x1, [x20]                             
+00FE2A08  mov      x2, xzr                               
+00FE2A0C  bl       #0x1960c80                             // System.String$$op_Inequality
+00FE2A10  ldr      w8, [x19, #0x288]                      // self.position
+00FE2A14  tbz      w0, #0, #0xfe2a74                     
+00FE2A18  cbnz     w8, #0xfe2a24                         
+00FE2A1C  mov      x0, x19                               
+00FE2A20  bl       #0xfe25e4                              // ObservadorResorte2$$doValidarPos1
+00FE2A24  ldrb     w8, [x19, #0xe8]                       // self.ocupado
+00FE2A28  cbnz     w8, #0xfe2aa0                         
+00FE2A2C  ldr      w8, [x19, #0x288]                      // self.position
+00FE2A30  cmp      w8, #1                                
+00FE2A34  b.gt     #0xfe2a54                             
+00FE2A38  ldrb     w8, [x19, #0x2d8]                      // self.sw_hayresorte2
+00FE2A3C  cbz      w8, #0xfe2a50                         
+00FE2A40  mov      x0, x19                               
+00FE2A44  bl       #0xfe2720                              // ObservadorResorte2$$doValidarPos2
+00FE2A48  ldrb     w8, [x19, #0xe8]                       // self.ocupado
+00FE2A4C  cbnz     w8, #0xfe2aa0                         
+00FE2A50  ldr      w8, [x19, #0x288]                      // self.position
+00FE2A54  cmp      w8, #3                                
+00FE2A58  b.gt     #0xfe2aa0                             
+00FE2A5C  ldrb     w8, [x19, #0x2d9]                      // self.sw_hayresorte3
+00FE2A60  cbz      w8, #0xfe2aa0                         
+00FE2A64  mov      x0, x19                               
+00FE2A68  ldp      x20, x19, [sp, #0x10]                 
+00FE2A6C  ldp      x30, x21, [sp], #0x20                 
+00FE2A70  b        #0xfe2874                              // ObservadorResorte2$$doValidarPos3
+00FE2A74  cbz      w8, #0xfe2a90                         
+00FE2A78  cmp      w8, #2                                
+00FE2A7C  b.eq     #0xfe2a98                             
+00FE2A80  cmp      w8, #1                                
+00FE2A84  b.ne     #0xfe2aa0                             
+00FE2A88  mov      w8, #2                                
+00FE2A8C  b        #0xfe2a9c                             
+00FE2A90  mov      w8, #1                                
+00FE2A94  b        #0xfe2a9c                             
+00FE2A98  mov      w8, #3                                
+00FE2A9C  str      w8, [x19, #0x31c]                      // self.posiMax
+00FE2AA0  ldp      x20, x19, [sp, #0x10]                 
+00FE2AA4  ldp      x30, x21, [sp], #0x20                 
+00FE2AA8  ret                                            

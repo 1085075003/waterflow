@@ -1,0 +1,36 @@
+// UIManagerSelScript0$$CodigoChinoReal VA 0x1048EDC, inferred length 136
+System_String_o* UIManagerSelScript0__CodigoChinoReal (UIManagerSelScript0_o* __this, const MethodInfo* method);
+01048EDC  str      x30, [sp, #-0x20]!                    
+01048EE0  stp      x20, x19, [sp, #0x10]                 
+01048EE4  adrp     x20, #0x24fb000                       
+01048EE8  adrp     x19, #0x2368000                       
+01048EEC  ldrb     w8, [x20, #0xd93]                     
+01048EF0  ldr      x19, [x19, #0x878]                     // [0x2368878] UnityEngine.Application_TypeInfo
+01048EF4  tbnz     w8, #0, #0x1048f24                    
+01048EF8  adrp     x0, #0x2368000                        
+01048EFC  ldr      x0, [x0, #0x878]                       // [0x2368878] UnityEngine.Application_TypeInfo
+01048F00  bl       #0xe61b78                             
+01048F04  adrp     x0, #0x236b000                        
+01048F08  ldr      x0, [x0, #0x2e8]                       // [0x236B2E8] 'zh-TW'
+01048F0C  bl       #0xe61b78                             
+01048F10  adrp     x0, #0x236b000                        
+01048F14  ldr      x0, [x0, #0x320]                       // [0x236B320] 'zh'
+01048F18  bl       #0xe61b78                             
+01048F1C  mov      w8, #1                                
+01048F20  strb     w8, [x20, #0xd93]                     
+01048F24  ldr      x0, [x19]                             
+01048F28  adrp     x19, #0x236b000                       
+01048F2C  adrp     x20, #0x236b000                       
+01048F30  ldr      w8, [x0, #0xe0]                       
+01048F34  ldr      x19, [x19, #0x2e8]                     // [0x236B2E8] 'zh-TW'; self.grupoEstr4
+01048F38  ldr      x20, [x20, #0x320]                     // [0x236B320] 'zh'
+01048F3C  cbnz     w8, #0x1048f44                        
+01048F40  bl       #0xe61c80                             
+01048F44  mov      x0, xzr                               
+01048F48  bl       #0x1fe0094                             // UnityEngine.Application$$get_systemLanguage
+01048F4C  cmp      w0, #0x29                             
+01048F50  csel     x8, x19, x20, eq                      
+01048F54  ldr      x0, [x8]                              
+01048F58  ldp      x20, x19, [sp, #0x10]                 
+01048F5C  ldr      x30, [sp], #0x20                      
+01048F60  ret                                            

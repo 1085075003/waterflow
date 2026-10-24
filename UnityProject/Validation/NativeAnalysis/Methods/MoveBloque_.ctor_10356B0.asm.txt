@@ -1,0 +1,61 @@
+// MoveBloque$$.ctor VA 0x10356B0, inferred length 236
+void MoveBloque___ctor (MoveBloque_o* __this, const MethodInfo* method);
+010356B0  str      x30, [sp, #-0x30]!                    
+010356B4  stp      x22, x21, [sp, #0x10]                 
+010356B8  stp      x20, x19, [sp, #0x20]                 
+010356BC  adrp     x22, #0x24fb000                       
+010356C0  adrp     x21, #0x236b000                       
+010356C4  adrp     x20, #0x236a000                       
+010356C8  ldrb     w8, [x22, #0xd34]                     
+010356CC  ldr      x21, [x21, #0xb58]                     // [0x236BB58] 'SoundBlock'
+010356D0  ldr      x20, [x20, #0x918]                     // [0x236A918] Save1_TypeInfo
+010356D4  mov      x19, x0                               
+010356D8  tbnz     w8, #0, #0x10356fc                    
+010356DC  adrp     x0, #0x236a000                        
+010356E0  ldr      x0, [x0, #0x918]                       // [0x236A918] Save1_TypeInfo
+010356E4  bl       #0xe61b78                             
+010356E8  adrp     x0, #0x236b000                        
+010356EC  ldr      x0, [x0, #0xb58]                       // [0x236BB58] 'SoundBlock'
+010356F0  bl       #0xe61b78                             
+010356F4  mov      w8, #1                                
+010356F8  strb     w8, [x22, #0xd34]                     
+010356FC  adrp     x8, #0x601000                         
+01035700  ldr      q0, [x8, #0xdd0]                      
+01035704  mov      w0, #-1                               
+01035708  mov      x1, xzr                               
+0103570C  stur     q0, [x19, #0xc4]                       // self.smoothSpeed
+01035710  bl       #0x2006870                             // UnityEngine.LayerMask$$op_Implicit
+01035714  adrp     x8, #0x600000                         
+01035718  ldr      d0, [x8, #0x7d0]                      
+0103571C  mov      w9, #0x3f800000                       
+01035720  str      w9, [x19, #0x108]                      // self.sphereRadius
+01035724  adrp     x9, #0x601000                         
+01035728  str      d0, [x19, #0xe0]                       // self.varx
+0103572C  ldr      q0, [x9, #0x120]                      
+01035730  mov      w8, #0x101                            
+01035734  mov      w22, #1                               
+01035738  add      x9, x19, #0x258                       
+0103573C  strh     w8, [x19, #0x23c]                      // self.inicioFijacion
+01035740  mov      w8, #-0x3d600000                      
+01035744  str      w0, [x19, #0xdc]                       // self.mask
+01035748  strb     w22, [x19, #0x140]                     // self.procesoCheck
+0103574C  str      q0, [x9]                              
+01035750  dup      v0.2s, w8                             
+01035754  str      w8, [x19, #0x268]                      // self.minX2
+01035758  str      d0, [x19, #0x270]                      // self.maxX2
+0103575C  ldr      x8, [x21]                             
+01035760  str      w22, [x19, #0x290]                     // self.paso
+01035764  strb     w22, [x19, #0x358]                     // self.checkGuia
+01035768  str      x8, [x19, #0x288]                      // self.SoundBlock
+0103576C  ldr      x0, [x20]                             
+01035770  bl       #0xe61d94                             
+01035774  mov      x20, x0                               
+01035778  bl       #0x102a738                             // Save1$$.ctor
+0103577C  str      x20, [x19, #0x380]                     // self.save1
+01035780  strb     w22, [x19, #0x3cc]                     // self.cambiofase
+01035784  mov      x0, x19                               
+01035788  ldp      x20, x19, [sp, #0x20]                 
+0103578C  ldp      x22, x21, [sp, #0x10]                 
+01035790  mov      x1, xzr                               
+01035794  ldr      x30, [sp], #0x30                      
+01035798  b        #0x2007a3c                             // UnityEngine.MonoBehaviour$$.ctor

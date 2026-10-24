@@ -1,0 +1,339 @@
+// CascadaTestC$$doControlNormal VA 0xFD7820, inferred length 1348
+void CascadaTestC__doControlNormal (CascadaTestC_o* __this, const MethodInfo* method);
+00FD7820  stp      x29, x30, [sp, #-0x20]!               
+00FD7824  stp      x20, x19, [sp, #0x10]                 
+00FD7828  sub      sp, sp, #0x390                        
+00FD782C  adrp     x20, #0x24fb000                       
+00FD7830  ldrb     w8, [x20, #0xb74]                     
+00FD7834  mov      x19, x0                               
+00FD7838  tbnz     w8, #0, #0xfd7850                     
+00FD783C  adrp     x0, #0x236a000                        
+00FD7840  ldr      x0, [x0, #0x7a0]                       // [0x236A7A0] Method$UnityEngine.GameObject.GetComponent<ParticleSystem>()
+00FD7844  bl       #0xe61b78                             
+00FD7848  mov      w8, #1                                
+00FD784C  strb     w8, [x20, #0xb74]                     
+00FD7850  ldr      x0, [x19, #0x28]                       // self.Chorro
+00FD7854  cbz      x0, #0xfd7d60                         
+00FD7858  adrp     x8, #0x236a000                        
+00FD785C  ldr      x8, [x8, #0x7a0]                       // [0x236A7A0] Method$UnityEngine.GameObject.GetComponent<ParticleSystem>()
+00FD7860  ldr      x1, [x8]                              
+00FD7864  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FD7868  str      x0, [x19, #0xe0]                       // self.ps
+00FD786C  cbz      x0, #0xfd7d60                         
+00FD7870  mov      x1, xzr                               
+00FD7874  bl       #0x203cf94                             // UnityEngine.ParticleSystem$$get_forceOverLifetime
+00FD7878  str      x0, [sp, #0x388]                      
+00FD787C  ldr      x0, [x19, #0xe0]                       // self.ps
+00FD7880  cbz      x0, #0xfd7d60                         
+00FD7884  mov      x1, xzr                               
+00FD7888  bl       #0x203cf88                             // UnityEngine.ParticleSystem$$get_velocityOverLifetime
+00FD788C  str      x0, [sp, #0x380]                      
+00FD7890  ldr      w8, [x19, #0x8c]                       // self.altura
+00FD7894  add      w8, w8, #4                            
+00FD7898  cmp      w8, #6                                
+00FD789C  b.hi     #0xfd7968                             
+00FD78A0  adrp     x9, #0x621000                         
+00FD78A4  add      x9, x9, #0x170                        
+00FD78A8  adr      x10, #0xfd78b8                        
+00FD78AC  ldrb     w11, [x9, x8]                         
+00FD78B0  add      x10, x10, x11, lsl #2                 
+00FD78B4  br       x10                                   
+00FD78B8  add      x8, sp, #0x360                        
+00FD78BC  fmov     s0, #18.00000000                      
+00FD78C0  mov      x0, xzr                               
+00FD78C4  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD78C8  ldp      q0, q1, [sp, #0x360]                  
+00FD78CC  add      x0, sp, #0x380                        
+00FD78D0  add      x1, sp, #0x80                         
+00FD78D4  mov      x2, xzr                               
+00FD78D8  stp      q0, q1, [sp, #0x80]                   
+00FD78DC  bl       #0x203d468                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_y
+00FD78E0  add      x8, sp, #0x360                        
+00FD78E4  fmov     s0, #-7.50000000                      
+00FD78E8  mov      x0, xzr                               
+00FD78EC  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD78F0  ldp      q0, q1, [sp, #0x360]                  
+00FD78F4  add      x0, sp, #0x380                        
+00FD78F8  add      x1, sp, #0x60                         
+00FD78FC  mov      x2, xzr                               
+00FD7900  stp      q0, q1, [sp, #0x60]                   
+00FD7904  bl       #0x203d4f0                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_z
+00FD7908  add      x8, sp, #0x360                        
+00FD790C  fmov     s0, #-10.00000000                     
+00FD7910  mov      x0, xzr                               
+00FD7914  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7918  ldp      q0, q1, [sp, #0x360]                  
+00FD791C  add      x0, sp, #0x388                        
+00FD7920  add      x1, sp, #0x40                         
+00FD7924  mov      x2, xzr                               
+00FD7928  stp      q0, q1, [sp, #0x40]                   
+00FD792C  bl       #0x203d578                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_y
+00FD7930  add      x8, sp, #0x360                        
+00FD7934  fmov     s0, #1.00000000                       
+00FD7938  mov      x0, xzr                               
+00FD793C  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7940  ldp      q0, q1, [sp, #0x360]                  
+00FD7944  add      x0, sp, #0x388                        
+00FD7948  add      x1, sp, #0x20                         
+00FD794C  mov      x2, xzr                               
+00FD7950  stp      q0, q1, [sp, #0x20]                   
+00FD7954  bl       #0x203d600                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_z
+00FD7958  ldr      x0, [x19, #0xe0]                       // self.ps
+00FD795C  cbz      x0, #0xfd7d60                         
+00FD7960  fmov     s0, #6.00000000                       
+00FD7964  b        #0xfd7c08                             
+00FD7968  add      x8, sp, #0x360                        
+00FD796C  fmov     s0, #-15.00000000                     
+00FD7970  mov      x0, xzr                               
+00FD7974  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7978  ldp      q0, q1, [sp, #0x360]                  
+00FD797C  add      x0, sp, #0x388                        
+00FD7980  mov      x1, sp                                
+00FD7984  mov      x2, xzr                               
+00FD7988  stp      q0, q1, [sp]                          
+00FD798C  bl       #0x203d578                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_y
+00FD7990  b        #0xfd7d50                             
+00FD7994  add      x8, sp, #0x360                        
+00FD7998  fmov     s0, #18.00000000                      
+00FD799C  mov      x0, xzr                               
+00FD79A0  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD79A4  ldp      q0, q1, [sp, #0x360]                  
+00FD79A8  add      x0, sp, #0x380                        
+00FD79AC  add      x1, sp, #0x100                        
+00FD79B0  mov      x2, xzr                               
+00FD79B4  stp      q0, q1, [sp, #0x100]                  
+00FD79B8  bl       #0x203d468                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_y
+00FD79BC  add      x8, sp, #0x360                        
+00FD79C0  fmov     s0, #-8.00000000                      
+00FD79C4  mov      x0, xzr                               
+00FD79C8  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD79CC  ldp      q0, q1, [sp, #0x360]                  
+00FD79D0  add      x0, sp, #0x380                        
+00FD79D4  add      x1, sp, #0xe0                         
+00FD79D8  mov      x2, xzr                               
+00FD79DC  stp      q0, q1, [sp, #0xe0]                   
+00FD79E0  bl       #0x203d4f0                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_z
+00FD79E4  add      x8, sp, #0x360                        
+00FD79E8  fmov     s0, #-10.00000000                     
+00FD79EC  mov      x0, xzr                               
+00FD79F0  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD79F4  ldp      q0, q1, [sp, #0x360]                  
+00FD79F8  add      x0, sp, #0x388                        
+00FD79FC  add      x1, sp, #0xc0                         
+00FD7A00  mov      x2, xzr                               
+00FD7A04  stp      q0, q1, [sp, #0xc0]                   
+00FD7A08  bl       #0x203d578                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_y
+00FD7A0C  add      x8, sp, #0x360                        
+00FD7A10  fmov     s0, #1.00000000                       
+00FD7A14  mov      x0, xzr                               
+00FD7A18  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7A1C  ldp      q0, q1, [sp, #0x360]                  
+00FD7A20  add      x0, sp, #0x388                        
+00FD7A24  add      x1, sp, #0xa0                         
+00FD7A28  mov      x2, xzr                               
+00FD7A2C  stp      q0, q1, [sp, #0xa0]                   
+00FD7A30  bl       #0x203d600                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_z
+00FD7A34  ldr      x0, [x19, #0xe0]                       // self.ps
+00FD7A38  cbz      x0, #0xfd7d60                         
+00FD7A3C  adrp     x8, #0x5ff000                         
+00FD7A40  ldr      s0, [x8, #0xd3c]                      
+00FD7A44  b        #0xfd7c08                             
+00FD7A48  add      x8, sp, #0x360                        
+00FD7A4C  fmov     s0, #18.00000000                      
+00FD7A50  mov      x0, xzr                               
+00FD7A54  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7A58  ldp      q0, q1, [sp, #0x360]                  
+00FD7A5C  add      x0, sp, #0x380                        
+00FD7A60  add      x1, sp, #0x180                        
+00FD7A64  mov      x2, xzr                               
+00FD7A68  stp      q0, q1, [sp, #0x180]                  
+00FD7A6C  bl       #0x203d468                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_y
+00FD7A70  add      x8, sp, #0x360                        
+00FD7A74  fmov     s0, #-8.00000000                      
+00FD7A78  mov      x0, xzr                               
+00FD7A7C  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7A80  ldp      q0, q1, [sp, #0x360]                  
+00FD7A84  add      x0, sp, #0x380                        
+00FD7A88  add      x1, sp, #0x160                        
+00FD7A8C  mov      x2, xzr                               
+00FD7A90  stp      q0, q1, [sp, #0x160]                  
+00FD7A94  bl       #0x203d4f0                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_z
+00FD7A98  add      x8, sp, #0x360                        
+00FD7A9C  fmov     s0, #-10.00000000                     
+00FD7AA0  mov      x0, xzr                               
+00FD7AA4  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7AA8  ldp      q0, q1, [sp, #0x360]                  
+00FD7AAC  add      x0, sp, #0x388                        
+00FD7AB0  add      x1, sp, #0x140                        
+00FD7AB4  mov      x2, xzr                               
+00FD7AB8  stp      q0, q1, [sp, #0x140]                  
+00FD7ABC  bl       #0x203d578                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_y
+00FD7AC0  add      x8, sp, #0x360                        
+00FD7AC4  fmov     s0, #1.00000000                       
+00FD7AC8  mov      x0, xzr                               
+00FD7ACC  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7AD0  ldp      q0, q1, [sp, #0x360]                  
+00FD7AD4  add      x0, sp, #0x388                        
+00FD7AD8  add      x1, sp, #0x120                        
+00FD7ADC  mov      x2, xzr                               
+00FD7AE0  stp      q0, q1, [sp, #0x120]                  
+00FD7AE4  bl       #0x203d600                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_z
+00FD7AE8  ldr      x0, [x19, #0xe0]                       // self.ps
+00FD7AEC  cbz      x0, #0xfd7d60                         
+00FD7AF0  fmov     s0, #5.50000000                       
+00FD7AF4  b        #0xfd7c08                             
+00FD7AF8  add      x8, sp, #0x360                        
+00FD7AFC  fmov     s0, #-8.50000000                      
+00FD7B00  mov      x0, xzr                               
+00FD7B04  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7B08  ldp      q0, q1, [sp, #0x360]                  
+00FD7B0C  add      x0, sp, #0x380                        
+00FD7B10  add      x1, sp, #0x1e0                        
+00FD7B14  mov      x2, xzr                               
+00FD7B18  stp      q0, q1, [sp, #0x1e0]                  
+00FD7B1C  bl       #0x203d4f0                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_z
+00FD7B20  add      x8, sp, #0x360                        
+00FD7B24  fmov     s0, #-10.00000000                     
+00FD7B28  mov      x0, xzr                               
+00FD7B2C  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7B30  ldp      q0, q1, [sp, #0x360]                  
+00FD7B34  add      x0, sp, #0x388                        
+00FD7B38  add      x1, sp, #0x1c0                        
+00FD7B3C  mov      x2, xzr                               
+00FD7B40  stp      q0, q1, [sp, #0x1c0]                  
+00FD7B44  bl       #0x203d578                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_y
+00FD7B48  add      x8, sp, #0x360                        
+00FD7B4C  fmov     s0, #1.00000000                       
+00FD7B50  mov      x0, xzr                               
+00FD7B54  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7B58  ldp      q0, q1, [sp, #0x360]                  
+00FD7B5C  add      x0, sp, #0x388                        
+00FD7B60  add      x1, sp, #0x1a0                        
+00FD7B64  mov      x2, xzr                               
+00FD7B68  stp      q0, q1, [sp, #0x1a0]                  
+00FD7B6C  bl       #0x203d600                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_z
+00FD7B70  ldr      x0, [x19, #0xe0]                       // self.ps
+00FD7B74  cbz      x0, #0xfd7d60                         
+00FD7B78  adrp     x8, #0x5ff000                         
+00FD7B7C  ldr      s0, [x8, #0xc74]                      
+00FD7B80  b        #0xfd7c08                             
+00FD7B84  add      x8, sp, #0x360                        
+00FD7B88  fmov     s0, #-8.50000000                      
+00FD7B8C  mov      x0, xzr                               
+00FD7B90  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7B94  ldp      q0, q1, [sp, #0x360]                  
+00FD7B98  add      x0, sp, #0x380                        
+00FD7B9C  add      x1, sp, #0x340                        
+00FD7BA0  mov      x2, xzr                               
+00FD7BA4  stp      q0, q1, [sp, #0x340]                  
+00FD7BA8  bl       #0x203d4f0                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_z
+00FD7BAC  add      x8, sp, #0x360                        
+00FD7BB0  fmov     s0, #-10.00000000                     
+00FD7BB4  mov      x0, xzr                               
+00FD7BB8  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7BBC  ldp      q0, q1, [sp, #0x360]                  
+00FD7BC0  add      x0, sp, #0x388                        
+00FD7BC4  add      x1, sp, #0x320                        
+00FD7BC8  mov      x2, xzr                               
+00FD7BCC  stp      q0, q1, [sp, #0x320]                  
+00FD7BD0  bl       #0x203d578                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_y
+00FD7BD4  add      x8, sp, #0x360                        
+00FD7BD8  fmov     s0, #1.00000000                       
+00FD7BDC  mov      x0, xzr                               
+00FD7BE0  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7BE4  ldp      q0, q1, [sp, #0x360]                  
+00FD7BE8  add      x0, sp, #0x388                        
+00FD7BEC  add      x1, sp, #0x300                        
+00FD7BF0  mov      x2, xzr                               
+00FD7BF4  stp      q0, q1, [sp, #0x300]                  
+00FD7BF8  bl       #0x203d600                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_z
+00FD7BFC  ldr      x0, [x19, #0xe0]                       // self.ps
+00FD7C00  cbz      x0, #0xfd7d60                         
+00FD7C04  fmov     s0, #4.50000000                       
+00FD7C08  mov      x1, xzr                               
+00FD7C0C  bl       #0x203cca8                             // UnityEngine.ParticleSystem$$set_startLifetime
+00FD7C10  b        #0xfd7d50                             
+00FD7C14  add      x8, sp, #0x360                        
+00FD7C18  fmov     s0, #18.00000000                      
+00FD7C1C  mov      x0, xzr                               
+00FD7C20  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7C24  ldp      q0, q1, [sp, #0x360]                  
+00FD7C28  add      x0, sp, #0x380                        
+00FD7C2C  add      x1, sp, #0x2e0                        
+00FD7C30  mov      x2, xzr                               
+00FD7C34  stp      q0, q1, [sp, #0x2e0]                  
+00FD7C38  bl       #0x203d468                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_y
+00FD7C3C  add      x8, sp, #0x360                        
+00FD7C40  fmov     s0, #-9.50000000                      
+00FD7C44  mov      x0, xzr                               
+00FD7C48  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7C4C  ldp      q0, q1, [sp, #0x360]                  
+00FD7C50  add      x0, sp, #0x380                        
+00FD7C54  add      x1, sp, #0x2c0                        
+00FD7C58  mov      x2, xzr                               
+00FD7C5C  stp      q0, q1, [sp, #0x2c0]                  
+00FD7C60  bl       #0x203d4f0                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_z
+00FD7C64  add      x8, sp, #0x360                        
+00FD7C68  fmov     s0, #-9.00000000                      
+00FD7C6C  mov      x0, xzr                               
+00FD7C70  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7C74  ldp      q0, q1, [sp, #0x360]                  
+00FD7C78  add      x0, sp, #0x388                        
+00FD7C7C  add      x1, sp, #0x2a0                        
+00FD7C80  mov      x2, xzr                               
+00FD7C84  stp      q0, q1, [sp, #0x2a0]                  
+00FD7C88  bl       #0x203d578                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_y
+00FD7C8C  add      x8, sp, #0x360                        
+00FD7C90  fmov     s0, #1.00000000                       
+00FD7C94  mov      x0, xzr                               
+00FD7C98  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7C9C  ldp      q0, q1, [sp, #0x360]                  
+00FD7CA0  add      x0, sp, #0x388                        
+00FD7CA4  add      x1, sp, #0x280                        
+00FD7CA8  stp      q0, q1, [sp, #0x280]                  
+00FD7CAC  b        #0xfd7d48                             
+00FD7CB0  add      x8, sp, #0x360                        
+00FD7CB4  fmov     s0, #15.00000000                      
+00FD7CB8  mov      x0, xzr                               
+00FD7CBC  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7CC0  ldp      q0, q1, [sp, #0x360]                  
+00FD7CC4  add      x0, sp, #0x380                        
+00FD7CC8  add      x1, sp, #0x260                        
+00FD7CCC  mov      x2, xzr                               
+00FD7CD0  stp      q0, q1, [sp, #0x260]                  
+00FD7CD4  bl       #0x203d468                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_y
+00FD7CD8  add      x8, sp, #0x360                        
+00FD7CDC  fmov     s0, #-5.00000000                      
+00FD7CE0  mov      x0, xzr                               
+00FD7CE4  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7CE8  ldp      q0, q1, [sp, #0x360]                  
+00FD7CEC  add      x0, sp, #0x380                        
+00FD7CF0  add      x1, sp, #0x240                        
+00FD7CF4  mov      x2, xzr                               
+00FD7CF8  stp      q0, q1, [sp, #0x240]                  
+00FD7CFC  bl       #0x203d4f0                             // UnityEngine.ParticleSystem.VelocityOverLifetimeModule$$set_z
+00FD7D00  add      x8, sp, #0x360                        
+00FD7D04  fmov     s0, #-15.00000000                     
+00FD7D08  mov      x0, xzr                               
+00FD7D0C  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7D10  ldp      q0, q1, [sp, #0x360]                  
+00FD7D14  add      x0, sp, #0x388                        
+00FD7D18  add      x1, sp, #0x220                        
+00FD7D1C  mov      x2, xzr                               
+00FD7D20  stp      q0, q1, [sp, #0x220]                  
+00FD7D24  bl       #0x203d578                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_y
+00FD7D28  add      x8, sp, #0x360                        
+00FD7D2C  fmov     s0, #2.00000000                       
+00FD7D30  mov      x0, xzr                               
+00FD7D34  bl       #0x203d3d8                             // UnityEngine.ParticleSystem.MinMaxCurve$$op_Implicit
+00FD7D38  ldp      q0, q1, [sp, #0x360]                  
+00FD7D3C  add      x0, sp, #0x388                        
+00FD7D40  add      x1, sp, #0x200                        
+00FD7D44  stp      q0, q1, [sp, #0x200]                  
+00FD7D48  mov      x2, xzr                               
+00FD7D4C  bl       #0x203d600                             // UnityEngine.ParticleSystem.ForceOverLifetimeModule$$set_z
+00FD7D50  add      sp, sp, #0x390                        
+00FD7D54  ldp      x20, x19, [sp, #0x10]                 
+00FD7D58  ldp      x29, x30, [sp], #0x20                 
+00FD7D5C  ret                                            
+00FD7D60  bl       #0xe61da0                             

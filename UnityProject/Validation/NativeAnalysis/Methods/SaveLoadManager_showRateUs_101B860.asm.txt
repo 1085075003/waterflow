@@ -1,0 +1,46 @@
+// SaveLoadManager$$showRateUs VA 0x101B860, inferred length 176
+void SaveLoadManager__showRateUs (SaveLoadManager_o* __this, const MethodInfo* method);
+0101B860  str      x30, [sp, #-0x20]!                    
+0101B864  stp      x20, x19, [sp, #0x10]                 
+0101B868  adrp     x20, #0x24fb000                       
+0101B86C  ldrb     w8, [x20, #0xca2]                     
+0101B870  mov      x19, x0                               
+0101B874  tbnz     w8, #0, #0x101b8a4                    
+0101B878  adrp     x0, #0x236b000                        
+0101B87C  ldr      x0, [x0, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+0101B880  bl       #0xe61b78                             
+0101B884  adrp     x0, #0x236b000                        
+0101B888  ldr      x0, [x0, #0x680]                       // [0x236B680] 'an_complete'
+0101B88C  bl       #0xe61b78                             
+0101B890  adrp     x0, #0x236b000                        
+0101B894  ldr      x0, [x0, #0x688]                       // [0x236B688] 'an_complete2d'
+0101B898  bl       #0xe61b78                             
+0101B89C  mov      w8, #1                                
+0101B8A0  strb     w8, [x20, #0xca2]                     
+0101B8A4  ldr      x0, [x19, #0x170]                      // self.cajaRate
+0101B8A8  cbz      x0, #0x101b90c                        
+0101B8AC  mov      w1, #1                                
+0101B8B0  mov      x2, xzr                               
+0101B8B4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0101B8B8  ldr      x0, [x19, #0x170]                      // self.cajaRate
+0101B8BC  cbz      x0, #0x101b90c                        
+0101B8C0  adrp     x8, #0x236b000                        
+0101B8C4  ldr      x8, [x8, #0x678]                       // [0x236B678] Method$UnityEngine.GameObject.GetComponent<Animator>()
+0101B8C8  ldr      x1, [x8]                              
+0101B8CC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0101B8D0  cbz      x0, #0x101b90c                        
+0101B8D4  ldr      w8, [x19, #0x3e8]                      // self.esTablet
+0101B8D8  adrp     x9, #0x236b000                        
+0101B8DC  adrp     x10, #0x236b000                       
+0101B8E0  ldr      x9, [x9, #0x688]                       // [0x236B688] 'an_complete2d'
+0101B8E4  ldr      x10, [x10, #0x680]                     // [0x236B680] 'an_complete'
+0101B8E8  cmp      w8, #1                                
+0101B8EC  ldp      x20, x19, [sp, #0x10]                 
+0101B8F0  fmov     s0, wzr                               
+0101B8F4  csel     x8, x9, x10, eq                       
+0101B8F8  ldr      x1, [x8]                              
+0101B8FC  mov      w2, wzr                               
+0101B900  mov      x3, xzr                               
+0101B904  ldr      x30, [sp], #0x20                      
+0101B908  b        #0x1fdb684                             // UnityEngine.Animator$$Play
+0101B90C  bl       #0xe61da0                             

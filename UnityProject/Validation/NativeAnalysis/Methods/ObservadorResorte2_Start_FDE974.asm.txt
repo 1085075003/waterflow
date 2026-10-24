@@ -1,0 +1,226 @@
+// ObservadorResorte2$$Start VA 0xFDE974, inferred length 896
+void ObservadorResorte2__Start (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FDE974  stp      x30, x21, [sp, #-0x20]!               
+00FDE978  stp      x20, x19, [sp, #0x10]                 
+00FDE97C  adrp     x21, #0x24fb000                       
+00FDE980  adrp     x20, #0x236a000                       
+00FDE984  ldrb     w8, [x21, #0xb9c]                     
+00FDE988  ldr      x20, [x20, #0x700]                     // [0x236A700] '0'
+00FDE98C  mov      x19, x0                               
+00FDE990  tbnz     w8, #0, #0xfde9cc                     
+00FDE994  adrp     x0, #0x236a000                        
+00FDE998  ldr      x0, [x0, #0x7c8]                       // [0x236A7C8] Resorte1_TypeInfo
+00FDE99C  bl       #0xe61b78                             
+00FDE9A0  adrp     x0, #0x236a000                        
+00FDE9A4  ldr      x0, [x0, #0x7d0]                       // [0x236A7D0] 'c'
+00FDE9A8  bl       #0xe61b78                             
+00FDE9AC  adrp     x0, #0x236a000                        
+00FDE9B0  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FDE9B4  bl       #0xe61b78                             
+00FDE9B8  adrp     x0, #0x236a000                        
+00FDE9BC  ldr      x0, [x0, #0x700]                       // [0x236A700] '0'
+00FDE9C0  bl       #0xe61b78                             
+00FDE9C4  mov      w8, #1                                
+00FDE9C8  strb     w8, [x21, #0xb9c]                     
+00FDE9CC  mov      w8, #1                                
+00FDE9D0  movi     v0.2d, #0000000000000000              
+00FDE9D4  strb     wzr, [x19, #0x270]                     // self.terminadoResorte1
+00FDE9D8  strh     wzr, [x19, #0x164]                     // self.activadoResorte
+00FDE9DC  strb     wzr, [x19, #0x1c4]                     // self.resorteOK
+00FDE9E0  strb     wzr, [x19, #0x273]                     // self.terminado1
+00FDE9E4  str      w8, [x19, #0x1c0]                      // self.chorro
+00FDE9E8  str      d0, [x19, #0x288]                      // self.position
+00FDE9EC  ldr      x9, [x20]                             
+00FDE9F0  mov      x0, x19                               
+00FDE9F4  mov      x1, xzr                               
+00FDE9F8  str      q0, [x19, #0x2e0]                      // self.managerResorte
+00FDE9FC  strb     w8, [x19, #0x329]                      // self.prineraVezResorte2
+00FDEA00  str      x9, [x19, #0x40]                       // self.valMove2
+00FDEA04  strb     wzr, [x19, #0x274]                     // self.sueloBloqueado
+00FDEA08  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FDEA0C  cbz      x0, #0xfdecf0                         
+00FDEA10  mov      x1, xzr                               
+00FDEA14  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FDEA18  cbz      x0, #0xfdecf0                         
+00FDEA1C  mov      x1, xzr                               
+00FDEA20  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FDEA24  mov      x0, x19                               
+00FDEA28  mov      x1, xzr                               
+00FDEA2C  str      s0, [x19, #0x7c]                       // self.inix0
+00FDEA30  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FDEA34  cbz      x0, #0xfdecf0                         
+00FDEA38  mov      x1, xzr                               
+00FDEA3C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FDEA40  cbz      x0, #0xfdecf0                         
+00FDEA44  mov      x1, xzr                               
+00FDEA48  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FDEA4C  mov      x0, x19                               
+00FDEA50  mov      x1, xzr                               
+00FDEA54  str      s1, [x19, #0x80]                       // self.iniy0
+00FDEA58  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FDEA5C  cbz      x0, #0xfdecf0                         
+00FDEA60  mov      x1, xzr                               
+00FDEA64  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FDEA68  cbz      x0, #0xfdecf0                         
+00FDEA6C  mov      x1, xzr                               
+00FDEA70  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+00FDEA74  ldur     d0, [x19, #0x7c]                       // self.inix0
+00FDEA78  ldr      x0, [x19, #0x20]                       // self.conResorte
+00FDEA7C  str      s2, [x19, #0x84]                       // self.iniz0
+00FDEA80  str      wzr, [x19, #0x88]                      // self.angle0
+00FDEA84  str      s2, [x19, #0x78]                       // self.iniz
+00FDEA88  str      wzr, [x19, #0x31c]                     // self.posiMax
+00FDEA8C  str      wzr, [x19, #0xf0]                      // self.posiMaxTotal
+00FDEA90  str      d0, [x19, #0x70]                       // self.inix
+00FDEA94  strb     wzr, [x19, #0x290]                     // self.sw_hayConResorte2
+00FDEA98  cbz      x0, #0xfdecf0                         
+00FDEA9C  ldr      w21, [x0, #0x10]                      
+00FDEAA0  mov      w2, #1                                
+00FDEAA4  mov      w1, wzr                               
+00FDEAA8  mov      x3, xzr                               
+00FDEAAC  mov      w20, #1                               
+00FDEAB0  bl       #0x196288c                             // System.String$$Substring
+00FDEAB4  cmp      w21, #2                               
+00FDEAB8  str      x0, [x19, #0x250]                      // self.conResorte1
+00FDEABC  b.lt     #0xfdeae0                             
+00FDEAC0  ldr      x0, [x19, #0x20]                       // self.conResorte
+00FDEAC4  strb     w20, [x19, #0x290]                     // self.sw_hayConResorte2
+00FDEAC8  cbz      x0, #0xfdecf0                         
+00FDEACC  mov      w1, #1                                
+00FDEAD0  mov      w2, #1                                
+00FDEAD4  mov      x3, xzr                               
+00FDEAD8  bl       #0x196288c                             // System.String$$Substring
+00FDEADC  str      x0, [x19, #0x258]                      // self.conResorte2
+00FDEAE0  ldr      x8, [x19, #0x28]                       // self.tipoResorte
+00FDEAE4  ldrb     w9, [x19, #0x290]                      // self.sw_hayConResorte2
+00FDEAE8  str      x8, [x19, #0x298]                      // self.tipo1
+00FDEAEC  cbz      w9, #0xfdeb5c                         
+00FDEAF0  cbz      x8, #0xfdecf0                         
+00FDEAF4  adrp     x9, #0x236a000                        
+00FDEAF8  ldr      x9, [x9, #0x7d0]                       // [0x236A7D0] 'c'
+00FDEAFC  mov      x0, x8                                
+00FDEB00  mov      x2, xzr                               
+00FDEB04  ldr      x1, [x9]                              
+00FDEB08  bl       #0x196578c                             // System.String$$IndexOf
+00FDEB0C  ldr      x8, [x19, #0x28]                       // self.tipoResorte
+00FDEB10  cbz      x8, #0xfdecf0                         
+00FDEB14  mov      w20, w0                               
+00FDEB18  mov      x0, x8                                
+00FDEB1C  mov      w1, wzr                               
+00FDEB20  mov      w2, w20                               
+00FDEB24  mov      x3, xzr                               
+00FDEB28  bl       #0x196288c                             // System.String$$Substring
+00FDEB2C  ldr      x8, [x19, #0x28]                       // self.tipoResorte
+00FDEB30  str      x0, [x19, #0x298]                      // self.tipo1
+00FDEB34  cbz      x8, #0xfdecf0                         
+00FDEB38  ldr      w9, [x8, #0x10]                       
+00FDEB3C  mvn      w10, w20                              
+00FDEB40  add      w1, w20, #1                           
+00FDEB44  mov      x0, x8                                
+00FDEB48  add      w2, w9, w10                           
+00FDEB4C  mov      x3, xzr                               
+00FDEB50  bl       #0x196288c                             // System.String$$Substring
+00FDEB54  ldr      x8, [x19, #0x298]                      // self.tipo1
+00FDEB58  str      x0, [x19, #0x2a0]                      // self.tipo2
+00FDEB5C  cbz      x8, #0xfdecf0                         
+00FDEB60  ldr      w20, [x8, #0x10]                      
+00FDEB64  mov      w2, #1                                
+00FDEB68  mov      x0, x8                                
+00FDEB6C  mov      w1, wzr                               
+00FDEB70  mov      x3, xzr                               
+00FDEB74  mov      w21, #1                               
+00FDEB78  bl       #0x196288c                             // System.String$$Substring
+00FDEB7C  cmp      w20, #2                               
+00FDEB80  str      x0, [x19, #0x2a8]                      // self.tipoResorte1_1
+00FDEB84  str      w21, [x19, #0xf4]                      // self.posiMaxTotal1
+00FDEB88  b.lt     #0xfdebe8                             
+00FDEB8C  ldr      x0, [x19, #0x298]                      // self.tipo1
+00FDEB90  strb     w21, [x19, #0x2da]                     // self.sw_hayresorte1_2
+00FDEB94  cbz      x0, #0xfdecf0                         
+00FDEB98  mov      w1, #1                                
+00FDEB9C  mov      w2, #1                                
+00FDEBA0  mov      x3, xzr                               
+00FDEBA4  mov      w21, #1                               
+00FDEBA8  bl       #0x196288c                             // System.String$$Substring
+00FDEBAC  mov      w8, #2                                
+00FDEBB0  cmp      w20, #3                               
+00FDEBB4  str      x0, [x19, #0x2b0]                      // self.tipoResorte1_2
+00FDEBB8  str      w8, [x19, #0xf4]                       // self.posiMaxTotal1
+00FDEBBC  b.lt     #0xfdebe8                             
+00FDEBC0  ldr      x0, [x19, #0x298]                      // self.tipo1
+00FDEBC4  strb     w21, [x19, #0x2db]                     // self.sw_hayresorte1_3
+00FDEBC8  cbz      x0, #0xfdecf0                         
+00FDEBCC  mov      w1, #2                                
+00FDEBD0  mov      w2, #1                                
+00FDEBD4  mov      x3, xzr                               
+00FDEBD8  bl       #0x196288c                             // System.String$$Substring
+00FDEBDC  mov      w8, #3                                
+00FDEBE0  str      x0, [x19, #0x2b8]                      // self.tipoResorte1_3
+00FDEBE4  str      w8, [x19, #0xf4]                       // self.posiMaxTotal1
+00FDEBE8  ldrb     w8, [x19, #0x290]                      // self.sw_hayConResorte2
+00FDEBEC  cbz      w8, #0xfdec7c                         
+00FDEBF0  ldr      x0, [x19, #0x2a0]                      // self.tipo2
+00FDEBF4  cbz      x0, #0xfdecf0                         
+00FDEBF8  ldr      w20, [x0, #0x10]                      
+00FDEBFC  mov      w2, #1                                
+00FDEC00  mov      w1, wzr                               
+00FDEC04  mov      x3, xzr                               
+00FDEC08  mov      w21, #1                               
+00FDEC0C  bl       #0x196288c                             // System.String$$Substring
+00FDEC10  cmp      w20, #2                               
+00FDEC14  str      x0, [x19, #0x2c0]                      // self.tipoResorte2_1
+00FDEC18  str      w21, [x19, #0xf8]                      // self.posiMaxTotal2
+00FDEC1C  b.lt     #0xfdec7c                             
+00FDEC20  ldr      x0, [x19, #0x2a0]                      // self.tipo2
+00FDEC24  strb     w21, [x19, #0x2dc]                     // self.sw_hayresorte2_2
+00FDEC28  cbz      x0, #0xfdecf0                         
+00FDEC2C  mov      w1, #1                                
+00FDEC30  mov      w2, #1                                
+00FDEC34  mov      x3, xzr                               
+00FDEC38  mov      w21, #1                               
+00FDEC3C  bl       #0x196288c                             // System.String$$Substring
+00FDEC40  mov      w8, #2                                
+00FDEC44  cmp      w20, #3                               
+00FDEC48  str      x0, [x19, #0x2c8]                      // self.tipoResorte2_2
+00FDEC4C  str      w8, [x19, #0xf8]                       // self.posiMaxTotal2
+00FDEC50  b.lt     #0xfdec7c                             
+00FDEC54  ldr      x0, [x19, #0x2a0]                      // self.tipo2
+00FDEC58  strb     w21, [x19, #0x2dd]                     // self.sw_hayresorte2_3
+00FDEC5C  cbz      x0, #0xfdecf0                         
+00FDEC60  mov      w1, #2                                
+00FDEC64  mov      w2, #1                                
+00FDEC68  mov      x3, xzr                               
+00FDEC6C  bl       #0x196288c                             // System.String$$Substring
+00FDEC70  mov      w8, #3                                
+00FDEC74  str      x0, [x19, #0x2d0]                      // self.tipoResorte2_3
+00FDEC78  str      w8, [x19, #0xf8]                       // self.posiMaxTotal2
+00FDEC7C  ldr      x0, [x19, #0x250]                      // self.conResorte1
+00FDEC80  add      x8, x19, #0x238                       
+00FDEC84  adrp     x9, #0x236a000                        
+00FDEC88  mov      x2, xzr                               
+00FDEC8C  str      x0, [x19, #0x260]                      // self.conResor
+00FDEC90  ldr      q0, [x8, #0x70]                       
+00FDEC94  ldr      x9, [x9, #0x6e8]                       // [0x236A6E8] '1'
+00FDEC98  str      d0, [x19, #0x230]                      // self.tipoResor
+00FDEC9C  str      q0, [x8]                              
+00FDECA0  ldr      x8, [x19, #0x2b8]                      // self.tipoResorte1_3
+00FDECA4  ldrh     w10, [x19, #0x2da]                     // self.sw_hayresorte1_2
+00FDECA8  ldr      w11, [x19, #0xf4]                      // self.posiMaxTotal1
+00FDECAC  strb     wzr, [x19, #0x2de]                     // self.sigueMovimiento
+00FDECB0  str      x8, [x19, #0x248]                      // self.tipoResor3
+00FDECB4  strh     w10, [x19, #0x2d8]                     // self.sw_hayresorte2
+00FDECB8  str      w11, [x19, #0xf0]                      // self.posiMaxTotal
+00FDECBC  ldr      x1, [x9]                              
+00FDECC0  bl       #0x1960c7c                             // System.String$$op_Equality
+00FDECC4  tbz      w0, #0, #0xfdece4                     
+00FDECC8  adrp     x8, #0x236a000                        
+00FDECCC  ldr      x8, [x8, #0x7c8]                       // [0x236A7C8] Resorte1_TypeInfo
+00FDECD0  ldr      x8, [x8]                              
+00FDECD4  ldr      x8, [x8, #0xb8]                       
+00FDECD8  ldr      w9, [x8, #8]                          
+00FDECDC  add      w9, w9, #1                            
+00FDECE0  str      w9, [x8, #8]                          
+00FDECE4  ldp      x20, x19, [sp, #0x10]                 
+00FDECE8  ldp      x30, x21, [sp], #0x20                 
+00FDECEC  ret                                            
+00FDECF0  bl       #0xe61da0                             

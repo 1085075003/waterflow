@@ -1,0 +1,111 @@
+// MoveBloque$$doProcess2Solution VA 0x1034EE8, inferred length 436
+void MoveBloque__doProcess2Solution (MoveBloque_o* __this, const MethodInfo* method);
+01034EE8  str      x30, [sp, #-0x20]!                    
+01034EEC  stp      x20, x19, [sp, #0x10]                 
+01034EF0  adrp     x20, #0x24fb000                       
+01034EF4  ldrb     w8, [x20, #0xd31]                     
+01034EF8  mov      x19, x0                               
+01034EFC  tbnz     w8, #0, #0x1034f2c                    
+01034F00  adrp     x0, #0x236a000                        
+01034F04  ldr      x0, [x0, #0x960]                       // [0x236A960] Method$System.Collections.Generic.List<string>.get_Item()
+01034F08  bl       #0xe61b78                             
+01034F0C  adrp     x0, #0x236b000                        
+01034F10  ldr      x0, [x0, #0xb48]                       // [0x236BB48] Method$System.Collections.Generic.List<int>.get_Item()
+01034F14  bl       #0xe61b78                             
+01034F18  adrp     x0, #0x2368000                        
+01034F1C  ldr      x0, [x0, #0x2e0]                       // [0x23682E0] 'r'
+01034F20  bl       #0xe61b78                             
+01034F24  mov      w8, #1                                
+01034F28  strb     w8, [x20, #0xd31]                     
+01034F2C  ldr      x8, [x19, #0x380]                      // self.save1
+01034F30  cbz      x8, #0x1035098                        
+01034F34  ldr      x0, [x8, #0x30]                       
+01034F38  cbz      x0, #0x1035098                        
+01034F3C  adrp     x20, #0x236b000                       
+01034F40  ldr      x20, [x20, #0xb48]                     // [0x236BB48] Method$System.Collections.Generic.List<int>.get_Item()
+01034F44  ldr      w1, [x19, #0x390]                      // self.numMove
+01034F48  ldr      x2, [x20]                             
+01034F4C  bl       #0x15580e8                             // System.Collections.Generic.List<int>$$get_Item
+01034F50  add      w9, w0, w0, lsl #2                    
+01034F54  ldr      x8, [x19, #0x380]                      // self.save1
+01034F58  lsl      w9, w9, #2                            
+01034F5C  mov      w10, #-0x3d900000                     
+01034F60  scvtf    s0, w9                                
+01034F64  fmov     s1, w10                               
+01034F68  fadd     s0, s0, s1                            
+01034F6C  str      s0, [x19, #0x3a4]                      // self.finx
+01034F70  cbz      x8, #0x1035098                        
+01034F74  ldr      x0, [x8, #0x38]                       
+01034F78  cbz      x0, #0x1035098                        
+01034F7C  ldr      w1, [x19, #0x390]                      // self.numMove
+01034F80  ldr      x2, [x20]                             
+01034F84  bl       #0x15580e8                             // System.Collections.Generic.List<int>$$get_Item
+01034F88  adrp     x8, #0x600000                         
+01034F8C  ldr      s0, [x8, #0x198]                      
+01034F90  adrp     x8, #0x5ff000                         
+01034F94  ldr      s1, [x8, #0xda0]                      
+01034F98  sub      w9, w0, #1                            
+01034F9C  ldr      x8, [x19, #0x380]                      // self.save1
+01034FA0  scvtf    s2, w9                                
+01034FA4  fmul     s0, s2, s0                            
+01034FA8  fadd     s0, s0, s1                            
+01034FAC  str      s0, [x19, #0x3a8]                      // self.finy
+01034FB0  cbz      x8, #0x1035098                        
+01034FB4  ldr      x0, [x8, #0x40]                       
+01034FB8  cbz      x0, #0x1035098                        
+01034FBC  ldr      w1, [x19, #0x390]                      // self.numMove
+01034FC0  ldr      x2, [x20]                             
+01034FC4  bl       #0x15580e8                             // System.Collections.Generic.List<int>$$get_Item
+01034FC8  add      w9, w0, w0, lsl #2                    
+01034FCC  ldr      x8, [x19, #0x380]                      // self.save1
+01034FD0  lsl      w9, w9, #2                            
+01034FD4  mov      w10, #-0x3d900000                     
+01034FD8  scvtf    s0, w9                                
+01034FDC  fmov     s1, w10                               
+01034FE0  fadd     s0, s0, s1                            
+01034FE4  str      s0, [x19, #0x3ac]                      // self.finz
+01034FE8  cbz      x8, #0x1035098                        
+01034FEC  ldr      x0, [x8, #0x48]                       
+01034FF0  cbz      x0, #0x1035098                        
+01034FF4  adrp     x8, #0x236a000                        
+01034FF8  ldr      x8, [x8, #0x960]                       // [0x236A960] Method$System.Collections.Generic.List<string>.get_Item()
+01034FFC  ldr      w1, [x19, #0x390]                      // self.numMove
+01035000  adrp     x20, #0x2368000                       
+01035004  ldr      x2, [x8]                              
+01035008  ldr      x20, [x20, #0x2e0]                     // [0x23682E0] 'r'
+0103500C  bl       #0x1571904                             // System.Collections.Generic.List<object>$$get_Item
+01035010  str      x0, [x19, #0x3b0]                      // self.xcept
+01035014  ldr      x1, [x20]                             
+01035018  mov      x2, xzr                               
+0103501C  bl       #0x1960c7c                             // System.String$$op_Equality
+01035020  ldr      s0, [x19, #0x3a8]                      // self.finy
+01035024  tbz      w0, #0, #0x1035038                    
+01035028  adrp     x8, #0x5ff000                         
+0103502C  ldr      s1, [x8, #0xd68]                      
+01035030  fadd     s0, s0, s1                            
+01035034  str      s0, [x19, #0x3a8]                      // self.finy
+01035038  ldr      s2, [x19, #0x3d8]                      // self.alturaSolution
+0103503C  ldr      s1, [x19, #0x3a4]                      // self.finx
+01035040  ldr      s3, [x19, #0x3ac]                      // self.finz
+01035044  mov      w8, #0x420c0000                       
+01035048  ldr      x0, [x19, #0xa0]                       // self.planoGuia2
+0103504C  fmov     s4, w8                                
+01035050  fadd     s0, s0, s4                            
+01035054  fadd     s0, s0, s2                            
+01035058  stp      s1, s0, [x19, #0xb8]                   // self.hitPosition1
+0103505C  str      s3, [x19, #0xc0]                      
+01035060  cbz      x0, #0x1035098                        
+01035064  mov      x1, xzr                               
+01035068  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0103506C  cbz      x0, #0x1035098                        
+01035070  adrp     x8, #0x5ff000                         
+01035074  ldr      s1, [x19, #0x3a8]                      // self.finy
+01035078  ldr      s3, [x8, #0xb3c]                      
+0103507C  ldr      s2, [x19, #0x3ac]                      // self.finz
+01035080  ldr      s0, [x19, #0x3a4]                      // self.finx
+01035084  ldp      x20, x19, [sp, #0x10]                 
+01035088  fadd     s1, s1, s3                            
+0103508C  mov      x1, xzr                               
+01035090  ldr      x30, [sp], #0x20                      
+01035094  b        #0x200ea50                             // UnityEngine.Transform$$set_position
+01035098  bl       #0xe61da0                             

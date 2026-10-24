@@ -1,0 +1,135 @@
+// Resorte2$$doRota3_1 VA 0x100FCF8, inferred length 532
+void Resorte2__doRota3_1 (Resorte2_o* __this, const MethodInfo* method);
+0100FCF8  sub      sp, sp, #0x70                         
+0100FCFC  stp      d15, d14, [sp, #0x10]                 
+0100FD00  stp      d13, d12, [sp, #0x20]                 
+0100FD04  stp      d11, d10, [sp, #0x30]                 
+0100FD08  stp      d9, d8, [sp, #0x40]                   
+0100FD0C  stp      x30, x21, [sp, #0x50]                 
+0100FD10  stp      x20, x19, [sp, #0x60]                 
+0100FD14  mov      x19, x0                               
+0100FD18  ldr      x0, [x0, #0x30]                       
+0100FD1C  mov      w8, #-0x3d4c0000                      
+0100FD20  str      w8, [x19, #0x2d4]                      // self.angle
+0100FD24  cbz      x0, #0x100ff08                        
+0100FD28  mov      x1, xzr                               
+0100FD2C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100FD30  ldr      x8, [x19, #0x30]                       // self.objeto3
+0100FD34  cbz      x8, #0x100ff08                        
+0100FD38  mov      x20, x0                               
+0100FD3C  mov      x0, x8                                
+0100FD40  mov      x1, xzr                               
+0100FD44  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100FD48  cbz      x0, #0x100ff08                        
+0100FD4C  mov      x1, xzr                               
+0100FD50  bl       #0x200ec48                             // UnityEngine.Transform$$get_rotation
+0100FD54  adrp     x8, #0x5ff000                         
+0100FD58  mov      v13.16b, v0.16b                       
+0100FD5C  mov      v12.16b, v1.16b                       
+0100FD60  ldr      s0, [x19, #0x2d4]                      // self.angle
+0100FD64  ldr      s1, [x8, #0xd64]                      
+0100FD68  mov      v14.16b, v2.16b                       
+0100FD6C  fmov     s2, wzr                               
+0100FD70  mov      x0, xzr                               
+0100FD74  fmul     s1, s0, s1                            
+0100FD78  fmov     s0, wzr                               
+0100FD7C  mov      v15.16b, v3.16b                       
+0100FD80  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0100FD84  mov      v8.16b, v0.16b                        
+0100FD88  ldr      s0, [x19, #0x2cc]                      // self.rotationSpeed
+0100FD8C  mov      x0, xzr                               
+0100FD90  mov      v9.16b, v1.16b                        
+0100FD94  mov      v10.16b, v2.16b                       
+0100FD98  str      s0, [sp, #8]                          
+0100FD9C  mov      v11.16b, v3.16b                       
+0100FDA0  bl       #0x1ffb6c8                             // UnityEngine.Time$$get_deltaTime
+0100FDA4  mov      v4.16b, v0.16b                        
+0100FDA8  fmul     s0, s13, s8                           
+0100FDAC  fmul     s1, s12, s9                           
+0100FDB0  fmul     s2, s14, s10                          
+0100FDB4  adrp     x8, #0x5ff000                         
+0100FDB8  fadd     s0, s0, s1                            
+0100FDBC  fmul     s3, s15, s11                          
+0100FDC0  ldr      s1, [x8, #0xe48]                      
+0100FDC4  fadd     s0, s2, s0                            
+0100FDC8  fadd     s0, s3, s0                            
+0100FDCC  fabs     s0, s0                                
+0100FDD0  fmov     s2, #1.00000000                       
+0100FDD4  fminnm   s0, s0, s2                            
+0100FDD8  fcmp     s0, s1                                
+0100FDDC  adrp     x21, #0x600000                        
+0100FDE0  str      s13, [sp, #0xc]                       
+0100FDE4  b.gt     #0x100fe58                            
+0100FDE8  mov      v13.16b, v12.16b                      
+0100FDEC  mov      v12.16b, v4.16b                       
+0100FDF0  bl       #0x224d3c0                            
+0100FDF4  ldr      s1, [x21, #0x1cc]                     
+0100FDF8  fadd     s0, s0, s0                            
+0100FDFC  fmul     s0, s0, s1                            
+0100FE00  fcmp     s0, #0.0                              
+0100FE04  b.eq     #0x100fe58                            
+0100FE08  ldr      s1, [sp, #8]                          
+0100FE0C  mov      v2.16b, v14.16b                       
+0100FE10  mov      v3.16b, v15.16b                       
+0100FE14  mov      v4.16b, v8.16b                        
+0100FE18  fmul     s1, s1, s12                           
+0100FE1C  fdiv     s0, s1, s0                            
+0100FE20  fmov     s1, #1.00000000                       
+0100FE24  fmin     s0, s0, s1                            
+0100FE28  str      s0, [sp]                              
+0100FE2C  ldr      s0, [sp, #0xc]                        
+0100FE30  mov      v1.16b, v13.16b                       
+0100FE34  mov      v5.16b, v9.16b                        
+0100FE38  mov      v6.16b, v10.16b                       
+0100FE3C  mov      v7.16b, v11.16b                       
+0100FE40  mov      x0, xzr                               
+0100FE44  bl       #0x1ffca6c                             // UnityEngine.Quaternion$$SlerpUnclamped
+0100FE48  mov      v8.16b, v0.16b                        
+0100FE4C  mov      v9.16b, v1.16b                        
+0100FE50  mov      v10.16b, v2.16b                       
+0100FE54  mov      v11.16b, v3.16b                       
+0100FE58  cbz      x20, #0x100ff08                       
+0100FE5C  mov      x0, x20                               
+0100FE60  mov      v0.16b, v8.16b                        
+0100FE64  mov      v1.16b, v9.16b                        
+0100FE68  mov      v2.16b, v10.16b                       
+0100FE6C  mov      v3.16b, v11.16b                       
+0100FE70  mov      x1, xzr                               
+0100FE74  bl       #0x200eccc                             // UnityEngine.Transform$$set_rotation
+0100FE78  ldr      x0, [x19, #0x30]                       // self.objeto3
+0100FE7C  cbz      x0, #0x100ff08                        
+0100FE80  mov      x1, xzr                               
+0100FE84  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100FE88  cbz      x0, #0x100ff08                        
+0100FE8C  mov      x1, xzr                               
+0100FE90  bl       #0x200ec48                             // UnityEngine.Transform$$get_rotation
+0100FE94  mov      x0, xzr                               
+0100FE98  bl       #0x1ffccac                             // UnityEngine.Quaternion$$Internal_ToEulerRad
+0100FE9C  ldr      s3, [x21, #0x1cc]                     
+0100FEA0  mov      x0, xzr                               
+0100FEA4  fmul     s0, s0, s3                            
+0100FEA8  fmul     s1, s1, s3                            
+0100FEAC  fmul     s2, s2, s3                            
+0100FEB0  bl       #0x1ffd184                             // UnityEngine.Quaternion$$Internal_MakePositive
+0100FEB4  ldr      s0, [x19, #0x2d4]                      // self.angle
+0100FEB8  adrp     x8, #0x5ff000                         
+0100FEBC  ldr      s2, [x8, #0xcf4]                      
+0100FEC0  str      s1, [x19, #0x2d8]                      // self.currentAngle
+0100FEC4  fabd     s0, s0, s1                            
+0100FEC8  str      s0, [x19, #0x2dc]                      // self.anglediferenciay
+0100FECC  fcmp     s0, s2                                
+0100FED0  b.pl     #0x100fee8                            
+0100FED4  mov      w20, #1                               
+0100FED8  mov      x0, x19                               
+0100FEDC  strb     w20, [x19, #0x2f3]                     // self.swfinRota3
+0100FEE0  bl       #0x100d0fc                             // Resorte2$$doActivarAguas2
+0100FEE4  strb     w20, [x19, #0x2f9]                     // self.primeraVezAguas
+0100FEE8  ldp      x20, x19, [sp, #0x60]                 
+0100FEEC  ldp      x30, x21, [sp, #0x50]                 
+0100FEF0  ldp      d9, d8, [sp, #0x40]                   
+0100FEF4  ldp      d11, d10, [sp, #0x30]                 
+0100FEF8  ldp      d13, d12, [sp, #0x20]                 
+0100FEFC  ldp      d15, d14, [sp, #0x10]                 
+0100FF00  add      sp, sp, #0x70                         
+0100FF04  ret                                            
+0100FF08  bl       #0xe61da0                             

@@ -1,0 +1,46 @@
+// AudioManager0$$StopSound VA 0x1039F10, inferred length 176
+void AudioManager0__StopSound (AudioManager0_o* __this, System_String_o* _name, const MethodInfo* method);
+01039F10  str      x30, [sp, #-0x30]!                    
+01039F14  stp      x22, x21, [sp, #0x10]                 
+01039F18  stp      x20, x19, [sp, #0x20]                 
+01039F1C  ldr      x8, [x0, #0x20]                       
+01039F20  cbz      x8, #0x1039f70                        
+01039F24  mov      x19, x0                               
+01039F28  mov      x20, x1                               
+01039F2C  mov      w21, #4                               
+01039F30  ldr      w9, [x8, #0x18]                       
+01039F34  sub      x22, x21, #4                          
+01039F38  cmp      w22, w9                               
+01039F3C  b.ge     #0x1039f74                            
+01039F40  cmp      w22, w9                               
+01039F44  b.hs     #0x1039fbc                            
+01039F48  ldr      x8, [x8, x21, lsl #3]                 
+01039F4C  cbz      x8, #0x1039f70                        
+01039F50  ldr      x0, [x8, #0x10]                       
+01039F54  mov      x1, x20                               
+01039F58  mov      x2, xzr                               
+01039F5C  bl       #0x1960c7c                             // System.String$$op_Equality
+01039F60  tbnz     w0, #0, #0x1039f84                    
+01039F64  ldr      x8, [x19, #0x20]                       // self.sounds
+01039F68  add      x21, x21, #1                          
+01039F6C  cbnz     x8, #0x1039f30                        
+01039F70  bl       #0xe61da0                             
+01039F74  ldp      x20, x19, [sp, #0x20]                 
+01039F78  ldp      x22, x21, [sp, #0x10]                 
+01039F7C  ldr      x30, [sp], #0x30                      
+01039F80  ret                                            
+01039F84  ldr      x8, [x19, #0x20]                       // self.sounds
+01039F88  cbz      x8, #0x1039f70                        
+01039F8C  ldr      w9, [x8, #0x18]                       
+01039F90  cmp      w22, w9                               
+01039F94  b.hs     #0x1039fbc                            
+01039F98  ldr      x8, [x8, x21, lsl #3]                 
+01039F9C  cbz      x8, #0x1039f70                        
+01039FA0  ldr      x0, [x8, #0x30]                       
+01039FA4  cbz      x0, #0x1039f70                        
+01039FA8  ldp      x20, x19, [sp, #0x20]                 
+01039FAC  ldp      x22, x21, [sp, #0x10]                 
+01039FB0  mov      x1, xzr                               
+01039FB4  ldr      x30, [sp], #0x30                      
+01039FB8  b        #0x1fdd89c                             // UnityEngine.AudioSource$$Stop
+01039FBC  bl       #0xe61da8                             

@@ -1,0 +1,131 @@
+// CascadaTest$$doActivarCapsulaFiltrante VA 0xFD31F4, inferred length 516
+void CascadaTest__doActivarCapsulaFiltrante (CascadaTest_o* __this, const MethodInfo* method);
+00FD31F4  str      d10, [sp, #-0x30]!                    
+00FD31F8  stp      d9, d8, [sp, #8]                      
+00FD31FC  str      x30, [sp, #0x18]                      
+00FD3200  stp      x20, x19, [sp, #0x20]                 
+00FD3204  ldr      w8, [x0, #0x150]                      
+00FD3208  adrp     x9, #0x5ff000                         
+00FD320C  ldr      s0, [x9, #0xe88]                      
+00FD3210  adrp     x9, #0x5ff000                         
+00FD3214  ldr      s1, [x9, #0xc68]                      
+00FD3218  adrp     x9, #0x5ff000                         
+00FD321C  scvtf    s3, w8                                
+00FD3220  fmul     s0, s3, s0                            
+00FD3224  ldr      s3, [x9, #0xba4]                      
+00FD3228  fmov     s2, wzr                               
+00FD322C  adrp     x9, #0x5ff000                         
+00FD3230  cmp      w8, #1                                
+00FD3234  fcsel    s1, s1, s2, eq                        
+00FD3238  ldr      s2, [x9, #0xf58]                      
+00FD323C  adrp     x9, #0x5ff000                         
+00FD3240  fadd     s0, s0, s3                            
+00FD3244  ldr      s3, [x9, #0xf3c]                      
+00FD3248  adrp     x9, #0x600000                         
+00FD324C  cmp      w8, #2                                
+00FD3250  fcsel    s1, s2, s1, eq                        
+00FD3254  ldr      s2, [x9, #0x98]                       
+00FD3258  adrp     x9, #0x5ff000                         
+00FD325C  cmp      w8, #3                                
+00FD3260  fcsel    s1, s3, s1, eq                        
+00FD3264  ldr      s3, [x9, #0xe3c]                      
+00FD3268  adrp     x9, #0x600000                         
+00FD326C  cmp      w8, #4                                
+00FD3270  fcsel    s0, s2, s0, eq                        
+00FD3274  ldr      s2, [x9, #0x120]                      
+00FD3278  adrp     x9, #0x600000                         
+00FD327C  fcsel    s1, s3, s1, eq                        
+00FD3280  ldr      s3, [x9, #0xd4]                       
+00FD3284  ldrb     w9, [x0, #0x108]                      
+00FD3288  cmp      w8, #5                                
+00FD328C  mov      x19, x0                               
+00FD3290  fcsel    s10, s3, s1, eq                       
+00FD3294  fcsel    s8, s2, s0, eq                        
+00FD3298  fneg     s9, s10                               
+00FD329C  cbz      w9, #0xfd32c8                         
+00FD32A0  ldr      x0, [x19, #0xc0]                       // self.capsulaFiltrante
+00FD32A4  cbz      x0, #0xfd33f4                         
+00FD32A8  mov      x1, xzr                               
+00FD32AC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD32B0  cbz      x0, #0xfd33f4                         
+00FD32B4  fmov     s2, wzr                               
+00FD32B8  mov      v0.16b, v9.16b                        
+00FD32BC  mov      v1.16b, v8.16b                        
+00FD32C0  mov      x1, xzr                               
+00FD32C4  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD32C8  ldrb     w8, [x19, #0x109]                      // self.cascada2
+00FD32CC  cbz      w8, #0xfd3334                         
+00FD32D0  ldr      x0, [x19, #0xc0]                       // self.capsulaFiltrante
+00FD32D4  cbz      x0, #0xfd33f4                         
+00FD32D8  mov      x1, xzr                               
+00FD32DC  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD32E0  cbz      x0, #0xfd33f4                         
+00FD32E4  fmov     s0, wzr                               
+00FD32E8  mov      v1.16b, v8.16b                        
+00FD32EC  mov      v2.16b, v10.16b                       
+00FD32F0  mov      x1, xzr                               
+00FD32F4  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD32F8  ldr      x0, [x19, #0xc0]                       // self.capsulaFiltrante
+00FD32FC  cbz      x0, #0xfd33f4                         
+00FD3300  mov      x1, xzr                               
+00FD3304  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD3308  adrp     x8, #0x5ff000                         
+00FD330C  ldr      s1, [x8, #0xe38]                      
+00FD3310  mov      x20, x0                               
+00FD3314  fmov     s0, wzr                               
+00FD3318  fmov     s2, wzr                               
+00FD331C  mov      x0, xzr                               
+00FD3320  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD3324  cbz      x20, #0xfd33f4                        
+00FD3328  mov      x0, x20                               
+00FD332C  mov      x1, xzr                               
+00FD3330  bl       #0x200edcc                             // UnityEngine.Transform$$set_localRotation
+00FD3334  ldrb     w8, [x19, #0x10a]                      // self.cascada3
+00FD3338  cbz      w8, #0xfd3364                         
+00FD333C  ldr      x0, [x19, #0xc0]                       // self.capsulaFiltrante
+00FD3340  cbz      x0, #0xfd33f4                         
+00FD3344  mov      x1, xzr                               
+00FD3348  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD334C  cbz      x0, #0xfd33f4                         
+00FD3350  fmov     s2, wzr                               
+00FD3354  mov      v0.16b, v10.16b                       
+00FD3358  mov      v1.16b, v8.16b                        
+00FD335C  mov      x1, xzr                               
+00FD3360  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD3364  ldrb     w8, [x19, #0x10b]                      // self.cascada4
+00FD3368  cbz      w8, #0xfd33d0                         
+00FD336C  ldr      x0, [x19, #0xc0]                       // self.capsulaFiltrante
+00FD3370  cbz      x0, #0xfd33f4                         
+00FD3374  mov      x1, xzr                               
+00FD3378  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD337C  cbz      x0, #0xfd33f4                         
+00FD3380  fmov     s0, wzr                               
+00FD3384  mov      v1.16b, v8.16b                        
+00FD3388  mov      v2.16b, v9.16b                        
+00FD338C  mov      x1, xzr                               
+00FD3390  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+00FD3394  ldr      x0, [x19, #0xc0]                       // self.capsulaFiltrante
+00FD3398  cbz      x0, #0xfd33f4                         
+00FD339C  mov      x1, xzr                               
+00FD33A0  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+00FD33A4  adrp     x8, #0x5ff000                         
+00FD33A8  ldr      s1, [x8, #0xe08]                      
+00FD33AC  mov      x20, x0                               
+00FD33B0  fmov     s0, wzr                               
+00FD33B4  fmov     s2, wzr                               
+00FD33B8  mov      x0, xzr                               
+00FD33BC  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+00FD33C0  cbz      x20, #0xfd33f4                        
+00FD33C4  mov      x0, x20                               
+00FD33C8  mov      x1, xzr                               
+00FD33CC  bl       #0x200edcc                             // UnityEngine.Transform$$set_localRotation
+00FD33D0  ldr      x0, [x19, #0xc0]                       // self.capsulaFiltrante
+00FD33D4  cbz      x0, #0xfd33f4                         
+00FD33D8  ldp      x20, x19, [sp, #0x20]                 
+00FD33DC  ldr      x30, [sp, #0x18]                      
+00FD33E0  ldp      d9, d8, [sp, #8]                      
+00FD33E4  mov      w1, #1                                
+00FD33E8  mov      x2, xzr                               
+00FD33EC  ldr      d10, [sp], #0x30                      
+00FD33F0  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FD33F4  bl       #0xe61da0                             

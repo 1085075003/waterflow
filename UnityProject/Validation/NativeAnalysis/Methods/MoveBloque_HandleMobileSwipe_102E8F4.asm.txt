@@ -1,0 +1,96 @@
+// MoveBloque$$HandleMobileSwipe VA 0x102E8F4, inferred length 376
+void MoveBloque__HandleMobileSwipe (MoveBloque_o* __this, const MethodInfo* method);
+0102E8F4  sub      sp, sp, #0xc0                         
+0102E8F8  stp      x30, x21, [sp, #0xa0]                 
+0102E8FC  stp      x20, x19, [sp, #0xb0]                 
+0102E900  adrp     x21, #0x24fb000                       
+0102E904  adrp     x20, #0x236a000                       
+0102E908  ldrb     w8, [x21, #0xd0f]                     
+0102E90C  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102E910  mov      x19, x0                               
+0102E914  tbnz     w8, #0, #0x102e944                    
+0102E918  adrp     x0, #0x236a000                        
+0102E91C  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0102E920  bl       #0xe61b78                             
+0102E924  adrp     x0, #0x236b000                        
+0102E928  ldr      x0, [x0, #0x498]                       // [0x236B498] MoveBloque_TypeInfo
+0102E92C  bl       #0xe61b78                             
+0102E930  adrp     x0, #0x2368000                        
+0102E934  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0102E938  bl       #0xe61b78                             
+0102E93C  mov      w8, #1                                
+0102E940  strb     w8, [x21, #0xd0f]                     
+0102E944  ldr      x0, [x20]                             
+0102E948  movi     v0.2d, #0000000000000000              
+0102E94C  str      wzr, [sp, #0x90]                      
+0102E950  stp      q0, q0, [sp, #0x70]                   
+0102E954  stp      q0, q0, [sp, #0x50]                   
+0102E958  ldr      w8, [x0, #0xe0]                       
+0102E95C  cbnz     w8, #0x102e968                        
+0102E960  bl       #0xe61c80                             
+0102E964  ldr      x0, [x20]                             
+0102E968  ldr      x8, [x0, #0xb8]                       
+0102E96C  ldrb     w8, [x8, #0x16]                       
+0102E970  cbz      w8, #0x102e9a4                        
+0102E974  adrp     x20, #0x236b000                       
+0102E978  ldr      x20, [x20, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+0102E97C  ldr      x0, [x20]                             
+0102E980  ldr      w8, [x0, #0xe0]                       
+0102E984  cbnz     w8, #0x102e990                        
+0102E988  bl       #0xe61c80                             
+0102E98C  ldr      x0, [x20]                             
+0102E990  ldr      x8, [x0, #0xb8]                       
+0102E994  ldrb     w8, [x8, #0xb]                        
+0102E998  cbz      w8, #0x102e9b4                        
+0102E99C  mov      x0, x19                               
+0102E9A0  bl       #0x102ee14                             // MoveBloque$$doFijarPieza
+0102E9A4  ldp      x20, x19, [sp, #0xb0]                 
+0102E9A8  ldp      x30, x21, [sp, #0xa0]                 
+0102E9AC  add      sp, sp, #0xc0                         
+0102E9B0  ret                                            
+0102E9B4  mov      x0, xzr                               
+0102E9B8  bl       #0x203adb8                             // UnityEngine.Input$$get_touchCount
+0102E9BC  cmp      w0, #1                                
+0102E9C0  b.lt     #0x102e9a4                            
+0102E9C4  add      x8, sp, #8                            
+0102E9C8  mov      w0, wzr                               
+0102E9CC  mov      x1, xzr                               
+0102E9D0  bl       #0x203a830                             // UnityEngine.Input$$GetTouch
+0102E9D4  add      x0, sp, #0x50                         
+0102E9D8  add      x1, sp, #8                            
+0102E9DC  mov      w2, #0x44                             
+0102E9E0  bl       #0x224d3f0                            
+0102E9E4  add      x0, sp, #0x50                         
+0102E9E8  mov      x1, xzr                               
+0102E9EC  bl       #0x203a2a0                             // UnityEngine.Touch$$get_phase
+0102E9F0  cbnz     w0, #0x102e9fc                        
+0102E9F4  mov      x0, x19                               
+0102E9F8  bl       #0x102ea6c                             // MoveBloque$$doProcess1
+0102E9FC  add      x8, sp, #8                            
+0102EA00  mov      w0, wzr                               
+0102EA04  mov      x1, xzr                               
+0102EA08  bl       #0x203a830                             // UnityEngine.Input$$GetTouch
+0102EA0C  add      x0, sp, #0x50                         
+0102EA10  add      x1, sp, #8                            
+0102EA14  mov      w2, #0x44                             
+0102EA18  bl       #0x224d3f0                            
+0102EA1C  add      x0, sp, #0x50                         
+0102EA20  mov      x1, xzr                               
+0102EA24  bl       #0x203a2a0                             // UnityEngine.Touch$$get_phase
+0102EA28  cmp      w0, #3                                
+0102EA2C  b.ne     #0x102e9a4                            
+0102EA30  adrp     x8, #0x2368000                        
+0102EA34  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0102EA38  ldr      x20, [x19, #0x30]                      // self.getTarget
+0102EA3C  ldr      x0, [x8]                              
+0102EA40  ldr      w8, [x0, #0xe0]                       
+0102EA44  cbnz     w8, #0x102ea4c                        
+0102EA48  bl       #0xe61c80                             
+0102EA4C  mov      x0, x20                               
+0102EA50  mov      x1, xzr                               
+0102EA54  mov      x2, xzr                               
+0102EA58  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+0102EA5C  tbz      w0, #0, #0x102e9a4                    
+0102EA60  mov      x0, x19                               
+0102EA64  bl       #0x102ec58                             // MoveBloque$$doEnd
+0102EA68  b        #0x102e9a4                            

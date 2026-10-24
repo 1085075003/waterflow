@@ -1,0 +1,32 @@
+// ObservadorResorte2$$doChangeManager VA 0xFE1760, inferred length 120
+void ObservadorResorte2__doChangeManager (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE1760  stp      x30, x21, [sp, #-0x20]!               
+00FE1764  stp      x20, x19, [sp, #0x10]                 
+00FE1768  adrp     x21, #0x24fb000                       
+00FE176C  adrp     x20, #0x236a000                       
+00FE1770  ldrb     w8, [x21, #0xbb1]                     
+00FE1774  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+00FE1778  mov      x19, x0                               
+00FE177C  tbnz     w8, #0, #0xfe17a0                     
+00FE1780  adrp     x0, #0x236a000                        
+00FE1784  ldr      x0, [x0, #0x7c8]                       // [0x236A7C8] Resorte1_TypeInfo
+00FE1788  bl       #0xe61b78                             
+00FE178C  adrp     x0, #0x236a000                        
+00FE1790  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+00FE1794  bl       #0xe61b78                             
+00FE1798  mov      w8, #1                                
+00FE179C  strb     w8, [x21, #0xbb1]                     
+00FE17A0  ldr      x0, [x19, #0x260]                      // self.conResor
+00FE17A4  ldr      x1, [x20]                             
+00FE17A8  mov      x2, xzr                               
+00FE17AC  bl       #0x1960c7c                             // System.String$$op_Equality
+00FE17B0  tbz      w0, #0, #0xfe17cc                     
+00FE17B4  adrp     x8, #0x236a000                        
+00FE17B8  ldr      x8, [x8, #0x7c8]                       // [0x236A7C8] Resorte1_TypeInfo
+00FE17BC  ldr      w9, [x19, #0x2e0]                      // self.managerResorte
+00FE17C0  ldr      x8, [x8]                              
+00FE17C4  ldr      x8, [x8, #0xb8]                       
+00FE17C8  str      w9, [x8, #4]                          
+00FE17CC  ldp      x20, x19, [sp, #0x10]                 
+00FE17D0  ldp      x30, x21, [sp], #0x20                 
+00FE17D4  ret                                            

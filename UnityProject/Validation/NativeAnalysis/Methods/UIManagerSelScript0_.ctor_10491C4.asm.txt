@@ -1,0 +1,24 @@
+// UIManagerSelScript0$$.ctor VA 0x10491C4, inferred length 88
+void UIManagerSelScript0___ctor (UIManagerSelScript0_o* __this, const MethodInfo* method);
+010491C4  stp      x30, x21, [sp, #-0x20]!               
+010491C8  stp      x20, x19, [sp, #0x10]                 
+010491CC  adrp     x20, #0x24fb000                       
+010491D0  adrp     x21, #0x236a000                       
+010491D4  ldrb     w8, [x20, #0xd97]                     
+010491D8  ldr      x21, [x21, #0xf30]                     // [0x236AF30] 'Click'
+010491DC  mov      x19, x0                               
+010491E0  tbnz     w8, #0, #0x10491f8                    
+010491E4  adrp     x0, #0x236a000                        
+010491E8  ldr      x0, [x0, #0xf30]                       // [0x236AF30] 'Click'
+010491EC  bl       #0xe61b78                             
+010491F0  mov      w8, #1                                
+010491F4  strb     w8, [x20, #0xd97]                     
+010491F8  ldr      x8, [x21]                             
+010491FC  mov      w9, #1                                
+01049200  strb     w9, [x19, #0x5a0]                      // self.botonesActivos
+01049204  mov      x0, x19                               
+01049208  str      x8, [x19, #0x20]                       // self.click
+0104920C  ldp      x20, x19, [sp, #0x10]                 
+01049210  mov      x1, xzr                               
+01049214  ldp      x30, x21, [sp], #0x20                 
+01049218  b        #0x2007a3c                             // UnityEngine.MonoBehaviour$$.ctor

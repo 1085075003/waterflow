@@ -1,0 +1,359 @@
+// ObservadorResorte$$Start VA 0x10C7B3C, inferred length 1428
+void ObservadorResorte__Start (ObservadorResorte_o* __this, const MethodInfo* method);
+010C7B3C  stp      x30, x23, [sp, #-0x30]!               
+010C7B40  stp      x22, x21, [sp, #0x10]                 
+010C7B44  stp      x20, x19, [sp, #0x20]                 
+010C7B48  adrp     x23, #0x24fb000                       
+010C7B4C  adrp     x22, #0x236a000                       
+010C7B50  adrp     x20, #0x236a000                       
+010C7B54  ldrb     w8, [x23, #0xff4]                     
+010C7B58  ldr      x22, [x22, #0x9d0]                     // [0x236A9D0] AudioManager_TypeInfo
+010C7B5C  ldr      x20, [x20, #0x700]                     // [0x236A700] '0'
+010C7B60  mov      x19, x0                               
+010C7B64  add      x21, x0, #0x2cc                       
+010C7B68  tbnz     w8, #0, #0x10c7c04                    
+010C7B6C  adrp     x0, #0x236a000                        
+010C7B70  ldr      x0, [x0, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+010C7B74  bl       #0xe61b78                             
+010C7B78  adrp     x0, #0x236a000                        
+010C7B7C  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C7B80  bl       #0xe61b78                             
+010C7B84  adrp     x0, #0x236a000                        
+010C7B88  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+010C7B8C  bl       #0xe61b78                             
+010C7B90  adrp     x0, #0x236a000                        
+010C7B94  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+010C7B98  bl       #0xe61b78                             
+010C7B9C  adrp     x0, #0x236a000                        
+010C7BA0  ldr      x0, [x0, #0x670]                       // [0x236A670] '6'
+010C7BA4  bl       #0xe61b78                             
+010C7BA8  adrp     x0, #0x236a000                        
+010C7BAC  ldr      x0, [x0, #0x7d0]                       // [0x236A7D0] 'c'
+010C7BB0  bl       #0xe61b78                             
+010C7BB4  adrp     x0, #0x236a000                        
+010C7BB8  ldr      x0, [x0, #0x6a0]                       // [0x236A6A0] '7'
+010C7BBC  bl       #0xe61b78                             
+010C7BC0  adrp     x0, #0x236a000                        
+010C7BC4  ldr      x0, [x0, #0x6a8]                       // [0x236A6A8] '4'
+010C7BC8  bl       #0xe61b78                             
+010C7BCC  adrp     x0, #0x236a000                        
+010C7BD0  ldr      x0, [x0, #0x798]                       // [0x236A798] '8'
+010C7BD4  bl       #0xe61b78                             
+010C7BD8  adrp     x0, #0x236a000                        
+010C7BDC  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+010C7BE0  bl       #0xe61b78                             
+010C7BE4  adrp     x0, #0x236a000                        
+010C7BE8  ldr      x0, [x0, #0x6f8]                       // [0x236A6F8] '5'
+010C7BEC  bl       #0xe61b78                             
+010C7BF0  adrp     x0, #0x236a000                        
+010C7BF4  ldr      x0, [x0, #0x700]                       // [0x236A700] '0'
+010C7BF8  bl       #0xe61b78                             
+010C7BFC  mov      w8, #1                                
+010C7C00  strb     w8, [x23, #0xff4]                     
+010C7C04  str      wzr, [x19, #0x3d8]                     // self.cont1
+010C7C08  ldr      x8, [x22]                             
+010C7C0C  movi     v0.2d, #0000000000000000              
+010C7C10  mov      x0, x19                               
+010C7C14  mov      x1, xzr                               
+010C7C18  ldr      x8, [x8, #0xb8]                       
+010C7C1C  ldr      x8, [x8]                              
+010C7C20  strb     wzr, [x19, #0x2b8]                     // self.terminadoResorte1
+010C7C24  strh     wzr, [x19, #0x19c]                     // self.activadoResorte
+010C7C28  strb     wzr, [x19, #0x2bb]                     // self.terminado1
+010C7C2C  str      x8, [x19, #0x3a0]                      // self.audioManager
+010C7C30  mov      w8, #1                                
+010C7C34  str      w8, [x19, #0x200]                      // self.chorro
+010C7C38  str      xzr, [x21]                            
+010C7C3C  ldr      x9, [x20]                             
+010C7C40  str      q0, [x19, #0x320]                      // self.managerResorte
+010C7C44  strb     w8, [x19, #0x385]                      // self.prineraVezResorte2
+010C7C48  strb     wzr, [x19, #0x3d4]                     // self.sueloBloqueado
+010C7C4C  str      x9, [x19, #0x40]                       // self.valMove2
+010C7C50  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C7C54  cbz      x0, #0x10c80cc                        
+010C7C58  mov      x1, xzr                               
+010C7C5C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C7C60  cbz      x0, #0x10c80cc                        
+010C7C64  mov      x1, xzr                               
+010C7C68  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C7C6C  mov      x0, x19                               
+010C7C70  mov      x1, xzr                               
+010C7C74  str      s0, [x19, #0x84]                       // self.inix0
+010C7C78  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C7C7C  cbz      x0, #0x10c80cc                        
+010C7C80  mov      x1, xzr                               
+010C7C84  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C7C88  cbz      x0, #0x10c80cc                        
+010C7C8C  mov      x1, xzr                               
+010C7C90  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C7C94  mov      x0, x19                               
+010C7C98  mov      x1, xzr                               
+010C7C9C  str      s1, [x19, #0x88]                       // self.iniy0
+010C7CA0  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C7CA4  cbz      x0, #0x10c80cc                        
+010C7CA8  mov      x1, xzr                               
+010C7CAC  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C7CB0  cbz      x0, #0x10c80cc                        
+010C7CB4  mov      x1, xzr                               
+010C7CB8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+010C7CBC  ldur     d0, [x19, #0x84]                       // self.inix0
+010C7CC0  ldr      x0, [x19, #0x20]                       // self.conResorte
+010C7CC4  str      s2, [x19, #0x8c]                       // self.iniz0
+010C7CC8  str      wzr, [x19, #0x90]                      // self.angle0
+010C7CCC  str      s2, [x19, #0x80]                       // self.iniz
+010C7CD0  str      wzr, [x19, #0x374]                     // self.posiMax
+010C7CD4  str      wzr, [x19, #0xf8]                      // self.posiMaxTotal
+010C7CD8  str      d0, [x19, #0x78]                       // self.inix
+010C7CDC  strb     wzr, [x19, #0x2d4]                     // self.sw_hayConResorte2
+010C7CE0  cbz      x0, #0x10c80cc                        
+010C7CE4  ldr      w22, [x0, #0x10]                      
+010C7CE8  mov      w2, #1                                
+010C7CEC  mov      w1, wzr                               
+010C7CF0  mov      x3, xzr                               
+010C7CF4  mov      w20, #1                               
+010C7CF8  bl       #0x196288c                             // System.String$$Substring
+010C7CFC  cmp      w22, #2                               
+010C7D00  str      x0, [x19, #0x298]                      // self.conResorte1
+010C7D04  b.lt     #0x10c7d28                            
+010C7D08  ldr      x0, [x19, #0x20]                       // self.conResorte
+010C7D0C  strb     w20, [x19, #0x2d4]                     // self.sw_hayConResorte2
+010C7D10  cbz      x0, #0x10c80cc                        
+010C7D14  mov      w1, #1                                
+010C7D18  mov      w2, #1                                
+010C7D1C  mov      x3, xzr                               
+010C7D20  bl       #0x196288c                             // System.String$$Substring
+010C7D24  str      x0, [x19, #0x2a0]                      // self.conResorte2
+010C7D28  ldr      x8, [x19, #0x28]                       // self.tipoResorte
+010C7D2C  ldrb     w9, [x19, #0x2d4]                      // self.sw_hayConResorte2
+010C7D30  str      x8, [x19, #0x2d8]                      // self.tipo1
+010C7D34  cbz      w9, #0x10c7da4                        
+010C7D38  cbz      x8, #0x10c80cc                        
+010C7D3C  adrp     x9, #0x236a000                        
+010C7D40  ldr      x9, [x9, #0x7d0]                       // [0x236A7D0] 'c'
+010C7D44  mov      x0, x8                                
+010C7D48  mov      x2, xzr                               
+010C7D4C  ldr      x1, [x9]                              
+010C7D50  bl       #0x196578c                             // System.String$$IndexOf
+010C7D54  ldr      x8, [x19, #0x28]                       // self.tipoResorte
+010C7D58  cbz      x8, #0x10c80cc                        
+010C7D5C  mov      w20, w0                               
+010C7D60  mov      x0, x8                                
+010C7D64  mov      w1, wzr                               
+010C7D68  mov      w2, w20                               
+010C7D6C  mov      x3, xzr                               
+010C7D70  bl       #0x196288c                             // System.String$$Substring
+010C7D74  ldr      x8, [x19, #0x28]                       // self.tipoResorte
+010C7D78  str      x0, [x19, #0x2d8]                      // self.tipo1
+010C7D7C  cbz      x8, #0x10c80cc                        
+010C7D80  ldr      w9, [x8, #0x10]                       
+010C7D84  mvn      w10, w20                              
+010C7D88  add      w1, w20, #1                           
+010C7D8C  mov      x0, x8                                
+010C7D90  add      w2, w9, w10                           
+010C7D94  mov      x3, xzr                               
+010C7D98  bl       #0x196288c                             // System.String$$Substring
+010C7D9C  ldr      x8, [x19, #0x2d8]                      // self.tipo1
+010C7DA0  str      x0, [x19, #0x2e0]                      // self.tipo2
+010C7DA4  cbz      x8, #0x10c80cc                        
+010C7DA8  ldr      w20, [x8, #0x10]                      
+010C7DAC  cmp      w20, #1                               
+010C7DB0  b.lt     #0x10c7e38                            
+010C7DB4  mov      w2, #1                                
+010C7DB8  mov      x0, x8                                
+010C7DBC  mov      w1, wzr                               
+010C7DC0  mov      x3, xzr                               
+010C7DC4  mov      w22, #1                               
+010C7DC8  bl       #0x196288c                             // System.String$$Substring
+010C7DCC  cmp      w20, #1                               
+010C7DD0  str      x0, [x19, #0x2e8]                      // self.tipoResorte1_1
+010C7DD4  str      w22, [x19, #0xfc]                      // self.posiMaxTotal1
+010C7DD8  b.eq     #0x10c7e38                            
+010C7DDC  ldr      x0, [x19, #0x2d8]                      // self.tipo1
+010C7DE0  strb     w22, [x19, #0x31a]                     // self.sw_hayresorte1_2
+010C7DE4  cbz      x0, #0x10c80cc                        
+010C7DE8  mov      w1, #1                                
+010C7DEC  mov      w2, #1                                
+010C7DF0  mov      x3, xzr                               
+010C7DF4  mov      w22, #1                               
+010C7DF8  bl       #0x196288c                             // System.String$$Substring
+010C7DFC  mov      w8, #2                                
+010C7E00  cmp      w20, #3                               
+010C7E04  str      x0, [x19, #0x2f0]                      // self.tipoResorte1_2
+010C7E08  str      w8, [x19, #0xfc]                       // self.posiMaxTotal1
+010C7E0C  b.lt     #0x10c7e38                            
+010C7E10  ldr      x0, [x19, #0x2d8]                      // self.tipo1
+010C7E14  strb     w22, [x19, #0x31b]                     // self.sw_hayresorte1_3
+010C7E18  cbz      x0, #0x10c80cc                        
+010C7E1C  mov      w1, #2                                
+010C7E20  mov      w2, #1                                
+010C7E24  mov      x3, xzr                               
+010C7E28  bl       #0x196288c                             // System.String$$Substring
+010C7E2C  mov      w8, #3                                
+010C7E30  str      x0, [x19, #0x2f8]                      // self.tipoResorte1_3
+010C7E34  str      w8, [x19, #0xfc]                       // self.posiMaxTotal1
+010C7E38  ldrb     w8, [x19, #0x2d4]                      // self.sw_hayConResorte2
+010C7E3C  cbz      w8, #0x10c7ecc                        
+010C7E40  ldr      x0, [x19, #0x2e0]                      // self.tipo2
+010C7E44  cbz      x0, #0x10c80cc                        
+010C7E48  ldr      w20, [x0, #0x10]                      
+010C7E4C  mov      w2, #1                                
+010C7E50  mov      w1, wzr                               
+010C7E54  mov      x3, xzr                               
+010C7E58  mov      w22, #1                               
+010C7E5C  bl       #0x196288c                             // System.String$$Substring
+010C7E60  cmp      w20, #2                               
+010C7E64  str      x0, [x19, #0x300]                      // self.tipoResorte2_1
+010C7E68  str      w22, [x19, #0x100]                     // self.posiMaxTotal2
+010C7E6C  b.lt     #0x10c7ecc                            
+010C7E70  ldr      x0, [x19, #0x2e0]                      // self.tipo2
+010C7E74  strb     w22, [x19, #0x31c]                     // self.sw_hayresorte2_2
+010C7E78  cbz      x0, #0x10c80cc                        
+010C7E7C  mov      w1, #1                                
+010C7E80  mov      w2, #1                                
+010C7E84  mov      x3, xzr                               
+010C7E88  mov      w22, #1                               
+010C7E8C  bl       #0x196288c                             // System.String$$Substring
+010C7E90  mov      w8, #2                                
+010C7E94  cmp      w20, #3                               
+010C7E98  str      x0, [x19, #0x308]                      // self.tipoResorte2_2
+010C7E9C  str      w8, [x19, #0x100]                      // self.posiMaxTotal2
+010C7EA0  b.lt     #0x10c7ecc                            
+010C7EA4  ldr      x0, [x19, #0x2e0]                      // self.tipo2
+010C7EA8  strb     w22, [x19, #0x31d]                     // self.sw_hayresorte2_3
+010C7EAC  cbz      x0, #0x10c80cc                        
+010C7EB0  mov      w1, #2                                
+010C7EB4  mov      w2, #1                                
+010C7EB8  mov      x3, xzr                               
+010C7EBC  bl       #0x196288c                             // System.String$$Substring
+010C7EC0  mov      w8, #3                                
+010C7EC4  str      x0, [x19, #0x310]                      // self.tipoResorte2_3
+010C7EC8  str      w8, [x19, #0x100]                      // self.posiMaxTotal2
+010C7ECC  adrp     x8, #0x236a000                        
+010C7ED0  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+010C7ED4  ldr      x0, [x19, #0x298]                      // self.conResorte1
+010C7ED8  ldr      x9, [x19, #0x2f8]                      // self.tipoResorte1_3
+010C7EDC  ldrh     w10, [x19, #0x31a]                     // self.sw_hayresorte1_2
+010C7EE0  ldr      w11, [x19, #0xfc]                      // self.posiMaxTotal1
+010C7EE4  str      x0, [x19, #0x2a8]                      // self.conResor
+010C7EE8  ldur     q0, [x21, #0x1c]                      
+010C7EEC  str      x9, [x19, #0x290]                      // self.tipoResor3
+010C7EF0  strb     wzr, [x19, #0x31e]                     // self.sigueMovimiento
+010C7EF4  strh     w10, [x19, #0x318]                     // self.sw_hayresorte2
+010C7EF8  str      d0, [x19, #0x278]                      // self.tipoResor
+010C7EFC  str      q0, [x19, #0x280]                      // self.tipoResor1
+010C7F00  str      w11, [x19, #0xf8]                      // self.posiMaxTotal
+010C7F04  ldr      x1, [x8]                              
+010C7F08  adrp     x20, #0x236a000                       
+010C7F0C  ldr      x20, [x20, #0x658]                     // [0x236A658] '2'
+010C7F10  mov      x2, xzr                               
+010C7F14  bl       #0x1960c7c                             // System.String$$op_Equality
+010C7F18  tbz      w0, #0, #0x10c7f38                    
+010C7F1C  adrp     x8, #0x236a000                        
+010C7F20  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C7F24  ldr      x8, [x8]                              
+010C7F28  ldr      x8, [x8, #0xb8]                       
+010C7F2C  ldr      w9, [x8, #0x34]                       
+010C7F30  add      w9, w9, #1                            
+010C7F34  str      w9, [x8, #0x34]                       
+010C7F38  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C7F3C  ldr      x1, [x20]                             
+010C7F40  adrp     x20, #0x236a000                       
+010C7F44  ldr      x20, [x20, #0x650]                     // [0x236A650] '3'
+010C7F48  mov      x2, xzr                               
+010C7F4C  bl       #0x1960c7c                             // System.String$$op_Equality
+010C7F50  tbz      w0, #0, #0x10c7f70                    
+010C7F54  adrp     x8, #0x236a000                        
+010C7F58  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C7F5C  ldr      x8, [x8]                              
+010C7F60  ldr      x8, [x8, #0xb8]                       
+010C7F64  ldr      w9, [x8, #0x38]                       
+010C7F68  add      w9, w9, #1                            
+010C7F6C  str      w9, [x8, #0x38]                       
+010C7F70  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C7F74  ldr      x1, [x20]                             
+010C7F78  adrp     x20, #0x236a000                       
+010C7F7C  ldr      x20, [x20, #0x6a8]                     // [0x236A6A8] '4'
+010C7F80  mov      x2, xzr                               
+010C7F84  bl       #0x1960c7c                             // System.String$$op_Equality
+010C7F88  tbz      w0, #0, #0x10c7fa8                    
+010C7F8C  adrp     x8, #0x236a000                        
+010C7F90  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C7F94  ldr      x8, [x8]                              
+010C7F98  ldr      x8, [x8, #0xb8]                       
+010C7F9C  ldr      w9, [x8, #0x3c]                       
+010C7FA0  add      w9, w9, #1                            
+010C7FA4  str      w9, [x8, #0x3c]                       
+010C7FA8  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C7FAC  ldr      x1, [x20]                             
+010C7FB0  adrp     x20, #0x236a000                       
+010C7FB4  ldr      x20, [x20, #0x6f8]                     // [0x236A6F8] '5'
+010C7FB8  mov      x2, xzr                               
+010C7FBC  bl       #0x1960c7c                             // System.String$$op_Equality
+010C7FC0  tbz      w0, #0, #0x10c7fe0                    
+010C7FC4  adrp     x8, #0x236a000                        
+010C7FC8  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C7FCC  ldr      x8, [x8]                              
+010C7FD0  ldr      x8, [x8, #0xb8]                       
+010C7FD4  ldr      w9, [x8, #0x40]                       
+010C7FD8  add      w9, w9, #1                            
+010C7FDC  str      w9, [x8, #0x40]                       
+010C7FE0  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C7FE4  ldr      x1, [x20]                             
+010C7FE8  adrp     x20, #0x236a000                       
+010C7FEC  ldr      x20, [x20, #0x670]                     // [0x236A670] '6'
+010C7FF0  mov      x2, xzr                               
+010C7FF4  bl       #0x1960c7c                             // System.String$$op_Equality
+010C7FF8  tbz      w0, #0, #0x10c8018                    
+010C7FFC  adrp     x8, #0x236a000                        
+010C8000  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C8004  ldr      x8, [x8]                              
+010C8008  ldr      x8, [x8, #0xb8]                       
+010C800C  ldr      w9, [x8, #0x44]                       
+010C8010  add      w9, w9, #1                            
+010C8014  str      w9, [x8, #0x44]                       
+010C8018  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C801C  ldr      x1, [x20]                             
+010C8020  adrp     x20, #0x236a000                       
+010C8024  ldr      x20, [x20, #0x6a0]                     // [0x236A6A0] '7'
+010C8028  mov      x2, xzr                               
+010C802C  bl       #0x1960c7c                             // System.String$$op_Equality
+010C8030  tbz      w0, #0, #0x10c8050                    
+010C8034  adrp     x8, #0x236a000                        
+010C8038  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C803C  ldr      x8, [x8]                              
+010C8040  ldr      x8, [x8, #0xb8]                       
+010C8044  ldr      w9, [x8, #0x48]                       
+010C8048  add      w9, w9, #1                            
+010C804C  str      w9, [x8, #0x48]                       
+010C8050  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C8054  ldr      x1, [x20]                             
+010C8058  adrp     x20, #0x236a000                       
+010C805C  ldr      x20, [x20, #0x798]                     // [0x236A798] '8'
+010C8060  mov      x2, xzr                               
+010C8064  bl       #0x1960c7c                             // System.String$$op_Equality
+010C8068  tbz      w0, #0, #0x10c8088                    
+010C806C  adrp     x8, #0x236a000                        
+010C8070  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C8074  ldr      x8, [x8]                              
+010C8078  ldr      x8, [x8, #0xb8]                       
+010C807C  ldr      w9, [x8, #0x4c]                       
+010C8080  add      w9, w9, #1                            
+010C8084  str      w9, [x8, #0x4c]                       
+010C8088  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010C808C  ldr      x1, [x20]                             
+010C8090  mov      x2, xzr                               
+010C8094  bl       #0x1960c7c                             // System.String$$op_Equality
+010C8098  tbz      w0, #0, #0x10c80b8                    
+010C809C  adrp     x8, #0x236a000                        
+010C80A0  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010C80A4  ldr      x8, [x8]                              
+010C80A8  ldr      x8, [x8, #0xb8]                       
+010C80AC  ldr      w9, [x8, #0x50]                       
+010C80B0  add      w9, w9, #1                            
+010C80B4  str      w9, [x8, #0x50]                       
+010C80B8  str      wzr, [x19, #0x390]                     // self.contadorUpdate
+010C80BC  ldp      x20, x19, [sp, #0x20]                 
+010C80C0  ldp      x22, x21, [sp, #0x10]                 
+010C80C4  ldp      x30, x23, [sp], #0x30                 
+010C80C8  ret                                            
+010C80CC  bl       #0xe61da0                             

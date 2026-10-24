@@ -1,0 +1,243 @@
+// ObservadorResorte2$$doActivarAguas VA 0xFE2D94, inferred length 964
+void ObservadorResorte2__doActivarAguas (ObservadorResorte2_o* __this, const MethodInfo* method);
+00FE2D94  stp      x30, x27, [sp, #-0x50]!               
+00FE2D98  stp      x26, x25, [sp, #0x10]                 
+00FE2D9C  stp      x24, x23, [sp, #0x20]                 
+00FE2DA0  stp      x22, x21, [sp, #0x30]                 
+00FE2DA4  stp      x20, x19, [sp, #0x40]                 
+00FE2DA8  adrp     x19, #0x24fb000                       
+00FE2DAC  ldrb     w8, [x19, #0xbb0]                     
+00FE2DB0  mov      x20, x0                               
+00FE2DB4  tbnz     w8, #0, #0xfe2dfc                     
+00FE2DB8  adrp     x0, #0x2368000                        
+00FE2DBC  ldr      x0, [x0, #0x240]                       // [0x2368240] System.IDisposable_TypeInfo
+00FE2DC0  bl       #0xe61b78                             
+00FE2DC4  adrp     x0, #0x2368000                        
+00FE2DC8  ldr      x0, [x0, #0x248]                       // [0x2368248] System.Collections.IEnumerator_TypeInfo
+00FE2DCC  bl       #0xe61b78                             
+00FE2DD0  adrp     x0, #0x2368000                        
+00FE2DD4  ldr      x0, [x0, #0x2b8]                       // [0x23682B8] UnityEngine.Transform_TypeInfo
+00FE2DD8  bl       #0xe61b78                             
+00FE2DDC  adrp     x0, #0x236a000                        
+00FE2DE0  ldr      x0, [x0, #0x7d8]                       // [0x236A7D8] 'AguaControlChorro1'
+00FE2DE4  bl       #0xe61b78                             
+00FE2DE8  adrp     x0, #0x236a000                        
+00FE2DEC  ldr      x0, [x0, #0x7e0]                       // [0x236A7E0] 'AguaControl5C'
+00FE2DF0  bl       #0xe61b78                             
+00FE2DF4  mov      w8, #1                                
+00FE2DF8  strb     w8, [x19, #0xbb0]                     
+00FE2DFC  mov      x0, x20                               
+00FE2E00  mov      x1, xzr                               
+00FE2E04  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FE2E08  cbz      x0, #0xfe305c                         
+00FE2E0C  mov      x1, xzr                               
+00FE2E10  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+00FE2E14  cbz      x0, #0xfe305c                         
+00FE2E18  adrp     x23, #0x2368000                       
+00FE2E1C  ldr      x23, [x23, #0x240]                     // [0x2368240] System.IDisposable_TypeInfo
+00FE2E20  mov      x1, xzr                               
+00FE2E24  bl       #0x2010228                             // UnityEngine.Transform$$GetEnumerator
+00FE2E28  mov      x19, x0                               
+00FE2E2C  cbz      x0, #0xfe3060                         
+00FE2E30  adrp     x24, #0x2368000                       
+00FE2E34  adrp     x25, #0x2368000                       
+00FE2E38  adrp     x26, #0x236a000                       
+00FE2E3C  adrp     x27, #0x236a000                       
+00FE2E40  ldr      x24, [x24, #0x248]                     // [0x2368248] System.Collections.IEnumerator_TypeInfo
+00FE2E44  ldr      x25, [x25, #0x2b8]                     // [0x23682B8] UnityEngine.Transform_TypeInfo
+00FE2E48  ldr      x26, [x26, #0x7d8]                     // [0x236A7D8] 'AguaControlChorro1'
+00FE2E4C  ldr      x27, [x27, #0x7e0]                     // [0x236A7E0] 'AguaControl5C'
+00FE2E50  ldr      x8, [x19]                             
+00FE2E54  ldr      x1, [x24]                             
+00FE2E58  ldrh     w9, [x8, #0x12e]                      
+00FE2E5C  cbz      x9, #0xfe2e80                         
+00FE2E60  ldr      x10, [x8, #0xb0]                      
+00FE2E64  add      x10, x10, #8                          
+00FE2E68  ldur     x11, [x10, #-8]                       
+00FE2E6C  cmp      x11, x1                               
+00FE2E70  b.eq     #0xfe2e90                             
+00FE2E74  subs     x9, x9, #1                            
+00FE2E78  add      x10, x10, #0x10                       
+00FE2E7C  b.ne     #0xfe2e68                             
+00FE2E80  mov      x0, x19                               
+00FE2E84  mov      w2, wzr                               
+00FE2E88  bl       #0xea2528                             
+00FE2E8C  b        #0xfe2e9c                             
+00FE2E90  ldrsw    x9, [x10]                             
+00FE2E94  add      x8, x8, x9, lsl #4                    
+00FE2E98  add      x0, x8, #0x138                        
+00FE2E9C  ldp      x8, x1, [x0]                          
+00FE2EA0  mov      x0, x19                               
+00FE2EA4  blr      x8                                    
+00FE2EA8  tbz      w0, #0, #0xfe2fb4                     
+00FE2EAC  ldr      x8, [x19]                             
+00FE2EB0  ldr      x1, [x24]                             
+00FE2EB4  ldrh     w9, [x8, #0x12e]                      
+00FE2EB8  cbz      x9, #0xfe2edc                         
+00FE2EBC  ldr      x10, [x8, #0xb0]                      
+00FE2EC0  add      x10, x10, #8                          
+00FE2EC4  ldur     x11, [x10, #-8]                       
+00FE2EC8  cmp      x11, x1                               
+00FE2ECC  b.eq     #0xfe2eec                             
+00FE2ED0  subs     x9, x9, #1                            
+00FE2ED4  add      x10, x10, #0x10                       
+00FE2ED8  b.ne     #0xfe2ec4                             
+00FE2EDC  mov      w2, #1                                
+00FE2EE0  mov      x0, x19                               
+00FE2EE4  bl       #0xea2528                             
+00FE2EE8  b        #0xfe2efc                             
+00FE2EEC  ldr      w9, [x10]                             
+00FE2EF0  add      w9, w9, #1                            
+00FE2EF4  add      x8, x8, w9, sxtw #4                   
+00FE2EF8  add      x0, x8, #0x138                        
+00FE2EFC  ldp      x8, x1, [x0]                          
+00FE2F00  mov      x0, x19                               
+00FE2F04  blr      x8                                    
+00FE2F08  mov      x21, x0                               
+00FE2F0C  cbz      x0, #0xfe304c                         
+00FE2F10  ldr      x8, [x21]                             
+00FE2F14  ldr      x1, [x25]                             
+00FE2F18  ldrb     w10, [x8, #0x130]                     
+00FE2F1C  ldrb     w9, [x1, #0x130]                      
+00FE2F20  cmp      w10, w9                               
+00FE2F24  b.lo     #0xfe3040                             
+00FE2F28  ldr      x8, [x8, #0xc8]                       
+00FE2F2C  add      x8, x8, x9, lsl #3                    
+00FE2F30  ldur     x8, [x8, #-8]                         
+00FE2F34  cmp      x8, x1                                
+00FE2F38  b.ne     #0xfe3040                             
+00FE2F3C  mov      x0, x21                               
+00FE2F40  mov      x1, xzr                               
+00FE2F44  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FE2F48  cbz      x0, #0xfe3050                         
+00FE2F4C  mov      x1, xzr                               
+00FE2F50  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+00FE2F54  mov      x22, x0                               
+00FE2F58  cbz      x0, #0xfe3048                         
+00FE2F5C  ldr      x1, [x26]                             
+00FE2F60  mov      x0, x22                               
+00FE2F64  mov      x2, xzr                               
+00FE2F68  bl       #0x19651dc                             // System.String$$Contains
+00FE2F6C  tbnz     w0, #0, #0xfe2f84                     
+00FE2F70  ldr      x1, [x27]                             
+00FE2F74  mov      x0, x22                               
+00FE2F78  mov      x2, xzr                               
+00FE2F7C  bl       #0x19651dc                             // System.String$$Contains
+00FE2F80  tbz      w0, #0, #0xfe2e50                     
+00FE2F84  mov      x0, x21                               
+00FE2F88  mov      x1, xzr                               
+00FE2F8C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+00FE2F90  cbz      x0, #0xfe3058                         
+00FE2F94  mov      x1, xzr                               
+00FE2F98  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+00FE2F9C  str      x0, [x20, #0x1b8]                     
+00FE2FA0  cbz      x0, #0xfe3054                         
+00FE2FA4  mov      w1, #1                                
+00FE2FA8  mov      x2, xzr                               
+00FE2FAC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+00FE2FB0  b        #0xfe2e50                             
+00FE2FB4  mov      x21, xzr                              
+00FE2FB8  ldr      x1, [x23]                             
+00FE2FBC  mov      x0, x19                               
+00FE2FC0  bl       #0xe61c84                             
+00FE2FC4  cbz      x0, #0xfe3024                         
+00FE2FC8  ldr      x8, [x0]                              
+00FE2FCC  ldr      x1, [x23]                             
+00FE2FD0  mov      x19, x0                               
+00FE2FD4  ldrh     w9, [x8, #0x12e]                      
+00FE2FD8  cbz      x9, #0xfe2ffc                         
+00FE2FDC  ldr      x10, [x8, #0xb0]                      
+00FE2FE0  add      x10, x10, #8                          
+00FE2FE4  ldur     x11, [x10, #-8]                       
+00FE2FE8  cmp      x11, x1                               
+00FE2FEC  b.eq     #0xfe300c                             
+00FE2FF0  subs     x9, x9, #1                            
+00FE2FF4  add      x10, x10, #0x10                       
+00FE2FF8  b.ne     #0xfe2fe4                             
+00FE2FFC  mov      x0, x19                               
+00FE3000  mov      w2, wzr                               
+00FE3004  bl       #0xea2528                             
+00FE3008  b        #0xfe3018                             
+00FE300C  ldrsw    x9, [x10]                             
+00FE3010  add      x8, x8, x9, lsl #4                    
+00FE3014  add      x0, x8, #0x138                        
+00FE3018  ldp      x8, x1, [x0]                          
+00FE301C  mov      x0, x19                               
+00FE3020  blr      x8                                    
+00FE3024  cbnz     x21, #0xfe3064                        
+00FE3028  ldp      x20, x19, [sp, #0x40]                 
+00FE302C  ldp      x22, x21, [sp, #0x30]                 
+00FE3030  ldp      x24, x23, [sp, #0x20]                 
+00FE3034  ldp      x26, x25, [sp, #0x10]                 
+00FE3038  ldp      x30, x27, [sp], #0x50                 
+00FE303C  ret                                            
+00FE3040  mov      x0, x21                               
+00FE3044  bl       #0xe6213c                             
+00FE3048  bl       #0xe61da0                             
+00FE304C  bl       #0xe61da0                             
+00FE3050  bl       #0xe61da0                             
+00FE3054  bl       #0xe61da0                             
+00FE3058  bl       #0xe61da0                             
+00FE305C  bl       #0xe61da0                             
+00FE3060  bl       #0xe61da0                             
+00FE3064  mov      x0, x21                               
+00FE3068  bl       #0xe61d98                             
+00FE306C  b        #0xfe30a8                             
+00FE3070  b        #0xfe30a8                             
+00FE3074  b        #0xfe30a8                             
+00FE3078  b        #0xfe30a8                             
+00FE307C  b        #0xfe30a8                             
+00FE3080  b        #0xfe30a8                             
+00FE3084  b        #0xfe30a8                             
+00FE3088  b        #0xfe30a8                             
+00FE308C  b        #0xfe30a8                             
+00FE3090  b        #0xfe30a8                             
+00FE3094  b        #0xfe30a8                             
+00FE3098  b        #0xfe30a8                             
+00FE309C  b        #0xfe30a8                             
+00FE30A0  b        #0xfe30a8                             
+00FE30A4  b        #0xfe30a8                             
+00FE30A8  mov      x20, x0                               
+00FE30AC  cmp      w1, #1                                
+00FE30B0  b.ne     #0xfe30c8                             
+00FE30B4  mov      x0, x20                               
+00FE30B8  bl       #0x224d2d0                            
+00FE30BC  ldr      x21, [x0]                             
+00FE30C0  bl       #0x224d2e0                            
+00FE30C4  b        #0xfe2fb8                             
+00FE30C8  mov      x21, xzr                              
+00FE30CC  b        #0xfe30d4                             
+00FE30D0  mov      x20, x0                               
+00FE30D4  ldr      x1, [x23]                             
+00FE30D8  mov      x0, x19                               
+00FE30DC  bl       #0xe61c84                             
+00FE30E0  mov      x19, x0                               
+00FE30E4  cbz      x0, #0xfe3140                         
+00FE30E8  ldr      x8, [x19]                             
+00FE30EC  ldr      x1, [x23]                             
+00FE30F0  ldrh     w9, [x8, #0x12e]                      
+00FE30F4  cbz      x9, #0xfe3118                         
+00FE30F8  ldr      x10, [x8, #0xb0]                      
+00FE30FC  add      x10, x10, #8                          
+00FE3100  ldur     x11, [x10, #-8]                       
+00FE3104  cmp      x11, x1                               
+00FE3108  b.eq     #0xfe3128                             
+00FE310C  subs     x9, x9, #1                            
+00FE3110  add      x10, x10, #0x10                       
+00FE3114  b.ne     #0xfe3100                             
+00FE3118  mov      x0, x19                               
+00FE311C  mov      w2, wzr                               
+00FE3120  bl       #0xea2528                             
+00FE3124  b        #0xfe3134                             
+00FE3128  ldrsw    x9, [x10]                             
+00FE312C  add      x8, x8, x9, lsl #4                    
+00FE3130  add      x0, x8, #0x138                        
+00FE3134  ldp      x8, x1, [x0]                          
+00FE3138  mov      x0, x19                               
+00FE313C  blr      x8                                    
+00FE3140  cbnz     x21, #0xfe314c                        
+00FE3144  mov      x0, x20                               
+00FE3148  bl       #0xf5dd7c                             
+00FE314C  mov      x0, x21                               
+00FE3150  bl       #0xe61d98                             
+00FE3154  bl       #0xd2eb98                             

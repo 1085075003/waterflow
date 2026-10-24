@@ -1,0 +1,86 @@
+// SaveLoadManager$$okBuy VA 0x102115C, inferred length 336
+void SaveLoadManager__okBuy (SaveLoadManager_o* __this, const MethodInfo* method);
+0102115C  stp      x30, x21, [sp, #-0x20]!               
+01021160  stp      x20, x19, [sp, #0x10]                 
+01021164  adrp     x20, #0x24fb000                       
+01021168  ldrb     w8, [x20, #0xcb5]                     
+0102116C  mov      x19, x0                               
+01021170  tbnz     w8, #0, #0x10211b8                    
+01021174  adrp     x0, #0x236a000                        
+01021178  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0102117C  bl       #0xe61b78                             
+01021180  adrp     x0, #0x236b000                        
+01021184  ldr      x0, [x0, #0x4f0]                       // [0x236B4F0] SaveLoadManager_TypeInfo
+01021188  bl       #0xe61b78                             
+0102118C  adrp     x0, #0x236b000                        
+01021190  ldr      x0, [x0, #0x88]                        // [0x236B088] 'NumSoluciones'
+01021194  bl       #0xe61b78                             
+01021198  adrp     x0, #0x236b000                        
+0102119C  ldr      x0, [x0, #0x720]                       // [0x236B720] 'completeOff'
+010211A0  bl       #0xe61b78                             
+010211A4  adrp     x0, #0x2368000                        
+010211A8  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+010211AC  bl       #0xe61b78                             
+010211B0  mov      w8, #1                                
+010211B4  strb     w8, [x20, #0xcb5]                     
+010211B8  ldr      x0, [x19, #0x198]                      // self.audioManager
+010211BC  cbz      x0, #0x10212a8                        
+010211C0  ldr      x1, [x19, #0x188]                      // self.click
+010211C4  mov      x2, xzr                               
+010211C8  bl       #0x1028540                             // AudioManager$$PlaySound
+010211CC  ldr      x0, [x19, #0xf0]                       // self.noMoreOff
+010211D0  cbz      x0, #0x10212a8                        
+010211D4  adrp     x8, #0x236b000                        
+010211D8  ldr      x8, [x8, #0x720]                       // [0x236B720] 'completeOff'
+010211DC  mov      w2, #1                                
+010211E0  mov      x3, xzr                               
+010211E4  ldr      x1, [x8]                              
+010211E8  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+010211EC  ldr      x0, [x19, #0xf8]                       // self.cajaNoMore
+010211F0  cbz      x0, #0x10212a8                        
+010211F4  adrp     x20, #0x236b000                       
+010211F8  adrp     x21, #0x236b000                       
+010211FC  ldr      x20, [x20, #0x4f0]                     // [0x236B4F0] SaveLoadManager_TypeInfo
+01021200  ldr      x21, [x21, #0x88]                      // [0x236B088] 'NumSoluciones'
+01021204  mov      w1, wzr                               
+01021208  mov      x2, xzr                               
+0102120C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01021210  ldr      x8, [x20]                             
+01021214  mov      x2, xzr                               
+01021218  ldr      x8, [x8, #0xb8]                       
+0102121C  ldr      w9, [x8]                              
+01021220  add      w1, w9, #4                            
+01021224  str      w1, [x8]                              
+01021228  ldr      x0, [x21]                             
+0102122C  bl       #0x200137c                             // UnityEngine.PlayerPrefs$$SetInt
+01021230  ldr      x8, [x20]                             
+01021234  ldr      x20, [x19, #0x90]                      // self.textNumS
+01021238  mov      x1, xzr                               
+0102123C  ldr      x0, [x8, #0xb8]                       
+01021240  bl       #0x1ab3994                             // System.Int32$$ToString
+01021244  cbz      x20, #0x10212a8                       
+01021248  adrp     x9, #0x2368000                        
+0102124C  ldr      x8, [x20]                             
+01021250  ldr      x9, [x9, #0xf50]                       // [0x2368F50] ''
+01021254  adrp     x21, #0x236a000                       
+01021258  cmp      x0, #0                                
+0102125C  ldr      x10, [x8, #0x5e8]                     
+01021260  ldr      x9, [x9]                              
+01021264  ldr      x2, [x8, #0x5f0]                      
+01021268  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102126C  csel     x1, x9, x0, eq                        
+01021270  mov      x0, x20                               
+01021274  blr      x10                                   
+01021278  ldr      x0, [x21]                             
+0102127C  ldr      w8, [x0, #0xe0]                       
+01021280  cbnz     w8, #0x102128c                        
+01021284  bl       #0xe61c80                             
+01021288  ldr      x0, [x21]                             
+0102128C  ldr      x8, [x0, #0xb8]                       
+01021290  mov      x0, x19                               
+01021294  ldp      x20, x19, [sp, #0x10]                 
+01021298  mov      w9, #1                                
+0102129C  strb     w9, [x8, #0x16]                       
+010212A0  ldp      x30, x21, [sp], #0x20                 
+010212A4  b        #0x101b9a0                             // SaveLoadManager$$doActivarBotones
+010212A8  bl       #0xe61da0                             

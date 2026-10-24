@@ -1,0 +1,16 @@
+// Resorte2b$$inactivarAgua VA 0x10120F4, inferred length 56
+void Resorte2b__inactivarAgua (Resorte2b_o* __this, const MethodInfo* method);
+010120F4  stp      x30, x19, [sp, #-0x10]!               
+010120F8  mov      x19, x0                               
+010120FC  ldr      x0, [x0, #0x78]                       
+01012100  cbz      x0, #0x1012128                        
+01012104  mov      w1, wzr                               
+01012108  mov      x2, xzr                               
+0101210C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01012110  ldr      x0, [x19, #0x80]                       // self.objeto13
+01012114  cbz      x0, #0x1012128                        
+01012118  mov      w1, wzr                               
+0101211C  mov      x2, xzr                               
+01012120  ldp      x30, x19, [sp], #0x10                 
+01012124  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+01012128  bl       #0xe61da0                             

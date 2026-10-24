@@ -1,0 +1,37 @@
+// UIManagerSelScript0$$botonDesign4Down VA 0x10467A4, inferred length 140
+void UIManagerSelScript0__botonDesign4Down (UIManagerSelScript0_o* __this, const MethodInfo* method);
+010467A4  str      x30, [sp, #-0x20]!                    
+010467A8  stp      x20, x19, [sp, #0x10]                 
+010467AC  adrp     x20, #0x24fb000                       
+010467B0  ldrb     w8, [x20, #0xd7e]                     
+010467B4  mov      x19, x0                               
+010467B8  tbnz     w8, #0, #0x10467d0                    
+010467BC  adrp     x0, #0x236a000                        
+010467C0  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+010467C4  bl       #0xe61b78                             
+010467C8  mov      w8, #1                                
+010467CC  strb     w8, [x20, #0xd7e]                     
+010467D0  ldr      w8, [x19, #0x1b4]                      // self.accesoDesign
+010467D4  cmp      w8, #4                                
+010467D8  b.ne     #0x1046804                            
+010467DC  ldr      x0, [x19, #0x1b8]                      // self.panelDesign0
+010467E0  cbz      x0, #0x104682c                        
+010467E4  adrp     x8, #0x236a000                        
+010467E8  ldr      x8, [x8, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+010467EC  ldr      x8, [x8]                              
+010467F0  ldr      x8, [x8, #0xb8]                       
+010467F4  ldr      w8, [x8, #8]                          
+010467F8  cbz      w8, #0x1046818                        
+010467FC  mov      w1, wzr                               
+01046800  b        #0x104681c                            
+01046804  mov      w8, #1                                
+01046808  str      w8, [x19, #0x1b4]                      // self.accesoDesign
+0104680C  ldp      x20, x19, [sp, #0x10]                 
+01046810  ldr      x30, [sp], #0x20                      
+01046814  ret                                            
+01046818  mov      w1, #1                                
+0104681C  ldp      x20, x19, [sp, #0x10]                 
+01046820  mov      x2, xzr                               
+01046824  ldr      x30, [sp], #0x20                      
+01046828  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+0104682C  bl       #0xe61da0                             

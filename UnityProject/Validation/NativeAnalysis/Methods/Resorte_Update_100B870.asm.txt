@@ -1,0 +1,86 @@
+// Resorte$$Update VA 0x100B870, inferred length 336
+void Resorte__Update (Resorte_o* __this, const MethodInfo* method);
+0100B870  str      x30, [sp, #-0x20]!                    
+0100B874  stp      x20, x19, [sp, #0x10]                 
+0100B878  adrp     x20, #0x24fb000                       
+0100B87C  ldrb     w8, [x20, #0xc88]                     
+0100B880  mov      x19, x0                               
+0100B884  tbnz     w8, #0, #0x100b8c0                    
+0100B888  adrp     x0, #0x236a000                        
+0100B88C  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+0100B890  bl       #0xe61b78                             
+0100B894  adrp     x0, #0x236b000                        
+0100B898  ldr      x0, [x0, #0x478]                       // [0x236B478] 'boolResorte'
+0100B89C  bl       #0xe61b78                             
+0100B8A0  adrp     x0, #0x236b000                        
+0100B8A4  ldr      x0, [x0, #0x480]                       // [0x236B480] 'doDesactivarMech'
+0100B8A8  bl       #0xe61b78                             
+0100B8AC  adrp     x0, #0x236b000                        
+0100B8B0  ldr      x0, [x0, #0x488]                       // [0x236B488] 'doBajarPieza'
+0100B8B4  bl       #0xe61b78                             
+0100B8B8  mov      w8, #1                                
+0100B8BC  strb     w8, [x20, #0xc88]                     
+0100B8C0  ldrb     w8, [x19, #0x30]                       // self.depura1
+0100B8C4  cbz      w8, #0x100b9b0                        
+0100B8C8  ldr      s0, [x19, #0x3c]                       // self.contUpdate
+0100B8CC  fmov     s1, #5.00000000                       
+0100B8D0  fcmp     s0, s1                                
+0100B8D4  b.le     #0x100b954                            
+0100B8D8  mov      w8, #1                                
+0100B8DC  mov      x0, x19                               
+0100B8E0  strb     w8, [x19, #0x40]                       // self.checkUpdate
+0100B8E4  bl       #0x100b9c0                             // Resorte$$doCheckCollision
+0100B8E8  ldrb     w9, [x19, #0x6c]                       // self.checkCollision
+0100B8EC  ldrb     w8, [x19, #0x6d]                       // self.checkCollision_old
+0100B8F0  cbz      w9, #0x100b968                        
+0100B8F4  cbnz     w8, #0x100b9ac                        
+0100B8F8  strb     wzr, [x19, #0xda]                      // self.chequear
+0100B8FC  adrp     x8, #0x236a000                        
+0100B900  ldr      x8, [x8, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+0100B904  ldr      x8, [x8]                              
+0100B908  ldr      x8, [x8, #0xb8]                       
+0100B90C  ldr      w8, [x8, #4]                          
+0100B910  cmp      w8, #1                                
+0100B914  b.ne     #0x100b92c                            
+0100B918  ldr      x0, [x19, #0xe8]                       // self.audioManager
+0100B91C  cbz      x0, #0x100b9bc                        
+0100B920  ldr      x1, [x19, #0xe0]                       // self.SoundResorte
+0100B924  mov      x2, xzr                               
+0100B928  bl       #0x1028540                             // AudioManager$$PlaySound
+0100B92C  adrp     x8, #0x236b000                        
+0100B930  ldr      s0, [x19, #0x34]                       // self.tiempo1
+0100B934  ldr      x8, [x8, #0x488]                       // [0x236B488] 'doBajarPieza'
+0100B938  mov      x0, x19                               
+0100B93C  mov      x2, xzr                               
+0100B940  ldr      x1, [x8]                              
+0100B944  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+0100B948  mov      w8, #1                                
+0100B94C  strb     w8, [x19, #0x6d]                       // self.checkCollision_old
+0100B950  b        #0x100b9ac                            
+0100B954  fmov     s1, #1.00000000                       
+0100B958  fadd     s0, s0, s1                            
+0100B95C  str      s0, [x19, #0x3c]                       // self.contUpdate
+0100B960  strb     wzr, [x19, #0x40]                      // self.checkUpdate
+0100B964  b        #0x100b9b0                            
+0100B968  cbz      w8, #0x100b9ac                        
+0100B96C  ldr      x0, [x19, #0x28]                       // self.animResorte
+0100B970  cbz      x0, #0x100b9bc                        
+0100B974  adrp     x8, #0x236b000                        
+0100B978  ldr      x8, [x8, #0x478]                       // [0x236B478] 'boolResorte'
+0100B97C  mov      w2, wzr                               
+0100B980  mov      x3, xzr                               
+0100B984  ldr      x1, [x8]                              
+0100B988  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+0100B98C  strb     wzr, [x19, #0x6d]                      // self.checkCollision_old
+0100B990  adrp     x8, #0x236b000                        
+0100B994  ldr      s0, [x19, #0x38]                       // self.tiempo2
+0100B998  ldr      x8, [x8, #0x480]                       // [0x236B480] 'doDesactivarMech'
+0100B99C  mov      x0, x19                               
+0100B9A0  mov      x2, xzr                               
+0100B9A4  ldr      x1, [x8]                              
+0100B9A8  bl       #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+0100B9AC  str      wzr, [x19, #0x3c]                      // self.contUpdate
+0100B9B0  ldp      x20, x19, [sp, #0x10]                 
+0100B9B4  ldr      x30, [sp], #0x20                      
+0100B9B8  ret                                            
+0100B9BC  bl       #0xe61da0                             

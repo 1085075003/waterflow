@@ -1,0 +1,161 @@
+// UIManagerScript1$$cargarEscena VA 0x1066938, inferred length 636
+void UIManagerScript1__cargarEscena (UIManagerScript1_o* __this, const MethodInfo* method);
+01066938  str      x30, [sp, #-0x30]!                    
+0106693C  stp      x22, x21, [sp, #0x10]                 
+01066940  stp      x20, x19, [sp, #0x20]                 
+01066944  adrp     x21, #0x24fb000                       
+01066948  adrp     x20, #0x236a000                       
+0106694C  ldrb     w8, [x21, #0xe5a]                     
+01066950  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01066954  mov      x19, x0                               
+01066958  tbnz     w8, #0, #0x10669d0                    
+0106695C  adrp     x0, #0x2368000                        
+01066960  ldr      x0, [x0, #0x878]                       // [0x2368878] UnityEngine.Application_TypeInfo
+01066964  bl       #0xe61b78                             
+01066968  adrp     x0, #0x236a000                        
+0106696C  ldr      x0, [x0, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+01066970  bl       #0xe61b78                             
+01066974  adrp     x0, #0x236a000                        
+01066978  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0106697C  bl       #0xe61b78                             
+01066980  adrp     x0, #0x236a000                        
+01066984  ldr      x0, [x0, #0x958]                       // [0x236A958] Method$System.Collections.Generic.List<string>.get_Count()
+01066988  bl       #0xe61b78                             
+0106698C  adrp     x0, #0x236a000                        
+01066990  ldr      x0, [x0, #0x960]                       // [0x236A960] Method$System.Collections.Generic.List<string>.get_Item()
+01066994  bl       #0xe61b78                             
+01066998  adrp     x0, #0x236a000                        
+0106699C  ldr      x0, [x0, #0x968]                       // [0x236A968] Method$System.Collections.Generic.List<float>.get_Item()
+010669A0  bl       #0xe61b78                             
+010669A4  adrp     x0, #0x236a000                        
+010669A8  ldr      x0, [x0, #0x970]                       // [0x236A970] Save_TypeInfo
+010669AC  bl       #0xe61b78                             
+010669B0  adrp     x0, #0x236d000                        
+010669B4  ldr      x0, [x0, #0x1c0]                       // [0x236D1C0] '.txt'
+010669B8  bl       #0xe61b78                             
+010669BC  adrp     x0, #0x236a000                        
+010669C0  ldr      x0, [x0, #0x990]                       // [0x236A990] 'gamesave'
+010669C4  bl       #0xe61b78                             
+010669C8  mov      w8, #1                                
+010669CC  strb     w8, [x21, #0xe5a]                     
+010669D0  mov      w8, #1                                
+010669D4  strb     w8, [x19, #0x39]                       // self.checkCargar
+010669D8  ldr      x0, [x20]                             
+010669DC  adrp     x22, #0x236a000                       
+010669E0  adrp     x19, #0x236d000                       
+010669E4  adrp     x21, #0x2368000                       
+010669E8  ldr      w8, [x0, #0xe0]                       
+010669EC  ldr      x22, [x22, #0x990]                     // [0x236A990] 'gamesave'
+010669F0  ldr      x19, [x19, #0x1c0]                     // [0x236D1C0] '.txt'
+010669F4  ldr      x21, [x21, #0x878]                     // [0x2368878] UnityEngine.Application_TypeInfo
+010669F8  cbnz     w8, #0x1066a04                        
+010669FC  bl       #0xe61c80                             
+01066A00  ldr      x0, [x20]                             
+01066A04  ldr      x0, [x0, #0xb8]                       
+01066A08  mov      x1, xzr                               
+01066A0C  bl       #0x1ab3994                             // System.Int32$$ToString
+01066A10  ldr      x8, [x22]                             
+01066A14  ldr      x2, [x19]                             
+01066A18  mov      x1, x0                                
+01066A1C  mov      x3, xzr                               
+01066A20  mov      x0, x8                                
+01066A24  bl       #0x196118c                             // System.String$$Concat
+01066A28  ldr      x8, [x21]                             
+01066A2C  mov      x19, x0                               
+01066A30  ldr      w9, [x8, #0xe0]                       
+01066A34  cbnz     w9, #0x1066a40                        
+01066A38  mov      x0, x8                                
+01066A3C  bl       #0xe61c80                             
+01066A40  mov      x0, xzr                               
+01066A44  bl       #0x1fdfef0                             // UnityEngine.Application$$get_persistentDataPath
+01066A48  mov      x1, x19                               
+01066A4C  mov      x2, xzr                               
+01066A50  bl       #0x1958280                             // System.String$$Concat
+01066A54  mov      x1, xzr                               
+01066A58  bl       #0x1a1ae04                             // System.IO.File$$Exists
+01066A5C  tbz      w0, #0, #0x1066b9c                    
+01066A60  adrp     x8, #0x236a000                        
+01066A64  ldr      x8, [x8, #0x8d0]                       // [0x236A8D0] System.Runtime.Serialization.Formatters.Binary.BinaryFormatter_TypeInfo
+01066A68  ldr      x0, [x8]                              
+01066A6C  bl       #0xe61d94                             
+01066A70  mov      x1, xzr                               
+01066A74  mov      x20, x0                               
+01066A78  bl       #0x19e726c                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$.ctor
+01066A7C  ldr      x0, [x21]                             
+01066A80  ldr      w8, [x0, #0xe0]                       
+01066A84  cbnz     w8, #0x1066a8c                        
+01066A88  bl       #0xe61c80                             
+01066A8C  mov      x0, xzr                               
+01066A90  bl       #0x1fdfef0                             // UnityEngine.Application$$get_persistentDataPath
+01066A94  mov      x1, x19                               
+01066A98  mov      x2, xzr                               
+01066A9C  bl       #0x1958280                             // System.String$$Concat
+01066AA0  mov      w1, #3                                
+01066AA4  mov      x2, xzr                               
+01066AA8  bl       #0x1a22734                             // System.IO.File$$Open
+01066AAC  cbz      x20, #0x1066b98                       
+01066AB0  mov      x21, x0                               
+01066AB4  mov      x0, x20                               
+01066AB8  mov      x1, x21                               
+01066ABC  mov      x2, xzr                               
+01066AC0  bl       #0x19e72ec                             // System.Runtime.Serialization.Formatters.Binary.BinaryFormatter$$Deserialize
+01066AC4  mov      x19, x0                               
+01066AC8  cbz      x0, #0x1066b00                        
+01066ACC  adrp     x9, #0x236a000                        
+01066AD0  ldr      x9, [x9, #0x970]                       // [0x236A970] Save_TypeInfo
+01066AD4  ldr      x8, [x19]                             
+01066AD8  ldr      x1, [x9]                              
+01066ADC  ldrb     w10, [x8, #0x130]                     
+01066AE0  ldrb     w9, [x1, #0x130]                      
+01066AE4  cmp      w10, w9                               
+01066AE8  b.lo     #0x1066bac                            
+01066AEC  ldr      x8, [x8, #0xc8]                       
+01066AF0  add      x8, x8, x9, lsl #3                    
+01066AF4  ldur     x8, [x8, #-8]                         
+01066AF8  cmp      x8, x1                                
+01066AFC  b.ne     #0x1066bac                            
+01066B00  cbz      x21, #0x1066b98                       
+01066B04  ldr      x8, [x21]                             
+01066B08  mov      x0, x21                               
+01066B0C  ldr      x9, [x8, #0x258]                      
+01066B10  ldr      x1, [x8, #0x260]                      
+01066B14  blr      x9                                    
+01066B18  cbz      x19, #0x1066b98                       
+01066B1C  ldr      x0, [x19, #0x18]                      
+01066B20  cbz      x0, #0x1066b98                        
+01066B24  adrp     x21, #0x236a000                       
+01066B28  adrp     x22, #0x236a000                       
+01066B2C  ldr      x21, [x21, #0x960]                     // [0x236A960] Method$System.Collections.Generic.List<string>.get_Item()
+01066B30  ldr      x22, [x22, #0x968]                     // [0x236A968] Method$System.Collections.Generic.List<float>.get_Item()
+01066B34  mov      w20, wzr                              
+01066B38  ldr      w8, [x0, #0x18]                       
+01066B3C  cmp      w20, w8                               
+01066B40  b.ge     #0x1066b9c                            
+01066B44  ldr      x2, [x21]                             
+01066B48  mov      w1, w20                               
+01066B4C  bl       #0x1571904                             // System.Collections.Generic.List<object>$$get_Item
+01066B50  ldr      x0, [x19, #0x20]                       // self.asset
+01066B54  cbz      x0, #0x1066b98                        
+01066B58  ldr      x2, [x22]                             
+01066B5C  mov      w1, w20                               
+01066B60  bl       #0x158970c                             // System.Collections.Generic.List<float>$$get_Item
+01066B64  ldr      x0, [x19, #0x28]                       // self.audioManager
+01066B68  cbz      x0, #0x1066b98                        
+01066B6C  ldr      x2, [x22]                             
+01066B70  mov      w1, w20                               
+01066B74  bl       #0x158970c                             // System.Collections.Generic.List<float>$$get_Item
+01066B78  ldr      x0, [x19, #0x30]                       // self.mainCamera
+01066B7C  cbz      x0, #0x1066b98                        
+01066B80  ldr      x2, [x22]                             
+01066B84  mov      w1, w20                               
+01066B88  bl       #0x158970c                             // System.Collections.Generic.List<float>$$get_Item
+01066B8C  ldr      x0, [x19, #0x18]                      
+01066B90  add      w20, w20, #1                          
+01066B94  cbnz     x0, #0x1066b38                        
+01066B98  bl       #0xe61da0                             
+01066B9C  ldp      x20, x19, [sp, #0x20]                 
+01066BA0  ldp      x22, x21, [sp, #0x10]                 
+01066BA4  ldr      x30, [sp], #0x30                      
+01066BA8  ret                                            
+01066BAC  mov      x0, x19                               
+01066BB0  bl       #0xe6213c                             

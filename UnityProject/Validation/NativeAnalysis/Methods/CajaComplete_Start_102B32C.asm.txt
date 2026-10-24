@@ -1,0 +1,124 @@
+// CajaComplete$$Start VA 0x102B32C, inferred length 488
+void CajaComplete__Start (CajaComplete_o* __this, const MethodInfo* method);
+0102B32C  stp      x30, x21, [sp, #-0x20]!               
+0102B330  stp      x20, x19, [sp, #0x10]                 
+0102B334  adrp     x20, #0x24fb000                       
+0102B338  ldrb     w8, [x20, #0xd01]                     
+0102B33C  mov      x19, x0                               
+0102B340  tbnz     w8, #0, #0x102b370                    
+0102B344  adrp     x0, #0x236a000                        
+0102B348  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0102B34C  bl       #0xe61b78                             
+0102B350  adrp     x0, #0x236a000                        
+0102B354  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0102B358  bl       #0xe61b78                             
+0102B35C  adrp     x0, #0x236b000                        
+0102B360  ldr      x0, [x0, #0x18]                        // [0x236B018] 'RemoveAds'
+0102B364  bl       #0xe61b78                             
+0102B368  mov      w8, #1                                
+0102B36C  strb     w8, [x20, #0xd01]                     
+0102B370  ldr      x0, [x19, #0x28]                       // self.buttonNext
+0102B374  cbz      x0, #0x102b510                        
+0102B378  mov      w1, wzr                               
+0102B37C  mov      x2, xzr                               
+0102B380  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0102B384  ldr      x0, [x19, #0x30]                       // self.buttonHome
+0102B388  cbz      x0, #0x102b510                        
+0102B38C  mov      w1, wzr                               
+0102B390  mov      x2, xzr                               
+0102B394  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0102B398  ldr      x0, [x19, #0x38]                       // self.buttonHome1
+0102B39C  cbz      x0, #0x102b510                        
+0102B3A0  adrp     x21, #0x236a000                       
+0102B3A4  adrp     x20, #0x236a000                       
+0102B3A8  ldr      x21, [x21, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+0102B3AC  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0102B3B0  mov      w1, wzr                               
+0102B3B4  mov      x2, xzr                               
+0102B3B8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0102B3BC  ldr      x8, [x21]                             
+0102B3C0  ldr      x0, [x20]                             
+0102B3C4  ldr      x8, [x8, #0xb8]                       
+0102B3C8  ldr      w9, [x0, #0xe0]                       
+0102B3CC  ldr      w21, [x8]                             
+0102B3D0  cbnz     w9, #0x102b3dc                        
+0102B3D4  bl       #0xe61c80                             
+0102B3D8  ldr      x0, [x20]                             
+0102B3DC  sub      w8, w21, #2                           
+0102B3E0  cmp      w8, #0x25                             
+0102B3E4  b.hi     #0x102b3f8                            
+0102B3E8  adrp     x9, #0x621000                         
+0102B3EC  add      x9, x9, #0x550                        
+0102B3F0  ldr      w21, [x9, w8, sxtw #2]                
+0102B3F4  b        #0x102b3fc                            
+0102B3F8  mov      w21, wzr                              
+0102B3FC  ldr      w8, [x0, #0xe0]                       
+0102B400  cbnz     w8, #0x102b40c                        
+0102B404  bl       #0xe61c80                             
+0102B408  ldr      x0, [x20]                             
+0102B40C  ldr      x8, [x0, #0xb8]                       
+0102B410  mov      x0, x19                               
+0102B414  ldr      w8, [x8]                              
+0102B418  add      w8, w8, w21                           
+0102B41C  str      w8, [x19, #0x40]                       // self.nivelPack
+0102B420  bl       #0x102b514                             // CajaComplete$$doLanguage
+0102B424  ldr      w8, [x19, #0x40]                       // self.nivelPack
+0102B428  cmp      w8, #0x32                             
+0102B42C  b.ne     #0x102b44c                            
+0102B430  ldr      x0, [x19, #0x38]                       // self.buttonHome1
+0102B434  cbz      x0, #0x102b510                        
+0102B438  ldp      x20, x19, [sp, #0x10]                 
+0102B43C  mov      w1, #1                                
+0102B440  mov      x2, xzr                               
+0102B444  ldp      x30, x21, [sp], #0x20                 
+0102B448  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+0102B44C  ldr      x0, [x19, #0x28]                       // self.buttonNext
+0102B450  cbz      x0, #0x102b510                        
+0102B454  mov      w1, #1                                
+0102B458  mov      x2, xzr                               
+0102B45C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0102B460  ldr      x0, [x19, #0x30]                       // self.buttonHome
+0102B464  cbz      x0, #0x102b510                        
+0102B468  mov      w1, #1                                
+0102B46C  mov      x2, xzr                               
+0102B470  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0102B474  adrp     x8, #0x236b000                        
+0102B478  ldr      x8, [x8, #0x18]                        // [0x236B018] 'RemoveAds'
+0102B47C  mov      w1, wzr                               
+0102B480  mov      x2, xzr                               
+0102B484  ldr      x0, [x8]                              
+0102B488  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+0102B48C  str      w0, [x19, #0x44]                       // self.indicadorAds
+0102B490  cbz      w0, #0x102b4a0                        
+0102B494  ldp      x20, x19, [sp, #0x10]                 
+0102B498  ldp      x30, x21, [sp], #0x20                 
+0102B49C  ret                                            
+0102B4A0  mov      x0, x19                               
+0102B4A4  bl       #0x102b5b0                             // CajaComplete$$ConfigureRewarded
+0102B4A8  ldrb     w8, [x19, #0x4c]                       // self.modoRewarded
+0102B4AC  cbz      w8, #0x102b494                        
+0102B4B0  ldr      w9, [x19, #0x40]                       // self.nivelPack
+0102B4B4  mov      w8, #0x6667                           
+0102B4B8  movk     w8, #0x6666, lsl #16                  
+0102B4BC  smull    x8, w9, w8                            
+0102B4C0  lsr      x10, x8, #0x3f                        
+0102B4C4  asr      x8, x8, #0x21                         
+0102B4C8  add      w8, w8, w10                           
+0102B4CC  add      w10, w8, w8, lsl #2                   
+0102B4D0  cmp      w9, w10                               
+0102B4D4  b.ne     #0x102b494                            
+0102B4D8  ldr      w9, [x19, #0x48]                       // self.marc1
+0102B4DC  cmp      w8, w9                                
+0102B4E0  b.lt     #0x102b494                            
+0102B4E4  ldr      x0, [x19, #0x28]                       // self.buttonNext
+0102B4E8  cbz      x0, #0x102b510                        
+0102B4EC  mov      w1, wzr                               
+0102B4F0  mov      x2, xzr                               
+0102B4F4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0102B4F8  ldr      x0, [x19, #0x30]                       // self.buttonHome
+0102B4FC  cbz      x0, #0x102b510                        
+0102B500  mov      w1, wzr                               
+0102B504  mov      x2, xzr                               
+0102B508  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0102B50C  b        #0x102b430                            
+0102B510  bl       #0xe61da0                             

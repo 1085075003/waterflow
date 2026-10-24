@@ -1,0 +1,38 @@
+// SaveLoadManager$$okSolution VA 0x10202E4, inferred length 144
+void SaveLoadManager__okSolution (SaveLoadManager_o* __this, const MethodInfo* method);
+010202E4  str      x30, [sp, #-0x20]!                    
+010202E8  stp      x20, x19, [sp, #0x10]                 
+010202EC  adrp     x20, #0x24fb000                       
+010202F0  ldrb     w8, [x20, #0xcb3]                     
+010202F4  mov      x19, x0                               
+010202F8  tbnz     w8, #0, #0x1020310                    
+010202FC  adrp     x0, #0x236b000                        
+01020300  ldr      x0, [x0, #0x720]                       // [0x236B720] 'completeOff'
+01020304  bl       #0xe61b78                             
+01020308  mov      w8, #1                                
+0102030C  strb     w8, [x20, #0xcb3]                     
+01020310  ldr      x0, [x19, #0x198]                      // self.audioManager
+01020314  cbz      x0, #0x1020370                        
+01020318  ldr      x1, [x19, #0x188]                      // self.click
+0102031C  mov      x2, xzr                               
+01020320  bl       #0x1028540                             // AudioManager$$PlaySound
+01020324  ldr      x0, [x19, #0xe0]                       // self.solutionOff
+01020328  cbz      x0, #0x1020370                        
+0102032C  adrp     x8, #0x236b000                        
+01020330  ldr      x8, [x8, #0x720]                       // [0x236B720] 'completeOff'
+01020334  mov      w2, #1                                
+01020338  mov      x3, xzr                               
+0102033C  ldr      x1, [x8]                              
+01020340  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+01020344  ldr      x0, [x19, #0xe8]                       // self.cajaSolution
+01020348  cbz      x0, #0x1020370                        
+0102034C  mov      w1, wzr                               
+01020350  mov      x2, xzr                               
+01020354  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01020358  mov      x0, x19                               
+0102035C  strb     wzr, [x19, #0x381]                     // self.recuperarSuelo
+01020360  bl       #0x101fc34                             // SaveLoadManager$$doSolucionLevel
+01020364  ldp      x20, x19, [sp, #0x10]                 
+01020368  ldr      x30, [sp], #0x20                      
+0102036C  b        #0x1020374                             // SaveLoadManager$$doAnalytics
+01020370  bl       #0xe61da0                             

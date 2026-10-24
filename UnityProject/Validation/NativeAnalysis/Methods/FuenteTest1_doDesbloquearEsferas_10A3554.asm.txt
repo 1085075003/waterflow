@@ -1,0 +1,174 @@
+// FuenteTest1$$doDesbloquearEsferas VA 0x10A3554, inferred length 688
+void FuenteTest1__doDesbloquearEsferas (FuenteTest1_o* __this, int32_t esf, const MethodInfo* method);
+010A3554  stp      x30, x21, [sp, #-0x20]!               
+010A3558  stp      x20, x19, [sp, #0x10]                 
+010A355C  adrp     x21, #0x24fb000                       
+010A3560  ldrb     w8, [x21, #0xf5d]                     
+010A3564  mov      w19, w1                               
+010A3568  mov      x20, x0                               
+010A356C  tbnz     w8, #0, #0x10a3584                    
+010A3570  adrp     x0, #0x2368000                        
+010A3574  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010A3578  bl       #0xe61b78                             
+010A357C  mov      w8, #1                                
+010A3580  strb     w8, [x21, #0xf5d]                     
+010A3584  sub      w8, w19, #1                           
+010A3588  cmp      w8, #5                                
+010A358C  b.hi     #0x10a37ec                            
+010A3590  adrp     x9, #0x621000                         
+010A3594  add      x9, x9, #0xca0                        
+010A3598  adr      x10, #0x10a35a8                       
+010A359C  ldrb     w11, [x9, x8]                         
+010A35A0  add      x10, x10, x11, lsl #2                 
+010A35A4  br       x10                                   
+010A35A8  ldr      x0, [x20, #0x68]                      
+010A35AC  cbz      x0, #0x10a3800                        
+010A35B0  mov      x1, xzr                               
+010A35B4  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A35B8  cbz      x0, #0x10a3800                        
+010A35BC  ldr      x1, [x20, #0x1e8]                     
+010A35C0  mov      x2, xzr                               
+010A35C4  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A35C8  ldr      x0, [x20, #0x68]                      
+010A35CC  cbz      x0, #0x10a3800                        
+010A35D0  mov      w1, #1                                
+010A35D4  mov      x2, xzr                               
+010A35D8  mov      w21, #1                               
+010A35DC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A35E0  ldr      w8, [x20, #0x2b0]                     
+010A35E4  strb     w21, [x20, #0x1e0]                    
+010A35E8  add      w8, w8, #1                            
+010A35EC  str      w8, [x20, #0x2b0]                     
+010A35F0  adrp     x8, #0x2368000                        
+010A35F4  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010A35F8  ldr      x21, [x20, #0x148]                    
+010A35FC  ldr      x0, [x8]                              
+010A3600  ldr      w8, [x0, #0xe0]                       
+010A3604  cbnz     w8, #0x10a360c                        
+010A3608  bl       #0xe61c80                             
+010A360C  mov      x0, x21                               
+010A3610  mov      x1, xzr                               
+010A3614  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A3618  ldr      x0, [x20, #0xc8]                      
+010A361C  cbnz     x0, #0x10a3794                        
+010A3620  b        #0x10a3800                            
+010A3624  ldr      x0, [x20, #0x70]                      
+010A3628  cbz      x0, #0x10a3800                        
+010A362C  mov      x1, xzr                               
+010A3630  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A3634  cbz      x0, #0x10a3800                        
+010A3638  ldr      x1, [x20, #0x1e8]                     
+010A363C  mov      x2, xzr                               
+010A3640  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A3644  ldr      x0, [x20, #0x70]                      
+010A3648  cbz      x0, #0x10a3800                        
+010A364C  mov      w1, #1                                
+010A3650  mov      x2, xzr                               
+010A3654  mov      w21, #1                               
+010A3658  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A365C  ldr      w8, [x20, #0x2b0]                     
+010A3660  strb     w21, [x20, #0x1e1]                    
+010A3664  add      w8, w8, #1                            
+010A3668  str      w8, [x20, #0x2b0]                     
+010A366C  adrp     x8, #0x2368000                        
+010A3670  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010A3674  ldr      x21, [x20, #0x150]                    
+010A3678  ldr      x0, [x8]                              
+010A367C  ldr      w8, [x0, #0xe0]                       
+010A3680  cbnz     w8, #0x10a3688                        
+010A3684  bl       #0xe61c80                             
+010A3688  mov      x0, x21                               
+010A368C  mov      x1, xzr                               
+010A3690  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A3694  ldr      x0, [x20, #0xd0]                      
+010A3698  cbnz     x0, #0x10a3794                        
+010A369C  b        #0x10a3800                            
+010A36A0  ldr      x0, [x20, #0x78]                      
+010A36A4  cbz      x0, #0x10a3800                        
+010A36A8  mov      x1, xzr                               
+010A36AC  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A36B0  cbz      x0, #0x10a3800                        
+010A36B4  ldr      x1, [x20, #0x1e8]                     
+010A36B8  mov      x2, xzr                               
+010A36BC  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A36C0  ldr      x0, [x20, #0x78]                      
+010A36C4  cbz      x0, #0x10a3800                        
+010A36C8  mov      w1, #1                                
+010A36CC  mov      x2, xzr                               
+010A36D0  mov      w21, #1                               
+010A36D4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A36D8  ldr      w8, [x20, #0x2b0]                     
+010A36DC  strb     w21, [x20, #0x1e2]                    
+010A36E0  add      w8, w8, #1                            
+010A36E4  str      w8, [x20, #0x2b0]                     
+010A36E8  adrp     x8, #0x2368000                        
+010A36EC  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010A36F0  ldr      x21, [x20, #0x158]                    
+010A36F4  ldr      x0, [x8]                              
+010A36F8  ldr      w8, [x0, #0xe0]                       
+010A36FC  cbnz     w8, #0x10a3704                        
+010A3700  bl       #0xe61c80                             
+010A3704  mov      x0, x21                               
+010A3708  mov      x1, xzr                               
+010A370C  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A3710  ldr      x0, [x20, #0xd8]                      
+010A3714  cbnz     x0, #0x10a3794                        
+010A3718  b        #0x10a3800                            
+010A371C  ldr      x0, [x20, #0x80]                      
+010A3720  cbz      x0, #0x10a3800                        
+010A3724  mov      x1, xzr                               
+010A3728  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A372C  cbz      x0, #0x10a3800                        
+010A3730  ldr      x1, [x20, #0x1e8]                     
+010A3734  mov      x2, xzr                               
+010A3738  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A373C  ldr      x0, [x20, #0x80]                      
+010A3740  cbz      x0, #0x10a3800                        
+010A3744  mov      w1, #1                                
+010A3748  mov      x2, xzr                               
+010A374C  mov      w21, #1                               
+010A3750  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A3754  ldr      w8, [x20, #0x2b0]                     
+010A3758  strb     w21, [x20, #0x1e3]                    
+010A375C  add      w8, w8, #1                            
+010A3760  str      w8, [x20, #0x2b0]                     
+010A3764  adrp     x8, #0x2368000                        
+010A3768  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010A376C  ldr      x21, [x20, #0x160]                    
+010A3770  ldr      x0, [x8]                              
+010A3774  ldr      w8, [x0, #0xe0]                       
+010A3778  cbnz     w8, #0x10a3780                        
+010A377C  bl       #0xe61c80                             
+010A3780  mov      x0, x21                               
+010A3784  mov      x1, xzr                               
+010A3788  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A378C  ldr      x0, [x20, #0xe0]                      
+010A3790  cbz      x0, #0x10a3800                        
+010A3794  mov      w1, #1                                
+010A3798  mov      x2, xzr                               
+010A379C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A37A0  b        #0x10a37ec                            
+010A37A4  ldr      x0, [x20, #0x88]                      
+010A37A8  cbz      x0, #0x10a3800                        
+010A37AC  mov      x1, xzr                               
+010A37B0  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+010A37B4  cbz      x0, #0x10a3800                        
+010A37B8  ldr      x1, [x20, #0x1e8]                     
+010A37BC  mov      x2, xzr                               
+010A37C0  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+010A37C4  ldr      x0, [x20, #0x88]                      
+010A37C8  cbz      x0, #0x10a3800                        
+010A37CC  mov      w1, #1                                
+010A37D0  mov      x2, xzr                               
+010A37D4  mov      w21, #1                               
+010A37D8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010A37DC  ldr      w8, [x20, #0x2b0]                     
+010A37E0  strb     w21, [x20, #0x1e4]                    
+010A37E4  add      w8, w8, #1                            
+010A37E8  str      w8, [x20, #0x2b0]                     
+010A37EC  mov      x0, x20                               
+010A37F0  mov      w1, w19                               
+010A37F4  ldp      x20, x19, [sp, #0x10]                 
+010A37F8  ldp      x30, x21, [sp], #0x20                 
+010A37FC  b        #0x10a3804                             // FuenteTest1$$doActivarCascada2
+010A3800  bl       #0xe61da0                             

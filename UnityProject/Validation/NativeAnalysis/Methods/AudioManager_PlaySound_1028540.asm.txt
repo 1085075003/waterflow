@@ -1,0 +1,85 @@
+// AudioManager$$PlaySound VA 0x1028540, inferred length 332
+void AudioManager__PlaySound (AudioManager_o* __this, System_String_o* _name, const MethodInfo* method);
+01028540  stp      x30, x23, [sp, #-0x30]!               
+01028544  stp      x22, x21, [sp, #0x10]                 
+01028548  stp      x20, x19, [sp, #0x20]                 
+0102854C  adrp     x22, #0x24fb000                       
+01028550  adrp     x23, #0x236b000                       
+01028554  adrp     x21, #0x236b000                       
+01028558  ldrb     w8, [x22, #0xcff]                     
+0102855C  ldr      x23, [x23, #0x938]                     // [0x236B938] 'Conf_music'
+01028560  ldr      x21, [x21, #0x940]                     // [0x236B940] 'Conf_sound'
+01028564  mov      x20, x1                               
+01028568  mov      x19, x0                               
+0102856C  tbnz     w8, #0, #0x10285a8                    
+01028570  adrp     x0, #0x236b000                        
+01028574  ldr      x0, [x0, #0x898]                       // [0x236B898] 'Chill'
+01028578  bl       #0xe61b78                             
+0102857C  adrp     x0, #0x236b000                        
+01028580  ldr      x0, [x0, #0x8a0]                       // [0x236B8A0] 'MusicaLevel'
+01028584  bl       #0xe61b78                             
+01028588  adrp     x0, #0x236b000                        
+0102858C  ldr      x0, [x0, #0x938]                       // [0x236B938] 'Conf_music'
+01028590  bl       #0xe61b78                             
+01028594  adrp     x0, #0x236b000                        
+01028598  ldr      x0, [x0, #0x940]                       // [0x236B940] 'Conf_sound'
+0102859C  bl       #0xe61b78                             
+010285A0  mov      w8, #1                                
+010285A4  strb     w8, [x22, #0xcff]                     
+010285A8  ldr      x0, [x23]                             
+010285AC  mov      x1, xzr                               
+010285B0  bl       #0x2001574                             // UnityEngine.PlayerPrefs$$GetFloat
+010285B4  str      s0, [x19, #0x70]                       // self.volumenMusic
+010285B8  ldr      x0, [x21]                             
+010285BC  mov      x1, xzr                               
+010285C0  bl       #0x2001574                             // UnityEngine.PlayerPrefs$$GetFloat
+010285C4  ldr      x8, [x19, #0x20]                       // self.sounds
+010285C8  str      s0, [x19, #0x74]                       // self.volumenSound
+010285CC  cbz      x8, #0x1028614                        
+010285D0  mov      w21, #4                               
+010285D4  ldr      w9, [x8, #0x18]                       
+010285D8  sub      x22, x21, #4                          
+010285DC  cmp      w22, w9                               
+010285E0  b.ge     #0x1028618                            
+010285E4  cmp      w22, w9                               
+010285E8  b.hs     #0x1028688                            
+010285EC  ldr      x8, [x8, x21, lsl #3]                 
+010285F0  cbz      x8, #0x1028614                        
+010285F4  ldr      x0, [x8, #0x10]                       
+010285F8  mov      x1, x20                               
+010285FC  mov      x2, xzr                               
+01028600  bl       #0x1960c7c                             // System.String$$op_Equality
+01028604  tbnz     w0, #0, #0x1028628                    
+01028608  ldr      x8, [x19, #0x20]                       // self.sounds
+0102860C  add      x21, x21, #1                          
+01028610  cbnz     x8, #0x10285d4                        
+01028614  bl       #0xe61da0                             
+01028618  ldp      x20, x19, [sp, #0x20]                 
+0102861C  ldp      x22, x21, [sp, #0x10]                 
+01028620  ldp      x30, x23, [sp], #0x30                 
+01028624  ret                                            
+01028628  adrp     x8, #0x236b000                        
+0102862C  ldr      x8, [x8, #0x898]                       // [0x236B898] 'Chill'
+01028630  mov      x0, x20                               
+01028634  mov      x2, xzr                               
+01028638  ldr      x1, [x8]                              
+0102863C  bl       #0x1960c7c                             // System.String$$op_Equality
+01028640  tbnz     w0, #0, #0x102865c                    
+01028644  adrp     x8, #0x236b000                        
+01028648  ldr      x8, [x8, #0x8a0]                       // [0x236B8A0] 'MusicaLevel'
+0102864C  mov      x0, x20                               
+01028650  mov      x2, xzr                               
+01028654  ldr      x1, [x8]                              
+01028658  bl       #0x1960c7c                             // System.String$$op_Equality
+0102865C  ldr      x8, [x19, #0x20]                       // self.sounds
+01028660  cbz      x8, #0x1028614                        
+01028664  ldr      w9, [x8, #0x18]                       
+01028668  cmp      w22, w9                               
+0102866C  b.hs     #0x1028688                            
+01028670  ldr      x0, [x8, x21, lsl #3]                 
+01028674  cbz      x0, #0x1028614                        
+01028678  ldp      x20, x19, [sp, #0x20]                 
+0102867C  ldp      x22, x21, [sp, #0x10]                 
+01028680  ldp      x30, x23, [sp], #0x30                 
+01028684  b        #0x102a988                             // Sound2$$Play
+01028688  bl       #0xe61da8                             

@@ -1,0 +1,45 @@
+// MoveBloque$$doCheckArriba VA 0x1032E90, inferred length 172
+void MoveBloque__doCheckArriba (MoveBloque_o* __this, const MethodInfo* method);
+01032E90  stp      x30, x21, [sp, #-0x20]!               
+01032E94  stp      x20, x19, [sp, #0x10]                 
+01032E98  ldr      s0, [x0, #0x1b0]                      
+01032E9C  ldr      s1, [x0, #0x1b8]                      
+01032EA0  mov      x19, x0                               
+01032EA4  movi     v2.2d, #0000000000000000              
+01032EA8  mov      w20, #1                               
+01032EAC  mov      w21, #1                               
+01032EB0  str      q2, [x0, #0x2b0]                      
+01032EB4  fadd     s0, s0, s1                            
+01032EB8  mov      x0, x19                               
+01032EBC  str      s0, [x19, #0x1b0]                      // self.valor5y
+01032EC0  bl       #0x10330d8                             // MoveBloque$$doCheckColl5
+01032EC4  ldrb     w8, [x19, #0x139]                      // self.checkCollision5
+01032EC8  cbz      w8, #0x1032f14                        
+01032ECC  sub      w8, w20, #1                           
+01032ED0  tbz      w21, #0, #0x1032ee8                   
+01032ED4  ldr      s0, [x19, #0x1b0]                      // self.valor5y
+01032ED8  ldr      s1, [x19, #0x1b8]                      // self.arribay
+01032EDC  str      w20, [x19, #0x2b0]                     // self.primeraAltura
+01032EE0  fsub     s0, s0, s1                            
+01032EE4  str      s0, [x19, #0x2b8]                      // self.valor5y_1
+01032EE8  ldr      w9, [x19, #0x2b4]                      // self.ultimaAltura
+01032EEC  cmp      w8, w9                                
+01032EF0  b.ge     #0x1032efc                            
+01032EF4  mov      w21, wzr                              
+01032EF8  b        #0x1032f14                            
+01032EFC  ldr      s0, [x19, #0x1b0]                      // self.valor5y
+01032F00  ldr      s1, [x19, #0x1b8]                      // self.arribay
+01032F04  mov      w21, wzr                              
+01032F08  str      w20, [x19, #0x2b4]                     // self.ultimaAltura
+01032F0C  fsub     s0, s0, s1                            
+01032F10  str      s0, [x19, #0x2bc]                      // self.valor5y_2
+01032F14  ldr      s0, [x19, #0x1b0]                      // self.valor5y
+01032F18  ldr      s1, [x19, #0x1b8]                      // self.arribay
+01032F1C  add      w20, w20, #1                          
+01032F20  cmp      w20, #6                               
+01032F24  b.ne     #0x1032eb4                            
+01032F28  fsub     s0, s0, s1                            
+01032F2C  str      s0, [x19, #0x1b0]                      // self.valor5y
+01032F30  ldp      x20, x19, [sp, #0x10]                 
+01032F34  ldp      x30, x21, [sp], #0x20                 
+01032F38  ret                                            

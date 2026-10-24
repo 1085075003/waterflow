@@ -1,0 +1,79 @@
+// MoveBloque$$HandleStepsSolution VA 0x10341F4, inferred length 308
+void MoveBloque__HandleStepsSolution (MoveBloque_o* __this, const MethodInfo* method);
+010341F4  str      x30, [sp, #-0x20]!                    
+010341F8  stp      x20, x19, [sp, #0x10]                 
+010341FC  adrp     x20, #0x24fb000                       
+01034200  ldrb     w8, [x20, #0xd2d]                     
+01034204  mov      x19, x0                               
+01034208  tbnz     w8, #0, #0x1034220                    
+0103420C  adrp     x0, #0x236b000                        
+01034210  ldr      x0, [x0, #0x498]                       // [0x236B498] MoveBloque_TypeInfo
+01034214  bl       #0xe61b78                             
+01034218  mov      w8, #1                                
+0103421C  strb     w8, [x20, #0xd2d]                     
+01034220  ldrb     w8, [x19, #0x3cc]                      // self.cambiofase
+01034224  cbz      w8, #0x1034290                        
+01034228  ldr      w8, [x19, #0x388]                      // self.faseSol
+0103422C  cmp      w8, #3                                
+01034230  b.eq     #0x1034278                            
+01034234  cmp      w8, #2                                
+01034238  b.eq     #0x1034284                            
+0103423C  cmp      w8, #1                                
+01034240  b.ne     #0x1034290                            
+01034244  adrp     x20, #0x236b000                       
+01034248  ldr      x20, [x20, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+0103424C  ldr      x0, [x20]                             
+01034250  ldr      w8, [x0, #0xe0]                       
+01034254  cbnz     w8, #0x1034260                        
+01034258  bl       #0xe61c80                             
+0103425C  ldr      x0, [x20]                             
+01034260  ldr      x8, [x0, #0xb8]                       
+01034264  ldrb     w8, [x8, #0xb]                        
+01034268  cbnz     w8, #0x1034290                        
+0103426C  mov      x0, x19                               
+01034270  bl       #0x103494c                             // MoveBloque$$doProcess1Solution
+01034274  b        #0x103428c                            
+01034278  mov      x0, x19                               
+0103427C  bl       #0x103509c                             // MoveBloque$$doProcess3Solution
+01034280  b        #0x103428c                            
+01034284  mov      x0, x19                               
+01034288  bl       #0x1034ee8                             // MoveBloque$$doProcess2Solution
+0103428C  strb     wzr, [x19, #0x3cc]                     // self.cambiofase
+01034290  ldrb     w8, [x19, #0xa9]                       // self.isMouseDragging1
+01034294  cbz      w8, #0x10342ec                        
+01034298  ldrb     w8, [x19, #0x3d4]                      // self.activadaEspera
+0103429C  cbz      w8, #0x10342b0                        
+010342A0  mov      x0, x19                               
+010342A4  ldp      x20, x19, [sp, #0x10]                 
+010342A8  ldr      x30, [sp], #0x20                      
+010342AC  b        #0x1035210                             // MoveBloque$$doProcesoEspera
+010342B0  ldr      w8, [x19, #0x388]                      // self.faseSol
+010342B4  cmp      w8, #9                                
+010342B8  b.eq     #0x10342ec                            
+010342BC  cmp      w8, #3                                
+010342C0  b.eq     #0x10342f8                            
+010342C4  cmp      w8, #1                                
+010342C8  b.ne     #0x1034318                            
+010342CC  ldr      w8, [x19, #0x28]                       // self.fijacionPieza
+010342D0  cbz      w8, #0x1034318                        
+010342D4  ldrb     w8, [x19, #0x141]                      // self.checkFija
+010342D8  cbz      w8, #0x1034318                        
+010342DC  mov      x0, x19                               
+010342E0  ldp      x20, x19, [sp, #0x10]                 
+010342E4  ldr      x30, [sp], #0x20                      
+010342E8  b        #0x10320e0                             // MoveBloque$$DoMoverArriba
+010342EC  ldp      x20, x19, [sp, #0x10]                 
+010342F0  ldr      x30, [sp], #0x20                      
+010342F4  ret                                            
+010342F8  ldr      w8, [x19, #0x28]                       // self.fijacionPieza
+010342FC  cbz      w8, #0x1034318                        
+01034300  ldrb     w8, [x19, #0x141]                      // self.checkFija
+01034304  cbz      w8, #0x1034318                        
+01034308  mov      x0, x19                               
+0103430C  ldp      x20, x19, [sp, #0x10]                 
+01034310  ldr      x30, [sp], #0x20                      
+01034314  b        #0x102f2f8                             // MoveBloque$$DoMoverAbajo
+01034318  mov      x0, x19                               
+0103431C  ldp      x20, x19, [sp, #0x10]                 
+01034320  ldr      x30, [sp], #0x20                      
+01034324  b        #0x10352bc                             // MoveBloque$$doProcessMoveSolu

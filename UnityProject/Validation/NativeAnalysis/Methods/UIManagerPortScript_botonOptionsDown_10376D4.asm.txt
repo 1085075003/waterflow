@@ -1,0 +1,39 @@
+// UIManagerPortScript$$botonOptionsDown VA 0x10376D4, inferred length 148
+void UIManagerPortScript__botonOptionsDown (UIManagerPortScript_o* __this, const MethodInfo* method);
+010376D4  str      x30, [sp, #-0x20]!                    
+010376D8  stp      x20, x19, [sp, #0x10]                 
+010376DC  adrp     x20, #0x24fb000                       
+010376E0  ldrb     w8, [x20, #0xd40]                     
+010376E4  mov      x19, x0                               
+010376E8  tbnz     w8, #0, #0x103770c                    
+010376EC  adrp     x0, #0x2368000                        
+010376F0  ldr      x0, [x0, #0xb28]                       // [0x2368B28] UnityEngine.SceneManagement.SceneManager_TypeInfo
+010376F4  bl       #0xe61b78                             
+010376F8  adrp     x0, #0x236b000                        
+010376FC  ldr      x0, [x0, #0xc80]                       // [0x236BC80] 'Settings'
+01037700  bl       #0xe61b78                             
+01037704  mov      w8, #1                                
+01037708  strb     w8, [x20, #0xd40]                     
+0103770C  ldrb     w8, [x19, #0x40]                       // self.botonesActivos
+01037710  cbz      w8, #0x1037758                        
+01037714  ldr      x0, [x19, #0x50]                       // self.audioManager
+01037718  cbz      x0, #0x1037764                        
+0103771C  ldr      x1, [x19, #0x48]                       // self.click
+01037720  adrp     x20, #0x2368000                       
+01037724  adrp     x19, #0x236b000                       
+01037728  ldr      x20, [x20, #0xb28]                     // [0x2368B28] UnityEngine.SceneManagement.SceneManager_TypeInfo
+0103772C  ldr      x19, [x19, #0xc80]                     // [0x236BC80] 'Settings'
+01037730  bl       #0x1037514                             // AudioManager0$$PlaySound
+01037734  ldr      x0, [x20]                             
+01037738  ldr      w8, [x0, #0xe0]                       
+0103773C  cbnz     w8, #0x1037744                        
+01037740  bl       #0xe61c80                             
+01037744  ldr      x0, [x19]                             
+01037748  ldp      x20, x19, [sp, #0x10]                 
+0103774C  mov      x1, xzr                               
+01037750  ldr      x30, [sp], #0x20                      
+01037754  b        #0x2014924                             // UnityEngine.SceneManagement.SceneManager$$LoadScene
+01037758  ldp      x20, x19, [sp, #0x10]                 
+0103775C  ldr      x30, [sp], #0x20                      
+01037760  ret                                            
+01037764  bl       #0xe61da0                             

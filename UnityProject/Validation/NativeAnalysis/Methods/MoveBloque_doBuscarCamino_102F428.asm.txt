@@ -1,0 +1,415 @@
+// MoveBloque$$doBuscarCamino VA 0x102F428, inferred length 1652
+void MoveBloque__doBuscarCamino (MoveBloque_o* __this, const MethodInfo* method);
+0102F428  str      d10, [sp, #-0x40]!                    
+0102F42C  stp      d9, d8, [sp, #0x10]                   
+0102F430  stp      x30, x21, [sp, #0x20]                 
+0102F434  stp      x20, x19, [sp, #0x30]                 
+0102F438  adrp     x21, #0x24fb000                       
+0102F43C  adrp     x20, #0x2368000                       
+0102F440  ldrb     w8, [x21, #0xd1d]                     
+0102F444  ldr      x20, [x20, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+0102F448  mov      x19, x0                               
+0102F44C  tbnz     w8, #0, #0x102f470                    
+0102F450  adrp     x0, #0x2368000                        
+0102F454  ldr      x0, [x0, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+0102F458  bl       #0xe61b78                             
+0102F45C  adrp     x0, #0x2368000                        
+0102F460  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0102F464  bl       #0xe61b78                             
+0102F468  mov      w8, #1                                
+0102F46C  strb     w8, [x21, #0xd1d]                     
+0102F470  ldr      x0, [x20]                             
+0102F474  ldr      x20, [x19, #0x228]                     // self.padre
+0102F478  ldr      w8, [x0, #0xe0]                       
+0102F47C  cbnz     w8, #0x102f484                        
+0102F480  bl       #0xe61c80                             
+0102F484  mov      x0, x20                               
+0102F488  mov      x1, xzr                               
+0102F48C  mov      x2, xzr                               
+0102F490  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+0102F494  tbz      w0, #0, #0x102f4e0                    
+0102F498  ldr      x0, [x19, #0x228]                      // self.padre
+0102F49C  cbz      x0, #0x102fa98                        
+0102F4A0  mov      x1, xzr                               
+0102F4A4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0102F4A8  cbz      x0, #0x102fa98                        
+0102F4AC  mov      x1, xzr                               
+0102F4B0  bl       #0x200ec48                             // UnityEngine.Transform$$get_rotation
+0102F4B4  mov      x0, xzr                               
+0102F4B8  bl       #0x1ffccac                             // UnityEngine.Quaternion$$Internal_ToEulerRad
+0102F4BC  adrp     x8, #0x600000                         
+0102F4C0  ldr      s3, [x8, #0x1cc]                      
+0102F4C4  mov      x0, xzr                               
+0102F4C8  fmul     s0, s0, s3                            
+0102F4CC  fmul     s1, s1, s3                            
+0102F4D0  fmul     s2, s2, s3                            
+0102F4D4  bl       #0x1ffd184                             // UnityEngine.Quaternion$$Internal_MakePositive
+0102F4D8  str      s1, [x19, #0x2d0]                      // self.rotation
+0102F4DC  b        #0x102f4e4                            
+0102F4E0  ldr      s1, [x19, #0x2d0]                      // self.rotation
+0102F4E4  movi     v0.2d, #0000000000000000              
+0102F4E8  mov      w8, #0x42340000                       
+0102F4EC  str      d0, [x19, #0x2c8]                      // self.camino
+0102F4F0  fmov     s0, w8                                
+0102F4F4  fcmp     s1, s0                                
+0102F4F8  adrp     x20, #0x5ff000                        
+0102F4FC  b.ls     #0x102f630                            
+0102F500  ldr      s0, [x20, #0xd44]                     
+0102F504  fcmp     s1, s0                                
+0102F508  b.ge     #0x102f630                            
+0102F50C  ldr      s0, [x19, #0x2d0]                      // self.rotation
+0102F510  mov      w8, #0x43610000                       
+0102F514  fmov     s1, w8                                
+0102F518  fcmp     s0, s1                                
+0102F51C  b.lt     #0x102f744                            
+0102F520  ldr      s1, [x20, #0xd44]                     
+0102F524  fcmp     s0, s1                                
+0102F528  b.pl     #0x102f744                            
+0102F52C  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F530  adrp     x8, #0x5ff000                         
+0102F534  ldr      s1, [x19, #0x180]                      // self.variay
+0102F538  adrp     x9, #0x5ff000                         
+0102F53C  ldr      s9, [x8, #0xc78]                      
+0102F540  ldr      s8, [x9, #0xb00]                      
+0102F544  fmov     s10, #20.00000000                     
+0102F548  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F54C  fadd     s0, s0, s10                           
+0102F550  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F554  fadd     s0, s1, s9                            
+0102F558  fadd     s0, s0, s8                            
+0102F55C  mov      x0, x19                               
+0102F560  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F564  str      s2, [x19, #0x1b4]                      // self.valor5z
+0102F568  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F56C  adrp     x8, #0x600000                         
+0102F570  ldr      d0, [x8, #0x258]                      
+0102F574  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F578  str      d0, [x19, #0x2c8]                      // self.camino
+0102F57C  cbnz     w8, #0x102f994                        
+0102F580  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F584  ldr      s1, [x19, #0x180]                      // self.variay
+0102F588  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F58C  mov      x0, x19                               
+0102F590  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F594  fadd     s0, s1, s9                            
+0102F598  fadd     s1, s2, s10                           
+0102F59C  fadd     s0, s0, s8                            
+0102F5A0  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F5A4  str      s1, [x19, #0x1b4]                      // self.valor5z
+0102F5A8  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F5AC  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F5B0  mov      w9, #0xe                              
+0102F5B4  str      w9, [x19, #0x2c8]                      // self.camino
+0102F5B8  cbnz     w8, #0x102f994                        
+0102F5BC  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F5C0  ldr      s1, [x19, #0x180]                      // self.variay
+0102F5C4  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F5C8  fmov     s10, #-20.00000000                    
+0102F5CC  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F5D0  fadd     s0, s1, s9                            
+0102F5D4  fadd     s1, s2, s10                           
+0102F5D8  fadd     s0, s0, s8                            
+0102F5DC  mov      x0, x19                               
+0102F5E0  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F5E4  str      s1, [x19, #0x1b4]                      // self.valor5z
+0102F5E8  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F5EC  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F5F0  mov      w9, #0x8e                             
+0102F5F4  str      w9, [x19, #0x2c8]                      // self.camino
+0102F5F8  cbnz     w8, #0x102f994                        
+0102F5FC  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F600  ldr      s1, [x19, #0x180]                      // self.variay
+0102F604  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F608  mov      x0, x19                               
+0102F60C  fadd     s0, s0, s10                           
+0102F610  fadd     s1, s1, s9                            
+0102F614  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F618  fadd     s0, s1, s8                            
+0102F61C  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F620  str      s2, [x19, #0x1b4]                      // self.valor5z
+0102F624  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F628  mov      w8, #0x58f                            
+0102F62C  b        #0x102f990                            
+0102F630  adrp     x8, #0x5ff000                         
+0102F634  ldr      s1, [x19, #0x180]                      // self.variay
+0102F638  adrp     x9, #0x5ff000                         
+0102F63C  ldr      s9, [x8, #0xc78]                      
+0102F640  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F644  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F648  ldr      s8, [x9, #0xb00]                      
+0102F64C  fmov     s3, #-20.00000000                     
+0102F650  fadd     s1, s1, s9                            
+0102F654  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F658  fadd     s0, s2, s3                            
+0102F65C  fadd     s1, s1, s8                            
+0102F660  mov      x0, x19                               
+0102F664  str      s1, [x19, #0x1b0]                      // self.valor5y
+0102F668  str      s0, [x19, #0x1b4]                      // self.valor5z
+0102F66C  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F670  adrp     x8, #0x600000                         
+0102F674  ldr      d0, [x8, #0x5e0]                      
+0102F678  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F67C  str      d0, [x19, #0x2c8]                      // self.camino
+0102F680  cbnz     w8, #0x102f994                        
+0102F684  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F688  ldr      s1, [x19, #0x180]                      // self.variay
+0102F68C  ldr      s3, [x19, #0x19c]                      // self.valor3z
+0102F690  fmov     s2, #20.00000000                      
+0102F694  fadd     s0, s0, s2                            
+0102F698  fadd     s1, s1, s9                            
+0102F69C  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F6A0  fadd     s0, s1, s8                            
+0102F6A4  mov      x0, x19                               
+0102F6A8  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F6AC  str      s3, [x19, #0x1b4]                      // self.valor5z
+0102F6B0  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F6B4  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F6B8  mov      w9, #0x15                             
+0102F6BC  str      w9, [x19, #0x2c8]                      // self.camino
+0102F6C0  cbnz     w8, #0x102f994                        
+0102F6C4  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F6C8  ldr      s1, [x19, #0x180]                      // self.variay
+0102F6CC  ldr      s3, [x19, #0x19c]                      // self.valor3z
+0102F6D0  fmov     s2, #-20.00000000                     
+0102F6D4  fadd     s0, s0, s2                            
+0102F6D8  fadd     s1, s1, s9                            
+0102F6DC  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F6E0  fadd     s0, s1, s8                            
+0102F6E4  mov      x0, x19                               
+0102F6E8  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F6EC  str      s3, [x19, #0x1b4]                      // self.valor5z
+0102F6F0  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F6F4  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F6F8  mov      w9, #0xd5                             
+0102F6FC  str      w9, [x19, #0x2c8]                      // self.camino
+0102F700  cbnz     w8, #0x102f994                        
+0102F704  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F708  ldr      s1, [x19, #0x180]                      // self.variay
+0102F70C  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F710  fmov     s3, #20.00000000                      
+0102F714  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F718  fadd     s0, s1, s9                            
+0102F71C  fadd     s1, s2, s3                            
+0102F720  fadd     s0, s0, s8                            
+0102F724  mov      x0, x19                               
+0102F728  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F72C  str      s1, [x19, #0x1b4]                      // self.valor5z
+0102F730  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F734  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F738  cbz      w8, #0x102fa8c                        
+0102F73C  mov      w8, #0x856                            
+0102F740  b        #0x102f990                            
+0102F744  mov      w8, #0x43070000                       
+0102F748  fmov     s1, w8                                
+0102F74C  fcmp     s0, s1                                
+0102F750  b.lt     #0x102f870                            
+0102F754  mov      w8, #0x43610000                       
+0102F758  fmov     s1, w8                                
+0102F75C  fcmp     s0, s1                                
+0102F760  b.pl     #0x102f870                            
+0102F764  adrp     x8, #0x5ff000                         
+0102F768  ldr      s1, [x19, #0x180]                      // self.variay
+0102F76C  adrp     x9, #0x5ff000                         
+0102F770  ldr      s9, [x8, #0xc78]                      
+0102F774  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F778  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F77C  ldr      s8, [x9, #0xb00]                      
+0102F780  fmov     s3, #20.00000000                      
+0102F784  fadd     s1, s1, s9                            
+0102F788  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F78C  fadd     s0, s2, s3                            
+0102F790  fadd     s1, s1, s8                            
+0102F794  mov      x0, x19                               
+0102F798  str      s1, [x19, #0x1b0]                      // self.valor5y
+0102F79C  str      s0, [x19, #0x1b4]                      // self.valor5z
+0102F7A0  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F7A4  adrp     x8, #0x600000                         
+0102F7A8  ldr      d0, [x8, #0x8c0]                      
+0102F7AC  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F7B0  str      d0, [x19, #0x2c8]                      // self.camino
+0102F7B4  cbnz     w8, #0x102f994                        
+0102F7B8  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F7BC  ldr      s1, [x19, #0x180]                      // self.variay
+0102F7C0  ldr      s3, [x19, #0x19c]                      // self.valor3z
+0102F7C4  fmov     s2, #-20.00000000                     
+0102F7C8  fadd     s0, s0, s2                            
+0102F7CC  fadd     s1, s1, s9                            
+0102F7D0  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F7D4  fadd     s0, s1, s8                            
+0102F7D8  mov      x0, x19                               
+0102F7DC  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F7E0  str      s3, [x19, #0x1b4]                      // self.valor5z
+0102F7E4  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F7E8  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F7EC  mov      w9, #0x2b                             
+0102F7F0  str      w9, [x19, #0x2c8]                      // self.camino
+0102F7F4  cbnz     w8, #0x102f994                        
+0102F7F8  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F7FC  ldr      s1, [x19, #0x180]                      // self.variay
+0102F800  ldr      s3, [x19, #0x19c]                      // self.valor3z
+0102F804  fmov     s2, #20.00000000                      
+0102F808  fadd     s0, s0, s2                            
+0102F80C  fadd     s1, s1, s9                            
+0102F810  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F814  fadd     s0, s1, s8                            
+0102F818  mov      x0, x19                               
+0102F81C  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F820  str      s3, [x19, #0x1b4]                      // self.valor5z
+0102F824  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F828  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F82C  mov      w9, #0x1af                            
+0102F830  str      w9, [x19, #0x2c8]                      // self.camino
+0102F834  cbnz     w8, #0x102f994                        
+0102F838  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F83C  ldr      s1, [x19, #0x180]                      // self.variay
+0102F840  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F844  fmov     s3, #-20.00000000                     
+0102F848  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F84C  fadd     s0, s1, s9                            
+0102F850  fadd     s1, s2, s3                            
+0102F854  fadd     s0, s0, s8                            
+0102F858  mov      x0, x19                               
+0102F85C  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F860  str      s1, [x19, #0x1b4]                      // self.valor5z
+0102F864  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F868  mov      w8, #0x10d8                           
+0102F86C  b        #0x102f990                            
+0102F870  mov      w8, #0x42340000                       
+0102F874  fmov     s1, w8                                
+0102F878  fcmp     s0, s1                                
+0102F87C  b.le     #0x102f994                            
+0102F880  mov      w8, #0x43070000                       
+0102F884  fmov     s1, w8                                
+0102F888  fcmp     s0, s1                                
+0102F88C  b.pl     #0x102f994                            
+0102F890  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F894  adrp     x8, #0x5ff000                         
+0102F898  ldr      s1, [x19, #0x180]                      // self.variay
+0102F89C  adrp     x9, #0x5ff000                         
+0102F8A0  ldr      s9, [x8, #0xc78]                      
+0102F8A4  ldr      s8, [x9, #0xb00]                      
+0102F8A8  fmov     s10, #-20.00000000                    
+0102F8AC  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F8B0  fadd     s0, s0, s10                           
+0102F8B4  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F8B8  fadd     s0, s1, s9                            
+0102F8BC  fadd     s0, s0, s8                            
+0102F8C0  mov      x0, x19                               
+0102F8C4  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F8C8  str      s2, [x19, #0x1b4]                      // self.valor5z
+0102F8CC  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F8D0  adrp     x8, #0x600000                         
+0102F8D4  ldr      d0, [x8, #0x688]                      
+0102F8D8  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F8DC  str      d0, [x19, #0x2c8]                      // self.camino
+0102F8E0  cbnz     w8, #0x102f994                        
+0102F8E4  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F8E8  ldr      s1, [x19, #0x180]                      // self.variay
+0102F8EC  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F8F0  mov      x0, x19                               
+0102F8F4  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F8F8  fadd     s0, s1, s9                            
+0102F8FC  fadd     s1, s2, s10                           
+0102F900  fadd     s0, s0, s8                            
+0102F904  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F908  str      s1, [x19, #0x1b4]                      // self.valor5z
+0102F90C  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F910  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F914  mov      w9, #0x20                             
+0102F918  str      w9, [x19, #0x2c8]                      // self.camino
+0102F91C  cbnz     w8, #0x102f994                        
+0102F920  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F924  ldr      s1, [x19, #0x180]                      // self.variay
+0102F928  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F92C  fmov     s10, #20.00000000                     
+0102F930  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F934  fadd     s0, s1, s9                            
+0102F938  fadd     s1, s2, s10                           
+0102F93C  fadd     s0, s0, s8                            
+0102F940  mov      x0, x19                               
+0102F944  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F948  str      s1, [x19, #0x1b4]                      // self.valor5z
+0102F94C  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F950  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F954  mov      w9, #0x144                            
+0102F958  str      w9, [x19, #0x2c8]                      // self.camino
+0102F95C  cbnz     w8, #0x102f994                        
+0102F960  ldr      s0, [x19, #0x194]                      // self.valor3x
+0102F964  ldr      s1, [x19, #0x180]                      // self.variay
+0102F968  ldr      s2, [x19, #0x19c]                      // self.valor3z
+0102F96C  mov      x0, x19                               
+0102F970  fadd     s0, s0, s10                           
+0102F974  fadd     s1, s1, s9                            
+0102F978  str      s0, [x19, #0x1ac]                      // self.valor5x
+0102F97C  fadd     s0, s1, s8                            
+0102F980  str      s0, [x19, #0x1b0]                      // self.valor5y
+0102F984  str      s2, [x19, #0x1b4]                      // self.valor5z
+0102F988  bl       #0x1032bbc                             // MoveBloque$$doCheckCamino
+0102F98C  mov      w8, #0xca9                            
+0102F990  str      w8, [x19, #0x2c8]                      // self.camino
+0102F994  ldrb     w8, [x19, #0x13d]                      // self.caminoLibre
+0102F998  cbz      w8, #0x102f9e0                        
+0102F99C  ldr      s0, [x19, #0x208]                     
+0102F9A0  ldr      s1, [x19, #0x214]                     
+0102F9A4  mov      w8, #0x7f800000                       
+0102F9A8  fmov     s2, w8                                
+0102F9AC  mov      w9, #-0xffffffff80000000              
+0102F9B0  fcvtzs   w8, s0                                
+0102F9B4  fcmp     s0, s2                                
+0102F9B8  fcvtzs   w10, s1                               
+0102F9BC  csel     w8, w9, w8, eq                        
+0102F9C0  fcmp     s1, s2                                
+0102F9C4  csel     w9, w9, w10, eq                       
+0102F9C8  cmp      w8, w9                                
+0102F9CC  strb     wzr, [x19, #0x13f]                     // self.noPunto3
+0102F9D0  b.ne     #0x102fa78                            
+0102F9D4  mov      w8, #1                                
+0102F9D8  strb     w8, [x19, #0x13f]                      // self.noPunto3
+0102F9DC  b        #0x102fa78                            
+0102F9E0  ldr      x0, [x19, #0x30]                       // self.getTarget
+0102F9E4  mov      w8, #5                                
+0102F9E8  str      w8, [x19, #0x2c8]                      // self.camino
+0102F9EC  cbz      x0, #0x102fa98                        
+0102F9F0  mov      x1, xzr                               
+0102F9F4  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0102F9F8  cbz      x0, #0x102fa98                        
+0102F9FC  mov      x1, xzr                               
+0102FA00  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0102FA04  ldr      x0, [x19, #0x30]                       // self.getTarget
+0102FA08  cbz      x0, #0x102fa98                        
+0102FA0C  mov      x1, xzr                               
+0102FA10  mov      v8.16b, v0.16b                        
+0102FA14  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0102FA18  cbz      x0, #0x102fa98                        
+0102FA1C  mov      x1, xzr                               
+0102FA20  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0102FA24  ldr      x0, [x19, #0x30]                       // self.getTarget
+0102FA28  cbz      x0, #0x102fa98                        
+0102FA2C  mov      x1, xzr                               
+0102FA30  mov      v9.16b, v1.16b                        
+0102FA34  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0102FA38  cbz      x0, #0x102fa98                        
+0102FA3C  mov      x1, xzr                               
+0102FA40  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0102FA44  ldr      x0, [x19, #0x30]                       // self.getTarget
+0102FA48  mov      w8, #0x420c0000                       
+0102FA4C  fmov     s0, w8                                
+0102FA50  fadd     s0, s9, s0                            
+0102FA54  str      s8, [x19, #0x1ec]                      // self.punto1
+0102FA58  str      s0, [x19, #0x1f0]                     
+0102FA5C  str      s2, [x19, #0x1f4]                     
+0102FA60  cbz      x0, #0x102fa98                        
+0102FA64  adrp     x8, #0x2368000                        
+0102FA68  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+0102FA6C  ldr      x1, [x8]                              
+0102FA70  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+0102FA74  str      x0, [x19, #0x2a8]                      // self.rend0
+0102FA78  ldp      x20, x19, [sp, #0x30]                 
+0102FA7C  ldp      x30, x21, [sp, #0x20]                 
+0102FA80  ldp      d9, d8, [sp, #0x10]                   
+0102FA84  ldr      d10, [sp], #0x40                      
+0102FA88  ret                                            
+0102FA8C  ldr      w8, [x19, #0x2c8]                      // self.camino
+0102FA90  cbnz     w8, #0x102f994                        
+0102FA94  b        #0x102f50c                            
+0102FA98  bl       #0xe61da0                             

@@ -1,0 +1,59 @@
+--- a/Assets/Editor/RecoveredTools/FlowWaterHudFramingValidation.cs
++++ b/Assets/Editor/RecoveredTools/FlowWaterHudFramingValidation.cs
+@@ -23,14 +23,16 @@
+         const string Key="FlowWater.HudFramingValidation";
+         [Serializable] public sealed class Check { public string name,detail; public bool passed; }
+         [Serializable] public sealed class Region { public string path; public Rect viewport; }
++        [Serializable] public sealed class HudProjection { public string path; public Rect actualViewport,protectedViewport; public bool covered; }
+         [Serializable] public sealed class Frame {
+             public int level,width,height,structuralMeshes,structuralVertices,hudOverlapMeshes,outsideVertices;
+             public string stage,screenshot;
+             public List<string> captureTrace=new List<string>();
+-            public float backwardDistance,fov,nearClip,farClip;
++            public float backwardDistance,fov,nearClip,farClip,minStructuralDepth,maxStructuralDepth;
+             public Vector3 cameraPosition;
+             public Quaternion cameraRotation;
+             public List<Region> protectedHud=new List<Region>();
++            public List<HudProjection> actualHudProjection=new List<HudProjection>();
+             public List<string> overlaps=new List<string>();
+         }
+         [Serializable] public sealed class Report {
+@@ -148,19 +150,36 @@
+             var regions=new List<RecoveredBoardFraming.HudRegion>();framing.GetProtectedHudRegions(regions);
+             frame.protectedHud=regions.Select(x=>new Region{path=x.path,viewport=x.viewport}).ToList();
+             string tag=frame.level+":"+stage+":"+size.x+"x"+size.y;
++            var sourceRects=new Dictionary<string,RectTransform>();
++            foreach(GameObject root in SceneManager.GetActiveScene().GetRootGameObjects())
++                foreach(RectTransform rect in root.GetComponentsInChildren<RectTransform>(true)) sourceRects[Hierarchy(rect)]=rect;
++            foreach(var region in regions) {
++                RectTransform rect;var sample=new HudProjection{path=region.path,protectedViewport=region.viewport};
++                if(sourceRects.TryGetValue(region.path,out rect)) {
++                    Canvas root=rect.GetComponentInParent<Canvas>().rootCanvas;
++                    Camera hudCamera=root.renderMode==RenderMode.ScreenSpaceOverlay?null:root.worldCamera;
++                    var corners=new Vector3[4];rect.GetWorldCorners(corners);
++                    Vector2[] projected=corners.Select(x=>RectTransformUtility.WorldToScreenPoint(hudCamera,x)).Select(x=>new Vector2((x.x/size.x-camera.rect.xMin)/camera.rect.width,(x.y/size.y-camera.rect.yMin)/camera.rect.height)).ToArray();
++                    sample.actualViewport=Rect.MinMaxRect(Mathf.Max(0,projected.Min(x=>x.x)),Mathf.Max(0,projected.Min(x=>x.y)),Mathf.Min(1,projected.Max(x=>x.x)),Mathf.Min(1,projected.Max(x=>x.y)));
++                    sample.covered=region.viewport.xMin<=sample.actualViewport.xMin+.0001f && region.viewport.yMin<=sample.actualViewport.yMin+.0001f && region.viewport.xMax>=sample.actualViewport.xMax-.0001f && region.viewport.yMax>=sample.actualViewport.yMax-.0001f;
++                }
++                frame.actualHudProjection.Add(sample);
++            }
++            CheckState(tag+":protected-HUD-covers-actual-rendered-rects",frame.actualHudProjection.Count>0 && frame.actualHudProjection.All(x=>x.covered),String.Join(";",frame.actualHudProjection.Where(x=>!x.covered).Select(x=>x.path+" actual="+x.actualViewport+" protected="+x.protectedViewport).ToArray()));
+             CheckState(tag+":actual-original-HUD-rectangles",regions.Count>=3 && regions.All(x=>x.viewport.yMin>.5f && x.viewport.height<.4f && x.viewport.width<.95f),String.Join(";",regions.Select(x=>x.path).ToArray()));
+             CheckState(tag+":original-projection-and-rotation-retained",Mathf.Abs(camera.fieldOfView-fov)<.0001f && Mathf.Abs(camera.nearClipPlane-near)<.0001f && Mathf.Abs(camera.farClipPlane-far)<.0001f && Mathf.Abs(Quaternion.Dot(camera.transform.rotation,rotation))>.999999f,
+                 "FOV="+camera.fieldOfView+",near="+camera.nearClipPlane+",far="+camera.farClipPlane+",rotation="+camera.transform.rotation);
++            frame.minStructuralDepth=float.PositiveInfinity;
+             foreach(Renderer renderer in Structural(game)) {
+                 MeshFilter filter=renderer.GetComponent<MeshFilter>();Mesh mesh=filter.sharedMesh;frame.structuralMeshes++;
+-                foreach(Vector3 v in mesh.vertices){Vector3 p=camera.WorldToViewportPoint(filter.transform.TransformPoint(v));frame.structuralVertices++;if(p.x<-.00001f || p.x>1.00001f || p.y<-.00001f || p.y>1.00001f || p.z<camera.nearClipPlane-.001f || p.z>camera.farClipPlane+.001f)frame.outsideVertices++;}
++                foreach(Vector3 v in mesh.vertices){Vector3 p=camera.WorldToViewportPoint(filter.transform.TransformPoint(v));frame.structuralVertices++;frame.minStructuralDepth=Mathf.Min(frame.minStructuralDepth,p.z);frame.maxStructuralDepth=Mathf.Max(frame.maxStructuralDepth,p.z);if(p.x<-.00001f || p.x>1.00001f || p.y<-.00001f || p.y>1.00001f || p.z<camera.nearClipPlane-.001f || p.z>camera.farClipPlane+.001f)frame.outsideVertices++;}
+                 Vector3[] corners=Corners(mesh.bounds).Select(x=>camera.WorldToViewportPoint(filter.transform.TransformPoint(x))).ToArray();
+                 Rect projected=Rect.MinMaxRect(corners.Min(x=>x.x),corners.Min(x=>x.y),corners.Max(x=>x.x),corners.Max(x=>x.y));
+                 if(regions.Any(x=>projected.xMin<x.viewport.xMax-.000001f && projected.xMax>x.viewport.xMin+.000001f && projected.yMin<x.viewport.yMax-.000001f && projected.yMax>x.viewport.yMin+.000001f)) {
+                     frame.hudOverlapMeshes++;if(frame.overlaps.Count<12)frame.overlaps.Add(Hierarchy(renderer.transform));
+                 }
+             }
+-            CheckState(tag+":all-structural-vertices-in-camera",frame.structuralVertices>0 && frame.outsideVertices==0,"vertices="+frame.structuralVertices+", outside="+frame.outsideVertices);
++            CheckState(tag+":all-structural-vertices-in-camera",frame.structuralVertices>0 && frame.outsideVertices==0,"vertices="+frame.structuralVertices+", outside="+frame.outsideVertices+", depth="+frame.minStructuralDepth+".."+frame.maxStructuralDepth);
+             CheckState(tag+":structural-meshes-clear-original-HUD",frame.structuralMeshes>0 && frame.hudOverlapMeshes==0,"meshes="+frame.structuralMeshes+", overlaps="+frame.hudOverlapMeshes+" "+String.Join(";",frame.overlaps.ToArray()));
+             if(frame.level==401) {
+                 bool needed=BaseNeedsFit(game,camera,regions,frame.backwardDistance);

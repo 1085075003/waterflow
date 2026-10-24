@@ -1,0 +1,34 @@
+// Resorte3$$doTextura3 VA 0x1028A2C, inferred length 128
+void Resorte3__doTextura3 (Resorte3_o* __this, const MethodInfo* method);
+01028A2C  str      x30, [sp, #-0x20]!                    
+01028A30  stp      x20, x19, [sp, #0x10]                 
+01028A34  adrp     x20, #0x24fb000                       
+01028A38  ldrb     w8, [x20, #0xced]                     
+01028A3C  mov      x19, x0                               
+01028A40  tbnz     w8, #0, #0x1028a58                    
+01028A44  adrp     x0, #0x2368000                        
+01028A48  ldr      x0, [x0, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01028A4C  bl       #0xe61b78                             
+01028A50  mov      w8, #1                                
+01028A54  strb     w8, [x20, #0xced]                     
+01028A58  ldr      x0, [x19, #0x28]                       // self.cilinder1
+01028A5C  cbz      x0, #0x1028aa8                        
+01028A60  adrp     x20, #0x2368000                       
+01028A64  ldr      x20, [x20, #0x2a8]                     // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01028A68  ldr      x1, [x20]                             
+01028A6C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01028A70  cbz      x0, #0x1028aa8                        
+01028A74  ldr      x1, [x19, #0xa8]                       // self.materialTextura3
+01028A78  mov      x2, xzr                               
+01028A7C  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01028A80  ldr      x0, [x19, #0x30]                       // self.cilinder2
+01028A84  cbz      x0, #0x1028aa8                        
+01028A88  ldr      x1, [x20]                             
+01028A8C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01028A90  cbz      x0, #0x1028aa8                        
+01028A94  ldr      x1, [x19, #0xa8]                       // self.materialTextura3
+01028A98  ldp      x20, x19, [sp, #0x10]                 
+01028A9C  mov      x2, xzr                               
+01028AA0  ldr      x30, [sp], #0x20                      
+01028AA4  b        #0x1fec520                             // UnityEngine.Renderer$$set_material
+01028AA8  bl       #0xe61da0                             

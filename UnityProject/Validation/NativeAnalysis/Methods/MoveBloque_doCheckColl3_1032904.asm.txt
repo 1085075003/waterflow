@@ -1,0 +1,116 @@
+// MoveBloque$$doCheckColl3 VA 0x1032904, inferred length 456
+void MoveBloque__doCheckColl3 (MoveBloque_o* __this, const MethodInfo* method);
+01032904  stp      d11, d10, [sp, #-0x80]!               
+01032908  stp      d9, d8, [sp, #0x10]                   
+0103290C  str      x30, [sp, #0x20]                      
+01032910  stp      x28, x27, [sp, #0x30]                 
+01032914  stp      x26, x25, [sp, #0x40]                 
+01032918  stp      x24, x23, [sp, #0x50]                 
+0103291C  stp      x22, x21, [sp, #0x60]                 
+01032920  stp      x20, x19, [sp, #0x70]                 
+01032924  adrp     x21, #0x24fb000                       
+01032928  adrp     x20, #0x2368000                       
+0103292C  ldrb     w8, [x21, #0xd1f]                     
+01032930  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+01032934  mov      x19, x0                               
+01032938  tbnz     w8, #0, #0x1032974                    
+0103293C  adrp     x0, #0x2368000                        
+01032940  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+01032944  bl       #0xe61b78                             
+01032948  adrp     x0, #0x236a000                        
+0103294C  ldr      x0, [x0, #0x5c0]                       // [0x236A5C0] 'Map1'
+01032950  bl       #0xe61b78                             
+01032954  adrp     x0, #0x236a000                        
+01032958  ldr      x0, [x0, #0x7f0]                       // [0x236A7F0] 'Suelo'
+0103295C  bl       #0xe61b78                             
+01032960  adrp     x0, #0x236a000                        
+01032964  ldr      x0, [x0, #0x630]                       // [0x236A630] 'Map'
+01032968  bl       #0xe61b78                             
+0103296C  mov      w8, #1                                
+01032970  strb     w8, [x21, #0xd1f]                     
+01032974  ldr      s0, [x19, #0x198]                      // self.valor3y
+01032978  ldr      s1, [x19, #0x16c]                      // self.subeRayo
+0103297C  ldr      s8, [x19, #0x194]                      // self.valor3x
+01032980  ldr      s9, [x19, #0x19c]                      // self.valor3z
+01032984  ldr      w0, [x19, #0x104]                      // self.mascaraDefault
+01032988  ldr      s10, [x19, #0x108]                     // self.sphereRadius
+0103298C  fadd     s11, s0, s1                           
+01032990  mov      x1, xzr                               
+01032994  str      s8, [x19, #0x10c]                      // self.vector
+01032998  str      s11, [x19, #0x110]                    
+0103299C  str      s9, [x19, #0x114]                     
+010329A0  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+010329A4  ldr      x8, [x20]                             
+010329A8  mov      w20, w0                               
+010329AC  ldr      w9, [x8, #0xe0]                       
+010329B0  cbnz     w9, #0x10329bc                        
+010329B4  mov      x0, x8                                
+010329B8  bl       #0xe61c80                             
+010329BC  mov      v0.16b, v8.16b                        
+010329C0  mov      v1.16b, v11.16b                       
+010329C4  mov      v2.16b, v9.16b                        
+010329C8  mov      v3.16b, v10.16b                       
+010329CC  mov      w0, w20                               
+010329D0  mov      x1, xzr                               
+010329D4  bl       #0x20406ec                             // UnityEngine.Physics$$OverlapSphere
+010329D8  cbz      x0, #0x1032ac4                        
+010329DC  ldr      x8, [x0, #0x18]                       
+010329E0  mov      x20, x0                               
+010329E4  cbz      x8, #0x1032aa0                        
+010329E8  cmp      w8, #1                                
+010329EC  b.lt     #0x1032aa0                            
+010329F0  adrp     x25, #0x236a000                       
+010329F4  adrp     x26, #0x236a000                       
+010329F8  adrp     x28, #0x236a000                       
+010329FC  ldr      x25, [x25, #0x7f0]                     // [0x236A7F0] 'Suelo'
+01032A00  ldr      x26, [x26, #0x5c0]                     // [0x236A5C0] 'Map1'
+01032A04  ldr      x28, [x28, #0x630]                     // [0x236A630] 'Map'
+01032A08  mov      x23, xzr                              
+01032A0C  add      x24, x20, #0x20                       
+01032A10  mov      w27, #1                               
+01032A14  cmp      w23, w8                               
+01032A18  b.hs     #0x1032ac8                            
+01032A1C  ldr      x0, [x24, x23, lsl #3]                
+01032A20  cbz      x0, #0x1032ac4                        
+01032A24  mov      x1, xzr                               
+01032A28  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01032A2C  cbz      x0, #0x1032ac4                        
+01032A30  mov      x1, xzr                               
+01032A34  bl       #0x2006314                             // UnityEngine.GameObject$$get_layer
+01032A38  ldr      x8, [x25]                             
+01032A3C  mov      w21, w0                               
+01032A40  mov      x1, xzr                               
+01032A44  mov      x0, x8                                
+01032A48  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+01032A4C  ldr      w8, [x20, #0x18]                      
+01032A50  cmp      w23, w8                               
+01032A54  b.hs     #0x1032ac8                            
+01032A58  mov      w22, w0                               
+01032A5C  ldr      x0, [x24, x23, lsl #3]                
+01032A60  cbz      x0, #0x1032ac4                        
+01032A64  mov      x1, xzr                               
+01032A68  bl       #0x2003eec                             // UnityEngine.Component$$get_tag
+01032A6C  cmp      w21, w22                              
+01032A70  b.ne     #0x1032a7c                            
+01032A74  ldr      x1, [x26]                             
+01032A78  b        #0x1032a80                            
+01032A7C  ldr      x1, [x28]                             
+01032A80  mov      x2, xzr                               
+01032A84  bl       #0x1960c7c                             // System.String$$op_Equality
+01032A88  tbz      w0, #0, #0x1032a90                    
+01032A8C  strb     w27, [x19, #0x137]                     // self.checkCollision3
+01032A90  ldr      w8, [x20, #0x18]                      
+01032A94  add      x23, x23, #1                          
+01032A98  cmp      w23, w8                               
+01032A9C  b.lt     #0x1032a14                            
+01032AA0  ldp      x20, x19, [sp, #0x70]                 
+01032AA4  ldp      x22, x21, [sp, #0x60]                 
+01032AA8  ldp      x24, x23, [sp, #0x50]                 
+01032AAC  ldp      x26, x25, [sp, #0x40]                 
+01032AB0  ldp      x28, x27, [sp, #0x30]                 
+01032AB4  ldr      x30, [sp, #0x20]                      
+01032AB8  ldp      d9, d8, [sp, #0x10]                   
+01032ABC  ldp      d11, d10, [sp], #0x80                 
+01032AC0  ret                                            
+01032AC4  bl       #0xe61da0                             
+01032AC8  bl       #0xe61da8                             

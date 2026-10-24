@@ -1,0 +1,41 @@
+// FuenteCubeta2$$OnTriggerExit VA 0x10989E4, inferred length 156
+void FuenteCubeta2__OnTriggerExit (FuenteCubeta2_o* __this, UnityEngine_Collider_o* other, const MethodInfo* method);
+010989E4  stp      x30, x21, [sp, #-0x20]!               
+010989E8  stp      x20, x19, [sp, #0x10]                 
+010989EC  adrp     x21, #0x24fb000                       
+010989F0  ldrb     w8, [x21, #0xf19]                     
+010989F4  mov      x20, x1                               
+010989F8  mov      x19, x0                               
+010989FC  tbnz     w8, #0, #0x1098a14                    
+01098A00  adrp     x0, #0x236d000                        
+01098A04  ldr      x0, [x0, #0x448]                       // [0x236D448] 'Objeto'
+01098A08  bl       #0xe61b78                             
+01098A0C  mov      w8, #1                                
+01098A10  strb     w8, [x21, #0xf19]                     
+01098A14  strb     wzr, [x19, #0x83]                      // self.activar
+01098A18  strb     wzr, [x19, #0x80]                      // self.ontrigger0
+01098A1C  cbz      x20, #0x1098a7c                       
+01098A20  mov      x0, x20                               
+01098A24  mov      x1, xzr                               
+01098A28  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01098A2C  cbz      x0, #0x1098a7c                        
+01098A30  adrp     x20, #0x236d000                       
+01098A34  ldr      x20, [x20, #0x448]                     // [0x236D448] 'Objeto'
+01098A38  mov      x1, xzr                               
+01098A3C  bl       #0x2006314                             // UnityEngine.GameObject$$get_layer
+01098A40  ldr      x8, [x20]                             
+01098A44  mov      w20, w0                               
+01098A48  mov      x1, xzr                               
+01098A4C  mov      x0, x8                                
+01098A50  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+01098A54  cmp      w20, w0                               
+01098A58  b.ne     #0x1098a70                            
+01098A5C  strb     wzr, [x19, #0xc0]                      // self.triggered
+01098A60  mov      x0, x19                               
+01098A64  ldp      x20, x19, [sp, #0x10]                 
+01098A68  ldp      x30, x21, [sp], #0x20                 
+01098A6C  b        #0x1098694                             // FuenteCubeta2$$doDesactivar
+01098A70  ldp      x20, x19, [sp, #0x10]                 
+01098A74  ldp      x30, x21, [sp], #0x20                 
+01098A78  ret                                            
+01098A7C  bl       #0xe61da0                             

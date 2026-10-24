@@ -1,0 +1,55 @@
+// ObservadorDoor$$doBuscarAguas VA 0x10C6B34, inferred length 212
+void ObservadorDoor__doBuscarAguas (ObservadorDoor_o* __this, const MethodInfo* method);
+010C6B34  str      x30, [sp, #-0x20]!                    
+010C6B38  stp      x20, x19, [sp, #0x10]                 
+010C6B3C  adrp     x20, #0x24fb000                       
+010C6B40  ldrb     w8, [x20, #0xff2]                     
+010C6B44  mov      x19, x0                               
+010C6B48  tbnz     w8, #0, #0x10c6b6c                    
+010C6B4C  adrp     x0, #0x236a000                        
+010C6B50  ldr      x0, [x0, #0x5b0]                       // [0x236A5B0] Method$UnityEngine.GameObject.GetComponent<AguasControl>()
+010C6B54  bl       #0xe61b78                             
+010C6B58  adrp     x0, #0x236d000                        
+010C6B5C  ldr      x0, [x0, #0x998]                       // [0x236D998] '/Aguas'
+010C6B60  bl       #0xe61b78                             
+010C6B64  mov      w8, #1                                
+010C6B68  strb     w8, [x20, #0xff2]                     
+010C6B6C  mov      x0, x19                               
+010C6B70  mov      x1, xzr                               
+010C6B74  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6B78  cbz      x0, #0x10c6c04                        
+010C6B7C  mov      x1, xzr                               
+010C6B80  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010C6B84  cbz      x0, #0x10c6c04                        
+010C6B88  adrp     x20, #0x236d000                       
+010C6B8C  ldr      x20, [x20, #0x998]                     // [0x236D998] '/Aguas'
+010C6B90  mov      x1, xzr                               
+010C6B94  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010C6B98  ldr      x8, [x19, #0x48]                       // self.checkVar
+010C6B9C  ldr      x1, [x20]                             
+010C6BA0  mov      x20, x0                               
+010C6BA4  mov      x2, xzr                               
+010C6BA8  mov      x0, x8                                
+010C6BAC  bl       #0x1958280                             // System.String$$Concat
+010C6BB0  cbz      x20, #0x10c6c04                       
+010C6BB4  mov      x1, x0                                
+010C6BB8  mov      x0, x20                               
+010C6BBC  mov      x2, xzr                               
+010C6BC0  bl       #0x2010150                             // UnityEngine.Transform$$Find
+010C6BC4  cbz      x0, #0x10c6c04                        
+010C6BC8  mov      x1, xzr                               
+010C6BCC  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010C6BD0  str      x0, [x19, #0xb0]                       // self.aguas
+010C6BD4  cbz      x0, #0x10c6c04                        
+010C6BD8  adrp     x8, #0x236a000                        
+010C6BDC  ldr      x8, [x8, #0x5b0]                       // [0x236A5B0] Method$UnityEngine.GameObject.GetComponent<AguasControl>()
+010C6BE0  ldr      x1, [x8]                              
+010C6BE4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010C6BE8  str      x0, [x19, #0xb8]                       // self.aguasC
+010C6BEC  cbz      x0, #0x10c6c04                        
+010C6BF0  ldr      w8, [x0, #0x20]                       
+010C6BF4  str      w8, [x19, #0xc0]                       // self.hayOrigen
+010C6BF8  ldp      x20, x19, [sp, #0x10]                 
+010C6BFC  ldr      x30, [sp], #0x20                      
+010C6C00  ret                                            
+010C6C04  bl       #0xe61da0                             

@@ -1,0 +1,72 @@
+// FuenteTest3$$doConfigPit VA 0x10ADFF8, inferred length 280
+void FuenteTest3__doConfigPit (FuenteTest3_o* __this, System_String_o* configP, const MethodInfo* method);
+010ADFF8  str      x30, [sp, #-0x30]!                    
+010ADFFC  stp      x22, x21, [sp, #0x10]                 
+010AE000  stp      x20, x19, [sp, #0x20]                 
+010AE004  adrp     x21, #0x24fb000                       
+010AE008  ldrb     w8, [x21, #0xf85]                     
+010AE00C  mov      x19, x1                               
+010AE010  mov      x20, x0                               
+010AE014  tbnz     w8, #0, #0x10ae050                    
+010AE018  adrp     x0, #0x236a000                        
+010AE01C  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+010AE020  bl       #0xe61b78                             
+010AE024  adrp     x0, #0x236a000                        
+010AE028  ldr      x0, [x0, #0x670]                       // [0x236A670] '6'
+010AE02C  bl       #0xe61b78                             
+010AE030  adrp     x0, #0x236a000                        
+010AE034  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+010AE038  bl       #0xe61b78                             
+010AE03C  adrp     x0, #0x236a000                        
+010AE040  ldr      x0, [x0, #0x6f8]                       // [0x236A6F8] '5'
+010AE044  bl       #0xe61b78                             
+010AE048  mov      w8, #1                                
+010AE04C  strb     w8, [x21, #0xf85]                     
+010AE050  cbz      x19, #0x10ae10c                       
+010AE054  adrp     x22, #0x236a000                       
+010AE058  adrp     x21, #0x236a000                       
+010AE05C  ldr      x22, [x22, #0x6e8]                     // [0x236A6E8] '1'
+010AE060  ldr      x21, [x21, #0x658]                     // [0x236A658] '2'
+010AE064  mov      w2, #1                                
+010AE068  mov      x0, x19                               
+010AE06C  mov      w1, wzr                               
+010AE070  mov      x3, xzr                               
+010AE074  bl       #0x196288c                             // System.String$$Substring
+010AE078  str      x0, [x20, #0x6c8]                     
+010AE07C  ldr      x1, [x22]                             
+010AE080  mov      x2, xzr                               
+010AE084  bl       #0x1960c7c                             // System.String$$op_Equality
+010AE088  tbnz     w0, #0, #0x10ae0a8                    
+010AE08C  adrp     x8, #0x236a000                        
+010AE090  ldr      x0, [x20, #0x6c8]                     
+010AE094  ldr      x8, [x8, #0x6f8]                       // [0x236A6F8] '5'
+010AE098  mov      x2, xzr                               
+010AE09C  ldr      x1, [x8]                              
+010AE0A0  bl       #0x1960c7c                             // System.String$$op_Equality
+010AE0A4  tbz      w0, #0, #0x10ae0b4                    
+010AE0A8  mov      x0, x20                               
+010AE0AC  mov      x1, x19                               
+010AE0B0  bl       #0x10ae110                             // FuenteTest3$$doPitA
+010AE0B4  ldr      x0, [x20, #0x6c8]                     
+010AE0B8  ldr      x1, [x21]                             
+010AE0BC  mov      x2, xzr                               
+010AE0C0  bl       #0x1960c7c                             // System.String$$op_Equality
+010AE0C4  tbnz     w0, #0, #0x10ae0e4                    
+010AE0C8  adrp     x8, #0x236a000                        
+010AE0CC  ldr      x0, [x20, #0x6c8]                     
+010AE0D0  ldr      x8, [x8, #0x670]                       // [0x236A670] '6'
+010AE0D4  mov      x2, xzr                               
+010AE0D8  ldr      x1, [x8]                              
+010AE0DC  bl       #0x1960c7c                             // System.String$$op_Equality
+010AE0E0  tbz      w0, #0, #0x10ae0fc                    
+010AE0E4  mov      x0, x20                               
+010AE0E8  mov      x1, x19                               
+010AE0EC  ldp      x20, x19, [sp, #0x20]                 
+010AE0F0  ldp      x22, x21, [sp, #0x10]                 
+010AE0F4  ldr      x30, [sp], #0x30                      
+010AE0F8  b        #0x10b050c                             // FuenteTest3$$doPitB
+010AE0FC  ldp      x20, x19, [sp, #0x20]                 
+010AE100  ldp      x22, x21, [sp, #0x10]                 
+010AE104  ldr      x30, [sp], #0x30                      
+010AE108  ret                                            
+010AE10C  bl       #0xe61da0                             

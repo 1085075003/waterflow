@@ -1,0 +1,12 @@
+// Resorte2d$$doMovimiento2b VA 0x10265D4, inferred length 40
+void Resorte2d__doMovimiento2b (Resorte2d_o* __this, const MethodInfo* method);
+010265D4  stp      x30, x19, [sp, #-0x10]!               
+010265D8  mov      x19, x0                               
+010265DC  bl       #0x10270b8                             // Resorte2d$$doMover2_1b
+010265E0  ldrb     w8, [x19, #0x1f1]                      // self.swfin2_1
+010265E4  cbz      w8, #0x10265f4                        
+010265E8  mov      w8, #0x10000                          
+010265EC  str      w8, [x19, #0x1e8]                      // self.swfin0
+010265F0  strb     wzr, [x19, #0x1ec]                     // self.swfin4
+010265F4  ldp      x30, x19, [sp], #0x10                 
+010265F8  ret                                            

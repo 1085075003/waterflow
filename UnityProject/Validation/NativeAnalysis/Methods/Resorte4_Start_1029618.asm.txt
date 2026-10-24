@@ -1,0 +1,46 @@
+// Resorte4$$Start VA 0x1029618, inferred length 176
+void Resorte4__Start (Resorte4_o* __this, const MethodInfo* method);
+01029618  stp      x30, x21, [sp, #-0x20]!               
+0102961C  stp      x20, x19, [sp, #0x10]                 
+01029620  adrp     x20, #0x24fb000                       
+01029624  adrp     x21, #0x236a000                       
+01029628  ldrb     w8, [x20, #0xcef]                     
+0102962C  ldr      x21, [x21, #0x9d0]                     // [0x236A9D0] AudioManager_TypeInfo
+01029630  mov      x19, x0                               
+01029634  tbnz     w8, #0, #0x102964c                    
+01029638  adrp     x0, #0x236a000                        
+0102963C  ldr      x0, [x0, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+01029640  bl       #0xe61b78                             
+01029644  mov      w8, #1                                
+01029648  strb     w8, [x20, #0xcef]                     
+0102964C  ldr      x8, [x21]                             
+01029650  ldr      x0, [x19, #0x50]                       // self.conResorte
+01029654  mov      w9, #1                                
+01029658  ldr      x8, [x8, #0xb8]                       
+0102965C  ldr      x8, [x8]                              
+01029660  strb     w9, [x19, #0xd9]                       // self.chequear
+01029664  str      x8, [x19, #0xf8]                       // self.audioManager
+01029668  cbz      x0, #0x10296c4                        
+0102966C  ldr      w8, [x0, #0x10]                       
+01029670  cmp      w8, #2                                
+01029674  b.ge     #0x1029680                            
+01029678  str      x0, [x19, #0xc8]                       // self.conResorte1
+0102967C  b        #0x10296b4                            
+01029680  mov      w2, #1                                
+01029684  mov      w1, wzr                               
+01029688  mov      x3, xzr                               
+0102968C  bl       #0x196288c                             // System.String$$Substring
+01029690  ldr      x8, [x19, #0x50]                       // self.conResorte
+01029694  str      x0, [x19, #0xc8]                       // self.conResorte1
+01029698  cbz      x8, #0x10296c4                        
+0102969C  mov      w1, #1                                
+010296A0  mov      w2, #1                                
+010296A4  mov      x0, x8                                
+010296A8  mov      x3, xzr                               
+010296AC  bl       #0x196288c                             // System.String$$Substring
+010296B0  str      x0, [x19, #0xd0]                       // self.conResorte2
+010296B4  str      wzr, [x19, #0x30]                      // self.contUpdate
+010296B8  ldp      x20, x19, [sp, #0x10]                 
+010296BC  ldp      x30, x21, [sp], #0x20                 
+010296C0  ret                                            
+010296C4  bl       #0xe61da0                             

@@ -1,0 +1,147 @@
+// ObservadorResorte$$doValidarMovimientos0 VA 0x10CCF94, inferred length 580
+void ObservadorResorte__doValidarMovimientos0 (ObservadorResorte_o* __this, const MethodInfo* method);
+010CCF94  stp      x30, x21, [sp, #-0x20]!               
+010CCF98  stp      x20, x19, [sp, #0x10]                 
+010CCF9C  adrp     x21, #0x24fb000                       
+010CCFA0  adrp     x20, #0x236a000                       
+010CCFA4  ldrb     w8, [x21, #0xff9]                     
+010CCFA8  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+010CCFAC  mov      x19, x0                               
+010CCFB0  tbnz     w8, #0, #0x10cd028                    
+010CCFB4  adrp     x0, #0x236a000                        
+010CCFB8  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+010CCFBC  bl       #0xe61b78                             
+010CCFC0  adrp     x0, #0x236a000                        
+010CCFC4  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+010CCFC8  bl       #0xe61b78                             
+010CCFCC  adrp     x0, #0x236a000                        
+010CCFD0  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+010CCFD4  bl       #0xe61b78                             
+010CCFD8  adrp     x0, #0x236a000                        
+010CCFDC  ldr      x0, [x0, #0x670]                       // [0x236A670] '6'
+010CCFE0  bl       #0xe61b78                             
+010CCFE4  adrp     x0, #0x236a000                        
+010CCFE8  ldr      x0, [x0, #0x6a0]                       // [0x236A6A0] '7'
+010CCFEC  bl       #0xe61b78                             
+010CCFF0  adrp     x0, #0x236a000                        
+010CCFF4  ldr      x0, [x0, #0x6a8]                       // [0x236A6A8] '4'
+010CCFF8  bl       #0xe61b78                             
+010CCFFC  adrp     x0, #0x236a000                        
+010CD000  ldr      x0, [x0, #0x798]                       // [0x236A798] '8'
+010CD004  bl       #0xe61b78                             
+010CD008  adrp     x0, #0x236a000                        
+010CD00C  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+010CD010  bl       #0xe61b78                             
+010CD014  adrp     x0, #0x236a000                        
+010CD018  ldr      x0, [x0, #0x6f8]                       // [0x236A6F8] '5'
+010CD01C  bl       #0xe61b78                             
+010CD020  mov      w8, #1                                
+010CD024  strb     w8, [x21, #0xff9]                     
+010CD028  strb     wzr, [x19, #0xf0]                      // self.ocupado
+010CD02C  ldr      x8, [x20]                             
+010CD030  ldr      x8, [x8, #0xb8]                       
+010CD034  ldrb     w8, [x8, #0x74]                       
+010CD038  cbz      w8, #0x10cd060                        
+010CD03C  adrp     x8, #0x236a000                        
+010CD040  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+010CD044  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CD048  mov      x2, xzr                               
+010CD04C  ldr      x1, [x8]                              
+010CD050  bl       #0x1960c80                             // System.String$$op_Inequality
+010CD054  tbz      w0, #0, #0x10cd060                    
+010CD058  mov      w8, #1                                
+010CD05C  strb     w8, [x19, #0xf0]                       // self.ocupado
+010CD060  ldr      x8, [x20]                             
+010CD064  ldr      x8, [x8, #0xb8]                       
+010CD068  ldrb     w8, [x8, #0x75]                       
+010CD06C  cbz      w8, #0x10cd094                        
+010CD070  adrp     x8, #0x236a000                        
+010CD074  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+010CD078  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CD07C  mov      x2, xzr                               
+010CD080  ldr      x1, [x8]                              
+010CD084  bl       #0x1960c80                             // System.String$$op_Inequality
+010CD088  tbz      w0, #0, #0x10cd094                    
+010CD08C  mov      w8, #1                                
+010CD090  strb     w8, [x19, #0xf0]                       // self.ocupado
+010CD094  ldr      x8, [x20]                             
+010CD098  ldr      x8, [x8, #0xb8]                       
+010CD09C  ldrb     w8, [x8, #0x76]                       
+010CD0A0  cbz      w8, #0x10cd0c8                        
+010CD0A4  adrp     x8, #0x236a000                        
+010CD0A8  ldr      x8, [x8, #0x650]                       // [0x236A650] '3'
+010CD0AC  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CD0B0  mov      x2, xzr                               
+010CD0B4  ldr      x1, [x8]                              
+010CD0B8  bl       #0x1960c80                             // System.String$$op_Inequality
+010CD0BC  tbz      w0, #0, #0x10cd0c8                    
+010CD0C0  mov      w8, #1                                
+010CD0C4  strb     w8, [x19, #0xf0]                       // self.ocupado
+010CD0C8  ldr      x8, [x20]                             
+010CD0CC  ldr      x8, [x8, #0xb8]                       
+010CD0D0  ldrb     w8, [x8, #0x77]                       
+010CD0D4  cbz      w8, #0x10cd0fc                        
+010CD0D8  adrp     x8, #0x236a000                        
+010CD0DC  ldr      x8, [x8, #0x6a8]                       // [0x236A6A8] '4'
+010CD0E0  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CD0E4  mov      x2, xzr                               
+010CD0E8  ldr      x1, [x8]                              
+010CD0EC  bl       #0x1960c80                             // System.String$$op_Inequality
+010CD0F0  tbz      w0, #0, #0x10cd0fc                    
+010CD0F4  mov      w8, #1                                
+010CD0F8  strb     w8, [x19, #0xf0]                       // self.ocupado
+010CD0FC  ldr      x8, [x20]                             
+010CD100  ldr      x8, [x8, #0xb8]                       
+010CD104  ldrb     w8, [x8, #0x78]                       
+010CD108  cbz      w8, #0x10cd130                        
+010CD10C  adrp     x8, #0x236a000                        
+010CD110  ldr      x8, [x8, #0x6f8]                       // [0x236A6F8] '5'
+010CD114  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CD118  mov      x2, xzr                               
+010CD11C  ldr      x1, [x8]                              
+010CD120  bl       #0x1960c80                             // System.String$$op_Inequality
+010CD124  tbz      w0, #0, #0x10cd130                    
+010CD128  mov      w8, #1                                
+010CD12C  strb     w8, [x19, #0xf0]                       // self.ocupado
+010CD130  ldr      x8, [x20]                             
+010CD134  ldr      x8, [x8, #0xb8]                       
+010CD138  ldrb     w8, [x8, #0x79]                       
+010CD13C  cbz      w8, #0x10cd164                        
+010CD140  adrp     x8, #0x236a000                        
+010CD144  ldr      x8, [x8, #0x670]                       // [0x236A670] '6'
+010CD148  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CD14C  mov      x2, xzr                               
+010CD150  ldr      x1, [x8]                              
+010CD154  bl       #0x1960c80                             // System.String$$op_Inequality
+010CD158  tbz      w0, #0, #0x10cd164                    
+010CD15C  mov      w8, #1                                
+010CD160  strb     w8, [x19, #0xf0]                       // self.ocupado
+010CD164  ldr      x8, [x20]                             
+010CD168  ldr      x8, [x8, #0xb8]                       
+010CD16C  ldrb     w8, [x8, #0x7a]                       
+010CD170  cbz      w8, #0x10cd198                        
+010CD174  adrp     x8, #0x236a000                        
+010CD178  ldr      x8, [x8, #0x6a0]                       // [0x236A6A0] '7'
+010CD17C  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CD180  mov      x2, xzr                               
+010CD184  ldr      x1, [x8]                              
+010CD188  bl       #0x1960c80                             // System.String$$op_Inequality
+010CD18C  tbz      w0, #0, #0x10cd198                    
+010CD190  mov      w8, #1                                
+010CD194  strb     w8, [x19, #0xf0]                       // self.ocupado
+010CD198  ldr      x8, [x20]                             
+010CD19C  ldr      x8, [x8, #0xb8]                       
+010CD1A0  ldrb     w8, [x8, #0x7b]                       
+010CD1A4  cbz      w8, #0x10cd1cc                        
+010CD1A8  adrp     x8, #0x236a000                        
+010CD1AC  ldr      x8, [x8, #0x798]                       // [0x236A798] '8'
+010CD1B0  ldr      x0, [x19, #0x2a8]                      // self.conResor
+010CD1B4  mov      x2, xzr                               
+010CD1B8  ldr      x1, [x8]                              
+010CD1BC  bl       #0x1960c80                             // System.String$$op_Inequality
+010CD1C0  tbz      w0, #0, #0x10cd1cc                    
+010CD1C4  mov      w8, #1                                
+010CD1C8  strb     w8, [x19, #0xf0]                       // self.ocupado
+010CD1CC  ldp      x20, x19, [sp, #0x10]                 
+010CD1D0  ldp      x30, x21, [sp], #0x20                 
+010CD1D4  ret                                            

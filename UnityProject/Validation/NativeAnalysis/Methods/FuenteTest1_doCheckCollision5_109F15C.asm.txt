@@ -1,0 +1,71 @@
+// FuenteTest1$$doCheckCollision5 VA 0x109F15C, inferred length 276
+void FuenteTest1__doCheckCollision5 (FuenteTest1_o* __this, const MethodInfo* method);
+0109F15C  stp      d11, d10, [sp, #-0x40]!               
+0109F160  stp      d9, d8, [sp, #0x10]                   
+0109F164  str      x30, [sp, #0x20]                      
+0109F168  stp      x20, x19, [sp, #0x30]                 
+0109F16C  adrp     x20, #0x24fb000                       
+0109F170  ldrb     w8, [x20, #0xf57]                     
+0109F174  mov      x19, x0                               
+0109F178  tbnz     w8, #0, #0x109f190                    
+0109F17C  adrp     x0, #0x2368000                        
+0109F180  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+0109F184  bl       #0xe61b78                             
+0109F188  mov      w8, #1                                
+0109F18C  strb     w8, [x20, #0xf57]                     
+0109F190  mov      x0, x19                               
+0109F194  mov      x1, xzr                               
+0109F198  strb     wzr, [x19, #0x2a0]                     // self.checkCollision5
+0109F19C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109F1A0  cbz      x0, #0x109f26c                        
+0109F1A4  mov      x1, xzr                               
+0109F1A8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0109F1AC  mov      x0, x19                               
+0109F1B0  mov      x1, xzr                               
+0109F1B4  mov      v8.16b, v0.16b                        
+0109F1B8  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109F1BC  cbz      x0, #0x109f26c                        
+0109F1C0  mov      x1, xzr                               
+0109F1C4  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0109F1C8  mov      x0, x19                               
+0109F1CC  mov      x1, xzr                               
+0109F1D0  mov      v9.16b, v1.16b                        
+0109F1D4  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109F1D8  cbz      x0, #0x109f26c                        
+0109F1DC  adrp     x20, #0x2368000                       
+0109F1E0  ldr      x20, [x20, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+0109F1E4  mov      x1, xzr                               
+0109F1E8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0109F1EC  ldr      w0, [x19, #0x270]                      // self.mascaraObjeto
+0109F1F0  ldr      s11, [x19, #0x2a4]                     // self.sphereRadius
+0109F1F4  mov      x1, xzr                               
+0109F1F8  mov      v10.16b, v2.16b                       
+0109F1FC  str      s8, [x19, #0x288]                      // self.vector2
+0109F200  str      s9, [x19, #0x28c]                     
+0109F204  str      s2, [x19, #0x290]                     
+0109F208  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+0109F20C  ldr      x8, [x20]                             
+0109F210  mov      w20, w0                               
+0109F214  ldr      w9, [x8, #0xe0]                       
+0109F218  cbnz     w9, #0x109f224                        
+0109F21C  mov      x0, x8                                
+0109F220  bl       #0xe61c80                             
+0109F224  mov      v0.16b, v8.16b                        
+0109F228  mov      v1.16b, v9.16b                        
+0109F22C  mov      v2.16b, v10.16b                       
+0109F230  mov      v3.16b, v11.16b                       
+0109F234  mov      w0, w20                               
+0109F238  mov      x1, xzr                               
+0109F23C  bl       #0x20406ec                             // UnityEngine.Physics$$OverlapSphere
+0109F240  cbz      x0, #0x109f26c                        
+0109F244  ldr      w8, [x0, #0x18]                       
+0109F248  cmp      w8, #2                                
+0109F24C  b.lt     #0x109f258                            
+0109F250  mov      w8, #1                                
+0109F254  strb     w8, [x19, #0x2a0]                      // self.checkCollision5
+0109F258  ldp      x20, x19, [sp, #0x30]                 
+0109F25C  ldr      x30, [sp, #0x20]                      
+0109F260  ldp      d9, d8, [sp, #0x10]                   
+0109F264  ldp      d11, d10, [sp], #0x40                 
+0109F268  ret                                            
+0109F26C  bl       #0xe61da0                             

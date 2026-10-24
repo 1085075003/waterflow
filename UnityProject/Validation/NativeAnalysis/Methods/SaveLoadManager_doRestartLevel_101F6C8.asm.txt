@@ -1,0 +1,90 @@
+// SaveLoadManager$$doRestartLevel VA 0x101F6C8, inferred length 352
+void SaveLoadManager__doRestartLevel (SaveLoadManager_o* __this, const MethodInfo* method);
+0101F6C8  stp      x30, x21, [sp, #-0x20]!               
+0101F6CC  stp      x20, x19, [sp, #0x10]                 
+0101F6D0  adrp     x20, #0x24fb000                       
+0101F6D4  ldrb     w8, [x20, #0xcaf]                     
+0101F6D8  mov      x19, x0                               
+0101F6DC  tbnz     w8, #0, #0x101f700                    
+0101F6E0  adrp     x0, #0x236a000                        
+0101F6E4  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0101F6E8  bl       #0xe61b78                             
+0101F6EC  adrp     x0, #0x236a000                        
+0101F6F0  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+0101F6F4  bl       #0xe61b78                             
+0101F6F8  mov      w8, #1                                
+0101F6FC  strb     w8, [x20, #0xcaf]                     
+0101F700  ldr      x0, [x19, #0x198]                      // self.audioManager
+0101F704  cbz      x0, #0x101f824                        
+0101F708  ldr      x1, [x19, #0x188]                      // self.click
+0101F70C  mov      x2, xzr                               
+0101F710  bl       #0x1028540                             // AudioManager$$PlaySound
+0101F714  ldr      x0, [x19, #0x198]                      // self.audioManager
+0101F718  cbz      x0, #0x101f824                        
+0101F71C  ldr      x1, [x19, #0x178]                      // self.SonidoFuente
+0101F720  mov      x2, xzr                               
+0101F724  bl       #0x102b0e8                             // AudioManager$$StopSound
+0101F728  ldr      x0, [x19, #0x168]                      // self.cajaComplete
+0101F72C  cbz      x0, #0x101f824                        
+0101F730  adrp     x21, #0x236a000                       
+0101F734  adrp     x20, #0x236a000                       
+0101F738  ldr      x21, [x21, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0101F73C  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+0101F740  mov      w1, wzr                               
+0101F744  mov      x2, xzr                               
+0101F748  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0101F74C  ldr      x0, [x21]                             
+0101F750  ldr      w8, [x0, #0xe0]                       
+0101F754  cbnz     w8, #0x101f760                        
+0101F758  bl       #0xe61c80                             
+0101F75C  ldr      x0, [x21]                             
+0101F760  ldr      x8, [x0, #0xb8]                       
+0101F764  mov      w9, #1                                
+0101F768  mov      w2, #0x88                             
+0101F76C  mov      w1, wzr                               
+0101F770  strb     w9, [x8, #0x16]                       
+0101F774  str      wzr, [x8, #8]                         
+0101F778  strh     wzr, [x8, #4]                         
+0101F77C  strb     wzr, [x8, #0x14]                      
+0101F780  ldr      x8, [x20]                             
+0101F784  ldr      x20, [x8, #0xb8]                      
+0101F788  add      x0, x20, #0x14                        
+0101F78C  bl       #0x224d3e0                            
+0101F790  stp      xzr, xzr, [x20, #0xa0]                
+0101F794  str      wzr, [x20, #0xb0]                     
+0101F798  ldr      x0, [x19, #0xa0]                       // self.solutionButton
+0101F79C  cbz      x0, #0x101f824                        
+0101F7A0  mov      w1, #1                                
+0101F7A4  mov      x2, xzr                               
+0101F7A8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0101F7AC  ldr      x0, [x19, #0x140]                      // self.botonNumSol
+0101F7B0  cbz      x0, #0x101f824                        
+0101F7B4  mov      w1, #1                                
+0101F7B8  mov      x2, xzr                               
+0101F7BC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0101F7C0  ldr      x0, [x19, #0xa8]                       // self.backButton
+0101F7C4  cbz      x0, #0x101f824                        
+0101F7C8  mov      w1, wzr                               
+0101F7CC  mov      x2, xzr                               
+0101F7D0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0101F7D4  ldr      x0, [x19, #0x138]                      // self.NextButton
+0101F7D8  cbz      x0, #0x101f824                        
+0101F7DC  mov      w1, wzr                               
+0101F7E0  mov      x2, xzr                               
+0101F7E4  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0101F7E8  mov      x0, x19                               
+0101F7EC  bl       #0x101b9a0                             // SaveLoadManager$$doActivarBotones
+0101F7F0  ldrb     w8, [x19, #0x3cc]                      // self.dosteps
+0101F7F4  cbz      w8, #0x101f804                        
+0101F7F8  mov      x0, x19                               
+0101F7FC  strb     wzr, [x19, #0x3cc]                     // self.dosteps
+0101F800  bl       #0x101f828                             // SaveLoadManager$$doActivarSuelo
+0101F804  mov      x0, x19                               
+0101F808  bl       #0x101f914                             // SaveLoadManager$$doBorradoPiezas
+0101F80C  strb     wzr, [x19, #0x381]                     // self.recuperarSuelo
+0101F810  str      wzr, [x19, #0x3a8]                     // self.modoProceso
+0101F814  mov      x0, x19                               
+0101F818  ldp      x20, x19, [sp, #0x10]                 
+0101F81C  ldp      x30, x21, [sp], #0x20                 
+0101F820  b        #0x10138d0                             // SaveLoadManager$$doCargarEscena
+0101F824  bl       #0xe61da0                             

@@ -1,0 +1,465 @@
+// FuenteCubetaC$$doInstanciarAgua VA 0x109CA04, inferred length 1852
+void FuenteCubetaC__doInstanciarAgua (FuenteCubetaC_o* __this, const MethodInfo* method);
+0109CA04  str      d14, [sp, #-0x60]!                    
+0109CA08  stp      d13, d12, [sp, #8]                    
+0109CA0C  stp      d11, d10, [sp, #0x18]                 
+0109CA10  stp      d9, d8, [sp, #0x28]                   
+0109CA14  str      x30, [sp, #0x38]                      
+0109CA18  stp      x22, x21, [sp, #0x40]                 
+0109CA1C  stp      x20, x19, [sp, #0x50]                 
+0109CA20  adrp     x20, #0x24fb000                       
+0109CA24  ldrb     w8, [x20, #0xf39]                     
+0109CA28  mov      x19, x0                               
+0109CA2C  tbnz     w8, #0, #0x109ca68                    
+0109CA30  adrp     x0, #0x236a000                        
+0109CA34  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+0109CA38  bl       #0xe61b78                             
+0109CA3C  adrp     x0, #0x2368000                        
+0109CA40  ldr      x0, [x0, #0x900]                       // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+0109CA44  bl       #0xe61b78                             
+0109CA48  adrp     x0, #0x2368000                        
+0109CA4C  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0109CA50  bl       #0xe61b78                             
+0109CA54  adrp     x0, #0x236a000                        
+0109CA58  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+0109CA5C  bl       #0xe61b78                             
+0109CA60  mov      w8, #1                                
+0109CA64  strb     w8, [x20, #0xf39]                     
+0109CA68  ldr      w8, [x19, #0x30]                       // self.origen
+0109CA6C  adrp     x22, #0x2368000                       
+0109CA70  adrp     x21, #0x2368000                       
+0109CA74  ldr      x22, [x22, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+0109CA78  ldr      x21, [x21, #0x900]                     // [0x2368900] Method$UnityEngine.Object.Instantiate<GameObject>()
+0109CA7C  cmp      w8, #1                                
+0109CA80  b.ne     #0x109cb88                            
+0109CA84  adrp     x8, #0x5ff000                         
+0109CA88  ldr      s1, [x8, #0xe38]                      
+0109CA8C  ldr      x20, [x19, #0xf8]                      // self.prefabAgua
+0109CA90  fmov     s0, wzr                               
+0109CA94  fmov     s2, wzr                               
+0109CA98  mov      x0, xzr                               
+0109CA9C  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0109CAA0  ldr      x0, [x22]                             
+0109CAA4  mov      v10.16b, v0.16b                       
+0109CAA8  mov      v11.16b, v1.16b                       
+0109CAAC  mov      v12.16b, v2.16b                       
+0109CAB0  ldr      w8, [x0, #0xe0]                       
+0109CAB4  mov      v13.16b, v3.16b                       
+0109CAB8  cbnz     w8, #0x109cac0                        
+0109CABC  bl       #0xe61c80                             
+0109CAC0  adrp     x8, #0x600000                         
+0109CAC4  adrp     x9, #0x600000                         
+0109CAC8  ldr      s8, [x8, #0xc0]                       
+0109CACC  ldr      s9, [x9, #0x150]                      
+0109CAD0  ldr      x1, [x21]                             
+0109CAD4  fmov     s2, wzr                               
+0109CAD8  mov      x0, x20                               
+0109CADC  mov      v0.16b, v8.16b                        
+0109CAE0  mov      v1.16b, v9.16b                        
+0109CAE4  mov      v3.16b, v10.16b                       
+0109CAE8  mov      v4.16b, v11.16b                       
+0109CAEC  mov      v5.16b, v12.16b                       
+0109CAF0  mov      v6.16b, v13.16b                       
+0109CAF4  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+0109CAF8  str      x0, [x19, #0xa8]                       // self.Agua1
+0109CAFC  cbz      x0, #0x109d13c                        
+0109CB00  mov      x1, xzr                               
+0109CB04  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CB08  mov      x20, x0                               
+0109CB0C  mov      x0, x19                               
+0109CB10  mov      x1, xzr                               
+0109CB14  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109CB18  cbz      x20, #0x109d13c                       
+0109CB1C  mov      x1, x0                                
+0109CB20  mov      x0, x20                               
+0109CB24  mov      x2, xzr                               
+0109CB28  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+0109CB2C  ldr      x0, [x19, #0xa8]                       // self.Agua1
+0109CB30  cbz      x0, #0x109d13c                        
+0109CB34  mov      x1, xzr                               
+0109CB38  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CB3C  cbz      x0, #0x109d13c                        
+0109CB40  fmov     s2, wzr                               
+0109CB44  mov      v0.16b, v8.16b                        
+0109CB48  mov      v1.16b, v9.16b                        
+0109CB4C  mov      x1, xzr                               
+0109CB50  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0109CB54  ldr      x0, [x19, #0xa8]                       // self.Agua1
+0109CB58  cbz      x0, #0x109d13c                        
+0109CB5C  mov      x1, xzr                               
+0109CB60  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CB64  cbz      x0, #0x109d13c                        
+0109CB68  adrp     x8, #0x5ff000                         
+0109CB6C  adrp     x9, #0x5ff000                         
+0109CB70  ldr      s0, [x8, #0xc40]                      
+0109CB74  ldr      s2, [x9, #0xc44]                      
+0109CB78  fmov     s1, #4.00000000                       
+0109CB7C  mov      x1, xzr                               
+0109CB80  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+0109CB84  ldr      w8, [x19, #0x30]                       // self.origen
+0109CB88  cmp      w8, #2                                
+0109CB8C  b.ne     #0x109cc98                            
+0109CB90  ldr      x20, [x19, #0xf8]                      // self.prefabAgua
+0109CB94  fmov     s0, wzr                               
+0109CB98  fmov     s1, wzr                               
+0109CB9C  fmov     s2, wzr                               
+0109CBA0  mov      x0, xzr                               
+0109CBA4  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0109CBA8  ldr      x0, [x22]                             
+0109CBAC  mov      v10.16b, v0.16b                       
+0109CBB0  mov      v11.16b, v1.16b                       
+0109CBB4  mov      v12.16b, v2.16b                       
+0109CBB8  ldr      w8, [x0, #0xe0]                       
+0109CBBC  mov      v13.16b, v3.16b                       
+0109CBC0  cbnz     w8, #0x109cbc8                        
+0109CBC4  bl       #0xe61c80                             
+0109CBC8  adrp     x8, #0x600000                         
+0109CBCC  adrp     x9, #0x5ff000                         
+0109CBD0  ldr      s9, [x8, #0x150]                      
+0109CBD4  ldr      s8, [x9, #0xed0]                      
+0109CBD8  ldr      x1, [x21]                             
+0109CBDC  mov      w8, #-0xffffffff80000000              
+0109CBE0  fmov     s0, w8                                
+0109CBE4  mov      x0, x20                               
+0109CBE8  mov      v1.16b, v9.16b                        
+0109CBEC  mov      v2.16b, v8.16b                        
+0109CBF0  mov      v3.16b, v10.16b                       
+0109CBF4  mov      v4.16b, v11.16b                       
+0109CBF8  mov      v5.16b, v12.16b                       
+0109CBFC  mov      v6.16b, v13.16b                       
+0109CC00  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+0109CC04  str      x0, [x19, #0xa8]                       // self.Agua1
+0109CC08  cbz      x0, #0x109d13c                        
+0109CC0C  mov      x1, xzr                               
+0109CC10  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CC14  mov      x20, x0                               
+0109CC18  mov      x0, x19                               
+0109CC1C  mov      x1, xzr                               
+0109CC20  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109CC24  cbz      x20, #0x109d13c                       
+0109CC28  mov      x1, x0                                
+0109CC2C  mov      x0, x20                               
+0109CC30  mov      x2, xzr                               
+0109CC34  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+0109CC38  ldr      x0, [x19, #0xa8]                       // self.Agua1
+0109CC3C  cbz      x0, #0x109d13c                        
+0109CC40  mov      x1, xzr                               
+0109CC44  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CC48  cbz      x0, #0x109d13c                        
+0109CC4C  mov      w8, #-0xffffffff80000000              
+0109CC50  fmov     s0, w8                                
+0109CC54  mov      v1.16b, v9.16b                        
+0109CC58  mov      v2.16b, v8.16b                        
+0109CC5C  mov      x1, xzr                               
+0109CC60  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0109CC64  ldr      x0, [x19, #0xa8]                       // self.Agua1
+0109CC68  cbz      x0, #0x109d13c                        
+0109CC6C  mov      x1, xzr                               
+0109CC70  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CC74  cbz      x0, #0x109d13c                        
+0109CC78  adrp     x8, #0x5ff000                         
+0109CC7C  adrp     x9, #0x5ff000                         
+0109CC80  ldr      s0, [x8, #0xc40]                      
+0109CC84  ldr      s2, [x9, #0xc44]                      
+0109CC88  fmov     s1, #4.00000000                       
+0109CC8C  mov      x1, xzr                               
+0109CC90  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+0109CC94  ldr      w8, [x19, #0x30]                       // self.origen
+0109CC98  cmp      w8, #3                                
+0109CC9C  b.ne     #0x109cda4                            
+0109CCA0  adrp     x8, #0x5ff000                         
+0109CCA4  ldr      s1, [x8, #0xe08]                      
+0109CCA8  ldr      x20, [x19, #0xf8]                      // self.prefabAgua
+0109CCAC  fmov     s0, wzr                               
+0109CCB0  fmov     s2, wzr                               
+0109CCB4  mov      x0, xzr                               
+0109CCB8  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0109CCBC  ldr      x0, [x22]                             
+0109CCC0  mov      v10.16b, v0.16b                       
+0109CCC4  mov      v11.16b, v1.16b                       
+0109CCC8  mov      v12.16b, v2.16b                       
+0109CCCC  ldr      w8, [x0, #0xe0]                       
+0109CCD0  mov      v13.16b, v3.16b                       
+0109CCD4  cbnz     w8, #0x109ccdc                        
+0109CCD8  bl       #0xe61c80                             
+0109CCDC  adrp     x8, #0x5ff000                         
+0109CCE0  adrp     x9, #0x600000                         
+0109CCE4  ldr      s8, [x8, #0xed0]                      
+0109CCE8  ldr      s9, [x9, #0x150]                      
+0109CCEC  ldr      x1, [x21]                             
+0109CCF0  fmov     s2, wzr                               
+0109CCF4  mov      x0, x20                               
+0109CCF8  mov      v0.16b, v8.16b                        
+0109CCFC  mov      v1.16b, v9.16b                        
+0109CD00  mov      v3.16b, v10.16b                       
+0109CD04  mov      v4.16b, v11.16b                       
+0109CD08  mov      v5.16b, v12.16b                       
+0109CD0C  mov      v6.16b, v13.16b                       
+0109CD10  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+0109CD14  str      x0, [x19, #0xa8]                       // self.Agua1
+0109CD18  cbz      x0, #0x109d13c                        
+0109CD1C  mov      x1, xzr                               
+0109CD20  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CD24  mov      x20, x0                               
+0109CD28  mov      x0, x19                               
+0109CD2C  mov      x1, xzr                               
+0109CD30  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109CD34  cbz      x20, #0x109d13c                       
+0109CD38  mov      x1, x0                                
+0109CD3C  mov      x0, x20                               
+0109CD40  mov      x2, xzr                               
+0109CD44  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+0109CD48  ldr      x0, [x19, #0xa8]                       // self.Agua1
+0109CD4C  cbz      x0, #0x109d13c                        
+0109CD50  mov      x1, xzr                               
+0109CD54  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CD58  cbz      x0, #0x109d13c                        
+0109CD5C  fmov     s2, wzr                               
+0109CD60  mov      v0.16b, v8.16b                        
+0109CD64  mov      v1.16b, v9.16b                        
+0109CD68  mov      x1, xzr                               
+0109CD6C  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0109CD70  ldr      x0, [x19, #0xa8]                       // self.Agua1
+0109CD74  cbz      x0, #0x109d13c                        
+0109CD78  mov      x1, xzr                               
+0109CD7C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CD80  cbz      x0, #0x109d13c                        
+0109CD84  adrp     x8, #0x5ff000                         
+0109CD88  adrp     x9, #0x5ff000                         
+0109CD8C  ldr      s0, [x8, #0xc40]                      
+0109CD90  ldr      s2, [x9, #0xc44]                      
+0109CD94  fmov     s1, #4.00000000                       
+0109CD98  mov      x1, xzr                               
+0109CD9C  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+0109CDA0  ldr      w8, [x19, #0x30]                       // self.origen
+0109CDA4  cmp      w8, #4                                
+0109CDA8  b.ne     #0x109ceb0                            
+0109CDAC  adrp     x8, #0x5ff000                         
+0109CDB0  ldr      s1, [x8, #0xb20]                      
+0109CDB4  ldr      x20, [x19, #0xf8]                      // self.prefabAgua
+0109CDB8  fmov     s0, wzr                               
+0109CDBC  fmov     s2, wzr                               
+0109CDC0  mov      x0, xzr                               
+0109CDC4  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0109CDC8  ldr      x0, [x22]                             
+0109CDCC  mov      v10.16b, v0.16b                       
+0109CDD0  mov      v11.16b, v1.16b                       
+0109CDD4  mov      v12.16b, v2.16b                       
+0109CDD8  ldr      w8, [x0, #0xe0]                       
+0109CDDC  mov      v13.16b, v3.16b                       
+0109CDE0  cbnz     w8, #0x109cde8                        
+0109CDE4  bl       #0xe61c80                             
+0109CDE8  adrp     x8, #0x600000                         
+0109CDEC  adrp     x9, #0x600000                         
+0109CDF0  ldr      s9, [x8, #0x150]                      
+0109CDF4  ldr      s8, [x9, #0xc0]                       
+0109CDF8  ldr      x1, [x21]                             
+0109CDFC  fmov     s0, wzr                               
+0109CE00  mov      x0, x20                               
+0109CE04  mov      v1.16b, v9.16b                        
+0109CE08  mov      v2.16b, v8.16b                        
+0109CE0C  mov      v3.16b, v10.16b                       
+0109CE10  mov      v4.16b, v11.16b                       
+0109CE14  mov      v5.16b, v12.16b                       
+0109CE18  mov      v6.16b, v13.16b                       
+0109CE1C  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+0109CE20  str      x0, [x19, #0xa8]                       // self.Agua1
+0109CE24  cbz      x0, #0x109d13c                        
+0109CE28  mov      x1, xzr                               
+0109CE2C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CE30  mov      x20, x0                               
+0109CE34  mov      x0, x19                               
+0109CE38  mov      x1, xzr                               
+0109CE3C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109CE40  cbz      x20, #0x109d13c                       
+0109CE44  mov      x1, x0                                
+0109CE48  mov      x0, x20                               
+0109CE4C  mov      x2, xzr                               
+0109CE50  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+0109CE54  ldr      x0, [x19, #0xa8]                       // self.Agua1
+0109CE58  cbz      x0, #0x109d13c                        
+0109CE5C  mov      x1, xzr                               
+0109CE60  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CE64  cbz      x0, #0x109d13c                        
+0109CE68  fmov     s0, wzr                               
+0109CE6C  mov      v1.16b, v9.16b                        
+0109CE70  mov      v2.16b, v8.16b                        
+0109CE74  mov      x1, xzr                               
+0109CE78  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0109CE7C  ldr      x0, [x19, #0xa8]                       // self.Agua1
+0109CE80  cbz      x0, #0x109d13c                        
+0109CE84  mov      x1, xzr                               
+0109CE88  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CE8C  cbz      x0, #0x109d13c                        
+0109CE90  adrp     x8, #0x5ff000                         
+0109CE94  adrp     x9, #0x5ff000                         
+0109CE98  ldr      s0, [x8, #0xc40]                      
+0109CE9C  ldr      s2, [x9, #0xc44]                      
+0109CEA0  fmov     s1, #4.00000000                       
+0109CEA4  mov      x1, xzr                               
+0109CEA8  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+0109CEAC  ldr      w8, [x19, #0x30]                       // self.origen
+0109CEB0  cmp      w8, #5                                
+0109CEB4  b.ne     #0x109cfac                            
+0109CEB8  adrp     x8, #0x5ff000                         
+0109CEBC  ldr      s1, [x8, #0xb20]                      
+0109CEC0  ldr      x20, [x19, #0xf8]                      // self.prefabAgua
+0109CEC4  fmov     s0, wzr                               
+0109CEC8  fmov     s2, wzr                               
+0109CECC  mov      x0, xzr                               
+0109CED0  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0109CED4  ldr      x0, [x22]                             
+0109CED8  mov      v9.16b, v0.16b                        
+0109CEDC  mov      v10.16b, v1.16b                       
+0109CEE0  mov      v11.16b, v2.16b                       
+0109CEE4  ldr      w8, [x0, #0xe0]                       
+0109CEE8  mov      v12.16b, v3.16b                       
+0109CEEC  cbnz     w8, #0x109cef4                        
+0109CEF0  bl       #0xe61c80                             
+0109CEF4  adrp     x8, #0x5ff000                         
+0109CEF8  ldr      s8, [x8, #0xbb8]                      
+0109CEFC  ldr      x1, [x21]                             
+0109CF00  fmov     s0, wzr                               
+0109CF04  fmov     s1, #-1.50000000                      
+0109CF08  mov      x0, x20                               
+0109CF0C  mov      v2.16b, v8.16b                        
+0109CF10  mov      v3.16b, v9.16b                        
+0109CF14  mov      v4.16b, v10.16b                       
+0109CF18  mov      v5.16b, v11.16b                       
+0109CF1C  mov      v6.16b, v12.16b                       
+0109CF20  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+0109CF24  str      x0, [x19, #0xa8]                       // self.Agua1
+0109CF28  cbz      x0, #0x109d13c                        
+0109CF2C  mov      x1, xzr                               
+0109CF30  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CF34  mov      x20, x0                               
+0109CF38  mov      x0, x19                               
+0109CF3C  mov      x1, xzr                               
+0109CF40  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109CF44  cbz      x20, #0x109d13c                       
+0109CF48  mov      x1, x0                                
+0109CF4C  mov      x0, x20                               
+0109CF50  mov      x2, xzr                               
+0109CF54  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+0109CF58  ldr      x0, [x19, #0xa8]                       // self.Agua1
+0109CF5C  cbz      x0, #0x109d13c                        
+0109CF60  mov      x1, xzr                               
+0109CF64  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CF68  cbz      x0, #0x109d13c                        
+0109CF6C  fmov     s0, wzr                               
+0109CF70  fmov     s1, #-1.50000000                      
+0109CF74  mov      v2.16b, v8.16b                        
+0109CF78  mov      x1, xzr                               
+0109CF7C  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0109CF80  ldr      x0, [x19, #0xa8]                       // self.Agua1
+0109CF84  cbz      x0, #0x109d13c                        
+0109CF88  mov      x1, xzr                               
+0109CF8C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109CF90  cbz      x0, #0x109d13c                        
+0109CF94  adrp     x8, #0x5ff000                         
+0109CF98  ldr      s0, [x8, #0xc40]                      
+0109CF9C  fmov     s1, #2.00000000                       
+0109CFA0  fmov     s2, #2.00000000                       
+0109CFA4  mov      x1, xzr                               
+0109CFA8  bl       #0x200f138                             // UnityEngine.Transform$$set_localScale
+0109CFAC  ldr      w8, [x19, #0xf0]                       // self.tipoFuente
+0109CFB0  adrp     x9, #0x5ff000                         
+0109CFB4  ldr      s0, [x9, #0xc04]                      
+0109CFB8  ldr      x20, [x19, #0x100]                     // self.prefabFuente
+0109CFBC  cmp      w8, #2                                
+0109CFC0  fmov     s1, #15.50000000                      
+0109CFC4  fcsel    s8, s1, s0, eq                        
+0109CFC8  fmov     s0, wzr                               
+0109CFCC  fmov     s1, wzr                               
+0109CFD0  fmov     s2, wzr                               
+0109CFD4  mov      x0, xzr                               
+0109CFD8  bl       #0x1ffcc14                             // UnityEngine.Quaternion$$Internal_FromEulerRad
+0109CFDC  ldr      x0, [x22]                             
+0109CFE0  mov      v11.16b, v0.16b                       
+0109CFE4  mov      v12.16b, v1.16b                       
+0109CFE8  mov      v13.16b, v2.16b                       
+0109CFEC  ldr      w8, [x0, #0xe0]                       
+0109CFF0  mov      v14.16b, v3.16b                       
+0109CFF4  cbnz     w8, #0x109cffc                        
+0109CFF8  bl       #0xe61c80                             
+0109CFFC  adrp     x8, #0x5ff000                         
+0109D000  adrp     x9, #0x5ff000                         
+0109D004  ldr      s9, [x8, #0xc3c]                      
+0109D008  ldr      s10, [x9, #0xcb0]                     
+0109D00C  ldr      x1, [x21]                             
+0109D010  mov      x0, x20                               
+0109D014  mov      v1.16b, v8.16b                        
+0109D018  mov      v0.16b, v10.16b                       
+0109D01C  mov      v2.16b, v9.16b                        
+0109D020  mov      v3.16b, v11.16b                       
+0109D024  mov      v4.16b, v12.16b                       
+0109D028  mov      v5.16b, v13.16b                       
+0109D02C  mov      v6.16b, v14.16b                       
+0109D030  bl       #0x117f538                             // UnityEngine.Object$$Instantiate<object>
+0109D034  str      x0, [x19, #0xb0]                       // self.Agua2
+0109D038  cbz      x0, #0x109d13c                        
+0109D03C  mov      x1, xzr                               
+0109D040  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109D044  mov      x20, x0                               
+0109D048  mov      x0, x19                               
+0109D04C  mov      x1, xzr                               
+0109D050  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0109D054  cbz      x20, #0x109d13c                       
+0109D058  mov      x1, x0                                
+0109D05C  mov      x0, x20                               
+0109D060  mov      x2, xzr                               
+0109D064  bl       #0x200f20c                             // UnityEngine.Transform$$set_parent
+0109D068  ldr      x0, [x19, #0xb0]                       // self.Agua2
+0109D06C  cbz      x0, #0x109d13c                        
+0109D070  mov      x1, xzr                               
+0109D074  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0109D078  cbz      x0, #0x109d13c                        
+0109D07C  adrp     x20, #0x236a000                       
+0109D080  ldr      x20, [x20, #0x758]                     // [0x236A758] UIManagerScript_TypeInfo
+0109D084  mov      v0.16b, v10.16b                       
+0109D088  mov      v1.16b, v8.16b                        
+0109D08C  mov      v2.16b, v9.16b                        
+0109D090  mov      x1, xzr                               
+0109D094  bl       #0x200eb88                             // UnityEngine.Transform$$set_localPosition
+0109D098  ldr      x8, [x20]                             
+0109D09C  ldr      x8, [x8, #0xb8]                       
+0109D0A0  ldr      w8, [x8, #4]                          
+0109D0A4  cmp      w8, #1                                
+0109D0A8  b.ne     #0x109d0c0                            
+0109D0AC  ldr      x0, [x19, #0x1c0]                      // self.audioManager
+0109D0B0  cbz      x0, #0x109d13c                        
+0109D0B4  ldr      x1, [x19, #0x1b8]                      // self.SonidoFuente
+0109D0B8  mov      x2, xzr                               
+0109D0BC  bl       #0x1028540                             // AudioManager$$PlaySound
+0109D0C0  adrp     x20, #0x236a000                       
+0109D0C4  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+0109D0C8  ldr      x0, [x20]                             
+0109D0CC  ldr      w8, [x0, #0xe0]                       
+0109D0D0  cbnz     w8, #0x109d0dc                        
+0109D0D4  bl       #0xe61c80                             
+0109D0D8  ldr      x0, [x20]                             
+0109D0DC  ldr      x8, [x0, #0xb8]                       
+0109D0E0  ldrb     w9, [x8, #0x15]                       
+0109D0E4  cbz      w9, #0x109d10c                        
+0109D0E8  ldr      w9, [x0, #0xe0]                       
+0109D0EC  cbnz     w9, #0x109d0fc                        
+0109D0F0  bl       #0xe61c80                             
+0109D0F4  ldr      x8, [x20]                             
+0109D0F8  ldr      x8, [x8, #0xb8]                       
+0109D0FC  ldr      d0, [x8, #8]                          
+0109D100  movi     v1.2s, #1                             
+0109D104  add      v0.2s, v0.2s, v1.2s                   
+0109D108  str      d0, [x8, #8]                          
+0109D10C  ldr      x8, [x19, #0x160]                      // self.agscr
+0109D110  cbz      x8, #0x109d13c                        
+0109D114  ldr      w9, [x19, #0x30]                       // self.origen
+0109D118  ldp      x20, x19, [sp, #0x50]                 
+0109D11C  ldp      x22, x21, [sp, #0x40]                 
+0109D120  ldr      x30, [sp, #0x38]                      
+0109D124  ldp      d9, d8, [sp, #0x28]                   
+0109D128  ldp      d11, d10, [sp, #0x18]                 
+0109D12C  ldp      d13, d12, [sp, #8]                    
+0109D130  str      w9, [x8, #0x20]                       
+0109D134  ldr      d14, [sp], #0x60                      
+0109D138  ret                                            
+0109D13C  bl       #0xe61da0                             
