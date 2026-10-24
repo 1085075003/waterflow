@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Recovered.FlowWater
+{
+    // CascadaTest.Start FCFC4C and doControlAltura FD0354: original
+    // floor probes use layer 9, radius 2, endpoint distance 20. The
+    // same-height arch marker is open when the layer 15 probe at 14 is clear.
+    public sealed class RecoveredWaterCollision : IDisposable
+    {
+        readonly Dictionary<Collider, RecoveryPiece> owners = new Dictionary<Collider, RecoveryPiece>();
+        readonly List<Collider> enabled = new List<Collider>();
+        static readonly float[] Depths = { 0, 7.92f, 16, 24, 32, 38 };
+
+        public RecoveredWaterCollision(IEnumerable<RecoveryPiece> pieces)
+        {
+            foreach (RecoveryPiece piece in pieces)
+            {
+                if (piece == null || piece.OriginalCaptureColliders == null) continue;
+                foreach (Collider collider in piece.OriginalCaptureColliders)
+                {
+                    if (collider == null || !collider.gameObject.activeInHierarchy) continue;
+                    bool originalEnabled;
+                    if ((RecoveredNativeGeometry.TryGetOriginalColliderEnabled(collider, out originalEnabled) ||
+                        RecoveredNativeFixedGeometry.TryGetOriginalColliderEnabled(collider, out originalEnabled)) && !originalEnabled) continue;
+                    owners[collider] = piece;
+                    if (!collider.enabled) { collider.enabled = true; enabled.Add(collider); }
+                }
+            }
+            Physics.SyncTransforms();
+        }
+
+        public bool BlocksFall(RecoveryPiece source, Vector3 sourcePoint,
+            RecoveryPiece target, Vector3 targetPoint, Vector3 endpoint)
+        {
+            float drop = sourcePoint.y - targetPoint.y;
+            Vector3 direction = endpoint - sourcePoint; direction.y = 0;
+            Vector3 entryProbe = sourcePoint + direction.normalized * 14;
+            for (int i = 0; i < Depths.Length; i++)
+            {
+                if (Depths[i] > drop + 2) break;
+                Vector3 probe = new Vector3(endpoint.x, sourcePoint.y - Depths[i], endpoint.z);
+                Collider[] contacts = Physics.OverlapSphere(probe, 2, 1 << 9, QueryTriggerInteraction.UseGlobal);
+                bool hit = false, arch = false;
+                foreach (Collider collider in contacts)
+                {
+                    RecoveryPiece owner;
+                    if (!owners.TryGetValue(collider, out owner) || owner == source || owner == target ||
+                        owner.transform.position.y <= targetPoint.y + 3 || owner.transform.position.y > sourcePoint.y + .4f) continue;
+                    hit = true;
+                    arch |= collider.name.Contains("esferacentroArco");
+                }
+                if (!hit) continue;
+                if (i == 0 && arch)
+                {
+                    bool wall = false;
+                    foreach (Collider collider in Physics.OverlapSphere(entryProbe, 2, 1 << 15, QueryTriggerInteraction.UseGlobal))
+                    {
+                        RecoveryPiece owner;
+                        if (owners.TryGetValue(collider, out owner) && owner != source && owner != target) { wall = true; break; }
+                    }
+                    if (!wall) continue;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public void Dispose()
+        {
+            foreach (Collider collider in enabled) if (collider != null) collider.enabled = false;
+            enabled.Clear(); owners.Clear();
+        }
+
+        public bool BlocksUpward(RecoveryPiece source, RecoveryPiece target, Vector3 probe)
+        {
+            // CascadaTest1.CheckCollision FD3C94 and .ctor FD3DB0.
+            foreach (Collider collider in Physics.OverlapSphere(probe, 2, 1 << 9, QueryTriggerInteraction.UseGlobal))
+            {
+                RecoveryPiece owner;
+                if (owners.TryGetValue(collider, out owner) && owner != source && owner != target) return true;
+            }
+            return false;
+        }
+    }
+}

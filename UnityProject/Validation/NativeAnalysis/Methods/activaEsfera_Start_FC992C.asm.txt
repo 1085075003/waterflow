@@ -1,0 +1,22 @@
+// activaEsfera$$Start VA 0xFC992C, inferred length 80
+void activaEsfera__Start (activaEsfera_o* __this, const MethodInfo* method);
+00FC992C  stp      x30, x21, [sp, #-0x20]!               
+00FC9930  stp      x20, x19, [sp, #0x10]                 
+00FC9934  adrp     x20, #0x24fb000                       
+00FC9938  adrp     x21, #0x236a000                       
+00FC993C  ldrb     w8, [x20, #0xb33]                     
+00FC9940  ldr      x21, [x21, #0x5a8]                     // [0x236A5A8] 'activaEsfera1'
+00FC9944  mov      x19, x0                               
+00FC9948  tbnz     w8, #0, #0xfc9960                     
+00FC994C  adrp     x0, #0x236a000                        
+00FC9950  ldr      x0, [x0, #0x5a8]                       // [0x236A5A8] 'activaEsfera1'
+00FC9954  bl       #0xe61b78                             
+00FC9958  mov      w8, #1                                
+00FC995C  strb     w8, [x20, #0xb33]                     
+00FC9960  ldr      x1, [x21]                             
+00FC9964  mov      x0, x19                               
+00FC9968  ldp      x20, x19, [sp, #0x10]                 
+00FC996C  fmov     s0, #0.50000000                       
+00FC9970  mov      x2, xzr                               
+00FC9974  ldp      x30, x21, [sp], #0x20                 
+00FC9978  b        #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke

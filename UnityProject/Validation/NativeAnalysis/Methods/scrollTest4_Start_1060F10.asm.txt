@@ -1,0 +1,82 @@
+// scrollTest4$$Start VA 0x1060F10, inferred length 320
+void scrollTest4__Start (scrollTest4_o* __this, const MethodInfo* method);
+01060F10  stp      x30, x21, [sp, #-0x20]!               
+01060F14  stp      x20, x19, [sp, #0x10]                 
+01060F18  adrp     x21, #0x24fb000                       
+01060F1C  adrp     x20, #0x2368000                       
+01060F20  ldrb     w8, [x21, #0xe23]                     
+01060F24  ldr      x20, [x20, #0xf50]                     // [0x2368F50] ''
+01060F28  mov      x19, x0                               
+01060F2C  tbnz     w8, #0, #0x1060f5c                    
+01060F30  adrp     x0, #0x236a000                        
+01060F34  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+01060F38  bl       #0xe61b78                             
+01060F3C  adrp     x0, #0x2368000                        
+01060F40  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+01060F44  bl       #0xe61b78                             
+01060F48  adrp     x0, #0x236a000                        
+01060F4C  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+01060F50  bl       #0xe61b78                             
+01060F54  mov      w8, #1                                
+01060F58  strb     w8, [x21, #0xe23]                     
+01060F5C  ldr      x0, [x19, #0x58]                       // self.confColor
+01060F60  ldr      x1, [x20]                             
+01060F64  adrp     x20, #0x236a000                       
+01060F68  ldr      x20, [x20, #0x6e8]                     // [0x236A6E8] '1'
+01060F6C  mov      x2, xzr                               
+01060F70  bl       #0x1960c7c                             // System.String$$op_Equality
+01060F74  tbz      w0, #0, #0x1060f84                    
+01060F78  adrp     x8, #0x602000                         
+01060F7C  ldr      q0, [x8, #0x70]                       
+01060F80  stur     q0, [x19, #0x48]                       // self.color1
+01060F84  ldr      x0, [x19, #0x58]                       // self.confColor
+01060F88  ldr      x1, [x20]                             
+01060F8C  adrp     x20, #0x236a000                       
+01060F90  ldr      x20, [x20, #0x658]                     // [0x236A658] '2'
+01060F94  mov      x2, xzr                               
+01060F98  bl       #0x1960c7c                             // System.String$$op_Equality
+01060F9C  tbz      w0, #0, #0x1060fac                    
+01060FA0  adrp     x8, #0x601000                         
+01060FA4  ldr      q0, [x8, #0x7d0]                      
+01060FA8  stur     q0, [x19, #0x48]                       // self.color1
+01060FAC  ldr      x0, [x19, #0x58]                       // self.confColor
+01060FB0  ldr      x1, [x20]                             
+01060FB4  mov      x2, xzr                               
+01060FB8  bl       #0x1960c7c                             // System.String$$op_Equality
+01060FBC  tbz      w0, #0, #0x1060fcc                    
+01060FC0  adrp     x8, #0x601000                         
+01060FC4  ldr      q0, [x8, #0xd40]                      
+01060FC8  stur     q0, [x19, #0x48]                       // self.color1
+01060FCC  ldr      x0, [x19, #0x20]                       // self.material1
+01060FD0  cbz      x0, #0x106104c                        
+01060FD4  ldp      s2, s3, [x19, #0x50]                  
+01060FD8  ldp      s0, s1, [x19, #0x48]                   // self.color1
+01060FDC  mov      x1, xzr                               
+01060FE0  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01060FE4  ldr      x0, [x19, #0x28]                       // self.material2
+01060FE8  cbz      x0, #0x106104c                        
+01060FEC  ldp      s2, s3, [x19, #0x50]                  
+01060FF0  ldp      s0, s1, [x19, #0x48]                   // self.color1
+01060FF4  mov      x1, xzr                               
+01060FF8  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01060FFC  ldr      x0, [x19, #0x30]                       // self.material3
+01061000  cbz      x0, #0x106104c                        
+01061004  ldp      s2, s3, [x19, #0x50]                  
+01061008  ldp      s0, s1, [x19, #0x48]                   // self.color1
+0106100C  mov      x1, xzr                               
+01061010  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+01061014  ldr      x0, [x19, #0x38]                       // self.material4
+01061018  cbz      x0, #0x106104c                        
+0106101C  ldp      s2, s3, [x19, #0x50]                  
+01061020  ldp      s0, s1, [x19, #0x48]                   // self.color1
+01061024  mov      x1, xzr                               
+01061028  bl       #0x1fecd78                             // UnityEngine.Material$$set_color
+0106102C  ldr      x0, [x19, #0x40]                       // self.material5
+01061030  cbz      x0, #0x106104c                        
+01061034  ldp      s2, s3, [x19, #0x50]                  
+01061038  ldp      s0, s1, [x19, #0x48]                   // self.color1
+0106103C  ldp      x20, x19, [sp, #0x10]                 
+01061040  mov      x1, xzr                               
+01061044  ldp      x30, x21, [sp], #0x20                 
+01061048  b        #0x1fecd78                             // UnityEngine.Material$$set_color
+0106104C  bl       #0xe61da0                             

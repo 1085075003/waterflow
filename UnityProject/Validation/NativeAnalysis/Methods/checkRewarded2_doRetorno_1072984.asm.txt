@@ -1,0 +1,64 @@
+// checkRewarded2$$doRetorno VA 0x1072984, inferred length 248
+void checkRewarded2__doRetorno (checkRewarded2_o* __this, const MethodInfo* method);
+01072984  str      x30, [sp, #-0x20]!                    
+01072988  stp      x20, x19, [sp, #0x10]                 
+0107298C  adrp     x20, #0x24fb000                       
+01072990  ldrb     w8, [x20, #0xeb2]                     
+01072994  mov      x19, x0                               
+01072998  tbnz     w8, #0, #0x10729d4                    
+0107299C  adrp     x0, #0x236a000                        
+010729A0  ldr      x0, [x0, #0x890]                       // [0x236A890] ControladorJuego_TypeInfo
+010729A4  bl       #0xe61b78                             
+010729A8  adrp     x0, #0x236a000                        
+010729AC  ldr      x0, [x0, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+010729B0  bl       #0xe61b78                             
+010729B4  adrp     x0, #0x236d000                        
+010729B8  ldr      x0, [x0, #0x3e0]                       // [0x236D3E0] 'rewHintsAd'
+010729BC  bl       #0xe61b78                             
+010729C0  adrp     x0, #0x2368000                        
+010729C4  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+010729C8  bl       #0xe61b78                             
+010729CC  mov      w8, #1                                
+010729D0  strb     w8, [x20, #0xeb2]                     
+010729D4  ldr      x0, [x19, #0x28]                       // self.rewAdmob
+010729D8  cbz      x0, #0x1072a78                        
+010729DC  adrp     x8, #0x236a000                        
+010729E0  ldr      x8, [x8, #0xf48]                       // [0x236AF48] Method$UnityEngine.GameObject.GetComponent<Button>()
+010729E4  ldr      x1, [x8]                              
+010729E8  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010729EC  cbz      x0, #0x1072a78                        
+010729F0  adrp     x20, #0x2368000                       
+010729F4  ldr      x20, [x20, #0xf50]                     // [0x2368F50] ''
+010729F8  mov      w1, wzr                               
+010729FC  mov      x2, xzr                               
+01072A00  bl       #0x222d9f4                             // UnityEngine.UI.Selectable$$set_interactable
+01072A04  ldr      x8, [x20]                             
+01072A08  ldrb     w9, [x19, #0x42]                       // self.showedAdmob
+01072A0C  str      x8, [x19, #0x90]                       // self.process_SE
+01072A10  cbz      w9, #0x1072a24                        
+01072A14  adrp     x8, #0x236d000                        
+01072A18  ldr      x8, [x8, #0x3e0]                       // [0x236D3E0] 'rewHintsAd'
+01072A1C  ldr      x8, [x8]                              
+01072A20  str      x8, [x19, #0x90]                       // self.process_SE
+01072A24  ldr      x0, [x19, #0x68]                       // self.saveloadmanager
+01072A28  strb     wzr, [x19, #0x42]                      // self.showedAdmob
+01072A2C  strb     wzr, [x19, #0x38]                      // self.checkAdmob
+01072A30  strh     wzr, [x19, #0x40]                      // self.encontrado1
+01072A34  cbz      x0, #0x1072a78                        
+01072A38  adrp     x20, #0x236a000                       
+01072A3C  ldr      x20, [x20, #0x890]                     // [0x236A890] ControladorJuego_TypeInfo
+01072A40  mov      x1, xzr                               
+01072A44  bl       #0x101b9a0                             // SaveLoadManager$$doActivarBotones
+01072A48  ldr      x0, [x20]                             
+01072A4C  ldr      w8, [x0, #0xe0]                       
+01072A50  cbnz     w8, #0x1072a5c                        
+01072A54  bl       #0xe61c80                             
+01072A58  ldr      x0, [x20]                             
+01072A5C  ldr      x8, [x0, #0xb8]                       
+01072A60  mov      x0, x19                               
+01072A64  ldp      x20, x19, [sp, #0x10]                 
+01072A68  mov      w9, #1                                
+01072A6C  strb     w9, [x8, #0x16]                       
+01072A70  ldr      x30, [sp], #0x20                      
+01072A74  b        #0x1072a7c                             // checkRewarded2$$doAnalytics
+01072A78  bl       #0xe61da0                             

@@ -1,0 +1,582 @@
+// colorCilindro$$Start VA 0x10738E8, inferred length 2320
+void colorCilindro__Start (colorCilindro_o* __this, const MethodInfo* method);
+010738E8  stp      x30, x21, [sp, #-0x20]!               
+010738EC  stp      x20, x19, [sp, #0x10]                 
+010738F0  adrp     x20, #0x24fb000                       
+010738F4  adrp     x21, #0x2368000                       
+010738F8  ldrb     w8, [x20, #0xebc]                     
+010738FC  ldr      x21, [x21, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+01073900  mov      x19, x0                               
+01073904  tbnz     w8, #0, #0x1073970                    
+01073908  adrp     x0, #0x2368000                        
+0107390C  ldr      x0, [x0, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073910  bl       #0xe61b78                             
+01073914  adrp     x0, #0x2368000                        
+01073918  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0107391C  bl       #0xe61b78                             
+01073920  adrp     x0, #0x236a000                        
+01073924  ldr      x0, [x0, #0x650]                       // [0x236A650] '3'
+01073928  bl       #0xe61b78                             
+0107392C  adrp     x0, #0x236a000                        
+01073930  ldr      x0, [x0, #0x658]                       // [0x236A658] '2'
+01073934  bl       #0xe61b78                             
+01073938  adrp     x0, #0x236a000                        
+0107393C  ldr      x0, [x0, #0x6a8]                       // [0x236A6A8] '4'
+01073940  bl       #0xe61b78                             
+01073944  adrp     x0, #0x236d000                        
+01073948  ldr      x0, [x0, #0x400]                       // [0x236D400] 'Rendija'
+0107394C  bl       #0xe61b78                             
+01073950  adrp     x0, #0x2368000                        
+01073954  ldr      x0, [x0, #0xf50]                       // [0x2368F50] ''
+01073958  bl       #0xe61b78                             
+0107395C  adrp     x0, #0x236a000                        
+01073960  ldr      x0, [x0, #0x6e8]                       // [0x236A6E8] '1'
+01073964  bl       #0xe61b78                             
+01073968  mov      w8, #1                                
+0107396C  strb     w8, [x20, #0xebc]                     
+01073970  str      wzr, [x19, #0x100]                     // self.check
+01073974  ldr      x0, [x21]                             
+01073978  ldr      x20, [x19, #0x20]                      // self.cilindro
+0107397C  ldr      w8, [x0, #0xe0]                       
+01073980  cbnz     w8, #0x1073988                        
+01073984  bl       #0xe61c80                             
+01073988  mov      x0, x20                               
+0107398C  mov      x1, xzr                               
+01073990  mov      x2, xzr                               
+01073994  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073998  tbz      w0, #0, #0x1073a04                    
+0107399C  ldr      x0, [x19, #0x20]                       // self.cilindro
+010739A0  cbz      x0, #0x10741f4                        
+010739A4  mov      x1, xzr                               
+010739A8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010739AC  cbz      x0, #0x10741f4                        
+010739B0  mov      x1, xzr                               
+010739B4  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010739B8  cbz      x0, #0x10741f4                        
+010739BC  adrp     x8, #0x236d000                        
+010739C0  ldr      x8, [x8, #0x400]                       // [0x236D400] 'Rendija'
+010739C4  mov      x2, xzr                               
+010739C8  ldr      x1, [x8]                              
+010739CC  bl       #0x19651dc                             // System.String$$Contains
+010739D0  tbz      w0, #0, #0x1073a04                    
+010739D4  ldr      x0, [x19, #0x20]                       // self.cilindro
+010739D8  mov      w8, #1                                
+010739DC  str      w8, [x19, #0x100]                      // self.check
+010739E0  cbz      x0, #0x10741f4                        
+010739E4  adrp     x8, #0x2368000                        
+010739E8  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010739EC  ldr      x1, [x8]                              
+010739F0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010739F4  cbz      x0, #0x10741f4                        
+010739F8  ldr      x1, [x19, #0x70]                       // self.material0
+010739FC  mov      x2, xzr                               
+01073A00  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073A04  ldr      w8, [x19, #0x100]                      // self.check
+01073A08  cbnz     w8, #0x10741e8                        
+01073A0C  ldr      w8, [x19, #0x58]                       // self.color
+01073A10  cmp      w8, #1                                
+01073A14  b.ne     #0x1073bac                            
+01073A18  ldr      x0, [x21]                             
+01073A1C  ldr      x20, [x19, #0x20]                      // self.cilindro
+01073A20  ldr      w8, [x0, #0xe0]                       
+01073A24  cbnz     w8, #0x1073a2c                        
+01073A28  bl       #0xe61c80                             
+01073A2C  mov      x0, x20                               
+01073A30  mov      x1, xzr                               
+01073A34  mov      x2, xzr                               
+01073A38  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073A3C  tbz      w0, #0, #0x1073a68                    
+01073A40  ldr      x0, [x19, #0x20]                       // self.cilindro
+01073A44  cbz      x0, #0x10741f4                        
+01073A48  adrp     x8, #0x2368000                        
+01073A4C  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073A50  ldr      x1, [x8]                              
+01073A54  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073A58  cbz      x0, #0x10741f4                        
+01073A5C  ldr      x1, [x19, #0x78]                       // self.material1
+01073A60  mov      x2, xzr                               
+01073A64  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073A68  ldr      x0, [x21]                             
+01073A6C  ldr      x20, [x19, #0x28]                      // self.cilindroB
+01073A70  ldr      w8, [x0, #0xe0]                       
+01073A74  cbnz     w8, #0x1073a7c                        
+01073A78  bl       #0xe61c80                             
+01073A7C  mov      x0, x20                               
+01073A80  mov      x1, xzr                               
+01073A84  mov      x2, xzr                               
+01073A88  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073A8C  tbz      w0, #0, #0x1073ab8                    
+01073A90  ldr      x0, [x19, #0x28]                       // self.cilindroB
+01073A94  cbz      x0, #0x10741f4                        
+01073A98  adrp     x8, #0x2368000                        
+01073A9C  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073AA0  ldr      x1, [x8]                              
+01073AA4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073AA8  cbz      x0, #0x10741f4                        
+01073AAC  ldr      x1, [x19, #0x78]                       // self.material1
+01073AB0  mov      x2, xzr                               
+01073AB4  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073AB8  ldr      x0, [x21]                             
+01073ABC  ldr      x20, [x19, #0x30]                      // self.cilindroC
+01073AC0  ldr      w8, [x0, #0xe0]                       
+01073AC4  cbnz     w8, #0x1073acc                        
+01073AC8  bl       #0xe61c80                             
+01073ACC  mov      x0, x20                               
+01073AD0  mov      x1, xzr                               
+01073AD4  mov      x2, xzr                               
+01073AD8  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073ADC  tbz      w0, #0, #0x1073b08                    
+01073AE0  ldr      x0, [x19, #0x30]                       // self.cilindroC
+01073AE4  cbz      x0, #0x10741f4                        
+01073AE8  adrp     x8, #0x2368000                        
+01073AEC  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073AF0  ldr      x1, [x8]                              
+01073AF4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073AF8  cbz      x0, #0x10741f4                        
+01073AFC  ldr      x1, [x19, #0xb8]                       // self.material1c
+01073B00  mov      x2, xzr                               
+01073B04  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073B08  ldr      x0, [x21]                             
+01073B0C  ldr      x20, [x19, #0x38]                      // self.cilindro1
+01073B10  ldr      w8, [x0, #0xe0]                       
+01073B14  cbnz     w8, #0x1073b1c                        
+01073B18  bl       #0xe61c80                             
+01073B1C  mov      x0, x20                               
+01073B20  mov      x1, xzr                               
+01073B24  mov      x2, xzr                               
+01073B28  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073B2C  tbz      w0, #0, #0x1073b58                    
+01073B30  ldr      x0, [x19, #0x38]                       // self.cilindro1
+01073B34  cbz      x0, #0x10741f4                        
+01073B38  adrp     x8, #0x2368000                        
+01073B3C  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073B40  ldr      x1, [x8]                              
+01073B44  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073B48  cbz      x0, #0x10741f4                        
+01073B4C  ldr      x1, [x19, #0x98]                       // self.material1b
+01073B50  mov      x2, xzr                               
+01073B54  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073B58  ldr      x0, [x21]                             
+01073B5C  ldr      x20, [x19, #0x40]                      // self.cilindro2
+01073B60  ldr      w8, [x0, #0xe0]                       
+01073B64  cbnz     w8, #0x1073b6c                        
+01073B68  bl       #0xe61c80                             
+01073B6C  mov      x0, x20                               
+01073B70  mov      x1, xzr                               
+01073B74  mov      x2, xzr                               
+01073B78  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073B7C  tbz      w0, #0, #0x1073ba8                    
+01073B80  ldr      x0, [x19, #0x40]                       // self.cilindro2
+01073B84  cbz      x0, #0x10741f4                        
+01073B88  adrp     x8, #0x2368000                        
+01073B8C  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073B90  ldr      x1, [x8]                              
+01073B94  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073B98  cbz      x0, #0x10741f4                        
+01073B9C  ldr      x1, [x19, #0x98]                       // self.material1b
+01073BA0  mov      x2, xzr                               
+01073BA4  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073BA8  ldr      w8, [x19, #0x58]                       // self.color
+01073BAC  cmp      w8, #2                                
+01073BB0  b.ne     #0x1073d44                            
+01073BB4  ldr      x0, [x21]                             
+01073BB8  ldr      x20, [x19, #0x20]                      // self.cilindro
+01073BBC  ldr      w8, [x0, #0xe0]                       
+01073BC0  cbnz     w8, #0x1073bc8                        
+01073BC4  bl       #0xe61c80                             
+01073BC8  mov      x0, x20                               
+01073BCC  mov      x1, xzr                               
+01073BD0  mov      x2, xzr                               
+01073BD4  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073BD8  tbz      w0, #0, #0x1073c04                    
+01073BDC  ldr      x0, [x19, #0x20]                       // self.cilindro
+01073BE0  cbz      x0, #0x10741f4                        
+01073BE4  adrp     x8, #0x2368000                        
+01073BE8  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073BEC  ldr      x1, [x8]                              
+01073BF0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073BF4  cbz      x0, #0x10741f4                        
+01073BF8  ldr      x1, [x19, #0x80]                       // self.material2
+01073BFC  mov      x2, xzr                               
+01073C00  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073C04  ldr      x0, [x21]                             
+01073C08  ldr      x20, [x19, #0x28]                      // self.cilindroB
+01073C0C  ldr      w8, [x0, #0xe0]                       
+01073C10  cbnz     w8, #0x1073c18                        
+01073C14  bl       #0xe61c80                             
+01073C18  mov      x0, x20                               
+01073C1C  mov      x1, xzr                               
+01073C20  mov      x2, xzr                               
+01073C24  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073C28  tbz      w0, #0, #0x1073c54                    
+01073C2C  ldr      x0, [x19, #0x28]                       // self.cilindroB
+01073C30  cbz      x0, #0x10741f4                        
+01073C34  adrp     x8, #0x2368000                        
+01073C38  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073C3C  ldr      x1, [x8]                              
+01073C40  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073C44  cbz      x0, #0x10741f4                        
+01073C48  ldr      x1, [x19, #0x80]                       // self.material2
+01073C4C  mov      x2, xzr                               
+01073C50  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073C54  ldr      x0, [x21]                             
+01073C58  ldr      x20, [x19, #0x30]                      // self.cilindroC
+01073C5C  ldr      w8, [x0, #0xe0]                       
+01073C60  cbnz     w8, #0x1073c68                        
+01073C64  bl       #0xe61c80                             
+01073C68  mov      x0, x20                               
+01073C6C  mov      x1, xzr                               
+01073C70  mov      x2, xzr                               
+01073C74  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073C78  tbz      w0, #0, #0x1073ca4                    
+01073C7C  ldr      x0, [x19, #0x30]                       // self.cilindroC
+01073C80  cbz      x0, #0x10741f4                        
+01073C84  adrp     x8, #0x2368000                        
+01073C88  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073C8C  ldr      x1, [x8]                              
+01073C90  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073C94  cbz      x0, #0x10741f4                        
+01073C98  ldr      x1, [x19, #0xc0]                       // self.material2c
+01073C9C  mov      x2, xzr                               
+01073CA0  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073CA4  ldr      x0, [x21]                             
+01073CA8  ldr      x20, [x19, #0x38]                      // self.cilindro1
+01073CAC  ldr      w8, [x0, #0xe0]                       
+01073CB0  cbnz     w8, #0x1073cb8                        
+01073CB4  bl       #0xe61c80                             
+01073CB8  mov      x0, x20                               
+01073CBC  mov      x1, xzr                               
+01073CC0  mov      x2, xzr                               
+01073CC4  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073CC8  tbz      w0, #0, #0x1073cf4                    
+01073CCC  ldr      x0, [x19, #0x38]                       // self.cilindro1
+01073CD0  cbz      x0, #0x10741f4                        
+01073CD4  adrp     x8, #0x2368000                        
+01073CD8  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073CDC  ldr      x1, [x8]                              
+01073CE0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073CE4  cbz      x0, #0x10741f4                        
+01073CE8  ldr      x1, [x19, #0xa0]                       // self.material2b
+01073CEC  mov      x2, xzr                               
+01073CF0  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073CF4  ldr      x0, [x21]                             
+01073CF8  ldr      x20, [x19, #0x40]                      // self.cilindro2
+01073CFC  ldr      w8, [x0, #0xe0]                       
+01073D00  cbnz     w8, #0x1073d08                        
+01073D04  bl       #0xe61c80                             
+01073D08  mov      x0, x20                               
+01073D0C  mov      x1, xzr                               
+01073D10  mov      x2, xzr                               
+01073D14  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073D18  tbz      w0, #0, #0x1073d44                    
+01073D1C  ldr      x0, [x19, #0x40]                       // self.cilindro2
+01073D20  cbz      x0, #0x10741f4                        
+01073D24  adrp     x8, #0x2368000                        
+01073D28  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073D2C  ldr      x1, [x8]                              
+01073D30  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073D34  cbz      x0, #0x10741f4                        
+01073D38  ldr      x1, [x19, #0xa0]                       // self.material2b
+01073D3C  mov      x2, xzr                               
+01073D40  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073D44  ldr      w8, [x19, #0x58]                       // self.color
+01073D48  cmp      w8, #3                                
+01073D4C  b.ne     #0x1073ee4                            
+01073D50  ldr      x0, [x21]                             
+01073D54  ldr      x20, [x19, #0x20]                      // self.cilindro
+01073D58  ldr      w8, [x0, #0xe0]                       
+01073D5C  cbnz     w8, #0x1073d64                        
+01073D60  bl       #0xe61c80                             
+01073D64  mov      x0, x20                               
+01073D68  mov      x1, xzr                               
+01073D6C  mov      x2, xzr                               
+01073D70  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073D74  tbz      w0, #0, #0x1073da0                    
+01073D78  ldr      x0, [x19, #0x20]                       // self.cilindro
+01073D7C  cbz      x0, #0x10741f4                        
+01073D80  adrp     x8, #0x2368000                        
+01073D84  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073D88  ldr      x1, [x8]                              
+01073D8C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073D90  cbz      x0, #0x10741f4                        
+01073D94  ldr      x1, [x19, #0x88]                       // self.material3
+01073D98  mov      x2, xzr                               
+01073D9C  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073DA0  ldr      x0, [x21]                             
+01073DA4  ldr      x20, [x19, #0x28]                      // self.cilindroB
+01073DA8  ldr      w8, [x0, #0xe0]                       
+01073DAC  cbnz     w8, #0x1073db4                        
+01073DB0  bl       #0xe61c80                             
+01073DB4  mov      x0, x20                               
+01073DB8  mov      x1, xzr                               
+01073DBC  mov      x2, xzr                               
+01073DC0  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073DC4  tbz      w0, #0, #0x1073df0                    
+01073DC8  ldr      x0, [x19, #0x28]                       // self.cilindroB
+01073DCC  cbz      x0, #0x10741f4                        
+01073DD0  adrp     x8, #0x2368000                        
+01073DD4  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073DD8  ldr      x1, [x8]                              
+01073DDC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073DE0  cbz      x0, #0x10741f4                        
+01073DE4  ldr      x1, [x19, #0x88]                       // self.material3
+01073DE8  mov      x2, xzr                               
+01073DEC  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073DF0  ldr      x0, [x21]                             
+01073DF4  ldr      x20, [x19, #0x30]                      // self.cilindroC
+01073DF8  ldr      w8, [x0, #0xe0]                       
+01073DFC  cbnz     w8, #0x1073e04                        
+01073E00  bl       #0xe61c80                             
+01073E04  mov      x0, x20                               
+01073E08  mov      x1, xzr                               
+01073E0C  mov      x2, xzr                               
+01073E10  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073E14  tbz      w0, #0, #0x1073e40                    
+01073E18  ldr      x0, [x19, #0x30]                       // self.cilindroC
+01073E1C  cbz      x0, #0x10741f4                        
+01073E20  adrp     x8, #0x2368000                        
+01073E24  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073E28  ldr      x1, [x8]                              
+01073E2C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073E30  cbz      x0, #0x10741f4                        
+01073E34  ldr      x1, [x19, #0xc8]                       // self.material3c
+01073E38  mov      x2, xzr                               
+01073E3C  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073E40  ldr      x0, [x21]                             
+01073E44  ldr      x20, [x19, #0x38]                      // self.cilindro1
+01073E48  ldr      w8, [x0, #0xe0]                       
+01073E4C  cbnz     w8, #0x1073e54                        
+01073E50  bl       #0xe61c80                             
+01073E54  mov      x0, x20                               
+01073E58  mov      x1, xzr                               
+01073E5C  mov      x2, xzr                               
+01073E60  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073E64  tbz      w0, #0, #0x1073e90                    
+01073E68  ldr      x0, [x19, #0x38]                       // self.cilindro1
+01073E6C  cbz      x0, #0x10741f4                        
+01073E70  adrp     x8, #0x2368000                        
+01073E74  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073E78  ldr      x1, [x8]                              
+01073E7C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073E80  cbz      x0, #0x10741f4                        
+01073E84  ldr      x1, [x19, #0xa8]                       // self.material3b
+01073E88  mov      x2, xzr                               
+01073E8C  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073E90  ldr      x0, [x21]                             
+01073E94  ldr      x20, [x19, #0x40]                      // self.cilindro2
+01073E98  ldr      w8, [x0, #0xe0]                       
+01073E9C  cbnz     w8, #0x1073ea4                        
+01073EA0  bl       #0xe61c80                             
+01073EA4  mov      x0, x20                               
+01073EA8  mov      x1, xzr                               
+01073EAC  mov      x2, xzr                               
+01073EB0  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073EB4  tbz      w0, #0, #0x1073ee0                    
+01073EB8  ldr      x0, [x19, #0x40]                       // self.cilindro2
+01073EBC  cbz      x0, #0x10741f4                        
+01073EC0  adrp     x8, #0x2368000                        
+01073EC4  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073EC8  ldr      x1, [x8]                              
+01073ECC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073ED0  cbz      x0, #0x10741f4                        
+01073ED4  ldr      x1, [x19, #0xa8]                       // self.material3b
+01073ED8  mov      x2, xzr                               
+01073EDC  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073EE0  ldr      w8, [x19, #0x58]                       // self.color
+01073EE4  cmp      w8, #4                                
+01073EE8  b.ne     #0x1074094                            
+01073EEC  ldr      x0, [x21]                             
+01073EF0  ldr      x20, [x19, #0x20]                      // self.cilindro
+01073EF4  ldr      w8, [x0, #0xe0]                       
+01073EF8  cbnz     w8, #0x1073f00                        
+01073EFC  bl       #0xe61c80                             
+01073F00  mov      x0, x20                               
+01073F04  mov      x1, xzr                               
+01073F08  mov      x2, xzr                               
+01073F0C  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073F10  tbz      w0, #0, #0x1073f54                    
+01073F14  ldr      x0, [x19, #0x20]                       // self.cilindro
+01073F18  cbz      x0, #0x10741f4                        
+01073F1C  adrp     x8, #0x2368000                        
+01073F20  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073F24  ldr      x1, [x8]                              
+01073F28  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073F2C  cbz      x0, #0x10741f4                        
+01073F30  ldr      x1, [x19, #0x90]                       // self.material4
+01073F34  mov      x2, xzr                               
+01073F38  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073F3C  adrp     x8, #0x236a000                        
+01073F40  ldr      x0, [x19, #0x60]                       // self.confColor
+01073F44  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+01073F48  mov      x2, xzr                               
+01073F4C  ldr      x1, [x8]                              
+01073F50  bl       #0x1960c7c                             // System.String$$op_Equality
+01073F54  ldr      x0, [x21]                             
+01073F58  ldr      x20, [x19, #0x28]                      // self.cilindroB
+01073F5C  ldr      w8, [x0, #0xe0]                       
+01073F60  cbnz     w8, #0x1073f68                        
+01073F64  bl       #0xe61c80                             
+01073F68  mov      x0, x20                               
+01073F6C  mov      x1, xzr                               
+01073F70  mov      x2, xzr                               
+01073F74  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073F78  tbz      w0, #0, #0x1073fa4                    
+01073F7C  ldr      x0, [x19, #0x28]                       // self.cilindroB
+01073F80  cbz      x0, #0x10741f4                        
+01073F84  adrp     x8, #0x2368000                        
+01073F88  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073F8C  ldr      x1, [x8]                              
+01073F90  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073F94  cbz      x0, #0x10741f4                        
+01073F98  ldr      x1, [x19, #0x90]                       // self.material4
+01073F9C  mov      x2, xzr                               
+01073FA0  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073FA4  ldr      x0, [x21]                             
+01073FA8  ldr      x20, [x19, #0x30]                      // self.cilindroC
+01073FAC  ldr      w8, [x0, #0xe0]                       
+01073FB0  cbnz     w8, #0x1073fb8                        
+01073FB4  bl       #0xe61c80                             
+01073FB8  mov      x0, x20                               
+01073FBC  mov      x1, xzr                               
+01073FC0  mov      x2, xzr                               
+01073FC4  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01073FC8  tbz      w0, #0, #0x1073ff4                    
+01073FCC  ldr      x0, [x19, #0x30]                       // self.cilindroC
+01073FD0  cbz      x0, #0x10741f4                        
+01073FD4  adrp     x8, #0x2368000                        
+01073FD8  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01073FDC  ldr      x1, [x8]                              
+01073FE0  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01073FE4  cbz      x0, #0x10741f4                        
+01073FE8  ldr      x1, [x19, #0xd0]                       // self.material4c
+01073FEC  mov      x2, xzr                               
+01073FF0  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01073FF4  ldr      x0, [x21]                             
+01073FF8  ldr      x20, [x19, #0x38]                      // self.cilindro1
+01073FFC  ldr      w8, [x0, #0xe0]                       
+01074000  cbnz     w8, #0x1074008                        
+01074004  bl       #0xe61c80                             
+01074008  mov      x0, x20                               
+0107400C  mov      x1, xzr                               
+01074010  mov      x2, xzr                               
+01074014  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01074018  tbz      w0, #0, #0x1074044                    
+0107401C  ldr      x0, [x19, #0x38]                       // self.cilindro1
+01074020  cbz      x0, #0x10741f4                        
+01074024  adrp     x8, #0x2368000                        
+01074028  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+0107402C  ldr      x1, [x8]                              
+01074030  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01074034  cbz      x0, #0x10741f4                        
+01074038  ldr      x1, [x19, #0xb0]                       // self.material4b
+0107403C  mov      x2, xzr                               
+01074040  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01074044  ldr      x0, [x21]                             
+01074048  ldr      x20, [x19, #0x40]                      // self.cilindro2
+0107404C  ldr      w8, [x0, #0xe0]                       
+01074050  cbnz     w8, #0x1074058                        
+01074054  bl       #0xe61c80                             
+01074058  mov      x0, x20                               
+0107405C  mov      x1, xzr                               
+01074060  mov      x2, xzr                               
+01074064  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01074068  tbz      w0, #0, #0x1074094                    
+0107406C  ldr      x0, [x19, #0x40]                       // self.cilindro2
+01074070  cbz      x0, #0x10741f4                        
+01074074  adrp     x8, #0x2368000                        
+01074078  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+0107407C  ldr      x1, [x8]                              
+01074080  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01074084  cbz      x0, #0x10741f4                        
+01074088  ldr      x1, [x19, #0xb0]                       // self.material4b
+0107408C  mov      x2, xzr                               
+01074090  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01074094  adrp     x8, #0x2368000                        
+01074098  ldr      x0, [x19, #0x68]                       // self.textura
+0107409C  ldr      x8, [x8, #0xf50]                       // [0x2368F50] ''
+010740A0  mov      x2, xzr                               
+010740A4  ldr      x1, [x8]                              
+010740A8  bl       #0x1960c80                             // System.String$$op_Inequality
+010740AC  tbz      w0, #0, #0x10741e8                    
+010740B0  adrp     x8, #0x236a000                        
+010740B4  ldr      x0, [x19, #0x68]                       // self.textura
+010740B8  ldr      x8, [x8, #0x6e8]                       // [0x236A6E8] '1'
+010740BC  mov      x2, xzr                               
+010740C0  ldr      x1, [x8]                              
+010740C4  bl       #0x1960c7c                             // System.String$$op_Equality
+010740C8  tbz      w0, #0, #0x10740d4                    
+010740CC  ldr      x8, [x19, #0xe0]                       // self.materialFuente1
+010740D0  str      x8, [x19, #0xd8]                       // self.materialFuente
+010740D4  adrp     x8, #0x236a000                        
+010740D8  ldr      x0, [x19, #0x68]                       // self.textura
+010740DC  ldr      x8, [x8, #0x658]                       // [0x236A658] '2'
+010740E0  mov      x2, xzr                               
+010740E4  ldr      x1, [x8]                              
+010740E8  bl       #0x1960c7c                             // System.String$$op_Equality
+010740EC  tbz      w0, #0, #0x10740f8                    
+010740F0  ldr      x8, [x19, #0xe8]                       // self.materialFuente2
+010740F4  str      x8, [x19, #0xd8]                       // self.materialFuente
+010740F8  adrp     x8, #0x236a000                        
+010740FC  ldr      x0, [x19, #0x68]                       // self.textura
+01074100  ldr      x8, [x8, #0x650]                       // [0x236A650] '3'
+01074104  mov      x2, xzr                               
+01074108  ldr      x1, [x8]                              
+0107410C  bl       #0x1960c7c                             // System.String$$op_Equality
+01074110  tbz      w0, #0, #0x107411c                    
+01074114  ldr      x8, [x19, #0xf0]                       // self.materialFuente3
+01074118  str      x8, [x19, #0xd8]                       // self.materialFuente
+0107411C  adrp     x8, #0x236a000                        
+01074120  ldr      x0, [x19, #0x68]                       // self.textura
+01074124  ldr      x8, [x8, #0x6a8]                       // [0x236A6A8] '4'
+01074128  mov      x2, xzr                               
+0107412C  ldr      x1, [x8]                              
+01074130  bl       #0x1960c7c                             // System.String$$op_Equality
+01074134  tbz      w0, #0, #0x1074140                    
+01074138  ldr      x8, [x19, #0xf8]                       // self.materialFuente4
+0107413C  str      x8, [x19, #0xd8]                       // self.materialFuente
+01074140  ldr      x0, [x21]                             
+01074144  ldr      x20, [x19, #0x48]                      // self.parte1
+01074148  ldr      w8, [x0, #0xe0]                       
+0107414C  cbnz     w8, #0x1074154                        
+01074150  bl       #0xe61c80                             
+01074154  mov      x0, x20                               
+01074158  mov      x1, xzr                               
+0107415C  mov      x2, xzr                               
+01074160  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+01074164  tbz      w0, #0, #0x1074190                    
+01074168  ldr      x0, [x19, #0x48]                       // self.parte1
+0107416C  cbz      x0, #0x10741f4                        
+01074170  adrp     x8, #0x2368000                        
+01074174  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+01074178  ldr      x1, [x8]                              
+0107417C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01074180  cbz      x0, #0x10741f4                        
+01074184  ldr      x1, [x19, #0xd8]                       // self.materialFuente
+01074188  mov      x2, xzr                               
+0107418C  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+01074190  ldr      x0, [x21]                             
+01074194  ldr      x20, [x19, #0x50]                      // self.parte2
+01074198  ldr      w8, [x0, #0xe0]                       
+0107419C  cbnz     w8, #0x10741a4                        
+010741A0  bl       #0xe61c80                             
+010741A4  mov      x0, x20                               
+010741A8  mov      x1, xzr                               
+010741AC  mov      x2, xzr                               
+010741B0  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010741B4  tbz      w0, #0, #0x10741e8                    
+010741B8  ldr      x0, [x19, #0x50]                       // self.parte2
+010741BC  cbz      x0, #0x10741f4                        
+010741C0  adrp     x8, #0x2368000                        
+010741C4  ldr      x8, [x8, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+010741C8  ldr      x1, [x8]                              
+010741CC  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+010741D0  cbz      x0, #0x10741f4                        
+010741D4  ldr      x1, [x19, #0xd8]                       // self.materialFuente
+010741D8  ldp      x20, x19, [sp, #0x10]                 
+010741DC  mov      x2, xzr                               
+010741E0  ldp      x30, x21, [sp], #0x20                 
+010741E4  b        #0x1fec520                             // UnityEngine.Renderer$$set_material
+010741E8  ldp      x20, x19, [sp, #0x10]                 
+010741EC  ldp      x30, x21, [sp], #0x20                 
+010741F0  ret                                            
+010741F4  bl       #0xe61da0                             

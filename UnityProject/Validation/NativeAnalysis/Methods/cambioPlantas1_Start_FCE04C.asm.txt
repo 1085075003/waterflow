@@ -1,0 +1,199 @@
+// cambioPlantas1$$Start VA 0xFCE04C, inferred length 788
+void cambioPlantas1__Start (cambioPlantas1_o* __this, const MethodInfo* method);
+00FCE04C  str      x30, [sp, #-0x30]!                    
+00FCE050  stp      x22, x21, [sp, #0x10]                 
+00FCE054  stp      x20, x19, [sp, #0x20]                 
+00FCE058  adrp     x20, #0x24fb000                       
+00FCE05C  ldrb     w8, [x20, #0xb46]                     
+00FCE060  mov      x19, x0                               
+00FCE064  tbnz     w8, #0, #0xfce088                     
+00FCE068  adrp     x0, #0x2368000                        
+00FCE06C  ldr      x0, [x0, #0x2a8]                       // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+00FCE070  bl       #0xe61b78                             
+00FCE074  adrp     x0, #0x2368000                        
+00FCE078  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCE07C  bl       #0xe61b78                             
+00FCE080  mov      w8, #1                                
+00FCE084  strb     w8, [x20, #0xb46]                     
+00FCE088  ldr      w8, [x19, #0x48]                       // self.texturaPlant
+00FCE08C  ldr      x9, [x19, #0x50]                       // self.materialTextura1
+00FCE090  ldr      x10, [x19, #0x60]                      // self.materialTextura3
+00FCE094  sub      w8, w8, #1                            
+00FCE098  cmp      w8, #0x12                             
+00FCE09C  stp      x9, x10, [x19, #0x190]                 // self.material1
+00FCE0A0  b.hi     #0xfce1f0                             
+00FCE0A4  adrp     x9, #0x621000                         
+00FCE0A8  add      x9, x9, #0x107                        
+00FCE0AC  adr      x10, #0xfce0bc                        
+00FCE0B0  ldrb     w11, [x9, x8]                         
+00FCE0B4  add      x10, x10, x11, lsl #2                 
+00FCE0B8  br       x10                                   
+00FCE0BC  ldr      x8, [x19, #0x58]                       // self.materialTextura2
+00FCE0C0  str      x8, [x19, #0x190]                      // self.material1
+00FCE0C4  add      x8, x19, #0x68                        
+00FCE0C8  b        #0xfce1e8                             
+00FCE0CC  ldr      x8, [x19, #0x70]                       // self.materialTextura5
+00FCE0D0  str      x8, [x19, #0x190]                      // self.material1
+00FCE0D4  add      x8, x19, #0x78                        
+00FCE0D8  b        #0xfce1e8                             
+00FCE0DC  ldr      x8, [x19, #0x80]                       // self.materialTextura7
+00FCE0E0  str      x8, [x19, #0x190]                      // self.material1
+00FCE0E4  add      x8, x19, #0x88                        
+00FCE0E8  b        #0xfce1e8                             
+00FCE0EC  ldr      x8, [x19, #0x90]                       // self.materialTextura9
+00FCE0F0  str      x8, [x19, #0x190]                      // self.material1
+00FCE0F4  add      x8, x19, #0x98                        
+00FCE0F8  b        #0xfce1e8                             
+00FCE0FC  ldr      x8, [x19, #0xa0]                       // self.materialTextura11
+00FCE100  str      x8, [x19, #0x190]                      // self.material1
+00FCE104  add      x8, x19, #0xa8                        
+00FCE108  b        #0xfce1e8                             
+00FCE10C  ldr      x8, [x19, #0xb0]                       // self.materialTextura13
+00FCE110  str      x8, [x19, #0x190]                      // self.material1
+00FCE114  add      x8, x19, #0xb8                        
+00FCE118  b        #0xfce1e8                             
+00FCE11C  ldr      x8, [x19, #0xc0]                       // self.materialTextura15
+00FCE120  str      x8, [x19, #0x190]                      // self.material1
+00FCE124  add      x8, x19, #0xc8                        
+00FCE128  b        #0xfce1e8                             
+00FCE12C  ldr      x8, [x19, #0xd0]                       // self.materialTextura17
+00FCE130  str      x8, [x19, #0x190]                      // self.material1
+00FCE134  add      x8, x19, #0xd8                        
+00FCE138  b        #0xfce1e8                             
+00FCE13C  ldr      x8, [x19, #0xe0]                       // self.materialTextura19
+00FCE140  str      x8, [x19, #0x190]                      // self.material1
+00FCE144  add      x8, x19, #0xe8                        
+00FCE148  b        #0xfce1e8                             
+00FCE14C  ldr      x8, [x19, #0xf0]                       // self.materialTextura21
+00FCE150  str      x8, [x19, #0x190]                      // self.material1
+00FCE154  add      x8, x19, #0xf8                        
+00FCE158  b        #0xfce1e8                             
+00FCE15C  ldr      x8, [x19, #0x100]                      // self.materialTextura23
+00FCE160  str      x8, [x19, #0x190]                      // self.material1
+00FCE164  add      x8, x19, #0x108                       
+00FCE168  b        #0xfce1e8                             
+00FCE16C  ldr      x8, [x19, #0x110]                      // self.materialTextura25
+00FCE170  str      x8, [x19, #0x190]                      // self.material1
+00FCE174  add      x8, x19, #0x118                       
+00FCE178  b        #0xfce1e8                             
+00FCE17C  ldr      x8, [x19, #0x120]                      // self.materialTextura27
+00FCE180  str      x8, [x19, #0x190]                      // self.material1
+00FCE184  add      x8, x19, #0x128                       
+00FCE188  b        #0xfce1e8                             
+00FCE18C  ldr      x8, [x19, #0x130]                      // self.materialTextura29
+00FCE190  str      x8, [x19, #0x190]                      // self.material1
+00FCE194  add      x8, x19, #0x138                       
+00FCE198  b        #0xfce1e8                             
+00FCE19C  ldr      x8, [x19, #0x140]                      // self.materialTextura31
+00FCE1A0  str      x8, [x19, #0x190]                      // self.material1
+00FCE1A4  add      x8, x19, #0x148                       
+00FCE1A8  b        #0xfce1e8                             
+00FCE1AC  ldr      x8, [x19, #0x150]                      // self.materialTextura33
+00FCE1B0  str      x8, [x19, #0x190]                      // self.material1
+00FCE1B4  add      x8, x19, #0x158                       
+00FCE1B8  b        #0xfce1e8                             
+00FCE1BC  ldr      x8, [x19, #0x160]                      // self.materialTextura35
+00FCE1C0  str      x8, [x19, #0x190]                      // self.material1
+00FCE1C4  add      x8, x19, #0x168                       
+00FCE1C8  b        #0xfce1e8                             
+00FCE1CC  ldr      x8, [x19, #0x170]                      // self.materialTextura37
+00FCE1D0  str      x8, [x19, #0x190]                      // self.material1
+00FCE1D4  add      x8, x19, #0x178                       
+00FCE1D8  b        #0xfce1e8                             
+00FCE1DC  ldr      x8, [x19, #0x180]                      // self.materialTextura39
+00FCE1E0  str      x8, [x19, #0x190]                      // self.material1
+00FCE1E4  add      x8, x19, #0x188                       
+00FCE1E8  ldr      x8, [x8]                              
+00FCE1EC  str      x8, [x19, #0x198]                      // self.material2
+00FCE1F0  ldr      x0, [x19, #0x20]                       // self.objetoRenderer
+00FCE1F4  cbz      x0, #0xfce35c                         
+00FCE1F8  adrp     x21, #0x2368000                       
+00FCE1FC  ldr      x21, [x21, #0x2a8]                     // [0x23682A8] Method$UnityEngine.GameObject.GetComponent<Renderer>()
+00FCE200  ldr      x1, [x21]                             
+00FCE204  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCE208  cbz      x0, #0xfce35c                         
+00FCE20C  ldr      x1, [x19, #0x190]                      // self.material1
+00FCE210  adrp     x22, #0x2368000                       
+00FCE214  ldr      x22, [x22, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+00FCE218  mov      x2, xzr                               
+00FCE21C  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+00FCE220  ldr      x0, [x22]                             
+00FCE224  ldr      x20, [x19, #0x28]                      // self.objetoRenderer1
+00FCE228  ldr      w8, [x0, #0xe0]                       
+00FCE22C  cbnz     w8, #0xfce234                         
+00FCE230  bl       #0xe61c80                             
+00FCE234  mov      x0, x20                               
+00FCE238  mov      x1, xzr                               
+00FCE23C  mov      x2, xzr                               
+00FCE240  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FCE244  tbz      w0, #0, #0xfce268                     
+00FCE248  ldr      x0, [x19, #0x28]                       // self.objetoRenderer1
+00FCE24C  cbz      x0, #0xfce35c                         
+00FCE250  ldr      x1, [x21]                             
+00FCE254  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCE258  cbz      x0, #0xfce35c                         
+00FCE25C  ldr      x1, [x19, #0x190]                      // self.material1
+00FCE260  mov      x2, xzr                               
+00FCE264  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+00FCE268  ldr      x0, [x22]                             
+00FCE26C  ldr      x20, [x19, #0x30]                      // self.objetoRenderer2
+00FCE270  ldr      w8, [x0, #0xe0]                       
+00FCE274  cbnz     w8, #0xfce27c                         
+00FCE278  bl       #0xe61c80                             
+00FCE27C  mov      x0, x20                               
+00FCE280  mov      x1, xzr                               
+00FCE284  mov      x2, xzr                               
+00FCE288  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FCE28C  tbz      w0, #0, #0xfce2b0                     
+00FCE290  ldr      x0, [x19, #0x30]                       // self.objetoRenderer2
+00FCE294  cbz      x0, #0xfce35c                         
+00FCE298  ldr      x1, [x21]                             
+00FCE29C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCE2A0  cbz      x0, #0xfce35c                         
+00FCE2A4  ldr      x1, [x19, #0x190]                      // self.material1
+00FCE2A8  mov      x2, xzr                               
+00FCE2AC  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+00FCE2B0  ldr      x0, [x22]                             
+00FCE2B4  ldr      x20, [x19, #0x38]                      // self.objetoRenderer3
+00FCE2B8  ldr      w8, [x0, #0xe0]                       
+00FCE2BC  cbnz     w8, #0xfce2c4                         
+00FCE2C0  bl       #0xe61c80                             
+00FCE2C4  mov      x0, x20                               
+00FCE2C8  mov      x1, xzr                               
+00FCE2CC  mov      x2, xzr                               
+00FCE2D0  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FCE2D4  tbz      w0, #0, #0xfce2f8                     
+00FCE2D8  ldr      x0, [x19, #0x38]                       // self.objetoRenderer3
+00FCE2DC  cbz      x0, #0xfce35c                         
+00FCE2E0  ldr      x1, [x21]                             
+00FCE2E4  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCE2E8  cbz      x0, #0xfce35c                         
+00FCE2EC  ldr      x1, [x19, #0x190]                      // self.material1
+00FCE2F0  mov      x2, xzr                               
+00FCE2F4  bl       #0x1fec520                             // UnityEngine.Renderer$$set_material
+00FCE2F8  ldr      x0, [x22]                             
+00FCE2FC  ldr      x20, [x19, #0x40]                      // self.objetoRenderer4
+00FCE300  ldr      w8, [x0, #0xe0]                       
+00FCE304  cbnz     w8, #0xfce30c                         
+00FCE308  bl       #0xe61c80                             
+00FCE30C  mov      x0, x20                               
+00FCE310  mov      x1, xzr                               
+00FCE314  mov      x2, xzr                               
+00FCE318  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+00FCE31C  tbz      w0, #0, #0xfce34c                     
+00FCE320  ldr      x0, [x19, #0x40]                       // self.objetoRenderer4
+00FCE324  cbz      x0, #0xfce35c                         
+00FCE328  ldr      x1, [x21]                             
+00FCE32C  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+00FCE330  cbz      x0, #0xfce35c                         
+00FCE334  ldr      x1, [x19, #0x198]                      // self.material2
+00FCE338  ldp      x20, x19, [sp, #0x20]                 
+00FCE33C  ldp      x22, x21, [sp, #0x10]                 
+00FCE340  mov      x2, xzr                               
+00FCE344  ldr      x30, [sp], #0x30                      
+00FCE348  b        #0x1fec520                             // UnityEngine.Renderer$$set_material
+00FCE34C  ldp      x20, x19, [sp, #0x20]                 
+00FCE350  ldp      x22, x21, [sp, #0x10]                 
+00FCE354  ldr      x30, [sp], #0x30                      
+00FCE358  ret                                            
+00FCE35C  bl       #0xe61da0                             

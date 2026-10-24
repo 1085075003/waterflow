@@ -1,0 +1,273 @@
+// changeColorU$$doLuzColor VA 0x106FBE8, inferred length 1084
+void changeColorU__doLuzColor (changeColorU_o* __this, const MethodInfo* method);
+0106FBE8  sub      sp, sp, #0x190                        
+0106FBEC  stp      x29, x30, [sp, #0x160]                
+0106FBF0  stp      x22, x21, [sp, #0x170]                
+0106FBF4  stp      x20, x19, [sp, #0x180]                
+0106FBF8  adrp     x20, #0x24fb000                       
+0106FBFC  ldrb     w8, [x20, #0xe90]                     
+0106FC00  mov      x19, x0                               
+0106FC04  tbnz     w8, #0, #0x106fc34                    
+0106FC08  adrp     x0, #0x236a000                        
+0106FC0C  ldr      x0, [x0, #0x740]                       // [0x236A740] UnityEngine.GradientAlphaKey[]_TypeInfo
+0106FC10  bl       #0xe61b78                             
+0106FC14  adrp     x0, #0x236a000                        
+0106FC18  ldr      x0, [x0, #0x748]                       // [0x236A748] UnityEngine.GradientColorKey[]_TypeInfo
+0106FC1C  bl       #0xe61b78                             
+0106FC20  adrp     x0, #0x236a000                        
+0106FC24  ldr      x0, [x0, #0x750]                       // [0x236A750] UnityEngine.Gradient_TypeInfo
+0106FC28  bl       #0xe61b78                             
+0106FC2C  mov      w8, #1                                
+0106FC30  strb     w8, [x20, #0xe90]                     
+0106FC34  ldr      x0, [x19, #0x50]                       // self.ps
+0106FC38  cbz      x0, #0x1070020                        
+0106FC3C  mov      x1, xzr                               
+0106FC40  bl       #0x203cfa0                             // UnityEngine.ParticleSystem$$get_colorOverLifetime
+0106FC44  str      x0, [sp, #0x158]                      
+0106FC48  add      x0, sp, #0x158                        
+0106FC4C  mov      w1, #1                                
+0106FC50  mov      x2, xzr                               
+0106FC54  bl       #0x203d688                             // UnityEngine.ParticleSystem.ColorOverLifetimeModule$$set_enabled
+0106FC58  mov      x0, x19                               
+0106FC5C  mov      x1, xzr                               
+0106FC60  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+0106FC64  cbz      x0, #0x1070020                        
+0106FC68  mov      x1, xzr                               
+0106FC6C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0106FC70  cbz      x0, #0x1070020                        
+0106FC74  adrp     x20, #0x236a000                       
+0106FC78  adrp     x21, #0x236a000                       
+0106FC7C  ldr      x20, [x20, #0x750]                     // [0x236A750] UnityEngine.Gradient_TypeInfo
+0106FC80  ldr      x21, [x21, #0x748]                     // [0x236A748] UnityEngine.GradientColorKey[]_TypeInfo
+0106FC84  mov      x1, xzr                               
+0106FC88  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+0106FC8C  ldp      w8, w9, [x19, #0x24]                   // self.subcolor
+0106FC90  fmov     v0.4s, #1.00000000                    
+0106FC94  stur     q0, [x19, #0x3c]                       // self.color2
+0106FC98  cbz      w9, #0x106fccc                        
+0106FC9C  sub      w8, w8, #1                            
+0106FCA0  cmp      w8, #5                                
+0106FCA4  b.hi     #0x106fd8c                            
+0106FCA8  adrp     x9, #0x621000                         
+0106FCAC  add      x9, x9, #0x757                        
+0106FCB0  adr      x10, #0x106fcc0                       
+0106FCB4  ldrb     w11, [x9, x8]                         
+0106FCB8  add      x10, x10, x11, lsl #2                 
+0106FCBC  br       x10                                   
+0106FCC0  adrp     x8, #0x601000                         
+0106FCC4  ldr      q0, [x8, #0xce0]                      
+0106FCC8  b        #0x106fd88                            
+0106FCCC  sub      w8, w8, #2                            
+0106FCD0  cmp      w8, #7                                
+0106FCD4  b.hi     #0x106fd8c                            
+0106FCD8  adrp     x9, #0x621000                         
+0106FCDC  add      x9, x9, #0x75d                        
+0106FCE0  adr      x10, #0x106fcf0                       
+0106FCE4  ldrb     w11, [x9, x8]                         
+0106FCE8  add      x10, x10, x11, lsl #2                 
+0106FCEC  br       x10                                   
+0106FCF0  adrp     x8, #0x601000                         
+0106FCF4  ldr      q0, [x8, #0xdc0]                      
+0106FCF8  b        #0x106fd88                            
+0106FCFC  adrp     x8, #0x601000                         
+0106FD00  ldr      q0, [x8, #0xd50]                      
+0106FD04  b        #0x106fd88                            
+0106FD08  adrp     x8, #0x601000                         
+0106FD0C  ldr      q0, [x8, #0x8e0]                      
+0106FD10  b        #0x106fd88                            
+0106FD14  adrp     x8, #0x601000                         
+0106FD18  ldr      q0, [x8, #0x8d0]                      
+0106FD1C  b        #0x106fd88                            
+0106FD20  adrp     x8, #0x601000                         
+0106FD24  ldr      q0, [x8, #0xcd0]                      
+0106FD28  b        #0x106fd88                            
+0106FD2C  adrp     x8, #0x601000                         
+0106FD30  ldr      q0, [x8, #0xec0]                      
+0106FD34  b        #0x106fd88                            
+0106FD38  adrp     x8, #0x602000                         
+0106FD3C  ldr      q0, [x8, #0x10]                       
+0106FD40  b        #0x106fd88                            
+0106FD44  adrp     x8, #0x602000                         
+0106FD48  ldr      q0, [x8, #0x2c0]                      
+0106FD4C  b        #0x106fd88                            
+0106FD50  adrp     x8, #0x601000                         
+0106FD54  ldr      q0, [x8, #0x490]                      
+0106FD58  b        #0x106fd88                            
+0106FD5C  adrp     x8, #0x601000                         
+0106FD60  ldr      q0, [x8, #0x390]                      
+0106FD64  b        #0x106fd88                            
+0106FD68  adrp     x8, #0x601000                         
+0106FD6C  ldr      q0, [x8, #0x210]                      
+0106FD70  b        #0x106fd88                            
+0106FD74  adrp     x8, #0x601000                         
+0106FD78  ldr      q0, [x8, #0x990]                      
+0106FD7C  b        #0x106fd88                            
+0106FD80  adrp     x8, #0x601000                         
+0106FD84  ldr      q0, [x8, #0xaa0]                      
+0106FD88  stur     q0, [x19, #0x2c]                       // self.color1
+0106FD8C  ldr      x0, [x20]                             
+0106FD90  bl       #0xe61d94                             
+0106FD94  mov      x1, xzr                               
+0106FD98  mov      x20, x0                               
+0106FD9C  bl       #0x1ff82cc                             // UnityEngine.Gradient$$.ctor
+0106FDA0  ldr      x0, [x21]                             
+0106FDA4  mov      w1, #4                                
+0106FDA8  bl       #0xe61bf0                             
+0106FDAC  ldp      s0, s1, [x19, #0x2c]                   // self.color1
+0106FDB0  ldp      s2, s3, [x19, #0x34]                  
+0106FDB4  mov      x21, x0                               
+0106FDB8  add      x0, sp, #0x140                        
+0106FDBC  fmov     s4, wzr                               
+0106FDC0  mov      x1, xzr                               
+0106FDC4  stp      xzr, xzr, [sp, #0x140]                
+0106FDC8  str      wzr, [sp, #0x150]                     
+0106FDCC  bl       #0x1ff820c                             // UnityEngine.GradientColorKey$$.ctor
+0106FDD0  cbz      x21, #0x1070020                       
+0106FDD4  ldr      q0, [sp, #0x140]                      
+0106FDD8  ldr      w8, [sp, #0x150]                      
+0106FDDC  str      q0, [sp, #0x120]                      
+0106FDE0  str      w8, [sp, #0x130]                      
+0106FDE4  ldr      w8, [x21, #0x18]                      
+0106FDE8  cbz      w8, #0x107001c                        
+0106FDEC  ldr      w8, [sp, #0x130]                      
+0106FDF0  ldr      q0, [sp, #0x120]                      
+0106FDF4  add      x0, sp, #0x108                        
+0106FDF8  fmov     s4, #0.25000000                       
+0106FDFC  str      w8, [x21, #0x30]                      
+0106FE00  str      q0, [x21, #0x20]                      
+0106FE04  ldp      s0, s1, [x19, #0x3c]                   // self.color2
+0106FE08  ldp      s2, s3, [x19, #0x44]                  
+0106FE0C  mov      x1, xzr                               
+0106FE10  add      x22, sp, #0xa8                        
+0106FE14  stp      xzr, xzr, [sp, #0x108]                
+0106FE18  str      wzr, [sp, #0x118]                     
+0106FE1C  bl       #0x1ff820c                             // UnityEngine.GradientColorKey$$.ctor
+0106FE20  ldr      w8, [sp, #0x118]                      
+0106FE24  ldr      q0, [x22, #0x60]                      
+0106FE28  str      w8, [sp, #0x100]                      
+0106FE2C  str      q0, [sp, #0xf0]                       
+0106FE30  ldr      w8, [x21, #0x18]                      
+0106FE34  cmp      w8, #1                                
+0106FE38  b.ls     #0x107001c                            
+0106FE3C  ldr      w8, [sp, #0x100]                      
+0106FE40  ldr      q0, [sp, #0xf0]                       
+0106FE44  add      x0, sp, #0xd8                         
+0106FE48  fmov     s4, #0.50000000                       
+0106FE4C  str      w8, [x21, #0x44]                      
+0106FE50  stur     q0, [x21, #0x34]                      
+0106FE54  ldp      s0, s1, [x19, #0x2c]                   // self.color1
+0106FE58  ldp      s2, s3, [x19, #0x34]                  
+0106FE5C  mov      x1, xzr                               
+0106FE60  stp      xzr, xzr, [sp, #0xd8]                 
+0106FE64  str      wzr, [sp, #0xe8]                      
+0106FE68  bl       #0x1ff820c                             // UnityEngine.GradientColorKey$$.ctor
+0106FE6C  ldr      w8, [sp, #0xe8]                       
+0106FE70  ldr      q0, [x22, #0x30]                      
+0106FE74  str      w8, [sp, #0xd0]                       
+0106FE78  str      q0, [sp, #0xc0]                       
+0106FE7C  ldr      w8, [x21, #0x18]                      
+0106FE80  cmp      w8, #2                                
+0106FE84  b.ls     #0x107001c                            
+0106FE88  ldr      w8, [sp, #0xd0]                       
+0106FE8C  ldr      q0, [sp, #0xc0]                       
+0106FE90  add      x0, sp, #0xa8                         
+0106FE94  fmov     s4, #0.75000000                       
+0106FE98  str      w8, [x21, #0x58]                      
+0106FE9C  stur     q0, [x21, #0x48]                      
+0106FEA0  ldp      s0, s1, [x19, #0x3c]                   // self.color2
+0106FEA4  ldp      s2, s3, [x19, #0x44]                  
+0106FEA8  mov      x1, xzr                               
+0106FEAC  stp      xzr, xzr, [sp, #0xa8]                 
+0106FEB0  str      wzr, [sp, #0xb8]                      
+0106FEB4  bl       #0x1ff820c                             // UnityEngine.GradientColorKey$$.ctor
+0106FEB8  ldr      w8, [sp, #0xb8]                       
+0106FEBC  ldr      q0, [x22]                             
+0106FEC0  str      w8, [sp, #0xa0]                       
+0106FEC4  str      q0, [sp, #0x90]                       
+0106FEC8  ldr      w8, [x21, #0x18]                      
+0106FECC  cmp      w8, #3                                
+0106FED0  b.ls     #0x107001c                            
+0106FED4  ldr      w8, [sp, #0xa0]                       
+0106FED8  ldr      q0, [sp, #0x90]                       
+0106FEDC  adrp     x9, #0x236a000                        
+0106FEE0  ldr      x9, [x9, #0x740]                       // [0x236A740] UnityEngine.GradientAlphaKey[]_TypeInfo
+0106FEE4  str      w8, [x21, #0x6c]                      
+0106FEE8  stur     q0, [x21, #0x5c]                      
+0106FEEC  mov      w1, #4                                
+0106FEF0  ldr      x0, [x9]                              
+0106FEF4  bl       #0xe61bf0                             
+0106FEF8  mov      x19, x0                               
+0106FEFC  add      x0, sp, #0x88                         
+0106FF00  fmov     s0, #1.00000000                       
+0106FF04  fmov     s1, wzr                               
+0106FF08  mov      x1, xzr                               
+0106FF0C  str      xzr, [sp, #0x88]                      
+0106FF10  bl       #0x1ff821c                             // UnityEngine.GradientAlphaKey$$.ctor
+0106FF14  cbz      x19, #0x1070020                       
+0106FF18  ldr      w8, [x19, #0x18]                      
+0106FF1C  cbz      w8, #0x107001c                        
+0106FF20  ldr      d0, [sp, #0x88]                       
+0106FF24  adrp     x8, #0x5ff000                         
+0106FF28  add      x0, sp, #0x80                         
+0106FF2C  fmov     s1, #0.25000000                       
+0106FF30  str      d0, [x19, #0x20]                       // self.color
+0106FF34  ldr      s0, [x8, #0xfd8]                      
+0106FF38  mov      x1, xzr                               
+0106FF3C  str      xzr, [sp, #0x80]                      
+0106FF40  bl       #0x1ff821c                             // UnityEngine.GradientAlphaKey$$.ctor
+0106FF44  ldr      w8, [x19, #0x18]                      
+0106FF48  cmp      w8, #1                                
+0106FF4C  b.ls     #0x107001c                            
+0106FF50  ldr      d0, [sp, #0x80]                       
+0106FF54  add      x0, sp, #0x78                         
+0106FF58  fmov     s1, #0.50000000                       
+0106FF5C  mov      x1, xzr                               
+0106FF60  str      d0, [x19, #0x28]                       // self.colx
+0106FF64  fmov     s0, #0.50000000                       
+0106FF68  str      xzr, [sp, #0x78]                      
+0106FF6C  bl       #0x1ff821c                             // UnityEngine.GradientAlphaKey$$.ctor
+0106FF70  ldr      w8, [x19, #0x18]                      
+0106FF74  cmp      w8, #2                                
+0106FF78  b.ls     #0x107001c                            
+0106FF7C  ldr      d0, [sp, #0x78]                       
+0106FF80  adrp     x8, #0x600000                         
+0106FF84  add      x0, sp, #0x70                         
+0106FF88  fmov     s1, #0.75000000                       
+0106FF8C  str      d0, [x19, #0x30]                      
+0106FF90  ldr      s0, [x8, #0x12c]                      
+0106FF94  mov      x1, xzr                               
+0106FF98  str      xzr, [sp, #0x70]                      
+0106FF9C  bl       #0x1ff821c                             // UnityEngine.GradientAlphaKey$$.ctor
+0106FFA0  ldr      w8, [x19, #0x18]                      
+0106FFA4  cmp      w8, #3                                
+0106FFA8  b.ls     #0x107001c                            
+0106FFAC  ldr      d0, [sp, #0x70]                       
+0106FFB0  str      d0, [x19, #0x38]                      
+0106FFB4  cbz      x20, #0x1070020                       
+0106FFB8  mov      x0, x20                               
+0106FFBC  mov      x1, x21                               
+0106FFC0  mov      x2, x19                               
+0106FFC4  mov      x3, xzr                               
+0106FFC8  bl       #0x1ff83cc                             // UnityEngine.Gradient$$SetKeys
+0106FFCC  add      x8, sp, #0x38                         
+0106FFD0  mov      x0, x20                               
+0106FFD4  mov      x1, xzr                               
+0106FFD8  bl       #0x203d444                             // UnityEngine.ParticleSystem.MinMaxGradient$$op_Implicit
+0106FFDC  ldur     q0, [sp, #0x38]                       
+0106FFE0  ldur     q1, [sp, #0x48]                       
+0106FFE4  ldur     q2, [sp, #0x58]                       
+0106FFE8  ldr      x8, [sp, #0x68]                       
+0106FFEC  add      x0, sp, #0x158                        
+0106FFF0  mov      x1, sp                                
+0106FFF4  mov      x2, xzr                               
+0106FFF8  stp      q0, q1, [sp]                          
+0106FFFC  str      q2, [sp, #0x20]                       
+01070000  str      x8, [sp, #0x30]                       
+01070004  bl       #0x203d710                             // UnityEngine.ParticleSystem.ColorOverLifetimeModule$$set_color
+01070008  ldp      x20, x19, [sp, #0x180]                
+0107000C  ldp      x22, x21, [sp, #0x170]                
+01070010  ldp      x29, x30, [sp, #0x160]                
+01070014  add      sp, sp, #0x190                        
+01070018  ret                                            
+0107001C  bl       #0xe61da8                             
+01070020  bl       #0xe61da0                             

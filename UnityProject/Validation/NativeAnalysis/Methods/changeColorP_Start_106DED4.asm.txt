@@ -1,0 +1,62 @@
+// changeColorP$$Start VA 0x106DED4, inferred length 240
+void changeColorP__Start (changeColorP_o* __this, const MethodInfo* method);
+0106DED4  str      x30, [sp, #-0x20]!                    
+0106DED8  stp      x20, x19, [sp, #0x10]                 
+0106DEDC  adrp     x20, #0x24fb000                       
+0106DEE0  ldrb     w8, [x20, #0xe88]                     
+0106DEE4  mov      x19, x0                               
+0106DEE8  tbnz     w8, #0, #0x106df0c                    
+0106DEEC  adrp     x0, #0x236a000                        
+0106DEF0  ldr      x0, [x0, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+0106DEF4  bl       #0xe61b78                             
+0106DEF8  adrp     x0, #0x236a000                        
+0106DEFC  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0106DF00  bl       #0xe61b78                             
+0106DF04  mov      w8, #1                                
+0106DF08  strb     w8, [x20, #0xe88]                     
+0106DF0C  ldr      w8, [x19, #0x24]                       // self.subcolor
+0106DF10  strb     wzr, [x19, #0x5d]                      // self.luzcolor
+0106DF14  cbz      w8, #0x106df30                        
+0106DF18  mov      w8, #1                                
+0106DF1C  strb     w8, [x19, #0x5d]                       // self.luzcolor
+0106DF20  mov      x0, x19                               
+0106DF24  ldp      x20, x19, [sp, #0x10]                 
+0106DF28  ldr      x30, [sp], #0x20                      
+0106DF2C  b        #0x106e990                             // changeColorP$$doLuzColor
+0106DF30  ldr      w8, [x19, #0x20]                       // self.color
+0106DF34  cmp      w8, #3                                
+0106DF38  b.eq     #0x106df4c                            
+0106DF3C  cmp      w8, #4                                
+0106DF40  b.ne     #0x106df68                            
+0106DF44  mov      w8, #0x10                             
+0106DF48  b        #0x106df50                            
+0106DF4C  mov      w8, #0xc                              
+0106DF50  adrp     x9, #0x236a000                        
+0106DF54  ldr      x9, [x9, #0x758]                       // [0x236A758] UIManagerScript_TypeInfo
+0106DF58  ldr      x9, [x9]                              
+0106DF5C  ldr      x9, [x9, #0xb8]                       
+0106DF60  ldr      w8, [x9, x8]                          
+0106DF64  str      w8, [x19, #0x58]                       // self.confColor
+0106DF68  strb     wzr, [x19, #0x5c]                      // self.night
+0106DF6C  adrp     x8, #0x236a000                        
+0106DF70  ldr      x8, [x8, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0106DF74  ldr      x8, [x8]                              
+0106DF78  ldr      x8, [x8, #0xb8]                       
+0106DF7C  ldr      w9, [x8]                              
+0106DF80  sub      w10, w9, #0x24                        
+0106DF84  cmp      w10, #4                               
+0106DF88  b.hs     #0x106dfa4                            
+0106DF8C  mov      w8, #1                                
+0106DF90  strb     w8, [x19, #0x5c]                       // self.night
+0106DF94  mov      x0, x19                               
+0106DF98  ldp      x20, x19, [sp, #0x10]                 
+0106DF9C  ldr      x30, [sp], #0x20                      
+0106DFA0  b        #0x106dfc4                             // changeColorP$$doColor2
+0106DFA4  cbnz     w9, #0x106dfb4                        
+0106DFA8  ldr      w8, [x8, #4]                          
+0106DFAC  cmp      w8, #1                                
+0106DFB0  b.eq     #0x106df8c                            
+0106DFB4  mov      x0, x19                               
+0106DFB8  ldp      x20, x19, [sp, #0x10]                 
+0106DFBC  ldr      x30, [sp], #0x20                      
+0106DFC0  b        #0x106e5c8                             // changeColorP$$doColor1

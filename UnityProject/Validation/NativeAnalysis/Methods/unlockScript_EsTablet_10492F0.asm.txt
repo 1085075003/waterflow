@@ -1,0 +1,30 @@
+// unlockScript$$EsTablet VA 0x10492F0, inferred length 112
+bool unlockScript__EsTablet (unlockScript_o* __this, const MethodInfo* method);
+010492F0  str      d8, [sp, #-0x20]!                     
+010492F4  stp      x30, x19, [sp, #0x10]                 
+010492F8  mov      x0, xzr                               
+010492FC  bl       #0x1fe9f80                             // UnityEngine.Screen$$get_dpi
+01049300  fcmp     s0, #0.0                              
+01049304  b.eq     #0x1049350                            
+01049308  mov      x0, xzr                               
+0104930C  mov      v8.16b, v0.16b                        
+01049310  bl       #0x1fe9f30                             // UnityEngine.Screen$$get_width
+01049314  mov      w19, w0                               
+01049318  mov      x0, xzr                               
+0104931C  bl       #0x1fe9f58                             // UnityEngine.Screen$$get_height
+01049320  scvtf    s0, w0                                
+01049324  scvtf    s1, w19                               
+01049328  fdiv     s0, s0, s8                            
+0104932C  fdiv     s1, s1, s8                            
+01049330  fmul     s1, s1, s1                            
+01049334  fmul     s0, s0, s0                            
+01049338  fadd     s0, s1, s0                            
+0104933C  fsqrt    s0, s0                                
+01049340  fmov     s1, #7.00000000                       
+01049344  fcmp     s0, s1                                
+01049348  cset     w0, ge                                
+0104934C  b        #0x1049354                            
+01049350  mov      w0, wzr                               
+01049354  ldp      x30, x19, [sp, #0x10]                 
+01049358  ldr      d8, [sp], #0x20                       
+0104935C  ret                                            

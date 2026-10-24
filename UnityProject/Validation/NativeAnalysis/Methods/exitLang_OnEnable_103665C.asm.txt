@@ -1,0 +1,82 @@
+// exitLang$$OnEnable VA 0x103665C, inferred length 320
+void exitLang__OnEnable (exitLang_o* __this, const MethodInfo* method);
+0103665C  stp      x30, x23, [sp, #-0x30]!               
+01036660  stp      x22, x21, [sp, #0x10]                 
+01036664  stp      x20, x19, [sp, #0x20]                 
+01036668  adrp     x23, #0x24fb000                       
+0103666C  adrp     x21, #0x236b000                       
+01036670  adrp     x22, #0x236b000                       
+01036674  adrp     x20, #0x236b000                       
+01036678  ldrb     w8, [x23, #0xd3a]                     
+0103667C  ldr      x21, [x21, #0x208]                     // [0x236B208] 'language'
+01036680  ldr      x22, [x22, #0x210]                     // [0x236B210] 'en'
+01036684  ldr      x20, [x20, #0x270]                     // [0x236B270] 'ko'
+01036688  mov      x19, x0                               
+0103668C  tbnz     w8, #0, #0x10366bc                    
+01036690  adrp     x0, #0x236b000                        
+01036694  ldr      x0, [x0, #0x270]                       // [0x236B270] 'ko'
+01036698  bl       #0xe61b78                             
+0103669C  adrp     x0, #0x236b000                        
+010366A0  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+010366A4  bl       #0xe61b78                             
+010366A8  adrp     x0, #0x236b000                        
+010366AC  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+010366B0  bl       #0xe61b78                             
+010366B4  mov      w8, #1                                
+010366B8  strb     w8, [x23, #0xd3a]                     
+010366BC  mov      x0, x19                               
+010366C0  bl       #0x103679c                             // exitLang$$AjustarPopup
+010366C4  ldr      x0, [x21]                             
+010366C8  ldr      x1, [x22]                             
+010366CC  mov      x2, xzr                               
+010366D0  bl       #0x2001644                             // UnityEngine.PlayerPrefs$$GetString
+010366D4  mov      x1, x0                                
+010366D8  str      x0, [x19, #0x30]                       // self.idioma
+010366DC  bl       #0x1036854                             // exitLang$$ObtenerTextoTraducido
+010366E0  ldr      x8, [x19, #0x30]                       // self.idioma
+010366E4  ldr      x1, [x20]                             
+010366E8  mov      x20, x0                               
+010366EC  mov      x2, xzr                               
+010366F0  mov      x0, x8                                
+010366F4  bl       #0x1960c7c                             // System.String$$op_Equality
+010366F8  ldr      x8, [x19, #0x20]                       // self.mensajeTexto
+010366FC  cbz      x8, #0x1036798                        
+01036700  tbz      w0, #0, #0x1036738                    
+01036704  mov      w1, #0x2d                             
+01036708  mov      x0, x8                                
+0103670C  mov      x2, xzr                               
+01036710  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+01036714  ldr      x0, [x19, #0x20]                       // self.mensajeTexto
+01036718  cbz      x0, #0x1036798                        
+0103671C  mov      w1, #1                                
+01036720  mov      x2, xzr                               
+01036724  bl       #0x22321f0                             // UnityEngine.UI.Text$$set_horizontalOverflow
+01036728  ldr      x0, [x19, #0x20]                       // self.mensajeTexto
+0103672C  cbz      x0, #0x1036798                        
+01036730  mov      w1, #0x46                             
+01036734  b        #0x1036768                            
+01036738  mov      w1, #0x41                             
+0103673C  mov      x0, x8                                
+01036740  mov      x2, xzr                               
+01036744  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+01036748  ldr      x0, [x19, #0x20]                       // self.mensajeTexto
+0103674C  cbz      x0, #0x1036798                        
+01036750  mov      w1, wzr                               
+01036754  mov      x2, xzr                               
+01036758  bl       #0x22321f0                             // UnityEngine.UI.Text$$set_horizontalOverflow
+0103675C  ldr      x0, [x19, #0x20]                       // self.mensajeTexto
+01036760  cbz      x0, #0x1036798                        
+01036764  mov      w1, #0x50                             
+01036768  mov      x2, xzr                               
+0103676C  bl       #0x223203c                             // UnityEngine.UI.Text$$set_resizeTextMaxSize
+01036770  ldr      x0, [x19, #0x20]                       // self.mensajeTexto
+01036774  cbz      x0, #0x1036798                        
+01036778  ldr      x8, [x0]                              
+0103677C  mov      x1, x20                               
+01036780  ldp      x20, x19, [sp, #0x20]                 
+01036784  ldp      x22, x21, [sp, #0x10]                 
+01036788  ldr      x3, [x8, #0x5e8]                      
+0103678C  ldr      x2, [x8, #0x5f0]                      
+01036790  ldp      x30, x23, [sp], #0x30                 
+01036794  br       x3                                    
+01036798  bl       #0xe61da0                             

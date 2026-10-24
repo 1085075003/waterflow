@@ -1,0 +1,91 @@
+// UIManagerSelScript$$Start VA 0x103CCF8, inferred length 356
+void UIManagerSelScript__Start (UIManagerSelScript_o* __this, const MethodInfo* method);
+0103CCF8  stp      x30, x23, [sp, #-0x30]!               
+0103CCFC  stp      x22, x21, [sp, #0x10]                 
+0103CD00  stp      x20, x19, [sp, #0x20]                 
+0103CD04  adrp     x22, #0x24fb000                       
+0103CD08  adrp     x23, #0x236a000                       
+0103CD0C  adrp     x21, #0x236b000                       
+0103CD10  adrp     x20, #0x236b000                       
+0103CD14  ldrb     w8, [x22, #0xd66]                     
+0103CD18  ldr      x23, [x23, #0x620]                     // [0x236A620] UIManagerSelScript_TypeInfo
+0103CD1C  ldr      x21, [x21, #0x4f0]                     // [0x236B4F0] SaveLoadManager_TypeInfo
+0103CD20  ldr      x20, [x20, #0x18]                      // [0x236B018] 'RemoveAds'
+0103CD24  mov      x19, x0                               
+0103CD28  tbnz     w8, #0, #0x103cd7c                    
+0103CD2C  adrp     x0, #0x236a000                        
+0103CD30  ldr      x0, [x0, #0xf40]                       // [0x236AF40] AudioManager0_TypeInfo
+0103CD34  bl       #0xe61b78                             
+0103CD38  adrp     x0, #0x236b000                        
+0103CD3C  ldr      x0, [x0, #0x4f0]                       // [0x236B4F0] SaveLoadManager_TypeInfo
+0103CD40  bl       #0xe61b78                             
+0103CD44  adrp     x0, #0x236a000                        
+0103CD48  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0103CD4C  bl       #0xe61b78                             
+0103CD50  adrp     x0, #0x236a000                        
+0103CD54  ldr      x0, [x0, #0x620]                       // [0x236A620] UIManagerSelScript_TypeInfo
+0103CD58  bl       #0xe61b78                             
+0103CD5C  adrp     x0, #0x236b000                        
+0103CD60  ldr      x0, [x0, #0x18]                        // [0x236B018] 'RemoveAds'
+0103CD64  bl       #0xe61b78                             
+0103CD68  adrp     x0, #0x236a000                        
+0103CD6C  ldr      x0, [x0, #0x980]                       // [0x236A980] 'test'
+0103CD70  bl       #0xe61b78                             
+0103CD74  mov      w8, #1                                
+0103CD78  strb     w8, [x22, #0xd66]                     
+0103CD7C  ldr      x8, [x23]                             
+0103CD80  mov      w1, wzr                               
+0103CD84  mov      x2, xzr                               
+0103CD88  ldr      x8, [x8, #0xb8]                       
+0103CD8C  str      xzr, [x8]                             
+0103CD90  ldr      x8, [x21]                             
+0103CD94  ldr      x8, [x8, #0xb8]                       
+0103CD98  str      wzr, [x8, #4]                         
+0103CD9C  ldr      x0, [x20]                             
+0103CDA0  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+0103CDA4  ldr      x8, [x19, #0x68]                       // self.BannerManager
+0103CDA8  str      w0, [x19, #0x70]                       // self.indicadorAds
+0103CDAC  cbz      x8, #0x103ce58                        
+0103CDB0  adrp     x20, #0x236a000                       
+0103CDB4  adrp     x21, #0x236a000                       
+0103CDB8  adrp     x22, #0x236a000                       
+0103CDBC  ldr      x20, [x20, #0xf40]                     // [0x236AF40] AudioManager0_TypeInfo
+0103CDC0  ldr      x21, [x21, #0x980]                     // [0x236A980] 'test'
+0103CDC4  ldr      x22, [x22, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+0103CDC8  cmp      w0, #0                                
+0103CDCC  cset     w1, eq                                
+0103CDD0  mov      x0, x8                                
+0103CDD4  mov      x2, xzr                               
+0103CDD8  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0103CDDC  ldr      x8, [x20]                             
+0103CDE0  mov      w1, wzr                               
+0103CDE4  mov      x2, xzr                               
+0103CDE8  ldr      x8, [x8, #0xb8]                       
+0103CDEC  ldr      x8, [x8]                              
+0103CDF0  stp      wzr, wzr, [x19, #0x4c]                 // self.contadorTest
+0103CDF4  str      x8, [x19, #0x28]                       // self.audioManager
+0103CDF8  ldr      x0, [x21]                             
+0103CDFC  bl       #0x200137c                             // UnityEngine.PlayerPrefs$$SetInt
+0103CE00  ldr      x8, [x22]                             
+0103CE04  ldr      x8, [x8, #0xb8]                       
+0103CE08  ldr      w8, [x8, #8]                          
+0103CE0C  cmp      w8, #1                                
+0103CE10  b.ne     #0x103ce48                            
+0103CE14  ldr      x0, [x19, #0x38]                       // self.botonDesign2
+0103CE18  cbz      x0, #0x103ce58                        
+0103CE1C  mov      w1, #1                                
+0103CE20  mov      x2, xzr                               
+0103CE24  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0103CE28  ldr      x0, [x19, #0x40]                       // self.botonSolucion
+0103CE2C  cbz      x0, #0x103ce58                        
+0103CE30  ldp      x20, x19, [sp, #0x20]                 
+0103CE34  ldp      x22, x21, [sp, #0x10]                 
+0103CE38  mov      w1, #1                                
+0103CE3C  mov      x2, xzr                               
+0103CE40  ldp      x30, x23, [sp], #0x30                 
+0103CE44  b        #0x2006394                             // UnityEngine.GameObject$$SetActive
+0103CE48  ldp      x20, x19, [sp, #0x20]                 
+0103CE4C  ldp      x22, x21, [sp, #0x10]                 
+0103CE50  ldp      x30, x23, [sp], #0x30                 
+0103CE54  ret                                            
+0103CE58  bl       #0xe61da0                             

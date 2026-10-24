@@ -1,0 +1,47 @@
+// UIManagerSelScript0$$botonMenuDown VA 0x1041884, inferred length 180
+void UIManagerSelScript0__botonMenuDown (UIManagerSelScript0_o* __this, const MethodInfo* method);
+01041884  str      x30, [sp, #-0x20]!                    
+01041888  stp      x20, x19, [sp, #0x10]                 
+0104188C  adrp     x20, #0x24fb000                       
+01041890  ldrb     w8, [x20, #0xd77]                     
+01041894  mov      x19, x0                               
+01041898  tbnz     w8, #0, #0x10418c8                    
+0104189C  adrp     x0, #0x2368000                        
+010418A0  ldr      x0, [x0, #0xb28]                       // [0x2368B28] UnityEngine.SceneManagement.SceneManager_TypeInfo
+010418A4  bl       #0xe61b78                             
+010418A8  adrp     x0, #0x236b000                        
+010418AC  ldr      x0, [x0, #0xc10]                       // [0x236BC10] UIManagerPortScript_TypeInfo
+010418B0  bl       #0xe61b78                             
+010418B4  adrp     x0, #0x236c000                        
+010418B8  ldr      x0, [x0, #0x250]                       // [0x236C250] 'Portada'
+010418BC  bl       #0xe61b78                             
+010418C0  mov      w8, #1                                
+010418C4  strb     w8, [x20, #0xd77]                     
+010418C8  ldr      x0, [x19, #0x28]                       // self.audioManager
+010418CC  cbz      x0, #0x1041934                        
+010418D0  ldr      x1, [x19, #0x20]                       // self.click
+010418D4  adrp     x20, #0x236b000                       
+010418D8  adrp     x19, #0x2368000                       
+010418DC  ldr      x20, [x20, #0xc10]                     // [0x236BC10] UIManagerPortScript_TypeInfo
+010418E0  ldr      x19, [x19, #0xb28]                     // [0x2368B28] UnityEngine.SceneManagement.SceneManager_TypeInfo
+010418E4  bl       #0x1037514                             // AudioManager0$$PlaySound
+010418E8  ldr      x0, [x20]                             
+010418EC  ldr      w8, [x0, #0xe0]                       
+010418F0  cbnz     w8, #0x10418fc                        
+010418F4  bl       #0xe61c80                             
+010418F8  ldr      x0, [x20]                             
+010418FC  ldr      x8, [x0, #0xb8]                       
+01041900  mov      w9, #1                                
+01041904  str      w9, [x8, #0x14]                       
+01041908  ldr      x0, [x19]                             
+0104190C  adrp     x19, #0x236c000                       
+01041910  ldr      w8, [x0, #0xe0]                       
+01041914  ldr      x19, [x19, #0x250]                     // [0x236C250] 'Portada'; self.candado4_4
+01041918  cbnz     w8, #0x1041920                        
+0104191C  bl       #0xe61c80                             
+01041920  ldr      x0, [x19]                             
+01041924  ldp      x20, x19, [sp, #0x10]                 
+01041928  mov      x1, xzr                               
+0104192C  ldr      x30, [sp], #0x20                      
+01041930  b        #0x2014924                             // UnityEngine.SceneManagement.SceneManager$$LoadScene
+01041934  bl       #0xe61da0                             

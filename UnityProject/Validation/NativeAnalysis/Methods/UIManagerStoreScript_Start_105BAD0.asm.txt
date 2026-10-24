@@ -1,0 +1,59 @@
+// UIManagerStoreScript$$Start VA 0x105BAD0, inferred length 228
+void UIManagerStoreScript__Start (UIManagerStoreScript_o* __this, const MethodInfo* method);
+0105BAD0  stp      x30, x21, [sp, #-0x20]!               
+0105BAD4  stp      x20, x19, [sp, #0x10]                 
+0105BAD8  adrp     x20, #0x24fb000                       
+0105BADC  adrp     x21, #0x236a000                       
+0105BAE0  ldrb     w8, [x20, #0xe12]                     
+0105BAE4  ldr      x21, [x21, #0x738]                     // [0x236A738] UIManagerSelScript0_TypeInfo
+0105BAE8  mov      x19, x0                               
+0105BAEC  tbnz     w8, #0, #0x105bb28                    
+0105BAF0  adrp     x0, #0x236a000                        
+0105BAF4  ldr      x0, [x0, #0xf40]                       // [0x236AF40] AudioManager0_TypeInfo
+0105BAF8  bl       #0xe61b78                             
+0105BAFC  adrp     x0, #0x236a000                        
+0105BB00  ldr      x0, [x0, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+0105BB04  bl       #0xe61b78                             
+0105BB08  adrp     x0, #0x236a000                        
+0105BB0C  ldr      x0, [x0, #0x738]                       // [0x236A738] UIManagerSelScript0_TypeInfo
+0105BB10  bl       #0xe61b78                             
+0105BB14  adrp     x0, #0x236c000                        
+0105BB18  ldr      x0, [x0, #0xc28]                       // [0x236CC28] UIManagerStoreScript_TypeInfo
+0105BB1C  bl       #0xe61b78                             
+0105BB20  mov      w8, #1                                
+0105BB24  strb     w8, [x20, #0xe12]                     
+0105BB28  ldr      x8, [x21]                             
+0105BB2C  ldr      x8, [x8, #0xb8]                       
+0105BB30  ldr      w9, [x8, #0xc]                        
+0105BB34  cmp      w9, #1                                
+0105BB38  b.le     #0x105bb58                            
+0105BB3C  adrp     x9, #0x236a000                        
+0105BB40  ldr      x9, [x9, #0x9d0]                       // [0x236A9D0] AudioManager_TypeInfo
+0105BB44  ldr      x9, [x9]                              
+0105BB48  ldr      x9, [x9, #0xb8]                       
+0105BB4C  ldr      x9, [x9]                              
+0105BB50  str      x9, [x19, #0x30]                       // self.audioManager
+0105BB54  b        #0x105bb70                            
+0105BB58  adrp     x9, #0x236a000                        
+0105BB5C  ldr      x9, [x9, #0xf40]                       // [0x236AF40] AudioManager0_TypeInfo
+0105BB60  ldr      x9, [x9]                              
+0105BB64  ldr      x9, [x9, #0xb8]                       
+0105BB68  ldr      x9, [x9]                              
+0105BB6C  str      x9, [x19, #0x28]                       // self.audioManager0
+0105BB70  ldr      x0, [x19, #0xa0]                       // self.botonDesign
+0105BB74  cbz      x0, #0x105bbb0                        
+0105BB78  ldr      w8, [x8, #8]                          
+0105BB7C  adrp     x20, #0x236c000                       
+0105BB80  ldr      x20, [x20, #0xc28]                     // [0x236CC28] UIManagerStoreScript_TypeInfo
+0105BB84  mov      x2, xzr                               
+0105BB88  cmp      w8, #1                                
+0105BB8C  cset     w1, eq                                
+0105BB90  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0105BB94  ldr      x8, [x20]                             
+0105BB98  mov      x0, x19                               
+0105BB9C  ldp      x20, x19, [sp, #0x10]                 
+0105BBA0  ldr      x8, [x8, #0xb8]                       
+0105BBA4  strb     wzr, [x8]                             
+0105BBA8  ldp      x30, x21, [sp], #0x20                 
+0105BBAC  b        #0x105bbb4                             // UIManagerStoreScript$$doLanguage
+0105BBB0  bl       #0xe61da0                             

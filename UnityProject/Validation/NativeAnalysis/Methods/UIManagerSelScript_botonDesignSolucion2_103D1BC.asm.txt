@@ -1,0 +1,21 @@
+// UIManagerSelScript$$botonDesignSolucion2 VA 0x103D1BC, inferred length 76
+void UIManagerSelScript__botonDesignSolucion2 (UIManagerSelScript_o* __this, const MethodInfo* method);
+0103D1BC  str      x30, [sp, #-0x20]!                    
+0103D1C0  stp      x20, x19, [sp, #0x10]                 
+0103D1C4  adrp     x19, #0x24fb000                       
+0103D1C8  adrp     x20, #0x236a000                       
+0103D1CC  ldrb     w8, [x19, #0xd6e]                     
+0103D1D0  ldr      x20, [x20, #0x620]                     // [0x236A620] UIManagerSelScript_TypeInfo
+0103D1D4  tbnz     w8, #0, #0x103d1ec                    
+0103D1D8  adrp     x0, #0x236a000                        
+0103D1DC  ldr      x0, [x0, #0x620]                       // [0x236A620] UIManagerSelScript_TypeInfo
+0103D1E0  bl       #0xe61b78                             
+0103D1E4  mov      w8, #1                                
+0103D1E8  strb     w8, [x19, #0xd6e]                     
+0103D1EC  ldr      x8, [x20]                             
+0103D1F0  ldp      x20, x19, [sp, #0x10]                 
+0103D1F4  mov      w9, #2                                
+0103D1F8  ldr      x8, [x8, #0xb8]                       
+0103D1FC  str      w9, [x8, #4]                          
+0103D200  ldr      x30, [sp], #0x20                      
+0103D204  ret                                            

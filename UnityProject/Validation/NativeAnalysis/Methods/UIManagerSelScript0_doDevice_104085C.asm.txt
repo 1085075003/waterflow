@@ -1,0 +1,95 @@
+// UIManagerSelScript0$$doDevice VA 0x104085C, inferred length 372
+void UIManagerSelScript0__doDevice (UIManagerSelScript0_o* __this, const MethodInfo* method);
+0104085C  str      d8, [sp, #-0x30]!                     
+01040860  stp      x30, x21, [sp, #0x10]                 
+01040864  stp      x20, x19, [sp, #0x20]                 
+01040868  adrp     x20, #0x24fb000                       
+0104086C  ldrb     w8, [x20, #0xd94]                     
+01040870  mov      x19, x0                               
+01040874  tbnz     w8, #0, #0x10408a4                    
+01040878  adrp     x0, #0x2368000                        
+0104087C  ldr      x0, [x0, #0x290]                       // [0x2368290] bool_TypeInfo
+01040880  bl       #0xe61b78                             
+01040884  adrp     x0, #0x2368000                        
+01040888  ldr      x0, [x0, #0x178]                       // [0x2368178] UnityEngine.Debug_TypeInfo
+0104088C  bl       #0xe61b78                             
+01040890  adrp     x0, #0x236c000                        
+01040894  ldr      x0, [x0, #0x248]                       // [0x236C248] 'tagu95 esTablet '
+01040898  bl       #0xe61b78                             
+0104089C  mov      w8, #1                                
+010408A0  strb     w8, [x20, #0xd94]                     
+010408A4  mov      x0, xzr                               
+010408A8  bl       #0x1fe9f30                             // UnityEngine.Screen$$get_width
+010408AC  mov      w20, w0                               
+010408B0  mov      x0, xzr                               
+010408B4  bl       #0x1fe9f58                             // UnityEngine.Screen$$get_height
+010408B8  scvtf    s0, w20                               
+010408BC  scvtf    s1, w0                                
+010408C0  mov      x0, xzr                               
+010408C4  fdiv     s8, s0, s1                            
+010408C8  bl       #0x1fe9f30                             // UnityEngine.Screen$$get_width
+010408CC  mov      w20, w0                               
+010408D0  mov      x0, xzr                               
+010408D4  bl       #0x1fe9f58                             // UnityEngine.Screen$$get_height
+010408D8  adrp     x8, #0x5ff000                         
+010408DC  ldr      s0, [x8, #0xd34]                      
+010408E0  cmp      w20, w0                               
+010408E4  csel     w8, w20, w0, lt                       
+010408E8  fcmp     s8, s0                                
+010408EC  b.pl     #0x1040924                            
+010408F0  cmp      w8, #0x3e8                            
+010408F4  b.lt     #0x1040924                            
+010408F8  ldr      x0, [x19, #0x5d0]                      // self.panelTit1a
+010408FC  mov      w8, #1                                
+01040900  strb     w8, [x19, #0x5c8]                      // self.esTablet
+01040904  cbz      x0, #0x10409cc                        
+01040908  mov      w1, wzr                               
+0104090C  mov      x2, xzr                               
+01040910  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01040914  ldr      x0, [x19, #0x5d8]                      // self.panelTit1b
+01040918  cbz      x0, #0x10409cc                        
+0104091C  mov      w1, #1                                
+01040920  b        #0x1040948                            
+01040924  ldr      x0, [x19, #0x5d0]                      // self.panelTit1a
+01040928  strb     wzr, [x19, #0x5c8]                     // self.esTablet
+0104092C  cbz      x0, #0x10409cc                        
+01040930  mov      w1, #1                                
+01040934  mov      x2, xzr                               
+01040938  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+0104093C  ldr      x0, [x19, #0x5d8]                      // self.panelTit1b
+01040940  cbz      x0, #0x10409cc                        
+01040944  mov      w1, wzr                               
+01040948  mov      x2, xzr                               
+0104094C  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01040950  adrp     x8, #0x2368000                        
+01040954  ldr      x8, [x8, #0x290]                       // [0x2368290] bool_TypeInfo
+01040958  adrp     x21, #0x236c000                       
+0104095C  adrp     x20, #0x2368000                       
+01040960  add      x19, x19, #0x5c8                      
+01040964  ldr      x0, [x8]                              
+01040968  ldr      w8, [x0, #0xe0]                       
+0104096C  ldr      x21, [x21, #0x248]                     // [0x236C248] 'tagu95 esTablet '
+01040970  ldr      x20, [x20, #0x178]                     // [0x2368178] UnityEngine.Debug_TypeInfo
+01040974  cbnz     w8, #0x104097c                        
+01040978  bl       #0xe61c80                             
+0104097C  mov      x0, x19                               
+01040980  mov      x1, xzr                               
+01040984  bl       #0x1a4b628                             // System.Boolean$$ToString
+01040988  ldr      x8, [x21]                             
+0104098C  mov      x1, x0                                
+01040990  mov      x2, xzr                               
+01040994  mov      x0, x8                                
+01040998  bl       #0x1958280                             // System.String$$Concat
+0104099C  ldr      x8, [x20]                             
+010409A0  mov      x19, x0                               
+010409A4  ldr      w9, [x8, #0xe0]                       
+010409A8  cbnz     w9, #0x10409b4                        
+010409AC  mov      x0, x8                                
+010409B0  bl       #0xe61c80                             
+010409B4  mov      x0, x19                               
+010409B8  ldp      x20, x19, [sp, #0x20]                 
+010409BC  ldp      x30, x21, [sp, #0x10]                 
+010409C0  mov      x1, xzr                               
+010409C4  ldr      d8, [sp], #0x30                       
+010409C8  b        #0x1fe3034                             // UnityEngine.Debug$$Log
+010409CC  bl       #0xe61da0                             

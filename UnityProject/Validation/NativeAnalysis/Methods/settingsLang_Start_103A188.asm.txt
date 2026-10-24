@@ -1,0 +1,162 @@
+// settingsLang$$Start VA 0x103A188, inferred length 640
+void settingsLang__Start (settingsLang_o* __this, const MethodInfo* method);
+0103A188  str      x30, [sp, #-0x30]!                    
+0103A18C  stp      x22, x21, [sp, #0x10]                 
+0103A190  stp      x20, x19, [sp, #0x20]                 
+0103A194  adrp     x20, #0x24fb000                       
+0103A198  adrp     x21, #0x236b000                       
+0103A19C  adrp     x22, #0x236b000                       
+0103A1A0  ldrb     w8, [x20, #0xd5f]                     
+0103A1A4  ldr      x21, [x21, #0x208]                     // [0x236B208] 'language'
+0103A1A8  ldr      x22, [x22, #0x210]                     // [0x236B210] 'en'
+0103A1AC  mov      x19, x0                               
+0103A1B0  tbnz     w8, #0, #0x103a1d4                    
+0103A1B4  adrp     x0, #0x236b000                        
+0103A1B8  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+0103A1BC  bl       #0xe61b78                             
+0103A1C0  adrp     x0, #0x236b000                        
+0103A1C4  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+0103A1C8  bl       #0xe61b78                             
+0103A1CC  mov      w8, #1                                
+0103A1D0  strb     w8, [x20, #0xd5f]                     
+0103A1D4  ldr      x0, [x21]                             
+0103A1D8  ldr      x1, [x22]                             
+0103A1DC  mov      x2, xzr                               
+0103A1E0  bl       #0x2001644                             // UnityEngine.PlayerPrefs$$GetString
+0103A1E4  str      x0, [x19, #0x50]                       // self.idioma
+0103A1E8  mov      x0, x19                               
+0103A1EC  bl       #0x103a408                             // settingsLang$$ObtenerTexto2
+0103A1F0  str      x0, [x19, #0x60]                       // self.tex2
+0103A1F4  mov      x0, x19                               
+0103A1F8  bl       #0x103aa7c                             // settingsLang$$ObtenerTexto3
+0103A1FC  str      x0, [x19, #0x68]                       // self.tex3
+0103A200  mov      x0, x19                               
+0103A204  bl       #0x103b168                             // settingsLang$$ObtenerTexto6
+0103A208  ldr      x8, [x19, #0x20]                       // self.texto1
+0103A20C  str      x0, [x19, #0x80]                       // self.tex6
+0103A210  cbz      x8, #0x103a404                        
+0103A214  ldr      x9, [x8]                              
+0103A218  ldr      x1, [x19, #0x58]                       // self.tex1
+0103A21C  mov      x0, x8                                
+0103A220  ldr      x10, [x9, #0x5e8]                     
+0103A224  ldr      x2, [x9, #0x5f0]                      
+0103A228  blr      x10                                   
+0103A22C  ldr      x0, [x19, #0x28]                       // self.texto2
+0103A230  cbz      x0, #0x103a404                        
+0103A234  ldr      x8, [x0]                              
+0103A238  ldr      x1, [x19, #0x60]                       // self.tex2
+0103A23C  ldr      x9, [x8, #0x5e8]                      
+0103A240  ldr      x2, [x8, #0x5f0]                      
+0103A244  blr      x9                                    
+0103A248  ldr      x0, [x19, #0x30]                       // self.texto3
+0103A24C  cbz      x0, #0x103a404                        
+0103A250  ldr      x8, [x0]                              
+0103A254  ldr      x1, [x19, #0x68]                       // self.tex3
+0103A258  ldr      x9, [x8, #0x5e8]                      
+0103A25C  ldr      x2, [x8, #0x5f0]                      
+0103A260  blr      x9                                    
+0103A264  ldr      x0, [x19, #0x38]                       // self.texto4
+0103A268  cbz      x0, #0x103a404                        
+0103A26C  ldr      x8, [x0]                              
+0103A270  ldr      x1, [x19, #0x70]                       // self.tex4
+0103A274  ldr      x9, [x8, #0x5e8]                      
+0103A278  ldr      x2, [x8, #0x5f0]                      
+0103A27C  blr      x9                                    
+0103A280  ldr      x0, [x19, #0x40]                       // self.texto5
+0103A284  cbz      x0, #0x103a404                        
+0103A288  ldr      x8, [x0]                              
+0103A28C  ldr      x1, [x19, #0x78]                       // self.tex5
+0103A290  ldr      x9, [x8, #0x5e8]                      
+0103A294  ldr      x2, [x8, #0x5f0]                      
+0103A298  blr      x9                                    
+0103A29C  ldr      x0, [x19, #0x48]                       // self.texto6
+0103A2A0  cbz      x0, #0x103a404                        
+0103A2A4  ldr      x8, [x0]                              
+0103A2A8  ldr      x1, [x19, #0x80]                       // self.tex6
+0103A2AC  ldr      x9, [x8, #0x5e8]                      
+0103A2B0  ldr      x2, [x8, #0x5f0]                      
+0103A2B4  blr      x9                                    
+0103A2B8  ldr      x0, [x19, #0x38]                       // self.texto4
+0103A2BC  cbz      x0, #0x103a404                        
+0103A2C0  ldr      x8, [x0]                              
+0103A2C4  ldr      x9, [x8, #0x5d8]                      
+0103A2C8  ldr      x1, [x8, #0x5e0]                      
+0103A2CC  blr      x9                                    
+0103A2D0  cbz      x0, #0x103a404                        
+0103A2D4  ldr      x8, [x19, #0x40]                       // self.texto5
+0103A2D8  cbz      x8, #0x103a404                        
+0103A2DC  ldr      x9, [x8]                              
+0103A2E0  ldr      w20, [x0, #0x10]                      
+0103A2E4  mov      x0, x8                                
+0103A2E8  ldr      x10, [x9, #0x5d8]                     
+0103A2EC  ldr      x1, [x9, #0x5e0]                      
+0103A2F0  blr      x10                                   
+0103A2F4  cbz      x0, #0x103a404                        
+0103A2F8  ldr      w8, [x0, #0x10]                       
+0103A2FC  cmp      w20, w8                               
+0103A300  csel     w8, w20, w8, gt                       
+0103A304  cmp      w8, #6                                
+0103A308  b.le     #0x103a360                            
+0103A30C  ldr      x0, [x19, #0x38]                       // self.texto4
+0103A310  cmp      w8, #0xa                              
+0103A314  b.le     #0x103a3ac                            
+0103A318  cbz      x0, #0x103a404                        
+0103A31C  mov      w1, #0x18                             
+0103A320  mov      x2, xzr                               
+0103A324  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+0103A328  ldr      x0, [x19, #0x40]                       // self.texto5
+0103A32C  cbz      x0, #0x103a404                        
+0103A330  mov      w1, #0x18                             
+0103A334  mov      x2, xzr                               
+0103A338  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+0103A33C  ldr      x0, [x19, #0x38]                       // self.texto4
+0103A340  cbz      x0, #0x103a404                        
+0103A344  mov      w1, #0x18                             
+0103A348  mov      x2, xzr                               
+0103A34C  bl       #0x223203c                             // UnityEngine.UI.Text$$set_resizeTextMaxSize
+0103A350  ldr      x0, [x19, #0x40]                       // self.texto5
+0103A354  cbz      x0, #0x103a404                        
+0103A358  mov      w1, #0x18                             
+0103A35C  b        #0x103a3f0                            
+0103A360  ldr      x0, [x19, #0x38]                       // self.texto4
+0103A364  cbz      x0, #0x103a404                        
+0103A368  mov      w1, #0x1f                             
+0103A36C  mov      x2, xzr                               
+0103A370  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+0103A374  ldr      x0, [x19, #0x40]                       // self.texto5
+0103A378  cbz      x0, #0x103a404                        
+0103A37C  mov      w1, #0x1f                             
+0103A380  mov      x2, xzr                               
+0103A384  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+0103A388  ldr      x0, [x19, #0x38]                       // self.texto4
+0103A38C  cbz      x0, #0x103a404                        
+0103A390  mov      w1, #0x1f                             
+0103A394  mov      x2, xzr                               
+0103A398  bl       #0x223203c                             // UnityEngine.UI.Text$$set_resizeTextMaxSize
+0103A39C  ldr      x0, [x19, #0x40]                       // self.texto5
+0103A3A0  cbz      x0, #0x103a404                        
+0103A3A4  mov      w1, #0x1f                             
+0103A3A8  b        #0x103a3f0                            
+0103A3AC  cbz      x0, #0x103a404                        
+0103A3B0  mov      w1, #0x1b                             
+0103A3B4  mov      x2, xzr                               
+0103A3B8  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+0103A3BC  ldr      x0, [x19, #0x40]                       // self.texto5
+0103A3C0  cbz      x0, #0x103a404                        
+0103A3C4  mov      w1, #0x1b                             
+0103A3C8  mov      x2, xzr                               
+0103A3CC  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+0103A3D0  ldr      x0, [x19, #0x38]                       // self.texto4
+0103A3D4  cbz      x0, #0x103a404                        
+0103A3D8  mov      w1, #0x1b                             
+0103A3DC  mov      x2, xzr                               
+0103A3E0  bl       #0x223203c                             // UnityEngine.UI.Text$$set_resizeTextMaxSize
+0103A3E4  ldr      x0, [x19, #0x40]                       // self.texto5
+0103A3E8  cbz      x0, #0x103a404                        
+0103A3EC  mov      w1, #0x1b                             
+0103A3F0  ldp      x20, x19, [sp, #0x20]                 
+0103A3F4  ldp      x22, x21, [sp, #0x10]                 
+0103A3F8  mov      x2, xzr                               
+0103A3FC  ldr      x30, [sp], #0x30                      
+0103A400  b        #0x223203c                             // UnityEngine.UI.Text$$set_resizeTextMaxSize
+0103A404  bl       #0xe61da0                             
