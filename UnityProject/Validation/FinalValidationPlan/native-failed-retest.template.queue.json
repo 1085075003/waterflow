@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "planId": "final-20261016T044201Z",
+  "project": "../../../.validation-project",
+  "unityVersion": "2022.3.28f1",
+  "continueOnFailure": false,
+  "jobs": [
+    {
+      "name": "native-failed-retest",
+      "method": "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNativeFailed",
+      "reportDirectory": "Validation/Save1Gameplay",
+      "reportFile": "save1-gameplay-validation.json",
+      "archiveDestination": "FinalValidationRuns/final-20261016T044201Z/Retests-NativeFailed-Batch01",
+      "timeoutSeconds": 21600
+    }
+  ],
+  "executionStatus": "Prepared only; no Unity process launched by this plan.",
+  "executionGate": [
+    "Only if actual closed final base has nonempty failed ids.",
+    "Copy that immutable original report to this project Validation/Save1Gameplay/native-retest-source.json.",
+    "For two source reports use distinct new queues/archive destinations, preserving each source provenance.",
+    "Do not skip failed movements, alter inputs/targets or combine different critical physics. Final Input61 follows every selected retest."
+  ]
+}

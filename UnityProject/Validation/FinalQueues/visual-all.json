@@ -1,0 +1,21 @@
+{
+  "continueOnFailure": false,
+  "jobs": [
+    {
+      "name": "native-preview-goals",
+      "method": "Recovered.FlowWater.Editor.FlowWaterNativePreviewEvidenceValidation.Run",
+      "reportDirectory": "Validation/Save1Gameplay",
+      "reportFile": "save1-gameplay-validation.json",
+      "archiveDestination": "FinalRender/PreviewGameplay",
+      "timeoutSeconds": 1200
+    },
+    {
+      "name": "all-1350-layouts",
+      "method": "Recovered.FlowWater.Editor.FlowWaterFullValidation.RunAll",
+      "reportDirectory": "Validation/FullContent",
+      "reportFile": "all-runtime-validation.json",
+      "archiveDestination": "FinalRender/FullContent",
+      "timeoutSeconds": 14400
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "unityVersion": "2022.3.28f1",
+  "continueOnFailure": false,
+  "executionGate": "Import reviewed native recipe fixes, finish all source changes, pass the closed 33-case render regression, and synchronize frozen Assets before launch.",
+  "jobs": [
+    {
+      "name": "native-recipe-final-preview-positive-goals",
+      "method": "Recovered.FlowWater.Editor.FlowWaterNativePreviewEvidenceValidation.Run",
+      "reportDirectory": "Validation/Save1Gameplay",
+      "reportFile": "save1-gameplay-validation.json",
+      "archiveDestination": "FinalRender/NativeRecipeFinalPreviewGameplay",
+      "timeoutSeconds": 1200
+    },
+    {
+      "name": "native-recipe-final-all-1350",
+      "method": "Recovered.FlowWater.Editor.FlowWaterFullValidation.RunAll",
+      "reportDirectory": "Validation/FullContent",
+      "reportFile": "all-runtime-validation.json",
+      "archiveDestination": "FinalRender/FullContentNativeRecipesFinal",
+      "timeoutSeconds": 14400
+    }
+  ]
+}

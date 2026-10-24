@@ -1,0 +1,190 @@
+{
+  "schemaVersion": 1,
+  "createdUtc": "2026-10-16T04:46:00.059572+00:00",
+  "planId": "final-20261016T044201Z",
+  "purpose": "Remaining final feature suites only; the two halves and root-owned preview/full visual jobs are already running and must not be restarted by this handoff.",
+  "status": "Prepared and structurally validated only; no Unity process launched.",
+  "queue": {
+    "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationPlan\\visual-features-after-full.queue.json",
+    "sha256": "392b376a9c59e134283551c292f7fe0ac9712e2351ac17b14e8c0fef20580e71",
+    "project": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project",
+    "jobs": 24,
+    "archiveDestinationsNewAndNotNested": true,
+    "noConflictWithRunningRootVisualArchives": true
+  },
+  "independentFinalInput": {
+    "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationPlan\\final-input-post-retests.queue.json",
+    "sha256": "140c2ac35e08a58e677760b9e20ea434b314c43cba00c292f5e53210a0d81645",
+    "jobs": 1,
+    "runSeparatelyLast": true,
+    "gate": "After both halves, all selected retests, all feature jobs; startedUtc later than every supplied retest finishedUtc."
+  },
+  "derivedFrom": {
+    "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationPlan\\visual-regression.queue.json",
+    "sha256": "661857083aad50536e4f9ecea1e8502db9bc855ab7796e69208d0bcd136f50a8",
+    "removedFirstJobs": [
+      "01-native-preview-positive-609-622",
+      "02-full1350"
+    ],
+    "existingFileUnchanged": true
+  },
+  "sourceFreeze": "Validation/FinalSource-20261016T043531611160Z",
+  "jobs": [
+    {
+      "name": "03-ui",
+      "method": "Recovered.FlowWater.Editor.FlowWaterUIValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\UIFlows\\ui-flow-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\03-ui"
+    },
+    {
+      "name": "04-input-precheck",
+      "method": "Recovered.FlowWater.Editor.FlowWaterInteractionValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\Interaction\\interaction-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\04-input-precheck"
+    },
+    {
+      "name": "05-camera",
+      "method": "Recovered.FlowWater.Editor.FlowWaterCameraTutorialValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\CameraTutorial\\camera-tutorial-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\05-camera"
+    },
+    {
+      "name": "06-springs",
+      "method": "Recovered.FlowWater.Editor.FlowWaterSpringValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\Springs\\spring-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\06-springs"
+    },
+    {
+      "name": "07-spring-modes",
+      "method": "Recovered.FlowWater.Editor.FlowWaterSpringModeValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\SpringModes\\spring-mode-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\07-spring-modes"
+    },
+    {
+      "name": "08-spring-constraints",
+      "method": "Recovered.FlowWater.Editor.FlowWaterSpringConstraintValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\SpringConstraints\\spring-constraint-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\08-spring-constraints"
+    },
+    {
+      "name": "09-propagation",
+      "method": "Recovered.FlowWater.Editor.FlowWaterPropagationValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\WaterPropagation\\water-propagation-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\09-propagation"
+    },
+    {
+      "name": "10-preview",
+      "method": "Recovered.FlowWater.Editor.FlowWaterPreviewValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\CategoryPreview\\category-preview-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\10-preview"
+    },
+    {
+      "name": "11-aspect",
+      "method": "Recovered.FlowWater.Editor.FlowWaterAspectValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\Aspect\\aspect-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\11-aspect"
+    },
+    {
+      "name": "12-fountain-animation",
+      "method": "Recovered.FlowWater.Editor.FlowWaterFountainAnimationValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\FountainAnimation\\fountain-animation-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\12-fountain-animation"
+    },
+    {
+      "name": "13-fountain-dispatch",
+      "method": "Recovered.FlowWater.Editor.FlowWaterFountainDispatchValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\FountainDispatch\\fountain-dispatch-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\13-fountain-dispatch"
+    },
+    {
+      "name": "14-decorative-pits",
+      "method": "Recovered.FlowWater.Editor.FlowWaterDecorativePitValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\DecorativePits\\decorative-pit-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\14-decorative-pits"
+    },
+    {
+      "name": "15-bottom-markers",
+      "method": "Recovered.FlowWater.Editor.FlowWaterBottomMarkerValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\BottomMarker\\bottom-marker-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\15-bottom-markers"
+    },
+    {
+      "name": "16-jet-normal-gameplay",
+      "method": "Recovered.FlowWater.Editor.FlowWaterNativeJetRotationValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\Save1Gameplay\\save1-gameplay-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\16-jet-normal-gameplay"
+    },
+    {
+      "name": "17-jet-lifetime-snapshots",
+      "method": "Recovered.FlowWater.Editor.FlowWaterJetLifetimeValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\JetLifetime\\jet-lifetime-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\17-jet-lifetime-snapshots"
+    },
+    {
+      "name": "18-upward-pfuente",
+      "method": "Recovered.FlowWater.Editor.FlowWaterPfuenteOcclusionValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\PfuenteOcclusion\\pfuente-occlusion-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\18-upward-pfuente"
+    },
+    {
+      "name": "19-standalone-c3",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStandaloneFountainValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\StandaloneFountain\\standalone-fountain-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\19-standalone-c3"
+    },
+    {
+      "name": "20-stars",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStarAnimationValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\UIAnimations\\native-ui-animation-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\20-stars"
+    },
+    {
+      "name": "21-language",
+      "method": "Recovered.FlowWater.Editor.FlowWaterNativeLanguageValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\NativeLanguage\\native-language-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\21-language"
+    },
+    {
+      "name": "22-step-automatic",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.Run",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\NativeStepPlayback\\native-step-playback-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\22-step-automatic"
+    },
+    {
+      "name": "23-step-mechanism",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.RunMechanisms",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\NativeStepPlayback\\native-step-playback-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\23-step-mechanism"
+    },
+    {
+      "name": "24-step-lifts",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.RunLifts",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\NativeStepPlayback\\native-step-playback-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\24-step-lifts"
+    },
+    {
+      "name": "25-step-missing-capture",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.RunMissingCapture",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\NativeStepPlayback\\native-step-playback-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\25-step-missing-capture"
+    },
+    {
+      "name": "26-step-reference-lifetime",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.RunCaptureLifetime",
+      "primaryReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project\\Validation\\NativeStepPlayback\\native-step-playback-validation.json",
+      "archiveDestination": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationRuns\\final-20261016T044201Z\\Visual\\26-step-reference-lifetime"
+    }
+  ],
+  "executionCommandArguments": {
+    "runner": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\run_unity_queue.py",
+    "project": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-visual-project",
+    "queue": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalValidationPlan\\visual-features-after-full.queue.json"
+  },
+  "limits": [
+    "No success result is generated by this plan.",
+    "Existing original six queues and their manifest are unchanged.",
+    "Do not run the original full26 visual queue or the half queues again.",
+    "Only fresh closed primary reports and unchanged before/after source snapshots count; archived prior screenshots are not new captures.",
+    "No reportDirectory=Validation root job or History subtree is copied."
+  ]
+}
