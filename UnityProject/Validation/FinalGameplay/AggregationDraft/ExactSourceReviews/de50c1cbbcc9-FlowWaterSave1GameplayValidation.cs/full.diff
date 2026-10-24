@@ -1,0 +1,241 @@
+--- Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs@3cd3d1b9fc6c0dfa20a3282eeefcb0d0376fcab3392d33de32965f653a364cc6
++++ Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs@de50c1cbbcc9241af0d07236398becbf1c543ac533a832544493b76058805c39
+@@ -26,6 +26,8 @@
+         const string RetestSourceKey = "FlowWater.Save1GameplayValidation.RetestSource";
+         const string CatalogKey = "FlowWater.Save1GameplayValidation.ExpectedCatalog";
+         const string TerminalQuickKey = "FlowWater.Save1GameplayValidation.TerminalQuickRelease";
++        const string OrdinaryEarlyKey = "FlowWater.Save1GameplayValidation.OrdinaryEarlyRelease";
++        static bool ordinaryEarlyForNextBegin;
+         static bool NativeReplay { get { return SessionState.GetBool(InputModeKey,false); } }
+         const string TimeKey = "FlowWater.Save1GameplayValidation.TimeScale";
+         static readonly int[] FocusedCases = { 609, 622, 614, 1851, 656, 1057, 2001 };
+@@ -45,7 +47,9 @@
+             public bool productionInput, nativeWaitObservedBusy, waterPendingBefore, waterPendingAtRelease;
+             public int pickupFrame, nativeWaitBusyFrame=-1, nativeWaitIdleFrame=-1, releaseFrame, committedFrame;
+             public Vector3 pickScreen, dropScreen, originalGuide, heldPosition, heldFloatingTarget;
+-            public bool compressionLanding, retainedOriginalGrabOffset, terminalQuickRelease;
++            public bool compressionLanding, retainedOriginalGrabOffset, terminalQuickRelease, ordinaryEarlyRelease;
++            public int heldInputFrames, motionFinishedFrame=-1, compressionSettledFrame=-1, pressurePostMotionFrames;
++            public float compressionWaitRealSeconds;
+             public int cameraQuarterTurns, cameraSlowGestures, cameraSlowFrames;
+             public List<float> cameraYawSamples=new List<float>();
+             public List<string> inputDiagnostics=new List<string>();
+@@ -90,7 +94,7 @@
+             public RetestSource retestSource;
+             public ExpectedCatalog expectedCatalog;
+             public string playerReleaseStrategy;
+-            public bool passed, preferencesRestored;
++            public bool passed, preferencesRestored, ordinaryEarlyRelease;
+             public float simulationTimeScale, originalTimeScale;
+             public int plannedLevels;
+             public List<Check> checks = new List<Check>();
+@@ -134,8 +138,19 @@
+         public static void RunNativeFocused() { Begin(new[] {1142,1149,1236,1656,1660},true); }
+         public static void RunNativeViewFailures() { Begin(new[] {754,761},true); }
+         public static void RunNativeLandingRegression() { Begin(new[] {1187},true); }
++        public static void RunNativePressureReleaseRegression() { Begin(new[] {609,690},true); }
+         public static void RunNativeTerminalQuickRelease() { Begin(new[] {1187},true,null,true); }
+-        public static void RunNativeFailed()
++        public static void RunNative1105EarlyRelease() { BeginOrdinaryEarlyRelease(new[] {1105},null); }
++        public static void RunNativeBoxSurfaceRegressions() { BeginOrdinaryEarlyRelease(new[] {1187,2033},null); }
++        public static void RunNativeFailedEarlyRelease() { RunNativeFailedWithPolicy(true); }
++        static void BeginOrdinaryEarlyRelease(int[] cases,RetestSource source)
++        {
++            bool previous=ordinaryEarlyForNextBegin; ordinaryEarlyForNextBegin=true;
++            try { Begin(cases,true,source); }
++            finally { ordinaryEarlyForNextBegin=previous; }
++        }
++        public static void RunNativeFailed() { RunNativeFailedWithPolicy(false); }
++        static void RunNativeFailedWithPolicy(bool ordinaryEarly)
+         {
+             // Root copies a closed snapshot here. The parent run may still be
+             // active, but an unfinished level without failure is never selected.
+@@ -149,7 +164,8 @@
+             if(cases.Length==0) throw new InvalidOperationException("No closed failed native-input levels in "+path);
+             string sha;
+             using(var digest=System.Security.Cryptography.SHA256.Create()) sha=BitConverter.ToString(digest.ComputeHash(bytes)).Replace("-","").ToLowerInvariant();
+-            Begin(cases,true,new RetestSource { path=Path.GetFullPath(path),sha256=sha,startedUtc=previous.startedUtc,finishedUtc=previous.finishedUtc,closedFailedIds=cases });
++            var source=new RetestSource { path=Path.GetFullPath(path),sha256=sha,startedUtc=previous.startedUtc,finishedUtc=previous.finishedUtc,closedFailedIds=cases };
++            if(ordinaryEarly) BeginOrdinaryEarlyRelease(cases,source); else Begin(cases,true,source);
+         }
+         public static void RunNativeHalf1() { RunNativeHalf(false); }
+         public static void RunNativeHalf2() { RunNativeHalf(true); }
+@@ -228,6 +244,7 @@
+             if(expected!=null) File.WriteAllText(Path.Combine(Output,"expected-catalog.json"),JsonUtility.ToJson(expected,true));
+             SessionState.SetBool(InputModeKey,nativeInput);
+             SessionState.SetBool(TerminalQuickKey,terminalQuick);
++            SessionState.SetBool(OrdinaryEarlyKey,ordinaryEarlyForNextBegin);
+             SessionState.SetString(RetestSourceKey,retestSource==null ? "" : JsonUtility.ToJson(retestSource));
+             SessionState.SetString(CasesKey, String.Join(",", cases));
+             SessionState.SetFloat(TimeKey, Time.timeScale);
+@@ -267,8 +284,10 @@
+                     AssetDatabase.DisallowAutoRefresh(); EditorApplication.LockReloadAssemblies(); importsLocked = true;
+                     report = new Report { startedUtc = DateTime.UtcNow.ToString("o"), unityVersion = Application.unityVersion, simulationTimeScale = 10, originalTimeScale = SessionState.GetFloat(TimeKey, 1), inputStrategy = NativeReplay ? "production-pointer-drag" : "instant-TryMove-baseline", plannedLevels = Cases.Length };
+                     Time.timeScale = report.simulationTimeScale;
+-                    report.playerReleaseStrategy=SessionState.GetBool(TerminalQuickKey,false)?"settled-hover-prefix-and-quick-terminal-ordinary-guide":"settled-hover";
+-                    if(SessionState.GetBool(TerminalQuickKey,false)) report.notes.Add("Legal terminal-release diagnostic strategy: all preceding recorded actions retain the ordinary settled-hover strategy. Only the final recorded ordinary block releases after its exact original guide is resolved and one real held frame has elapsed, without waiting to rise/hover35 high. Original player input has no mandatory hover delay. CuboResorte keeps its original centered hold/compression behavior. Production Begin/Continue/End and actual animations/collisions still run; no actor/guide/water/switch is assigned. Final raw destinations, recorded count, transactions and positive native water/victory criteria remain unchanged.");
++                    report.ordinaryEarlyRelease=SessionState.GetBool(OrdinaryEarlyKey,false);
++                    report.playerReleaseStrategy=SessionState.GetBool(OrdinaryEarlyKey,false)?"ordinary-early-release":SessionState.GetBool(TerminalQuickKey,false)?"settled-hover-prefix-and-quick-terminal-ordinary-guide":"settled-hover";
++                    if(SessionState.GetBool(OrdinaryEarlyKey,false)) report.notes.Add("Independent ordinaryEarlyRelease legal player strategy: after a real Begin/Continue ray resolves the unchanged original recorded guide, keep the pointer held across at least one actual PlayerLoop frame, re-raycast it through production ContinueDrag, then call production EndDrag without waiting for the lifted actor to settle at floatingTarget. Native doEnd/doFijar performs all actual release motion and centering. CuboResorte still uses the separate settled-pointer plus native delayed compression fixture. No piece/guide/source/water/switch or native busy state is written. All original transactions, poses, positive matching-color goals and native victory standards remain exact. This is not the terminal-only release diagnostic or the original automatic-preview timing.");
++                    if(SessionState.GetBool(TerminalQuickKey,false)) report.notes.Add("Legal terminal-release diagnostic strategy: all preceding recorded actions retain the ordinary settled-hover strategy. Only the final recorded ordinary block releases after its exact original guide is resolved and one real held frame has elapsed, without waiting to rise/hover35 high. Original player input has no mandatory hover delay. CuboResorte keeps the settled real pointer and separate native post-release compression checks. Production Begin/Continue/End and actual animations/collisions still run; no actor/guide/water/switch is assigned. Final raw destinations, recorded count, transactions and positive native water/victory criteria remain unchanged.");
+                     string catalogJson=SessionState.GetString(CatalogKey,"");
+                     if(!String.IsNullOrEmpty(catalogJson)) report.expectedCatalog=JsonUtility.FromJson<ExpectedCatalog>(catalogJson);
+                     if(NativeReplay && report.expectedCatalog==null) throw new InvalidOperationException("Original expected catalog did not survive the Play-mode/domain transition.");
+@@ -280,7 +299,7 @@
+                         report.notes.Add("Retest of closed failed production-pointer-drag levels only. Source snapshot sha256="+report.retestSource.sha256+", ids="+String.Join(",",report.retestSource.closedFailedIds)+". A source run with no finishedUtc may still have unfinished levels; those are excluded. This is a separate actual retest for aggregate evidence, not a claim that the original full run passed in one execution.");
+                     }
+                     if(NativeReplay) report.notes.Add("After four occluded quarter views, v8 may use genuine gentle original mouse rotation: actual entrada BeginRotation, pointer displacement with original MouseX sensitivity.1, per-frame ContinueRotation, low-force EndRotation and one real release frame. Intermediate angles are observed through the original camera; no camera transform/pitch/mask, guide, actor or switch is assigned.");
+-                    if(NativeReplay) report.notes.Add("Native-input variant: every captured non-z actor uses the original camera screen ray, production BeginDrag/ContinueDrag/EndDrag, original grab offset and real motion. No actor transform, guide, switch or water state is assigned by this validator. A recorded w is an automatic-preview wait annotation. This legal mode0 player strategy selects layer2, records observed busy/idle frames, waits for any current mechanism movement to end, then drags normally; it does not require retriggering a previously completed movement. Strict automatic-preview w is a separate restoration/test scope. Ordinary pieces hover at the original pointer floatingTarget with their native grab offset; original doFijar Lerp subsequently centers them at the unchanged guide. Only CuboResorte needs held XZ centered first because native doBajar preserves XZ. A blocked view is cancelled through production CancelDrag before original SwipeHandler2.GirarDerecha turns the native EsferaCamera parent, with no direct camera transform write. Original mesh vertices supplement real surface-ray candidates. helpRotation preferences are backed up and restored. Every detailed input assertion remains in the final report and each completed NativeCases/gmID.json. Small progress.json updates every1.5real seconds; the full growing report flushes every25cases, immediately on failures and finally, avoiding full-report rewrites for every ray adjustment. This proves a legal real-input player strategy, not the original automatic preview animation's exact phase timing.");
++                    if(NativeReplay) report.notes.Add("Native-input variant: every captured non-z actor uses the original camera screen ray, production BeginDrag/ContinueDrag/EndDrag, original grab offset and real motion. No actor transform, guide, switch or water state is assigned by this validator. A recorded w is an automatic-preview wait annotation. This legal mode0 player strategy selects layer2, records observed busy/idle frames, waits for any current mechanism movement to end, then drags normally; it does not require retriggering a previously completed movement. Strict automatic-preview w is a separate restoration/test scope. Ordinary pieces hover at the original pointer floatingTarget with their native grab offset; original doFijar Lerp subsequently centers them at the unchanged guide. CuboResorte also follows its real floatingTarget while held; native doFijar centers on release before the separate delayed doBajar result is checked. A blocked view is cancelled through production CancelDrag before original SwipeHandler2.GirarDerecha turns the native EsferaCamera parent, with no direct camera transform write. Original mesh vertices supplement real surface-ray candidates. helpRotation preferences are backed up and restored. Every detailed input assertion remains in the final report and each completed NativeCases/gmID.json. Small progress.json updates every1.5real seconds; the full growing report flushes every25cases, immediately on failures and finally, avoiding full-report rewrites for every ray adjustment. This proves a legal real-input player strategy, not the original automatic preview animation's exact phase timing.");
+                     if(!NativeReplay) report.notes.Add("All cases load original gm mode0 through the production UI adapter and replay original Save1 destinations with public TryMove. No Solve/preview, ApplyHint, fabricated switch/water state, proxy target count, or direct transform placement is used. Screen picking and drag motion are covered by the separate interaction validation.");
+                     report.notes.Add("A same-cell drag first verifies the original guide equals the recorded drop. If its real support moves during released settling, final placement is checked against that production Motion.Target (original support transform+4.2), with both recorded destination and dynamic target logged. No actor coordinates, switches, collision tolerance or water target standards are changed.");
+                     report.notes.Add("Recovery.MoveCount counts successful undoable transactions, including a legal same-cell pickup/release. The original game has no visible player MoveCount field; this internal recovery counter is not presented as native UI scoring.");
+@@ -564,6 +583,7 @@
+                 Require("gm"+level.id+"-native-input-original-guide-"+step.number,OriginalGuideMatches(motion.Target,step.destination,surface),"Resolved production guide="+motion.Target.ToString("F3")+", recorded="+step.destination.ToString("F3"));
+             }
+             step.compressionLanding=surface.collider!=null && surface.collider.name.IndexOf("CuboResorte",StringComparison.Ordinal)>=0;
++            step.ordinaryEarlyRelease=SessionState.GetBool(OrdinaryEarlyKey,false) && !step.compressionLanding;
+             step.terminalQuickRelease=SessionState.GetBool(TerminalQuickKey,false) && !step.compressionLanding && report.expectedCatalog!=null && step.number==report.expectedCatalog.levels.First(x=>x.id==level.id).recordedSteps;
+             // Offset is the actual original grab point. Adjust only the screen
+             // pointer, re-raycasting the surface each time, as a user centers it.
+@@ -591,23 +611,42 @@
+             // One real frame preserves a real pointer-down/move/up interval;
+             // the selected actor is allowed to lag its final guide, as native
+             // doEnd/doFijar expressly animate it after release.
+-            if(step.terminalQuickRelease) yield return null;
+-            while(!step.terminalQuickRelease && EditorApplication.timeSinceStartup<until)
+-            {
++            bool releaseEarly=step.ordinaryEarlyRelease || step.terminalQuickRelease;
++            if(releaseEarly)
++            {
++                int originalGuideFrame=Time.frameCount;
++                while(Time.frameCount<=originalGuideFrame && EditorApplication.timeSinceStartup<until) yield return null;
++                Require("gm"+level.id+"-native-early-release-real-held-frame-"+step.number,Time.frameCount>originalGuideFrame,"The early-release policy must cross an actual Unity PlayerLoop frame before pointer-up; Editor coroutine iterations alone do not count.");
++                NativeInput("ContinueDrag",screen); step.heldInputFrames++;
++            }
++            int lastHeldInputFrame=Time.frameCount;
++            while(!releaseEarly && EditorApplication.timeSinceStartup<until)
++            {
++                // Editor update may run repeatedly without a PlayerLoop frame.
++                // A held player's pointer is re-raycast once per actual frame;
++                // do not mistake Editor coroutine iterations for native input.
++                if(Time.frameCount==lastHeldInputFrame) { yield return null; continue; }
++                lastHeldInputFrame=Time.frameCount;
++                NativeInput("ContinueDrag",screen); step.heldInputFrames++;
+                 Vector3 target=motion.Target, position=actor.transform.position;
+                 Vector3 floating=(Vector3)Read(motion,"floatingTarget");
+-                bool hovered=step.compressionLanding?new Vector2(position.x-target.x,position.z-target.z).sqrMagnitude<.0004f:(position-floating).sqrMagnitude<.0009f;
++                // A selected body remains layer2; the pressure mask cannot
++                // detect it until doEnd restores bloque. Held motion follows
++                // its real grab-offset floatingTarget for pressure surfaces too.
++                bool hovered=(position-floating).sqrMagnitude<.0009f;
+                 if(hovered && position.y>=target.y+5) break;
+                 yield return null;
+             }
+             step.heldPosition=actor.transform.position;
+             Vector3 heldTarget=motion.Target;
+             step.heldFloatingTarget=(Vector3)Read(motion,"floatingTarget");
+-            bool heldReady=step.compressionLanding?new Vector2(step.heldPosition.x-heldTarget.x,step.heldPosition.z-heldTarget.z).sqrMagnitude<.0004f:(step.heldPosition-step.heldFloatingTarget).sqrMagnitude<.0009f;
+-            if(step.terminalQuickRelease)
++            bool heldReady=(step.heldPosition-step.heldFloatingTarget).sqrMagnitude<.0009f;
++            if(step.ordinaryEarlyRelease)
++                Require("gm"+level.id+"-native-ordinary-early-original-guide-"+step.number,motion.IsActive && !motion.IsReleased && Near(motion.Target,step.originalGuide) && OriginalGuideMatches(motion.Target,step.destination,surface),"Actual production guide remains the original recorded guide after a real held PlayerLoop frame; actor may still be following native floatingTarget. actor="+step.heldPosition.ToString("F4")+",guide="+motion.Target.ToString("F4")+",heldInputFrames="+step.heldInputFrames);
++            else if(step.terminalQuickRelease)
+                 Require("gm"+level.id+"-native-terminal-quick-original-guide-"+step.number,motion.IsActive && !motion.IsReleased && Near(motion.Target,step.destination),"A real held pointer resolved the unchanged original destination before early release; original post-release motion must still complete. actor="+step.heldPosition.ToString("F4")+",guide="+motion.Target.ToString("F4"));
+             else
+-                Require("gm"+level.id+"-native-input-held-hover-"+step.number,heldReady && step.heldPosition.y>=heldTarget.y+5,"Actual held actor="+step.heldPosition.ToString("F3")+", original pointer floatingTarget="+step.heldFloatingTarget.ToString("F3")+", original guide="+heldTarget.ToString("F3")+"; ordinary doFijar Lerp centers the released actor at the guide, while CuboResorte requires exact held XZ before delayed compression.");
++                Require("gm"+level.id+"-native-input-held-hover-"+step.number,heldReady && step.heldPosition.y>=heldTarget.y+5,"Actual held actor="+step.heldPosition.ToString("F3")+", original pointer floatingTarget="+step.heldFloatingTarget.ToString("F3")+", original guide="+heldTarget.ToString("F3")+"; original held motion follows its actual grab-offset floatingTarget. doEnd takes the independent guide, doFijar centers after release, and Resorte then performs its separate native delayed compression.");
+             step.waterPendingAtRelease=Water!=null && Water.HasPendingPropagation;
+             bool diagnostic=level.id==1187 && step.number==18;
+             Action commitObserver=null;
+@@ -637,6 +676,32 @@
+                 {
+                     step.inputDiagnostics.Add("native-early-unlock frame="+Read(motion,"nativeWaterRestoreFrame")+",distance="+Read(motion,"nativeWaterRestoreDistance")+",unblocked="+Read(motion,"nativeWaterUnblocked")+",commitFrame="+Time.frameCount);
+                     CaptureLandingContext(step,"after-native-animation",actor);
++                }
++                step.motionFinishedFrame=Time.frameCount;
++                if(step.compressionLanding)
++                {
++                    // Original guide is1.2 above the plate. Motion completion
++                    // and Resorte.Update -> Invoke(doBajarPieza,tiempo1) are
++                    // separate operations. A cold/high-delta frame may finish
++                    // doFijar before the next plate detection/publication frame.
++                    // Wait for the actual native delayed placement, never write
++                    // the actor, guide, animator, bus or pending publication.
++                    double pressureStarted=EditorApplication.timeSinceStartup;
++                    until=pressureStarted+20;
++                    int pressureFrame=Time.frameCount;
++                    while(EditorApplication.timeSinceStartup<until)
++                    {
++                        Vector3 expected=step.followsMovingSupport?motion.Target:step.destination;
++                        if(!motion.IsActive && Near(actor.transform.position,expected))
++                        { step.compressionSettledFrame=Time.frameCount; break; }
++                        if(Time.frameCount!=pressureFrame)
++                        { pressureFrame=Time.frameCount; step.pressurePostMotionFrames++; }
++                        yield return null;
++                    }
++                    step.compressionWaitRealSeconds=(float)(EditorApplication.timeSinceStartup-pressureStarted);
++                    Vector3 compressionExpected=step.followsMovingSupport?motion.Target:step.destination;
++                    step.inputDiagnostics.Add("native-pressure-settle releaseFrame="+step.releaseFrame+",motionFinishedFrame="+step.motionFinishedFrame+",settledFrame="+step.compressionSettledFrame+",postMotionFrames="+step.pressurePostMotionFrames+",heldInputFrames="+step.heldInputFrames+",actor="+actor.transform.position.ToString("F4")+",expected="+compressionExpected.ToString("F4")+",waitReal="+step.compressionWaitRealSeconds);
++                    Require("gm"+level.id+"-native-pressure-delayed-placement-"+step.number,step.compressionSettledFrame>=step.releaseFrame && !motion.IsActive && Near(actor.transform.position,compressionExpected),"Resorte.doBajarPieza must itself lower the released actor from the original raised guide to the unchanged recorded target. "+step.inputDiagnostics.Last());
+                 }
+                 step.committedFrame=Time.frameCount;
+             }
+@@ -738,6 +803,8 @@
+         {
+             int diagnosticStart=diagnostic==null?0:diagnostic.inputDiagnostics.Count;
+             var points=new List<Vector3>();
++            var boxFacePoints=new List<KeyValuePair<Collider,Vector3>>();
++            int nearbyBoxCount=0;
+             points.Add(destination-Vector3.up*4.2f); points.Add(destination);
+             using(RecoveredNativeInteraction.QueryOriginalColliders(Game))
+             {
+@@ -749,6 +816,24 @@
+                     bool spans=bounds.min.x<=destination.x+1 && bounds.max.x>=destination.x-1 && bounds.min.z<=destination.z+1 && bounds.max.z>=destination.z-1 && bounds.min.y<=destination.y+1 && bounds.max.y>=destination.y-12;
+                     if(!centered && !spans) continue;
+                     points.Add(point); points.Add(bounds.center);
++                    BoxCollider originalBox=collider as BoxCollider;
++                    if(originalBox!=null && ((collider.tag.IndexOf("Map",StringComparison.Ordinal)>=0 && collider.tag!="Map1") || collider.name.IndexOf("Origen",StringComparison.Ordinal)>=0))
++                    {
++                        // Sample the original Box faces, including visible
++                        // vertical sides below a roof. This only adds real
++                        // pointer candidates; the production ray/guide decides.
++                        nearbyBoxCount++;
++                        for(int axis=0;axis<3;axis++) foreach(int sign in new[]{-1,1})
++                        for(int u=0;u<9;u++) for(int w=0;w<9;w++)
++                        {
++                            Vector3 local=originalBox.center;
++                            local[axis]+=originalBox.size[axis]*.499f*sign;
++                            int across=(axis+1)%3, down=(axis+2)%3;
++                            local[across]+=originalBox.size[across]*.5f*(-.99f+u*.2475f);
++                            local[down]+=originalBox.size[down]*.5f*(-.99f+w*.2475f);
++                            boxFacePoints.Add(new KeyValuePair<Collider,Vector3>(collider,originalBox.transform.TransformPoint(local)));
++                        }
++                    }
+                     // Actual interior top-face rays can reach a cell whose
+                     // center/edge is occluded by an authored neighboring tower.
+                     // This adds screen candidates only, never a synthetic guide.
+@@ -788,6 +873,23 @@
+                         diagnostic.inputDiagnostics.Add("ray "+candidate.ToString("F1")+" guideValid="+valid+" guide="+landing.ToString("F3")+" first="+obstruction);
+                     }
+                 }
++                int faceSamples=0;
++                foreach(KeyValuePair<Collider,Vector3> originalFace in boxFacePoints)
++                {
++                    Vector3 candidate=Game.GameCamera.WorldToScreenPoint(originalFace.Value);
++                    if(candidate.z<=0) continue;
++                    faceSamples++;
++                    if(RecoveredNativeInteraction.TryGetDropPoint(Game.GameCamera,candidate,Game,out landing,out surface) && OriginalGuideMatches(landing,destination,surface))
++                    {
++                        if(diagnostic!=null)
++                        {
++                            if(diagnostic.inputDiagnostics.Count>diagnosticStart) diagnostic.inputDiagnostics.RemoveRange(diagnosticStart,diagnostic.inputDiagnostics.Count-diagnosticStart);
++                            diagnostic.inputDiagnostics.Add("original-box-face-real-ray samples="+faceSamples+",boxes="+nearbyBoxCount+",sampled="+ColliderPath(originalFace.Key)+",world="+originalFace.Value.ToString("F4")+",actualHit="+ColliderPath(surface.collider)+",guide="+landing.ToString("F4"));
++                        }
++                        screen=candidate; return true;
++                    }
++                }
++                if(diagnostic!=null && boxFacePoints.Count>0) diagnostic.inputDiagnostics.Add("original-box-face-no-recorded-guide realRaySamples="+faceSamples+",boxes="+nearbyBoxCount+",destination="+destination.ToString("F4"));
+             }
+             screen=landing=Vector3.zero; surface=new RaycastHit(); return false;
+         }

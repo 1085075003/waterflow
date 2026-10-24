@@ -1,0 +1,1092 @@
+#if UNITY_EDITOR
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+
+namespace Recovered.FlowWater.Editor
+{
+    // Replays the player's original Save1 placements in mode0. It never calls Solve,
+    // ApplyHint, a switch setter, a water override, or writes any actor transform.
+    [InitializeOnLoad]
+    public static class FlowWaterSave1GameplayValidation
+    {
+        const string ActiveKey = "FlowWater.Save1GameplayValidation.Active";
+        const string PrefsKey = "FlowWater.Save1GameplayValidation.Preferences";
+        const string ScenesKey = "FlowWater.Save1GameplayValidation.Scenes";
+        const string ExitKey = "FlowWater.Save1GameplayValidation.Exit";
+        const string CasesKey = "FlowWater.Save1GameplayValidation.Cases";
+        const string InputModeKey = "FlowWater.Save1GameplayValidation.NativeInput";
+        const string RetestSourceKey = "FlowWater.Save1GameplayValidation.RetestSource";
+        const string CatalogKey = "FlowWater.Save1GameplayValidation.ExpectedCatalog";
+        const string TerminalQuickKey = "FlowWater.Save1GameplayValidation.TerminalQuickRelease";
+        const string OrdinaryEarlyKey = "FlowWater.Save1GameplayValidation.OrdinaryEarlyRelease";
+        static bool ordinaryEarlyForNextBegin;
+        static bool NativeReplay { get { return SessionState.GetBool(InputModeKey,false); } }
+        const string TimeKey = "FlowWater.Save1GameplayValidation.TimeScale";
+        static readonly int[] FocusedCases = { 609, 622, 614, 1851, 656, 1057, 2001 };
+        static int[] Cases { get { string value = SessionState.GetString(CasesKey, ""); return String.IsNullOrEmpty(value) ? FocusedCases : value.Split(',').Select(Int32.Parse).ToArray(); } }
+        [Serializable] public sealed class SavedPreference { public string key; public bool existed, isFloat; public int intValue; public float floatValue; }
+        [Serializable] public sealed class Preferences { public List<SavedPreference> values = new List<SavedPreference>(); }
+        [Serializable] public sealed class SavedScene { public string path; public bool loaded, active; }
+        [Serializable] public sealed class SavedScenes { public SavedScene[] scenes; }
+        [Serializable] public sealed class Check { public string name, detail; public bool passed; }
+        [Serializable] public sealed class Step
+        {
+            public int number, sourceRecord = -1, actorIndex = -1, beforeMoves, afterMoves;
+            public string exception, actor, status, switchesAfter;
+            public Vector3 origin, destination, actualBefore, actualAfter, nativeLanding;
+            public bool applied, marker, movable, sameCellPickup, followsMovingSupport;
+            public float waitedSeconds;
+            public bool productionInput, nativeWaitObservedBusy, waterPendingBefore, waterPendingAtRelease;
+            public int pickupFrame, nativeWaitBusyFrame=-1, nativeWaitIdleFrame=-1, releaseFrame, committedFrame;
+            public Vector3 pickScreen, dropScreen, originalGuide, heldPosition, heldFloatingTarget;
+            public bool compressionLanding, retainedOriginalGrabOffset, terminalQuickRelease, ordinaryEarlyRelease;
+            public int heldInputFrames, motionFinishedFrame=-1, compressionSettledFrame=-1, pressurePostMotionFrames;
+            public float compressionWaitRealSeconds;
+            public int cameraQuarterTurns, cameraSlowGestures, cameraSlowFrames;
+            public List<float> cameraYawSamples=new List<float>();
+            public List<string> inputDiagnostics=new List<string>();
+        }
+        [Serializable] public sealed class Level
+        {
+            public int id, nativeRequired, initialRequired, finalRequired, finalActive, actors, observers, proxies;
+            public int firstAllWetFrame = -1, completedFrame = -1, stableWetFrames, nativePollingFrames = 51;
+            public bool passed, normalGameplay, complete, nativeMissionComplete, springsBusy;
+            public bool waterPending;
+            public int pendingWaterEvents, maximumPendingWaterEvents;
+            public float lastScheduledWaterEventTime, finalWaitRealSeconds, stableDrySeconds;
+            public string failure, screenshot;
+            public List<Step> steps = new List<Step>();
+            public List<string> failureActorPositions = new List<string>();
+            public string[] blockedFlowDiagnostics;
+            public string[] switchEventDiagnostics;
+            public string[] pendingWaterDiagnostics, waterRebuildDiagnostics;
+            public string switches;
+            public List<string> waterGraph = new List<string>();
+            public List<string> springDiagnostics = new List<string>();
+        }
+        [Serializable] public sealed class CatalogLevel
+        {
+            public int id, recordedSteps;
+            public string layoutSha256, solutionSha256;
+        }
+        [Serializable] public sealed class ExpectedCatalog
+        {
+            public int originalLevelCount, originalRecordedSteps;
+            public string catalogSha256;
+            public List<CatalogLevel> levels=new List<CatalogLevel>();
+        }
+        [Serializable] public sealed class RetestSource
+        {
+            public string path, sha256, startedUtc, finishedUtc;
+            public int[] closedFailedIds;
+        }
+        [Serializable] public sealed class Report
+        {
+            public string startedUtc, finishedUtc, unityVersion, inputStrategy;
+            public RetestSource retestSource;
+            public ExpectedCatalog expectedCatalog;
+            public string playerReleaseStrategy;
+            public bool passed, preferencesRestored, ordinaryEarlyRelease;
+            public float simulationTimeScale, originalTimeScale;
+            public int plannedLevels;
+            public List<Check> checks = new List<Check>();
+            public List<Level> levels = new List<Level>();
+            public List<string> runtimeErrors = new List<string>();
+            public List<string> notes = new List<string>();
+        }
+        [Serializable] sealed class NativeProgress
+        {
+            public string updatedUtc, startedUtc, finishedUtc, inputStrategy;
+            public int plannedLevels, completedLevels, passedLevels, failedLevels, id, step, pendingEvents, activeTargets, requiredTargets;
+            public bool waterPending, springsBusy, passed, preferencesRestored;
+        }
+        [Serializable] sealed class NativeCaseReport
+        {
+            public string inputStrategy, capturedUtc;
+            public Level level;
+            public List<Check> checks;
+        }
+        static double nextProgressWrite;
+        static Report report;
+        static IEnumerator routine;
+        static bool busy, importsLocked;
+        static double deadline;
+        static RecoveredFlowGame Game { get { return RecoveredFlowGame.Instance; } }
+        static RecoveredWaterNetwork Water { get { return RecoveredWaterNetwork.Instance; } }
+        static RecoveredNativeSprings Springs { get { return Game == null ? null : Game.GetComponent<RecoveredNativeSprings>(); } }
+        static string Output { get { return Path.Combine(Directory.GetParent(Application.dataPath).FullName, "Validation", "Save1Gameplay"); } }
+
+        static FlowWaterSave1GameplayValidation()
+        {
+            EditorApplication.update += Update;
+            EditorApplication.playModeStateChanged += OnPlayMode;
+            Application.logMessageReceived += OnLog;
+        }
+        [MenuItem("Tools/Flow Water/Validate Save1 Normal Gameplay")]
+        public static void Run() { RunFocused(); }
+        public static void RunFocused() { Begin(FocusedCases); }
+        public static void Run622() { Begin(new[] { 622 }); }
+        public static void Run1142Sequence() { Begin(Enumerable.Range(1138, 12).ToArray()); }
+        public static void RunNativeFocused() { Begin(new[] {1142,1149,1236,1656,1660},true); }
+        public static void RunNativeViewFailures() { Begin(new[] {754,761},true); }
+        public static void RunNativeLandingRegression() { Begin(new[] {1187},true); }
+        public static void RunNativePressureReleaseRegression() { Begin(new[] {609,690},true); }
+        public static void RunNativeTerminalQuickRelease() { Begin(new[] {1187},true,null,true); }
+        public static void RunNative1105EarlyRelease() { BeginOrdinaryEarlyRelease(new[] {1105},null); }
+        public static void RunNativeBoxSurfaceRegressions() { BeginOrdinaryEarlyRelease(new[] {1187,2033},null); }
+        public static void RunNativeFailedEarlyRelease() { RunNativeFailedWithPolicy(true); }
+        static void BeginOrdinaryEarlyRelease(int[] cases,RetestSource source)
+        {
+            bool previous=ordinaryEarlyForNextBegin; ordinaryEarlyForNextBegin=true;
+            try { Begin(cases,true,source); }
+            finally { ordinaryEarlyForNextBegin=previous; }
+        }
+        public static void RunNativeFailed() { RunNativeFailedWithPolicy(false); }
+        static void RunNativeFailedWithPolicy(bool ordinaryEarly)
+        {
+            // Root copies a closed snapshot here. The parent run may still be
+            // active, but an unfinished level without failure is never selected.
+            string path=Path.Combine(Output,"native-retest-source.json");
+            byte[] bytes=File.ReadAllBytes(path);
+            string json=System.Text.Encoding.UTF8.GetString(bytes).TrimStart('\uFEFF');
+            Report previous=JsonUtility.FromJson<Report>(json);
+            if(previous==null || previous.inputStrategy!="production-pointer-drag" || previous.levels==null)
+                throw new InvalidOperationException("Native retest source must be a production-pointer-drag Report snapshot: "+path);
+            int[] cases=previous.levels.Where(l=>l!=null && l.id>0 && !l.passed && !String.IsNullOrEmpty(l.failure)).Select(l=>l.id).Distinct().OrderBy(id=>id).ToArray();
+            if(cases.Length==0) throw new InvalidOperationException("No closed failed native-input levels in "+path);
+            string sha;
+            using(var digest=System.Security.Cryptography.SHA256.Create()) sha=BitConverter.ToString(digest.ComputeHash(bytes)).Replace("-","").ToLowerInvariant();
+            var source=new RetestSource { path=Path.GetFullPath(path),sha256=sha,startedUtc=previous.startedUtc,finishedUtc=previous.finishedUtc,closedFailedIds=cases };
+            if(ordinaryEarly) BeginOrdinaryEarlyRelease(cases,source); else Begin(cases,true,source);
+        }
+        public static void RunNativeHalf1() { RunNativeHalf(false); }
+        public static void RunNativeHalf2() { RunNativeHalf(true); }
+        static void RunNativeHalf(bool second)
+        {
+            if(EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Start native-input validation from Edit mode.");
+            RecoveryCatalogBuilder.Build();
+            ExpectedCatalog expected=BuildExpectedCatalog();
+            int[] ids=expected.levels.Select(x=>x.id).ToArray();
+            Begin((second?ids.Skip(400):ids.Take(400)).ToArray(),true);
+        }
+        static string TextSha256(string value)
+        {
+            using(var hash=System.Security.Cryptography.SHA256.Create())
+                return BitConverter.ToString(hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes(value))).Replace("-","").ToLowerInvariant();
+        }
+        static ExpectedCatalog BuildExpectedCatalog()
+        {
+            var expected=new ExpectedCatalog();
+            foreach(RecoveryLevelEntry entry in RecoveryCatalog.Load().levels.OrderBy(x=>x.assetId))
+            {
+                if(entry.solution==null) continue;
+                RecoverySave solution=JsonUtility.FromJson<RecoveryEnvelope>(entry.solution.text).data;
+                if(!solution.IsValidSteps()) continue;
+                if(entry.layout==null) throw new InvalidOperationException("Original layout missing for gm"+entry.assetId);
+                expected.levels.Add(new CatalogLevel { id=entry.assetId,recordedSteps=solution.move.Count,
+                    layoutSha256=TextSha256(entry.layout.text),solutionSha256=TextSha256(entry.solution.text) });
+            }
+            expected.originalLevelCount=expected.levels.Count;
+            expected.originalRecordedSteps=expected.levels.Sum(x=>x.recordedSteps);
+            if(expected.originalLevelCount!=800 || expected.originalRecordedSteps!=11919 || expected.levels.Select(x=>x.id).Distinct().Count()!=800)
+                throw new InvalidOperationException("Original Save1 catalog must be800 unique levels and11919 recorded entries.");
+            string canonical=String.Join("\n",expected.levels.Select(x=>x.id+"|"+x.recordedSteps+"|"+x.layoutSha256+"|"+x.solutionSha256));
+            expected.catalogSha256=TextSha256(canonical);
+            return expected;
+        }
+        public static void RunNativeAll()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Start native-input Save1 validation from Edit mode.");
+            RecoveryCatalogBuilder.Build();
+            Begin(RecoveryCatalog.Load().levels.Where(e=>e.solution!=null && JsonUtility.FromJson<RecoveryEnvelope>(e.solution.text).data.IsValidSteps()).Select(e=>e.assetId).OrderBy(id=>id).ToArray(),true);
+        }
+        public static void Run1236() { Begin(new[] { 1236 }); }
+        public static void RunPendingSpringRegressions() { Begin(new[] { 630, 678, 693, 695, 746, 750, 785, 1055, 1065, 1075, 1079, 1088, 1090, 1095, 1097, 1098, 1100 }); }
+        public static void RunFailuresAndFocused()
+        {
+            string path=Path.Combine(Output,"BaselinePartial","save1-gameplay-validation.json");
+            Report previous=JsonUtility.FromJson<Report>(File.ReadAllText(path));
+            int[] cases=previous.levels.Where(l=>!l.passed && !String.IsNullOrEmpty(l.failure)).Select(l=>l.id).Concat(FocusedCases).Distinct().OrderBy(id=>id).ToArray();
+            Begin(cases);
+        }
+        public static void RunFailed()
+        {
+            string path=Path.Combine(Output,"save1-gameplay-validation.json");
+            Report previous=JsonUtility.FromJson<Report>(File.ReadAllText(path));
+            int[] cases=previous.levels.Where(l=>!l.passed && !String.IsNullOrEmpty(l.failure)).Select(l=>l.id).Distinct().OrderBy(id=>id).ToArray();
+            if(cases.Length==0) throw new InvalidOperationException("No completed failed cases in the previous report.");
+            Begin(cases);
+        }
+        [MenuItem("Tools/Flow Water/Validate All Save1 Normal Gameplay")]
+        public static void RunAll()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Start Save1 validation from Edit mode.");
+            RecoveryCatalogBuilder.Build();
+            Begin(RecoveryCatalog.Load().levels.Where(e => e.solution != null && JsonUtility.FromJson<RecoveryEnvelope>(e.solution.text).data.IsValidSteps()).Select(e => e.assetId).OrderBy(id => id).ToArray());
+        }
+        static void Begin(int[] cases, bool nativeInput=false, RetestSource retestSource=null, bool terminalQuick=false)
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Start Save1 validation from Edit mode.");
+            foreach (SceneSetup setup in EditorSceneManager.GetSceneManagerSetup())
+                if (UnityEngine.SceneManagement.SceneManager.GetSceneByPath(setup.path).isDirty) throw new InvalidOperationException("Save edited scenes before running validation.");
+            RecoveryCatalogBuilder.Build(); Directory.CreateDirectory(Output);
+            ExpectedCatalog expected=nativeInput?BuildExpectedCatalog():null;
+            if(expected!=null && cases.Any(id=>!expected.levels.Any(entry=>entry.id==id))) throw new InvalidOperationException("Requested native case is absent from the unchanged original Save1 catalog.");
+            SessionState.SetString(CatalogKey,expected==null?"":JsonUtility.ToJson(expected));
+            if(expected!=null) File.WriteAllText(Path.Combine(Output,"expected-catalog.json"),JsonUtility.ToJson(expected,true));
+            SessionState.SetBool(InputModeKey,nativeInput);
+            SessionState.SetBool(TerminalQuickKey,terminalQuick);
+            SessionState.SetBool(OrdinaryEarlyKey,ordinaryEarlyForNextBegin);
+            SessionState.SetString(RetestSourceKey,retestSource==null ? "" : JsonUtility.ToJson(retestSource));
+            SessionState.SetString(CasesKey, String.Join(",", cases));
+            SessionState.SetFloat(TimeKey, Time.timeScale);
+            var keys = new List<string> { "Recovery.LastLevelId", "esTablet", "OptionSelLev", "primeraVez", "MusicaON", "Soundlevel", "Conf_music", "Conf_sound", "helpRotation" };
+            foreach (int id in Cases) { keys.Add("Recovery.Complete." + id); keys.Add("Recovery.Completed.gm" + id); }
+            var backup = new Preferences();
+            foreach (string key in keys)
+            {
+                bool isFloat = key == "Conf_music" || key == "Conf_sound";
+                backup.values.Add(new SavedPreference { key = key, existed = PlayerPrefs.HasKey(key), isFloat = isFloat,
+                    intValue = isFloat ? 0 : PlayerPrefs.GetInt(key), floatValue = isFloat ? PlayerPrefs.GetFloat(key) : 0 });
+            }
+            string preferences = JsonUtility.ToJson(backup, true);
+            SessionState.SetString(PrefsKey, preferences);
+            File.WriteAllText(Path.Combine(Output, "preferences-before.json"), preferences);
+            SessionState.SetString(ScenesKey, JsonUtility.ToJson(new SavedScenes { scenes = EditorSceneManager.GetSceneManagerSetup().Select(s => new SavedScene { path = s.path, loaded = s.isLoaded, active = s.isActive }).ToArray() }));
+            SessionState.SetBool(ActiveKey, true);
+            try
+            {
+                string scene = OriginalScenePresentation.SceneForLevel(Cases[0]);
+                string path = AssetDatabase.FindAssets(scene + " t:Scene", new[] { "Assets/Scenes" }).Select(AssetDatabase.GUIDToAssetPath).FirstOrDefault(p => Path.GetFileNameWithoutExtension(p) == scene);
+                if (String.IsNullOrEmpty(path)) throw new FileNotFoundException("Original scene missing: " + scene);
+                PlayerPrefs.SetInt("Recovery.LastLevelId", Cases[0]);
+                EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+                EditorApplication.EnterPlaymode();
+            }
+            catch { RestorePreferences(); RestoreScenes(); SessionState.EraseBool(ActiveKey); throw; }
+        }
+        static void Update()
+        {
+            if (busy || !SessionState.GetBool(ActiveKey, false) || !EditorApplication.isPlaying || EditorApplication.isCompiling) return;
+            busy = true;
+            try
+            {
+                if (report == null)
+                {
+                    AssetDatabase.DisallowAutoRefresh(); EditorApplication.LockReloadAssemblies(); importsLocked = true;
+                    report = new Report { startedUtc = DateTime.UtcNow.ToString("o"), unityVersion = Application.unityVersion, simulationTimeScale = 10, originalTimeScale = SessionState.GetFloat(TimeKey, 1), inputStrategy = NativeReplay ? "production-pointer-drag" : "instant-TryMove-baseline", plannedLevels = Cases.Length };
+                    Time.timeScale = report.simulationTimeScale;
+                    report.ordinaryEarlyRelease=SessionState.GetBool(OrdinaryEarlyKey,false);
+                    report.playerReleaseStrategy=SessionState.GetBool(OrdinaryEarlyKey,false)?"ordinary-early-release":SessionState.GetBool(TerminalQuickKey,false)?"settled-hover-prefix-and-quick-terminal-ordinary-guide":"settled-hover";
+                    if(SessionState.GetBool(OrdinaryEarlyKey,false)) report.notes.Add("Independent ordinaryEarlyRelease legal player strategy: after a real Begin/Continue ray resolves the unchanged original recorded guide, keep the pointer held across at least one actual PlayerLoop frame, re-raycast it through production ContinueDrag, then call production EndDrag without waiting for the lifted actor to settle at floatingTarget. Native doEnd/doFijar performs all actual release motion and centering. CuboResorte still uses the separate settled-pointer plus native delayed compression fixture. No piece/guide/source/water/switch or native busy state is written. All original transactions, poses, positive matching-color goals and native victory standards remain exact. This is not the terminal-only release diagnostic or the original automatic-preview timing.");
+                    if(SessionState.GetBool(TerminalQuickKey,false)) report.notes.Add("Legal terminal-release diagnostic strategy: all preceding recorded actions retain the ordinary settled-hover strategy. Only the final recorded ordinary block releases after its exact original guide is resolved and one real held frame has elapsed, without waiting to rise/hover35 high. Original player input has no mandatory hover delay. CuboResorte keeps the settled real pointer and separate native post-release compression checks. Production Begin/Continue/End and actual animations/collisions still run; no actor/guide/water/switch is assigned. Final raw destinations, recorded count, transactions and positive native water/victory criteria remain unchanged.");
+                    string catalogJson=SessionState.GetString(CatalogKey,"");
+                    if(!String.IsNullOrEmpty(catalogJson)) report.expectedCatalog=JsonUtility.FromJson<ExpectedCatalog>(catalogJson);
+                    if(NativeReplay && report.expectedCatalog==null) throw new InvalidOperationException("Original expected catalog did not survive the Play-mode/domain transition.");
+                    if(report.expectedCatalog!=null) report.notes.Add("Expected original catalog800 unique ids/11919 recorded entries, identity="+report.expectedCatalog.catalogSha256+". This run executes"+Cases.Length+" actual cases; a400-case run alone cannot qualify as800-level coverage. Text SHA256 values hash the actual unchanged Unity TextAsset.text as UTF8; canonical inventory rows=id|recordedSteps|layoutSha256|solutionSha256 joined by newline, sorted byid.");
+                    string retestJson=SessionState.GetString(RetestSourceKey,"");
+                    if(!String.IsNullOrEmpty(retestJson))
+                    {
+                        report.retestSource=JsonUtility.FromJson<RetestSource>(retestJson);
+                        report.notes.Add("Retest of closed failed production-pointer-drag levels only. Source snapshot sha256="+report.retestSource.sha256+", ids="+String.Join(",",report.retestSource.closedFailedIds)+". A source run with no finishedUtc may still have unfinished levels; those are excluded. This is a separate actual retest for aggregate evidence, not a claim that the original full run passed in one execution.");
+                    }
+                    if(NativeReplay) report.notes.Add("After four occluded quarter views, v8 may use genuine gentle original mouse rotation: actual entrada BeginRotation, pointer displacement with original MouseX sensitivity.1, per-frame ContinueRotation, low-force EndRotation and one real release frame. Intermediate angles are observed through the original camera; no camera transform/pitch/mask, guide, actor or switch is assigned.");
+                    if(NativeReplay) report.notes.Add("Native-input variant: every captured non-z actor uses the original camera screen ray, production BeginDrag/ContinueDrag/EndDrag, original grab offset and real motion. No actor transform, guide, switch or water state is assigned by this validator. A recorded w is an automatic-preview wait annotation. This legal mode0 player strategy selects layer2, records observed busy/idle frames, waits for any current mechanism movement to end, then drags normally; it does not require retriggering a previously completed movement. Strict automatic-preview w is a separate restoration/test scope. Ordinary pieces hover at the original pointer floatingTarget with their native grab offset; original doFijar Lerp subsequently centers them at the unchanged guide. CuboResorte also follows its real floatingTarget while held; native doFijar centers on release before the separate delayed doBajar result is checked. A blocked view is cancelled through production CancelDrag before original SwipeHandler2.GirarDerecha turns the native EsferaCamera parent, with no direct camera transform write. Original mesh vertices supplement real surface-ray candidates. helpRotation preferences are backed up and restored. Every detailed input assertion remains in the final report and each completed NativeCases/gmID.json. Small progress.json updates every1.5real seconds; the full growing report flushes every25cases, immediately on failures and finally, avoiding full-report rewrites for every ray adjustment. This proves a legal real-input player strategy, not the original automatic preview animation's exact phase timing.");
+                    if(!NativeReplay) report.notes.Add("All cases load original gm mode0 through the production UI adapter and replay original Save1 destinations with public TryMove. No Solve/preview, ApplyHint, fabricated switch/water state, proxy target count, or direct transform placement is used. Screen picking and drag motion are covered by the separate interaction validation.");
+                    report.notes.Add("A same-cell drag first verifies the original guide equals the recorded drop. If its real support moves during released settling, final placement is checked against that production Motion.Target (original support transform+4.2), with both recorded destination and dynamic target logged. No actor coordinates, switches, collision tolerance or water target standards are changed.");
+                    report.notes.Add("Recovery.MoveCount counts successful undoable transactions, including a legal same-cell pickup/release. The original game has no visible player MoveCount field; this internal recovery counter is not presented as native UI scoring.");
+                    report.notes.Add("609 must fill four real moving CuFuente targets; 622 must fill two. st9 preview actors are forbidden in every case. A legal 0/0 final preview is not gameplay completion.");
+                    report.notes.Add("Native doSolucionLevel clears chequearFuentes while in preview (101FEC8). Native ControladorJuego.Update polls numFuentes>=requiredFuentes after counter reaches 51. Actual wet/completion frame timings are observed after all recorded steps, without requiring 51 consecutive wet frames as an original rule.");
+                    report.notes.Add("Save1 z skips actor capture in doProcess1Solution. Same-cell non-z actions with an actual movable capture execute production pickup/release, including the native layer2/12 cycle; empty capture same-position markers remain legal no-ops. The normal-player variant waits for any current busy motion after layer2 selection; a previously finished mechanism does not require a new cycle. The stricter original automatic-preview w state machine is not being claimed by this mode0 player strategy. The instant baseline is identified separately in inputStrategy. r has a +1.2 Y adjustment only in HandleSolutionTotal; normal player placement uses the native pressure-plate grid height. Original a/b/c/d codes alter transient preview lift rather than the player's destination.");
+                    report.notes.Add("Simulation runs at Time.timeScale=10; every player placement allows at least .18 real seconds for the water network (unscaled .12-second cadence), then waits for real mechanism motion to settle. Water propagation is allowed to continue between moves. Final validation waits up to120 real seconds and requires HasPendingPropagation=false in addition to real positive matching-color targets, settled mechanisms and the production51-frame completion poll. Original imported timeScale4 is restored.");
+                    deadline = EditorApplication.timeSinceStartup + Math.Max(600, Cases.Length * 120); routine = Exercise();
+                }
+                if (EditorApplication.timeSinceStartup > deadline) throw new TimeoutException("Save1 gameplay validation exceeded its per-case wall-clock allowance.");
+                if(NativeReplay) WriteNativeProgress(false);
+                if (!routine.MoveNext()) Finish();
+            }
+            catch (Exception e) { if (report != null) report.runtimeErrors.Add(e.ToString()); Finish(); }
+            finally { busy = false; }
+        }
+        static IEnumerator Exercise()
+        {
+            CheckState("unity-version", Application.unityVersion == "2022.3.28f1", Application.unityVersion);
+            foreach (int id in Cases)
+            {
+                int firstCaseCheck=report.checks.Count;
+                var level = new Level { id = id }; report.levels.Add(level);
+                IEnumerator stage = ExerciseLevel(level);
+                while (true)
+                {
+                    bool next; object current = null;
+                    try { next = stage.MoveNext(); if (next) current = stage.Current; }
+                    catch (Exception e)
+                    {
+                        level.failure = e.ToString();
+                        if (Game != null && Game.CurrentLevelId == id)
+                        {
+                            level.complete = Game.IsComplete; level.springsBusy = Springs != null && Springs.IsBusy;
+                            level.nativeMissionComplete = ControladorJuego.misionComplete && ControladorJuego.misionCompleteAd;
+                            if (Water != null) { level.finalActive = Water.ActiveFountainCount; level.finalRequired = Water.RequiredFountainCount; level.blockedFlowDiagnostics = Water.BlockedFlowDiagnostics; CapturePendingWater(level); }
+                            foreach (RecoveryPiece actor in Game.Pieces) if (actor != null) level.failureActorPositions.Add("record" + actor.SourceRecordIndex + " " + actor.OriginalName + " " + actor.transform.position.ToString("F3") + " yaw=" + actor.transform.eulerAngles.y + " movable=" + actor.CanMove);
+                            CaptureDiagnostics(level);
+                            level.screenshot = Capture("gm" + id + "-failed-gameplay.png");
+                        }
+                        CheckState("gm" + id + "-normal-gameplay", false, e.Message); break;
+                    }
+                    if (!next) break;
+                    yield return current;
+                }
+                if(NativeReplay) PersistNativeCase(level,firstCaseCheck); else Persist();
+            }
+        }
+        static IEnumerator ExerciseLevel(Level level)
+        {
+            double until = EditorApplication.timeSinceStartup + 20;
+            while (Game == null || FlowWaterRecoveryUI.Instance == null)
+            { if (EditorApplication.timeSinceStartup > until) throw new TimeoutException("Recovery game/UI not ready."); yield return null; }
+            FlowWaterRecoveryUI.Instance.StartGame(level.id);
+            while (Game == null || Game.CurrentLevelId != level.id || !Game.IsLevelActive || Water == null || Water.CurrentPieceRoot != Game.PieceRoot)
+            { if (EditorApplication.timeSinceStartup > until) throw new TimeoutException("gm" + level.id + " failed to load."); yield return null; }
+            foreach (object wait in Wait(.6f)) yield return wait;
+            Require("gm" + level.id + "-production-water-propagation-api", typeof(RecoveredWaterNetwork).GetProperty("HasPendingPropagation") != null && typeof(RecoveredWaterNetwork).GetProperty("PendingWaterEventCount") != null, "The production pending-water queue must be observable; an absent queue API cannot qualify as settled propagation.");
+            RecoveryLevelEntry entry = RecoveryCatalog.Load().levels.First(e => e.assetId == level.id);
+            RecoverySave layout = JsonUtility.FromJson<RecoveryEnvelope>(entry.layout.text).data;
+            RecoverySave solution = JsonUtility.FromJson<RecoveryEnvelope>(entry.solution.text).data;
+            if (!solution.IsValidSteps()) throw new InvalidOperationException("Original solution is not Save1.");
+            level.nativeRequired = CountNativeTargets(layout);
+            level.initialRequired = Water.RequiredFountainCount; level.actors = Game.PieceCount;
+            level.observers = Springs == null ? 0 : Springs.ObserverCount;
+            level.proxies = Game.Pieces.Count(p => SpringToken(layout.fijo[p.SourceRecordIndex]) == "9");
+            level.normalGameplay = !Game.IsSolutionPreview && !Game.IsShowingFinalSolution && level.proxies == 0;
+            Require("gm" + level.id + "-mode0-real-targets", level.normalGameplay && level.nativeRequired > 0 && level.initialRequired == level.nativeRequired,
+                "normal=" + level.normalGameplay + ", proxies=" + level.proxies + ", nativeRequired=" + level.nativeRequired + ", networkRequired=" + level.initialRequired);
+            if (level.id == 609 || level.id == 622) Require("gm" + level.id + "-original-target-number", level.nativeRequired == (level.id == 609 ? 4 : 2), "Original non-st9 target count.");
+            for (int i = 0; i < solution.move.Count; i++)
+            {
+                var step = new Step { number = i + 1, exception = solution.excep != null && i < solution.excep.Count ? solution.excep[i] : "",
+                    origin = RecoveredFlowGame.StepPosition(solution.orix[i], solution.oriy[i], solution.oriz[i]),
+                    destination = RecoveredFlowGame.StepPosition(solution.desx[i], solution.desy[i], solution.desz[i]), beforeMoves = Game.MoveCount };
+                level.steps.Add(step); float start = Time.time;
+                bool sameCell=(step.origin-step.destination).sqrMagnitude<.01f;
+                RecoveryPiece sameCellActor=sameCell?Game.Pieces.Where(p=>p!=null && p.CanMove && Near(p.transform.position,step.origin)).OrderBy(p=>(p.transform.position-step.origin).sqrMagnitude).FirstOrDefault():null;
+                step.sameCellPickup=sameCell && step.exception!="z" && sameCellActor!=null;
+                // Only z skips native capture. A same-position w still picks
+                // up layer2 and releases layer12, re-arming the physical plate.
+                // Empty capture at a same position is the native legal no-op.
+                step.marker=step.exception=="z" || (sameCell && sameCellActor==null);
+                if (step.marker)
+                {
+                    // A native z marker must be satisfied by the mechanism, never by teleporting its actor.
+                    foreach (object wait in Wait(.35f)) yield return wait;
+                    until = EditorApplication.timeSinceStartup + 35;
+                    while (Springs != null && Springs.IsBusy && EditorApplication.timeSinceStartup < until) yield return null;
+                    step.applied = Springs == null || !Springs.IsBusy; step.status = "Original wait marker; no manual actor move.";
+                }
+                else if(NativeReplay)
+                {
+                    foreach(object inputWait in ExerciseNativeInputStep(level,step)) yield return inputWait;
+                }
+                else if(step.sameCellPickup)
+                {
+                    RecoveryPiece actor=sameCellActor;
+                    step.sourceRecord=actor.SourceRecordIndex; step.actorIndex=actor.Index; step.actor=actor.OriginalName;
+                    step.movable=actor.CanMove; step.actualBefore=actor.transform.position;
+                    Vector3 screen;
+                    Require("gm"+level.id+"-same-cell-original-screen-pick-"+step.number,TryOriginalPickPoint(actor,out screen),"Same-cell recorded action must select the real authored collider through the production camera query.");
+                    NativeInput("BeginDrag",screen);
+                    RecoveredNativeDragMotion motion=Game.GetComponent<RecoveredNativeDragMotion>();
+                    Require("gm"+level.id+"-same-cell-production-pickup-"+step.number,motion!=null && motion.IsActive,"Production BeginDrag selects and lifts the actor without a fabricated switch write.");
+                    Require("gm"+level.id+"-same-cell-original-guide-"+step.number,Near(motion.Target,step.destination),"Before any automatic mechanism response, the native guide must equal the recorded same-cell drop.");
+                    foreach(object wait in WaitReal(.18f)) yield return wait;
+                    NativeInput("EndDrag");
+                    Transform support=Read(motion,"finalSupport") as Transform;
+                    step.followsMovingSupport=support!=null && support.GetComponentInParent<RecoveryPiece>()!=actor;
+                    until=EditorApplication.timeSinceStartup+15;
+                    while(motion!=null && motion.IsActive && EditorApplication.timeSinceStartup<until) yield return null;
+                    step.actualAfter=actor.transform.position;
+                    step.nativeLanding=step.followsMovingSupport?motion.Target:step.destination;
+                    step.applied=motion!=null && !motion.IsActive && Game.MoveCount==step.beforeMoves+1 && Near(step.actualAfter,step.nativeLanding);
+                    step.status="Original same-cell pickup/release through production BeginDrag/EndDrag; "+Game.Status;
+                }
+                else
+                {
+                    until = EditorApplication.timeSinceStartup + 15;
+                    while (EditorApplication.timeSinceStartup < until)
+                    {
+                        if (step.exception == "w" && Springs != null && Springs.IsBusy) { yield return null; continue; }
+                        RecoveryPiece actor = Game.Pieces.Where(p => p != null && p.CanMove && Near(p.transform.position, step.origin)).OrderBy(p => (p.transform.position - step.origin).sqrMagnitude).FirstOrDefault();
+                        if (actor != null)
+                        {
+                            step.sourceRecord = actor.SourceRecordIndex; step.actorIndex = actor.Index; step.actor = actor.OriginalName;
+                            step.movable = actor.CanMove; step.actualBefore = actor.transform.position;
+                            if (Game.TryMove(actor.Index, step.destination))
+                            { step.applied = true; step.actualAfter = actor.transform.position; step.status = Game.Status; break; }
+                        }
+                        yield return null;
+                    }
+                }
+                step.waitedSeconds = Time.time - start; step.afterMoves = Game.MoveCount;
+                Require("gm" + level.id + "-player-step-" + step.number, step.applied && (step.marker || (step.movable && step.afterMoves == step.beforeMoves + 1 && Near(step.actualAfter, step.followsMovingSupport ? step.nativeLanding : step.destination))),
+                    "exception=" + step.exception + ", record=" + step.sourceRecord + ", from=" + step.origin + ", to=" + step.destination + ", actual=" + step.actualAfter + (step.followsMovingSupport ? ", nativeMovingSupport="+step.nativeLanding : "") + "; " + (step.status ?? Game.Status));
+                foreach (object wait in WaitReal(.18f)) yield return wait;
+                until = EditorApplication.timeSinceStartup + 35;
+                while (Springs != null && Springs.IsBusy && EditorApplication.timeSinceStartup < until) yield return null;
+                step.switchesAfter = SwitchState();
+            }
+            double finalWaitStarted = EditorApplication.timeSinceStartup;
+            double drySince = -1;
+            int dryActive = -1, dryRequired = -1;
+            until = finalWaitStarted + 120;
+            int lastFrame = -1;
+            while (EditorApplication.timeSinceStartup < until)
+            {
+                if (Time.frameCount != lastFrame)
+                {
+                    lastFrame = Time.frameCount;
+                    CapturePendingWater(level);
+                    bool wet = Water != null && Water.CurrentPieceRoot == Game.PieceRoot && Water.RequiredFountainCount == level.nativeRequired && Water.ActiveFountainCount >= level.nativeRequired;
+                    if (wet) { if (level.firstAllWetFrame < 0) level.firstAllWetFrame = Time.frameCount; level.stableWetFrames++; } else level.stableWetFrames = 0;
+                    if (Game.IsComplete && level.completedFrame < 0) level.completedFrame = Time.frameCount;
+                    if (Game.IsComplete && level.stableWetFrames >= 3 && !level.waterPending && (Springs == null || !Springs.IsBusy)) break;
+                    bool settledDry = !Game.IsComplete && !level.waterPending && (Springs == null || !Springs.IsBusy) && Water != null && Water.RequiredFountainCount == level.nativeRequired && Water.ActiveFountainCount < level.nativeRequired;
+                    if(settledDry)
+                    {
+                        if(drySince<0 || dryActive!=Water.ActiveFountainCount || dryRequired!=Water.RequiredFountainCount)
+                        { drySince=EditorApplication.timeSinceStartup; dryActive=Water.ActiveFountainCount; dryRequired=Water.RequiredFountainCount; }
+                        level.stableDrySeconds=(float)(EditorApplication.timeSinceStartup-drySince);
+                        if(level.stableDrySeconds>=5)
+                        { report.notes.Add("gm"+level.id+" failed early after"+level.stableDrySeconds+" real seconds with unchanged dry targets"+dryActive+"/"+dryRequired+", no pending water and no spring motion. This only terminates a failed case; it cannot satisfy completion."); break; }
+                    }
+                    else { drySince=-1; level.stableDrySeconds=0; }
+                }
+                yield return null;
+            }
+            level.finalRequired = Water.RequiredFountainCount; level.finalActive = Water.ActiveFountainCount;
+            level.complete = Game.IsComplete; level.nativeMissionComplete = ControladorJuego.misionComplete && ControladorJuego.misionCompleteAd;
+            level.springsBusy = Springs != null && Springs.IsBusy;
+            level.finalWaitRealSeconds = (float)(EditorApplication.timeSinceStartup - finalWaitStarted);
+            CapturePendingWater(level);
+            level.passed = level.normalGameplay && level.finalRequired == level.nativeRequired && level.finalRequired > 0 && level.finalActive >= level.finalRequired && level.complete && level.nativeMissionComplete && level.stableWetFrames >= 3 && !level.springsBusy && !level.waterPending;
+            level.screenshot = Capture("gm" + level.id + "-normal-gameplay.png");
+            Require("gm" + level.id + "-actual-water-and-completion", level.passed, "active=" + level.finalActive + "/" + level.finalRequired + ", stableWetFrames=" + level.stableWetFrames + ", complete=" + level.complete + ", nativeMission=" + level.nativeMissionComplete + ", springsBusy=" + level.springsBusy + ", waterPending=" + level.waterPending + ", pendingEvents=" + level.pendingWaterEvents + ", lastScheduledGameTime=" + level.lastScheduledWaterEventTime + ", finalWaitReal=" + level.finalWaitRealSeconds + ", stableDryReal=" + level.stableDrySeconds);
+        }
+
+        static IEnumerable ExerciseNativeInputStep(Level level,Step step)
+        {
+            step.productionInput=true;
+            double until=EditorApplication.timeSinceStartup+15;
+            RecoveryPiece actor=null;
+            while(actor==null && EditorApplication.timeSinceStartup<until)
+            {
+                actor=Game.Pieces.Where(p=>p!=null && p.CanMove && Near(p.transform.position,step.origin)).OrderBy(p=>(p.transform.position-step.origin).sqrMagnitude).FirstOrDefault();
+                if(actor==null) yield return null;
+            }
+            Require("gm"+level.id+"-native-input-capture-"+step.number,actor!=null,"An actual movable actor must occupy the original recorded capture position.");
+            step.sourceRecord=actor.SourceRecordIndex; step.actorIndex=actor.Index; step.actor=actor.OriginalName;
+            step.actualBefore=actor.transform.position; step.movable=actor.CanMove;
+            step.waterPendingBefore=Water!=null && Water.HasPendingPropagation;
+            Vector3 screen=Vector3.zero;
+            RecoveredNativeDragMotion motion=null;
+            bool planned=false;
+            for(int view=0;view<4;view++)
+            {
+                actor=Game.Pieces.FirstOrDefault(piece=>piece!=null && piece.SourceRecordIndex==step.sourceRecord && piece.CanMove && Near(piece.transform.position,step.origin));
+                if(actor==null) { step.inputDiagnostics.Add("Original capture actor moved or became fixed while changing camera; no substitute capture."); break; }
+                if(TryOriginalPickPoint(actor,out screen,step))
+                {
+                    NativeInput("BeginDrag",screen);
+                    motion=Game.GetComponent<RecoveredNativeDragMotion>();
+                    if(motion!=null && motion.IsActive)
+                    {
+                        Vector3 dropScreen,drop; RaycastHit hit;
+                        if(step.sameCellPickup || FindOriginalDropPoint(step.destination,out dropScreen,out drop,out hit,step)) { planned=true; break; }
+                        // Native camera input disallows rotating a held piece.
+                        // Cancel through the production transaction first; it
+                        // restores its original before-state and does not count
+                        // as a successful recorded placement.
+                        step.inputDiagnostics.Add("view="+view+" target occluded/unavailable; production CancelDrag before turning the original camera sphere.");
+                        NativeInput("CancelDrag");
+                    }
+                }
+                else step.inputDiagnostics.Add("view="+view+" original source closest-hit query is occluded.");
+                if(view<3) foreach(object cameraWait in TurnNativeCamera(level,step)) yield return cameraWait;
+            }
+            // The original camera also supports continuous slow mouse swipes.
+            // Quarter-turn buttons alone do not prove a surface is unreachable.
+            // Try this only after all four original quarter views fail; every
+            // pose change still comes from original entrada/Begin/Continue/End.
+            if(!planned)
+            for(int quarter=0;quarter<4 && !planned;quarter++)
+            {
+                foreach(float offset in new[]{15f,30f,45f,60f,75f})
+                {
+                    foreach(object cameraWait in SlowNativeCamera(level,step,offset)) yield return cameraWait;
+                    actor=Game.Pieces.FirstOrDefault(piece=>piece!=null && piece.SourceRecordIndex==step.sourceRecord && piece.CanMove && Near(piece.transform.position,step.origin));
+                    if(actor==null) { step.inputDiagnostics.Add("Slow view: original actor moved or became fixed; no substitute capture."); break; }
+                    if(TryOriginalPickPoint(actor,out screen,step))
+                    {
+                        NativeInput("BeginDrag",screen); motion=Game.GetComponent<RecoveredNativeDragMotion>();
+                        if(motion!=null && motion.IsActive)
+                        {
+                            Vector3 dropScreen,drop; RaycastHit hit;
+                            if(step.sameCellPickup || FindOriginalDropPoint(step.destination,out dropScreen,out drop,out hit,step)) { planned=true; break; }
+                            NativeInput("CancelDrag");
+                        }
+                    }
+                }
+                if(!planned && quarter<3) foreach(object cameraWait in TurnNativeCamera(level,step)) yield return cameraWait;
+            }
+            Require("gm"+level.id+"-native-input-original-source-and-surface-"+step.number,planned && motion!=null && motion.IsActive,"Original pick and drop must be reachable through a real camera view. "+String.Join("; ",step.inputDiagnostics.Take(12).ToArray()));
+            step.pickScreen=screen; step.pickupFrame=Time.frameCount; step.actualBefore=actor.transform.position;
+            Collider body=Read(motion,"selectedCollider") as Collider;
+            Require("gm"+level.id+"-native-input-selected-layer2-"+step.number,body!=null && body.gameObject.layer==2,"Native doProcess1Solution1034C00 selects the exact collider body into IgnoreRaycast before waiting/moving.");
+            if(step.exception=="w")
+            {
+                until=EditorApplication.timeSinceStartup+35;
+                while(EditorApplication.timeSinceStartup<until)
+                {
+                    bool active=NativeChannelsBusy();
+                    if(active && !step.nativeWaitObservedBusy) { step.nativeWaitObservedBusy=true; step.nativeWaitBusyFrame=Time.frameCount; }
+                    // This variant validates a legal mode0 player strategy.
+                    // w is an original automatic-preview annotation, not a
+                    // normal-player requirement to retrigger a finished spring.
+                    if(!active) { step.nativeWaitIdleFrame=Time.frameCount; break; }
+                    yield return null;
+                }
+                Require("gm"+level.id+"-player-w-annotation-current-idle-"+step.number,step.nativeWaitIdleFrame>=step.pickupFrame && !NativeChannelsBusy(),"Legal mode0 player waits for current movement to end, then drags normally. observedBusy="+step.nativeWaitObservedBusy+", busyFrame="+step.nativeWaitBusyFrame+", idleFrame="+step.nativeWaitIdleFrame+"; a completed earlier spring need not be retriggered. Original automatic-preview w state machine is a separate restoration/test scope.");
+            }
+            // The original fixed-roof escape precedes changing the final guide.
+            until=EditorApplication.timeSinceStartup+20;
+            while(motion.IsActive && motion.RouteStage>0 && !motion.IsReleased && EditorApplication.timeSinceStartup<until) yield return null;
+            Require("gm"+level.id+"-native-input-up-route-settled-"+step.number,motion.IsActive && motion.RouteStage==0,"Original up/over path must finish before guiding the held actor into the destination.");
+            RaycastHit surface=new RaycastHit(); Vector3 landing=Vector3.zero;
+            if(step.sameCellPickup)
+            {
+                screen=step.pickScreen;
+                step.originalGuide=motion.Target;
+                Require("gm"+level.id+"-native-input-same-cell-guide-"+step.number,Near(motion.Target,step.destination),"The unchanged native guide must match the same-cell recording.");
+            }
+            else
+            {
+                Require("gm"+level.id+"-native-input-real-drop-surface-"+step.number,FindOriginalDropPoint(step.destination,out screen,out landing,out surface,step),"An actual authored Map/Origen ray must resolve to the original recorded destination. Missing/occluded surfaces fail rather than fabricating a guide.");
+                NativeInput("ContinueDrag",screen);
+                step.originalGuide=motion.Target;
+                Require("gm"+level.id+"-native-input-original-guide-"+step.number,OriginalGuideMatches(motion.Target,step.destination,surface),"Resolved production guide="+motion.Target.ToString("F3")+", recorded="+step.destination.ToString("F3"));
+            }
+            step.compressionLanding=surface.collider!=null && surface.collider.name.IndexOf("CuboResorte",StringComparison.Ordinal)>=0;
+            step.ordinaryEarlyRelease=SessionState.GetBool(OrdinaryEarlyKey,false) && !step.compressionLanding;
+            step.terminalQuickRelease=SessionState.GetBool(TerminalQuickKey,false) && !step.compressionLanding && report.expectedCatalog!=null && step.number==report.expectedCatalog.levels.First(x=>x.id==level.id).recordedSteps;
+            // Offset is the actual original grab point. Adjust only the screen
+            // pointer, re-raycasting the surface each time, as a user centers it.
+            for(int adjust=0;adjust<12;adjust++)
+            {
+                Vector3 floating=(Vector3)Read(motion,"floatingTarget");
+                Vector3 target=motion.Target;
+                Vector3 delta=new Vector3(target.x-floating.x,0,target.z-floating.z);
+                if(delta.sqrMagnitude<.000025f) break;
+                RaycastHit pointerHit;
+                using(RecoveredNativeInteraction.QueryOriginalColliders(Game))
+                    Require("gm"+level.id+"-native-input-pointer-ray-"+step.number+"-"+adjust,Physics.Raycast(Game.GameCamera.ScreenPointToRay(screen),out pointerHit,Mathf.Infinity,Physics.DefaultRaycastLayers,QueryTriggerInteraction.UseGlobal),"The pointer correction must remain a real scene surface ray.");
+                bool adjusted=false;
+                foreach(float fraction in new[]{1f,.5f,.25f,.125f,.0625f})
+                {
+                    Vector3 proposed=Game.GameCamera.WorldToScreenPoint(pointerHit.point+delta*fraction);
+                    Vector3 proposedLanding; RaycastHit proposedSurface;
+                    if(!RecoveredNativeInteraction.TryGetDropPoint(Game.GameCamera,proposed,Game,out proposedLanding,out proposedSurface) || !OriginalGuideMatches(proposedLanding,step.destination,proposedSurface)) continue;
+                    screen=proposed; NativeInput("ContinueDrag",screen); adjusted=true; break;
+                }
+                if(!adjusted) { step.retainedOriginalGrabOffset=true; break; }
+            }
+            step.dropScreen=screen;
+            until=EditorApplication.timeSinceStartup+20;
+            // One real frame preserves a real pointer-down/move/up interval;
+            // the selected actor is allowed to lag its final guide, as native
+            // doEnd/doFijar expressly animate it after release.
+            bool releaseEarly=step.ordinaryEarlyRelease || step.terminalQuickRelease;
+            if(releaseEarly)
+            {
+                int originalGuideFrame=Time.frameCount;
+                while(Time.frameCount<=originalGuideFrame && EditorApplication.timeSinceStartup<until) yield return null;
+                Require("gm"+level.id+"-native-early-release-real-held-frame-"+step.number,Time.frameCount>originalGuideFrame,"The early-release policy must cross an actual Unity PlayerLoop frame before pointer-up; Editor coroutine iterations alone do not count.");
+                NativeInput("ContinueDrag",screen); step.heldInputFrames++;
+            }
+            int lastHeldInputFrame=Time.frameCount;
+            while(!releaseEarly && EditorApplication.timeSinceStartup<until)
+            {
+                // Editor update may run repeatedly without a PlayerLoop frame.
+                // A held player's pointer is re-raycast once per actual frame;
+                // do not mistake Editor coroutine iterations for native input.
+                if(Time.frameCount==lastHeldInputFrame) { yield return null; continue; }
+                lastHeldInputFrame=Time.frameCount;
+                NativeInput("ContinueDrag",screen); step.heldInputFrames++;
+                Vector3 target=motion.Target, position=actor.transform.position;
+                Vector3 floating=(Vector3)Read(motion,"floatingTarget");
+                // A selected body remains layer2; the pressure mask cannot
+                // detect it until doEnd restores bloque. Held motion follows
+                // its real grab-offset floatingTarget for pressure surfaces too.
+                bool hovered=(position-floating).sqrMagnitude<.0009f;
+                if(hovered && position.y>=target.y+5) break;
+                yield return null;
+            }
+            step.heldPosition=actor.transform.position;
+            Vector3 heldTarget=motion.Target;
+            step.heldFloatingTarget=(Vector3)Read(motion,"floatingTarget");
+            bool heldReady=(step.heldPosition-step.heldFloatingTarget).sqrMagnitude<.0009f;
+            if(step.ordinaryEarlyRelease)
+                Require("gm"+level.id+"-native-ordinary-early-original-guide-"+step.number,motion.IsActive && !motion.IsReleased && Near(motion.Target,step.originalGuide) && OriginalGuideMatches(motion.Target,step.destination,surface),"Actual production guide remains the original recorded guide after a real held PlayerLoop frame; actor may still be following native floatingTarget. actor="+step.heldPosition.ToString("F4")+",guide="+motion.Target.ToString("F4")+",heldInputFrames="+step.heldInputFrames);
+            else if(step.terminalQuickRelease)
+                Require("gm"+level.id+"-native-terminal-quick-original-guide-"+step.number,motion.IsActive && !motion.IsReleased && Near(motion.Target,step.destination),"A real held pointer resolved the unchanged original destination before early release; original post-release motion must still complete. actor="+step.heldPosition.ToString("F4")+",guide="+motion.Target.ToString("F4"));
+            else
+                Require("gm"+level.id+"-native-input-held-hover-"+step.number,heldReady && step.heldPosition.y>=heldTarget.y+5,"Actual held actor="+step.heldPosition.ToString("F3")+", original pointer floatingTarget="+step.heldFloatingTarget.ToString("F3")+", original guide="+heldTarget.ToString("F3")+"; original held motion follows its actual grab-offset floatingTarget. doEnd takes the independent guide, doFijar centers after release, and Resorte then performs its separate native delayed compression.");
+            step.waterPendingAtRelease=Water!=null && Water.HasPendingPropagation;
+            bool diagnostic=level.id==1187 && step.number==18;
+            Action commitObserver=null;
+            if(diagnostic)
+            {
+                CaptureLandingContext(step,"before-release",actor);
+                commitObserver=()=> {
+                    if(Game!=null && Game.CurrentLevelId==level.id && (Game.MoveCount!=step.beforeMoves || Game.Status.IndexOf("occupied",StringComparison.OrdinalIgnoreCase)>=0))
+                        CaptureLandingContext(step,"production-commit-notify",actor);
+                };
+                Game.StateChanged+=commitObserver;
+            }
+            try
+            {
+                NativeInput("EndDrag"); step.releaseFrame=Time.frameCount;
+                Transform support=Read(motion,"finalSupport") as Transform;
+                step.followsMovingSupport=support!=null && support.GetComponentInParent<RecoveryPiece>()!=actor;
+                until=EditorApplication.timeSinceStartup+25;
+                bool observedUnlock=false;
+                while(motion.IsActive && EditorApplication.timeSinceStartup<until)
+                {
+                    if(diagnostic && !observedUnlock && (bool)Read(motion,"nativeWaterUnblocked"))
+                    { observedUnlock=true; CaptureLandingContext(step,"native-below-.5-water-restored",actor); }
+                    yield return null;
+                }
+                if(diagnostic)
+                {
+                    step.inputDiagnostics.Add("native-early-unlock frame="+Read(motion,"nativeWaterRestoreFrame")+",distance="+Read(motion,"nativeWaterRestoreDistance")+",unblocked="+Read(motion,"nativeWaterUnblocked")+",commitFrame="+Time.frameCount);
+                    CaptureLandingContext(step,"after-native-animation",actor);
+                }
+                step.motionFinishedFrame=Time.frameCount;
+                if(step.compressionLanding)
+                {
+                    // Original guide is1.2 above the plate. Motion completion
+                    // and Resorte.Update -> Invoke(doBajarPieza,tiempo1) are
+                    // separate operations. A cold/high-delta frame may finish
+                    // doFijar before the next plate detection/publication frame.
+                    // Wait for the actual native delayed placement, never write
+                    // the actor, guide, animator, bus or pending publication.
+                    double pressureStarted=EditorApplication.timeSinceStartup;
+                    until=pressureStarted+20;
+                    int pressureFrame=Time.frameCount;
+                    while(EditorApplication.timeSinceStartup<until)
+                    {
+                        Vector3 expected=step.followsMovingSupport?motion.Target:step.destination;
+                        if(!motion.IsActive && Near(actor.transform.position,expected))
+                        { step.compressionSettledFrame=Time.frameCount; break; }
+                        if(Time.frameCount!=pressureFrame)
+                        { pressureFrame=Time.frameCount; step.pressurePostMotionFrames++; }
+                        yield return null;
+                    }
+                    step.compressionWaitRealSeconds=(float)(EditorApplication.timeSinceStartup-pressureStarted);
+                    Vector3 compressionExpected=step.followsMovingSupport?motion.Target:step.destination;
+                    step.inputDiagnostics.Add("native-pressure-settle releaseFrame="+step.releaseFrame+",motionFinishedFrame="+step.motionFinishedFrame+",settledFrame="+step.compressionSettledFrame+",postMotionFrames="+step.pressurePostMotionFrames+",heldInputFrames="+step.heldInputFrames+",actor="+actor.transform.position.ToString("F4")+",expected="+compressionExpected.ToString("F4")+",waitReal="+step.compressionWaitRealSeconds);
+                    Require("gm"+level.id+"-native-pressure-delayed-placement-"+step.number,step.compressionSettledFrame>=step.releaseFrame && !motion.IsActive && Near(actor.transform.position,compressionExpected),"Resorte.doBajarPieza must itself lower the released actor from the original raised guide to the unchanged recorded target. "+step.inputDiagnostics.Last());
+                }
+                step.committedFrame=Time.frameCount;
+            }
+            finally { if(commitObserver!=null && Game!=null) Game.StateChanged-=commitObserver; }
+            step.actualAfter=actor.transform.position;
+            step.nativeLanding=step.followsMovingSupport?motion.Target:step.destination;
+            step.applied=!motion.IsActive && Game.MoveCount==step.beforeMoves+1 && Near(step.actualAfter,step.nativeLanding);
+            step.status="Original screen input pickup/hover/release; "+Game.Status;
+            Require("gm"+level.id+"-native-input-layer-restored-"+step.number,body!=null && body.gameObject.layer!=2,"EndDrag restores the selected layer; a new real carry may temporarily own native layer9.");
+        }
+        static void CaptureLandingContext(Step step,string phase,RecoveryPiece selected)
+        {
+            if(Game==null) return;
+            step.inputDiagnostics.Add(phase+" frame="+Time.frameCount+",time="+Time.time+",status="+Game.Status+",switches="+SwitchState());
+            foreach(RecoveryPiece actor in Game.Pieces)
+                if(actor!=null && Mathf.Abs(actor.transform.position.x-step.destination.x)<=25 && Mathf.Abs(actor.transform.position.z-step.destination.z)<=25)
+                    step.inputDiagnostics.Add(phase+" actor record"+actor.SourceRecordIndex+":"+actor.BasePrefab+" pose="+actor.transform.position.ToString("F4")+",movable="+actor.CanMove);
+            float offset=2-4.199999809265137f,radius=1; int mask=4097;
+            foreach(MoveBloque source in UnityEngine.Object.FindObjectsOfType<MoveBloque>(true))
+                if(source!=null && source.gameObject.scene==Game.GameCamera.gameObject.scene)
+                { offset=source.subeRayo-4.199999809265137f;radius=source.sphereRadius;mask=source.mascaraSuelo.value;break; }
+            using(RecoveredNativeInteraction.QueryOriginalColliders(Game))
+                foreach(Collider hit in Physics.OverlapSphere(step.destination+Vector3.up*offset,radius,mask,QueryTriggerInteraction.UseGlobal))
+                {
+                    RecoveryPiece owner=hit.GetComponentInParent<RecoveryPiece>();
+                    if(owner==selected) continue;
+                    step.inputDiagnostics.Add(phase+" former-late-probe hit="+hit.name+",layer="+hit.gameObject.layer+",record="+(owner==null?-1:owner.SourceRecordIndex)+",pose="+hit.transform.position.ToString("F4"));
+                }
+        }
+
+        static IEnumerable TurnNativeCamera(Level level,Step step)
+        {
+            SwipeHandler2 swipe=UnityEngine.Object.FindObjectsOfType<SwipeHandler2>(true).FirstOrDefault(x=>x.EsferaCamera!=null && x.gameObject.scene==Game.GameCamera.gameObject.scene);
+            MethodInfo tick=typeof(SwipeHandler2).GetMethod("TickRotation",BindingFlags.Instance|BindingFlags.Public);
+            Require("gm"+level.id+"-native-input-camera-api-"+step.number,swipe!=null && swipe.enabled && tick!=null,"Native camera implementation must be configured and enabled. Test cannot replace it by assigning camera transforms.");
+            Require("gm"+level.id+"-native-input-camera-not-holding-"+step.number,!MoveBloque.MoviendoBloque,"Original CanRotate forbids turning while holding a piece.");
+            swipe.GirarDerecha(); step.cameraQuarterTurns++;
+            float target=swipe.rotationFinal.y;
+            double until=EditorApplication.timeSinceStartup+12;
+            while(Mathf.Abs(Mathf.DeltaAngle(swipe.EsferaCamera.eulerAngles.y,target))>.25f && EditorApplication.timeSinceStartup<until) yield return null;
+            Require("gm"+level.id+"-native-input-camera-quarter-turn-"+step.number+"-"+step.cameraQuarterTurns,Mathf.Abs(Mathf.DeltaAngle(swipe.EsferaCamera.eulerAngles.y,target))<=.25f,"Production GirarDerecha followed by original Update/LerpAngle; target="+target+", actual="+swipe.EsferaCamera.eulerAngles.y);
+            yield return null;
+        }
+        static IEnumerable SlowNativeCamera(Level level,Step step,float offset)
+        {
+            SwipeHandler2 swipe=UnityEngine.Object.FindObjectsOfType<SwipeHandler2>(true).FirstOrDefault(x=>x.EsferaCamera!=null && x.gameObject.scene==Game.GameCamera.gameObject.scene);
+            Require("gm"+level.id+"-slow-camera-not-holding-"+step.number,swipe!=null && swipe.enabled && !MoveBloque.MoviendoBloque,"Cancel production selection before original rotation; never move the camera while holding an actor.");
+            double until=EditorApplication.timeSinceStartup+12;
+            while(Mathf.Abs(Mathf.DeltaAngle(swipe.EsferaCamera.eulerAngles.y,swipe.rotationFinal.y))>.25f && EditorApplication.timeSinceStartup<until) yield return null;
+            Require("gm"+level.id+"-slow-camera-native-return-"+step.number,Mathf.Abs(Mathf.DeltaAngle(swipe.EsferaCamera.eulerAngles.y,swipe.rotationFinal.y))<=.25f,"Original TickRotation settles the previous gesture to its existing native target, without assigning a camera pose.");
+            Vector2 start=Vector2.zero; bool began=false; Rect rect=Game.GameCamera.pixelRect;
+            for(int y=2;y<=7 && !began;y++) for(int x=1;x<=8 && !began;x++)
+            {
+                Vector2 candidate=new Vector2(rect.x+rect.width*x/12f,rect.y+rect.height*y/9f);
+                if(candidate.x>rect.xMax-170) continue;
+                if(swipe.BeginRotation(candidate,false,Game.GameCamera)) { began=true; start=candidate; }
+            }
+            Require("gm"+level.id+"-slow-camera-real-entrada-"+step.number,began && swipe.getAreaRotation!=null && swipe.getAreaRotation.layer==LayerMask.NameToLayer("entrada"),"Production BeginRotation must hit the authored entrada collider and pass original UI/piece-selection gates.");
+            Vector2 pointer=start; float target=swipe.rotationFinal.y+offset,started=Time.time; int frames=0;
+            try
+            {
+                // InputManager.asset: Mouse X sensitivity=.1. Original desktop
+                // ContinueRotation uses degree=MouseX*multiplicador (scene5).
+                // One pixel per real frame gives axis.1 / approximately.5deg.
+                while(Mathf.Abs(Mathf.DeltaAngle(swipe.EsferaCamera.eulerAngles.y,target))>.05f && frames<200)
+                {
+                    float axis=Mathf.Clamp(Mathf.DeltaAngle(swipe.EsferaCamera.eulerAngles.y,target)/swipe.multiplicador,-.1f,.1f);
+                    pointer.x+=axis/.1f;
+                    Require("gm"+level.id+"-slow-camera-pointer-in-view-"+step.number,rect.Contains(pointer),"The gentle mouse gesture stays inside the real gameplay viewport.");
+                    swipe.ContinueRotation(pointer,axis); frames++; yield return null;
+                }
+                Require("gm"+level.id+"-slow-camera-continuous-yaw-"+step.number,frames>0 && Mathf.Abs(Mathf.DeltaAngle(swipe.EsferaCamera.eulerAngles.y,target))<=.05f,"Actual original slow gesture reaches target="+target+",yaw="+swipe.EsferaCamera.eulerAngles.y+",frames="+frames);
+                // Release slowly enough to stay below the original flick
+                // threshold. No change to handleFlicks/force/rotationFinal.
+                double releaseDeadline=EditorApplication.timeSinceStartup+3;
+                while(Time.time-started<Mathf.Abs(pointer.x-start.x)*Time.deltaTime*.5f/Mathf.Max(.1f,swipe.requiredForceForFlick*.8f) && EditorApplication.timeSinceStartup<releaseDeadline) yield return null;
+                swipe.EndRotation(pointer);
+            }
+            finally { if(swipe.IsPointerRotating) swipe.EndRotation(pointer,true); }
+            Require("gm"+level.id+"-slow-camera-low-force-release-"+step.number,!swipe.IsPointerRotating && Mathf.Abs(swipe.NativeFlickForce)<=swipe.requiredForceForFlick,"Actual EndRotation releases without a quarter-turn flick; force="+swipe.NativeFlickForce+",threshold="+swipe.requiredForceForFlick);
+            step.cameraSlowGestures++; step.cameraSlowFrames+=frames;
+            // A real frame after pointer-up permits the original release Lerp.
+            // The subsequent real pickup freezes that current intermediate yaw.
+            yield return null;
+            step.cameraYawSamples.Add(swipe.EsferaCamera.eulerAngles.y);
+            step.inputDiagnostics.Add("slow-native-mouse-view requestedOffset="+offset+", actualYaw="+swipe.EsferaCamera.eulerAngles.y+",frames="+frames+",nativeForce="+swipe.NativeFlickForce+",entrada="+swipe.getAreaRotation.name);
+        }
+        static bool NativeChannelsBusy()
+        {
+            for(int i=1;i<=8;i++) if((bool)typeof(UIManagerScript).GetField("activadoRes"+i).GetValue(null)) return true;
+            return false;
+        }
+        static bool OriginalGuideMatches(Vector3 actual,Vector3 recorded,RaycastHit hit)
+        {
+            if(Near(actual,recorded)) return true;
+            return hit.collider!=null && hit.collider.name.IndexOf("CuboResorte",StringComparison.Ordinal)>=0 && Near(actual,recorded+Vector3.up*1.2f);
+        }
+        static bool FindOriginalDropPoint(Vector3 destination,out Vector3 screen,out Vector3 landing,out RaycastHit surface,Step diagnostic=null)
+        {
+            int diagnosticStart=diagnostic==null?0:diagnostic.inputDiagnostics.Count;
+            var points=new List<Vector3>();
+            var boxFacePoints=new List<KeyValuePair<Collider,Vector3>>();
+            int nearbyBoxCount=0;
+            points.Add(destination-Vector3.up*4.2f); points.Add(destination);
+            using(RecoveredNativeInteraction.QueryOriginalColliders(Game))
+            {
+                foreach(Collider collider in UnityEngine.Object.FindObjectsOfType<Collider>(true))
+                {
+                    if(collider==null || !collider.enabled || !collider.gameObject.activeInHierarchy || collider.gameObject.scene!=Game.GameCamera.gameObject.scene) continue;
+                    Vector3 point=collider.transform.position; Bounds bounds=collider.bounds;
+                    bool centered=Mathf.Abs(point.x-destination.x)<=4 && Mathf.Abs(point.z-destination.z)<=4 && point.y<=destination.y+5 && point.y>=destination.y-12;
+                    bool spans=bounds.min.x<=destination.x+1 && bounds.max.x>=destination.x-1 && bounds.min.z<=destination.z+1 && bounds.max.z>=destination.z-1 && bounds.min.y<=destination.y+1 && bounds.max.y>=destination.y-12;
+                    if(!centered && !spans) continue;
+                    points.Add(point); points.Add(bounds.center);
+                    BoxCollider originalBox=collider as BoxCollider;
+                    if(originalBox!=null && ((collider.tag.IndexOf("Map",StringComparison.Ordinal)>=0 && collider.tag!="Map1") || collider.name.IndexOf("Origen",StringComparison.Ordinal)>=0))
+                    {
+                        // Sample the original Box faces, including visible
+                        // vertical sides below a roof. This only adds real
+                        // pointer candidates; the production ray/guide decides.
+                        nearbyBoxCount++;
+                        for(int axis=0;axis<3;axis++) foreach(int sign in new[]{-1,1})
+                        for(int u=0;u<9;u++) for(int w=0;w<9;w++)
+                        {
+                            Vector3 local=originalBox.center;
+                            local[axis]+=originalBox.size[axis]*.499f*sign;
+                            int across=(axis+1)%3, down=(axis+2)%3;
+                            local[across]+=originalBox.size[across]*.5f*(-.99f+u*.2475f);
+                            local[down]+=originalBox.size[down]*.5f*(-.99f+w*.2475f);
+                            boxFacePoints.Add(new KeyValuePair<Collider,Vector3>(collider,originalBox.transform.TransformPoint(local)));
+                        }
+                    }
+                    // Actual interior top-face rays can reach a cell whose
+                    // center/edge is occluded by an authored neighboring tower.
+                    // This adds screen candidates only, never a synthetic guide.
+                    if(collider.tag.IndexOf("Map",StringComparison.Ordinal)>=0 && collider.tag!="Map1")
+                        for(int gx=0;gx<9;gx++) for(int gz=0;gz<9;gz++)
+                            points.Add(new Vector3(bounds.center.x+bounds.extents.x*(-.99f+gx*.2475f),bounds.max.y,bounds.center.z+bounds.extents.z*(-.99f+gz*.2475f)));
+                    if(diagnostic!=null && diagnostic.inputDiagnostics.Count<32) diagnostic.inputDiagnostics.Add("surface-near "+ColliderPath(collider)+" layer="+collider.gameObject.layer+" tag="+collider.tag+" pos="+point.ToString("F3")+" bounds="+bounds);
+                    MeshCollider mesh=collider as MeshCollider;
+                    if(mesh!=null && mesh.sharedMesh!=null && mesh.sharedMesh.isReadable)
+                    {
+                        Vector3[] vertices=mesh.sharedMesh.vertices; int count=0;
+                        for(int v=0;v<vertices.Length && count<96;v++)
+                        {
+                            Vector3 world=mesh.transform.TransformPoint(vertices[v]);
+                            if(Mathf.Abs(world.x-destination.x)>10 || Mathf.Abs(world.z-destination.z)>10 || world.y>destination.y+5 || world.y<destination.y-12) continue;
+                            points.Add(world);
+                            foreach(float inset in new[]{.01f,.05f,.15f}) points.Add(Vector3.Lerp(world,bounds.center,inset));
+                            count++;
+                        }
+                    }
+                }
+                foreach(Vector3 point in points)
+                foreach(Vector3 delta in new[]{Vector3.zero,Vector3.right*3,Vector3.left*3,Vector3.forward*3,Vector3.back*3,Vector3.up*2,Vector3.down*2})
+                {
+                    Vector3 candidate=Game.GameCamera.WorldToScreenPoint(point+delta);
+                    if(candidate.z<=0) continue;
+                    bool valid=RecoveredNativeInteraction.TryGetDropPoint(Game.GameCamera,candidate,Game,out landing,out surface);
+                    if(valid && OriginalGuideMatches(landing,destination,surface))
+                    {
+                        if(diagnostic!=null && diagnostic.inputDiagnostics.Count>diagnosticStart) diagnostic.inputDiagnostics.RemoveRange(diagnosticStart,diagnostic.inputDiagnostics.Count-diagnosticStart);
+                        screen=candidate; return true;
+                    }
+                    if(diagnostic!=null && diagnostic.inputDiagnostics.Count<96)
+                    {
+                        RaycastHit blocked;
+                        string obstruction=Physics.Raycast(Game.GameCamera.ScreenPointToRay(candidate),out blocked,Mathf.Infinity,Physics.DefaultRaycastLayers,QueryTriggerInteraction.UseGlobal)?ColliderPath(blocked.collider)+" layer="+blocked.collider.gameObject.layer+" tag="+blocked.collider.tag+" at="+blocked.point.ToString("F3"):"no-hit";
+                        diagnostic.inputDiagnostics.Add("ray "+candidate.ToString("F1")+" guideValid="+valid+" guide="+landing.ToString("F3")+" first="+obstruction);
+                    }
+                }
+                int faceSamples=0;
+                foreach(KeyValuePair<Collider,Vector3> originalFace in boxFacePoints)
+                {
+                    Vector3 candidate=Game.GameCamera.WorldToScreenPoint(originalFace.Value);
+                    if(candidate.z<=0) continue;
+                    faceSamples++;
+                    if(RecoveredNativeInteraction.TryGetDropPoint(Game.GameCamera,candidate,Game,out landing,out surface) && OriginalGuideMatches(landing,destination,surface))
+                    {
+                        if(diagnostic!=null)
+                        {
+                            if(diagnostic.inputDiagnostics.Count>diagnosticStart) diagnostic.inputDiagnostics.RemoveRange(diagnosticStart,diagnostic.inputDiagnostics.Count-diagnosticStart);
+                            diagnostic.inputDiagnostics.Add("original-box-face-real-ray samples="+faceSamples+",boxes="+nearbyBoxCount+",sampled="+ColliderPath(originalFace.Key)+",world="+originalFace.Value.ToString("F4")+",actualHit="+ColliderPath(surface.collider)+",guide="+landing.ToString("F4"));
+                        }
+                        screen=candidate; return true;
+                    }
+                }
+                if(diagnostic!=null && boxFacePoints.Count>0) diagnostic.inputDiagnostics.Add("original-box-face-no-recorded-guide realRaySamples="+faceSamples+",boxes="+nearbyBoxCount+",destination="+destination.ToString("F4"));
+            }
+            screen=landing=Vector3.zero; surface=new RaycastHit(); return false;
+        }
+
+        static string ColliderPath(Collider collider)
+        {
+            if(collider==null) return "none";
+            var names=new List<string>(); Transform at=collider.transform;
+            while(at!=null) { names.Add(at.name); at=at.parent; }
+            names.Reverse(); return String.Join("/",names.ToArray());
+        }
+        const BindingFlags AllFields = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+        static object Read(object source, string field) { if (source == null) return null; FieldInfo f = source.GetType().GetField(field, AllFields); return f == null ? null : f.GetValue(source); }
+        static void CapturePendingWater(Level level)
+        {
+            if(Water==null) { level.waterPending=true; level.pendingWaterEvents=-1; return; }
+            PropertyInfo pending=Water.GetType().GetProperty("HasPendingPropagation"),count=Water.GetType().GetProperty("PendingWaterEventCount"),last=Water.GetType().GetProperty("LastScheduledWaterEventTime");
+            level.waterPending=pending==null || (bool)pending.GetValue(Water,null);
+            level.pendingWaterEvents=count==null?-1:(int)count.GetValue(Water,null);
+            level.maximumPendingWaterEvents=Math.Max(level.maximumPendingWaterEvents,level.pendingWaterEvents);
+            if(last!=null) level.lastScheduledWaterEventTime=Convert.ToSingle(last.GetValue(Water,null));
+        }
+        static string SwitchState()
+        {
+            var values = new List<string>();
+            for (int i = 1; i <= 8; i++)
+                foreach (string prefix in new[] { "conResorte", "positionRes", "activadoRes", "numPiezas", "contPiezas" })
+                { FieldInfo field = typeof(UIManagerScript).GetField(prefix + i, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic); if (field != null) values.Add(prefix + i + "=" + field.GetValue(null)); }
+            return String.Join(",", values);
+        }
+        static void CaptureDiagnostics(Level level)
+        {
+            level.switches = SwitchState();
+            RuntimeWaterMechanisms bus = Water == null ? null : Water.GetComponent<RuntimeWaterMechanisms>();
+            if (bus != null) level.switchEventDiagnostics = bus.SwitchEventDiagnostics;
+            if (Water != null)
+            {
+                level.pendingWaterDiagnostics = Water.PendingWaterDiagnostics;
+                level.waterRebuildDiagnostics = Water.WaterRebuildDiagnostics;
+                IEnumerable nodes = Read(Water, "nodes") as IEnumerable;
+                if (nodes != null) foreach (object node in nodes)
+                {
+                    RecoveryPiece piece = Read(node, "piece") as RecoveryPiece; MonoBehaviour controller = Read(node, "controller") as MonoBehaviour;
+                    bool[] ports = Read(node, "ports") as bool[]; Array links = Read(node, "links") as Array;
+                    var routes = new List<string>();
+                    if (links != null) for (int i = 0; i < links.Length; i++) { RecoveryPiece linked = Read(links.GetValue(i), "piece") as RecoveryPiece; routes.Add((i + 1) + ":" + (linked == null ? "-" : linked.SourceRecordIndex.ToString())); }
+                    var controls = new List<string>();
+                    if (controller != null) for (int i = 1; i <= 6; i++) controls.Add("conOrigen" + i + "=" + Read(controller, "conOrigen" + i) + "/wet=" + Water.IsControllerPortWet(controller, i));
+                    level.waterGraph.Add("record=" + (piece == null ? -1 : piece.SourceRecordIndex) + " controller=" + (controller == null ? "null" : controller.GetType().Name) + " pos=" + (controller == null ? "null" : controller.transform.position.ToString("F3")) + " ports=" + (ports == null ? "null" : String.Join("", ports.Select(p => p ? "1" : "0"))) + " source=" + Read(node, "source") + " target=" + Read(node, "target") + " color=" + Read(node, "waterColor") + " expected=" + Read(node, "expectedColor") + " incoming=" + Read(node, "incoming") + " links=" + String.Join(",", routes) + " " + String.Join(",", controls));
+                }
+            }
+            if (Springs != null)
+            {
+                IEnumerable collisions = Read(Springs, "collisionDiagnostics") as IEnumerable;
+                if (collisions != null) foreach (object collision in collisions) level.springDiagnostics.Add("collision: " + collision);
+                IEnumerable channels = Read(Springs, "channels") as IEnumerable;
+                if (channels != null) foreach (object channel in channels) if (channel != null) level.springDiagnostics.Add("channel=" + Read(channel, "index") + " position=" + Read(channel, "position") + " maximum=" + Read(channel, "maximum") + " direction=" + Read(channel, "direction") + " moving=" + Read(channel, "moving") + " blocked=" + Read(channel, "blocked") + " wasActive=" + Read(channel, "wasActive"));
+                IEnumerable actors = Read(Springs, "actors") as IEnumerable;
+                if (actors != null) foreach (object actor in actors)
+                { RecoveryPiece piece = Read(actor, "piece") as RecoveryPiece; level.springDiagnostics.Add("actor=" + (piece == null ? -1 : piece.SourceRecordIndex) + " moving=" + Read(actor, "moving") + " blocked=" + Read(actor, "blocked") + " turning=" + Read(actor, "turning") + " target=" + Read(actor, "target") + " direction=" + Read(actor, "direction")); }
+            }
+        }
+        static void NativeInput(string method,Vector3 screen) { typeof(RecoveredFlowGame).GetMethod(method,BindingFlags.Instance|BindingFlags.NonPublic).Invoke(Game,new object[] { new Vector2(screen.x,screen.y) }); }
+        static void NativeInput(string method) { typeof(RecoveredFlowGame).GetMethod(method,BindingFlags.Instance|BindingFlags.NonPublic).Invoke(Game,null); }
+        static bool TryOriginalPickPoint(RecoveryPiece actor,out Vector3 screen,Step diagnostic=null)
+        {
+            int samples=0;
+            using(RecoveredNativeInteraction.QueryOriginalColliders(Game))
+            foreach(Collider collider in actor.OriginalCaptureColliders??new Collider[0])
+            {
+                if(collider==null || !collider.enabled || !collider.gameObject.activeInHierarchy || collider.gameObject.layer!=LayerMask.NameToLayer("bloque")) continue;
+                Vector3 center=collider.transform.position;
+                BoxCollider box=collider as BoxCollider; SphereCollider sphere=collider as SphereCollider; MeshCollider mesh=collider as MeshCollider;
+                if(box!=null) center=collider.transform.TransformPoint(box.center);
+                else if(sphere!=null) center=collider.transform.TransformPoint(sphere.center);
+                else if(mesh!=null && mesh.sharedMesh!=null) center=collider.transform.TransformPoint(mesh.sharedMesh.bounds.center);
+                var candidates=new List<Vector3>();
+                foreach(Vector3 delta in new[] { Vector3.zero,Vector3.right*3,Vector3.left*3,Vector3.forward*3,Vector3.back*3,Vector3.up*2 }) candidates.Add(center+delta);
+                if(box!=null)
+                    foreach(float x in new[]{-.45f,.45f}) foreach(float y in new[]{-.45f,.45f}) foreach(float z in new[]{-.45f,.45f})
+                        candidates.Add(box.transform.TransformPoint(box.center+Vector3.Scale(box.size,new Vector3(x,y,z))));
+                if(mesh!=null && mesh.sharedMesh!=null && mesh.sharedMesh.isReadable)
+                {
+                    Vector3[] vertices=mesh.sharedMesh.vertices; int stride=Mathf.Max(1,vertices.Length/128);
+                    for(int v=0;v<vertices.Length;v+=stride) candidates.Add(mesh.transform.TransformPoint(vertices[v]));
+                }
+                if(diagnostic!=null && diagnostic.inputDiagnostics.Count<6) diagnostic.inputDiagnostics.Add("source-near "+ColliderPath(collider)+" pos="+collider.transform.position.ToString("F3")+" bounds="+collider.bounds+" candidates="+candidates.Count);
+                foreach(Vector3 candidate in candidates)
+                {
+                    Vector3 point=Game.GameCamera.WorldToScreenPoint(candidate); RecoveryPiece picked; RaycastHit hit;
+                    if(point.z<=0) continue; samples++;
+                    if(RecoveredNativeInteraction.TryPick(Game.GameCamera,point,Game,out picked,out hit) && picked==actor) { screen=point; return true; }
+                    if(diagnostic!=null && diagnostic.inputDiagnostics.Count<24)
+                    {
+                        RaycastHit blocked;
+                        string obstruction=Physics.Raycast(Game.GameCamera.ScreenPointToRay(point),out blocked,Mathf.Infinity,Physics.DefaultRaycastLayers,QueryTriggerInteraction.UseGlobal)?ColliderPath(blocked.collider)+" layer="+blocked.collider.gameObject.layer+" at="+blocked.point.ToString("F3"):"no-hit";
+                        diagnostic.inputDiagnostics.Add("source-ray "+point.ToString("F1")+" first="+obstruction);
+                    }
+                }
+            }
+            if(diagnostic!=null) diagnostic.inputDiagnostics.Add("source-pick-unreachable samples="+samples);
+            screen=Vector3.zero; return false;
+        }
+        static bool Near(Vector3 a, Vector3 b) { return (a - b).sqrMagnitude < .64f; }
+        static string SpringToken(string value) { Match match = Regex.Match(value ?? "", "st(.*?)et"); return match.Success ? match.Groups[1].Value : ""; }
+        static int CountNativeTargets(RecoverySave layout)
+        {
+            int count = 0;
+            RecoveryCatalog catalog = RecoveryCatalog.Load();
+            RecoveryAliasFile aliasFile = catalog.aliases == null ? null : JsonUtility.FromJson<RecoveryAliasFile>(catalog.aliases.text);
+            var aliases = aliasFile == null || aliasFile.aliases == null ? new Dictionary<string, RecoveryAlias>(StringComparer.Ordinal) : aliasFile.aliases.ToDictionary(a => a.originalName, a => a, StringComparer.Ordinal);
+            for (int i = 0; i < layout.pieza.Count; i++)
+            {
+                string name = layout.pieza[i]; RecoveryAlias alias;
+                if (aliases.TryGetValue(name, out alias)) name = alias.basePrefab;
+                if (SpringToken(layout.fijo[i]) == "9") continue;
+                if ((name.Contains("Cu") && (name.Contains("CubaFuente") || name.Contains("CuFuente") || name.Contains("CubFuente"))) || name.Contains("BloqueChorro1")) count++;
+            }
+            return count;
+        }
+        static IEnumerable WaitReal(float seconds) { double until = EditorApplication.timeSinceStartup + seconds; while (EditorApplication.timeSinceStartup < until) yield return null; }
+        static IEnumerable Wait(float seconds) { float until = Time.time + seconds; while (Time.time < until) yield return null; }
+        static void Require(string name, bool passed, string detail) { CheckState(name, passed, detail); if (!passed) throw new InvalidOperationException(name + ": " + detail); }
+        static void CheckState(string name, bool passed, string detail)
+        {
+            report.checks.Add(new Check { name = name, passed = passed, detail = detail });
+            if(!NativeReplay || !passed || name=="unity-version") Persist();
+            if(NativeReplay) WriteNativeProgress(false);
+        }
+        static void WriteNativeProgress(bool force)
+        {
+            if(report==null || !NativeReplay || (!force && EditorApplication.timeSinceStartup<nextProgressWrite)) return;
+            nextProgressWrite=EditorApplication.timeSinceStartup+1.5;
+            Level level=report.levels.Count==0?null:report.levels[report.levels.Count-1];
+            var progress=new NativeProgress
+            {
+                updatedUtc=DateTime.UtcNow.ToString("o"),startedUtc=report.startedUtc,finishedUtc=report.finishedUtc,inputStrategy=report.inputStrategy,
+                plannedLevels=report.plannedLevels,completedLevels=report.levels.Count(x=>x.passed || !String.IsNullOrEmpty(x.failure)),
+                passedLevels=report.levels.Count(x=>x.passed),failedLevels=report.levels.Count(x=>!String.IsNullOrEmpty(x.failure)),
+                id=level==null?0:level.id,step=level==null?0:level.steps.Count,
+                waterPending=Water!=null && Water.HasPendingPropagation,pendingEvents=Water==null?0:Water.PendingWaterEventCount,
+                springsBusy=Springs!=null && Springs.IsBusy,activeTargets=Water==null?0:Water.ActiveFountainCount,
+                requiredTargets=Water==null?0:Water.RequiredFountainCount,passed=report.passed,preferencesRestored=report.preferencesRestored
+            };
+            File.WriteAllText(Path.Combine(Output,"progress.json"),JsonUtility.ToJson(progress,true));
+        }
+        static void PersistNativeCase(Level level,int firstCheck)
+        {
+            string directory=Path.Combine(Output,"NativeCases"); Directory.CreateDirectory(directory);
+            var saved=new NativeCaseReport { inputStrategy=report.inputStrategy,capturedUtc=DateTime.UtcNow.ToString("o"),level=level,checks=report.checks.Skip(firstCheck).ToList() };
+            File.WriteAllText(Path.Combine(directory,"gm"+level.id+".json"),JsonUtility.ToJson(saved,true));
+            WriteNativeProgress(true);
+            if(!String.IsNullOrEmpty(level.failure) || report.levels.Count%25==0) Persist();
+        }
+        static void Persist() { if (report != null) File.WriteAllText(Path.Combine(Output, "save1-gameplay-validation.json"), JsonUtility.ToJson(report, true)); }
+        static string Capture(string file)
+        {
+            Camera camera = Game.GameCamera; if (camera == null) return "";
+            string path = Path.Combine(Output, file); RenderTexture old = camera.targetTexture, active = RenderTexture.active; float aspect = camera.aspect;
+            RenderTexture target = RenderTexture.GetTemporary(1280, 800, 24); Texture2D texture = new Texture2D(1280, 800, TextureFormat.RGB24, false);
+            try { camera.targetTexture = target; camera.aspect = 1.6f; Canvas.ForceUpdateCanvases(); camera.Render(); RenderTexture.active = target; texture.ReadPixels(new Rect(0, 0, 1280, 800), 0, 0); texture.Apply(); File.WriteAllBytes(path, texture.EncodeToPNG()); return path; }
+            finally { camera.targetTexture = old; camera.aspect = aspect; RenderTexture.active = active; RenderTexture.ReleaseTemporary(target); UnityEngine.Object.DestroyImmediate(texture); }
+        }
+        static bool RestorePreferences()
+        {
+            string json = SessionState.GetString(PrefsKey, ""); if (String.IsNullOrEmpty(json)) return false;
+            Preferences backup = JsonUtility.FromJson<Preferences>(json);
+            foreach (SavedPreference value in backup.values) if (!value.existed) PlayerPrefs.DeleteKey(value.key); else if (value.isFloat) PlayerPrefs.SetFloat(value.key, value.floatValue); else PlayerPrefs.SetInt(value.key, value.intValue);
+            PlayerPrefs.Save(); SessionState.EraseString(PrefsKey);
+            return backup.values.All(v => PlayerPrefs.HasKey(v.key) == v.existed && (!v.existed || (v.isFloat ? PlayerPrefs.GetFloat(v.key) == v.floatValue : PlayerPrefs.GetInt(v.key) == v.intValue)));
+        }
+        static void RestoreScenes()
+        {
+            string json = SessionState.GetString(ScenesKey, ""); SessionState.EraseString(ScenesKey);
+            if (!String.IsNullOrEmpty(json)) { SavedScenes saved = JsonUtility.FromJson<SavedScenes>(json); if (saved.scenes != null && saved.scenes.Length > 0) EditorSceneManager.RestoreSceneManagerSetup(saved.scenes.Select(s => new SceneSetup { path = s.path, isLoaded = s.loaded, isActive = s.active }).ToArray()); }
+        }
+        static void OnLog(string message, string stack, LogType type) { if (report != null && (type == LogType.Error || type == LogType.Exception || type == LogType.Assert)) report.runtimeErrors.Add(message + "\n" + stack); }
+        static void ReleaseImports() { if (!importsLocked) return; importsLocked = false; EditorApplication.UnlockReloadAssemblies(); AssetDatabase.AllowAutoRefresh(); }
+        static void OnPlayMode(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode) ReleaseImports();
+            if (state != PlayModeStateChange.EnteredEditMode) return;
+            if (SessionState.GetBool(ActiveKey, false)) { RestorePreferences(); SessionState.EraseBool(ActiveKey); report = null; routine = null; }
+            RestoreScenes(); Time.timeScale = SessionState.GetFloat(TimeKey, 1);
+            int exit = SessionState.GetInt(ExitKey, -1); SessionState.EraseInt(ExitKey);
+            if (Application.isBatchMode && exit >= 0) EditorApplication.Exit(exit);
+        }
+        static void Finish()
+        {
+            if (report == null) report = new Report();
+            Time.timeScale = report.originalTimeScale;
+            report.preferencesRestored = RestorePreferences(); report.finishedUtc = DateTime.UtcNow.ToString("o");
+            report.passed = report.preferencesRestored && report.levels.Count == Cases.Length && report.levels.All(l => l.passed) && report.checks.All(c => c.passed) && report.runtimeErrors.Count == 0;
+            Persist(); WriteNativeProgress(true); bool passed = report.passed;
+            Debug.Log("Save1 normal gameplay validation " + (passed ? "PASS" : "FAIL") + "; levels=" + report.levels.Count(l => l.passed) + "/" + Cases.Length + "; checks=" + report.checks.Count + "; errors=" + report.runtimeErrors.Count);
+            SessionState.EraseBool(ActiveKey); SessionState.SetInt(ExitKey, passed ? 0 : 1); report = null; routine = null; ReleaseImports(); EditorApplication.isPlaying = false;
+        }
+    }
+}
+#endif

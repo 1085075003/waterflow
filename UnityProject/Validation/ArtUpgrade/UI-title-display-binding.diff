@@ -1,0 +1,41 @@
+--- UnityProject\Validation\ArtUpgrade\Before\UI\Runtime\FlowWaterRecoveryUI.before-title-binding.cs
++++ UnityProject\Assets\Scripts\RecoveryUI\FlowWaterRecoveryUI.cs
+@@ -162,6 +162,7 @@
+         if (scene == SceneManager.GetActiveScene())
+         {
+             StopBlockingFades(scene);
++            if (OriginalScenePresentation.IsGameplayScene(scene)) RefreshLevelTitle();
+             Canvas.ForceUpdateCanvases();
+         }
+     }
+@@ -824,17 +825,24 @@
+         }
+     }
+ 
++    void RefreshLevelTitle()
++    {
++        var game = RecoveredFlowGame.Instance;
++        if (game == null) return;
++        string levelName = RecoveredNativeLocalization.Text("Leveltexto2$$ObtenerTexto",RecoveredNativeLocalization.Language) + " " + ((game.CurrentLevelId - 1) % 50 + 1);
++        foreach (Text label in SceneComponents<Text>(SceneManager.GetActiveScene()))
++        {
++            for (Transform parent = label.transform.parent; parent != null; parent = parent.parent)
++                if (parent.name == "Level") { label.text = levelName; break; }
++        }
++    }
++
+     void RefreshGame()
+     {
+         var game = RecoveredFlowGame.Instance;
+         if (game == null) return;
+         if (!game.IsComplete && !game.IsSolutionPreview) completionDismissed = false;
+-        string levelName = RecoveredNativeLocalization.Text("Leveltexto2$$ObtenerTexto",RecoveredNativeLocalization.Language) + " " + ((game.CurrentLevelId - 1) % 50 + 1);
+-        foreach (Text label in SceneComponents<Text>(SceneManager.GetActiveScene()))
+-        {
+-            for (Transform parent = label.transform.parent; parent != null; parent = parent.parent)
+-                if (parent.name == "Level") { label.text = levelName; break; }
+-        }
++        RefreshLevelTitle();
+         foreach (var loader in SceneComponents<SaveLoadManager>(SceneManager.GetActiveScene()))
+         {
+             if (loader.numSol != null) loader.numSol.text = game.HasSolution ? "1" : "0";

@@ -1,0 +1,59 @@
+Flow Water Fountain 3D Puzzle 2.18 — 资源与 Unity 工程恢复
+
+来源：E:\downloads\Flow-Water-Fountain-3D-Puzzle_2.18_apkcube.apks
+源文件 SHA-256：74bb3e4721de868450ecc415d3deb00e3b64d1c07c42f7aa7fa67492e3cbdd03
+提取日期：2026-10-15
+原产品引擎：Unity 2022.3.62f2，Android ARM64，IL2CPP。
+
+一、先看这里
+UnityProject 是已经整理成标准目录结构的恢复工程，可在 Unity Hub 中添加该文件夹。建议使用与原产品相同的 Unity 2022.3.62f2。
+本次已恢复场景、Prefab、模型、贴图、材质参数、动画、组件引用、项目设置和关卡数据；游戏 C# 方法体仍为占位实现。此工程用于资源编辑、结构研究与后续重建，当前不能宣称原游戏已经完整可运行。
+当前机器没有 Unity Editor，因此未进行 Unity 导入、编译、Play 或 Android 构建验证。静态引用检查及媒体/数据校验不等于编辑器运行测试。
+
+二、目录怎么用
+UnityProject/：标准 Unity 恢复工程，含 Assets、Packages、ProjectSettings 和 AuxiliaryFiles。
+unity/：按 Unity 类型整理的独立资源。PNG、WAV、OBJ 可以直接使用；JSON 保留对象字段与引用。unity/unpacked 保存 Unity 容器内部文件；unity/unconverted 保留无法正常转换的对象原始数据。
+LevelData/：1350 份起始布局、1350 份解答数据及 gs0 的可读 JSON，含索引和原始资源 SHA-256。
+raw/：APKS 内原始内容。含基础 APK 资源、ARM64 原生库、IL2CPP metadata、原始资源包等，便于继续复核或深入分析。
+android_decoded/：AndroidManifest、Android 二进制 XML 与资源表的可读导出。
+inventory/：原始文件清单、Unity 对象清单、类型信息、引用与校验报告。
+工程结构说明.txt：场景、游戏脚本职责、拼块映射、关卡格式及恢复依据。
+
+三、打开原始场景
+在 Unity Hub 中添加 UnityProject，使用 2022.3.62f2 打开，等待资源导入和 UGUI 包解析。
+首页：Assets/Scenes/Portada.unity。
+主游戏场景：Assets/Scenes/Levely5z/Levely5.unity。
+其他游戏场景：Assets/Scenes/Levely5_6x6.unity、Levely5_7x7.unity、Levely5_basic.unity。
+选关界面：Assets/Scenes/SelLevel0.unity、SelLevel1.unity。
+设置和商店：Assets/Settings.unity、Assets/Store.unity。
+共 9 个场景、529 个 Prefab、112 个动画片段、57 个动画控制器。
+1350 个关卡通过数据加载，不是 1350 个独立 .unity 场景。
+
+四、查看真实关卡几何布局
+本次新增了独立 Editor 工具，文件为 Assets/Editor/RecoveredTools/FlowWaterLayoutPreview.cs。该工具不是原游戏源码，不会在导入时自动执行。
+打开菜单 Tools > Flow Water > Layout Preview。
+Asset ID 输入 gm 文件后缀编号，例如 1 对应 gm1；点击 Create selected asset preview in new additive scene。
+也可以把 Assets/RecoveredData/LevelData 下的 JSON 拖入 Or decoded JSON 后生成。
+工具会在新建的附加场景中摆放恢复的 Prefab，保留位置、原 pieza 名称及原 fijo 字符串。原有场景不会被覆盖；预览场景需手动保存。若已有场景叠加影响观察，可关闭其他场景，仅保留预览场景。
+Use final-layout solution 只适用于 Save 类型的 550 份 so 终态布局；另外 800 份 so 是 Save1 操作步骤，工具会提示改用对应 gm 起始布局。
+关卡编号不连续：1–200、251–300、351–800、1001–1250、1651–2050。查找以资源名 gmNNN/soNNN 为准；内部 Save.level 有 699 处与文件名编号不同，不能用它重命名或去重。
+预览只恢复基础几何。fijo 的复杂状态、旋转与机关、Col 颜色后缀、水流、交互、胜负判定和关卡流程尚未还原。预览中关闭了游戏脚本和 Animator，不通过 Play 还原原游戏。
+原场景的拼块索引 292 存在差异，工具提供切换项：主场景 BloqueChorro2；其他游戏场景 Curva4y。默认使用后者。
+
+五、已经校验的内容
+671 个原始文件均与包内内容逐个校验，CRC、SHA-256 和字节一致，无缺失。
+57,208 个 Unity 对象均有导出记录或保留数据。
+320 张图片可解码；10 份音频可读取；224 个 OBJ 含有效顶点；2703 份 TextAsset 与原始内容逐字节一致。
+2701 份 NRBF 关卡相关数据全部静态解析成功，坐标/名称等数组长度一致。未执行原始 BinaryFormatter 反序列化或游戏代码。
+376 份 C# 文件通过 Roslyn 语法解析；38 个保留 DLL 的非系统/非引擎依赖均有对应声明程序集，UI 由官方 UGUI 包提供。工程没有重复 GUID 或缺失的本地 fileID 引用；15 种 UI 脚本引用已映射到官方 UGUI。上述均为静态检查，尚未经 Unity 编译和运行验证。
+原包内的 2 个 0×0 字体纹理是空源对象；另有 5 个 MonoBehaviour 和 1 个内置 Shader 无法完整转换，已保留原始数据与元信息，详见 inventory/unity_export_issues.json。
+独立提取数量与工程 Assets 数量可能不同：工程导出会处理内置资源、子资源及重复对象，完整原始清单以 inventory/unity_objects.csv 为准。
+
+六、需要继续重建的部分
+脚本：已保留类名、字段、方法声明、序列化引用及辅助程序集；本次没有恢复 IL2CPP 原生库中的原始业务方法实现。生成的 C# 和 DLL 方法体是占位实现。
+Shader：保留原始编译资源及材质参数，工程中的自定义 Shader 为恢复工具生成的替代文件。水体、透明/ZWrite、粒子叠加和边缘光仍需按实际效果重建。
+运行环境：广告、内购、Firebase 等 SDK 的占位程序集不能提供完整业务功能。恢复工程的编辑器兼容设置不等于 SDK 已完成重新集成。
+工程缺少原始美术源文件、原始 C# 工程、原始包锁定信息和开发阶段历史；原始 APK 通常不包含这些文件。本次未将推断或新写的预览代码标为原始源码。
+后续优先补写 SaveLoadManager、ControladorJuego、MoveBloque/SwipeHandler2 以及水流相关方法，再验证关卡固定状态、操作步骤坐标换算、UI 和胜负判定。
+
+详细依据与限制见 inventory/project_restore.json、inventory/project_static_review.json、inventory/game_structure.json、inventory/resource_validation.json 和 工程结构说明.txt。

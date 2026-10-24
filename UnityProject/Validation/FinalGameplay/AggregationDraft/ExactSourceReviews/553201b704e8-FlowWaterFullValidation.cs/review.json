@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "reviewedUtc": "2026-10-16T07:49:33.746987+00:00",
+  "path": "Assets/Editor/RecoveredTools/FlowWaterFullValidation.cs",
+  "baseSha256": "2ed4d1c498b8bce3fa5bbd59522658e339f1e32e42bfd3627cfbc1b0ad8f7a5a",
+  "otherSha256": "553201b704e82ccd7e1d5dcb5dea26bcbb35e97aa08308e231311a58eca6b0aa",
+  "reviewStatus": "APPROVED_EXACT_EXECUTED_PAIR",
+  "scope": "Editor-only detail-request entry selects existing catalog IDs. Version553 adds no changes outside that mode; version939 additionally exports read-only camera/renderer/mesh diagnostics only when mode==detail. Native gameplay replay never invokes these detail routines; FullValidation inactive ExitingPlayMode is guarded by report!=null. No normal-game runtime, pointer, water, actor placement or verdict is changed.",
+  "checks": [
+    "Complete base-to-version diff reviewed: new detail mode and (939 only) read-only WriteDetailCamera export.",
+    "Existing all/native paths and original source Physics remain unchanged.",
+    "Dormant callback has report!=null guard."
+  ],
+  "caveats": [],
+  "affectedActualReportSha256": [
+    "81a7bdaba84ea2e926c367f1da5caa4f25aee5e002debebb39447952cf21f2f7",
+    "c427303f08e11713c002c5321a1566cf4939e51df29ab9e94c4759512a433fe8",
+    "b763113d0163358b73c7da68c5afb6805237530a2cd6b141442ac2dba0566ff1",
+    "51f20487c9d143fece317157701d8f72c1afb7ed1f0ca1d97609f1901c9c7710"
+  ],
+  "fullDiff": {
+    "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\AggregationDraft\\ExactSourceReviews\\553201b704e8-FlowWaterFullValidation.cs\\full.diff",
+    "sha256": "43e6538bf08f4774f9dcec61a816b9197d51c64e51d086713ec61e5033b84883"
+  },
+  "sourceBefore": {
+    "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\AggregationDraft\\ExactSourceReviews\\553201b704e8-FlowWaterFullValidation.cs\\before.txt",
+    "sha256": "2ed4d1c498b8bce3fa5bbd59522658e339f1e32e42bfd3627cfbc1b0ad8f7a5a"
+  },
+  "sourceAfter": {
+    "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\AggregationDraft\\ExactSourceReviews\\553201b704e8-FlowWaterFullValidation.cs\\after.txt",
+    "sha256": "553201b704e82ccd7e1d5dcb5dea26bcbb35e97aa08308e231311a58eca6b0aa"
+  },
+  "approvalLimits": "Only this path and exact source-hash pair for the listed actual executed snapshots; no other runtime/Editor/Geometry/resource or future Input61 pair is approved."
+}

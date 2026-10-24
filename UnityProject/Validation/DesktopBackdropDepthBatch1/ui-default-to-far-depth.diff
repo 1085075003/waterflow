@@ -1,0 +1,33 @@
+--- before/Assets/Resources/RecoveredBackdropDepth.shader
++++ after/Assets/Resources/RecoveredBackdropDepth.shader
+@@ -1,6 +1,6 @@
+ // Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
+ 
+-Shader "UI/Default"
++Shader "Recovered/UI/BackdropFarDepth"
+ {
+     Properties
+     {
+@@ -41,7 +41,7 @@
+         Cull Off
+         Lighting Off
+         ZWrite Off
+-        ZTest [unity_GUIZTestMode]
++        ZTest LEqual
+         Blend One OneMinusSrcAlpha
+         ColorMask [_ColorMask]
+ 
+@@ -95,6 +95,13 @@
+                 float4 vPosition = UnityObjectToClipPos(v.vertex);
+                 OUT.worldPosition = v.vertex;
+                 OUT.vertex = vPosition;
++                // Desktop backdrop adaptation only: keep XY/W, UVs, mask and
++                // alpha identical to the original UI shader; write far depth.
++                #if defined(UNITY_REVERSED_Z)
++                OUT.vertex.z = 0.0;
++                #else
++                OUT.vertex.z = OUT.vertex.w;
++                #endif
+ 
+                 float2 pixelSize = vPosition.w;
+                 pixelSize /= float2(1, 1) * abs(mul((float2x2)UNITY_MATRIX_P, _ScreenParams.xy));

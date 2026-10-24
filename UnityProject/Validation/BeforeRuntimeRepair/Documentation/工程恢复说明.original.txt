@@ -1,0 +1,43 @@
+Flow Water 2.18 Unity 工程恢复说明
+
+这是从 Android IL2CPP 安装包恢复的可编辑资源工程，不是原始源码工程，也未在 Unity Editor 中完成编译或运行验证。
+
+打开方式
+1. 在 Unity Hub 中添加本目录 UnityProject，选择 Unity 2022.3.62f2（包中记录的准确版本）。
+2. 等待 Unity 导入资源；UGUI 依赖 com.unity.ugui 1.0.0 是 Unity 2022.3 自带核心包。
+3. 原始构建场景顺序保存在 ProjectSettings/EditorBuildSettings.asset，可先查看 Assets/Scenes/Portada.unity 和 Assets/Scenes/Levely5z/Levely5.unity。
+4. 只查看真实关卡几何：先新建空场景并关闭其他场景，打开 Tools > Flow Water > Layout Preview。输入 gmNNN / soNNN 文件后缀作为 Asset ID，然后创建预览。工具会生成独立、未保存的 additive scene，并给出缺失、颜色和推断映射统计。
+5. 预览工具是本次恢复新编写的 Editor 工具，不会在导入或启动时自动运行。原 9 个场景未被此工具重写。请自行保存生成的预览场景。
+
+已恢复内容（原 AssetRipper 导出，不含新增工具）
+9 个场景；529 个 Prefab；211 个 Mesh；112 个 AnimationClip；57 个 AnimatorController；261 个材质；201 个 PNG（含图集/立方体贴图面）；10 个 OGG；2701 个原始关卡二进制 TextAsset；375 个 C# 声明文件；80 个重建托管程序集（AuxiliaryFiles/GameAssemblies）。
+所有源 APK 文件和原始 Unity 数据另保留在上一级 raw 目录。
+
+真实关卡数据
+Assets/RecoveredData/LevelData 包含 1350 个 gm 起始布局、1350 个 so 解答，以及 gs0。1350 个 so 中 550 个保存终态布局，800 个保存 4–34 步操作序列。预览工具只加载 Save 布局；遇到 Save1 步骤文件会提示使用对应 gm。
+关卡资产编号不连续；699 个 gm 的内部 Save.level 与 gm 文件后缀不同。工具以资产文件名定位，不据 Save.level 改名或去重。
+pieza、原始位置和 fijo 字符串均原样保留在 JSON，fijo 含复杂状态编码，未简化成“固定/不固定”。
+piece_aliases.json 保留完整溯源。preview_aliases.json 是提供给 JsonUtility 的简化索引。
+全部 498 种存档名称可对应原始 295 个 prefabPiezas 模板之一。sqNNNeq 的数组索引解释、ColN 的基础几何映射是依据静态数据的推断，不能当作已恢复原方法逻辑。
+索引 292 在原主场景为 BloqueChorro2，而 6x6/7x7/basic 场景为 Curva4y；工具默认后者，并提供切换。ColN 只恢复基础几何，不推测实际运行时材质颜色。工具保留模板原来的旋转和缩放，因为 Save 本身未存这些属性。
+
+代码与渲染限制
+IL2CPP 已将 C# 方法编译为原生机器码。本工程的 C# 和 DLL 主要恢复了类名、字段、签名和空方法体，不能据此声称游戏已可玩。
+水流连通判断、旋转拖动、关卡进程、广告、内购等原有方法实现没有还原。它们需要人工补写或进一步原生代码分析。
+9 个 shader 是保留属性和名称的占位 shader，不能等同原始视觉效果；原始编译 shader 数据另由上一级资源导出保存。
+附带的第三方 DLL 同样是 IL2CPP 重建声明，不是可用于正式运行的 SDK。为了让编辑器获得声明引用，38 个保留 DLL 的 Editor 导入开关已启用；应在继续开发前使用对应正版 SDK 替换。没有在本机 Unity 中验证编译，因此仍可能存在 API 或依赖兼容问题。
+
+对导出结果做的明确修复
+1. 添加 UGUI 1.0.0 依赖，将 15 类组件、3150 处场景/Prefab UI 脚本引用改为 Unity 官方 UGUI 源码的稳定脚本 GUID，以便使用实际 UI 包而非空方法 DLL。
+2. 原 UnityEngine.UI.dll 占位程序集及 GoogleMobileAdsSettings 编辑器设置资源没有丢弃：移至 AuxiliaryFiles/UnresolvedEditorAssets，避免 UI 重复程序集及缺失 GoogleMobileAds.Editor 引用。
+3. GoogleMobileAdsSettings 原资源没有被有效场景/Prefab 引用；其原始编辑器 SDK 未包含在 Android 构建内，因此不伪造该类型。
+4. 修改前的 20 个 YAML 与 38 个 DLL .meta 位于 AuxiliaryFiles/BeforeReferenceRepair。
+5. 具体修复记录、前后 SHA256、UGUI 引用对照在 AuxiliaryFiles/recovery_repairs.json。
+
+核验与可追溯性
+官方恢复工具 AssetRipper 2.0.0.0，便携工具下载 SHA256：9a7ef0e7c5c3ea5b90b4e6d855e2d98d5f7ec8c3f9e26fccbc194c6a7b01baf7。
+官方发布：https://github.com/AssetRipper/AssetRipper/releases/tag/2.0.0
+UI GUID 参考：https://github.com/Unity-Technologies/uGUI
+Unity 2022.3 UGUI 说明：https://docs.unity3d.com/2022.3/Documentation/Manual/com.unity.ugui.html
+详细静态核验结果见上一级 inventory/project_restore.json；AssetRipper 日志保存在 AuxiliaryFiles/Logs。
+本次工作仅解析了包内数据，没有运行源游戏。

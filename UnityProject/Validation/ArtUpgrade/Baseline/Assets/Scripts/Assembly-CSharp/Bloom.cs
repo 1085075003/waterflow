@@ -1,0 +1,28 @@
+using UnityEngine;
+
+[AddComponentMenu("Image Effects/Bloom")]
+[RequireComponent(typeof(Camera))]
+[ExecuteInEditMode]
+public class Bloom : MonoBehaviour
+{
+	[Range(0f, 1.5f)]
+	public float threshold;
+
+	[Range(0f, 4f)]
+	public float intensity;
+
+	[Range(0.25f, 5.5f)]
+	public float blurSize;
+
+	[Range(1f, 4f)]
+	public int blurIterations;
+
+	public Material fastBloomMaterial;
+
+	private void OnRenderImage(RenderTexture source, RenderTexture destination)
+	{
+		// Recovery compatibility: an empty image effect discards the camera output.
+		// Preserve the image until the original bloom shader can be reconstructed.
+		Graphics.Blit(source, destination);
+	}
+}

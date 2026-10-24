@@ -1,0 +1,94 @@
+--- UnityProject\Validation\ArtUpgrade\Before\UI\Runtime\FlowWaterRecoveryUI.cs
++++ UnityProject\Assets\Scripts\RecoveryUI\FlowWaterRecoveryUI.cs
+@@ -162,6 +162,7 @@
+         if (scene == SceneManager.GetActiveScene())
+         {
+             StopBlockingFades(scene);
++            if (OriginalScenePresentation.IsGameplayScene(scene)) RefreshLevelTitle();
+             Canvas.ForceUpdateCanvases();
+         }
+     }
+@@ -824,17 +825,24 @@
+         }
+     }
+ 
++    void RefreshLevelTitle()
++    {
++        var game = RecoveredFlowGame.Instance;
++        if (game == null) return;
++        string levelName = RecoveredNativeLocalization.Text("Leveltexto2$$ObtenerTexto",RecoveredNativeLocalization.Language) + " " + ((game.CurrentLevelId - 1) % 50 + 1);
++        foreach (Text label in SceneComponents<Text>(SceneManager.GetActiveScene()))
++        {
++            for (Transform parent = label.transform.parent; parent != null; parent = parent.parent)
++                if (parent.name == "Level") { label.text = levelName; break; }
++        }
++    }
++
+     void RefreshGame()
+     {
+         var game = RecoveredFlowGame.Instance;
+         if (game == null) return;
+         if (!game.IsComplete && !game.IsSolutionPreview) completionDismissed = false;
+-        string levelName = RecoveredNativeLocalization.Text("Leveltexto2$$ObtenerTexto",RecoveredNativeLocalization.Language) + " " + ((game.CurrentLevelId - 1) % 50 + 1);
+-        foreach (Text label in SceneComponents<Text>(SceneManager.GetActiveScene()))
+-        {
+-            for (Transform parent = label.transform.parent; parent != null; parent = parent.parent)
+-                if (parent.name == "Level") { label.text = levelName; break; }
+-        }
++        RefreshLevelTitle();
+         foreach (var loader in SceneComponents<SaveLoadManager>(SceneManager.GetActiveScene()))
+         {
+             if (loader.numSol != null) loader.numSol.text = game.HasSolution ? "1" : "0";
+@@ -1037,6 +1045,7 @@
+ 
+     void BuildOverlay()
+     {
++        font = Resources.Load<Font>("ArtUpgrade/UI/Fonts/Lato-Regular") ?? font;
+         var canvasObject = new GameObject("RecoveryCanvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
+         canvasObject.transform.SetParent(transform, false);
+         overlay = canvasObject.GetComponent<Canvas>();
+@@ -1054,9 +1063,9 @@
+ 
+     void BuildDialog()
+     {
+-        dialog = Panel("RecoveryDialog", overlay.transform, new Color(0, 0, 0, 0.68f));
++        dialog = Panel("RecoveryDialog", overlay.transform, new Color(0.10f, 0.19f, 0.20f, 0.58f));
+         Stretch(dialog);
+-        var body = Panel("RecoveryDialogBody", dialog.transform, new Color(0.07f, 0.15f, 0.20f));
++        var body = Panel("RecoveryDialogBody", dialog.transform, Color.white);
+         Anchor(body, Vector2.one * 0.5f, Vector2.one * 0.5f, Vector2.zero, new Vector2(580, 240));
+         var text = MakeText("RecoveryDialogText", body.transform, "", 19, TextAnchor.MiddleCenter);
+         Anchor(text.gameObject, Vector2.one * 0.5f, Vector2.one * 0.5f, new Vector2(0, 25), new Vector2(520, 145));
+@@ -1084,7 +1093,10 @@
+     {
+         var panel = new GameObject(name, typeof(RectTransform), typeof(Image));
+         panel.transform.SetParent(parent, false);
+-        panel.GetComponent<Image>().color = color;
++        var image = panel.GetComponent<Image>();
++        image.color = color;
++        image.sprite = Resources.Load<Sprite>("ArtUpgrade/UI/Sprites/" + (name == "RecoveryDialogBody" ? "card" : name == "RecoveryDialogOK" ? "primary" : name == "RecoveryDialogCancel" ? "button" : "overlay"));
++        image.type = Image.Type.Sliced;
+         return panel;
+     }
+     Text MakeText(string name, Transform parent, string text, int size, TextAnchor alignment)
+@@ -1093,17 +1105,17 @@
+         go.transform.SetParent(parent, false);
+         var label = go.GetComponent<Text>();
+         label.font = font; label.text = text; label.fontSize = size;
+-        label.alignment = alignment; label.color = new Color(0.91f, 0.97f, 0.98f);
++        label.alignment = alignment; label.color = new Color32(36, 63, 68, 255);
+         label.raycastTarget = false;
+         return label;
+     }
+     Button MakeButton(string name, Transform parent, string title, Vector2 position, Vector2 size, Action action)
+     {
+-        var go = Panel(name, parent, new Color(0.12f, 0.30f, 0.36f));
++        var go = Panel(name, parent, Color.white);
+         Anchor(go, Vector2.one * 0.5f, Vector2.one * 0.5f, position, size);
+         var button = go.AddComponent<Button>();
+         var colors = button.colors;
+-        colors.highlightedColor = new Color(0.50f, 0.95f, 1); colors.pressedColor = new Color(0.25f, 0.68f, 0.75f);
++        colors.highlightedColor = new Color(0.91f, 1f, 0.96f); colors.pressedColor = new Color(0.77f, 0.91f, 0.85f);
+         button.colors = colors;
+         button.onClick.AddListener(() => { PlayClick(); action(); });
+         var label = MakeText(name + "Label", go.transform, title, 14, TextAnchor.MiddleCenter);

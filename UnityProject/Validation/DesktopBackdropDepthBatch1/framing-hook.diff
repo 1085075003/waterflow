@@ -1,0 +1,10 @@
+--- before/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
++++ after/Assets/Scripts/RecoveryUI/RecoveredBoardFraming.cs
+@@ -65,6 +65,7 @@
+         basePosition=transform.position; hasApplied=false;
+         ground.Clear();
+         Scene scene=SceneManager.GetActiveScene();
++        RecoveredBackdropDepth.Apply(scene);
+         hudLoaders.Clear(); hudPaths.Clear(); hudGraphics.Clear(); hudTitles.Clear();
+         foreach(Leveltexto2 title in OriginalScenePresentation.Components<Leveltexto2>(scene)) hudTitles.Add(title);
+         foreach(SaveLoadManager loader in OriginalScenePresentation.Components<SaveLoadManager>(scene))
