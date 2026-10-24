@@ -1,0 +1,46 @@
+﻿Flow Water 2.18 — Unity 2022.3.28f1 恢复与验证
+说明刷新：2026-10-16 09:46:26 Asia/Shanghai
+当前状态：本轮验证仍在进行；未完成项不计为通过。具体覆盖范围以各报告结束时间、源码快照及实际结果为准。
+
+用Unity Hub添加本目录的UnityProject，选择本机2022.3.28f1。打开Assets/Scenes/Portada.unity按Play，从原首页、六分类及50关一组的选关页进入游戏。资源gm编号与组内LEVEL编号不同。
+鼠标按住可移动拼块，沿原落点引导释放。音乐、音效、重开、灯泡解答、关卡菜单及下一关使用原界面按钮。右键可旋转视角，R重开、Ctrl+Z撤销；不再使用早期替代HUD。
+关卡完成依据实际目标接到正确颜色的水及原延时判定。灯泡进入保存解答；有Save1记录时提供步骤演示，退出恢复原棋盘及撤销状态。
+
+已恢复原场景、Canvas、相机、地面、背景、光照、日夜主题、模型、纹理、材质、动画及音频资源。原9场景、529预制体、1350对gm/so数据与498别名保留。
+原配置前缀、固定块、地下边墙、输入拾取/抬升/下落、弹簧与门孔/喷流通道按原ARM64方法证据重建。水流使用原水片、粒子、开口、颜色与实际延时传播前沿；不会用湿水数量或摆放正确直接冒充目标通关。
+53处材质槽已追溯原同网格来源修复。静态几何重放当前通过1350/1350，不支持0，失败0；这与下面的普通游玩验证分开记录。
+
+实际证据
+场景与资源引用：通过；1117项检查；Validation/audit.json；结束UTC 2026-10-16T01:18:32.0928019Z
+全部关卡数据：通过；3205项检查；Validation/data-validation.json；结束UTC 2026-10-16T01:18:48.5551854Z
+模型、贴图、音频、材质与动画资源：通过；863项媒体资源，失败0；Validation/media-validation.json；结束UTC 2026-10-16T01:18:49.8036682Z
+800关普通游玩：进行中；真实拖动通过153/800关，失败1关；Validation/Save1Gameplay/save1-gameplay-validation.json；结束UTC 尚未结束
+1350关起始与解答实际渲染：旧快照，严格网格与新效果全量复验待完成；已完成1350/1350关，失败21关；Validation/FullContent/all-runtime-validation.json；结束UTC 2026-10-15T20:45:14.4067033Z
+原界面交互：通过；759项检查；Validation/UIFlows/ui-flow-validation.json；结束UTC 2026-10-16T01:22:06.9094279Z
+真实输入与撤销：通过；61项检查；Validation/Interaction/interaction-validation.json；结束UTC 2026-10-15T23:05:06.0435289Z
+原相机与教程：通过；17项检查；Validation/CameraTutorial/camera-tutorial-validation.json；结束UTC 2026-10-16T00:44:49.2877174Z
+弹簧机构：通过；44项检查；Validation/Springs/spring-validation.json；结束UTC 2026-10-15T23:19:01.5203462Z
+机构模式：通过；68项检查；Validation/SpringModes/spring-mode-validation.json；结束UTC 2026-10-15T22:37:06.6280848Z
+机构碰撞约束：通过；27项检查；Validation/SpringConstraints/spring-constraint-validation.json；结束UTC 2026-10-15T23:06:09.0738926Z
+水流传播与恢复：通过；27项检查；Validation/WaterPropagation/water-propagation-validation.json；结束UTC 2026-10-15T23:23:49.8608368Z
+底口与瀑布几何接水：通过；12项检查；Validation/BottomMarker/bottom-marker-validation.json；结束UTC 2026-10-16T01:30:28.4273443Z
+原喷泉动画：通过；13项检查；Validation/FountainAnimation/fountain-animation-validation.json；结束UTC 2026-10-16T01:07:08.3670784Z
+连续解答动画：待验证；；Validation/NativeStepPlayback/Automatic/native-step-playback-validation.json；结束UTC 尚未结束
+解答机构等待：待验证；；Validation/NativeStepPlayback/Mechanisms/native-step-playback-validation.json；结束UTC 尚未结束
+解答抬升例外：待验证；；Validation/NativeStepPlayback/Lifts/native-step-playback-validation.json；结束UTC 尚未结束
+分类水景与机构演示：通过；48项检查；Validation/CategoryPreview/category-preview-validation.json；结束UTC 2026-10-15T21:51:23.1184001Z
+窗口比例：通过；；Validation/Aspect/aspect-validation.json；结束UTC 2026-10-15T21:14:44.9099057Z
+
+Validation/validation-summary.json汇总当前报告；FullContent/review.html提供逐关画面对照（须与最新全量报告对应）。NativeAnalysis、ShaderAnalysis保留原方法与着色器证据。旧日志、历史截图及InstantBaselineCompleted只证明当时的源码，不作为当前全量通过证明。
+复验前关闭占用该工程的Unity。运行Validation/Validate-Unity.ps1 -Mode Assets、NativeGameplay、All、UI、Input、CameraTutorial、Preview或Propagation；各模式由指定2022.3.28f1实际执行并保存日志。
+
+边界与来源
+新增运行层依据原资产、存档与IL2CPP ARM64方法证据重建，并非找回原始C#工程源码。通过列明测试不等于证明与原Android二进制逐帧完全相同。
+原Shader依据包内GLSL及原材质参数重建；Windows与原移动GPU的逐像素等价性未建立。原包中的无效动画路径保留溯源，不随意映射到新对象。
+桌面增加原相机沿视线后移的横屏适配，以及鼠标操作；原FOV与姿态保留。原场景竖屏不受支持，竖屏截图仅作观察。
+本地开放已有的27组关卡及保存解答，解答数量显示1；这是桌面重建适配，未还原原商店、广告奖励与解答消耗经济。
+广告、内购、统计及联网服务没有连接真实SDK业务。语言按钮与关卡设计器仍保留当前本地功能限制，不能计为完整恢复这些功能。
+本机2022.3.28f1仅安装Windows与WebGL支持，未安装Android模块，本轮未验证Android构建。
+原包使用2022.3.62f2，工作工程按要求使用2022.3.28f1；原版本备份在Validation/ProjectVersion.original.txt。
+源包Flow-Water-Fountain-3D-Puzzle_2.18_apkcube.apks，SHA256 74bb3e4721de868450ecc415d3deb00e3b64d1c07c42f7aa7fa67492e3cbdd03。
+raw、unity、LevelData、android_decoded与inventory保留原始来源，未因运行层重建覆盖。早期文件备份位于UnityProject/Validation/BeforeRuntimeRepair。

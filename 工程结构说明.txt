@@ -1,0 +1,75 @@
+Flow Water Fountain 3D Puzzle 2.18：工程结构与恢复依据
+
+一、能确认的原始结构
+这是 Unity 2022.3.62f2 的 Android IL2CPP 产品。原始 Unity 序列化对象已提取，工程恢复时应以原始对象、引用和字段为依据；恢复工具生成的脚本壳、兼容代码和预览工具不等于原始游戏源代码。
+
+BuildSettings 共列出 9 个场景，顺序对应 raw 数据中的 level0～level8：
+0  Assets/Scenes/Portada.unity：标题/首页，350 个 GameObject。
+1  Assets/Scenes/Levely5z/Levely5.unity：主游戏场景，383 个 GameObject。
+2  Assets/Scenes/SelLevel0.unity：第一组选关界面，677 个 GameObject。
+3  Assets/Scenes/SelLevel1.unity：另一组选关界面，635 个 GameObject。
+4  Assets/Settings.unity：设置界面，90 个 GameObject。
+5  Assets/Store.unity：商店界面，382 个 GameObject。
+6  Assets/Scenes/Levely5_6x6.unity：6×6 游戏场景，467 个 GameObject。
+7  Assets/Scenes/Levely5_7x7.unity：7×7 游戏场景，482 个 GameObject。
+8  Assets/Scenes/Levely5_basic.unity：basic 游戏场景，409 个 GameObject。
+场景用途依据原始名称、组件和对象结构判断；它们不是 APK 中保存的 1350 份独立 .unity 关卡。
+
+游戏场景包含 Manager、SwipeManager、EventSystem、Canvas、AudioManager、Suelo/地面、PlanoGuia/参考面等根对象，主游戏管理对象及 UI 引用均有原始序列化数据。完整根对象、组件数量和路径见 inventory/game_structure.json。
+
+二、真正的关卡数据
+1350 份 gm 起始布局、1350 份 so 解答数据和 1 份 gs0 均为 TextAsset。原格式是 .NET BinaryFormatter NRBF；本次使用静态记录解析，不调用 BinaryFormatter，不执行游戏代码。共 2701 份解析成功，0 错误，各坐标/字符串数组长度均一致。
+
+LevelData/01_Layouts 保存全部 gm JSON；LevelData/02_Solutions 保存全部 so JSON。每份记录原 .bytes 路径和 SHA-256，原二进制仍保存在 unity/TextAsset/resources.assets。
+
+原资源编号范围为：1～200、251～300、351～800、1001～1250、1651～2050。编号不连续。
+699 份 gm 的内部 Save.level 与文件名编号不同。必须用 gmNNN 作为查找标识，保留内部 level 原值，不应按内部 level 重命名或去重。
+
+Save 类型用于全部 1350 份 gm、550 份 so 和 gs0，字段为：
+level：内部编号。
+pieza：原始拼块/对象名。
+positionx、positiony、positionz：一一对应的世界坐标。
+fijo：原始状态字符串。
+每份 gm 有 8～130 个对象。fijo 不只是“能否移动”的布尔值：数据中共有 8812 种值，常见值含 N、Y，也含 sr...er、sh...eh、sd...ed、<...> 等组合编码。旋转、机关、颜色和附加状态需要原始业务逻辑才能准确解释，现阶段必须原样保存。
+
+另 800 份 so 使用 Save1 类型，字段为 move、orix/oriy/oriz、desx/desy/desz、excep，包含 4～34 步原始操作。它们是步骤数据，不能当作 Save 的终态布局读取。gm/so 的“起始/解答”用途由成对资源、坐标变化和字段推断；未通过原始业务方法逐步运行确认。
+
+三、拼块与预制体对应
+4 个游戏场景的 SaveLoadManager 均引用一个包含 295 项的 prefabPiezas 数组。本次已解析数组中每个原始对象引用，保留准确顺序。
+
+关卡中出现的 498 个不同原始 pieza 名称，经标准 Unity Clone/数字后缀规范化、sq{索引}eq 索引解释、Col{数字}颜色后缀拆分后，全部可对应到这组原始预制体的基础几何。显式映射保存在 inventory/piece_aliases.json。
+例如 sq0eq 对应 Recta1j，sq79eq 对应 BloqueFijo，sq222eq 对应 CuFuenteEB5。索引解释属于依据原始有序数组的推断，并非还原出的游戏方法体。Col 后缀保留，但只对应基础几何，尚未确认准确运行时颜色切换。
+
+原始数据还存在一个场景差异：索引 292 在 Levely5 场景实际引用 BloqueChorro2，在 6×6、7×7 和 basic 场景引用 Curva4y。映射表保留该差异，几何预览默认参考 6×6 数组，不把该差异当作源文件损坏。
+
+四、主要原始脚本与运行结构
+MonoScript 资源共 1034 个。原 Assembly-CSharp 有 209 个类，Assembly-CSharp-firstpass 有 139 个类，后者含 UnityStandardAssets 与 LitJson 等第三方代码。部分类型是接口或数据类，不是每个类型都会挂在 GameObject 上。
+
+共 6075 个 MonoBehaviour，其中 3101 个属于 Assembly-CSharp、2972 个属于 UnityEngine.UI，其余为少量引擎或 SDK 组件。原类名、命名空间和程序集名见 inventory/monobehaviour_types.csv。
+
+依据原始类名和字段，可划分出以下职责：
+ControladorJuego：4 个游戏场景的流程、UI、完成条件和提示引用。
+SaveLoadManager：关卡读取、保存、295 项拼块引用及解答 UI 引用。
+MoveBloque / SwipeHandler2 / RotateCamera3：拼块操作、滑动输入、视角旋转。
+ControlPieza / ControlPiezaC / ControlPiezaCubetaB / ControlPiezaFuente：不同拼块和水槽变体。
+FuenteTest3 / CascadaTest / AguasControl3：水源、瀑布、水流状态与触发器等。
+ConfigSuelo / ConfigFondo / cambioPlantas：地面、背景、植物变化。
+UIManager* / CajaComplete / CajaSolution / scrollTest1：菜单、完成面板、解答面板和选关条目。
+广告、付费、评级和本地化也保留相应类名及字段。以上是根据名称和序列化字段判断的职责，不代表方法实现已经恢复。
+
+五、几何、动画与材质依赖
+原始导出含 224 个 Mesh、267 个 Material、239 个 Texture2D、112 个 AnimationClip、57 个 AnimatorController、180 个 ParticleSystem。动画控制器、粒子、碰撞器、刚体及对象之间的引用均应优先从恢复工程查看。
+
+267 个材质使用 18 种 Shader 名称。最多的是 Mobile/Diffuse Color1（161 个材质）、Standard（44 个）、Transparent/Diffuse ZWrite（22 个）、Mobile/Diffuse Color（11 个）；另有 ColoredRim、Particles/Additive Intensify 等。材质到 Shader 的完整对应见 inventory/game_structure.json。
+
+APK 保存的是编译后的 Shader 数据，不能据导出的 .shader 文件名认定原始 Shader 源码全部可编译或外观完全一致。水体透明、ZWrite、粒子叠加、颜色切换和边缘光是视觉复核重点。
+
+六、恢复边界与使用方式
+可直接利用的原始证据包括场景层级、网格、贴图、动画、材质参数、组件引用、关卡坐标、解答步骤、类名和字段布局。
+IL2CPP 的业务逻辑在原生库中，普通 Unity 资源文件不包含原始 C# 方法体。脚本壳、模拟功能、兼容修改和编辑器预览须与原始数据明确区分；不能据“工程能导入”宣称原始游戏可直接完整运行。
+1350 份关卡可以用于几何布局预览；准确互动仍需还原固定状态编码、旋转/机关、水流传播、解答步骤坐标换算、胜负判定和 UI 流程，并在 Unity 中编译和实际运行验证。
+
+结构证据：inventory/game_structure.json。
+拼块映射：inventory/piece_aliases.json。
+关卡检索：LevelData/index.csv、summary.json、使用说明.txt。
+原始组件字段：unity/MonoBehaviour；原始脚本元信息：unity/MonoScript。
