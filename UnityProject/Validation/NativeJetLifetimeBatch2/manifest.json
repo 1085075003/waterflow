@@ -1,0 +1,48 @@
+{
+  "batch": "NativeJetLifetimeBatch2",
+  "immutable": true,
+  "createdUtc": "2026-10-16T04:06:17.662174+00:00",
+  "dependsOn": [
+    "NativeJetLifetimeBatch1"
+  ],
+  "status": "Full runtime and Editor Roslyn compile passed; Unity actual repeat pending root",
+  "entry": "Recovered.FlowWater.Editor.FlowWaterJetLifetimeValidation.Run",
+  "files": [
+    {
+      "source": "Validation/NativeJetLifetimeBatch2/Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs",
+      "target": "Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs",
+      "sha256": "3621850bd9a9857fc6d890864ea78fa47ebe03989b8d0d131d15ddefbaa82f40",
+      "previousSha256": "a53f092beacc355991801b7b382d1398ba92a8ad927e3f4caf0326727a196ade"
+    },
+    {
+      "source": "Validation/NativeJetLifetimeBatch2/Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs.meta",
+      "target": "Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs.meta",
+      "sha256": "bc23d265d53461407ce622c336d92ee575573f9b2cb053fa09af59032744dc89",
+      "previousSha256": "bc23d265d53461407ce622c336d92ee575573f9b2cb053fa09af59032744dc89"
+    },
+    {
+      "source": "Validation/NativeJetLifetimeBatch2/Assets/Editor/RecoveredTools/FlowWaterJetLifetimeValidation.cs",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterJetLifetimeValidation.cs",
+      "sha256": "b79bf2ca0dad8fcd83dd6be8675a2e77357fbdcb9545d826021f4a9f4aebd1dc",
+      "previousSha256": "e724adde09593e80f09a8762568025b0cfd8c99abd831c9b1d7a3a3105c5050e"
+    },
+    {
+      "source": "Validation/NativeJetLifetimeBatch2/Assets/Editor/RecoveredTools/FlowWaterJetLifetimeValidation.cs.meta",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterJetLifetimeValidation.cs.meta",
+      "sha256": "08c0290c9430c8ee989fa51ece8b823d3ecade41f6752bfdd3205e1e0e4336f4",
+      "previousSha256": "08c0290c9430c8ee989fa51ece8b823d3ecade41f6752bfdd3205e1e0e4336f4"
+    }
+  ],
+  "changes": [
+    "Snapshot only: fully StopEmittingAndClear before random seed assignment; restore auto-seed flag while paused before Play",
+    "Honor exact saved playing/paused state across repeated same-frame wrapper/model activation notifications",
+    "Saved inactive cached objects retain birth basis but resume native normal activation rather than replaying dormant particle phase",
+    "Fixture captures aged original particles and checks exact seed/auto flag, saved clocks and playing/paused states",
+    "Fixture restores Time.timeScale after restoring original scene setup and again in delayCall before batch exit"
+  ],
+  "checks": [
+    "runtime.rsp exit 0",
+    "editor.rsp exit 0"
+  ],
+  "originalLivePath": "Already-wet model reuse and ordinary inactive reentry do not call Stop/Simulate; only a pending snapshot phase enters the changed restoration path."
+}

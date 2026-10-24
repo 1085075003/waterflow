@@ -1,0 +1,28 @@
+--- Assets/Editor/RecoveredTools/FlowWaterNativeGeometryStackValidation.cs Pose1
++++ Assets/Editor/RecoveredTools/FlowWaterNativeGeometryStackValidation.cs Pose2
+@@ -87,7 +87,7 @@
+                 }
+                 else if(level==610)Observe(game,21,"obj7",null,new Vector3(.07f,.1f,.1f),null);
+                 else if(level==626){Observe(game,2,"obj7",null,new Vector3(.1f,.1f,.07f),null);Observe(game,24,"obj7",null,new Vector3(.07f,.1f,.1f),null);}
+-                else if(level==634){Observe(game,0,"obj7",null,new Vector3(.1f,.1f,.1f),null);Observe(game,35,"obj7",null,new Vector3(.1f,.1f,.1f),null);}
++                else if(level==634){Observe(game,0,"obj7",null,new Vector3(.1f,.1f,.1f),null);ObserveInitialProxyAbsent(game,35);}
+                 else return;
+                 observed.Add(level);
+                 if(new[]{1095,610,626,634}.All(x=>observed.Contains(x)) && String.IsNullOrEmpty(report.finishedUtc)) {
+@@ -96,6 +96,16 @@
+                 }
+                 Save();
+             }catch(Exception error){report.errors.Add(error.ToString());observed.Add(waitingLevel);Save();}
++        }
++        static void ObserveInitialProxyAbsent(RecoveredFlowGame game,int record)
++        {
++            RecoveryPiece piece=game.PieceRoot.GetComponentsInChildren<RecoveryPiece>(true).FirstOrDefault(x=>x.SourceRecordIndex==record);
++            bool proxy=piece!=null && piece.OriginalConfiguration!=null && piece.OriginalConfiguration.Contains("st9et");
++            CheckState("634:35:original-st9-preview-proxy-identity",proxy,"Original gm634 record35 Ist9, distinct from active st1 record0 at sameXZ");
++            ControlPiezaC source=piece==null?null:piece.GetComponent<ControlPiezaC>();
++            GameObject instance=source==null?null:source.obj7;
++            CheckState("634:35:native-mode0-does-not-create-preview-Palo",!game.IsSolutionPreview && instance==null,
++                "Mode0 initial st9 final-preview proxy must not instantiate obj7; active st1 record0 above is separately positively tested");
+         }
+         static void Observe(RecoveredFlowGame game,int record,string field,Vector3? expectedPosition,Vector3 expectedScale,Quaternion? expectedRotation)
+         {

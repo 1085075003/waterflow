@@ -1,0 +1,45 @@
+// FuenteCubeta2$$doActivarEsfera VA 0x1098A80, inferred length 172
+void FuenteCubeta2__doActivarEsfera (FuenteCubeta2_o* __this, const MethodInfo* method);
+01098A80  str      x30, [sp, #-0x20]!                    
+01098A84  stp      x20, x19, [sp, #0x10]                 
+01098A88  adrp     x20, #0x24fb000                       
+01098A8C  ldrb     w8, [x20, #0xf1b]                     
+01098A90  mov      x19, x0                               
+01098A94  tbnz     w8, #0, #0x1098aac                    
+01098A98  adrp     x0, #0x236d000                        
+01098A9C  ldr      x0, [x0, #0x588]                       // [0x236D588] Method$UnityEngine.GameObject.GetComponent<CascadaTest1>()
+01098AA0  bl       #0xe61b78                             
+01098AA4  mov      w8, #1                                
+01098AA8  strb     w8, [x20, #0xf1b]                     
+01098AAC  ldrb     w8, [x19, #0xc0]                       // self.triggered
+01098AB0  cbz      w8, #0x1098b1c                        
+01098AB4  ldrb     w8, [x19, #0x82]                       // self.esf5
+01098AB8  cbz      w8, #0x1098b1c                        
+01098ABC  ldr      x0, [x19, #0x28]                       // self.esferaFuente1
+01098AC0  cbz      x0, #0x1098b28                        
+01098AC4  mov      w1, #1                                
+01098AC8  mov      x2, xzr                               
+01098ACC  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01098AD0  ldr      x0, [x19, #0x28]                       // self.esferaFuente1
+01098AD4  cbz      x0, #0x1098b28                        
+01098AD8  mov      x1, xzr                               
+01098ADC  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+01098AE0  cbz      x0, #0x1098b28                        
+01098AE4  ldr      x1, [x19, #0x88]                       // self.tagName
+01098AE8  mov      x2, xzr                               
+01098AEC  bl       #0x2006450                             // UnityEngine.GameObject$$set_tag
+01098AF0  ldr      x0, [x19, #0x30]                       // self.Fuente1
+01098AF4  cbz      x0, #0x1098b28                        
+01098AF8  adrp     x8, #0x236d000                        
+01098AFC  ldr      x8, [x8, #0x588]                       // [0x236D588] Method$UnityEngine.GameObject.GetComponent<CascadaTest1>()
+01098B00  ldr      x1, [x8]                              
+01098B04  bl       #0x1161fd0                             // UnityEngine.GameObject$$GetComponent<object>
+01098B08  cbz      x0, #0x1098b28                        
+01098B0C  ldr      w8, [x19, #0x90]                       // self.color
+01098B10  mov      w9, #1                                
+01098B14  str      w9, [x0, #0x88]                       
+01098B18  str      w8, [x0, #0x60]                       
+01098B1C  ldp      x20, x19, [sp, #0x10]                 
+01098B20  ldr      x30, [sp], #0x20                      
+01098B24  ret                                            
+01098B28  bl       #0xe61da0                             

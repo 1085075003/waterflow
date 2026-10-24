@@ -1,0 +1,79 @@
+--- Scoped5/aggregate_native_gameplay.py
++++ Camera6/aggregate_native_gameplay.py
+@@ -23,6 +23,8 @@
+ """
+ 
+ from __future__ import annotations
++
++import desktop_camera_review as desktop
+ 
+ import argparse
+ import difflib
+@@ -466,6 +468,7 @@
+         key = (approval["path"], approval.get("baseSha256"), approval.get("otherSha256"))
+         ensure(key not in approval_map, f"Duplicate difference approval:{key}")
+         ensure(approval["path"] not in STRICT_FILES, f"Cannot approve different production physics:{approval['path']}")
++        ensure(approval["path"] != desktop.PATH, "Changed desktop pointer camera requires its typed disclosure, never mode0Unchanged approval")
+         ensure(bool(approval.get("explanation")) and approval.get("mode0Unchanged") is True,
+                f"Difference requires explicit mode0 review:{approval['path']}")
+         evidence = approval.get("evidence")
+@@ -495,11 +498,18 @@
+     interaction = data.get("postImportInteraction")
+     ensure(isinstance(interaction, dict), "Final independent Input61 evidence required")
+     input_snapshot_path, input_snapshot_data, input_snapshot_sha = snapshot(interaction.get("runtimeSnapshot"), path.parent)
++    desktop_proof = None
++    desktop_comparisons = []
++    if data.get("desktopCameraPresentationDifference") is not None:
++        desktop_proof, desktop_comparisons = desktop.verify(
++            data["desktopCameraPresentationDifference"], path.parent, sys.modules[__name__], interaction)
++    used_desktop = False
+     actual_differences = []
+     used_approvals = set()
+     base_files = snapshots[anchor.digest][1]["files"]
+     comparisons = [(str(run.path), run.digest, snapshots[run.digest][1]["files"]) for run in [*bases[1:], *retests]]
+     comparisons.append((str(input_snapshot_path), "post-import-Input61", input_snapshot_data["files"]))
++    comparisons.extend(desktop_comparisons)
+     for label, report_digest, other_files in comparisons:
+         for key in sorted(base_files.keys() | other_files.keys()):
+             before, after = base_files.get(key), other_files.get(key)
+@@ -511,6 +521,14 @@
+                 used_visual.add(approval_key)
+                 actual_differences.append({"reportSha256": report_digest, **visual_map[approval_key]})
+                 continue
++            if key == desktop.PATH:
++                ensure(desktop_proof is not None and before == desktop.BASE and after == desktop.OTHER,
++                       "Changed desktop pointer view lacks the exact typed final-regression proof")
++                used_desktop = True
++                actual_differences.append({"reportSha256": report_digest, "ruleId": desktop.RULE,
++                    "path": key, "baseSha256": before, "otherSha256": after,
++                    "physicsUnchanged": True, "pointerPresentationChanged": True, "mode0Unchanged": False})
++                continue
+             ensure(approval_key in approval_map, f"Unreviewed runtime/config difference: {key} ({label})")
+             approval = approval_map[approval_key]
+             if "onlyReportSha256" in approval:
+@@ -518,6 +536,7 @@
+                        f"Difference approval is scoped to other closed reports: {key} ({label})")
+             used_approvals.add(approval_key)
+             actual_differences.append({"reportSha256": report_digest, **approval})
++    ensure((desktop_proof is not None) == used_desktop, "Unused typed desktop camera approval")
+     ensure(used_approvals == set(approval_map), "Unused difference approval: exact current comparisons required")
+     ensure(used_visual == set(visual_map), "Unused exact UV approval: exact current comparisons required")
+     input_path, input_data, input_digest = evidence_file(interaction.get("report"), path.parent)
+@@ -542,6 +561,7 @@
+             "strictDefaultFiles": sorted(STRICT_FILES),
+             "strictIdenticalFiles": sorted(STRICT_FILES - {key[0] for key in used_visual}),
+             "exactVisualScrollExceptions": list(visual_map.values()), "runSnapshots": sources,
++            "desktopCameraPresentationDifference": desktop_proof,
+             "explicitReviewedDifferences": actual_differences,
+             "postImportInteraction": {"path": str(input_path), "sha256": input_digest,
+                                       "finishedUtc": input_data["finishedUtc"], "checks": len(input_checks),
+@@ -631,7 +651,8 @@
+         "retestedIds": sorted(set().union(*(set(run.levels) for run in retests))) if retests else [],
+         "baseRuns": [run.source() for run in bases], "retests": [run.source() for run in retests],
+         "runtimeCompatibility": compat, "levels": levels,
+-        "interpretation": "Separate completed actual Unity runs are combined over exactly800 original ids: one800-case run or two nonoverlapping400-case halves with identical original800/11919 data inventories. Each part remains its ids' first attempt even if its full-run finish is later than a parallel closed-case retest. Retests are applied by their finish time; a later failed retest is not hidden by an earlier pass. Each selected level must independently satisfy actual mode0 pointer input/legitimate markers, unchanged transaction/landing checks, positive original targets, native completion and no pending water/busy mechanisms. This artifact is aggregate coverage, not a single800-case all-pass execution. Original reports remain authoritative evidence and are unchanged.",
++        "desktopPresentationScope": (compat.get("desktopCameraPresentationDifference") or {}).get("scopeDisclosure"),
++        "interpretation": "Separate completed actual Unity runs are combined over exactly800 original ids: one800-case run or two nonoverlapping400-case halves with identical original800/11919 data inventories. Each part remains its ids' first attempt even if its full-run finish is later than a parallel closed-case retest. Retests are applied by their finish time; a later failed retest is not hidden by an earlier pass. Each selected level must independently satisfy actual mode0 pointer input/legitimate markers, unchanged transaction/landing checks, positive original targets, native completion and no pending water/busy mechanisms. This artifact is aggregate coverage, not a single800-case all-pass execution. Original reports remain authoritative evidence and are unchanged. When the typed desktop camera scope is present, the800 actual player replays use the previous desktop view; the final changed pointer presentation is separately evidenced by169 actual gameplay cases, Camera17, final Input61, HUD24 and all1350 mesh captures. This does not assert800 replays under the final camera or native-device pixel equivalence.",
+     }
+ 
+ 

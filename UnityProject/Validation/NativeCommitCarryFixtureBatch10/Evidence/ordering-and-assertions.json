@@ -1,0 +1,22 @@
+{
+  "scope": "Read-only production commit sampling and independent native postcommit carry assertion; no runtime mutation.",
+  "ordering": [
+    {
+      "file": "Assets/Scripts/RecoveryRuntime/RecoveredNativeDragMotion.cs",
+      "method": "Complete",
+      "fact": "Sets active=false; invokes original completed callback with actual Target."
+    },
+    {
+      "file": "Assets/Scripts/RecoveryRuntime/RecoveredFlowGame.cs",
+      "method": "EndDrag -> TryMoveCore(nativeLanding=true)",
+      "fact": "Writes piece.position=destination, MoveCount++, CheckComplete, SyncTransforms, synchronous StateChanged.Notify."
+    },
+    {
+      "file": "Assets/Scripts/RecoveryRuntime/RecoveredNativeSprings.cs",
+      "method": "LateUpdate actual Actor loop",
+      "fact": "After plate processing, captures original movable upper actor into Actor.carried; MoveTowards carrier and that member by native speed while maintaining7.6*(index+1) Y. Final clears carried only after moving completes."
+    }
+  ],
+  "known1216Actual": "Probe4 step10 actual selected38 X40.828 versus original40 and actual native carrier52 sameX/Y+7.6. A postcommit Editor sample can occur after this native movement. This fixture still fails if actual synchronous commit itself is wrong or private native Actor.carried membership/active translating owner/original layer offset is absent. Actual new proof remains pending root.",
+  "strictness": "Existing Near(.8) never changed. Offset constraint is additional .03 strict native layer invariant. actualAfter remains measured late position; no write or inferred support/landing replacement."
+}

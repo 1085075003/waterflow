@@ -1,0 +1,994 @@
+using System;
+using System.Reflection;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+/// <summary>Original IL2CPP language literals and the original serialized Text targets.</summary>
+public static class RecoveredNativeLocalization
+{
+    public const string OriginalLibrarySha256 = "cadee25e966aa53892446710207d2048624cc52421d84f6349e0ecb2ab66097a";
+    public static string Language { get { return PlayerPrefs.GetString("language", "en"); } }
+    public static string[] SelectorCycle { get { return new[] {"es","en","fr","de","pt","zh","hi","ar","ru","ja","it","ko","nl","tr","pl","th","vi","sv","el","id" }; } }
+    public static string[] PortCycle { get { return new[] {"es","en","fr","de","pt","zh","zh-TW","hi","ru","ja","it","ko","nl","tr","pl","th","vi","sv","el","id" }; } }
+    // No OS font replacement: English continues to use the authored Playtime asset.
+    public static string Text(string method, string language, string argument = "")
+    {
+        string value;
+        switch (method)
+        {
+            case "HelpRotate$$ObtenerTexto1":
+                switch (language)
+                {
+                    case "es": value = "girar tablero"; break;
+                    case "fr": value = "tourner le plateau"; break;
+                    case "de": value = "brett drehen"; break;
+                    case "pt": value = "girar tabuleiro"; break;
+                    case "zh": value = "旋转棋盘"; break;
+                    case "zh-TW": value = "旋轉棋盤"; break;
+                    case "hi": value = "बोर्ड घुमाएं"; break;
+                    case "ru": value = "повернуть доску"; break;
+                    case "ja": value = "ボードを回転"; break;
+                    case "it": value = "ruota tavola"; break;
+                    case "ko": value = "보드 회전"; break;
+                    case "nl": value = "draai bord"; break;
+                    case "tr": value = "tahtayı döndür"; break;
+                    case "pl": value = "obróć tablicę"; break;
+                    case "th": value = "หมุนกระดาน"; break;
+                    case "vi": value = "xoay bảng"; break;
+                    case "sv": value = "rotera brädet"; break;
+                    case "el": value = "περιστροφή πίνακα"; break;
+                    case "id": value = "putar papan"; break;
+                    default: value = "rotate board"; break;
+                }
+                break;
+            case "HelpRotate$$ObtenerTexto2":
+                switch (language)
+                {
+                    case "es": value = "desliza aquí"; break;
+                    case "fr": value = "glisser ici"; break;
+                    case "de": value = "hier wischen"; break;
+                    case "pt": value = "deslize aqui"; break;
+                    case "zh": value = "在这里滑动"; break;
+                    case "zh-TW": value = "在這裡滑動"; break;
+                    case "hi": value = "यहाँ स्वाइप करें"; break;
+                    case "ru": value = "проведите здесь"; break;
+                    case "ja": value = "ここでスワイプ"; break;
+                    case "it": value = "scorri qui"; break;
+                    case "ko": value = "여기에서 스와이프"; break;
+                    case "nl": value = "veg hier"; break;
+                    case "tr": value = "burada kaydır"; break;
+                    case "pl": value = "przesuń tutaj"; break;
+                    case "th": value = "ปัดที่นี่"; break;
+                    case "vi": value = "vuốt ở đây"; break;
+                    case "sv": value = "svepa här"; break;
+                    case "el": value = "σύρετε εδώ"; break;
+                    case "id": value = "geser di sini"; break;
+                    default: value = "swipe here"; break;
+                }
+                break;
+            case "noMoreLang$$ObtenerTexto":
+                switch (language)
+                {
+                    case "es": value = "¡No quedan soluciones!\n¿Quieres conseguir más?"; break;
+                    case "fr": value = "Plus de solutions !\nVous en voulez plus ?"; break;
+                    case "de": value = "Keine Lösungen mehr!\nMöchtest du mehr?"; break;
+                    case "pt": value = "Não há mais soluções!\nQuer obter mais?"; break;
+                    case "zh": value = "没有解法了！\n想获得更多吗？"; break;
+                    case "zh-TW": value = "沒有解法了！\n想獲得更多嗎？"; break;
+                    case "hi": value = "अब कोई समाधान नहीं बचा!\nक्या आप और चाहते हैं?"; break;
+                    case "ru": value = "Больше решений нет!\nХотите получить ещё?"; break;
+                    case "ja": value = "解法がありません！\nもっと取得しますか？"; break;
+                    case "it": value = "Non ci sono più soluzioni!\nVuoi ottenerne altre?"; break;
+                    case "ko": value = "더 이상 해결책이 없습니다!\n더 얻으시겠습니까?"; break;
+                    case "nl": value = "Geen oplossingen meer!\nWil je er meer?"; break;
+                    case "tr": value = "Daha fazla çözüm yok!\nDaha fazlasını ister misiniz?"; break;
+                    case "pl": value = "Brak rozwiązań!\nChcesz więcej?"; break;
+                    case "th": value = "ไม่มีวิธีแก้แล้ว!\nต้องการเพิ่มหรือไม่?"; break;
+                    case "vi": value = "Không còn giải pháp!\nBạn có muốn thêm không?"; break;
+                    case "sv": value = "Inga lösningar kvar!\nVill du ha fler?"; break;
+                    case "el": value = "Δεν υπάρχουν άλλες λύσεις!\nΘέλεις περισσότερες;"; break;
+                    case "id": value = "Tidak ada solusi lagi!\nIngin lebih banyak?"; break;
+                    default: value = "No solutions left!\nDo you want more?"; break;
+                }
+                break;
+            case "rateUsLang$$ObtenerTexto1":
+                switch (language)
+                {
+                    case "es": value = "¿Te gusta el juego? ¡Valóralo en Google Play!"; break;
+                    case "fr": value = "Vous aimez le jeu ? Notez-nous sur Google Play !"; break;
+                    case "de": value = "Gefällt dir das Spiel? Bewerte uns im Google Play!"; break;
+                    case "pt": value = "Gostando do jogo? Avalie na Google Play!"; break;
+                    case "zh": value = "喜欢这个游戏吗？请在 Google Play 给我们评分！"; break;
+                    case "zh-TW": value = "喜歡這個遊戲嗎？請在 Google Play 給我們評分！"; break;
+                    case "hi": value = "क्या खेल पसंद है? Google Play पर रेट करें!"; break;
+                    case "ru": value = "Нравится игра? Оцените нас в Google Play!"; break;
+                    case "ja": value = "ゲームは楽しい？\nGoogle Playで評価してね！"; break;
+                    case "it": value = "Ti piace il gioco? Valutaci su Google Play!"; break;
+                    case "ko": value = "게임이 마음에 드나요? Google Play에서 평가해주세요!"; break;
+                    case "nl": value = "Bevalt het spel? Beoordeel ons op Google Play!"; break;
+                    case "tr": value = "\"Oyunu beğendin mi? Google Play'de değerlendir!\""; break;
+                    case "pl": value = "Podoba Ci się gra? Oceń nas w Google Play!"; break;
+                    case "th": value = "ชอบเกมไหม? ให้คะแนนบน Google Play!"; break;
+                    case "vi": value = "Bạn thích game chứ? Hãy đánh giá trên Google Play!"; break;
+                    case "sv": value = "Gillar du spelet? Betygsätt oss på Google Play!"; break;
+                    case "el": value = "Σου αρέσει το παιχνίδι; Βαθμολόγησέ μας στο Google Play!"; break;
+                    case "id": value = "Suka gamenya? Beri rating di Google Play!"; break;
+                    default: value = "Enjoying the game? Rate us on Google Play!"; break;
+                }
+                break;
+            case "rateUsLang$$ObtenerTexto2":
+                switch (language)
+                {
+                    case "es": value = "LUEGO"; break;
+                    case "fr": value = "PLUS TARD"; break;
+                    case "de": value = "SPÄTER"; break;
+                    case "pt": value = "DEPOIS"; break;
+                    case "zh": value = "稍后"; break;
+                    case "zh-TW": value = "稍後"; break;
+                    case "hi": value = "बाद में"; break;
+                    case "ru": value = "ПОЗЖЕ"; break;
+                    case "ja": value = "あとで"; break;
+                    case "it": value = "DOPO"; break;
+                    case "ko": value = "나중에"; break;
+                    case "tr": value = "DAHA SONRA"; break;
+                    case "pl": value = "PÓŹNIEJ"; break;
+                    case "th": value = "ภายหลัง"; break;
+                    case "vi": value = "ĐỂ SAU"; break;
+                    case "sv": value = "SENARE"; break;
+                    case "el": value = "ΑΡΓΟΤΕΡΑ"; break;
+                    case "id": value = "NANTI"; break;
+                    default: value = "LATER"; break;
+                }
+                break;
+            case "rateUsLang$$ObtenerTexto3":
+                switch (language)
+                {
+                    case "es": value = "VALORAR"; break;
+                    case "fr": value = "NOTER"; break;
+                    case "de": value = "BEWERTEN"; break;
+                    case "pt": value = "AVALIAR"; break;
+                    case "zh": value = "评分"; break;
+                    case "zh-TW": value = "評分"; break;
+                    case "hi": value = "रेट करें"; break;
+                    case "ru": value = "ОЦЕНИТЬ"; break;
+                    case "ja": value = "評価"; break;
+                    case "it": value = "VALUTA"; break;
+                    case "ko": value = "평가"; break;
+                    case "nl": value = "BEOORDELEN"; break;
+                    case "tr": value = "PUANLA"; break;
+                    case "pl": value = "OCEŃ"; break;
+                    case "th": value = "ให้คะแนน"; break;
+                    case "vi": value = "ĐÁNH GIÁ"; break;
+                    case "sv": value = "BETYGSÄTT"; break;
+                    case "el": value = "ΑΞΙΟΛΟΓΗΣΗ"; break;
+                    case "id": value = "NILAI"; break;
+                    default: value = "RATE"; break;
+                }
+                break;
+            case "CajaComplete$$ObtenerTexto1":
+                switch (language)
+                {
+                    case "es": value = "NIVEL"; break;
+                    case "fr": value = "NIVEAU"; break;
+                    case "de": value = "STUFE"; break;
+                    case "pt": value = "NÍVEL"; break;
+                    case "zh": value = "等级"; break;
+                    case "hi": value = "स्तर"; break;
+                    case "ru": value = "УРОВЕНЬ"; break;
+                    case "ja": value = "レベル"; break;
+                    case "it": value = "LIVELLO"; break;
+                    case "ko": value = "레벨"; break;
+                    case "nl": value = "NIVEAU"; break;
+                    case "tr": value = "SEVİYE"; break;
+                    case "pl": value = "POZIOM"; break;
+                    case "th": value = "ระดับ"; break;
+                    case "vi": value = "CẤP ĐỘ"; break;
+                    case "sv": value = "NIVÅ"; break;
+                    case "el": value = "ΕΠΙΠΕΔΟ"; break;
+                    case "id": value = "TINGKAT"; break;
+                    default: value = "LEVEL"; break;
+                }
+                break;
+            case "CajaComplete$$ObtenerTexto2":
+                switch (language)
+                {
+                    case "es": value = "¡NIVEL COMPLETADO!"; break;
+                    case "fr": value = "NIVEAU TERMINÉ!"; break;
+                    case "de": value = "STUFE ABGESCHLOSSEN!"; break;
+                    case "pt": value = "NÍVEL CONCLUÍDO!"; break;
+                    case "zh": value = "关卡完成！"; break;
+                    case "zh-TW": value = "關卡完成！"; break;
+                    case "hi": value = "स्तर पूरा हुआ!"; break;
+                    case "ru": value = "УРОВЕНЬ ЗАВЕРШЕН!"; break;
+                    case "ja": value = "レベル完了！"; break;
+                    case "it": value = "LIVELLO COMPLETATO!"; break;
+                    case "ko": value = "레벨 완료!"; break;
+                    case "nl": value = "NIVEAU VOLTOOID!"; break;
+                    case "tr": value = "SEVİYE TAMAMLANDI!"; break;
+                    case "pl": value = "POZIOM UKOŃCZONY!"; break;
+                    case "th": value = "ระดับเสร็จสมบูรณ์!"; break;
+                    case "vi": value = "CẤP ĐỘ HOÀN THÀNH!"; break;
+                    case "sv": value = "NIVÅ AVKLARAD!"; break;
+                    case "el": value = "ΕΠΙΠΕΔΟ ΟΛΟΚΛΗΡΩΘΗΚΕ!"; break;
+                    case "id": value = "TINGKAT SELESAI!"; break;
+                    case "ar": value = "المستوى مكتمل!"; break;
+                    default: value = "LEVEL COMPLETED!"; break;
+                }
+                break;
+            case "Leveltexto2$$ObtenerTexto":
+                switch (language)
+                {
+                    case "es": value = "NIVEL"; break;
+                    case "fr": value = "NIVEAU"; break;
+                    case "de": value = "STUFE"; break;
+                    case "pt": value = "NÍVEL"; break;
+                    case "zh": value = "关卡"; break;
+                    case "zh-TW": value = "關卡"; break;
+                    case "hi": value = "स्तर"; break;
+                    case "ru": value = "УРОВЕНЬ"; break;
+                    case "ja": value = "レベル"; break;
+                    case "it": value = "LIVELLO"; break;
+                    case "ko": value = "레벨"; break;
+                    case "nl": value = "NIVEAU"; break;
+                    case "tr": value = "SEVİYE"; break;
+                    case "pl": value = "POZIOM"; break;
+                    case "th": value = "ระดับ"; break;
+                    case "vi": value = "CẤP ĐỘ"; break;
+                    case "sv": value = "NIVÅ"; break;
+                    case "el": value = "ΕΠΙΠΕΔΟ"; break;
+                    case "id": value = "TINGKAT"; break;
+                    default: value = "LEVEL"; break;
+                }
+                break;
+            case "exitLang$$ObtenerTextoTraducido":
+                switch (language)
+                {
+                    case "es": value = "¿Seguro que quieres salir?"; break;
+                    case "fr": value = "Êtes-vous sûr de vouloir quitter?"; break;
+                    case "de": value = "Sind Sie sicher, dass Sie beenden möchten?"; break;
+                    case "pt": value = "Tem certeza de que deseja sair?"; break;
+                    case "zh": value = "您确定要退出吗？"; break;
+                    case "zh-TW": value = "您確定要退出嗎？"; break;
+                    case "hi": value = "क्या आप वाकई बाहर निकलना चाहते हैं?"; break;
+                    case "ru": value = "Вы уверены, что хотите выйти?"; break;
+                    case "ja": value = "終了しますか？"; break;
+                    case "it": value = "Sei sicuro di voler uscire?"; break;
+                    case "ko": value = "종료하시겠습니까 ?"; break;
+                    case "nl": value = "Weet je zeker dat je wilt afsluiten?"; break;
+                    case "tr": value = "Çıkmak istediğinizden emin misiniz?"; break;
+                    case "pl": value = "Czy na pewno chcesz zakończyć?"; break;
+                    case "th": value = "คุณแน่ใจหรือว่าต้องการออกจากเกม?"; break;
+                    case "vi": value = "Bạn có chắc chắn muốn thoát không?"; break;
+                    case "sv": value = "Är du säker på att du vill avsluta?"; break;
+                    case "el": value = "Είστε σίγουροι ότι θέλετε να βγείτε;"; break;
+                    case "id": value = "Apakah Anda yakin ingin keluar?"; break;
+                    default: value = "Are you sure you want to exit?"; break;
+                }
+                break;
+            case "settingsLang$$ObtenerTexto1":
+                switch (language)
+                {
+                    case "es": value = "CONFIGURACIÓN"; break;
+                    case "fr": value = "PARAMÈTRES"; break;
+                    case "de": value = "EINSTELLUNGEN"; break;
+                    case "pt": value = "CONFIGURAÇÕES"; break;
+                    case "zh": value = "设置"; break;
+                    case "hi": value = "सेटिंग्स"; break;
+                    case "ru": value = "НАСТРОЙКИ"; break;
+                    case "ja": value = "設定"; break;
+                    case "it": value = "IMPOSTAZIONI"; break;
+                    case "ko": value = "설정"; break;
+                    case "nl": value = "INSTELLINGEN"; break;
+                    case "tr": value = "AYARLAR"; break;
+                    case "pl": value = "USTAWIENIA"; break;
+                    case "th": value = "การตั้งค่า"; break;
+                    case "vi": value = "CÀI ĐẶT"; break;
+                    case "sv": value = "INSTÄLLNINGAR"; break;
+                    case "el": value = "ΡΥΘΜΙΣΕΙΣ"; break;
+                    case "id": value = "PENGATURAN"; break;
+                    case "ar": value = "الإعدادات"; break;
+                    default: value = "SETTINGS"; break;
+                }
+                break;
+            case "settingsLang$$ObtenerTexto2":
+                switch (language)
+                {
+                    case "es": value = "MÚSICA"; break;
+                    case "fr": value = "MUSIQUE"; break;
+                    case "de": value = "MUSIK"; break;
+                    case "pt": value = "MÚSICA"; break;
+                    case "zh": value = "音乐"; break;
+                    case "hi": value = "संगीत"; break;
+                    case "ru": value = "МУЗЫКА"; break;
+                    case "ja": value = "音楽"; break;
+                    case "it": value = "MUSICA"; break;
+                    case "ko": value = "음악"; break;
+                    case "nl": value = "MUZIEK"; break;
+                    case "tr": value = "MÜZİK"; break;
+                    case "pl": value = "MUZYKA"; break;
+                    case "th": value = "ดนตรี"; break;
+                    case "vi": value = "ÂM NHẠC"; break;
+                    case "sv": value = "MUSIK"; break;
+                    case "el": value = "ΜΟΥΣΙΚΗ"; break;
+                    case "id": value = "MUSIK"; break;
+                    case "ar": value = "موسيقى"; break;
+                    default: value = "MUSIC"; break;
+                }
+                break;
+            case "settingsLang$$ObtenerTexto3":
+                switch (language)
+                {
+                    case "es": value = "SONIDO"; break;
+                    case "fr": value = "SON"; break;
+                    case "de": value = "KLANG"; break;
+                    case "pt": value = "SOM"; break;
+                    case "zh": value = "声音"; break;
+                    case "hi": value = "ध्वनि"; break;
+                    case "ru": value = "ЗВУК"; break;
+                    case "ja": value = "音"; break;
+                    case "it": value = "SUONO"; break;
+                    case "ko": value = "소리"; break;
+                    case "nl": value = "GELUID"; break;
+                    case "tr": value = "SES"; break;
+                    case "pl": value = "DŹWIĘK"; break;
+                    case "th": value = "เสียง"; break;
+                    case "vi": value = "ÂM THANH"; break;
+                    case "sv": value = "LJUD"; break;
+                    case "el": value = "ΗΧΟΣ"; break;
+                    case "id": value = "SUARA"; break;
+                    case "ar": value = "صوت"; break;
+                    default: value = "SOUND"; break;
+                }
+                break;
+            case "settingsLang$$ObtenerTexto4":
+                switch (language)
+                {
+                    case "es": value = "REINICIAR"; break;
+                    case "fr": value = "RÉINITIALISER"; break;
+                    case "de": value = "ZURÜCKSETZEN"; break;
+                    case "pt": value = "REINICIAR"; break;
+                    case "zh": value = "重置"; break;
+                    case "hi": value = "रीसेट करें"; break;
+                    case "ru": value = "СБРОС"; break;
+                    case "ja": value = "リセット"; break;
+                    case "it": value = "REIMPOSTA"; break;
+                    case "ko": value = "재설정"; break;
+                    case "nl": value = "RESETTEN"; break;
+                    case "tr": value = "SIFIRLA"; break;
+                    case "pl": value = "RESETUJ"; break;
+                    case "th": value = "รีเซ็ต"; break;
+                    case "vi": value = "ĐẶT LẠI"; break;
+                    case "sv": value = "ÅTERSTÄLL"; break;
+                    case "el": value = "ΕΠΑΝΑΦΟΡΑ"; break;
+                    case "id": value = "ATUR ULANG"; break;
+                    case "ar": value = "إعادة ضبط"; break;
+                    default: value = "RESET"; break;
+                }
+                break;
+            case "settingsLang$$ObtenerTexto5":
+                switch (language)
+                {
+                    case "es": value = "CALIFICA"; break;
+                    case "fr": value = "ÉVALUER"; break;
+                    case "de": value = "BEWERTEN"; break;
+                    case "pt": value = "AVALIAR"; break;
+                    case "zh": value = "评分"; break;
+                    case "hi": value = "दर दें"; break;
+                    case "ru": value = "ОЦЕНИТЬ"; break;
+                    case "ja": value = "評価"; break;
+                    case "it": value = "VALUTA"; break;
+                    case "ko": value = "평가"; break;
+                    case "nl": value = "BEOORDEEL"; break;
+                    case "tr": value = "PUANLA"; break;
+                    case "pl": value = "OCEŃ"; break;
+                    case "th": value = "ให้คะแนน"; break;
+                    case "vi": value = "ĐÁNH GIÁ"; break;
+                    case "sv": value = "BETYGSÄTT"; break;
+                    case "el": value = "ΑΞΙΟΛΟΓΗΣΤΕ"; break;
+                    case "id": value = "BERI NILAI"; break;
+                    case "ar": value = "قيم"; break;
+                    default: value = "RATE"; break;
+                }
+                break;
+            case "settingsLang$$ObtenerTexto6":
+                switch (language)
+                {
+                    case "es": value = "¿Estás seguro de que quieres eliminar todo tu progreso en el juego?"; break;
+                    case "fr": value = "Êtes-vous sûr de vouloir supprimer toute votre progression dans le jeu ?"; break;
+                    case "de": value = "Sind Sie sicher, dass Sie Ihren gesamten Fortschritt im Spiel löschen möchten?"; break;
+                    case "pt": value = "Tem certeza de que deseja excluir todo o seu progresso no jogo?"; break;
+                    case "zh": value = "您确定要删除游戏中的所有进度吗？"; break;
+                    case "hi": value = "क्या आप वाकई अपने खेल की सारी प्रगति हटाना चाहते हैं?"; break;
+                    case "ru": value = "Вы уверены, что хотите удалить весь свой прогресс в игре?"; break;
+                    case "ja": value = "ゲーム内の進行状況をすべて削除してもよろしいですか？"; break;
+                    case "it": value = "Sei sicuro di voler eliminare tutti i tuoi progressi nel gioco?"; break;
+                    case "ko": value = "게임에서 모든 진행 상황을 삭제하시겠습니까?"; break;
+                    case "nl": value = "Weet je zeker dat je al je voortgang in het spel wilt verwijderen?"; break;
+                    case "tr": value = "Oyundaki tüm ilerlemenizi silmek istediğinizden emin misiniz?"; break;
+                    case "pl": value = "Czy na pewno chcesz usunąć cały postęp w grze?"; break;
+                    case "th": value = "คุณแน่ใจหรือไม่ว่าต้องการลบความคืบหน้าทั้งหมดในเกม?"; break;
+                    case "vi": value = "Bạn có chắc chắn muốn xóa toàn bộ tiến trình trong trò chơi không?"; break;
+                    case "sv": value = "Är du säker på att du vill radera all din framsteg i spelet?"; break;
+                    case "el": value = "Είστε βέβαιοι ότι θέλετε να διαγράψετε όλη την πρόοδό σας στο παιχνίδι;"; break;
+                    case "id": value = "Apakah Anda yakin ingin menghapus semua kemajuan Anda dalam permainan?"; break;
+                    case "ar": value = "هل أنت متأكد أنك تريد حذف كل تقدمك في اللعبة؟"; break;
+                    default: value = "Are you sure you want to delete all your progress in the game?"; break;
+                }
+                break;
+            case "UIManagerSelScript0$$ObtenerTexto1":
+                switch (language)
+                {
+                    case "es": value = "El paquete está bloqueado\n¿Desbloquearlo en la tienda?"; break;
+                    case "fr": value = "Ce pack est verrouillé\nLe débloquer dans la boutique ?"; break;
+                    case "de": value = "Dieses Paket ist gesperrt\nIm Store freischalten?"; break;
+                    case "pt": value = "Este pacote está bloqueado\nDesbloquear na loja?"; break;
+                    case "zh": value = "此包已锁定\n前往商店解锁？"; break;
+                    case "zh-TW": value = "此包已鎖定\n前往商店解鎖？"; break;
+                    case "hi": value = "यह पैक लॉक है\nक्या इसे स्टोर में अनलॉक करें?"; break;
+                    case "ru": value = "Этот пакет заблокирован\nРазблокировать в магазине?"; break;
+                    case "ja": value = "このパックはロックされています\nストアでアンロックしますか？"; break;
+                    case "it": value = "Questo pacchetto è bloccato\nSbloccarlo nel negozio?"; break;
+                    case "ko": value = "이 팩은 잠겨 있습니다\n스토어에서 잠금 해제하시겠습니까?"; break;
+                    case "nl": value = "Dit pakket is vergrendeld\nOntgrendelen in de winkel?"; break;
+                    case "tr": value = "Bu paket kilitli\nMağazada kilidi açılsın mı?"; break;
+                    case "pl": value = "Ten pakiet jest zablokowany\nOdblokować w sklepie?"; break;
+                    case "th": value = "แพ็กนี้ถูกล็อกอยู่\nปลดล็อกในร้านค้าหรือไม่?"; break;
+                    case "vi": value = "Gói này đã bị khóa\nMở khóa trong cửa hàng?"; break;
+                    case "sv": value = "Detta paket är låst\nLåsa upp i butiken?"; break;
+                    case "el": value = "Αυτό το πακέτο είναι κλειδωμένο\nΞεκλείδωμα στο κατάστημα;"; break;
+                    case "id": value = "Paket ini terkunci\nBuka kunci di toko?"; break;
+                    default: value = "This pack is locked\nUnlock it in the Store?"; break;
+                }
+                break;
+            case "UIManagerSelScript0$$ObtenerTexto2":
+                switch (language)
+                {
+                    case "es": value = "Necesitas terminar el pack anterior para acceder al pack {0}."; break;
+                    case "fr": value = "Vous devez terminer le pack précédent pour accéder au pack {0}."; break;
+                    case "de": value = "Du musst das vorherige Paket abschließen, um auf das {0}-Paket zuzugreifen."; break;
+                    case "pt": value = "Você precisa concluir o pacote anterior para acessar o pacote {0}."; break;
+                    case "zh": value = "你需要完成上一个包才能访问 {0} 包。"; break;
+                    case "hi": value = "आपको पिछले पैक को पूरा करना होगा ताकि आप {0} पैक तक पहुंच सकें।"; break;
+                    case "ru": value = "Вам нужно завершить предыдущий пакет, чтобы получить доступ к пакету {0}."; break;
+                    case "ja": value = "前のパックを完了する必要があります。{0} パックにアクセスできます。"; break;
+                    case "it": value = "Devi completare il pacchetto precedente per accedere al pacchetto {0}."; break;
+                    case "ko": value = "이전 팩을 완료해야 {0} 팩에 접근할 수 있습니다."; break;
+                    case "nl": value = "Je moet het vorige pakket voltooien om toegang te krijgen tot het {0}-pakket."; break;
+                    case "tr": value = "Önceki paketi tamamlamadan {0} paketine erişemezsin."; break;
+                    case "pl": value = "Musisz ukończyć poprzedni pakiet, aby uzyskać dostęp do pakietu {0}."; break;
+                    case "th": value = "คุณต้องทำแพ็กก่อนหน้าให้เสร็จสิ้นก่อนจึงจะเข้าถึงแพ็ก {0} ได้"; break;
+                    case "vi": value = "Bạn cần hoàn thành gói trước để truy cập gói {0}."; break;
+                    case "sv": value = "Du måste slutföra det föregående paketet för att få tillgång till {0}-paketet."; break;
+                    case "el": value = "Πρέπει να ολοκληρώσετε το προηγούμενο πακέτο για να αποκτήσετε πρόσβαση στο πακέτο {0}."; break;
+                    case "id": value = "Anda harus menyelesaikan paket sebelumnya untuk mengakses paket {0}."; break;
+                    default: value = "You need to complete the previous pack to access the {0} pack."; break;
+                }
+                break;
+            case "UIManagerOptScript$$ObtenerTexto2":
+                switch (language)
+                {
+                    case "es": value = "MÚSICA"; break;
+                    case "fr": value = "MUSIQUE"; break;
+                    case "de": value = "MUSIK"; break;
+                    case "pt": value = "MÚSICA"; break;
+                    case "zh": value = "音乐"; break;
+                    case "zh-TW": value = "音樂"; break;
+                    case "hi": value = "संगीत"; break;
+                    case "ru": value = "МУЗЫКА"; break;
+                    case "ja": value = "音楽"; break;
+                    case "it": value = "MUSICA"; break;
+                    case "ko": value = "음악"; break;
+                    case "nl": value = "MUZIEK"; break;
+                    case "tr": value = "MÜZİK"; break;
+                    case "pl": value = "MUZYKA"; break;
+                    case "th": value = "ดนตรี"; break;
+                    case "vi": value = "ÂM NHẠC"; break;
+                    case "sv": value = "MUSIK"; break;
+                    case "el": value = "ΜΟΥΣΙΚΗ"; break;
+                    case "id": value = "MUSIK"; break;
+                    case "ar": value = "موسيقى"; break;
+                    default: value = "MUSIC"; break;
+                }
+                break;
+            case "UIManagerOptScript$$ObtenerTexto3":
+                switch (language)
+                {
+                    case "es": value = "SONIDO"; break;
+                    case "fr": value = "SON"; break;
+                    case "de": value = "KLANG"; break;
+                    case "pt": value = "SOM"; break;
+                    case "zh": value = "声音"; break;
+                    case "zh-TW": value = "聲音"; break;
+                    case "hi": value = "ध्वनि"; break;
+                    case "ru": value = "ЗВУК"; break;
+                    case "ja": value = "音"; break;
+                    case "it": value = "SUONO"; break;
+                    case "ko": value = "소리"; break;
+                    case "nl": value = "GELUID"; break;
+                    case "tr": value = "SES"; break;
+                    case "pl": value = "DŹWIĘK"; break;
+                    case "th": value = "เสียง"; break;
+                    case "vi": value = "ÂM THANH"; break;
+                    case "sv": value = "LJUD"; break;
+                    case "el": value = "ΗΧΟΣ"; break;
+                    case "id": value = "SUARA"; break;
+                    default: value = "SOUND"; break;
+                }
+                break;
+            case "UIManagerOptScript$$ObtenerTexto6":
+                switch (language)
+                {
+                    case "es": value = "¿Seguro que quieres eliminar todo el progreso?"; break;
+                    case "fr": value = "Voulez-vous vraiment\nsupprimer toute la progression ?"; break;
+                    case "de": value = "Möchten Sie wirklich\nden gesamten Fortschritt löschen?"; break;
+                    case "pt": value = "Tem certeza de que deseja excluir todo o progresso?"; break;
+                    case "zh": value = "确定要删除所有进度吗？"; break;
+                    case "zh-TW": value = "確定要刪除所有進度嗎？"; break;
+                    case "hi": value = "क्या आप वाकई\nसारी प्रगति हटाना चाहते हैं?"; break;
+                    case "ru": value = "Вы уверены, что хотите удалить весь прогресс?"; break;
+                    case "ja": value = "すべての進行状況を\n削除してもよろしいですか？"; break;
+                    case "it": value = "Sei sicuro di voler\neliminare tutti i progressi?"; break;
+                    case "ko": value = "모든 진행 상황을\n삭제하시겠습니까?"; break;
+                    case "nl": value = "Weet je zeker dat je\nalle voortgang wilt verwijderen?"; break;
+                    case "tr": value = "Tüm ilerlemeyi silmek\nistediğinizden emin misiniz?"; break;
+                    case "pl": value = "Czy na pewno chcesz\nusunąć cały postęp?"; break;
+                    case "th": value = "คุณแน่ใจหรือไม่ว่า\nต้องการลบความคืบหน้าทั้งหมด?"; break;
+                    case "vi": value = "Bạn có chắc chắn muốn\nxóa toàn bộ tiến trình không?"; break;
+                    case "sv": value = "Är du säker på att du vill radera alla framsteg?"; break;
+                    case "el": value = "Είστε σίγουροι ότι θέλετε να διαγράψετε όλη την πρόοδο;"; break;
+                    case "id": value = "Apakah Anda yakin ingin menghapus semua progres?"; break;
+                    case "ar": value = "هل أنت متأكد أنك تريد\nحذف كل التقدم؟"; break;
+                    default: value = "Are you sure you want\nto delete all progress?"; break;
+                }
+                break;
+            case "UIManagerOptScript$$ObtenerTexto7":
+                switch (language)
+                {
+                    case "es": value = "Progreso borrado"; break;
+                    case "fr": value = "Progression supprimée"; break;
+                    case "de": value = "Fortschritt gelöscht"; break;
+                    case "pt": value = "Progresso apagado"; break;
+                    case "zh": value = "进度已删除"; break;
+                    case "zh-TW": value = "進度已刪除"; break;
+                    case "hi": value = "प्रगति हटा दी गई"; break;
+                    case "ru": value = "Прогресс удален"; break;
+                    case "ja": value = "進行が削除されました"; break;
+                    case "it": value = "Progresso eliminato"; break;
+                    case "ko": value = "진행 삭제됨"; break;
+                    case "nl": value = "Voortgang verwijderd"; break;
+                    case "tr": value = "İlerleme silindi"; break;
+                    case "pl": value = "Postęp usunięty"; break;
+                    case "th": value = "ความคืบหน้าถูกลบ"; break;
+                    case "vi": value = "Tiến trình đã bị xóa"; break;
+                    case "sv": value = "Framsteg raderade"; break;
+                    case "el": value = "Η πρόοδος διαγράφηκε"; break;
+                    case "id": value = "Progres dihapus"; break;
+                    default: value = "Progress deleted"; break;
+                }
+                break;
+            case "UIManagerStoreScript$$ObtenerTexto1":
+                switch (language)
+                {
+                    case "es": value = "COMPRAR"; break;
+                    case "fr": value = "ACHETER"; break;
+                    case "de": value = "KAUFEN"; break;
+                    case "pt": value = "COMPRAR"; break;
+                    case "zh": value = "购买"; break;
+                    case "zh-TW": value = "購買"; break;
+                    case "hi": value = "खरीदें"; break;
+                    case "ru": value = "КУПИТЬ"; break;
+                    case "ja": value = "購入"; break;
+                    case "it": value = "COMPRA"; break;
+                    case "ko": value = "구매"; break;
+                    case "nl": value = "KOPEN"; break;
+                    case "tr": value = "SATIN AL"; break;
+                    case "pl": value = "KUP"; break;
+                    case "th": value = "ซื้อ"; break;
+                    case "vi": value = "MUA"; break;
+                    case "sv": value = "KÖP"; break;
+                    case "el": value = "ΑΓΟΡΑ"; break;
+                    case "id": value = "BELI"; break;
+                    default: value = "BUY"; break;
+                }
+                break;
+            case "UIManagerStoreScript$$ObtenerTexto2":
+                switch (language)
+                {
+                    case "es": value = "Desbloquea todos los packs y elimina anuncios"; break;
+                    case "fr": value = "Débloquez tous les packs et supprimez les pubs"; break;
+                    case "de": value = "Alle packs freischalten und werbung entfernen"; break;
+                    case "pt": value = "Desbloqueie todos os packs e remova anúncios"; break;
+                    case "zh": value = "解锁所有包并移除广告"; break;
+                    case "zh-TW": value = "解鎖所有包並移除廣告"; break;
+                    case "hi": value = "सभी पैक अनलॉक करें और विज्ञापन हटाएं"; break;
+                    case "ru": value = "Разблокируйте все пакеты и удалите рекламу"; break;
+                    case "ja": value = "すべてのパックを解除し、広告を削除"; break;
+                    case "it": value = "Sblocca tutti i pack e rimuovi gli annunci"; break;
+                    case "ko": value = "모든 팩 잠금 해제 및 광고 제거"; break;
+                    case "nl": value = "Ontgrendel alle pakketten en verwijder advertenties"; break;
+                    case "tr": value = "Tüm paketleri aç ve reklamları kaldır"; break;
+                    case "pl": value = "Odblokuj wszystkie pakiety i usuń reklamy"; break;
+                    case "th": value = "ปลดล็อกทุกแพ็กและลบโฆษณา"; break;
+                    case "vi": value = "Mở khóa tất cả các gói và xóa quảng cáo"; break;
+                    case "sv": value = "Lås upp alla paket och ta bort annonser"; break;
+                    case "el": value = "Ξεκλειδώστε όλα τα πακέτα και αφαιρέστε τις διαφημίσεις"; break;
+                    case "id": value = "Buka semua paket dan hapus iklan"; break;
+                    default: value = "Unlock all packs and remove ads"; break;
+                }
+                break;
+            case "UIManagerStoreScript$$ObtenerTexto3":
+                switch (language)
+                {
+                    case "es": value = "Desbloquea el pack {0} y elimina anuncios"; break;
+                    case "fr": value = "Débloquez le pack {0} et supprimez les pubs"; break;
+                    case "de": value = "Schalte das {0}-Paket frei und entferne Werbung"; break;
+                    case "pt": value = "Desbloqueie o pacote {0} e remova anúncios"; break;
+                    case "zh": value = "解锁{0}包并移除广告"; break;
+                    case "zh-TW": value = "解鎖{0}包並移除廣告"; break;
+                    case "hi": value = "{0} पैक अनलॉक करें और विज्ञापन हटाएं"; break;
+                    case "ru": value = "Разблокируйте {0} пакет и удалите рекламу"; break;
+                    case "ja": value = "{0}パックを解除し、広告を削除"; break;
+                    case "it": value = "Sblocca il pacchetto {0} e rimuovi gli annunci"; break;
+                    case "ko": value = "{0} 팩을 잠금 해제하고 광고를 제거하세요"; break;
+                    case "nl": value = "Ontgrendel het {0} pakket en verwijder advertenties"; break;
+                    case "tr": value = "{0} paketini aç ve reklamları kaldır"; break;
+                    case "pl": value = "Odblokuj pakiet {0} i usuń reklamy"; break;
+                    case "th": value = "ปลดล็อกแพ็ก {0} และลบโฆษณา"; break;
+                    case "vi": value = "Mở khóa gói {0} và xóa quảng cáo"; break;
+                    case "sv": value = "Lås upp {0} paketet och ta bort annonser"; break;
+                    case "el": value = "Ξεκλειδώστε το πακέτο {0} και αφαιρέστε τις διαφημίσεις"; break;
+                    case "id": value = "Buka paket {0} dan hapus iklan"; break;
+                    default: value = "Unlock {0} pack and remove ads"; break;
+                }
+                break;
+            case "UIManagerStoreScript$$ObtenerTexto4":
+                switch (language)
+                {
+                    case "es": value = "Eliminar anuncios"; break;
+                    case "fr": value = "Supprimer les pubs"; break;
+                    case "de": value = "Werbung entfernen"; break;
+                    case "pt": value = "Remover anúncios"; break;
+                    case "zh": value = "移除广告"; break;
+                    case "zh-TW": value = "移除廣告"; break;
+                    case "hi": value = "विज्ञापन हटाएं"; break;
+                    case "ru": value = "Удалить рекламу"; break;
+                    case "ja": value = "広告を削除"; break;
+                    case "it": value = "Rimuovi gli annunci"; break;
+                    case "ko": value = "광고 제거"; break;
+                    case "nl": value = "Advertenties verwijderen"; break;
+                    case "tr": value = "Reklamları kaldır"; break;
+                    case "pl": value = "Usuń reklamy"; break;
+                    case "th": value = "ลบโฆษณา"; break;
+                    case "vi": value = "Xóa quảng cáo"; break;
+                    case "sv": value = "Ta bort annonser"; break;
+                    case "el": value = "Αφαίρεση διαφημίσεων"; break;
+                    case "id": value = "Hapus iklan"; break;
+                    default: value = "Remove ads"; break;
+                }
+                break;
+            case "UIManagerStoreScript$$ObtenerTexto5":
+                switch (language)
+                {
+                    case "es": value = "{0} Soluciones Extras"; break;
+                    case "fr": value = "{0} Solutions Supplémentaires"; break;
+                    case "de": value = "{0} Zusätzliche Lösungen"; break;
+                    case "pt": value = "{0} Soluções Extras"; break;
+                    case "zh": value = "{0} 额外解决方案"; break;
+                    case "zh-TW": value = "{0} 額外解決方案"; break;
+                    case "hi": value = "{0} अतिरिक्त समाधान"; break;
+                    case "ru": value = "{0} Дополнительные решения"; break;
+                    case "ja": value = "{0} 追加の解決策"; break;
+                    case "it": value = "{0} Soluzioni Extra"; break;
+                    case "ko": value = "{0} 추가 솔루션"; break;
+                    case "nl": value = "{0} Extra Oplossingen"; break;
+                    case "tr": value = "{0} Ekstra Çözümler"; break;
+                    case "pl": value = "{0} Dodatkowe Rozwiązania"; break;
+                    case "th": value = "{0} โซลูชันเพิ่มเติม"; break;
+                    case "vi": value = "{0} Giải pháp bổ sung"; break;
+                    case "sv": value = "{0} Extra Lösningar"; break;
+                    case "el": value = "{0} Επιπλέον λύσεις"; break;
+                    case "id": value = "{0} Solusi Tambahan"; break;
+                    default: value = "{0} Extra Solutions"; break;
+                }
+                break;
+            case "SolutionLang$$ObtenerTexto":
+                switch (language)
+                {
+                    case "es": value = "¿Quieres ver la solución?"; break;
+                    case "fr": value = "Voulez-vous voir la solution?"; break;
+                    case "de": value = "Möchten Sie die Lösung sehen?"; break;
+                    case "pt": value = "Você quer ver a solução?"; break;
+                    case "zh": value = "想查看解法吗？"; break;
+                    case "zh-TW": value = "想查看解法嗎？"; break;
+                    case "hi": value = "क्या आप समाधान देखना चाहते हैं?"; break;
+                    case "ru": value = "Вы хотите увидеть решение?"; break;
+                    case "ja": value = "解法を\n見ますか？"; break;
+                    case "it": value = "Vuoi vedere la soluzione?"; break;
+                    case "ko": value = "해결책을 보고 싶으신가요?"; break;
+                    case "nl": value = "Wil je de oplossing zien?"; break;
+                    case "tr": value = "Çözümü görmek ister misiniz?"; break;
+                    case "pl": value = "Chcesz zobaczyć rozwiązanie?"; break;
+                    case "th": value = "คุณต้องการดูวิธีแก้ไขหรือไม่?"; break;
+                    case "vi": value = "Bạn có muốn xem giải pháp không?"; break;
+                    case "sv": value = "Vill du se lösningen?"; break;
+                    case "el": value = "Θέλετε να δείτε τη λύση?"; break;
+                    case "id": value = "Apakah Anda ingin melihat solusinya?"; break;
+                    default: value = "Do you want to see the solution?"; break;
+                }
+                break;
+            case "watchBox$$ObtenerTexto1":
+                switch (language)
+                {
+                    case "es": value = "¿Ver un video para desbloquear estos niveles?"; break;
+                    case "fr": value = "Regarder une vidéo pour débloquer ces niveaux ?"; break;
+                    case "de": value = "Video ansehen, um diese Level freizuschalten?"; break;
+                    case "pt": value = "Assistir a um vídeo para desbloquear estes níveis?"; break;
+                    case "zh": value = "观看视频解锁这些关卡？"; break;
+                    case "zh-TW": value = "觀看影片解鎖這些關卡？"; break;
+                    case "hi": value = "इन स्तरों को अनलॉक करने के लिए वीडियो देखें?"; break;
+                    case "ru": value = "Посмотреть видео, чтобы открыть эти уровни?"; break;
+                    case "ja": value = "動画を見て\nこれらのレベルを解放しますか？"; break;
+                    case "it": value = "Guardare un video per sbloccare questi livelli?"; break;
+                    case "ko": value = "동영상을 보고\n이 레벨을 잠금 해제할까요?"; break;
+                    case "nl": value = "Video bekijken om deze levels te ontgrendelen?"; break;
+                    case "tr": value = "Bu seviyeleri açmak için video izlemek ister misiniz?"; break;
+                    case "pl": value = "Obejrzeć wideo, aby odblokować te poziomy?"; break;
+                    case "th": value = "ดูวิดีโอเพื่อปลดล็อกด่านเหล่านี้?"; break;
+                    case "vi": value = "Xem video để mở khóa các cấp độ này?"; break;
+                    case "sv": value = "Titta på en video för att låsa upp dessa nivåer?"; break;
+                    case "el": value = "Δες ένα βίντεο για να ξεκλειδώσεις αυτά τα επίπεδα;"; break;
+                    case "id": value = "Tonton video untuk membuka level ini?"; break;
+                    default: value = "Watch a video to unlock these levels?"; break;
+                }
+                break;
+            default: throw new ArgumentOutOfRangeException("method", method, "Unknown native localization method");
+        }
+        return value.Replace("{0}", argument ?? "");
+    }
+    public static string Reverse(string value) { char[] chars = (value ?? "").ToCharArray(); Array.Reverse(chars); return new string(chars); }
+    public static void Set(Text text, string value) { if (text != null) text.text = value; }
+    static readonly BindingFlags Fields = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+    static void Field(object owner, string name, object value)
+    { FieldInfo field = owner.GetType().GetField(name, Fields); if (field != null) field.SetValue(owner, value); }
+    static string ReadString(object owner, string name)
+    { FieldInfo field = owner.GetType().GetField(name, Fields); return field == null ? null : field.GetValue(owner) as string; }
+    static string Native(object owner, string method, string argument = "") { return Text(owner.GetType().Name + "$$" + method, Language, argument); }
+    public static string SystemLanguageCode(SystemLanguage language)
+    {
+        switch ((int)language)
+        {
+            case 6: return "zh";
+            case 9: return "nl";
+            case 14: return "fr";
+            case 15: return "de";
+            case 16: return "el";
+            case 20: return "id";
+            case 21: return "it";
+            case 22: return "ja";
+            case 23: return "ko";
+            case 27: return "pl";
+            case 28: return "pt";
+            case 30: return "ru";
+            case 34: return "es";
+            case 35: return "sv";
+            case 36: return "th";
+            case 37: return "tr";
+            case 39: return "vi";
+            case 41: return "zh-TW";
+            case 42: return "hi";
+            default: return "en";
+        }
+    }
+    public static void Cycle(UIManagerPortScript owner)
+    {
+        FieldInfo field = typeof(UIManagerPortScript).GetField("lang", Fields);
+        int before = (int)field.GetValue(owner); field.SetValue(owner, unchecked(before + 1));
+        string code = before >= 0 && before < PortCycle.Length ? PortCycle[before] : "en";
+        if (before == 20) { code = "es"; field.SetValue(owner, 1); }
+        Set(owner.TxtLang, code); PlayerPrefs.SetString("language", code); PlayerPrefs.Save();
+    }
+    public static void Cycle(UIManagerSelScript0 owner)
+    {
+        FieldInfo field = typeof(UIManagerSelScript0).GetField("lang", Fields);
+        int before = (int)field.GetValue(owner); field.SetValue(owner, unchecked(before + 1));
+        string code = before >= 0 && before < SelectorCycle.Length ? SelectorCycle[before] : "en";
+        Set(owner.TxtLang, code); PlayerPrefs.SetString("language", code); PlayerPrefs.Save();
+        // The native selector has no wrap/reset branch after index19.
+    }
+    public static bool DispatchLanguageButton(Scene scene)
+    {
+        foreach (var owner in OriginalScenePresentation.Components<UIManagerPortScript>(scene)) { owner.botonLangDown(); return true; }
+        foreach (var owner in OriginalScenePresentation.Components<UIManagerSelScript0>(scene)) { owner.botonLangDown(); return true; }
+        return false;
+    }
+    public static void Apply(settingsLang owner)
+    {
+        Field(owner,"idioma",Language);
+        Field(owner,"tex2",Native(owner,"ObtenerTexto2")); Field(owner,"tex3",Native(owner,"ObtenerTexto3")); Field(owner,"tex6",Native(owner,"ObtenerTexto6"));
+        // Unattached settingsLang.Start only initialized 2/3/6; 1/4/5 retain their native values.
+        for (int i=1;i<=6;i++) Set(typeof(settingsLang).GetField("texto"+i).GetValue(owner) as Text, ReadString(owner,"tex"+i));
+        int longest=Math.Max(owner.texto4 == null ? 0 : owner.texto4.text.Length, owner.texto5 == null ? 0 : owner.texto5.text.Length);
+        int size=longest<=6 ? 31 : longest<=10 ? 27 : 24;
+        foreach(Text text in new[]{owner.texto4,owner.texto5}) if(text!=null) { text.fontSize=size; text.resizeTextMaxSize=size; }
+    }
+    public static bool IsTablet()
+    {
+        float dpi=Screen.dpi; if(dpi==0) return false;
+        return Mathf.Sqrt(Mathf.Pow(Screen.width/dpi,2)+Mathf.Pow(Screen.height/dpi,2))>=7;
+    }
+    public static void ResizeExit(exitLang owner)
+    {
+        RectTransform rect=owner.GetComponent<RectTransform>(); Field(owner,"rectTransform",rect);
+        if(rect!=null) rect.sizeDelta=IsTablet() ? new Vector2(Screen.width*.6000000238418579f,Screen.height*.5f) : new Vector2(Screen.width*.8500000238418579f,Screen.height*.699999988079071f);
+    }
+    public static void Apply(exitLang owner)
+    {
+        ResizeExit(owner); Field(owner,"idioma",Language); bool korean=Language=="ko";
+        if(owner.mensajeTexto!=null) { owner.mensajeTexto.fontSize=korean?45:65; owner.mensajeTexto.horizontalOverflow=korean?HorizontalWrapMode.Overflow:HorizontalWrapMode.Wrap; owner.mensajeTexto.resizeTextMaxSize=korean?70:80; }
+        Set(owner.mensajeTexto,Native(owner,"ObtenerTextoTraducido"));
+    }
+    public static void Apply(noMoreLang owner)
+    { Field(owner,"idioma",Language); string value=Native(owner,"ObtenerTexto"); if(Language=="ar") value=Reverse(value); Field(owner,"tex1",value); Set(owner.texto1,value); }
+    public static void Apply(SolutionLang owner)
+    { Field(owner,"idioma",Language); string value=Native(owner,"ObtenerTexto"); if(Language=="ar") value=Reverse(value); Field(owner,"texto1",value); Set(owner.texto1a,value); }
+    public static void Apply(rateUsLang owner)
+    {
+        Field(owner,"idioma",Language);
+        for(int i=1;i<=3;i++) { string value=Native(owner,"ObtenerTexto"+i); Field(owner,"tex"+i,value); Set(typeof(rateUsLang).GetField("texto"+i).GetValue(owner) as Text,value); }
+    }
+    public static void FitRate(rateUsLang owner)
+    {
+        Canvas.ForceUpdateCanvases(); if(owner.texto1==null || owner.texto2==null) return;
+        int size=Math.Min(owner.texto1.cachedTextGenerator.fontSizeUsedForBestFit,owner.texto2.cachedTextGenerator.fontSizeUsedForBestFit);
+        owner.texto1.resizeTextForBestFit=owner.texto2.resizeTextForBestFit=false;
+        owner.texto1.fontSize=owner.texto2.fontSize=size;
+    }
+    public static void Apply(UIManagerOptScript owner)
+    {
+        Field(owner,"idioma",Language);
+        foreach(int i in new[]{2,3,6,7}) { string value=Native(owner,"ObtenerTexto"+i); Field(owner,"tex"+i,value); Set(typeof(UIManagerOptScript).GetField("texto"+i).GetValue(owner) as Text,value); }
+    }
+    public static void Apply(UIManagerStoreScript owner)
+    {
+        Field(owner,"idiomaActual",Language);
+        string buy=Native(owner,"ObtenerTexto1"); Field(owner,"tex1",buy);
+        for(int i=1;i<=12;i++) Set(typeof(UIManagerStoreScript).GetField("texto1_"+i).GetValue(owner) as Text,buy);
+        string[] values=new string[12]; values[0]=Native(owner,"ObtenerTexto2");
+        string[] packs={"CLASSIC","POOLS","SPRINGS","MECH","JETS","NIGHT"};
+        for(int i=0;i<6;i++) { Field(owner,"packName",packs[i]); values[i+1]=Native(owner,"ObtenerTexto3",packs[i]); }
+        values[7]=Native(owner,"ObtenerTexto4"); string[] counts={"15","30","80","200"};
+        for(int i=0;i<4;i++) { Field(owner,"cantidad",counts[i]); values[i+8]=Native(owner,"ObtenerTexto5",counts[i]); }
+        for(int i=0;i<12;i++) { Field(owner,"tex"+(i+2),values[i]); Set(typeof(UIManagerStoreScript).GetField("texto"+(i==0 ? "" : (i+1).ToString())).GetValue(owner) as Text,values[i]); }
+    }
+    public static void Apply(CajaComplete owner)
+    { Field(owner,"idioma",Language); string value=Native(owner,"ObtenerTexto2"); Field(owner,"texto2",value); Set(owner.text2,value); }
+    public static void Apply(watchBox owner)
+    { Field(owner,"idioma",Language); string value=Native(owner,"ObtenerTexto1"); Field(owner,"tex1",value); Set(owner.texto1,value); }
+    public static void ApplyScene(Scene scene)
+    {
+        foreach(var owner in OriginalScenePresentation.Components<UIManagerOptScript>(scene)) Apply(owner);
+        foreach(var owner in OriginalScenePresentation.Components<UIManagerStoreScript>(scene)) Apply(owner);
+        foreach(var owner in OriginalScenePresentation.Components<exitLang>(scene)) Apply(owner);
+        foreach(var owner in OriginalScenePresentation.Components<rateUsLang>(scene)) Apply(owner);
+        foreach(var owner in OriginalScenePresentation.Components<noMoreLang>(scene)) Apply(owner);
+        foreach(var owner in OriginalScenePresentation.Components<SolutionLang>(scene)) Apply(owner);
+        foreach(var owner in OriginalScenePresentation.Components<CajaComplete>(scene)) Apply(owner);
+        foreach(var owner in OriginalScenePresentation.Components<watchBox>(scene)) Apply(owner);
+        // Existing HelpRotate owns its two native labels and Arabic reverse lifecycle.
+    }
+    public static void SelectorLayout(UIManagerSelScript0 owner,string language)
+    {
+        switch(language)
+        {
+            case "es":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=70;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=70;
+                if(owner.textUnlock1!=null && owner.textUnlock1!=null) { Vector2 offset=owner.textUnlock1.rectTransform.offsetMax; offset.y=106.0999984741211f; owner.textUnlock1.rectTransform.offsetMax=offset; }
+                break;
+            case "en":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                if(owner.textUnlock1!=null && owner.textUnlock1!=null) { Vector2 offset=owner.textUnlock1.rectTransform.offsetMax; offset.y=106.0999984741211f; owner.textUnlock1.rectTransform.offsetMax=offset; }
+                break;
+            case "fr":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=70;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=70;
+                if(owner.textUnlock1!=null && owner.textUnlock1!=null) { Vector2 offset=owner.textUnlock1.rectTransform.offsetMax; offset.y=111.19999694824219f; owner.textUnlock1.rectTransform.offsetMax=offset; }
+                if(owner.textUnlock2!=null && owner.textUnlock2!=null) { Vector2 offset=owner.textUnlock2.rectTransform.offsetMax; offset.y=113.80000305175781f; owner.textUnlock2.rectTransform.offsetMax=offset; }
+                break;
+            case "de":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            case "pt":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            case "zh":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=70;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=70;
+                if(owner.textUnlock1!=null && owner.textUnlock1!=null) { Vector2 offset=owner.textUnlock1.rectTransform.offsetMax; offset.y=106.0999984741211f; owner.textUnlock1.rectTransform.offsetMax=offset; }
+                if(owner.textUnlock2!=null && owner.textUnlock2!=null) { Vector2 offset=owner.textUnlock2.rectTransform.offsetMax; offset.y=114.5999984741211f; owner.textUnlock2.rectTransform.offsetMax=offset; }
+                break;
+            case "zh-TW":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            case "hi":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=62;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=62;
+                if(owner.textUnlock1!=null && owner.textUnlock1!=null) { Vector2 offset=owner.textUnlock1.rectTransform.offsetMax; offset.y=110.19999694824219f; owner.textUnlock1.rectTransform.offsetMax=offset; }
+                if(owner.textUnlock2!=null && owner.textUnlock2!=null) { Vector2 offset=owner.textUnlock2.rectTransform.offsetMax; offset.y=114.5999984741211f; owner.textUnlock2.rectTransform.offsetMax=offset; }
+                if(owner.textUnlock2!=null && owner.textUnlock1!=null) { Vector2 offset=owner.textUnlock1.rectTransform.offsetMin; offset.y=-113.4000015258789f; owner.textUnlock2.rectTransform.offsetMin=offset; }
+                break;
+            case "ru":
+                if(owner.textUnlock1!=null && owner.textUnlock1!=null) { Vector2 offset=owner.textUnlock1.rectTransform.offsetMax; offset.y=110.0f; owner.textUnlock1.rectTransform.offsetMax=offset; }
+                break;
+            case "ja":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            case "it":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=70;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=70;
+                if(owner.textUnlock1!=null && owner.textUnlock1!=null) { Vector2 offset=owner.textUnlock1.rectTransform.offsetMax; offset.y=106.0999984741211f; owner.textUnlock1.rectTransform.offsetMax=offset; }
+                break;
+            case "ko":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=62;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=62;
+                if(owner.textUnlock1!=null && owner.textUnlock1!=null) { Vector2 offset=owner.textUnlock1.rectTransform.offsetMax; offset.y=110.19999694824219f; owner.textUnlock1.rectTransform.offsetMax=offset; }
+                if(owner.textUnlock2!=null && owner.textUnlock2!=null) { Vector2 offset=owner.textUnlock2.rectTransform.offsetMax; offset.y=114.5999984741211f; owner.textUnlock2.rectTransform.offsetMax=offset; }
+                if(owner.textUnlock2!=null && owner.textUnlock1!=null) { Vector2 offset=owner.textUnlock1.rectTransform.offsetMin; offset.y=-113.4000015258789f; owner.textUnlock2.rectTransform.offsetMin=offset; }
+                break;
+            case "nl":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            case "tr":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            case "pl":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            case "th":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            case "vi":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            case "sv":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            case "el":
+                if(owner.textUnlock1!=null && owner.textUnlock1!=null) { Vector2 offset=owner.textUnlock1.rectTransform.offsetMax; offset.y=108.69999694824219f; owner.textUnlock1.rectTransform.offsetMax=offset; }
+                break;
+            case "id":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            case "ar":
+                if(owner.textUnlock2!=null) owner.textUnlock2.fontSize=78;
+                if(owner.textUnlock2!=null) owner.textUnlock2.resizeTextMaxSize=78;
+                break;
+            default: if(owner.textUnlock2!=null) { owner.textUnlock2.fontSize=78; owner.textUnlock2.resizeTextMaxSize=78; } break;
+        }
+    }
+    public static bool DispatchDesigner(string method,Scene scene)
+    {
+        foreach(var owner in OriginalScenePresentation.Components<UIManagerSelScript0>(scene))
+        {
+            switch(method) { case "botonDesign0Down": owner.botonDesign0Down(); return true; case "botonDesign1Down": owner.botonDesign1Down(); return true; case "botonDesign2Down": owner.botonDesign2Down(); return true; case "botonDesign3Down": owner.botonDesign3Down(); return true; case "botonDesign4Down": owner.botonDesign4Down(); return true; }
+        }
+        foreach(var owner in OriginalScenePresentation.Components<UIManagerSelScript>(scene))
+        {
+            switch(method) { case "botonDesignDown": owner.botonDesignDown(); return true; case "botonDesignDown2": owner.botonDesignDown2(); return true; case "botonDesignDown3": owner.botonDesignDown3(); return true; case "botonDesignSolucion": owner.botonDesignSolucion(); return true; case "botonDesignSolucion2": owner.botonDesignSolucion2(); return true; }
+        }
+        return false;
+    }
+}

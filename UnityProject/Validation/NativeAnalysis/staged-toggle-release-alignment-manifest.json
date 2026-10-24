@@ -1,0 +1,19 @@
+{
+  "status": "Immutable staging only; main unchanged during final All800",
+  "baseFile": "UnityProject\\Assets\\Scripts\\RecoveryRuntime\\RecoveredNativeSprings.cs",
+  "baseSHA256": "731e3aeb403e2f6659ec226c79db0bfde7a93135f28c5704baae4b22cb59a45c",
+  "sourceFile": "UnityProject\\Validation\\NativeAnalysis\\RecoveredNativeSprings.pending-toggle-release-alignment.cs.src",
+  "sourceSHA256": "e912469868c58c8ab0605fe5aee52bf7baba845fa6ab85a55610563a94f25a02",
+  "changes": [
+    "Resorte3 latched deactivation phases also perform original source-parent X/Z, sourceY+7.6 alignment before switch publication",
+    "Mode0 plain falling edge retains direct doDesactivarMech with no actor alignment",
+    "Choose tiempo2 for latched doSubir, tiempo1 for doBajar; original prefab values currently both .1"
+  ],
+  "nativeEvidence": [
+    "Resorte3.Update1028050..8070 and10280F8..8118 schedule phase2/4 doSubirPieza with tiempo2",
+    "Resorte3.doSubirPieza1029094..917C sets otherObject.parent to sourceParentX/Z and sourceY+7.6 before1029184 doDesactivarMech",
+    "Mode0 falling edge1027F38..7F5C invokes doDesactivarMech directly"
+  ],
+  "failureEvidence": "Validation/NativeAnalysis/gm1142-all-comparison.json and gm1142-reg-comparison.json: step13 phase2 publication returns source37 but absent original alignment leaves selected54 at34.35; step16 original26.75 capture is then empty and channels4/2/5 never activate",
+  "limitations": "Static confirmed correction; actual Unity regression must run gm1142 and consecutive1138..1149, Modes/Constraints. No claim of completed All800."
+}

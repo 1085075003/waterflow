@@ -1,0 +1,25 @@
+{
+  "createdUtc": "2026-10-16T02:19:18.982737+00:00",
+  "scope": "Offline aggregation/audit tooling only. No Assets edits, no Unity launch, no final coverage generated while main800 is running.",
+  "files": [
+    {
+      "path": "Validation/aggregate_native_gameplay.py",
+      "sha256": "8adb83e9a80ad48e6b9314dcf2e1b17b458fb9bc1a9c460c0029df5f7b06dca1"
+    },
+    {
+      "path": "Validation/test_aggregate_native_gameplay.py",
+      "sha256": "defc9b47a4259cdcf72748e3bc6d191df6b74d4e92f294a5644a117f516412c7"
+    },
+    {
+      "path": "Validation/native-gameplay-compatibility.example.json",
+      "sha256": "534ce10a1bd65994acd5e90068a5f9a73b430964f1c6ff8a26c06faed68ae4a4"
+    }
+  ],
+  "validation": {
+    "syntheticBoundaryTests": 12,
+    "syntheticBoundaryResult": "PASS; synthetic fixtures are not Unity gameplay evidence",
+    "actualFinishedReportAudit": "Read only the actual754/761 v8 finished report; both passed every strict per-level audit with no issues. No800-level aggregate created."
+  },
+  "usage": "python Validation/aggregate_native_gameplay.py --base FINISHED_MAIN800.json --retest FINISHED_FAILED_SUBSET.json --compatibility REAL_RUNTIME_COMPATIBILITY.json",
+  "note": "Default output is base directory/native-gameplay-coverage.json; base and retests are immutable. Exit2 rejects unfinished/invalid/hash-incompatible inputs without writing an artifact. Exit1 writes honest incomplete aggregate coverage. Exit0 requires800 actual valid levels and11919 original records."
+}

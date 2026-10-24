@@ -1,0 +1,154 @@
+{
+  "review_type": "Independent read-only static C#/DLL/configuration review after UGUI reference and DLL import repairs",
+  "review_date": "2026-10-15",
+  "unity_version": "2022.3.62f2",
+  "result": "No high-confidence remaining compiler or Editor helper API blocker found in the reviewed files.",
+  "csharp_syntax": {
+    "tool": "Microsoft.CodeAnalysis.CSharp (Roslyn bundled with local PowerShell runtime)",
+    "files": 376,
+    "preprocessor_symbols": [
+      "UNITY_EDITOR"
+    ],
+    "syntax_errors": [],
+    "note": "Includes the recovery Editor helper. Parse-only diagnostics; this is not semantic compilation."
+  },
+  "managed_dll_metadata": {
+    "method": "System.Reflection.Metadata.PEReader, metadata-only; no exported DLL code was executed.",
+    "dlls": 38,
+    "all_non_system_non_engine_dependencies_present": true,
+    "unaccounted_assembly_references": [],
+    "dlls_without_enabled_editor_import": [],
+    "expected_external_assembly_references": {
+      "System": [
+        "Firebase.Platform.dll",
+        "Google.Play.Common.dll",
+        "Google.Play.Core.dll",
+        "GoogleMobileAds.Mediation.UnityAds.Android.dll",
+        "GoogleMobileAds.Mediation.UnityAds.Api.dll",
+        "GoogleMobileAds.Mediation.UnityAds.Common.dll",
+        "Newtonsoft.Json.dll",
+        "Unity.Services.Core.Internal.dll",
+        "UnityEngine.Purchasing.dll",
+        "UnityEngine.Purchasing.Security.dll",
+        "UnityEngine.Purchasing.Stores.dll"
+      ],
+      "System.Core": [
+        "GoogleMobileAds.Core.dll",
+        "Newtonsoft.Json.dll",
+        "Unity.Services.Analytics.dll",
+        "UnityEngine.Purchasing.dll",
+        "UnityEngine.Purchasing.Stores.dll"
+      ],
+      "System.Data": [
+        "Newtonsoft.Json.dll"
+      ],
+      "System.Numerics": [
+        "Newtonsoft.Json.dll"
+      ],
+      "System.Runtime.Serialization": [
+        "Newtonsoft.Json.dll"
+      ],
+      "System.Xml": [
+        "Newtonsoft.Json.dll"
+      ],
+      "System.Xml.Linq": [
+        "Newtonsoft.Json.dll"
+      ],
+      "UnityEngine.AndroidJNIModule": [
+        "Google.Play.Common.dll",
+        "Google.Play.Core.dll",
+        "GoogleMobileAds.Android.dll",
+        "GoogleMobileAds.Ump.Android.dll",
+        "Unity.Services.Core.Device.dll",
+        "UnityEngine.Purchasing.Stores.dll"
+      ],
+      "UnityEngine.AssetBundleModule": [
+        "Google.Play.Common.dll"
+      ],
+      "UnityEngine.CoreModule": [
+        "Firebase.Platform.dll",
+        "Google.Play.Common.dll",
+        "Google.Play.Core.dll",
+        "GoogleMobileAds.Android.dll",
+        "GoogleMobileAds.Common.dll",
+        "GoogleMobileAds.Core.dll",
+        "GoogleMobileAds.Ump.Android.dll",
+        "Unity.Services.Analytics.dll",
+        "Unity.Services.Core.Configuration.dll",
+        "Unity.Services.Core.dll",
+        "Unity.Services.Core.Internal.dll",
+        "Unity.Services.Core.Registration.dll",
+        "Unity.Services.Core.Scheduler.dll",
+        "UnityEngine.Purchasing.dll",
+        "UnityEngine.Purchasing.Stores.dll"
+      ],
+      "UnityEngine.UI": [
+        "Google.Play.Common.dll"
+      ],
+      "UnityEngine.UnityAnalyticsModule": [
+        "Unity.Analytics.StandardEvents.dll"
+      ],
+      "UnityEngine.UnityWebRequestModule": [
+        "Google.Play.Common.dll",
+        "Unity.Services.Analytics.dll",
+        "Unity.Services.Core.Internal.dll"
+      ],
+      "mscorlib": [
+        "__Generated.dll",
+        "Firebase.Analytics.dll",
+        "Firebase.App.dll",
+        "Firebase.Platform.dll",
+        "Google.Play.Common.dll",
+        "Google.Play.Core.dll",
+        "GoogleMobileAds.Android.dll",
+        "GoogleMobileAds.Common.dll",
+        "GoogleMobileAds.Core.dll",
+        "GoogleMobileAds.dll",
+        "GoogleMobileAds.Mediation.UnityAds.Android.dll",
+        "GoogleMobileAds.Mediation.UnityAds.Api.dll",
+        "GoogleMobileAds.Mediation.UnityAds.Common.dll",
+        "GoogleMobileAds.Ump.Android.dll",
+        "GoogleMobileAds.Ump.dll",
+        "Newtonsoft.Json.dll",
+        "Purchasing.Common.dll",
+        "System.Runtime.CompilerServices.Unsafe.dll",
+        "Unity.Analytics.StandardEvents.dll",
+        "Unity.Services.Analytics.dll",
+        "Unity.Services.Core.Configuration.dll",
+        "Unity.Services.Core.Device.dll",
+        "Unity.Services.Core.dll",
+        "Unity.Services.Core.Environments.Internal.dll",
+        "Unity.Services.Core.Internal.dll",
+        "Unity.Services.Core.Registration.dll",
+        "Unity.Services.Core.Scheduler.dll",
+        "Unity.Services.Core.Telemetry.dll",
+        "Unity.Services.Core.Threading.dll",
+        "UnityEngine.Purchasing.AppleCore.dll",
+        "UnityEngine.Purchasing.AppleMacosStub.dll",
+        "UnityEngine.Purchasing.AppleStub.dll",
+        "UnityEngine.Purchasing.dll",
+        "UnityEngine.Purchasing.Security.dll",
+        "UnityEngine.Purchasing.SecurityCore.dll",
+        "UnityEngine.Purchasing.Stores.dll",
+        "UnityEngine.Purchasing.WinRTCore.dll",
+        "UnityEngine.Purchasing.WinRTStub.dll"
+      ]
+    },
+    "ugui_dependency": "1.0.0",
+    "note": "System and Unity engine assemblies come from the target Unity Editor. UnityEngine.UI comes from com.unity.ugui. Availability was inferred from the declared target version/package rather than an installed Editor."
+  },
+  "manual_checks": [
+    "Purchaser/Purchaser0 preserve the IStoreListener callback signatures, including both OnInitializeFailed overloads.",
+    "Recovered methods with out parameters assign them before return in inspected samples (Water.CreateWaterObjects, FirstPersonController.GetInput, MoveBloque.ReturnClickedObject).",
+    "FlowWaterLayoutPreview.cs uses EditorWindow/MenuItem, AssetDatabase, PrefabUtility.InstantiatePrefab(Object, Scene), additive EditorSceneManager scenes, SceneManager and SceneView APIs consistent with Unity 2022.3.",
+    "The helper JSON envelope and Save fields agree with decoded gm1.json; compact alias JSON has the expected aliases list and boolean/integer/string fields.",
+    "The helper is Editor-only, creates a new additive scene, checks list lengths, refuses Save1 move-step data, and labels color/inferred geometry limitations.",
+    "Packages/manifest.json and ProjectSettings/ProjectVersion.txt are present; target version is 2022.3.62f2 and com.unity.ugui is declared as 1.0.0."
+  ],
+  "limitations": [
+    "Unity Editor is not installed in this environment. No actual Unity asset import, semantic C# compilation, shader compilation, Play Mode, device build or game fidelity test was performed.",
+    "Roslyn syntax parsing and assembly-reference closure do not establish full type correctness or engine binary compatibility.",
+    "Recovered IL2CPP script method bodies and retained SDK DLL implementations are stubs. Their declarations do not restore gameplay, water simulation, advertising, analytics or purchasing behavior.",
+    "The new layout helper provides a geometry preview and does not establish restored original gameplay."
+  ]
+}

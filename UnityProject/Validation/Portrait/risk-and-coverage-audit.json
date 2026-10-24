@@ -1,0 +1,90 @@
+{
+  "capturedUtc": "2026-10-17T01:52:32.9482827Z",
+  "scope": "Independent read-only audit and Editor-only portrait QA tool. Runtime evidence is produced separately by the parent agent; this report does not claim that a capture has passed.",
+  "scenes": 9,
+  "menuScenes": 5,
+  "gameplayScenes": 4,
+  "runtimeSizes": [
+    {
+      "height": 1280,
+      "width": 720,
+      "aspect": "9:16"
+    },
+    {
+      "height": 1560,
+      "width": 720,
+      "aspect": "9:19.5"
+    },
+    {
+      "height": 1024,
+      "width": 768,
+      "aspect": "3:4"
+    }
+  ],
+  "sampleLevels": [
+    1,
+    407,
+    518,
+    626,
+    1058,
+    1095,
+    2001
+  ],
+  "expectedFramesPerSize": 20,
+  "findings": [
+    {
+      "topic": "Prior portrait board fitting",
+      "evidence": "RecoveredBoardFraming previously returned immediately for aspect < 1; cropping was not prevented.",
+      "severity": "high",
+      "resolution": "Portrait gameplay agent has added a HUD-free viewport fit. Actual mesh-vertex verification is still required in Unity."
+    },
+    {
+      "topic": "Actual layout viewport",
+      "evidence": "Native UI reads Screen.width/height and uses CanvasScaler. A portrait RenderTexture alone does not prove native portrait reflow.",
+      "severity": "high",
+      "resolution": "Capture is tied to the actual Game View resolution, records it, and aborts if it changes mid-suite."
+    },
+    {
+      "topic": "Animator override",
+      "evidence": "Native UI animations set transforms when menus, solution or completion panels are shown.",
+      "severity": "high",
+      "resolution": "Export inventories all position/scale/size/anchor animation bindings. Runtime checks wait after transitions."
+    },
+    {
+      "topic": "Coverage",
+      "evidence": "Initial six proposed levels missed the default Levely5 gameplay scene.",
+      "severity": "medium",
+      "resolution": "gm1 added. The suite now covers all four gameplay scenes; menus cover all five other scenes."
+    },
+    {
+      "topic": "Safe area",
+      "evidence": "Desktop Game View normally reports the entire screen as safe. It does not simulate an actual device notch by itself.",
+      "severity": "medium",
+      "resolution": "All active control rectangles are checked against actual Screen.safeArea. Device Simulator or device hardware is needed for additional real notch evidence."
+    },
+    {
+      "topic": "Hidden UI and paging",
+      "evidence": "Inactive modal panels and masked scrolling pages can intentionally sit outside the viewport.",
+      "severity": "medium",
+      "resolution": "Static audit inventories them without failing. Runtime tests skip masked fully-offscreen children and background controls behind active modals."
+    }
+  ],
+  "validationTool": "Assets/Editor/Portrait/FlowWaterPortraitValidation.cs",
+  "exportEntry": "Recovered.FlowWater.Editor.FlowWaterArtPortraitValidation.Export",
+  "captureEntry": "Recovered.FlowWater.Editor.FlowWaterArtPortraitValidation.Capture",
+  "currentFrameEntry": "Recovered.FlowWater.Editor.FlowWaterPortraitValidation.Audit",
+  "outputPattern": "Validation/Portrait/Runtime-WIDTHxHEIGHT/portrait-runtime-validation.json",
+  "runtimeAssertions": [
+    "Actual Game View is portrait and unchanged during the run",
+    "Active unmasked controls stay inside Screen.safeArea",
+    "Targets are at least approximately 44 units in a 720-wide design reference",
+    "EventSystem center rays reach the expected control or a descendant",
+    "Every visible structural mesh vertex is inside the exposed HUD-free PlayfieldViewport and near/far clipping range",
+    "No missing active text fonts or runtime Error/Exception/Assert"
+  ],
+  "limits": [
+    "Button rectangle overlap and controls entering the reserved playfield are reported as warnings for visual review because intentional slider/gesture container overlaps can exist.",
+    "Native win/flow/input/fountain invariants remain covered by existing gameplay validation; the visual suite never treats geometry matching as proof of native win behavior.",
+    "The suite changes normal Play-mode navigation and applies saved solutions only to gather initial/solution view evidence. It does not write production scenes or assets."
+  ]
+}

@@ -1,0 +1,49 @@
+// rateUsLang$$Ajustar VA 0x100B58C, inferred length 188
+void rateUsLang__Ajustar (rateUsLang_o* __this, const MethodInfo* method);
+0100B58C  str      x30, [sp, #-0x20]!                    
+0100B590  stp      x20, x19, [sp, #0x10]                 
+0100B594  mov      x19, x0                               
+0100B598  mov      x0, xzr                               
+0100B59C  bl       #0x2211b50                             // UnityEngine.Canvas$$ForceUpdateCanvases
+0100B5A0  ldr      x0, [x19, #0x20]                       // self.texto1
+0100B5A4  cbz      x0, #0x100b644                        
+0100B5A8  mov      x1, xzr                               
+0100B5AC  bl       #0x2231918                             // UnityEngine.UI.Text$$get_cachedTextGenerator
+0100B5B0  cbz      x0, #0x100b644                        
+0100B5B4  mov      x1, xzr                               
+0100B5B8  bl       #0x20b977c                             // UnityEngine.TextGenerator$$get_fontSizeUsedForBestFit
+0100B5BC  ldr      x8, [x19, #0x28]                       // self.texto2
+0100B5C0  cbz      x8, #0x100b644                        
+0100B5C4  mov      w20, w0                               
+0100B5C8  mov      x0, x8                                
+0100B5CC  mov      x1, xzr                               
+0100B5D0  bl       #0x2231918                             // UnityEngine.UI.Text$$get_cachedTextGenerator
+0100B5D4  cbz      x0, #0x100b644                        
+0100B5D8  mov      x1, xzr                               
+0100B5DC  bl       #0x20b977c                             // UnityEngine.TextGenerator$$get_fontSizeUsedForBestFit
+0100B5E0  ldr      x8, [x19, #0x20]                       // self.texto1
+0100B5E4  cmp      w20, w0                               
+0100B5E8  csel     w20, w20, w0, lt                      
+0100B5EC  cbz      x8, #0x100b644                        
+0100B5F0  mov      x0, x8                                
+0100B5F4  mov      w1, wzr                               
+0100B5F8  mov      x2, xzr                               
+0100B5FC  bl       #0x2231f50                             // UnityEngine.UI.Text$$set_resizeTextForBestFit
+0100B600  ldr      x0, [x19, #0x28]                       // self.texto2
+0100B604  cbz      x0, #0x100b644                        
+0100B608  mov      w1, wzr                               
+0100B60C  mov      x2, xzr                               
+0100B610  bl       #0x2231f50                             // UnityEngine.UI.Text$$set_resizeTextForBestFit
+0100B614  ldr      x0, [x19, #0x20]                       // self.texto1
+0100B618  cbz      x0, #0x100b644                        
+0100B61C  mov      w1, w20                               
+0100B620  mov      x2, xzr                               
+0100B624  bl       #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+0100B628  ldr      x0, [x19, #0x28]                       // self.texto2
+0100B62C  cbz      x0, #0x100b644                        
+0100B630  mov      w1, w20                               
+0100B634  ldp      x20, x19, [sp, #0x10]                 
+0100B638  mov      x2, xzr                               
+0100B63C  ldr      x30, [sp], #0x20                      
+0100B640  b        #0x2232180                             // UnityEngine.UI.Text$$set_fontSize
+0100B644  bl       #0xe61da0                             

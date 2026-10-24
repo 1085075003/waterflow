@@ -1,0 +1,53 @@
+{
+  "continueOnFailure": true,
+  "jobs": [
+    {
+      "name": "propagation",
+      "method": "Recovered.FlowWater.Editor.FlowWaterPropagationValidation.Run",
+      "reportDirectory": "Validation/WaterPropagation",
+      "reportFile": "water-propagation-validation.json",
+      "archiveDestination": "PreflightMechanics/propagation",
+      "timeoutSeconds": 1800
+    },
+    {
+      "name": "automatic",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.Run",
+      "reportDirectory": "Validation/NativeStepPlayback",
+      "reportFile": "native-step-playback-validation.json",
+      "archiveDestination": "PreflightMechanics/automatic",
+      "timeoutSeconds": 1800
+    },
+    {
+      "name": "mechanisms",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.RunMechanisms",
+      "reportDirectory": "Validation/NativeStepPlayback",
+      "reportFile": "native-step-playback-validation.json",
+      "archiveDestination": "PreflightMechanics/mechanisms",
+      "timeoutSeconds": 1800
+    },
+    {
+      "name": "lifts",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.RunLifts",
+      "reportDirectory": "Validation/NativeStepPlayback",
+      "reportFile": "native-step-playback-validation.json",
+      "archiveDestination": "PreflightMechanics/lifts",
+      "timeoutSeconds": 1800
+    },
+    {
+      "name": "missing",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.RunMissingCapture",
+      "reportDirectory": "Validation/NativeStepPlayback",
+      "reportFile": "native-step-playback-validation.json",
+      "archiveDestination": "PreflightMechanics/missing",
+      "timeoutSeconds": 1800
+    },
+    {
+      "name": "capture-lifetime",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.RunCaptureLifetime",
+      "reportDirectory": "Validation/NativeStepPlayback",
+      "reportFile": "native-step-playback-validation.json",
+      "archiveDestination": "PreflightMechanics/capture-lifetime",
+      "timeoutSeconds": 1800
+    }
+  ]
+}

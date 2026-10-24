@@ -1,0 +1,101 @@
+--- UnityProject\Assets\Scripts\RecoveryRuntime\RecoveredNativeSprings.cs
++++ UnityProject\Validation\NativeAnalysis\RecoveredNativeSprings.pending-stop-and-floor.cs.src
+@@ -39,7 +39,7 @@
+         sealed class Channel
+         {
+             public readonly List<Binding> bindings = new List<Binding>();
+-            public int index, position, maximum, direction;
++            public int index, position, maximum, direction, manager;
+             public bool wasActive, moving, blocked;
+         }
+         sealed class Plate
+@@ -68,7 +68,7 @@
+             public int[] carried;
+         }
+         sealed class BindingState { public int position; public Vector3[] poses; public Quaternion[] rotations; }
+-        sealed class ChannelState { public int position, direction; public bool wasActive, moving, blocked; }
++        sealed class ChannelState { public int position, direction, manager; public bool wasActive, moving, blocked; }
+         sealed class PlateState
+         {
+             public int phase; public bool wasOccupied, output1, output2, published1, published2, pending; public float remaining; public int occupant;
+@@ -88,7 +88,6 @@
+         RuntimeWaterMechanisms bus;
+         MethodInfo physicalSwitch;
+         bool restoring;
+-        int positionSignature;
+         public int ObserverCount { get { return actors.Count; } }
+         public int PhysicalSwitchCount { get { return plates.Count; } }
+         public bool IsBusy { get; private set; }
+@@ -151,6 +150,10 @@
+                         Resorte3 plate = model == null ? null : model.GetComponent<Resorte3>();
+                         if (plate != null)
+                         {
++                            // ControlFijo.Start10787D0..10788C4 moves the
++                            // transparent floor button4.5 local units down.
++                            if (source is ControlFijo && (piece.BasePrefab ?? "").IndexOf("Piezatrans1", StringComparison.Ordinal) >= 0)
++                                model.transform.localPosition = new Vector3(0, -4.5f, 0);
+                             plate.conResorte = button; plate.modoRes3 = Text(source, "modoRes3");
+                             Set(plate, "sphereRadius", 1f); // Resorte3.ctor10295DC..E4.
+                             Int32.TryParse(plate.modoRes3, out int mode);
+@@ -209,15 +212,6 @@
+                 for (int i = 1; i <= 8; i++) Global("activadoRes" + i, false);
+                 return;
+             }
+-            int signature = 17;
+-            foreach (RecoveryPiece piece in game.Pieces)
+-                if (piece != null && !IsProxy(piece))
+-                    unchecked { signature = signature * 31 + Mathf.RoundToInt(piece.transform.position.x * 10); signature = signature * 31 + Mathf.RoundToInt(piece.transform.position.y * 10); signature = signature * 31 + Mathf.RoundToInt(piece.transform.position.z * 10); }
+-            if (signature != positionSignature)
+-            {
+-                for (int i = 1; i <= 8; i++) channels[i].blocked = false;
+-                positionSignature = signature;
+-            }
+             UpdatePlates();
+             IsBusy = false;
+             for (int i = 1; i <= 8; i++) UpdateChannel(channels[i]);
+@@ -259,7 +253,14 @@
+         void UpdateChannel(Channel channel)
+         {
+             if (channel == null || channel.bindings.Count == 0) return;
+-            bool active = GlobalInt("conResorte" + channel.index) == 1;
++            int manager = GlobalInt("conResorte" + channel.index);
++            // Native doPrevio10C8B34..54 reruns only on its channel's
++            // manager/position change. Moving an unrelated player piece does
++            // not retry a failed3/5 request while the intake stays wet.
++            if (manager != channel.manager) { channel.manager = manager; channel.blocked = false; }
++            if (manager == 3 || manager == 5)
++            { channel.blocked = true; Global("activadoRes" + channel.index, false); return; }
++            bool active = manager == 1;
+             if (active != channel.wasActive) { channel.wasActive = active; channel.blocked = false; }
+             if (channel.moving || channel.blocked) return;
+             int target = active ? channel.maximum : 0;
+@@ -278,6 +279,11 @@
+                 if (!Prepare(binding, step, direction))
+                 {
+                     channel.blocked = true;
++                    // doResorte forward10CA51C..554 and reverse10CA774..7A0
++                    // publish3/5 through doChangeManager and stop this request.
++                    channel.manager = direction > 0 ? 3 : 5;
++                    Global("conResorte" + channel.index, channel.manager);
++                    Global("activadoRes" + channel.index, false);
+                     foreach (Binding cancel in channel.bindings)
+                     {
+                         cancel.actor.moving = false; GateNativeRotatingWater(cancel.actor, false); RestoreMovable(cancel.actor.piece);
+@@ -706,7 +712,7 @@
+                     direction = a.direction, target = a.target, rotation = a.targetRotation, carried = carried };
+             }
+             for (int i = 0; i < bindings.Count; i++) result.bindings[i] = new BindingState { position = bindings[i].position, poses = bindings[i].poses.ToArray(), rotations = bindings[i].rotations.ToArray() };
+-            for (int i = 1; i <= 8; i++) { Channel c = channels[i]; result.channels[i] = new ChannelState { position = c.position, direction = c.direction, wasActive = c.wasActive, moving = c.moving, blocked = c.blocked }; }
++            for (int i = 1; i <= 8; i++) { Channel c = channels[i]; result.channels[i] = new ChannelState { position = c.position, direction = c.direction, manager = c.manager, wasActive = c.wasActive, moving = c.moving, blocked = c.blocked }; }
+             for (int i = 0; i < plates.Count; i++)
+             {
+                 Plate p = plates[i]; var saved = new PlateState { phase = p.phase, wasOccupied = p.wasOccupied, output1 = p.output1, output2 = p.output2, published1 = p.published1, published2 = p.published2, pending = p.pending, remaining = p.when - Time.time, occupant = p.occupant == null ? -1 : p.occupant.Index };
+@@ -733,7 +739,7 @@
+                 foreach (int index in s.carried) { RecoveryPiece p = ByIndex(index); if (p != null) a.carried.Add(p); }
+                 if (a.moving) { a.piece.CanMove = false; foreach (RecoveryPiece p in a.carried) p.CanMove = false; }
+             }
+-            for (int i = 1; i <= 8; i++) { Channel c = channels[i]; ChannelState s = state.channels[i]; c.position = s.position; c.direction = s.direction; c.wasActive = s.wasActive; c.moving = s.moving; c.blocked = s.blocked; Global("positionRes" + i, c.position); Global("activadoRes" + i, c.moving); }
++            for (int i = 1; i <= 8; i++) { Channel c = channels[i]; ChannelState s = state.channels[i]; c.position = s.position; c.direction = s.direction; c.manager = s.manager; c.wasActive = s.wasActive; c.moving = s.moving; c.blocked = s.blocked; Global("positionRes" + i, c.position); Global("activadoRes" + i, c.moving); }
+             for (int i = 0; i < plates.Count; i++) { Plate p = plates[i]; PlateState s = state.plates[i]; p.phase = s.phase; p.wasOccupied = s.wasOccupied; p.output1 = s.published1; p.output2 = s.published2; p.pending = s.pending; p.when = Time.time + s.remaining; p.occupant = ByIndex(s.occupant); PublishPlate(p); p.output1 = s.output1; p.output2 = s.output2; Set(p.source,"fase",p.phase); PlateMaterial(p.source,PlateMaterialIndex(p)); RestorePlateVisual(p, s); }
+             IsBusy = false;
+             foreach (Actor actor in actors) { IsBusy |= actor.moving; GateNativeRotatingWater(actor,actor.moving && actor.turning); }

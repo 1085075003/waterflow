@@ -1,0 +1,106 @@
+--- EarlyHeldSettledBatch9
++++ NativeCommitCarryBatch10
+@@ -54,6 +54,10 @@
+             public bool compressionLanding, retainedOriginalGrabOffset, terminalQuickRelease, ordinaryEarlyRelease;
+             public int heldInputFrames, motionFinishedFrame=-1, compressionSettledFrame=-1, pressurePostMotionFrames;
+             public float compressionWaitRealSeconds;
++            public bool productionCommitObserved, nativeCarryAfterCommit, nativeCarryMembership, nativeCarrierMoving;
++            public int productionCommitFrame=-1, nativeCarrierRecord=-1, nativeCarryLayer;
++            public Vector3 productionCommitPosition, productionCommitTarget, nativeCarrierPosition, nativeCarryOffset;
++            public float nativeCarryOffsetError=-1;
+             public string postStepPausePolicy;
+             public int postStepCommittedFrame, postStepReadyFrame;
+             public int cameraQuarterTurns, cameraSlowGestures, cameraSlowFrames;
+@@ -478,7 +482,7 @@
+                     }
+                 }
+                 step.waitedSeconds = Time.time - start; step.afterMoves = Game.MoveCount;
+-                Require("gm" + level.id + "-player-step-" + step.number, step.applied && (step.marker || (step.movable && step.afterMoves == step.beforeMoves + 1 && Near(step.actualAfter, step.followsMovingSupport ? step.nativeLanding : step.destination))),
++                Require("gm" + level.id + "-player-step-" + step.number, step.applied && (step.marker || (step.movable && step.afterMoves == step.beforeMoves + 1 && (Near(step.actualAfter, step.followsMovingSupport ? step.nativeLanding : step.destination) || step.nativeCarryAfterCommit && RecordedCommitMatches(step)))),
+                     "exception=" + step.exception + ", record=" + step.sourceRecord + ", from=" + step.origin + ", to=" + step.destination + ", actual=" + step.actualAfter + (step.followsMovingSupport ? ", nativeMovingSupport="+step.nativeLanding : "") + "; " + (step.status ?? Game.Status));
+                 step.postStepCommittedFrame=Time.frameCount;
+                 if(report.ordinaryContinuousInput)
+@@ -705,16 +709,25 @@
+                 Require("gm"+level.id+"-native-input-held-hover-"+step.number,heldReady && step.heldPosition.y>=heldTarget.y+5,"Actual held actor="+step.heldPosition.ToString("F3")+", original pointer floatingTarget="+step.heldFloatingTarget.ToString("F3")+", original guide="+heldTarget.ToString("F3")+"; original held motion follows its actual grab-offset floatingTarget. doEnd takes the independent guide, doFijar centers after release, and Resorte then performs its separate native delayed compression.");
+             step.waterPendingAtRelease=Water!=null && Water.HasPendingPropagation;
+             bool diagnostic=level.id==1187 && step.number==18;
+-            Action commitObserver=null;
+-            if(diagnostic)
+-            {
+-                CaptureLandingContext(step,"before-release",actor);
+-                commitObserver=()=> {
+-                    if(Game!=null && Game.CurrentLevelId==level.id && (Game.MoveCount!=step.beforeMoves || Game.Status.IndexOf("occupied",StringComparison.OrdinalIgnoreCase)>=0))
+-                        CaptureLandingContext(step,"production-commit-notify",actor);
+-                };
+-                Game.StateChanged+=commitObserver;
+-            }
++            if(diagnostic) CaptureLandingContext(step,"before-release",actor);
++            // StateChanged is invoked synchronously by the production commit
++            // after it writes the actual landing pose and increments MoveCount.
++            // Read the first successful event, before another native LateUpdate
++            // can capture this newly placed actor as a carried upper block.
++            Action commitObserver=()=> {
++                if(Game!=null && Game.CurrentLevelId==level.id && actor!=null &&
++                    Game.MoveCount==step.beforeMoves+1 && !step.productionCommitObserved)
++                {
++                    step.productionCommitObserved=true;
++                    step.productionCommitFrame=Time.frameCount;
++                    step.productionCommitPosition=actor.transform.position;
++                    step.productionCommitTarget=motion.Target;
++                }
++                if(diagnostic && Game!=null && Game.CurrentLevelId==level.id &&
++                    (Game.MoveCount!=step.beforeMoves || Game.Status.IndexOf("occupied",StringComparison.OrdinalIgnoreCase)>=0))
++                    CaptureLandingContext(step,"production-commit-notify",actor);
++            };
++            Game.StateChanged+=commitObserver;
+             try
+             {
+                 NativeInput("EndDrag"); step.releaseFrame=Time.frameCount;
+@@ -764,9 +777,46 @@
+             finally { if(commitObserver!=null && Game!=null) Game.StateChanged-=commitObserver; }
+             step.actualAfter=actor.transform.position;
+             step.nativeLanding=step.followsMovingSupport?motion.Target:step.destination;
+-            step.applied=!motion.IsActive && Game.MoveCount==step.beforeMoves+1 && Near(step.actualAfter,step.nativeLanding);
++            bool actualLanding=Near(step.actualAfter,step.nativeLanding);
++            if(!actualLanding && !step.compressionLanding && !step.followsMovingSupport)
++            {
++                Require("gm"+level.id+"-native-input-actual-commit-pose-"+step.number,
++                    RecordedCommitMatches(step),
++                    "Actual synchronous production event must match the unchanged original destination; eventObserved="+step.productionCommitObserved+",eventFrame="+step.productionCommitFrame+",actualCommit="+step.productionCommitPosition.ToString("F4")+",target="+step.productionCommitTarget.ToString("F4")+",recorded="+step.destination.ToString("F4")+",laterActual="+step.actualAfter.ToString("F4"));
++                step.nativeCarryAfterCommit=ReadActualPostCommitCarry(step,actor);
++                Require("gm"+level.id+"-native-input-actual-postcommit-carry-"+step.number,
++                    step.nativeCarryAfterCommit,
++                    "After an exact actual commit, only real native observer.carried membership plus an active translating carrier and original7.6 layer offset can explain a later pose change. carrier="+step.nativeCarrierRecord+",membership="+step.nativeCarryMembership+",moving="+step.nativeCarrierMoving+",layer="+step.nativeCarryLayer+",carrierPosition="+step.nativeCarrierPosition.ToString("F4")+",offset="+step.nativeCarryOffset.ToString("F4")+",error="+step.nativeCarryOffsetError+",actualAfter="+step.actualAfter.ToString("F4"));
++            }
++            step.applied=!motion.IsActive && Game.MoveCount==step.beforeMoves+1 && (actualLanding || step.nativeCarryAfterCommit);
+             step.status="Original screen input pickup/hover/release; "+Game.Status;
+             Require("gm"+level.id+"-native-input-layer-restored-"+step.number,body!=null && body.gameObject.layer!=2,"EndDrag restores the selected layer; a new real carry may temporarily own native layer9.");
++        }
++        static bool RecordedCommitMatches(Step step)
++        {
++            return step.productionCommitObserved && step.productionCommitFrame>=step.releaseFrame &&
++                Near(step.productionCommitPosition,step.destination) && Near(step.originalGuide,step.destination);
++        }
++        static bool ReadActualPostCommitCarry(Step step,RecoveryPiece selected)
++        {
++            if(!RecordedCommitMatches(step) || Springs==null || selected==null) return false;
++            IEnumerable observers=Read(Springs,"actors") as IEnumerable;
++            if(observers==null) return false;
++            foreach(object observer in observers)
++            {
++                RecoveryPiece carrier=Read(observer,"piece") as RecoveryPiece;
++                IList carried=Read(observer,"carried") as IList;
++                if(carrier==null || carrier==selected || carried==null) continue;
++                int index=carried.IndexOf(selected);
++                if(index<0) continue;
++                step.nativeCarryMembership=true; step.nativeCarrierRecord=carrier.SourceRecordIndex;
++                step.nativeCarrierMoving=(bool)Read(observer,"moving");
++                step.nativeCarryLayer=index+1; step.nativeCarrierPosition=carrier.transform.position;
++                step.nativeCarryOffset=selected.transform.position-carrier.transform.position;
++                step.nativeCarryOffsetError=Vector3.Distance(step.nativeCarryOffset,Vector3.up*(7.6f*(index+1)));
++                return step.nativeCarrierMoving && !(bool)Read(observer,"turning") && step.nativeCarryOffsetError<.03f;
++            }
++            return false;
+         }
+         static void CaptureLandingContext(Step step,string phase,RecoveryPiece selected)
+         {

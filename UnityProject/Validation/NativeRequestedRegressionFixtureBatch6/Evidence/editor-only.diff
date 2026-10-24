@@ -1,0 +1,70 @@
+--- TargetSceneBatch7
++++ RequestedRegressionBatch6
+@@ -28,6 +28,8 @@
+         const string TerminalQuickKey = "FlowWater.Save1GameplayValidation.TerminalQuickRelease";
+         const string OrdinaryEarlyKey = "FlowWater.Save1GameplayValidation.OrdinaryEarlyRelease";
+         static bool ordinaryEarlyForNextBegin;
++        const string RegressionKey="FlowWater.Save1GameplayValidation.RequestedRegression";
++        static string requestedRegressionForNextBegin="";
+         static bool NativeReplay { get { return SessionState.GetBool(InputModeKey,false); } }
+         const string TimeKey = "FlowWater.Save1GameplayValidation.TimeScale";
+         static readonly int[] FocusedCases = { 609, 622, 614, 1851, 656, 1057, 2001 };
+@@ -90,10 +92,12 @@
+             public string path, sha256, startedUtc, finishedUtc;
+             public int[] closedFailedIds;
+         }
++        [Serializable] public sealed class RequestedRegression { public int[] ids; public string path, sha256; }
+         [Serializable] public sealed class Report
+         {
+             public string startedUtc, finishedUtc, unityVersion, inputStrategy;
+             public RetestSource retestSource;
++            public RequestedRegression requestedRegression;
+             public ExpectedCatalog expectedCatalog;
+             public string playerReleaseStrategy;
+             public bool passed, preferencesRestored, ordinaryEarlyRelease, ordinaryContinuousInput;
+@@ -142,6 +146,24 @@
+         public static void RunNativeLandingRegression() { Begin(new[] {1187},true); }
+         public static void RunNativePressureReleaseRegression() { Begin(new[] {609,690},true); }
+         public static void RunNativeTerminalQuickRelease() { Begin(new[] {1187},true,null,true); }
++        public static void RunNativeRequestedRegression()
++        {
++            string path=Path.Combine(Output,"native-regression-request.json");
++            byte[] bytes=File.ReadAllBytes(path);
++            RequestedRegression request=JsonUtility.FromJson<RequestedRegression>(System.Text.Encoding.UTF8.GetString(bytes).TrimStart('\uFEFF'));
++            if(request==null || request.ids==null || request.ids.Length==0 || request.ids.Any(id=>id<=0) || request.ids.Distinct().Count()!=request.ids.Length)
++                throw new InvalidOperationException("Regression request must contain nonempty unique positive ids: "+path);
++            RecoveryCatalogBuilder.Build();
++            ExpectedCatalog catalog=BuildExpectedCatalog();
++            if(request.ids.Any(id=>!catalog.levels.Any(level=>level.id==id)))
++                throw new InvalidOperationException("Regression request id is absent from the unchanged original800 Save1 catalog.");
++            request.path=path;
++            using(var digest=System.Security.Cryptography.SHA256.Create()) request.sha256=BitConverter.ToString(digest.ComputeHash(bytes)).Replace("-","").ToLowerInvariant();
++            string previous=requestedRegressionForNextBegin;
++            requestedRegressionForNextBegin=JsonUtility.ToJson(request);
++            try { BeginOrdinaryEarlyRelease(request.ids,null); }
++            finally { requestedRegressionForNextBegin=previous; }
++        }
+         public static void RunNative1187ContinuousEarlyRelease() { BeginOrdinaryEarlyRelease(new[] {1187},null); }
+         public static void RunNative1105EarlyRelease() { BeginOrdinaryEarlyRelease(new[] {1105},null); }
+         public static void RunNative2033SceneAudit() { BeginOrdinaryEarlyRelease(new[] {2033},null); }
+@@ -249,6 +271,7 @@
+             SessionState.SetBool(InputModeKey,nativeInput);
+             SessionState.SetBool(TerminalQuickKey,terminalQuick);
+             SessionState.SetBool(OrdinaryEarlyKey,ordinaryEarlyForNextBegin);
++            SessionState.SetString(RegressionKey,requestedRegressionForNextBegin??"");
+             SessionState.SetString(RetestSourceKey,retestSource==null ? "" : JsonUtility.ToJson(retestSource));
+             SessionState.SetString(CasesKey, String.Join(",", cases));
+             SessionState.SetFloat(TimeKey, Time.timeScale);
+@@ -290,6 +313,12 @@
+                     Time.timeScale = report.simulationTimeScale;
+                     report.ordinaryEarlyRelease=SessionState.GetBool(OrdinaryEarlyKey,false);
+                     report.ordinaryContinuousInput=report.ordinaryEarlyRelease;
++                    string regressionJson=SessionState.GetString(RegressionKey,"");
++                    if(!String.IsNullOrEmpty(regressionJson))
++                    {
++                        report.requestedRegression=JsonUtility.FromJson<RequestedRegression>(regressionJson);
++                        report.notes.Add("Requested affected-content regression, explicitly separate from aggregate exact-failed retest. Original800 ids are validated, requested JSON bytes SHA256 and ordered ids are recorded. This suite may include earlier passing levels and never establishes a failed-base aggregate closure by itself. Continuous real-pointer transactions, original poses and positive native victory standards are unchanged.");
++                    }
+                     report.playerReleaseStrategy=SessionState.GetBool(OrdinaryEarlyKey,false)?"ordinary-continuous-early-release":SessionState.GetBool(TerminalQuickKey,false)?"settled-hover-prefix-and-quick-terminal-ordinary-guide":"settled-hover";
+                     if(SessionState.GetBool(OrdinaryEarlyKey,false)) report.notes.Add("Independent ordinaryEarlyRelease legal player strategy: after a real Begin/Continue ray resolves the unchanged original recorded guide, keep the pointer held across at least one actual PlayerLoop frame, re-raycast it through production ContinueDrag, then call production EndDrag without waiting for the lifted actor to settle at floatingTarget. Native doEnd/doFijar performs all actual release motion and centering. CuboResorte still uses the separate settled-pointer plus native delayed compression fixture. No piece/guide/source/water/switch or native busy state is written. All original transactions, poses, positive matching-color goals and native victory standards remain exact. This is not the terminal-only release diagnostic or the original automatic-preview timing.");
+                     if(report.ordinaryContinuousInput) report.notes.Add("Continuous ordinary early-release strategy: after each successful native commit and exact recorded-pose assertion, begin the next recorded action without an artificial .18-real-second pause or a global all-springs-idle barrier. Real source/surface queries, one actual held PlayerLoop frame, original End/doFijar completion and compression delay, each w/z action-specific protocol, final positive matching-color targets, native victory and final water/spring settling all remain mandatory. Every step records this post-commit pause policy and actual frames. No runtime or game state is changed by this test policy.");

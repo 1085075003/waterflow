@@ -1,0 +1,15 @@
+{
+  "batch": "WaterSnapshotGateBatch1",
+  "status": "Immutable staging final; Assets unchanged",
+  "files": [
+    {
+      "source": "Validation\\WaterSnapshotGateBatch1\\RecoveredWaterNetwork.cs.src",
+      "destination": "Assets\\Scripts\\RecoveryRuntime\\RecoveredWaterNetwork.cs",
+      "sha256": "067cf8f3523365721a438c4a65098eeb8ddbaa798c0c92c3836b17f710ea3a85"
+    }
+  ],
+  "baseSha256": "5b1e09be8fba229576e3af8902aace83d0f2b16ead5bb631737bba4c48790bcf",
+  "change": "Only root-change movingPieces cleanup: keep gates already restored on current game.Pieces, remove old actors. No propagation, geometry, timing, palette or graph changes.",
+  "proof": "RecoveredNativeSprings.RestoreState ends by SetPieceMoving(actor,moving&&turning) once. TickActor does not reassert true each frame. Production snapshot order restores Springs before Water.RestoreState/Rebuild, so unconditional Clear loses a new actor turning-water gate.",
+  "validation": "Offline whole runtime compile, then production new-root snapshot while a ControlPiezaC spring actor is turning."
+}

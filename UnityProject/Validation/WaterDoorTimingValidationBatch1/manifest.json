@@ -1,0 +1,15 @@
+{
+  "batch": "WaterDoorTimingValidationBatch1",
+  "status": "Immutable staging final; not imported into Assets",
+  "requires": "WaterDoorTimingBatch1 runtime",
+  "files": [
+    {
+      "source": "Validation\\WaterDoorTimingValidationBatch1\\FlowWaterPropagationValidation.cs.src",
+      "destination": "Assets\\Editor\\RecoveredTools\\FlowWaterPropagationValidation.cs",
+      "sha256": "bf228b158f7a36581f3f71bb4a063cb24ea0c329165d63916e249c2c2e6c255a",
+      "baseSha256": "3482126fdd013ff1753d7de996cb33928b9ef69383841204632692037e730e80"
+    }
+  ],
+  "tests": "Real gm1052 authored source naturally reaches its yellow hole. Assert global requested-open while port remains closed for pending native .4 seconds; capture production snapshot in flight, let callback finish, restart to a new root and production restore. Assert requested-open/applied-closed distinction and exact callback remaining duration survive restore, then callback opens actual original port. Retains source/front/closed-door/gm605C rotation fixtures.",
+  "nativeReentry": "Original doCheckDoor has no CancelInvoke. Runtime queues independent .4 open/.5 close callbacks and preserves their due/order through snapshots, instead of latest-wins cancellation."
+}

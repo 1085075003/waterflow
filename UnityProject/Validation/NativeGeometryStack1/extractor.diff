@@ -1,0 +1,25 @@
+--- Validation/NativeAnalysis/extract_water_recipes.py base
++++ shared native VM stack fix
+@@ -26,7 +26,7 @@
+         val=int(val)%(1<<(size*8))
+         for i,b in enumerate(val.to_bytes(size,'little')):self.mem[addr+i]=b
+     def read(self,addr,size):
+-        if self.base<=addr<self.base+4096 or 0x200000000<=addr<0x200100000:
++        if addr in self.mem or self.base<=addr<self.base+4096 or 0x200000000<=addr<0x200100000:
+             return int.from_bytes(bytes(self.mem.get(addr+i,0) for i in range(size)),'little')
+         if addr in d.labels:
+             label=d.labels[addr]
+@@ -141,9 +141,11 @@
+                 value=self.r.get('v'+src[1:],0) if src.startswith(('s','q')) else self.get(src)
+                 self.write(self.addr(ins,ops[1]),value,size)
+             elif n in ['stp','ldp']:
+-                # Stack saves/restores do not affect the helper result. Field pairs do.
++                # D/X callee-save pairs are preserved by the call wrapper. S-register
++                # stack pairs are actual helper data (e.g. C108B948/108BA24),
++                # not register saves, and must participate in memory loads/stores.
+                 addr=self.addr(ins,ops[2]);src=ins.reg_name(ops[0].reg);size=16 if src.startswith('q')else 8 if src.startswith(('x','d')) else 4
+-                if ins.reg_name(ops[2].mem.base)!='sp':
++                if ins.reg_name(ops[2].mem.base)!='sp' or src.startswith('s'):
+                     for j in range(2):
+                         reg=ins.reg_name(ops[j].reg)
+                         if n=='ldp':

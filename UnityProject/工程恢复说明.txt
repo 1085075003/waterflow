@@ -1,0 +1,17 @@
+﻿Flow Water 2.18 — Unity 2022.3.28f1工作工程
+说明刷新：2026-10-16 09:46:26 Asia/Shanghai
+当前状态：本轮验证仍在进行；未完成项不计为通过。
+
+打开Assets/Scenes/Portada.unity按Play，从原首页、六分类、选关进入游戏。拖动拼块并在原引导上释放，灯泡打开保存解答，菜单/重开/下一关使用原界面。
+当前运行层位于Assets/Scripts/RecoveryRuntime与RecoveryUI；验证位于Assets/Editor/RecoveredTools。这些是根据原数据与ARM64方法证据重建的实现。
+实际报告与逐关渲染在Validation目录，摘要为Validation/validation-summary.json，画面对照为Validation/FullContent/review.html。
+普通游玩：800关：进行中；真实拖动通过153/800关，失败1关；Validation/Save1Gameplay/save1-gameplay-validation.json；结束UTC 尚未结束
+全部画面：1350关：旧快照，严格网格与新效果全量复验待完成；已完成1350/1350关，失败21关；Validation/FullContent/all-runtime-validation.json；结束UTC 2026-10-15T20:45:14.4067033Z
+完整使用说明、各套件计数、来源与限制见上一级“恢复情况与使用说明.txt”。
+
+新增运行层依据原资产、存档与IL2CPP ARM64方法证据重建，并非找回原始C#工程源码。通过列明测试不等于证明与原Android二进制逐帧完全相同。
+原Shader依据包内GLSL及原材质参数重建；Windows与原移动GPU的逐像素等价性未建立。原包中的无效动画路径保留溯源，不随意映射到新对象。
+桌面增加原相机沿视线后移的横屏适配，以及鼠标操作；原FOV与姿态保留。原场景竖屏不受支持，竖屏截图仅作观察。
+本地开放已有的27组关卡及保存解答，解答数量显示1；这是桌面重建适配，未还原原商店、广告奖励与解答消耗经济。
+广告、内购、统计及联网服务没有连接真实SDK业务。语言按钮与关卡设计器仍保留当前本地功能限制，不能计为完整恢复这些功能。
+本机2022.3.28f1仅安装Windows与WebGL支持，未安装Android模块，本轮未验证Android构建。

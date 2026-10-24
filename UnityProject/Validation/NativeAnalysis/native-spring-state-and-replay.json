@@ -1,0 +1,106 @@
+{
+  "source": "Read-only ARM64 control flow and actual serialized ObservadorResorte prefab. No game native code was executed.",
+  "globalFieldOffsets": {
+    "conResorte1..8": "UIManagerScript static block 0x14 + (channel-1)*4",
+    "numPiezas1..8": "0x34 + (channel-1)*4",
+    "contPiezas1..8": "0x54 + (channel-1)*4",
+    "activadoRes1..8": "0x74 + (channel-1)",
+    "positionRes1..8": "0x7C + (channel-1)*4"
+  },
+  "positionWritersEvidence": "native-ui-static-writes.json",
+  "trigger": {
+    "activationMethod": "FuenteTest1.doActivarMech 0x10A0B74",
+    "deactivationMethod": "FuenteTest1.doDesactivarMech 0x10A0D5C",
+    "channels": "conOri numeric 1..5",
+    "effect": "Set contPiezas[channel]=0. Activation sets conResorte=1 and decrements positionRes if busy. Deactivation sets conResorte=4 and increments positionRes if busy (FuenteTest1.doDesactivarMech0x10A0E10..0x10A0E2C, same for channels2..5). Earlier investigation summaries that called inactive2 were incorrect.",
+    "note": "This is not an unconditional increment of the action position. Other trigger classes Resorte/Resorte3/Resorte4 have their own dispatch methods, also listed in the static write evidence."
+  },
+  "completionBarrier": {
+    "method": "ObservadorResorte.doProcesoContPiezas 0x10CAA7C",
+    "coreVA": "0x10CACCC..0x10CAD0C",
+    "algorithm": [
+      "Read contPiezas, numPiezas and positionRes for conResor channel 1..8.",
+      "Increment contPiezas.",
+      "Only when this equals numPiezas, reset contPiezas=0 and advance the shared position.",
+      "If proceso==1 and this observer.position < posiMaxTotal, increment positionRes.",
+      "If proceso!=1 and positionRes>0, decrement positionRes.",
+      "Write the resulting contPiezas and positionRes back to that channel."
+    ],
+    "update": "ObservadorResorte.Update 0x10C80D0 reads both conResorte and positionRes; doPrevio 0x10C8B30 calls doResorte whenever either differs from its old value.",
+    "busy": "doActivaRes 0x10CBE58 sets activadoRes[channel]=true; doInactivaRes 0x10CC334 sets false."
+  },
+  "motion": {
+    "actionsEvidence": "native-spring-actions.json",
+    "sequence": "conResorte st..et first/optional second character select channels. tipoResorte sz..ez is up to three action characters per channel, separated by literal c when there are two channels.",
+    "forwardSelection": "managerResorte==1, position0/1/2 selects tipoResor1/2/3 and computes the next cached position from the current cached pose.",
+    "moveMethod": "ObservadorResorte.doMove 0x10C9390",
+    "translation": "Vector3.MoveTowards(current, puntoFinal, moveSpeed*Time.deltaTime)",
+    "completionToleranceEachAxis": 0.009999999776482582,
+    "rotationMethod": "ObservadorResorte.doRotation0x10C8F44: Quaternion.RotateTowards semantics. Calculate angle between current and target, SlerpUnclamped with min(rotationSpeed*deltaTime/angle,1). rotationSpeed is degrees per second, not a Slerp factor.",
+    "constructorDefaults": {
+      "rotationSpeed": 2.5,
+      "moveSpeed": 2.5,
+      "sphereRadius": 1.0
+    },
+    "actualPrefab": "Assets/GameObject/ObservadorResorte.prefab",
+    "actualPrefabOverrides": {
+      "rotationSpeed": 16.0,
+      "moveSpeed": 5.0
+    },
+    "scope": "Collision validation, floor blocking, manager states3/4/5, reverse cached poses and second-channel transitions must follow the associated native helper control flow. A direct displacement on every toggle does not implement that state machine.",
+    "twoChannelReversal": "doCambioResorte0x10C8494 captures current parent position at the selected channel position when its manager changes. doCalPuntoNext(comprueba=2) negates a translation relative to this pose, preserving displacement of the other channel. Rotations return the stored angle.",
+    "managerStates": {
+      "1": "Forward actions",
+      "4": "Reverse actions",
+      "3": "Forward failure/blocked cleanup; stops audio, returns to cached pose, releases carried pieces/floor and busy flag",
+      "5": "Reverse failure/blocked cleanup; releases carried pieces/floor and busy flag"
+    }
+  },
+  "carry": {
+    "detectMethod": "ObservadorResorte.doNumPiezasEncima 0x10CCC78",
+    "overlapMethod": "ObservadorResorte.doCheckCollision1 0x10CEB3C",
+    "query": "Physics.OverlapSphere at observer.posx, observer.posy+variay, observer.posz with mascaraBloque2 and sphereRadius.",
+    "probeHeights": [
+      7.599999904632568,
+      15.199999809265137,
+      22.799999713897705
+    ],
+    "maximumCarriedPieces": 2,
+    "thirdPiece": "Set numPiezas=3, clear sw_obj1 and sw_obj2; doValidarPosActual rejects numPiezas>=3.",
+    "validationMethod": "ObservadorResorte.doValidarPosActual 0x10CAE90",
+    "topRules": [
+      "Only valEncima1/2 enters the top-piece validation block.",
+      "Actions1,2,3 reject movement if any top piece exists.",
+      "valEncima2 rejects movement if any top piece exists.",
+      "valEncima1 permits translation carrying up to two eligible top pieces, subject to fixed, destination and bottom collision checks."
+    ],
+    "fixedComponents": "Overlap helper checks ControlFijo.esPiezaFija, ControlPiezaC.esPiezaFija, ControlPieza.esPiezaFija and ControlPiezaPfuente.esPiezaFija before accepting a carrier.",
+    "finalHeights": "doResorte and doPuntoFinal1 preserve top1/top2 at base+7.6/base+15.2 for the completed pose."
+  },
+  "solutionPreview": {
+    "initialInvokeDelay": 0.20000000298023224,
+    "initialMode": "SaveLoadManager.doMoveBloque1 sets MoveBloque.modoSolucion=1.",
+    "mode1": "MoveBloque.HandleSolution 0x102E700 calls HandleSolutionTotal 0x1033D20: iterate all Save1 entries, capture at each origin and set the parent transform directly to destination, skipping missing captures.",
+    "stepsButton": "SaveLoadManager.okSteps 0x1020E98 resets/rebuilds gm, invokes doMoveBloque2 after2 seconds and backbutton2 after6 seconds. Mode2 runs the three-stage animation, not a fixed0.2 second per-move interval.",
+    "exceptionsMethod": "MoveBloque.doProcess1Solution 0x103494C",
+    "exceptions": {
+      "z": "Set faseSol9 before capture; skip this entry. so1225 index5 is this exact skip marker and may legitimately have an empty origin.",
+      "w": "Set activadaEspera=true. doProcesoEspera 0x1035210 first observes any activadoRes1..8 true (activadoMech=1), then waits until all eight are false, sets activadoMech=2 and clears activadaEspera.",
+      "a": {
+        "alturaSolution": 7
+      },
+      "b": {
+        "alturaSolution": 14
+      },
+      "c": {
+        "alturaSolution": 21
+      },
+      "d": {
+        "alturaSolution": 28
+      },
+      "r": "HandleSolutionTotal adds float at VA0x5FFD68 to finy; preserve the native branch when decoding the final pose.",
+      "coordinateTokens": "HandleSolutionTotal parses <x...x>, <y...y>, <z...z> and adds parsed integer*7.6 to the associated final coordinate."
+    },
+    "distinction": "Literal c inside tipoResorte separates two switch-channel action sequences. Save1.excep=='c' is a movement-height override and does not trigger a mechanism."
+  }
+}

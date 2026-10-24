@@ -1,0 +1,57 @@
+{
+  "batch": "NativeBoxSurfaceFixtureBatch4",
+  "immutable": true,
+  "createdUtc": "2026-10-16T06:18:52.054496+00:00",
+  "status": "Editor-only fullEditorcsc0; actual real-input retest pending root",
+  "runtimeChanges": false,
+  "files": [
+    {
+      "source": "Validation/NativeBoxSurfaceFixtureBatch4/Sources/FlowWaterSave1GameplayValidation.cs.src",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs",
+      "previousSha256": "d85fe7a41ff1c1e28bfe885d5a18b6375aaa7b8899417dc1110ac8d070653e1d",
+      "sha256": "de50c1cbbcc9241af0d07236398becbf1c543ac533a832544493b76058805c39"
+    }
+  ],
+  "entries": {
+    "diagnosticTwoCases": "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNativeBoxSurfaceRegressions",
+    "formalFailedSelectorUnchanged": "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNativeFailedEarlyRelease"
+  },
+  "reportDirectory": "Validation/Save1Gameplay",
+  "reportFile": "save1-gameplay-validation.json",
+  "cases": [
+    1187,
+    2033
+  ],
+  "changes": [
+    "Retain existing planner first; if it fails, sample9x9 interior points on each6faces of nearby originalBoxCollider using its actual center/size/localToWorld transform.",
+    "Each sample remains a real camera screen ray through production TryGetDropPoint; exact original guide matching and closest hit/layers are unchanged.",
+    "Append actual hit/path/world point/guide provenance when face fallback succeeds; failures retain real ray counts.",
+    "Only pointer candidate search changes, not source capture, guide/water/switch/transform assignments, camera yaw strategy, early-release policy, transaction/pose/positive colors/nativewin verdicts."
+  ],
+  "compile": {
+    "response": "Validation/NativeBoxSurfaceFixtureBatch4/surface-fixture-compile.rsp",
+    "responseSha256": "374da4b52581ad057bb2c6261f21c421ded31bb4882b4c3e5fdffbb2bffaa893",
+    "assemblySha256": "4f328934031492a1281d87cd6dba4af9d99b7f0e0be438f0faf429e2ae48e19f",
+    "exitCode": 0
+  },
+  "evidence": [
+    {
+      "path": "NativeBoxSurfaceFixtureBatch4/Evidence/diagnosis.json",
+      "sha256": "f598eaaa59d93fa284a9276d244a951cac6b4e26ebbd8a133e54fa07d843dac6"
+    },
+    {
+      "path": "NativeBoxSurfaceFixtureBatch4/Evidence/editor-only.diff",
+      "sha256": "865a3d74e847d16db8f48c79f0c450578508432c28de8c2e1cd7891f2c6fdafc"
+    },
+    {
+      "path": "NativeBoxSurfaceFixtureBatch4/Evidence/gm2033-failed-original.json",
+      "sha256": "05bcaf0386a38264f0229d762a74ed20c70c2d16e4f544b0181aa90079f7fd31"
+    }
+  ],
+  "limits": [
+    "No runtime or Assets file was modified by this stage; no Unity launched.",
+    "Six-face candidates are a test strategy hypothesis; actual pass is not claimed.",
+    "2033 has27original recorded moves, with current failure at12 rather than finalmove.",
+    "Roof is original Map/Suelo1; no evidence supports ignoring its ray or changing native layer/guide."
+  ]
+}

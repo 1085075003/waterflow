@@ -1,0 +1,48 @@
+{
+  "cause": "Actual gm1660 final .49 landing snap changes ChannelSignature solely because position changes, although original outlet/intake sphere contact persists. Rebuild invalidates source15 and dependent19, then .4 native arrival re-enters A and toggles manager1 back4.",
+  "actualEvents": [
+    "frame=7926 time=160.022 publish channel=2 state=1 water=False physical=True",
+    "frame=8233 time=166.635 intake record=19 port=2 wet=True spring=A hole= pos=(40.000, 3.950, 60.000)",
+    "frame=8233 time=166.635 publish channel=1 state=1 water=True physical=False",
+    "frame=8259 time=167.418 intake record=19 port=2 wet=False spring=A hole= pos=(40.000, 3.950, 60.000)",
+    "frame=8271 time=167.821 intake record=19 port=2 wet=True spring=A hole= pos=(40.000, 3.950, 60.000)",
+    "frame=8271 time=167.821 publish channel=1 state=4 water=False physical=False"
+  ],
+  "actualRebuilds": [
+    "time=123.8533 signature-change key=4:0 old=record=4 pos=(20.0003529, 4.447344, 39.9997673) rot=(0, 0, 0, 1) current=record=4 pos=(20, 3.95000243, 40) rot=(0, 0, 0, 1)",
+    "time=130.0751 signature-change key=6:0 old=record=6 pos=(0.000260653964, 4.440801, 19.9999847) rot=(0, 0, 0, 1) current=record=6 pos=(0, 3.95000243, 20) rot=(0, 0, 0, 1)",
+    "time=136.658 signature-change key=16:0 old=record=16 pos=(20.0003128, 4.443866, 20.0003147) rot=(0, 0, 0, 1) current=record=16 pos=(20, 3.95000243, 20) rot=(0, 0, 0, 1)",
+    "time=142.9666 signature-change key=20:0 old=record=20 pos=(79.99958, 4.44375944, 79.99999) rot=(0, 0, 0, 1) current=record=20 pos=(80, 3.95000243, 80) rot=(0, 0, 0, 1)",
+    "time=149.3143 signature-change key=21:0 old=record=21 pos=(79.99964, 4.4405365, 60.00018) rot=(0, 0, 0, 1) current=record=21 pos=(80, 3.95000243, 60) rot=(0, 0, 0, 1)",
+    "time=155.5492 signature-change key=5:0 old=record=5 pos=(39.9996719, 4.436032, 20.0001621) rot=(0, 0, 0, 1) current=record=5 pos=(40, 3.95000243, 20) rot=(0, 0, 0, 1)",
+    "time=160.1504 signature-change key=20:0 old=record=20 pos=(80, 3.95000243, 80) rot=(0, 0, 0, 1) current=record=20 pos=(60, 11.5500021, 20) rot=(0, 0, 0, 1)",
+    "time=167.4177 signature-change key=15:0 old=record=15 pos=(39.99817, 4.44134474, 80.02793) rot=(0, 0, 0, 1) current=record=15 pos=(40, 3.95000243, 80) rot=(0, 0, 0, 1)"
+  ],
+  "emitterRecord": 0,
+  "emitterPit": "4500",
+  "activeOriginalSpring": "1213 -> original slot1/channel2/mode1/direction3",
+  "normalizedSpring": "213",
+  "outletPrototype": "chorroCascadaMech.prefab/esferaSalida1",
+  "outletRadius": 1.5,
+  "inletPrototype": "Recta6j_4 -> AguaControl5/OrigenCentro",
+  "inletRadius": 0.4,
+  "worldOutletCenter": [
+    40,
+    4.95,
+    80
+  ],
+  "preSnapIntakeCenter": [
+    39.99817,
+    4.44134474,
+    80.02793
+  ],
+  "finalIntakeCenter": [
+    40,
+    3.95,
+    80
+  ],
+  "preSnapDistance": 0.5094247808319377,
+  "finalDistance": 1.0,
+  "contactRadiusSum": 1.9,
+  "implementation": "Only channel identity signature excludes position and rotation. InputMask, recursively validated original same parent/link/incoming, recomputed collision graph, source/color/enabled state and native moving gates all remain authoritative. Visual signatures remain unchanged."
+}

@@ -1,0 +1,28 @@
+--- b9/FlowWaterSave1GameplayValidation.cs
++++ scene-scope/FlowWaterSave1GameplayValidation.cs
+@@ -144,6 +144,7 @@
+         public static void RunNativeTerminalQuickRelease() { Begin(new[] {1187},true,null,true); }
+         public static void RunNative1187ContinuousEarlyRelease() { BeginOrdinaryEarlyRelease(new[] {1187},null); }
+         public static void RunNative1105EarlyRelease() { BeginOrdinaryEarlyRelease(new[] {1105},null); }
++        public static void RunNative2033SceneAudit() { BeginOrdinaryEarlyRelease(new[] {2033},null); }
+         public static void RunNativeBoxSurfaceRegressions() { BeginOrdinaryEarlyRelease(new[] {1187,2033},null); }
+         public static void RunNativeFailedEarlyRelease() { RunNativeFailedWithPolicy(true); }
+         static void BeginOrdinaryEarlyRelease(int[] cases,RetestSource source)
+@@ -826,9 +827,16 @@
+             points.Add(destination-Vector3.up*4.2f); points.Add(destination);
+             using(RecoveredNativeInteraction.QueryOriginalColliders(Game))
+             {
++                if(diagnostic!=null && diagnostic.number==12 && Game.CurrentLevelId==2033)
++                    FlowWaterNativeTargetColliderAudit.WriteOnce(Game,destination);
+                 foreach(Collider collider in UnityEngine.Object.FindObjectsOfType<Collider>(true))
+                 {
+-                    if(collider==null || !collider.enabled || !collider.gameObject.activeInHierarchy || collider.gameObject.scene!=Game.GameCamera.gameObject.scene) continue;
++                    if(collider==null || !collider.enabled || !collider.gameObject.activeInHierarchy) continue;
++                    // Board pieces live under the persistent game root, while
++                    // the authored camera stays in its original level scene.
++                    // Both are queried by the same real production Physics ray.
++                    if(collider.gameObject.scene!=Game.GameCamera.gameObject.scene &&
++                        !(Game.PieceRoot!=null && collider.transform.IsChildOf(Game.PieceRoot))) continue;
+                     Vector3 point=collider.transform.position; Bounds bounds=collider.bounds;
+                     bool centered=Mathf.Abs(point.x-destination.x)<=4 && Mathf.Abs(point.z-destination.z)<=4 && point.y<=destination.y+5 && point.y>=destination.y-12;
+                     bool spans=bounds.min.x<=destination.x+1 && bounds.max.x>=destination.x-1 && bounds.min.z<=destination.z+1 && bounds.max.z>=destination.z-1 && bounds.min.y<=destination.y+1 && bounds.max.y>=destination.y-12;

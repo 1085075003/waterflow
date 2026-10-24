@@ -1,0 +1,153 @@
+--- UnityProject\Assets\Scripts\RecoveryRuntime\RecoveredNativeSprings.cs
++++ UnityProject\Validation\NativeAnalysis\RecoveredNativeSprings.pending-moving-layers.cs.src
+@@ -23,7 +23,7 @@
+             public readonly List<RecoveryPiece> carried = new List<RecoveryPiece>();
+             public Vector3 target;
+             public Quaternion targetRotation;
+-            public bool moving, blocked, turning;
++            public bool moving, blocked, turning, nativeLayersInactive;
+             public Binding current;
+             public int direction;
+             public GameObject blockedModel;
+@@ -61,11 +61,12 @@
+         }
+         sealed class ActorState
+         {
+-            public bool moving, blocked, turning;
++            public bool moving, blocked, turning, nativeLayersInactive;
+             public int currentChannel, direction;
+             public Vector3 target;
+             public Quaternion rotation;
+-            public int[] carried;
++            public int[] carried, carriedLayers;
++            public int bodyLayer;
+         }
+         sealed class BindingState { public int position; public Vector3[] poses; public Quaternion[] rotations; }
+         sealed class ChannelState { public int position, direction, manager; public bool wasActive, moving, blocked; }
+@@ -103,7 +104,7 @@
+ 
+         void Initialize(RecoveredFlowGame current)
+         {
+-            foreach (Actor actor in actors) GateNativeRotatingWater(actor, false);
++            foreach (Actor actor in actors) { GateNativeRotatingWater(actor, false); RestoreNativeMovementLayers(actor); }
+             foreach (GameObject model in models) if (model != null) Destroy(model);
+             models.Clear(); actors.Clear(); bindings.Clear(); plates.Clear(); originalMovement.Clear(); collisionDiagnostics.Clear();
+             game = current; levelRoot = current.PieceRoot;
+@@ -237,6 +238,7 @@
+                 transform.position = actor.target; transform.rotation = actor.targetRotation;
+                 actor.moving = false;
+                 GateNativeRotatingWater(actor, false);
++                RestoreNativeMovementLayers(actor);
+                 RestoreMovable(actor.piece);
+                 actor.current.position += actor.direction;
+                 actor.observer.position = actor.current.position;
+@@ -286,7 +288,7 @@
+                     Global("activadoRes" + channel.index, false);
+                     foreach (Binding cancel in channel.bindings)
+                     {
+-                        cancel.actor.moving = false; GateNativeRotatingWater(cancel.actor, false); RestoreMovable(cancel.actor.piece);
++                        cancel.actor.moving = false; GateNativeRotatingWater(cancel.actor, false); RestoreNativeMovementLayers(cancel.actor); RestoreMovable(cancel.actor.piece);
+                         foreach (RecoveryPiece carried in cancel.actor.carried) RestoreMovable(carried);
+                         cancel.actor.carried.Clear();
+                     }
+@@ -406,7 +408,11 @@
+             actor.current = binding; actor.direction = direction; actor.target = target; actor.targetRotation = targetRotation;
+             actor.turning = turning; actor.moving = action != '0'; actor.blocked = false;
+             GateNativeRotatingWater(actor, actor.moving && actor.turning);
+-            if (actor.moving) { actor.piece.CanMove = false; foreach (RecoveryPiece carried in actor.carried) carried.CanMove = false; }
++            if (actor.moving)
++            {
++                actor.piece.CanMove = false; foreach (RecoveryPiece carried in actor.carried) carried.CanMove = false;
++                InactivateNativeMovementLayers(actor);
++            }
+             if (!actor.moving) binding.position += direction;
+             Set(actor.observer, "activadoResorte", actor.moving);
+             actor.observer.managerResorte = direction > 0 ? 1 : 2;
+@@ -709,7 +715,9 @@
+                 Actor a = actors[i]; int[] carried = new int[a.carried.Count];
+                 for (int j = 0; j < carried.Length; j++) carried[j] = a.carried[j] == null ? -1 : a.carried[j].Index;
+                 result.actors[i] = new ActorState { moving = a.moving, blocked = a.blocked, turning = a.turning, currentChannel = a.current == null ? 0 : a.current.channel,
+-                    direction = a.direction, target = a.target, rotation = a.targetRotation, carried = carried };
++                    direction = a.direction, target = a.target, rotation = a.targetRotation, carried = carried,
++                    nativeLayersInactive = a.nativeLayersInactive, bodyLayer = CollisionBody(a.source) == null ? -1 : CollisionBody(a.source).layer,
++                    carriedLayers = CaptureCarriedLayers(a) };
+             }
+             for (int i = 0; i < bindings.Count; i++) result.bindings[i] = new BindingState { position = bindings[i].position, poses = bindings[i].poses.ToArray(), rotations = bindings[i].rotations.ToArray() };
+             for (int i = 1; i <= 8; i++) { Channel c = channels[i]; result.channels[i] = new ChannelState { position = c.position, direction = c.direction, manager = c.manager, wasActive = c.wasActive, moving = c.moving, blocked = c.blocked }; }
+@@ -728,6 +736,7 @@
+             if (game == null || levelRoot != game.PieceRoot) Initialize(RecoveredFlowGame.Instance);
+             if (state.actors.Length != actors.Count || state.bindings.Length != bindings.Count || state.plates.Length != plates.Count) return;
+             restoring = true;
++            foreach (Actor actor in actors) RestoreNativeMovementLayers(actor);
+             foreach (var pair in originalMovement) if (pair.Key != null) pair.Key.CanMove = pair.Value;
+             for (int i = 0; i < bindings.Count; i++) { Binding b = bindings[i]; BindingState s = state.bindings[i]; b.position = s.position; b.poses.Clear(); b.poses.AddRange(s.poses); b.rotations.Clear(); b.rotations.AddRange(s.rotations); }
+             for (int i = 0; i < actors.Count; i++)
+@@ -738,6 +747,11 @@
+                 foreach (Binding b in a.bindings) if (b.channel == s.currentChannel) a.current = b;
+                 foreach (int index in s.carried) { RecoveryPiece p = ByIndex(index); if (p != null) a.carried.Add(p); }
+                 if (a.moving) { a.piece.CanMove = false; foreach (RecoveryPiece p in a.carried) p.CanMove = false; }
++                a.nativeLayersInactive = s.nativeLayersInactive;
++                GameObject ownBody = CollisionBody(a.source);
++                if (ownBody != null && s.bodyLayer >= 0) ownBody.layer = s.bodyLayer;
++                for (int j = 0; j < a.carried.Count && s.carriedLayers != null && j < s.carriedLayers.Length; j++)
++                { GameObject body = CollisionBody(a.carried[j]); if (body != null && s.carriedLayers[j] >= 0) body.layer = s.carriedLayers[j]; }
+             }
+             for (int i = 1; i <= 8; i++) { Channel c = channels[i]; ChannelState s = state.channels[i]; c.position = s.position; c.direction = s.direction; c.manager = s.manager; c.wasActive = s.wasActive; c.moving = s.moving; c.blocked = s.blocked; Global("positionRes" + i, c.position); Global("activadoRes" + i, c.moving); }
+             for (int i = 0; i < plates.Count; i++) { Plate p = plates[i]; PlateState s = state.plates[i]; p.phase = s.phase; p.wasOccupied = s.wasOccupied; p.output1 = s.published1; p.output2 = s.published2; p.pending = s.pending; p.when = Time.time + s.remaining; p.occupant = ByIndex(s.occupant); PublishPlate(p); p.output1 = s.output1; p.output2 = s.output2; Set(p.source,"fase",p.phase); PlateMaterial(p.source,PlateMaterialIndex(p)); RestorePlateVisual(p, s); }
+@@ -770,6 +784,47 @@
+             }
+             GameObject body = Get(plate.source, "objeto") as GameObject;
+             if (saved.hasBody && body != null) { body.transform.localPosition = saved.bodyPosition; body.transform.localRotation = saved.bodyRotation; body.transform.localScale = saved.bodyScale; }
++        }
++
++        static GameObject CollisionBody(object source)
++        {
++            RecoveryPiece piece = source as RecoveryPiece;
++            if (piece == null)
++            { MonoBehaviour control = source as MonoBehaviour; return control == null ? null : Get(control,"objeto") as GameObject; }
++            foreach (MonoBehaviour candidate in piece.GetComponents<MonoBehaviour>())
++                if (candidate is ControlPieza || candidate is ControlFijo || candidate is ControlPiezaC ||
++                    candidate is ControlPiezaPfuente || candidate is ControlPiezaFuente || candidate is ControlFijo1)
++                    return Get(candidate,"objeto") as GameObject;
++            return null;
++        }
++        static int[] CaptureCarriedLayers(Actor actor)
++        {
++            var layers = new int[actor.carried.Count];
++            for (int i=0;i<layers.Length;i++) { GameObject body=CollisionBody(actor.carried[i]); layers[i]=body==null?-1:body.layer; }
++            return layers;
++        }
++        static void InactivateNativeMovementLayers(Actor actor)
++        {
++            if (actor == null || (actor.top != "1" && actor.top != "2")) return;
++            // doValidarPosActual10CB1D8..214 calls doInactivarPieza only for
++            // valEncima1/2. Native10CD508..58C uses Suelo1 on the actual body
++            // and the two captured bodies; it does not relayer every child.
++            int layer=LayerMask.NameToLayer("Suelo1"); if(layer<0) return;
++            GameObject own=(actor.piece.BasePrefab??"").IndexOf("LadrilloFuente",StringComparison.Ordinal)>=0?null:CollisionBody(actor.source);
++            if(own!=null) own.layer=layer;
++            for(int i=0;i<actor.carried.Count && i<2;i++) { GameObject body=CollisionBody(actor.carried[i]); if(body!=null) body.layer=layer; }
++            actor.nativeLayersInactive=true;
++            Physics.SyncTransforms();
++        }
++        static void RestoreNativeMovementLayers(Actor actor)
++        {
++            if(actor==null || !actor.nativeLayersInactive) return;
++            // doActivarPieza10CC2D0..320 restores own body0 and captures12.
++            GameObject own=(actor.piece.BasePrefab??"").IndexOf("LadrilloFuente",StringComparison.Ordinal)>=0?null:CollisionBody(actor.source);
++            if(own!=null) own.layer=0;
++            for(int i=0;i<actor.carried.Count && i<2;i++) { GameObject body=CollisionBody(actor.carried[i]); if(body!=null) body.layer=12; }
++            actor.nativeLayersInactive=false;
++            Physics.SyncTransforms();
+         }
+ 
+         static void GateNativeRotatingWater(Actor actor, bool disabled)
+@@ -784,7 +839,7 @@
+             MethodInfo set=water.GetType().GetMethod("SetPieceMoving",BindingFlags.Instance|BindingFlags.Public);
+             if(set!=null) set.Invoke(water,new object[] { actor.piece,disabled });
+         }
+-        void OnDestroy() { foreach(Actor actor in actors) GateNativeRotatingWater(actor,false); }
++        void OnDestroy() { foreach(Actor actor in actors) { GateNativeRotatingWater(actor,false); RestoreNativeMovementLayers(actor); } }
+ 
+         RecoveryPiece ByIndex(int index) { foreach (RecoveryPiece piece in game.Pieces) if (piece != null && piece.Index == index) return piece; return null; }
+         void RestoreMovable(RecoveryPiece piece) { if (piece != null && originalMovement.TryGetValue(piece, out bool movable)) piece.CanMove = movable; }

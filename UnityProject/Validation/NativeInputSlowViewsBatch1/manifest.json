@@ -1,0 +1,50 @@
+{
+  "createdUtc": "2026-10-16T01:55:06.547046+00:00",
+  "scope": "EDITOR VALIDATOR ONLY. Production game, interaction, camera, scene masks and main/clone Assets are untouched. Use isolated clone for actual754/761 validation before any main test update.",
+  "files": [
+    {
+      "path": "Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs",
+      "source": "Validation/NativeInputSlowViewsBatch1/Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs",
+      "sha256": "1c1e08026b0384b63afe644f1368ffcb146916817c9fc60a5cf3939d29ffc909",
+      "baseSha256": "2584c7cdf18908f1f593e3aa316ce88dde2019dbcef74330573db278a357877c"
+    }
+  ],
+  "entrypoint": "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNativeViewFailures",
+  "retainedEntrypoints": [
+    "RunNativeAll",
+    "RunNativeFocused",
+    "RunAll",
+    "Run1142Sequence",
+    "Run1236"
+  ],
+  "compile": "Roslyn editor0 errors; save1-native-input-v8-compile.rsp",
+  "actualUnityValidation": "Not run. Root launches isolated clone.",
+  "changes": [
+    "All v7 actions and criteria remain identical when its four quarter views find the source+target.",
+    "Only after all4 fail, try native slow continuous yaw offsets15/30/45/60/75 per quarter, at most20extra views.",
+    "BeginRotation must hit actual authored entrada, avoid UI/original movable selection, and obey no-held-actor gate.",
+    "Original InputManager MouseX sensitivity.1: move pointer at most1pixel/frame; ContinueRotation gets original axis=dx*.1 and scene multiplicador5; no direct camera pose/pitch/mask/FOV writes.",
+    "EndRotation uses actual elapsed time and pointer displacement; wait until measured force remains below the original flick threshold. Wait one real frame for original release Lerp, then production piece pickup holds that current intermediate yaw.",
+    "Every source/target still uses unchanged actual original closest-hit/CheckSphere/native surface ray, original guide and exact movement/water/spring completion.",
+    "Failures remain failures if no actual view reaches the floor; no fabricated guide, layer penetration or collision tolerance changes.",
+    "Record cameraSlowGestures/frames/actualYaw samples and honest diagnostics. Existing checks, pending-water and positive matching-color/native51 completion criteria preserved."
+  ],
+  "nativeEvidence": [
+    {
+      "source": "Methods/MoveBloque_doProcessMove_102FA9C.asm.txt",
+      "range": "0x102FB90..0x102FBAC",
+      "behavior": "Physics.Raycast(ray,out hit) with default layers. Do not point through layer0/13 roof."
+    },
+    {
+      "source": "Assets/Scripts/Assembly-CSharp/SwipeHandler2.cs",
+      "behavior": "Original mouse Begin/Continue/End path. Continue degree=MouseX*multiplicador; TickRotation only when released and not moving a selected actor."
+    },
+    {
+      "source": "ProjectSettings/InputManager.asset",
+      "line": 105,
+      "axis": "Mouse X",
+      "sensitivity": 0.1,
+      "type": 1
+    }
+  ]
+}

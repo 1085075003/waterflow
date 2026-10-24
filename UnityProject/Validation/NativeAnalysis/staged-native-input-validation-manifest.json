@@ -1,0 +1,26 @@
+{
+  "status": "Immutable staging only; not imported or executed",
+  "baseFile": "Validation\\NativeAnalysis\\FlowWaterSave1GameplayValidation.pending-release-sequence.cs.src",
+  "baseSHA256": "000ef31e85011fd5f8dd352f45b2649d64922b8a09dae382d4c0e25ca187222a",
+  "mainBaseFile": "Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs",
+  "mainBaseSHA256": "c43f1808c1fa43ef9ed31ce742287cd1acd3a3516de073eb33f39f214f29c75f",
+  "sourceFile": "Validation\\NativeAnalysis\\FlowWaterSave1GameplayValidation.pending-native-input.cs.src",
+  "sourceSHA256": "9eeb43fcf705f93ea6080f4f31e6ed1d7326808801cbe94ffc9d42b314511c57",
+  "entries": [
+    "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNativeFocused",
+    "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNativeAll"
+  ],
+  "cases": [
+    1142,
+    1149,
+    1236,
+    1656,
+    1660
+  ],
+  "scope": "All non-z captured actors use actual production camera picking and Begin/Continue/EndDrag, real original surface guide and held-hover pointer offset correction. w selects layer2 before requiring observed busy-to-idle. No transform/guide/switch/water writes. Existing RunAll remains explicit instant-TryMove baseline. RunNativeAll enumerates the same800 originalSave1 catalog; report.inputStrategy=production-pointer-drag. Failure to pick, ray guide, observe busy or finish real motion is reported, never bypassed.",
+  "nativeEvidence": [
+    "doProcess1Solution1034AEC enables w wait,1034C00 selects layer2 before HandleStepsSolution1034290..2AC calls doProcesoEspera",
+    "doProcesoEspera103528C..290 records observedbusy;10352A0..2B4 clears wait only after observedbusy then all eightidle"
+  ],
+  "limitations": "This is a legal real-input player strategy, not exact recreation of native automatic preview animation phase timing. NativeFocused must actually run on cloned project, no result inferred from compile."
+}

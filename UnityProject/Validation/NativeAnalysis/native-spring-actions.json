@@ -1,0 +1,27 @@
+{
+  "scope": "Verified coordinate/rotation calculation only. Original collision validation, carrying stacked pieces, chain state and animation require additional restoration.",
+  "method": "ObservadorResorte.doCalPuntoNext",
+  "VA": "0x10CC9B0",
+  "input": "tipoResor is one action character extracted from sz...ez, not the first fijo character.",
+  "forwardWhen": "comprueba==1",
+  "actions": {
+    "0": {"translation": [0, 0, 0], "yawDegrees": 0},
+    "1": {"translation": [0, 0, 0], "yawDegrees": 90, "returnYawDegrees": 0},
+    "2": {"translation": [0, 0, 0], "yawDegrees": 180, "returnYawDegrees": 0},
+    "3": {"translation": [0, 0, 0], "yawDegrees": -90, "returnYawDegrees": 0},
+    "4": {"translation": [0, 0, -20], "yawDegrees": 0},
+    "5": {"translation": [0, 0, 20], "yawDegrees": 0},
+    "6": {"translation": [20, 0, 0], "yawDegrees": 0},
+    "7": {"translation": [-20, 0, 0], "yawDegrees": 0},
+    "8": {"translation": [0, -7.599999904632568, 0], "yawDegrees": 0},
+    "9": {"translation": [0, 7.599999904632568, 0], "yawDegrees": 0}
+  },
+  "returnTranslation": "Negate forward translation when comprueba!=1.",
+  "result": "parnextx/y/z/angle = parx/y/z/angle + variax/y/z/angle",
+  "configuration": {
+    "conResorte": "st...et; first character selects first switch channel; optional second character selects second switch channel.",
+    "tipoResorte": "sz...ez; one-channel action sequence length1..3; with two switch channels, split by literal c into tipo1 and tipo2, each sequence length1..3.",
+    "readableExamples": {"st1etsz7ez": "switch 1, one action X-20", "st12etsz6c5ez": "switch1 sequence X+20; switch2 sequence Z+20"},
+    "trigger": "Update compares managerResorte and positionRes to old values; changes call doPrevio -> doResorte -> collision validation -> doRotation or doMove."
+  }
+}

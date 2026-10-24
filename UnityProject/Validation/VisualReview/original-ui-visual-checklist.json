@@ -1,0 +1,153 @@
+{
+  "updatedUtc": "2026-10-15T20:54:25.000041+00:00",
+  "sourceScreenshotBatch": "Aspect 2026-10-15T19:49:17..19:49:21Z, UIFlows18:47Z, representative19:16Z",
+  "assetsEditedForThisChecklist": false,
+  "checks": [
+    {
+      "area": "home",
+      "scene": "Portada",
+      "criteria": "Logo/3D PUZZLE and three original buttons; original stone/ivy fountain model with baked water; margins at 1280x720 and885x630; native exit modal/cancel.",
+      "status": "reviewed",
+      "finding": "Both landscape screenshots fit. Motion requires frame comparison, not one still."
+    },
+    {
+      "area": "classic",
+      "scene": "SelLevel0 tab1",
+      "criteria": "Only original grupo1 model; correct two-layer selected CLASSIC border; BASIC/EASY/HARD/MIX/MASTER/GENIUS/MANIAC links; original blue/green water.",
+      "status": "reviewed",
+      "finding": "Model and original baked water visible; layout complete at885x630."
+    },
+    {
+      "area": "pools",
+      "scene": "SelLevel0 tab2",
+      "criteria": "Only original grupo2; POOLS I/II/III/7x7; original cascade staircase/large basin model; no model/label overlap.",
+      "status": "reviewed",
+      "finding": "Model and baked pools visible; layout fits."
+    },
+    {
+      "area": "springs",
+      "scene": "SelLevel0 tab3",
+      "criteria": "Original GrupoMech21 at native special transform; four spring packs; native Resorte2 moving/rotating demo sequence and connected water.",
+      "status": "pending-runtime-demo",
+      "finding": "Model/layout present; initial Aspect still was dry. Native demo and water need time-series review."
+    },
+    {
+      "area": "mech",
+      "scene": "SelLevel0 tab4",
+      "criteria": "Original Grupo4Prefab; original bridge/pressure-switch demo moves in native order and original source colors; four pack links.",
+      "status": "pending-runtime-demo",
+      "finding": "Model/layout present; initial Aspect still was dry."
+    },
+    {
+      "area": "jets",
+      "scene": "SelLevel0 tab5",
+      "criteria": "Original grupo5Prefab; native original colored jet routing and demo; four visible pack links; active water branches only.",
+      "status": "pending-runtime-demo",
+      "finding": "Model/layout present; initial Aspect had green source only."
+    },
+    {
+      "area": "night",
+      "scene": "SelLevel0 tab6",
+      "criteria": "Original grupo6; fondo2/directional light disabled/ambient.4; lights and colored flow; four Night packs; selected border.",
+      "status": "pending-runtime-demo",
+      "finding": "Correct dark background/lights/model; source graph/dynamic demo still pending latest capture."
+    },
+    {
+      "area": "level-selection",
+      "scene": "SelLevel1",
+      "criteria": "Original selected pack title, cell numbers1..50 and paging; completion state; Back; no BASIC strip left after loading game.",
+      "status": "ui-controls-passed-await-new-images",
+      "finding": "757-check UI run entered27 recovered packs,39 native mappings,9 scenes."
+    },
+    {
+      "area": "settings",
+      "scene": "Settings",
+      "criteria": "Native music/sound slider size/knobs/labels, STORE/RATE/BACK; native Reset confirm/cancel; independent on/off and volume preferences.",
+      "status": "reviewed",
+      "finding": "885x630 fits; old reset screenshot fits. Latest UI round should recheck new persistence scope."
+    },
+    {
+      "area": "store",
+      "scene": "Store",
+      "criteria": "Original product artwork and English BUY labels; full descriptions; page arrows/back; no fabricated prices or successful local purchases.",
+      "status": "reviewed-with-service-limit",
+      "finding": "BUY spelling fixed; price boxes blank because local billing unavailable. All controls fit885x630."
+    },
+    {
+      "area": "game-scenes",
+      "scene": "four original Levely5 scenes",
+      "criteria": "Original perspective/ground/material/background/light/camera; complete board geometry including underground borders; native HUD; no invented checkerboard/status bar.",
+      "status": "partial-review",
+      "finding": "Basic/5/6x6 fit; 7x7 gm2001 underground bottom is visibly clipped in pre-framing Aspect at both landscape ratios."
+    },
+    {
+      "area": "solution-preview",
+      "scene": "game scenes",
+      "criteria": "Native confirmation art; final Save/Save1 layouts; correct panel2 or3; original Steps path; leave preview restores positions/inventory/moves/undo; no progress saved from preview.",
+      "status": "ui-controls-passed-await-new-images",
+      "finding": "Old gm288/Steps screenshots fit; gm288 inventory restoration passed."
+    },
+    {
+      "area": "complete",
+      "scene": "game scenes",
+      "criteria": "Original stars/LEVEL COMPLETE/modal close/menu/next; toolbar Next only after dismissal, whole solution count hidden; no repeated popup on refresh.",
+      "status": "fixed-await-latest-image",
+      "finding": "Prior screenshot showed Next/count overlap. Code/native lifecycle fixed; next UI run must recheck."
+    },
+    {
+      "area": "full-contact-audit",
+      "scene": "All1350",
+      "criteria": "Review actual visible mesh borders, missing geometry/materials, abrupt water slabs, direction/color, source/fountain structures, vegetation cutouts, night contrast, overlay leftovers; do not rely on pivot counts.",
+      "status": "pending-all-sheets",
+      "finding": "Each6x4 sheet has24frames=12 level start/solution pairs; map slots using ordered report IDs."
+    }
+  ],
+  "comparisonToUserOldScreenshot": {
+    "referenceMeaning": "The user image demonstrates the failed recovery, not a ground-truth original visual specification.",
+    "resolvedDifferences": [
+      "Invented technical top/footer HUD removed in favor of original blue art buttons.",
+      "Leftover BASIC selection strip eliminated by actual scene switching.",
+      "Muted synthetic checkerboard replaced by authored grass/stone floor materials and original perspective cameras.",
+      "Wall source/fountain geometry, ivy/grass, themed backgrounds/night lighting and native water assets reinstated."
+    ],
+    "verificationLimit": "A screenshot proves visual composition at one instant; water/UV/particles/mechanism loops need temporal captures and connected-flow diagnostics."
+  },
+  "openVisualIssues": [
+    {
+      "id": "camera-gm2001-bottom",
+      "severity": "must-fix",
+      "evidence": [
+        "Aspect/gm2001-1280x720.png",
+        "Aspect/gm2001-885x630.png"
+      ],
+      "description": "Underground bottom board corner crosses screen edge; prior PASS omitted boardBoundsInView. Validation now corrected; reconstructed minimum backward framing is awaiting actual test."
+    },
+    {
+      "id": "category-dynamic-demo",
+      "severity": "must-verify",
+      "evidence": [
+        "Aspect/category3-885x630.png",
+        "Aspect/category4-885x630.png",
+        "Aspect/category5-885x630.png",
+        "Aspect/category6-885x630.png"
+      ],
+      "description": "Dry or incomplete original model flow before new PreviewWater/demo scripts; await time-series images."
+    },
+    {
+      "id": "store-prices",
+      "severity": "external-service-limit",
+      "evidence": [
+        "Aspect/store-885x630.png"
+      ],
+      "description": "Original price boxes have no connected billing service; do not display invented prices."
+    },
+    {
+      "id": "home-home1",
+      "severity": "preserve-source-until-evidence",
+      "evidence": [
+        "UIFlows/08-original-completion.png"
+      ],
+      "description": "Two menu icons exist in original completion source. Native completed animations have only root scale curves; no proven branch to hide one."
+    }
+  ]
+}

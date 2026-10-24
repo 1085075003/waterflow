@@ -1,0 +1,41 @@
+{
+  "reviewedUtc": "2026-10-16T09:37:02.506361+00:00",
+  "scope": "Readonly resolution of the observed gm2050 original vertical-inlet q19/q20 surfaces",
+  "decision": "Original mesh, material, pose and active vertical-inlet A/B lifetime are confirmed by the cited native methods, assets and actual Unity diagnostics. Retain the observed native inlet presentation; no clipping, offset, family removal or premature A destruction is justified.",
+  "evidence": [
+    {
+      "path": "NativeWaterRecipeStackAudit1/native-q-pose-audit.json",
+      "sha256": "6a058fe8f764ef57caff1a5e0eec57f240df173539e5cf9b40f836aed4550f04"
+    },
+    {
+      "path": "VisualReview/q19-q20-raw-mesh-and-flipbook-audit.json",
+      "sha256": "471d97a945c471a04572f4158d62c0116fd065ed1f3f66223a714a3f0bec7918"
+    },
+    {
+      "path": "NativeAnalysis/native-ft3-fountain-call-gates-20261016.json",
+      "sha256": "2ad2286b2c7a8c4ee797e47908c6b003cad39f29e0f82178a87d0752c0a94dd4"
+    },
+    {
+      "path": "FinalRender/NativeGeometryRegression1/gm2050-water-mesh-diagnostics.json",
+      "sha256": "d25963d8fcc349fab3519a4d30150b1b222ee2511d45efb28a1a9f31b0df52e1"
+    },
+    {
+      "path": "NativeAnalysis/native-vertical-inlet-lifetime-audit.json",
+      "sha256": "a8239a226812619b1cb73c9ef88cd5cc563168765014d1b7677a89b456786a83"
+    }
+  ],
+  "confirmed": [
+    "All ten packed-vector payloads of original q19 and q20 meshes match exported assets byte for byte.",
+    "Literal native root setters, original parent transforms and original mesh AABBs independently predict actual records13/42/55 world bounds within5e-6.",
+    "Original water1b active curves select q19/q20 at the observed phases, without transform or material animation; actual diagnostics show one active q per observed instance.",
+    "Original opaque fontain20 and native Night shader replacement match actual material diagnostics.",
+    "Native call gates prove these are vertical-inlet A flow, not extra primary/border/center fountain families.",
+    "Vertical5/6 returns before the side-only doDestroyAgua Invoke; phase1 B is stored in Agua4 without replacing A, and A is destroyed on actual inlet exit. Original prefab has no self-destroy component or animation event."
+  ],
+  "limits": [
+    "Static native evidence and actual Unity diagnostics do not establish original Android-device pixel equivalence.",
+    "This resolves only the named inlet surfaces and does not pre-approve any other frame or visual issue."
+  ],
+  "productionChanges": false,
+  "nativeLifetimeReviewComplete": true
+}

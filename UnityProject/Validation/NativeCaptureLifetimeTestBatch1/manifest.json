@@ -1,0 +1,27 @@
+{
+  "createdUtc": "2026-10-16T01:46:41.057599+00:00",
+  "scope": "EDITOR TEST ONLY. Main/clone Assets and all runtime sources untouched. Requires NativeStepPlaybackBatch3 runtime. Controlled negative fixture is not normal original-level completion proof.",
+  "files": [
+    {
+      "path": "Assets/Editor/RecoveredTools/FlowWaterStepPlaybackValidation.cs",
+      "source": "Validation/NativeCaptureLifetimeTestBatch1/Assets/Editor/RecoveredTools/FlowWaterStepPlaybackValidation.cs",
+      "sha256": "c6d77c40b93ae0ad53ec758877bf2ed515804caf94ca85475b5d9437a23a2ca4",
+      "baseSha256": "f0159e56c5b16ec1e73ca50fb855d2cd22d1d28df88c0a8a8ed998f923c99950"
+    }
+  ],
+  "entrypoint": "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.RunCaptureLifetime",
+  "retainedOtherEntrypoints": true,
+  "compile": "Roslyn editor0 errors; native-capture-lifetime-editor-compile.rsp",
+  "actualUnityValidation": "Not run. Root launches clone only.",
+  "fixture": [
+    "Production UI loads real gm601/so601.",
+    "Independently query original production OverlapSphere at(1000,3.95,1000); require no selected body.",
+    "Temporarily change only first in-memory RecordedStep.origin to that empty point; first miss must leave no captured body, no motion/cursor/transaction/inventory change.",
+    "Restore exact first origin; production ApplyHint animates real original first step through3 phases and settles actual mechanism.",
+    "Temporarily change only second descriptor origin to same empty point; production ApplyHint must retain exact previous original body, selectlayer2/getTarget/isMouseDragging1, and animate all3 phases to original second destination.",
+    "Undo must restore all exact pre-step poses and previous captured-body reference.",
+    "Finally restores both exact original descriptors and reloads unchanged raw gm/so. PlayerPrefs/timeScale restored by existing harness.",
+    "Test never assigns actor/guide/collider transforms, water colors, switch/bus values or native data files."
+  ],
+  "nativeEvidence": "MoveBloque.doCapturarPieza1034638 clears only checkCollisionSolu;1034848 writes piezaCapturada on accepted hit. Steps caller never clears it. Total1034138 does clear each time."
+}

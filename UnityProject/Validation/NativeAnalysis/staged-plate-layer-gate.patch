@@ -1,0 +1,85 @@
+--- UnityProject\Assets\Scripts\RecoveryRuntime\RecoveredNativeSprings.cs
++++ UnityProject\Validation\NativeAnalysis\RecoveredNativeSprings.pending-plate-layer-gate.cs.src
+@@ -73,6 +73,7 @@
+         sealed class PlateState
+         {
+             public int phase; public bool wasOccupied, output1, output2, published1, published2, pending; public float remaining; public int occupant;
++            public int overlapOwner = -1, overlapOldLayer; public int[] overlapPath;
+             public bool hasBody, hasAnimator, animatorEnabled, animatorPressed;
+             public Vector3 bodyPosition, bodyScale; public Quaternion bodyRotation;
+             public int animatorState; public float animatorTime;
+@@ -535,14 +536,26 @@
+             foreach (Plate plate in plates)
+             {
+                 if (plate.source == null || plate.piece == null) continue;
++                // Invoke(doBajar/doSubir) continues independently of Update's
++                // layer gate, so a pending native publication still executes.
++                if (plate.pending && Time.time >= plate.when)
++                {
++                    plate.pending = false;
++                    PublishPlate(plate);
++                }
++                Resorte3 toggleSource = plate.source as Resorte3;
++                if (toggleSource != null)
++                {
++                    GameObject previous = toggleSource.otherObject;
++                    int layer = previous == null ? 12 : previous.layer;
++                    // Native1028230..2F0: temporarily carried layer9 is not a
++                    // release/repress. Preserve the previous collision edge.
++                    toggleSource.checkPieza = previous == null || layer == 12 || layer == 11 || layer == 0 || layer == 2;
++                    if (!toggleSource.checkPieza) continue;
++                }
+                 Vector3 center = plate.source.transform.position + Vector3.up * Number(plate.source, "altura", Storey);
+                 RecoveryPiece occupant = plate.source is Resorte ? FindOriginalPlateOccupant(plate, center) : FindOriginalToggleOccupant(plate, center);
+                 bool occupied = occupant != null;
+-                if (plate.pending && Time.time >= plate.when)
+-                {
+-                    plate.pending = false;
+-                    PublishPlate(plate);
+-                }
+                 if (occupied && !plate.wasOccupied)
+                 {
+                     bool allowed = PlateAcceptsPress(plate);
+@@ -724,7 +737,7 @@
+             for (int i = 0; i < plates.Count; i++)
+             {
+                 Plate p = plates[i]; var saved = new PlateState { phase = p.phase, wasOccupied = p.wasOccupied, output1 = p.output1, output2 = p.output2, published1 = p.published1, published2 = p.published2, pending = p.pending, remaining = p.when - Time.time, occupant = p.occupant == null ? -1 : p.occupant.Index };
+-                CapturePlateVisual(p, saved); result.plates[i] = saved;
++                CapturePlateOverlap(p, saved); CapturePlateVisual(p, saved); result.plates[i] = saved;
+             }
+             return result;
+         }
+@@ -754,10 +767,32 @@
+                 { GameObject body = CollisionBody(a.carried[j]); if (body != null && s.carriedLayers[j] >= 0) body.layer = s.carriedLayers[j]; }
+             }
+             for (int i = 1; i <= 8; i++) { Channel c = channels[i]; ChannelState s = state.channels[i]; c.position = s.position; c.direction = s.direction; c.manager = s.manager; c.wasActive = s.wasActive; c.moving = s.moving; c.blocked = s.blocked; Global("positionRes" + i, c.position); Global("activadoRes" + i, c.moving); }
+-            for (int i = 0; i < plates.Count; i++) { Plate p = plates[i]; PlateState s = state.plates[i]; p.phase = s.phase; p.wasOccupied = s.wasOccupied; p.output1 = s.published1; p.output2 = s.published2; p.pending = s.pending; p.when = Time.time + s.remaining; p.occupant = ByIndex(s.occupant); PublishPlate(p); p.output1 = s.output1; p.output2 = s.output2; Set(p.source,"fase",p.phase); PlateMaterial(p.source,PlateMaterialIndex(p)); RestorePlateVisual(p, s); }
++            for (int i = 0; i < plates.Count; i++) { Plate p = plates[i]; PlateState s = state.plates[i]; p.phase = s.phase; p.wasOccupied = s.wasOccupied; p.output1 = s.published1; p.output2 = s.published2; p.pending = s.pending; p.when = Time.time + s.remaining; p.occupant = ByIndex(s.occupant); PublishPlate(p); p.output1 = s.output1; p.output2 = s.output2; Set(p.source,"fase",p.phase); PlateMaterial(p.source,PlateMaterialIndex(p)); RestorePlateOverlap(p, s); RestorePlateVisual(p, s); }
+             IsBusy = false;
+             foreach (Actor actor in actors) { IsBusy |= actor.moving; GateNativeRotatingWater(actor,actor.moving && actor.turning); }
+             restoring = false;
++        }
++
++        static void CapturePlateOverlap(Plate plate, PlateState saved)
++        {
++            Resorte3 source = plate.source as Resorte3;
++            if (source == null || source.otherObject == null) return;
++            RecoveryPiece owner = source.otherObject.GetComponentInParent<RecoveryPiece>();
++            if (owner == null) return;
++            var path = new List<int>(); Transform current = source.otherObject.transform;
++            while (current != null && current != owner.transform) { path.Add(current.GetSiblingIndex()); current = current.parent; }
++            if (current == null) return;
++            path.Reverse(); saved.overlapOwner = owner.Index; saved.overlapPath = path.ToArray(); saved.overlapOldLayer = source.layer_old;
++        }
++        void RestorePlateOverlap(Plate plate, PlateState saved)
++        {
++            Resorte3 source = plate.source as Resorte3; if (source == null) return;
++            RecoveryPiece owner = ByIndex(saved.overlapOwner); Transform current = owner == null ? null : owner.transform;
++            foreach (int index in saved.overlapPath ?? new int[0])
++            { if (current == null || index < 0 || index >= current.childCount) { current = null; break; } current = current.GetChild(index); }
++            source.otherObject = current == null ? null : current.gameObject;
++            source.otherObject1 = current == null || current.parent == null ? null : current.parent.gameObject;
++            source.layer_old = saved.overlapOldLayer; source.checkCollision_old = saved.wasOccupied;
+         }
+ 
+         static void CapturePlateVisual(Plate plate, PlateState saved)

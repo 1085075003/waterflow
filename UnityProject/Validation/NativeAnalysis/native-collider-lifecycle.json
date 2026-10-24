@@ -1,0 +1,86 @@
+{
+  "source": "Original IL2CPP ARM64; normal gameplay UIManagerSelScript.var_design==0; layer numbers from original TagManager",
+  "normalGameplay": [
+    {
+      "type": "ControlPieza",
+      "condition": "esPiezaFija",
+      "target": "objeto",
+      "layer": 0,
+      "evidence": "Start0x107F8D8 fixed branch ->0x107FC94 esTextura4 ->0x1080C84..0x1080CAC. Nonfixed0x107FA54..0x107FAB4 bypasses layer block to0x1080CB0."
+    },
+    {
+      "type": "ControlFijo",
+      "condition": "esPiezaFija && !originalRootName.Contains(\"Piezatrans1\")",
+      "target": "objeto",
+      "layer": 0,
+      "evidence": "Start0x107680C false skips to0x1077FB0;0x107682C Piezatrans1 skips; otherwise0x1077F84..0x1077FAC."
+    },
+    {
+      "type": "ControlFijo",
+      "condition": "objeto.parent original name contains BloqueJapo, regardless of fixedness",
+      "target": "objeto",
+      "layer": 13,
+      "tag": "Map",
+      "evidence": "Independent later Start1077FB0..1078050 branch; overrides the earlier layer0."
+    },
+    {
+      "type": "ControlFijo1",
+      "condition": "esPiezaFija",
+      "target": "objeto",
+      "layer": 0,
+      "evidence": "Start0x107960C false jumps0x107DBDC; fixed branch reaches0x107AD84..0x107ADAC."
+    },
+    {
+      "type": "ControlPiezaPfuente",
+      "condition": "esPiezaFija",
+      "target": "objeto",
+      "layer": 0,
+      "evidence": "Start0x10943C8..0x109441C."
+    },
+    {
+      "type": "ControlPiezaFuente",
+      "condition": "always",
+      "target": "objetoCollider",
+      "layer": 0,
+      "tag": "Map",
+      "evidence": "Awake0x108FE34..0x108FE70. indicadorSuelo1 then overrides to Suelo1(13) at0x108FE74..0x108FEA4."
+    },
+    {
+      "type": "ControlPiezaC",
+      "condition": "originalRootName.Contains(\"FuenteED\") || originalRootName.Contains(\"FuenteEB6\")",
+      "target": "objeto",
+      "layer": 0,
+      "evidence": "Start0x1084608..0x10846B0; x25=FuenteED at0x1082F6C, unchanged through this block."
+    },
+    {
+      "type": "ControlPiezaC",
+      "condition": "other original names, except the following BloqueChorro2 override",
+      "target": "objeto",
+      "layer": 13,
+      "tag": "Map",
+      "evidence": "Start0x108469C jumps0x1085314 -> set_tag(Map), NameToLayer(Suelo1), set_layer0x1085358."
+    },
+    {
+      "type": "ControlPiezaC",
+      "condition": "originalRootName.Contains(BloqueChorro2) && !esPiezaFija",
+      "target": "objeto",
+      "layer": 12,
+      "tag": "Map",
+      "evidence": "Start0x1085398..0x10853A8 cbz esPiezaFija to out-of-line0x1088DD0..0x1088DF0: NameToLayer(bloque), then branch0x10846AC set_layer. Overrides earlier Suelo1."
+    },
+    {
+      "type": "ControlPiezaC",
+      "condition": "originalRootName.Contains(BloqueChorro2) && esPiezaFija",
+      "target": "objeto",
+      "layer": 0,
+      "tag": "Map",
+      "evidence": "Start0x10853AC..0x10853B4 branches to0x10846A8 set_layer0. Overrides earlier Suelo1."
+    }
+  ],
+  "gm1101": {
+    "record21": "Recta2j N retains authored collider layer12",
+    "record47": "BloqueCurva3 I st9et is fixed ControlPieza, child tierra is self.objeto, layer12->0 and excluded from mask4096",
+    "note": "Collider stays enabled in original; the change is layer membership. A recovery capture which forces all collider GameObjects to layer12 undoes native eligibility."
+  },
+  "capture": "MoveBloque.doCapturarPieza0x1034594 uses Physics.OverlapSphere(maskmascaraBloque=4096,radius1) and last eligible collider. Do not replace original layer with a generic query layer."
+}

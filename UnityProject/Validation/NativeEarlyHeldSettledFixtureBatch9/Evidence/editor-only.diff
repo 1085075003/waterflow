@@ -1,0 +1,101 @@
+--- Main6912
++++ EarlyHeldSettledBatch9
+@@ -28,6 +28,8 @@
+         const string TerminalQuickKey = "FlowWater.Save1GameplayValidation.TerminalQuickRelease";
+         const string OrdinaryEarlyKey = "FlowWater.Save1GameplayValidation.OrdinaryEarlyRelease";
+         static bool ordinaryEarlyForNextBegin;
++        const string ContinuousKey="FlowWater.Save1GameplayValidation.OrdinaryContinuousInput";
++        static bool ordinaryContinuousForNextBegin;
+         const string RegressionKey="FlowWater.Save1GameplayValidation.RequestedRegression";
+         static string requestedRegressionForNextBegin="";
+         static bool NativeReplay { get { return SessionState.GetBool(InputModeKey,false); } }
+@@ -146,7 +148,9 @@
+         public static void RunNativeLandingRegression() { Begin(new[] {1187},true); }
+         public static void RunNativePressureReleaseRegression() { Begin(new[] {609,690},true); }
+         public static void RunNativeTerminalQuickRelease() { Begin(new[] {1187},true,null,true); }
+-        public static void RunNativeRequestedRegression()
++        public static void RunNativeRequestedRegression() { RunNativeRequestedRegressionWithPolicy(true); }
++        public static void RunNativeRequestedRegressionSettled() { RunNativeRequestedRegressionWithPolicy(false); }
++        static void RunNativeRequestedRegressionWithPolicy(bool ordinaryEarly)
+         {
+             string path=Path.Combine(Output,"native-regression-request.json");
+             byte[] bytes=File.ReadAllBytes(path);
+@@ -161,7 +165,7 @@
+             using(var digest=System.Security.Cryptography.SHA256.Create()) request.sha256=BitConverter.ToString(digest.ComputeHash(bytes)).Replace("-","").ToLowerInvariant();
+             string previous=requestedRegressionForNextBegin;
+             requestedRegressionForNextBegin=JsonUtility.ToJson(request);
+-            try { BeginOrdinaryEarlyRelease(request.ids,null); }
++            try { if(ordinaryEarly) BeginOrdinaryEarlyRelease(request.ids,null); else Begin(request.ids,true,null); }
+             finally { requestedRegressionForNextBegin=previous; }
+         }
+         public static void RunNative1187ContinuousEarlyRelease() { BeginOrdinaryEarlyRelease(new[] {1187},null); }
+@@ -169,14 +173,16 @@
+         public static void RunNative2033SceneAudit() { BeginOrdinaryEarlyRelease(new[] {2033},null); }
+         public static void RunNativeBoxSurfaceRegressions() { BeginOrdinaryEarlyRelease(new[] {1187,2033},null); }
+         public static void RunNativeFailedEarlyRelease() { RunNativeFailedWithPolicy(true); }
+-        static void BeginOrdinaryEarlyRelease(int[] cases,RetestSource source)
+-        {
+-            bool previous=ordinaryEarlyForNextBegin; ordinaryEarlyForNextBegin=true;
++        public static void RunNativeFailedEarlyHeldSettled() { RunNativeFailedWithPolicy(true,false); }
++        static void BeginOrdinaryEarlyRelease(int[] cases,RetestSource source,bool continuous=true)
++        {
++            bool previous=ordinaryEarlyForNextBegin, previousContinuous=ordinaryContinuousForNextBegin;
++            ordinaryEarlyForNextBegin=true; ordinaryContinuousForNextBegin=continuous;
+             try { Begin(cases,true,source); }
+-            finally { ordinaryEarlyForNextBegin=previous; }
++            finally { ordinaryEarlyForNextBegin=previous; ordinaryContinuousForNextBegin=previousContinuous; }
+         }
+         public static void RunNativeFailed() { RunNativeFailedWithPolicy(false); }
+-        static void RunNativeFailedWithPolicy(bool ordinaryEarly)
++        static void RunNativeFailedWithPolicy(bool ordinaryEarly,bool continuous=true)
+         {
+             // Root copies a closed snapshot here. The parent run may still be
+             // active, but an unfinished level without failure is never selected.
+@@ -191,7 +197,7 @@
+             string sha;
+             using(var digest=System.Security.Cryptography.SHA256.Create()) sha=BitConverter.ToString(digest.ComputeHash(bytes)).Replace("-","").ToLowerInvariant();
+             var source=new RetestSource { path=Path.GetFullPath(path),sha256=sha,startedUtc=previous.startedUtc,finishedUtc=previous.finishedUtc,closedFailedIds=cases };
+-            if(ordinaryEarly) BeginOrdinaryEarlyRelease(cases,source); else Begin(cases,true,source);
++            if(ordinaryEarly) BeginOrdinaryEarlyRelease(cases,source,continuous); else Begin(cases,true,source);
+         }
+         public static void RunNativeHalf1() { RunNativeHalf(false); }
+         public static void RunNativeHalf2() { RunNativeHalf(true); }
+@@ -271,6 +277,7 @@
+             SessionState.SetBool(InputModeKey,nativeInput);
+             SessionState.SetBool(TerminalQuickKey,terminalQuick);
+             SessionState.SetBool(OrdinaryEarlyKey,ordinaryEarlyForNextBegin);
++            SessionState.SetBool(ContinuousKey,ordinaryEarlyForNextBegin && ordinaryContinuousForNextBegin);
+             SessionState.SetString(RegressionKey,requestedRegressionForNextBegin??"");
+             SessionState.SetString(RetestSourceKey,retestSource==null ? "" : JsonUtility.ToJson(retestSource));
+             SessionState.SetString(CasesKey, String.Join(",", cases));
+@@ -312,16 +319,17 @@
+                     report = new Report { startedUtc = DateTime.UtcNow.ToString("o"), unityVersion = Application.unityVersion, simulationTimeScale = 10, originalTimeScale = SessionState.GetFloat(TimeKey, 1), inputStrategy = NativeReplay ? "production-pointer-drag" : "instant-TryMove-baseline", plannedLevels = Cases.Length };
+                     Time.timeScale = report.simulationTimeScale;
+                     report.ordinaryEarlyRelease=SessionState.GetBool(OrdinaryEarlyKey,false);
+-                    report.ordinaryContinuousInput=report.ordinaryEarlyRelease;
++                    report.ordinaryContinuousInput=SessionState.GetBool(ContinuousKey,false);
+                     string regressionJson=SessionState.GetString(RegressionKey,"");
+                     if(!String.IsNullOrEmpty(regressionJson))
+                     {
+                         report.requestedRegression=JsonUtility.FromJson<RequestedRegression>(regressionJson);
+-                        report.notes.Add("Requested affected-content regression, explicitly separate from aggregate exact-failed retest. Original800 ids are validated, requested JSON bytes SHA256 and ordered ids are recorded. This suite may include earlier passing levels and never establishes a failed-base aggregate closure by itself. Continuous real-pointer transactions, original poses and positive native victory standards are unchanged.");
+-                    }
+-                    report.playerReleaseStrategy=SessionState.GetBool(OrdinaryEarlyKey,false)?"ordinary-continuous-early-release":SessionState.GetBool(TerminalQuickKey,false)?"settled-hover-prefix-and-quick-terminal-ordinary-guide":"settled-hover";
++                        report.notes.Add("Requested affected-content regression, explicitly separate from aggregate exact-failed retest. Original800 ids are validated, requested JSON bytes SHA256 and ordered ids are recorded. This suite may include earlier passing levels and never establishes a failed-base aggregate closure by itself. Actual held/release/post-step policy is declared by the independent report fields; original real-pointer transactions, poses and positive native victory standards are unchanged.");
++                    }
++                    report.playerReleaseStrategy=report.ordinaryEarlyRelease?(report.ordinaryContinuousInput?"ordinary-continuous-early-release":"ordinary-early-held-with-settled-post-step"):SessionState.GetBool(TerminalQuickKey,false)?"settled-hover-prefix-and-quick-terminal-ordinary-guide":"settled-hover";
+                     if(SessionState.GetBool(OrdinaryEarlyKey,false)) report.notes.Add("Independent ordinaryEarlyRelease legal player strategy: after a real Begin/Continue ray resolves the unchanged original recorded guide, keep the pointer held across at least one actual PlayerLoop frame, re-raycast it through production ContinueDrag, then call production EndDrag without waiting for the lifted actor to settle at floatingTarget. Native doEnd/doFijar performs all actual release motion and centering. CuboResorte still uses the separate settled-pointer plus native delayed compression fixture. No piece/guide/source/water/switch or native busy state is written. All original transactions, poses, positive matching-color goals and native victory standards remain exact. This is not the terminal-only release diagnostic or the original automatic-preview timing.");
+                     if(report.ordinaryContinuousInput) report.notes.Add("Continuous ordinary early-release strategy: after each successful native commit and exact recorded-pose assertion, begin the next recorded action without an artificial .18-real-second pause or a global all-springs-idle barrier. Real source/surface queries, one actual held PlayerLoop frame, original End/doFijar completion and compression delay, each w/z action-specific protocol, final positive matching-color targets, native victory and final water/spring settling all remain mandatory. Every step records this post-commit pause policy and actual frames. No runtime or game state is changed by this test policy.");
++                    if(report.ordinaryEarlyRelease && !report.ordinaryContinuousInput) report.notes.Add("Independent early-held with settled post-step legal strategy: retain real original Begin/Continue, at least one actual held PlayerLoop frame and unchanged exact original guide, then release without waiting for lifted floatingTarget convergence. Native End/doFijar still completes with exact recorded/native support pose and delayed compression requirements. After commit, preserve .18real pause and original all-springs-idle barrier before the next recorded capture. Early-held and continuous are independent flags; this is the former Early2 timing combination, not a changed runtime or source dataset. Exact failed-source selection and final positive matching-color targets/nativewin remain strict.");
+                     if(SessionState.GetBool(TerminalQuickKey,false)) report.notes.Add("Legal terminal-release diagnostic strategy: all preceding recorded actions retain the ordinary settled-hover strategy. Only the final recorded ordinary block releases after its exact original guide is resolved and one real held frame has elapsed, without waiting to rise/hover35 high. Original player input has no mandatory hover delay. CuboResorte keeps the settled real pointer and separate native post-release compression checks. Production Begin/Continue/End and actual animations/collisions still run; no actor/guide/water/switch is assigned. Final raw destinations, recorded count, transactions and positive native water/victory criteria remain unchanged.");
+                     string catalogJson=SessionState.GetString(CatalogKey,"");
+                     if(!String.IsNullOrEmpty(catalogJson)) report.expectedCatalog=JsonUtility.FromJson<ExpectedCatalog>(catalogJson);
+@@ -482,7 +490,7 @@
+                 }
+                 else
+                 {
+-                    step.postStepPausePolicy="settled-hover-extra-.18-real-and-global-busy-barrier";
++                    step.postStepPausePolicy=report.ordinaryEarlyRelease?"early-held-extra-.18-real-and-global-busy-barrier":"settled-hover-extra-.18-real-and-global-busy-barrier";
+                     foreach (object wait in WaitReal(.18f)) yield return wait;
+                     until = EditorApplication.timeSinceStartup + 35;
+                     while (Springs != null && Springs.IsBusy && EditorApplication.timeSinceStartup < until) yield return null;

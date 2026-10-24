@@ -1,0 +1,48 @@
+// exitLang$$AjustarPopup VA 0x103679C, inferred length 184
+void exitLang__AjustarPopup (exitLang_o* __this, const MethodInfo* method);
+0103679C  stp      x30, x21, [sp, #-0x20]!               
+010367A0  stp      x20, x19, [sp, #0x10]                 
+010367A4  adrp     x20, #0x24fb000                       
+010367A8  adrp     x21, #0x236b000                       
+010367AC  ldrb     w8, [x20, #0xd3b]                     
+010367B0  ldr      x21, [x21, #0xb68]                     // [0x236BB68] Method$UnityEngine.Component.GetComponent<RectTransform>()
+010367B4  mov      x19, x0                               
+010367B8  tbnz     w8, #0, #0x10367d0                    
+010367BC  adrp     x0, #0x236b000                        
+010367C0  ldr      x0, [x0, #0xb68]                       // [0x236BB68] Method$UnityEngine.Component.GetComponent<RectTransform>()
+010367C4  bl       #0xe61b78                             
+010367C8  mov      w8, #1                                
+010367CC  strb     w8, [x20, #0xd3b]                     
+010367D0  ldr      x1, [x21]                             
+010367D4  mov      x0, x19                               
+010367D8  bl       #0x1139f9c                             // UnityEngine.Component$$GetComponent<object>
+010367DC  str      x0, [x19, #0x28]                       // self.rectTransform
+010367E0  bl       #0x1036f3c                             // exitLang$$EsTablet
+010367E4  ldr      x19, [x19, #0x28]                      // self.rectTransform
+010367E8  mov      w21, w0                               
+010367EC  mov      x0, xzr                               
+010367F0  bl       #0x1fe9f30                             // UnityEngine.Screen$$get_width
+010367F4  mov      w20, w0                               
+010367F8  mov      x0, xzr                               
+010367FC  bl       #0x1fe9f58                             // UnityEngine.Screen$$get_height
+01036800  tbz      w21, #0, #0x1036818                   
+01036804  cbz      x19, #0x1036850                       
+01036808  adrp     x8, #0x5ff000                         
+0103680C  ldr      s0, [x8, #0xcf0]                      
+01036810  fmov     s1, #0.50000000                       
+01036814  b        #0x103682c                            
+01036818  cbz      x19, #0x1036850                       
+0103681C  adrp     x8, #0x5ff000                         
+01036820  adrp     x9, #0x5ff000                         
+01036824  ldr      s0, [x8, #0xf64]                      
+01036828  ldr      s1, [x9, #0xd78]                      
+0103682C  scvtf    s2, w20                               
+01036830  scvtf    s3, w0                                
+01036834  mov      x0, x19                               
+01036838  ldp      x20, x19, [sp, #0x10]                 
+0103683C  fmul     s1, s1, s3                            
+01036840  fmul     s0, s0, s2                            
+01036844  mov      x1, xzr                               
+01036848  ldp      x30, x21, [sp], #0x20                 
+0103684C  b        #0x200df0c                             // UnityEngine.RectTransform$$set_sizeDelta
+01036850  bl       #0xe61da0                             

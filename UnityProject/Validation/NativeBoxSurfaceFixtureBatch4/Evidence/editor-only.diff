@@ -1,0 +1,68 @@
+--- Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs d85
++++ NativeBoxSurfaceFixtureBatch4
+@@ -141,6 +141,7 @@
+         public static void RunNativePressureReleaseRegression() { Begin(new[] {609,690},true); }
+         public static void RunNativeTerminalQuickRelease() { Begin(new[] {1187},true,null,true); }
+         public static void RunNative1105EarlyRelease() { BeginOrdinaryEarlyRelease(new[] {1105},null); }
++        public static void RunNativeBoxSurfaceRegressions() { BeginOrdinaryEarlyRelease(new[] {1187,2033},null); }
+         public static void RunNativeFailedEarlyRelease() { RunNativeFailedWithPolicy(true); }
+         static void BeginOrdinaryEarlyRelease(int[] cases,RetestSource source)
+         {
+@@ -802,6 +803,8 @@
+         {
+             int diagnosticStart=diagnostic==null?0:diagnostic.inputDiagnostics.Count;
+             var points=new List<Vector3>();
++            var boxFacePoints=new List<KeyValuePair<Collider,Vector3>>();
++            int nearbyBoxCount=0;
+             points.Add(destination-Vector3.up*4.2f); points.Add(destination);
+             using(RecoveredNativeInteraction.QueryOriginalColliders(Game))
+             {
+@@ -813,6 +816,24 @@
+                     bool spans=bounds.min.x<=destination.x+1 && bounds.max.x>=destination.x-1 && bounds.min.z<=destination.z+1 && bounds.max.z>=destination.z-1 && bounds.min.y<=destination.y+1 && bounds.max.y>=destination.y-12;
+                     if(!centered && !spans) continue;
+                     points.Add(point); points.Add(bounds.center);
++                    BoxCollider originalBox=collider as BoxCollider;
++                    if(originalBox!=null && ((collider.tag.IndexOf("Map",StringComparison.Ordinal)>=0 && collider.tag!="Map1") || collider.name.IndexOf("Origen",StringComparison.Ordinal)>=0))
++                    {
++                        // Sample the original Box faces, including visible
++                        // vertical sides below a roof. This only adds real
++                        // pointer candidates; the production ray/guide decides.
++                        nearbyBoxCount++;
++                        for(int axis=0;axis<3;axis++) foreach(int sign in new[]{-1,1})
++                        for(int u=0;u<9;u++) for(int w=0;w<9;w++)
++                        {
++                            Vector3 local=originalBox.center;
++                            local[axis]+=originalBox.size[axis]*.499f*sign;
++                            int across=(axis+1)%3, down=(axis+2)%3;
++                            local[across]+=originalBox.size[across]*.5f*(-.99f+u*.2475f);
++                            local[down]+=originalBox.size[down]*.5f*(-.99f+w*.2475f);
++                            boxFacePoints.Add(new KeyValuePair<Collider,Vector3>(collider,originalBox.transform.TransformPoint(local)));
++                        }
++                    }
+                     // Actual interior top-face rays can reach a cell whose
+                     // center/edge is occluded by an authored neighboring tower.
+                     // This adds screen candidates only, never a synthetic guide.
+@@ -852,6 +873,23 @@
+                         diagnostic.inputDiagnostics.Add("ray "+candidate.ToString("F1")+" guideValid="+valid+" guide="+landing.ToString("F3")+" first="+obstruction);
+                     }
+                 }
++                int faceSamples=0;
++                foreach(KeyValuePair<Collider,Vector3> originalFace in boxFacePoints)
++                {
++                    Vector3 candidate=Game.GameCamera.WorldToScreenPoint(originalFace.Value);
++                    if(candidate.z<=0) continue;
++                    faceSamples++;
++                    if(RecoveredNativeInteraction.TryGetDropPoint(Game.GameCamera,candidate,Game,out landing,out surface) && OriginalGuideMatches(landing,destination,surface))
++                    {
++                        if(diagnostic!=null)
++                        {
++                            if(diagnostic.inputDiagnostics.Count>diagnosticStart) diagnostic.inputDiagnostics.RemoveRange(diagnosticStart,diagnostic.inputDiagnostics.Count-diagnosticStart);
++                            diagnostic.inputDiagnostics.Add("original-box-face-real-ray samples="+faceSamples+",boxes="+nearbyBoxCount+",sampled="+ColliderPath(originalFace.Key)+",world="+originalFace.Value.ToString("F4")+",actualHit="+ColliderPath(surface.collider)+",guide="+landing.ToString("F4"));
++                        }
++                        screen=candidate; return true;
++                    }
++                }
++                if(diagnostic!=null && boxFacePoints.Count>0) diagnostic.inputDiagnostics.Add("original-box-face-no-recorded-guide realRaySamples="+faceSamples+",boxes="+nearbyBoxCount+",destination="+destination.ToString("F4"));
+             }
+             screen=landing=Vector3.zero; surface=new RaycastHit(); return false;
+         }

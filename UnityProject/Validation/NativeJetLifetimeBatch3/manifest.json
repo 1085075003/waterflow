@@ -1,0 +1,37 @@
+{
+  "batch": "NativeJetLifetimeBatch3",
+  "immutable": true,
+  "createdUtc": "2026-10-16T04:11:16.925883+00:00",
+  "dependsOn": [
+    "NativeJetLifetimeBatch2"
+  ],
+  "status": "runtime Roslyn compile0errors; actual seed-policy and play/pause validation pending root",
+  "entry": "Recovered.FlowWater.Editor.FlowWaterJetLifetimeValidation.Run",
+  "files": [
+    {
+      "source": "Validation/NativeJetLifetimeBatch3/Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs",
+      "target": "Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs",
+      "sha256": "55b1c532683b62c0eb9ecb85d76f1526c78adff8b2bc7f7ffd86fea064893658",
+      "previousSha256": "3621850bd9a9857fc6d890864ea78fa47ebe03989b8d0d131d15ddefbaa82f40"
+    },
+    {
+      "source": "Validation/NativeJetLifetimeBatch3/Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs.meta",
+      "target": "Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs.meta",
+      "sha256": "bc23d265d53461407ce622c336d92ee575573f9b2cb053fa09af59032744dc89",
+      "previousSha256": "bc23d265d53461407ce622c336d92ee575573f9b2cb053fa09af59032744dc89"
+    }
+  ],
+  "changes": [
+    "Move both randomSeed and useAutoRandomSeed assignments directly after StopEmittingAndClear, before particle simulation; no setter occurs with live particles",
+    "Simulate restart:false advances the already seeded stopped state; resume only saved playing systems",
+    "All exact seed/auto policy/aged time/play-pause fixture assertions remain unchanged"
+  ],
+  "docs": [
+    "https://docs.unity3d.com/2022.3/Documentation/ScriptReference/ParticleSystem.Simulate.html",
+    "https://docs.unity3d.com/2022.3/Documentation/ScriptReference/ParticleSystem.Play.html"
+  ],
+  "checks": [
+    "runtime.rsp exit0"
+  ],
+  "actualStatus": "NOT_YET_RUN; must not infer exact automatic-seed behavior from compile"
+}

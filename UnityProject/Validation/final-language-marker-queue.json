@@ -1,0 +1,21 @@
+{
+  "continueOnFailure": true,
+  "jobs": [
+    {
+      "name": "languages",
+      "method": "Recovered.FlowWater.Editor.FlowWaterNativeLanguageValidation.Run",
+      "reportDirectory": "Validation/NativeLanguage",
+      "reportFile": "native-language-validation.json",
+      "archiveDestination": "FinalLanguageAndMarker/languages",
+      "timeoutSeconds": 1200
+    },
+    {
+      "name": "standalone-fountain",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStandaloneFountainValidation.Run",
+      "reportDirectory": "Validation/StandaloneFountain",
+      "reportFile": "standalone-fountain-validation.json",
+      "archiveDestination": "FinalLanguageAndMarker/standalone-fountain",
+      "timeoutSeconds": 1200
+    }
+  ]
+}

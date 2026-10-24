@@ -1,0 +1,62 @@
+{
+  "batch": "NativeTargetSceneFixtureBatch7",
+  "immutable": true,
+  "createdUtc": "2026-10-16T07:26:35.316784+00:00",
+  "status": "StableEditor-only wholeEditorcsc0; actual scene audit/ray/gameplay proof pending root",
+  "runtimeChanges": false,
+  "files": [
+    {
+      "source": "Validation/NativeTargetSceneFixtureBatch7/Sources/FlowWaterSave1GameplayValidation.cs.src",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs",
+      "previousSha256": "b9cb27c605975e264ed1409c93f0937879313e46c5e52e9a948ced471cbbc767",
+      "sha256": "2c1762df0ae8cdf8de2efe56e5e50e1ceb955bee194ac19b05486df392882987"
+    },
+    {
+      "source": "Validation/NativeTargetSceneFixtureBatch7/Sources/FlowWaterNativeTargetColliderAudit.cs.src",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterNativeTargetColliderAudit.cs",
+      "previousSha256": null,
+      "sha256": "1abe34d4ab917cae337a3a963ecfb1cd4ac83c1260fe9783b2c8c40f873f86ee"
+    },
+    {
+      "source": "Validation/NativeTargetSceneFixtureBatch7/Sources/FlowWaterNativeTargetColliderAudit.cs.meta",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterNativeTargetColliderAudit.cs.meta",
+      "previousSha256": null,
+      "sha256": "03ce279b2c8823c7cba106ba360d8f46f3d7c341e401c3ca62624398e18da5df"
+    }
+  ],
+  "entries": {
+    "diagnostic2033": "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNative2033SceneAudit",
+    "formalFailedRetestUnchanged": "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNativeFailedEarlyRelease"
+  },
+  "reportDirectory": "Validation/Save1Gameplay",
+  "reportFile": "save1-gameplay-validation.json",
+  "auxiliaryAudit": "Validation/Save1Gameplay/gm2033-colliders.json",
+  "changes": [
+    "Correct Editor candidate scope from camera-scene-only to camera-scene OR Game.PieceRoot descendant. Original persistent board pieces are not in authored camera scene.",
+    "Keep enabled/active filtering, original local6face/mesh sampling and every closest production Physics ray/OriginalGuideMatches unchanged.",
+    "Before sampling2033step12, dump every original near-targetCollider including inactive/disabled withinXZ20/Y25, scene, tag/layer/type/capture, box/sphere/mesh details, transform/bounds, and original movement probe masks.",
+    "Audit helper observation never modifies game/pointer/movement/guide/layers/collider settings; called within the already existing queryscope."
+  ],
+  "compile": {
+    "response": "Validation/NativeTargetSceneFixtureBatch7/scene-fixture-compile.rsp",
+    "responseSha256": "63cb687b849e16cb819ca19e022054472e4030b081e927f24595556f8e33787c",
+    "assemblySha256": "b4bd2ce524bede38d68d9820119f09a44584169efcc56f9c47a28dd38c16d83a",
+    "exitCode": 0
+  },
+  "evidence": [
+    {
+      "path": "NativeTargetSceneFixtureBatch7/Evidence/editor-scene-candidate.diff",
+      "sha256": "58732cd2bbc260ed9cb3453911dd41fc33c1287e7514b2adab562efe40e7bfb5"
+    },
+    {
+      "path": "NativeTargetSceneFixtureBatch7/Evidence/scene-architecture.json",
+      "sha256": "7caf43549c7741b3373dde41213950b173b2a9fa245010d35ec6ae5aab53bd3a"
+    }
+  ],
+  "limits": [
+    "Actual2033success is not claimed before Unity retest.",
+    "No target/height/source/rotation/pose tolerance/positive color/nativewin standards changed.",
+    "Runtime and current Assets remain untouched by staging.",
+    "If waterBatch6 request-selector has already been imported, merge this small FindOriginalDropPoint hunk and helper instead of replacing a different base."
+  ]
+}

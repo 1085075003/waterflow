@@ -1,0 +1,57 @@
+{
+  "methodEvidence": {
+    "CascadaTest.OnEnable": "0xFCFF68",
+    "CascadaTest2.Start": "0xFD3DC8",
+    "CascadaTest.doControlAltura": "0xFD0354",
+    "CascadaTest.CheckCollisionArco": "0xFD1DC4",
+    "CascadaTest.CheckCollisionPared": "0xFD1F78",
+    "CascadaTest.CheckCollision": "0xFD2078",
+    "CascadaTest.ctor": "0xFD3964",
+    "CascadaTest1.Update": "0xFD39AC",
+    "CascadaTest1.CheckCollision": "0xFD3C94",
+    "CascadaTest1.ctor": "0xFD3DB0"
+  },
+  "localYawDegreesByPort": [90, 180, -90, 0],
+  "nativeReadOnlyFloatPairs": [
+    {"va": "0x6003E0", "values": [0, 90]},
+    {"va": "0x6009F8", "values": [1.699, 180]},
+    {"va": "0x600990", "values": [1.7, 180]},
+    {"va": "0x600988", "values": [0, -90]},
+    {"va": "0x600478", "values": [-1.699, 0]},
+    {"va": "0x600C48", "values": [-1.7, 0]}
+  ],
+  "floor": {
+    "layer": 9,
+    "radius": 2,
+    "horizontalEndpointDistance": 20,
+    "depths": [0, 7.92, 16, 24, 32, 38],
+    "sameLevelArchName": "esferacentroArco",
+    "archEntryWallLayer": 15,
+    "archEntryWallRadius": 2,
+    "archEntryWallDistance": 14,
+    "archRule": "At zero depth, an arch marker with no entry-wall hit does not terminate the downward search."
+  },
+  "builtInSource": {
+    "prefabs": ["PiedraFuente7Azul", "PiedraFuente7Verde", "PiedraFuente7Z", "PiedraFuente7Ro"],
+    "controller": "CascadaTest1",
+    "serializedActiva": 1,
+    "requiresControlPieza": false,
+    "localFountainPosition": [0, 0.7, 0],
+    "scaleRule": "Native Instantiate followed by Transform.parent preserves prefab world scale.",
+    "upwardProbeRadius": 2,
+    "upwardProbeLayer": 9,
+    "probeDistanceField": "distan_y"
+  },
+  "diagnosticExample": {
+    "level": 2001,
+    "southSourceOldMeshCenterOffsetZ": -20.88,
+    "southSourceCorrectedMeshCenterOffsetZ": -13.12,
+    "northOrdinaryOldMeshCenterOffsetZ": 21.46,
+    "northOrdinaryCorrectedMeshCenterOffsetZ": 12.82,
+    "note": "Corrected values preserve original mesh, position and scale; only the proven north/south yaw changes."
+  },
+  "limitations": [
+    "Graph endpoint and intake topology are reconstructed separately from the original native trigger callbacks.",
+    "Jet-specific airborne collision probes are not represented by the ordinary cascade floor table."
+  ]
+}

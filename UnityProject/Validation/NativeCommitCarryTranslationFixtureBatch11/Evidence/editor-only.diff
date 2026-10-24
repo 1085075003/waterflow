@@ -1,0 +1,88 @@
+--- NativeCommitCarryBatch10
++++ NativeCommitCarryTranslationBatch11
+@@ -41,6 +41,7 @@
+         [Serializable] public sealed class SavedScene { public string path; public bool loaded, active; }
+         [Serializable] public sealed class SavedScenes { public SavedScene[] scenes; }
+         [Serializable] public sealed class Check { public string name, detail; public bool passed; }
++        [Serializable] public sealed class CarrierCommitSample { public int record; public Vector3 position; }
+         [Serializable] public sealed class Step
+         {
+             public int number, sourceRecord = -1, actorIndex = -1, beforeMoves, afterMoves;
+@@ -58,6 +59,11 @@
+             public int productionCommitFrame=-1, nativeCarrierRecord=-1, nativeCarryLayer;
+             public Vector3 productionCommitPosition, productionCommitTarget, nativeCarrierPosition, nativeCarryOffset;
+             public float nativeCarryOffsetError=-1;
++            public int nativeCarryEvidenceVersion, actualAfterFrame=-1;
++            public bool nativeCarrierTurning, nativeCarrierCommitObserved;
++            public Vector3 nativeCarrierCommitPosition, nativeActorTranslation, nativeCarrierTranslation;
++            public float nativeCarryTranslationError=-1;
++            public List<CarrierCommitSample> productionCommitCarriers=new List<CarrierCommitSample>();
+             public string postStepPausePolicy;
+             public int postStepCommittedFrame, postStepReadyFrame;
+             public int cameraQuarterTurns, cameraSlowGestures, cameraSlowFrames;
+@@ -722,6 +728,13 @@
+                     step.productionCommitFrame=Time.frameCount;
+                     step.productionCommitPosition=actor.transform.position;
+                     step.productionCommitTarget=motion.Target;
++                    IEnumerable actualObservers=Springs==null?null:Read(Springs,"actors") as IEnumerable;
++                    if(actualObservers!=null) foreach(object actualObserver in actualObservers)
++                    {
++                        RecoveryPiece actualCarrier=Read(actualObserver,"piece") as RecoveryPiece;
++                        if(actualCarrier!=null) step.productionCommitCarriers.Add(new CarrierCommitSample {
++                            record=actualCarrier.SourceRecordIndex,position=actualCarrier.transform.position });
++                    }
+                 }
+                 if(diagnostic && Game!=null && Game.CurrentLevelId==level.id &&
+                     (Game.MoveCount!=step.beforeMoves || Game.Status.IndexOf("occupied",StringComparison.OrdinalIgnoreCase)>=0))
+@@ -775,7 +788,7 @@
+                 step.committedFrame=Time.frameCount;
+             }
+             finally { if(commitObserver!=null && Game!=null) Game.StateChanged-=commitObserver; }
+-            step.actualAfter=actor.transform.position;
++            step.actualAfter=actor.transform.position; step.actualAfterFrame=Time.frameCount;
+             step.nativeLanding=step.followsMovingSupport?motion.Target:step.destination;
+             bool actualLanding=Near(step.actualAfter,step.nativeLanding);
+             if(!actualLanding && !step.compressionLanding && !step.followsMovingSupport)
+@@ -786,7 +799,7 @@
+                 step.nativeCarryAfterCommit=ReadActualPostCommitCarry(step,actor);
+                 Require("gm"+level.id+"-native-input-actual-postcommit-carry-"+step.number,
+                     step.nativeCarryAfterCommit,
+-                    "After an exact actual commit, only real native observer.carried membership plus an active translating carrier and original7.6 layer offset can explain a later pose change. carrier="+step.nativeCarrierRecord+",membership="+step.nativeCarryMembership+",moving="+step.nativeCarrierMoving+",layer="+step.nativeCarryLayer+",carrierPosition="+step.nativeCarrierPosition.ToString("F4")+",offset="+step.nativeCarryOffset.ToString("F4")+",error="+step.nativeCarryOffsetError+",actualAfter="+step.actualAfter.ToString("F4"));
++                    "After an exact actual commit, only real native observer.carried membership plus an active translating carrier and original7.6 layer offset can explain a later pose change. carrier="+step.nativeCarrierRecord+",membership="+step.nativeCarryMembership+",moving="+step.nativeCarrierMoving+",layer="+step.nativeCarryLayer+",carrierPosition="+step.nativeCarrierPosition.ToString("F4")+",offset="+step.nativeCarryOffset.ToString("F4")+",offsetError="+step.nativeCarryOffsetError+",actualAfter="+step.actualAfter.ToString("F4")+",afterFrame="+step.actualAfterFrame+",carrierAtCommit="+step.nativeCarrierCommitPosition.ToString("F4")+",actorDelta="+step.nativeActorTranslation.ToString("F4")+",carrierDelta="+step.nativeCarrierTranslation.ToString("F4")+",translationError="+step.nativeCarryTranslationError);
+             }
+             step.applied=!motion.IsActive && Game.MoveCount==step.beforeMoves+1 && (actualLanding || step.nativeCarryAfterCommit);
+             step.status="Original screen input pickup/hover/release; "+Game.Status;
+@@ -794,8 +807,10 @@
+         }
+         static bool RecordedCommitMatches(Step step)
+         {
+-            return step.productionCommitObserved && step.productionCommitFrame>=step.releaseFrame &&
+-                Near(step.productionCommitPosition,step.destination) && Near(step.originalGuide,step.destination);
++            return step.productionCommitObserved && step.pickupFrame<=step.releaseFrame &&
++                step.productionCommitFrame>=step.releaseFrame && step.actualAfterFrame>=step.productionCommitFrame &&
++                Near(step.productionCommitPosition,step.destination) && Near(step.productionCommitPosition,step.productionCommitTarget) &&
++                Near(step.originalGuide,step.destination);
+         }
+         static bool ReadActualPostCommitCarry(Step step,RecoveryPiece selected)
+         {
+@@ -814,7 +829,19 @@
+                 step.nativeCarryLayer=index+1; step.nativeCarrierPosition=carrier.transform.position;
+                 step.nativeCarryOffset=selected.transform.position-carrier.transform.position;
+                 step.nativeCarryOffsetError=Vector3.Distance(step.nativeCarryOffset,Vector3.up*(7.6f*(index+1)));
+-                return step.nativeCarrierMoving && !(bool)Read(observer,"turning") && step.nativeCarryOffsetError<.03f;
++                step.nativeCarrierTurning=(bool)Read(observer,"turning");
++                CarrierCommitSample before=step.productionCommitCarriers.FirstOrDefault(sample=>sample.record==carrier.SourceRecordIndex);
++                step.nativeCarrierCommitObserved=before!=null;
++                if(before!=null)
++                {
++                    step.nativeCarrierCommitPosition=before.position;
++                    step.nativeActorTranslation=step.actualAfter-step.productionCommitPosition;
++                    step.nativeCarrierTranslation=step.nativeCarrierPosition-before.position;
++                    step.nativeCarryTranslationError=Vector3.Distance(step.nativeActorTranslation,step.nativeCarrierTranslation);
++                }
++                step.nativeCarryEvidenceVersion=1;
++                return step.nativeCarrierMoving && !step.nativeCarrierTurning && step.nativeCarryOffsetError<.03f &&
++                    step.nativeCarrierCommitObserved && step.nativeCarryTranslationError>=0 && step.nativeCarryTranslationError<.03f;
+             }
+             return false;
+         }

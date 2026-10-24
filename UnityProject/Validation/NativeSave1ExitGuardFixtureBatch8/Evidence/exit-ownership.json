@@ -1,0 +1,12 @@
+{
+  "scope": "Editor lifecycle guard; actual normal-gameplay verdict/motion is unchanged.",
+  "problem": "Previously EnteredEditMode restored Scene/Time even when this validator had never run in that process, defaulting TimeKey to1.",
+  "ownership": [
+    "ActiveKey true: our currently active or externally interrupted run.",
+    "ExitKey>=0: Finish already cleared Active but scheduled our normal batch exit.",
+    "ScenesKey nonempty: our scene setup still needs restoration."
+  ],
+  "inactiveBehavior": "If allthree absent, return before ReleaseImports/Scene/Time/ExitKey side effects.",
+  "actualProofPending": "Root will run fresh UV436 and requested native166plus historical failedIDs after final import, then independent finalInput61.",
+  "UnityLaunched": false
+}

@@ -1,0 +1,45 @@
+// UIManagerPortScript$$Start VA 0x1037378, inferred length 172
+void UIManagerPortScript__Start (UIManagerPortScript_o* __this, const MethodInfo* method);
+01037378  stp      x30, x21, [sp, #-0x20]!               
+0103737C  stp      x20, x19, [sp, #0x10]                 
+01037380  adrp     x20, #0x24fb000                       
+01037384  adrp     x21, #0x236a000                       
+01037388  ldrb     w8, [x20, #0xd3e]                     
+0103738C  ldr      x21, [x21, #0xf40]                     // [0x236AF40] AudioManager0_TypeInfo
+01037390  mov      x19, x0                               
+01037394  tbnz     w8, #0, #0x10373b8                    
+01037398  adrp     x0, #0x236a000                        
+0103739C  ldr      x0, [x0, #0xf40]                       // [0x236AF40] AudioManager0_TypeInfo
+010373A0  bl       #0xe61b78                             
+010373A4  adrp     x0, #0x236b000                        
+010373A8  ldr      x0, [x0, #0xc10]                       // [0x236BC10] UIManagerPortScript_TypeInfo
+010373AC  bl       #0xe61b78                             
+010373B0  mov      w8, #1                                
+010373B4  strb     w8, [x20, #0xd3e]                     
+010373B8  ldr      x8, [x21]                             
+010373BC  ldr      x0, [x19, #0x20]                       // self.panelExit
+010373C0  ldr      x8, [x8, #0xb8]                       
+010373C4  ldr      x8, [x8]                              
+010373C8  str      x8, [x19, #0x50]                       // self.audioManager
+010373CC  cbz      x0, #0x1037420                        
+010373D0  adrp     x20, #0x236b000                       
+010373D4  ldr      x20, [x20, #0xc10]                     // [0x236BC10] UIManagerPortScript_TypeInfo
+010373D8  mov      w1, wzr                               
+010373DC  mov      x2, xzr                               
+010373E0  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+010373E4  ldr      x0, [x20]                             
+010373E8  ldr      w8, [x0, #0xe0]                       
+010373EC  cbnz     w8, #0x10373f8                        
+010373F0  bl       #0xe61c80                             
+010373F4  ldr      x0, [x20]                             
+010373F8  ldr      x8, [x0, #0xb8]                       
+010373FC  ldr      w8, [x8, #0x14]                       
+01037400  cbnz     w8, #0x103740c                        
+01037404  mov      x0, x19                               
+01037408  bl       #0x1037424                             // UIManagerPortScript$$doLanguage
+0103740C  mov      w8, #1                                
+01037410  strb     w8, [x19, #0x40]                       // self.botonesActivos
+01037414  ldp      x20, x19, [sp, #0x10]                 
+01037418  ldp      x30, x21, [sp], #0x20                 
+0103741C  ret                                            
+01037420  bl       #0xe61da0                             

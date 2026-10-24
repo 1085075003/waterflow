@@ -1,0 +1,47 @@
+--- PressureFixture1-50fbd24c
+
++++ ReleaseFixture2
+
+@@ -134,10 +134,11 @@
+
+         public static void Run622() { Begin(new[] { 622 }); }
+         public static void Run1142Sequence() { Begin(Enumerable.Range(1138, 12).ToArray()); }
+         public static void RunNativeFocused() { Begin(new[] {1142,1149,1236,1656,1660},true); }
+         public static void RunNativeViewFailures() { Begin(new[] {754,761},true); }
+         public static void RunNativeLandingRegression() { Begin(new[] {1187},true); }
++        public static void RunNativePressureReleaseRegression() { Begin(new[] {609,690},true); }
+         public static void RunNativeTerminalQuickRelease() { Begin(new[] {1187},true,null,true); }
+         public static void RunNativeFailed()
+         {
+             // Root copies a closed snapshot here. The parent run may still be
+             // active, but an unfinished level without failure is never selected.
+@@ -603,22 +604,25 @@
+
+                 if(Time.frameCount==lastHeldInputFrame) { yield return null; continue; }
+                 lastHeldInputFrame=Time.frameCount;
+                 NativeInput("ContinueDrag",screen); step.heldInputFrames++;
+                 Vector3 target=motion.Target, position=actor.transform.position;
+                 Vector3 floating=(Vector3)Read(motion,"floatingTarget");
+-                bool hovered=step.compressionLanding?new Vector2(position.x-target.x,position.z-target.z).sqrMagnitude<.0004f:(position-floating).sqrMagnitude<.0009f;
++                // A selected body remains layer2; the pressure mask cannot
++                // detect it until doEnd restores bloque. Held motion follows
++                // its real grab-offset floatingTarget for pressure surfaces too.
++                bool hovered=(position-floating).sqrMagnitude<.0009f;
+                 if(hovered && position.y>=target.y+5) break;
+                 yield return null;
+             }
+             step.heldPosition=actor.transform.position;
+             Vector3 heldTarget=motion.Target;
+             step.heldFloatingTarget=(Vector3)Read(motion,"floatingTarget");
+-            bool heldReady=step.compressionLanding?new Vector2(step.heldPosition.x-heldTarget.x,step.heldPosition.z-heldTarget.z).sqrMagnitude<.0004f:(step.heldPosition-step.heldFloatingTarget).sqrMagnitude<.0009f;
++            bool heldReady=(step.heldPosition-step.heldFloatingTarget).sqrMagnitude<.0009f;
+             if(step.terminalQuickRelease)
+                 Require("gm"+level.id+"-native-terminal-quick-original-guide-"+step.number,motion.IsActive && !motion.IsReleased && Near(motion.Target,step.destination),"A real held pointer resolved the unchanged original destination before early release; original post-release motion must still complete. actor="+step.heldPosition.ToString("F4")+",guide="+motion.Target.ToString("F4"));
+             else
+-                Require("gm"+level.id+"-native-input-held-hover-"+step.number,heldReady && step.heldPosition.y>=heldTarget.y+5,"Actual held actor="+step.heldPosition.ToString("F3")+", original pointer floatingTarget="+step.heldFloatingTarget.ToString("F3")+", original guide="+heldTarget.ToString("F3")+"; ordinary doFijar Lerp centers the released actor at the guide, while CuboResorte requires exact held XZ before delayed compression.");
++                Require("gm"+level.id+"-native-input-held-hover-"+step.number,heldReady && step.heldPosition.y>=heldTarget.y+5,"Actual held actor="+step.heldPosition.ToString("F3")+", original pointer floatingTarget="+step.heldFloatingTarget.ToString("F3")+", original guide="+heldTarget.ToString("F3")+"; original held motion follows its actual grab-offset floatingTarget. doEnd takes the independent guide, doFijar centers after release, and Resorte then performs its separate native delayed compression.");
+             step.waterPendingAtRelease=Water!=null && Water.HasPendingPropagation;
+             bool diagnostic=level.id==1187 && step.number==18;
+             Action commitObserver=null;
+             if(diagnostic)
+             {

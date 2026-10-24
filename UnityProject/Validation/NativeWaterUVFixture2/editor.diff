@@ -1,0 +1,96 @@
+--- Assets/Editor/RecoveredTools/FlowWaterWaterUVValidation.cs UV1
++++ Assets/Editor/RecoveredTools/FlowWaterWaterUVValidation.cs fixture2
+@@ -27,7 +27,8 @@
+         [Serializable] public sealed class Report
+         {
+             public string startedUtc, finishedUtc, unityVersion, runtimeSourceSha256;
+-            public bool passed, timeScaleRestored, preferencesRestored;
++            public bool passed, timeScaleRestored, preferencesRestored, enteredEditMode;
++            public float playModeRestoredTimeScale, serializedTimeManagerScale;
+             public float originalTimeScale, restoredTimeScale;
+             public List<Check> checks = new List<Check>();
+             public List<Sample> samples = new List<Sample>();
+@@ -51,7 +52,13 @@
+             Camera.onPostRender += PostRender;
+             EditorApplication.playModeStateChanged += state => {
+                 if (state == PlayModeStateChange.ExitingPlayMode) { Cleanup(); Unlock(); }
+-                if (state == PlayModeStateChange.EnteredEditMode) SessionState.EraseBool(Key);
++                if (state == PlayModeStateChange.EnteredEditMode && SessionState.GetBool(Key+".Finished",false)) {
++                    float savedScale=SessionState.GetFloat(Key+".Scale",1);
++                    // Mirror PropagationTimeRestoreBatch2: the play-mode exit
++                    // reset runs before this callback. Apply again on delayCall.
++                    Time.timeScale=savedScale;
++                    EditorApplication.delayCall+=()=>CompleteInEditMode(savedScale);
++                }
+             };
+             Application.logMessageReceived += (message, stack, type) => {
+                 if (report != null && (type == LogType.Error || type == LogType.Exception || type == LogType.Assert)) report.errors.Add(message+"\n"+stack);
+@@ -61,6 +68,8 @@
+         public static void Run()
+         {
+             if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Start UV validation from Edit mode.");
++            SessionState.SetFloat(Key+".Scale",Time.timeScale);
++            SessionState.EraseBool(Key+".Finished");
+             SessionState.SetString(Key+".Language",PlayerPrefs.GetString("language",""));
+             SessionState.SetBool(Key+".LanguageExists",PlayerPrefs.HasKey("language"));
+             var prefs=new FlowWaterUIValidation.Preferences();
+@@ -75,12 +84,12 @@
+         }
+         static void Update()
+         {
+-            if(busy || !SessionState.GetBool(Key,false) || !EditorApplication.isPlaying || EditorApplication.isCompiling) return;
++            if(busy || !SessionState.GetBool(Key,false) || SessionState.GetBool(Key+".Finished",false) || !EditorApplication.isPlaying || EditorApplication.isCompiling) return;
+             busy=true;
+             try {
+                 if(report==null) {
+                     AssetDatabase.DisallowAutoRefresh(); EditorApplication.LockReloadAssemblies(); locked=true;
+-                    originalTimeScale=Time.timeScale;
++                    originalTimeScale=SessionState.GetFloat(Key+".Scale",Time.timeScale);
+                     string path=Path.Combine(Application.dataPath,"Scripts/RecoveryRuntime/RecoveredWaterMotion.cs");
+                     string sha;
+                     using(var algorithm=SHA256.Create()) sha=BitConverter.ToString(algorithm.ComputeHash(File.ReadAllBytes(path))).Replace("-","").ToLowerInvariant();
+@@ -99,7 +108,7 @@
+             GameObject view=new GameObject("Native UV validation capture camera");
+             camera=view.AddComponent<Camera>(); camera.transform.position=new Vector3(10000,100,10000);
+             camera.transform.rotation=Quaternion.Euler(90,0,0); texture=new RenderTexture(32,32,16); camera.targetTexture=texture;
+-            foreach(string name in new[] {"AguaControl5","Cascada1Z","Cascada1Ro"}) {
++            foreach(string name in new[] {"AguaControl5","AguaControl5B","Cascada1Z","Cascada1Ro"}) {
+                 prefabName=name;
+                 GameObject prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/GameObject/"+name+".prefab");
+                 CheckState(name+":original-prefab",prefab!=null,"Original exported GameObject asset");
+@@ -173,7 +182,34 @@
+                 PlayerPrefs.HasKey("language")==SessionState.GetBool(Key+".LanguageExists",false) && (!PlayerPrefs.HasKey("language") || PlayerPrefs.GetString("language")==SessionState.GetString(Key+".Language",""));
+             report.finishedUtc=DateTime.UtcNow.ToString("o");report.passed=report.errors.Count==0 && report.checks.Count>0 && report.checks.All(x=>x.passed) && report.timeScaleRestored && report.preferencesRestored;
+             Directory.CreateDirectory(Output);File.WriteAllText(Path.Combine(Output,"native-water-uv-validation.json"),JsonUtility.ToJson(report,true));
+-            SessionState.EraseBool(Key);Unlock();EditorApplication.ExitPlaymode();EditorApplication.delayCall+=()=>EditorApplication.Exit(report.passed?0:1);
++            report.playModeRestoredTimeScale=Time.timeScale;
++            // Keep the report pending until the real EnteredEditMode boundary.
++            report.finishedUtc=""; SessionState.SetString(Key+".PendingReport",JsonUtility.ToJson(report));
++            SessionState.SetBool(Key+".Finished",true);routine=null;
++            Unlock();EditorApplication.ExitPlaymode();
++        }
++        static void CompleteInEditMode(float savedScale)
++        {
++            Time.timeScale=savedScale;
++            Report result=JsonUtility.FromJson<Report>(SessionState.GetString(Key+".PendingReport","{}"));
++            result.enteredEditMode=!EditorApplication.isPlaying;
++            result.restoredTimeScale=Time.timeScale;
++            result.timeScaleRestored=result.enteredEditMode && result.restoredTimeScale==result.originalTimeScale;
++            UnityEngine.Object[] settings=AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TimeManager.asset");
++            result.serializedTimeManagerScale=-1;
++            if(settings.Length>0) {
++                var serialized=new SerializedObject(settings[0]);serialized.Update();
++                SerializedProperty scale=serialized.FindProperty("m_TimeScale");
++                if(scale!=null)result.serializedTimeManagerScale=scale.floatValue;
++            }
++            result.checks.Add(new Check { name="time-scale-restored-after-EnteredEditMode",passed=result.timeScaleRestored && result.serializedTimeManagerScale==savedScale,
++                detail="saved="+savedScale+",actual="+Time.timeScale+",serializedTimeManager="+result.serializedTimeManagerScale });
++            result.passed=result.errors.Count==0 && result.checks.Count>0 && result.checks.All(x=>x.passed) && result.timeScaleRestored && result.preferencesRestored;
++            result.finishedUtc=DateTime.UtcNow.ToString("o");Directory.CreateDirectory(Output);
++            File.WriteAllText(Path.Combine(Output,"native-water-uv-validation.json"),JsonUtility.ToJson(result,true));
++            SessionState.EraseBool(Key);SessionState.EraseBool(Key+".Finished");SessionState.EraseString(Key+".PendingReport");
++            Time.timeScale=savedScale;
++            if(Application.isBatchMode)EditorApplication.Exit(result.passed?0:1);
+         }
+     }
+ }

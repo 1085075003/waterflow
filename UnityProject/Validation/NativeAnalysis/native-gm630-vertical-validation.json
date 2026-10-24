@@ -1,0 +1,18 @@
+{
+  "level": 630,
+  "failure": "Recorded player step12 cannot place Curva2h at(60,11.55,20) because spring record14 failed to descend.",
+  "actors": {
+    "14": "st1/sz48/valEncima1/valMove1; forward Z-20 then Y-7.6",
+    "15": "st1/sz08; no-op then Y-7.6"
+  },
+  "nativeEvidence": {
+    "10CB144..170": "valMove1/2 enters action-dependent validation",
+    "10CB174..1CC": "rotation1/2/3 uses doValidarRotacion",
+    "10CB284..29C": "tipoResor8 jumps to10CB1D0 before doValidarNext",
+    "10CB2A0..2B8": "tipoResor9 also jumps to10CB1D0",
+    "10CB05C..140": "Only valDebajo1 enters separate down-collision validation"
+  },
+  "stagedFix": "Do not run generic DestinationClear for action8/9. Preserve exact optional downward probe and horizontal/rotation checks.",
+  "status": "Validation staging only; main runtime frozen during All800.",
+  "stagingFile": "RecoveredNativeSprings.pending-vertical.cs.src"
+}

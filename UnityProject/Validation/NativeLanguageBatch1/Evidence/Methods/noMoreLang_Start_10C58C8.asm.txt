@@ -1,0 +1,70 @@
+// noMoreLang$$Start VA 0x10C58C8, inferred length 272
+void noMoreLang__Start (noMoreLang_o* __this, const MethodInfo* method);
+010C58C8  stp      x30, x23, [sp, #-0x30]!               
+010C58CC  stp      x22, x21, [sp, #0x10]                 
+010C58D0  stp      x20, x19, [sp, #0x20]                 
+010C58D4  adrp     x21, #0x24fb000                       
+010C58D8  adrp     x22, #0x236b000                       
+010C58DC  adrp     x23, #0x236b000                       
+010C58E0  adrp     x20, #0x236b000                       
+010C58E4  ldrb     w8, [x21, #0xfec]                     
+010C58E8  ldr      x22, [x22, #0x208]                     // [0x236B208] 'language'
+010C58EC  ldr      x23, [x23, #0x210]                     // [0x236B210] 'en'
+010C58F0  ldr      x20, [x20, #0x9d8]                     // [0x236B9D8] 'ar'
+010C58F4  mov      x19, x0                               
+010C58F8  tbnz     w8, #0, #0x10c5940                    
+010C58FC  adrp     x0, #0x236d000                        
+010C5900  ldr      x0, [x0, #0x50]                        // [0x236D050] Method$System.Linq.Enumerable.Reverse<char>()
+010C5904  bl       #0xe61b78                             
+010C5908  adrp     x0, #0x236d000                        
+010C590C  ldr      x0, [x0, #0x58]                        // [0x236D058] Method$System.Linq.Enumerable.ToArray<char>()
+010C5910  bl       #0xe61b78                             
+010C5914  adrp     x0, #0x236b000                        
+010C5918  ldr      x0, [x0, #0x9d8]                       // [0x236B9D8] 'ar'
+010C591C  bl       #0xe61b78                             
+010C5920  adrp     x0, #0x236b000                        
+010C5924  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+010C5928  bl       #0xe61b78                             
+010C592C  adrp     x0, #0x236b000                        
+010C5930  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+010C5934  bl       #0xe61b78                             
+010C5938  mov      w8, #1                                
+010C593C  strb     w8, [x21, #0xfec]                     
+010C5940  ldr      x0, [x22]                             
+010C5944  ldr      x1, [x23]                             
+010C5948  mov      x2, xzr                               
+010C594C  bl       #0x2001644                             // UnityEngine.PlayerPrefs$$GetString
+010C5950  str      x0, [x19, #0x28]                       // self.idioma
+010C5954  mov      x0, x19                               
+010C5958  bl       #0x10c59d8                             // noMoreLang$$ObtenerTexto
+010C595C  str      x0, [x19, #0x30]                       // self.tex1
+010C5960  ldr      x0, [x19, #0x28]                       // self.idioma
+010C5964  ldr      x1, [x20]                             
+010C5968  mov      x2, xzr                               
+010C596C  bl       #0x1960c7c                             // System.String$$op_Equality
+010C5970  tbz      w0, #0, #0x10c59ac                    
+010C5974  adrp     x8, #0x236d000                        
+010C5978  ldr      x0, [x19, #0x30]                       // self.tex1
+010C597C  ldr      x8, [x8, #0x50]                        // [0x236D050] Method$System.Linq.Enumerable.Reverse<char>()
+010C5980  ldr      x1, [x8]                              
+010C5984  bl       #0x1151338                             // System.Linq.Enumerable$$Reverse<char>
+010C5988  adrp     x8, #0x236d000                        
+010C598C  ldr      x8, [x8, #0x58]                        // [0x236D058] Method$System.Linq.Enumerable.ToArray<char>()
+010C5990  ldr      x1, [x8]                              
+010C5994  bl       #0x1157170                             // System.Linq.Enumerable$$ToArray<char>
+010C5998  mov      x1, x0                                
+010C599C  mov      x0, xzr                               
+010C59A0  mov      x2, xzr                               
+010C59A4  bl       #0x195f5a0                             // System.String$$CreateString
+010C59A8  str      x0, [x19, #0x30]                       // self.tex1
+010C59AC  ldr      x0, [x19, #0x20]                       // self.texto1
+010C59B0  cbz      x0, #0x10c59d4                        
+010C59B4  ldr      x8, [x0]                              
+010C59B8  ldr      x1, [x19, #0x30]                       // self.tex1
+010C59BC  ldp      x20, x19, [sp, #0x20]                 
+010C59C0  ldp      x22, x21, [sp, #0x10]                 
+010C59C4  ldr      x3, [x8, #0x5e8]                      
+010C59C8  ldr      x2, [x8, #0x5f0]                      
+010C59CC  ldp      x30, x23, [sp], #0x30                 
+010C59D0  br       x3                                    
+010C59D4  bl       #0xe61da0                             

@@ -1,0 +1,71 @@
+// UIManagerOptScript$$doLanguages VA 0x1058D78, inferred length 276
+void UIManagerOptScript__doLanguages (UIManagerOptScript_o* __this, const MethodInfo* method);
+01058D78  str      x30, [sp, #-0x30]!                    
+01058D7C  stp      x22, x21, [sp, #0x10]                 
+01058D80  stp      x20, x19, [sp, #0x20]                 
+01058D84  adrp     x20, #0x24fb000                       
+01058D88  adrp     x21, #0x236b000                       
+01058D8C  adrp     x22, #0x236b000                       
+01058D90  ldrb     w8, [x20, #0xe0c]                     
+01058D94  ldr      x21, [x21, #0x208]                     // [0x236B208] 'language'
+01058D98  ldr      x22, [x22, #0x210]                     // [0x236B210] 'en'
+01058D9C  mov      x19, x0                               
+01058DA0  tbnz     w8, #0, #0x1058dc4                    
+01058DA4  adrp     x0, #0x236b000                        
+01058DA8  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+01058DAC  bl       #0xe61b78                             
+01058DB0  adrp     x0, #0x236b000                        
+01058DB4  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+01058DB8  bl       #0xe61b78                             
+01058DBC  mov      w8, #1                                
+01058DC0  strb     w8, [x20, #0xe0c]                     
+01058DC4  ldr      x0, [x21]                             
+01058DC8  ldr      x1, [x22]                             
+01058DCC  mov      x2, xzr                               
+01058DD0  bl       #0x2001644                             // UnityEngine.PlayerPrefs$$GetString
+01058DD4  str      x0, [x19, #0xb8]                       // self.idioma
+01058DD8  mov      x0, x19                               
+01058DDC  bl       #0x1059ea8                             // UIManagerOptScript$$ObtenerTexto2
+01058DE0  str      x0, [x19, #0xc8]                       // self.tex2
+01058DE4  mov      x0, x19                               
+01058DE8  bl       #0x105a56c                             // UIManagerOptScript$$ObtenerTexto3
+01058DEC  str      x0, [x19, #0xd0]                       // self.tex3
+01058DF0  mov      x0, x19                               
+01058DF4  bl       #0x105ac58                             // UIManagerOptScript$$ObtenerTexto6
+01058DF8  str      x0, [x19, #0xe8]                       // self.tex6
+01058DFC  mov      x0, x19                               
+01058E00  bl       #0x105b394                             // UIManagerOptScript$$ObtenerTexto7
+01058E04  ldr      x8, [x19, #0x88]                       // self.texto2
+01058E08  str      x0, [x19, #0xf0]                       // self.tex7
+01058E0C  cbz      x8, #0x1058e88                        
+01058E10  ldr      x9, [x8]                              
+01058E14  ldr      x1, [x19, #0xc8]                       // self.tex2
+01058E18  mov      x0, x8                                
+01058E1C  ldr      x10, [x9, #0x5e8]                     
+01058E20  ldr      x2, [x9, #0x5f0]                      
+01058E24  blr      x10                                   
+01058E28  ldr      x0, [x19, #0x90]                       // self.texto3
+01058E2C  cbz      x0, #0x1058e88                        
+01058E30  ldr      x8, [x0]                              
+01058E34  ldr      x1, [x19, #0xd0]                       // self.tex3
+01058E38  ldr      x9, [x8, #0x5e8]                      
+01058E3C  ldr      x2, [x8, #0x5f0]                      
+01058E40  blr      x9                                    
+01058E44  ldr      x0, [x19, #0xa8]                       // self.texto6
+01058E48  cbz      x0, #0x1058e88                        
+01058E4C  ldr      x8, [x0]                              
+01058E50  ldr      x1, [x19, #0xe8]                       // self.tex6
+01058E54  ldr      x9, [x8, #0x5e8]                      
+01058E58  ldr      x2, [x8, #0x5f0]                      
+01058E5C  blr      x9                                    
+01058E60  ldr      x0, [x19, #0xb0]                       // self.texto7
+01058E64  cbz      x0, #0x1058e88                        
+01058E68  ldr      x8, [x0]                              
+01058E6C  ldr      x1, [x19, #0xf0]                       // self.tex7
+01058E70  ldp      x20, x19, [sp, #0x20]                 
+01058E74  ldp      x22, x21, [sp, #0x10]                 
+01058E78  ldr      x3, [x8, #0x5e8]                      
+01058E7C  ldr      x2, [x8, #0x5f0]                      
+01058E80  ldr      x30, [sp], #0x30                      
+01058E84  br       x3                                    
+01058E88  bl       #0xe61da0                             

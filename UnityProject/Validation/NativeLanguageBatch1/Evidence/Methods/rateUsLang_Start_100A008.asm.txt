@@ -1,0 +1,61 @@
+// rateUsLang$$Start VA 0x100A008, inferred length 236
+void rateUsLang__Start (rateUsLang_o* __this, const MethodInfo* method);
+0100A008  str      x30, [sp, #-0x30]!                    
+0100A00C  stp      x22, x21, [sp, #0x10]                 
+0100A010  stp      x20, x19, [sp, #0x20]                 
+0100A014  adrp     x20, #0x24fb000                       
+0100A018  adrp     x21, #0x236b000                       
+0100A01C  adrp     x22, #0x236b000                       
+0100A020  ldrb     w8, [x20, #0xc83]                     
+0100A024  ldr      x21, [x21, #0x208]                     // [0x236B208] 'language'
+0100A028  b        #0x224ce58                            
+0100A02C  mov      x19, x0                               
+0100A030  tbnz     w8, #0, #0x100a054                    
+0100A034  adrp     x0, #0x236b000                        
+0100A038  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+0100A03C  bl       #0xe61b78                             
+0100A040  adrp     x0, #0x236b000                        
+0100A044  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+0100A048  bl       #0xe61b78                             
+0100A04C  mov      w8, #1                                
+0100A050  strb     w8, [x20, #0xc83]                     
+0100A054  ldr      x0, [x21]                             
+0100A058  ldr      x1, [x22]                              // [0x236B000] ' 11'
+0100A05C  mov      x2, xzr                               
+0100A060  bl       #0x2001644                             // UnityEngine.PlayerPrefs$$GetString
+0100A064  str      x0, [x19, #0x38]                       // self.idioma
+0100A068  mov      x0, x19                               
+0100A06C  bl       #0x100a0f4                             // rateUsLang$$ObtenerTexto1
+0100A070  str      x0, [x19, #0x40]                       // self.tex1
+0100A074  mov      x0, x19                               
+0100A078  bl       #0x100a7e0                             // rateUsLang$$ObtenerTexto2
+0100A07C  str      x0, [x19, #0x48]                       // self.tex2
+0100A080  mov      x0, x19                               
+0100A084  bl       #0x100aea0                             // rateUsLang$$ObtenerTexto3
+0100A088  ldr      x8, [x19, #0x20]                       // self.texto1
+0100A08C  str      x0, [x19, #0x50]                       // self.tex3
+0100A090  cbz      x8, #0x100a0f0                        
+0100A094  ldr      x9, [x8]                              
+0100A098  ldr      x1, [x19, #0x40]                       // self.tex1
+0100A09C  mov      x0, x8                                
+0100A0A0  ldr      x10, [x9, #0x5e8]                     
+0100A0A4  ldr      x2, [x9, #0x5f0]                      
+0100A0A8  blr      x10                                   
+0100A0AC  ldr      x0, [x19, #0x28]                       // self.texto2
+0100A0B0  cbz      x0, #0x100a0f0                        
+0100A0B4  ldr      x8, [x0]                              
+0100A0B8  ldr      x1, [x19, #0x48]                       // self.tex2
+0100A0BC  ldr      x9, [x8, #0x5e8]                      
+0100A0C0  ldr      x2, [x8, #0x5f0]                      
+0100A0C4  blr      x9                                    
+0100A0C8  ldr      x0, [x19, #0x30]                       // self.texto3
+0100A0CC  cbz      x0, #0x100a0f0                        
+0100A0D0  ldr      x8, [x0]                              
+0100A0D4  ldr      x1, [x19, #0x50]                       // self.tex3
+0100A0D8  ldp      x20, x19, [sp, #0x20]                 
+0100A0DC  ldp      x22, x21, [sp, #0x10]                 
+0100A0E0  ldr      x3, [x8, #0x5e8]                      
+0100A0E4  ldr      x2, [x8, #0x5f0]                      
+0100A0E8  ldr      x30, [sp], #0x30                      
+0100A0EC  br       x3                                    
+0100A0F0  bl       #0xe61da0                             

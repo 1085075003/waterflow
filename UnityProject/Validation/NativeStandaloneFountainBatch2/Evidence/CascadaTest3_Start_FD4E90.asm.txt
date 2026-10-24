@@ -1,0 +1,39 @@
+// CascadaTest3$$Start VA 0xFD4E90, inferred length 148
+void CascadaTest3__Start (CascadaTest3_o* __this, const MethodInfo* method);
+00FD4E90  stp      x30, x21, [sp, #-0x20]!               
+00FD4E94  stp      x20, x19, [sp, #0x10]                 
+00FD4E98  adrp     x20, #0x24fb000                       
+00FD4E9C  ldrb     w8, [x20, #0xb67]                     
+00FD4EA0  mov      x19, x0                               
+00FD4EA4  tbnz     w8, #0, #0xfd4ebc                     
+00FD4EA8  adrp     x0, #0x2368000                        
+00FD4EAC  ldr      x0, [x0, #0x208]                       // [0x2368208] 'color'
+00FD4EB0  bl       #0xe61b78                             
+00FD4EB4  mov      w8, #1                                
+00FD4EB8  strb     w8, [x20, #0xb67]                     
+00FD4EBC  ldr      x0, [x19, #0x20]                       // self.esferaSalida
+00FD4EC0  mov      w8, #1                                
+00FD4EC4  str      w8, [x19, #0x8c]                       // self.activa
+00FD4EC8  strb     wzr, [x19, #0x90]                      // self.creada
+00FD4ECC  cbz      x0, #0xfd4f20                         
+00FD4ED0  adrp     x21, #0x2368000                       
+00FD4ED4  ldr      x21, [x21, #0x208]                     // [0x2368208] 'color'
+00FD4ED8  mov      x1, xzr                               
+00FD4EDC  bl       #0x2006858                             // UnityEngine.GameObject$$get_gameObject
+00FD4EE0  mov      x20, x0                               
+00FD4EE4  add      x0, x19, #0x68                        
+00FD4EE8  mov      x1, xzr                               
+00FD4EEC  bl       #0x1ab3994                             // System.Int32$$ToString
+00FD4EF0  ldr      x8, [x21]                             
+00FD4EF4  mov      x1, x0                                
+00FD4EF8  mov      x2, xzr                               
+00FD4EFC  mov      x0, x8                                
+00FD4F00  bl       #0x1958280                             // System.String$$Concat
+00FD4F04  cbz      x20, #0xfd4f20                        
+00FD4F08  mov      x1, x0                                
+00FD4F0C  mov      x0, x20                               
+00FD4F10  ldp      x20, x19, [sp, #0x10]                 
+00FD4F14  mov      x2, xzr                               
+00FD4F18  ldp      x30, x21, [sp], #0x20                 
+00FD4F1C  b        #0x2006450                             // UnityEngine.GameObject$$set_tag
+00FD4F20  bl       #0xe61da0                             

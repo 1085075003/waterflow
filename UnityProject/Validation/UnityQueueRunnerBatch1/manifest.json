@@ -1,0 +1,25 @@
+{
+  "createdUtc": "2026-10-16T03:18:11.510949+00:00",
+  "scope": "Generic Python queue tool only, no Assets or Unity launch performed by this subagent.",
+  "files": [
+    {
+      "path": "Validation/run_unity_queue.py",
+      "source": "Validation/UnityQueueRunnerBatch1/run_unity_queue.py",
+      "sha256": "4ea0ded4df7947dd9b384d0b2d17d244f85d35c1cb95e81a787023bad27b8140"
+    },
+    {
+      "path": "Validation/test_run_unity_queue.py",
+      "source": "Validation/UnityQueueRunnerBatch1/test_run_unity_queue.py",
+      "sha256": "981903deb7a56acd8379d63fa3f0c9f927b8c3e344a58f2e174890c7889fd60f"
+    },
+    {
+      "path": "Validation/unity-queue.example.json",
+      "source": "Validation/UnityQueueRunnerBatch1/unity-queue.example.json",
+      "sha256": "6f9e761c2540f32fad4eb222d5e7fec21095d17b145fca8ed393560381dc628d"
+    }
+  ],
+  "tests": "7/7 fake-process boundary tests PASS; fake processes never execute Unity. Real runner execution remains root-owned.",
+  "usage": "python UnityProject/Validation/run_unity_queue.py --project .validation-project --queue QUEUE.json [--continue-on-failure] [--dry-run]",
+  "safety": "Fixed Unity2022.3.28f1; hidden Popen; exact-project CIM+UnityLockfile+own atomic queue lock; serial self-exit jobs; timeout neverkills and stops queue while processalive; reads/writes stayworkspace, archive/log/snapshot writes belowMainValidation; rejects nested archive copies and stale/unclosed report results.",
+  "provenance": "Eachjob before/after hashes all Assets C#, ResourcesJSON and all ProjectSettings assets/version. Sourceschanged => jobfailed. Each fresh report SHA/start/finish and immutable report archive inventory preserved; failedjobs remainfailed even continueOnFailure executeslaterjobs."
+}

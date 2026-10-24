@@ -1,0 +1,322 @@
+#if UNITY_EDITOR
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
+using Recovered.FlowWater;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace Recovered.FlowWater.Editor
+{
+    // Each sample starts from Edit mode by opening an authored gameplay scene
+    // and entering real Play mode. The observer never invokes game/UI loaders,
+    // title refreshes, capture wrappers, actor movement or simulation methods.
+    [InitializeOnLoad]
+    public static class FlowWaterDirectSceneTitleValidation
+    {
+        const string Key = "FlowWater.DirectSceneTitleValidation";
+        const int MinimumPlayerFrames = 16;
+        const double CaseTimeoutSeconds = 75;
+        [Serializable] public sealed class Check { public string name, detail; public bool passed; }
+        [Serializable] public sealed class Title {
+            public string path, text;
+            public int signedIntegerCount, parsedNumber;
+            public bool parsed, expectedPositiveNumber;
+        }
+        [Serializable] public sealed class Case {
+            public int index, requestedLastLevelId, expectedLevelId, expectedLocalNumber;
+            public int enteredFrame, sampledFrame, playerFrames, domainGeneration;
+            public int globalLevelId, currentLevelId, originalPart, persistedLastLevelId;
+            public string name, scenePath, enteredPlayModeUtc, sampledUtc, exitedPlayModeUtc, actualScenePath;
+            public bool matchingPreference, enteredPlayMode, sampled, enteredEditMode, passed;
+            public float observedTimeScale;
+            public List<Title> titles = new List<Title>();
+        }
+        [Serializable] public sealed class Report {
+            public string startedUtc, finishedUtc, unityVersion, runtimeUiSourceSha256, nativeTitleSourceSha256;
+            public string preferenceBackupSha256;
+            public bool passed, preferencesRestored, timeScaleRestored, sceneSetupRestored, enteredEditMode;
+            public float originalTimeScale, restoredTimeScale;
+            public int preferenceKeys, realPlayStarts;
+            public List<Check> checks = new List<Check>();
+            public List<Case> cases = new List<Case>();
+            public List<string> errors = new List<string>();
+        }
+        [Serializable] sealed class Preference {
+            public string key, kind, stringValue;
+            public bool existed;
+            public int intValue;
+            public float floatValue;
+        }
+        [Serializable] sealed class Preferences { public List<Preference> values = new List<Preference>(); }
+        [Serializable] sealed class SavedScene { public string path; public bool loaded, active; }
+        [Serializable] sealed class SavedScenes { public SavedScene[] scenes; }
+        sealed class Definition {
+            public string name, scene;
+            public int requested, expected;
+            public bool matching;
+            public Definition(string name, string scene, int requested, int expected, bool matching) {
+                this.name=name;this.scene=scene;this.requested=requested;this.expected=expected;this.matching=matching;
+            }
+        }
+        static readonly Definition[] Definitions = {
+            new Definition("basic-matching", "Assets/Scenes/Levely5_basic.unity",421,421,true),
+            new Definition("basic-mismatched-fallback", "Assets/Scenes/Levely5_basic.unity",2050,401,false),
+            new Definition("6x6-matching", "Assets/Scenes/Levely5_6x6.unity",282,282,true),
+            new Definition("6x6-mismatched-fallback", "Assets/Scenes/Levely5_6x6.unity",2050,251,false),
+            new Definition("7x7-matching", "Assets/Scenes/Levely5_7x7.unity",366,366,true),
+            new Definition("7x7-mismatched-fallback", "Assets/Scenes/Levely5_7x7.unity",421,351,false),
+            new Definition("original-matching", "Assets/Scenes/Levely5z/Levely5.unity",13,13,true),
+            new Definition("original-mismatched-fallback", "Assets/Scenes/Levely5z/Levely5.unity",2050,1,false)
+        };
+        static Report report;
+        static bool busy;
+        static string Output { get { return Path.Combine(Directory.GetParent(Application.dataPath).FullName,"Validation","DirectSceneTitle"); } }
+        static string ReportPath { get { return Path.Combine(Output,"direct-scene-title-validation.json"); } }
+        static string Phase { get { return SessionState.GetString(Key+".Phase",""); } set { SessionState.SetString(Key+".Phase",value); } }
+        static bool Active { get { return SessionState.GetBool(Key,false); } }
+
+        static FlowWaterDirectSceneTitleValidation() {
+            EditorApplication.update += Update;
+            EditorApplication.playModeStateChanged += OnPlayMode;
+            EditorApplication.quitting += OnQuitting;
+            Application.logMessageReceived += OnLog;
+            if (!Active) return;
+            SessionState.SetInt(Key+".DomainGeneration",SessionState.GetInt(Key+".DomainGeneration",0)+1);
+        }
+
+        [MenuItem("Tools/Flow Water/Validate Direct Scene Native Level Titles")]
+        public static void Run() {
+            if (EditorApplication.isPlayingOrWillChangePlaymode || Active)
+                throw new InvalidOperationException("Start direct scene title validation from idle Edit mode.");
+            if (EditorSettings.enterPlayModeOptionsEnabled &&
+                (EditorSettings.enterPlayModeOptions & EnterPlayModeOptions.DisableDomainReload)!=0)
+                throw new InvalidOperationException("Real fresh startup validation requires domain reload enabled; fixture does not change Editor settings.");
+            foreach (SceneSetup saved in EditorSceneManager.GetSceneManagerSetup()) {
+                Scene scene=SceneManager.GetSceneByPath(saved.path);
+                if (String.IsNullOrEmpty(saved.path) || (scene.IsValid() && scene.isDirty))
+                    throw new InvalidOperationException("Save all open scenes before direct scene startup validation.");
+            }
+            RecoveryCatalog catalog=RecoveryCatalog.Load();
+            if(catalog==null)throw new InvalidOperationException("Original RecoveryCatalog must already exist; fixture does not build or modify assets.");
+            foreach(Definition d in Definitions) {
+                if(!catalog.levels.Any(x=>x.assetId==d.requested) || !catalog.levels.Any(x=>x.assetId==d.expected))
+                    throw new InvalidOperationException("Original catalog lacks requested test asset: "+d.name);
+                bool matches=OriginalScenePresentation.SceneForLevel(d.requested)==Path.GetFileNameWithoutExtension(d.scene);
+                if(matches!=d.matching || OriginalScenePresentation.SceneForLevel(d.expected)!=Path.GetFileNameWithoutExtension(d.scene))
+                    throw new InvalidOperationException("Fixture source scene mapping is invalid: "+d.name);
+            }
+            var prefs=BackupPreferences(catalog);
+            SessionState.SetString(Key+".Prefs",JsonUtility.ToJson(prefs));
+            SessionState.SetString(Key+".Scenes",JsonUtility.ToJson(new SavedScenes { scenes=EditorSceneManager.GetSceneManagerSetup()
+                .Select(s=>new SavedScene {path=s.path,loaded=s.isLoaded,active=s.isActive}).ToArray() }));
+            SessionState.SetFloat(Key+".Scale",Time.timeScale);
+            SessionState.SetInt(Key+".Index",0);
+            SessionState.SetInt(Key+".DomainGeneration",0);
+            report=new Report { startedUtc=DateTime.UtcNow.ToString("o"),unityVersion=Application.unityVersion,
+                originalTimeScale=Time.timeScale,preferenceKeys=prefs.values.Count,
+                preferenceBackupSha256=Hash(Encoding.UTF8.GetBytes(JsonUtility.ToJson(prefs))),
+                runtimeUiSourceSha256=Hash(File.ReadAllBytes(Path.Combine(Application.dataPath,"Scripts/RecoveryUI/FlowWaterRecoveryUI.cs"))),
+                nativeTitleSourceSha256=Hash(File.ReadAllBytes(Path.Combine(Application.dataPath,"Scripts/Assembly-CSharp/Leveltexto2.cs"))) };
+            CheckState("unity-2022.3.28f1",Application.unityVersion=="2022.3.28f1",Application.unityVersion);
+            CheckState("original-project-time-speed-is-four",Time.timeScale==4,"Actual Edit-mode project time speed="+Time.timeScale);
+            CheckState("fresh-domain-reload-enabled",!EditorSettings.enterPlayModeOptionsEnabled ||
+                (EditorSettings.enterPlayModeOptions & EnterPlayModeOptions.DisableDomainReload)==0,"Editor settings retained; each case enters real Play mode.");
+            SessionState.SetBool(Key,true);
+            Phase="advance";
+            Save();
+        }
+
+        static void Update() {
+            if(!Active || busy || EditorApplication.isCompiling) return;
+            busy=true;
+            try {
+                LoadReport();
+                if(Phase=="advance" && !EditorApplication.isPlayingOrWillChangePlaymode) {
+                    if(SessionState.GetInt(Key+".Index",0)>=Definitions.Length) { CompleteInEdit();return; }
+                    StartCase();return;
+                }
+                if(Phase=="restore" && !EditorApplication.isPlayingOrWillChangePlaymode) { CompleteInEdit();return; }
+                if(Phase=="entering" || Phase=="waiting" || Phase=="exiting") {
+                    DateTime deadline;
+                    if(DateTime.TryParse(SessionState.GetString(Key+".Deadline",""),null,System.Globalization.DateTimeStyles.RoundtripKind,out deadline) && DateTime.UtcNow>deadline)
+                        throw new TimeoutException("Direct scene case exceeded "+CaseTimeoutSeconds+" real seconds: "+Phase);
+                }
+                if(Phase!="waiting" || !EditorApplication.isPlaying)return;
+                Case sample=CurrentCase();
+                if(Time.frameCount-sample.enteredFrame<MinimumPlayerFrames)return;
+                RecoveredFlowGame game=RecoveredFlowGame.Instance;
+                if(game==null || !game.IsLevelActive)return;
+                Observe(sample,game);
+                Phase="exiting";
+                SetDeadline();Save();
+                EditorApplication.ExitPlaymode();
+            } catch(Exception exception) { Abort(exception); }
+            finally { busy=false; }
+        }
+
+        static void StartCase() {
+            int index=SessionState.GetInt(Key+".Index",0);
+            Definition d=Definitions[index];
+            if(!RestorePreferences())throw new InvalidOperationException("Failed to restore baseline preferences before "+d.name);
+            Time.timeScale=SessionState.GetFloat(Key+".Scale",4);
+            // These are test launch preferences only. All application writes
+            // during Play are retained until the case has been observed.
+            PlayerPrefs.SetString("language","en");
+            PlayerPrefs.SetInt("helpRotation",1);
+            PlayerPrefs.SetInt("Recovery.LastLevelId",d.requested);
+            PlayerPrefs.Save();
+            var sample=new Case {index=index,name=d.name,scenePath=d.scene,requestedLastLevelId=d.requested,
+                expectedLevelId=d.expected,expectedLocalNumber=(d.expected-1)%50+1,matchingPreference=d.matching};
+            report.cases.Add(sample);
+            Phase="entering";SetDeadline();Save();
+            EditorSceneManager.OpenScene(d.scene,OpenSceneMode.Single);
+            EditorApplication.EnterPlaymode();
+        }
+
+        static void OnPlayMode(PlayModeStateChange state) {
+            if(!Active)return;
+            try {
+                LoadReport();
+                if(state==PlayModeStateChange.EnteredPlayMode) {
+                    if(Phase!="entering")throw new InvalidOperationException("Unexpected EnteredPlayMode in phase "+Phase);
+                    Case sample=CurrentCase();sample.enteredPlayMode=true;sample.enteredPlayModeUtc=DateTime.UtcNow.ToString("o");
+                    sample.enteredFrame=Time.frameCount;sample.domainGeneration=SessionState.GetInt(Key+".DomainGeneration",0);
+                    report.realPlayStarts++;Phase="waiting";SetDeadline();Save();
+                }
+                if(state==PlayModeStateChange.EnteredEditMode) {
+                    Time.timeScale=SessionState.GetFloat(Key+".Scale",4);
+                    if(Phase=="exiting") {
+                        Case sample=CurrentCase();sample.enteredEditMode=true;sample.exitedPlayModeUtc=DateTime.UtcNow.ToString("o");
+                        SessionState.SetInt(Key+".Index",sample.index+1);Phase="advance";Save();
+                    } else if(Phase!="restore")throw new InvalidOperationException("Unexpected EnteredEditMode in phase "+Phase);
+                }
+            } catch(Exception exception) { Abort(exception); }
+        }
+
+        static void Observe(Case sample,RecoveredFlowGame game) {
+            Scene scene=SceneManager.GetActiveScene();
+            sample.sampled=true;sample.sampledUtc=DateTime.UtcNow.ToString("o");sample.sampledFrame=Time.frameCount;
+            sample.playerFrames=Time.frameCount-sample.enteredFrame;sample.actualScenePath=scene.path;
+            sample.globalLevelId=ControladorJuego.nivelActual;sample.currentLevelId=game.CurrentLevelId;
+            sample.originalPart=UIManagerSelScript0.parte;sample.persistedLastLevelId=PlayerPrefs.GetInt("Recovery.LastLevelId",-1);
+            sample.observedTimeScale=Time.timeScale;
+            int before=report.checks.Count;
+            CheckState(sample.name+":actual-fresh-play-start",sample.enteredPlayMode && sample.domainGeneration>0,"domainGeneration="+sample.domainGeneration+", starts="+report.realPlayStarts);
+            CheckState(sample.name+":sixteen-real-player-frames",sample.playerFrames>=MinimumPlayerFrames,"entered="+sample.enteredFrame+", sampled="+sample.sampledFrame);
+            CheckState(sample.name+":original-gameplay-scene",scene.path==sample.scenePath,"actual="+scene.path+", expected="+sample.scenePath);
+            CheckState(sample.name+":loaded-original-asset",sample.currentLevelId==sample.expectedLevelId,"current="+sample.currentLevelId+", expected="+sample.expectedLevelId);
+            CheckState(sample.name+":native-global-asset",sample.globalLevelId==sample.expectedLevelId,"global="+sample.globalLevelId+", expected="+sample.expectedLevelId);
+            CheckState(sample.name+":original-pack",sample.originalPart==OriginalScenePresentation.PartForLevel(sample.expectedLevelId),"part="+sample.originalPart);
+            CheckState(sample.name+":persisted-original-asset",sample.persistedLastLevelId==sample.expectedLevelId,"requested="+sample.requestedLastLevelId+", actual="+sample.persistedLastLevelId);
+            CheckState(sample.name+":runtime-time-speed-retained",Time.timeScale==report.originalTimeScale,"actual="+Time.timeScale+", original="+report.originalTimeScale);
+            Leveltexto2[] titles=OriginalScenePresentation.Components<Leveltexto2>(scene)
+                .Where(x=>x.isActiveAndEnabled && x.texto1!=null && x.texto1.isActiveAndEnabled).ToArray();
+            CheckState(sample.name+":active-original-title",titles.Length>0,"active original Leveltexto2/texto1 count="+titles.Length);
+            foreach(Leveltexto2 original in titles) {
+                string text=original.texto1.text??"";MatchCollection matches=Regex.Matches(text,@"[+-]?\d+");
+                int number=0;bool parsed=matches.Count==1 && Int32.TryParse(matches[0].Value,out number);
+                var title=new Title {path=Hierarchy(original.texto1.transform),text=text,signedIntegerCount=matches.Count,
+                    parsed=parsed,parsedNumber=number,expectedPositiveNumber=parsed && number>0 && number==sample.expectedLocalNumber};
+                sample.titles.Add(title);
+                CheckState(sample.name+":live-title-positive-exact-local-number",title.expectedPositiveNumber,
+                    "path="+title.path+", untouched text='"+text+"', signed integers="+matches.Count+", expected="+sample.expectedLocalNumber);
+            }
+            sample.passed=report.checks.Skip(before).All(x=>x.passed);
+            Save();
+        }
+
+        static void Abort(Exception exception) {
+            if(!Active)return;
+            LoadReport();report.errors.Add(exception.ToString());Phase="restore";Save();
+            if(EditorApplication.isPlaying)EditorApplication.ExitPlaymode();
+        }
+
+        static void CompleteInEdit() {
+            if(!Active || EditorApplication.isPlayingOrWillChangePlaymode)return;
+            LoadReport();Phase="finishing";
+            try { report.preferencesRestored=RestorePreferences(); }
+            catch(Exception exception) { report.errors.Add("Preference restoration: "+exception); }
+            try {
+                SavedScenes saved=JsonUtility.FromJson<SavedScenes>(SessionState.GetString(Key+".Scenes","{}"));
+                if(saved.scenes==null || saved.scenes.Length==0)throw new InvalidOperationException("Original scene setup is missing.");
+                EditorSceneManager.RestoreSceneManagerSetup(saved.scenes.Select(x=>new SceneSetup {path=x.path,isLoaded=x.loaded,isActive=x.active}).ToArray());
+                SceneSetup[] actual=EditorSceneManager.GetSceneManagerSetup();
+                report.sceneSetupRestored=actual.Length==saved.scenes.Length && actual.Select((x,i)=>x.path==saved.scenes[i].path && x.isLoaded==saved.scenes[i].loaded && x.isActive==saved.scenes[i].active).All(x=>x);
+            } catch(Exception exception) { report.errors.Add("Scene setup restoration: "+exception); }
+            // Scene restoration and other suites' Edit callbacks must finish
+            // before the original serialized time speed is restored and read.
+            Save();EditorApplication.delayCall+=FinalEditCheck;
+        }
+
+        static void FinalEditCheck() {
+            if(!Active || Phase!="finishing")return;
+            LoadReport();
+            float original=SessionState.GetFloat(Key+".Scale",4);Time.timeScale=original;
+            report.enteredEditMode=!EditorApplication.isPlayingOrWillChangePlaymode;
+            report.restoredTimeScale=Time.timeScale;report.timeScaleRestored=Time.timeScale==original;
+            CheckState("all-eight-genuine-startups-sampled",report.cases.Count==Definitions.Length && report.realPlayStarts==Definitions.Length &&
+                report.cases.All(x=>x.enteredPlayMode && x.sampled && x.enteredEditMode),"cases="+report.cases.Count+", starts="+report.realPlayStarts);
+            CheckState("exact-preferences-restored",report.preferencesRestored,"Backed-up typed keys="+report.preferenceKeys+", includes language/helpRotation/Recovery.LastLevelId.");
+            CheckState("original-scene-setup-restored",report.sceneSetupRestored,"Scene paths, loaded states, ordering and active scene compared in Edit mode.");
+            CheckState("original-time-speed-restored",report.timeScaleRestored && report.enteredEditMode,"original="+original+", restored="+report.restoredTimeScale);
+            report.finishedUtc=DateTime.UtcNow.ToString("o");
+            report.passed=report.errors.Count==0 && report.preferencesRestored && report.sceneSetupRestored && report.timeScaleRestored && report.enteredEditMode &&
+                report.cases.Count==Definitions.Length && report.cases.All(x=>x.passed && x.enteredEditMode) && report.checks.All(x=>x.passed);
+            Save();bool passed=report.passed;
+            SessionState.EraseBool(Key);Phase="";
+            Debug.Log("Direct original scene title validation "+(passed?"PASS":"FAIL")+"; cases="+report.cases.Count+"; checks="+report.checks.Count+"; errors="+report.errors.Count);
+            report=null;
+            if(Application.isBatchMode)EditorApplication.Exit(passed?0:1);
+        }
+
+        static Preferences BackupPreferences(RecoveryCatalog catalog) {
+            var result=new Preferences();
+            var keys=new HashSet<string>(new[]{"Recovery.LastLevelId","esTablet","OptionSelLev","Soundlevel","MusicaON","primeraVez","helpRotation"});
+            foreach(RecoveryLevelEntry level in catalog.levels) {keys.Add("Recovery.Complete."+level.assetId);keys.Add("Recovery.Completed.gm"+level.assetId);}
+            foreach(string name in keys.OrderBy(x=>x,StringComparer.Ordinal))result.values.Add(new Preference {key=name,kind="int",existed=PlayerPrefs.HasKey(name),intValue=PlayerPrefs.GetInt(name)});
+            foreach(string name in new[]{"Conf_music","Conf_sound"})result.values.Add(new Preference {key=name,kind="float",existed=PlayerPrefs.HasKey(name),floatValue=PlayerPrefs.GetFloat(name)});
+            result.values.Add(new Preference {key="language",kind="string",existed=PlayerPrefs.HasKey("language"),stringValue=PlayerPrefs.GetString("language","")});
+            return result;
+        }
+        static bool RestorePreferences() {
+            Preferences saved=JsonUtility.FromJson<Preferences>(SessionState.GetString(Key+".Prefs","{}"));
+            if(saved==null || saved.values==null || saved.values.Count==0)return false;
+            foreach(Preference p in saved.values) {
+                if(!p.existed)PlayerPrefs.DeleteKey(p.key);
+                else if(p.kind=="string")PlayerPrefs.SetString(p.key,p.stringValue);
+                else if(p.kind=="float")PlayerPrefs.SetFloat(p.key,p.floatValue);
+                else PlayerPrefs.SetInt(p.key,p.intValue);
+            }
+            PlayerPrefs.Save();
+            return saved.values.All(p=>PlayerPrefs.HasKey(p.key)==p.existed && (!p.existed ||
+                (p.kind=="string"?PlayerPrefs.GetString(p.key)==p.stringValue:p.kind=="float"?PlayerPrefs.GetFloat(p.key)==p.floatValue:PlayerPrefs.GetInt(p.key)==p.intValue)));
+        }
+        static void OnLog(string message,string stack,LogType type) {
+            if(!Active)return;
+            if(type!=LogType.Error && type!=LogType.Exception && type!=LogType.Assert)return;
+            LoadReport();report.errors.Add(message+"\n"+stack);Save();
+        }
+        static void OnQuitting() {
+            if(!Active)return;
+            LoadReport();report.errors.Add("Editor quit before direct scene title fixture completed.");
+            report.preferencesRestored=RestorePreferences();
+            if(!EditorApplication.isPlayingOrWillChangePlaymode)Time.timeScale=SessionState.GetFloat(Key+".Scale",4);
+            Save();
+        }
+        static Case CurrentCase() { return report.cases.Last(); }
+        static void SetDeadline() { SessionState.SetString(Key+".Deadline",DateTime.UtcNow.AddSeconds(CaseTimeoutSeconds).ToString("o")); }
+        static void LoadReport() { if(report==null)report=JsonUtility.FromJson<Report>(SessionState.GetString(Key+".Report","{}")); }
+        static void Save() { Directory.CreateDirectory(Output);string json=JsonUtility.ToJson(report,true);SessionState.SetString(Key+".Report",json);File.WriteAllText(ReportPath,json); }
+        static void CheckState(string name,bool passed,string detail) { report.checks.Add(new Check {name=name,passed=passed,detail=detail}); }
+        static string Hierarchy(Transform t) {string value=t.name;while(t.parent!=null){t=t.parent;value=t.name+"/"+value;}return value;}
+        static string Hash(byte[] bytes) {using(var sha=SHA256.Create())return BitConverter.ToString(sha.ComputeHash(bytes)).Replace("-","").ToLowerInvariant();}
+    }
+}
+#endif

@@ -1,0 +1,73 @@
+// FuenteTest1$$OnTriggerExit VA 0x109FF60, inferred length 284
+void FuenteTest1__OnTriggerExit (FuenteTest1_o* __this, UnityEngine_Collider_o* other, const MethodInfo* method);
+0109FF60  stp      x30, x21, [sp, #-0x20]!               
+0109FF64  stp      x20, x19, [sp, #0x10]                 
+0109FF68  adrp     x21, #0x24fb000                       
+0109FF6C  ldrb     w8, [x21, #0xf4a]                     
+0109FF70  mov      x20, x1                               
+0109FF74  mov      x19, x0                               
+0109FF78  tbnz     w8, #0, #0x109ff9c                    
+0109FF7C  adrp     x0, #0x2368000                        
+0109FF80  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+0109FF84  bl       #0xe61b78                             
+0109FF88  adrp     x0, #0x236d000                        
+0109FF8C  ldr      x0, [x0, #0x448]                       // [0x236D448] 'Objeto'
+0109FF90  bl       #0xe61b78                             
+0109FF94  mov      w8, #1                                
+0109FF98  strb     w8, [x21, #0xf4a]                     
+0109FF9C  mov      w8, #1                                
+0109FFA0  strh     wzr, [x19, #0x2d0]                     // self.test1
+0109FFA4  strb     w8, [x19, #0x2d2]                      // self.test3
+0109FFA8  strb     wzr, [x19, #0x1de]                     // self.activar
+0109FFAC  cbz      x20, #0x10a0078                       
+0109FFB0  mov      x0, x20                               
+0109FFB4  mov      x1, xzr                               
+0109FFB8  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+0109FFBC  cbz      x0, #0x10a0078                        
+0109FFC0  adrp     x21, #0x236d000                       
+0109FFC4  ldr      x21, [x21, #0x448]                     // [0x236D448] 'Objeto'
+0109FFC8  mov      x1, xzr                               
+0109FFCC  bl       #0x2006314                             // UnityEngine.GameObject$$get_layer
+0109FFD0  ldr      x8, [x21]                             
+0109FFD4  mov      w21, w0                               
+0109FFD8  mov      x1, xzr                               
+0109FFDC  mov      x0, x8                                
+0109FFE0  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+0109FFE4  cmp      w21, w0                               
+0109FFE8  b.ne     #0x10a006c                            
+0109FFEC  mov      x0, x20                               
+0109FFF0  mov      x1, xzr                               
+0109FFF4  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+0109FFF8  cbz      x0, #0x10a0078                        
+0109FFFC  mov      x1, xzr                               
+010A0000  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010A0004  ldr      w8, [x19, #0x34]                       // self.origen
+010A0008  str      x0, [x19, #0x20]                       // self.nombreObjeto
+010A000C  cmp      w8, #5                                
+010A0010  b.ne     #0x10a0058                            
+010A0014  ldr      x21, [x19, #0x260]                     // self.otherObject
+010A0018  mov      x0, x20                               
+010A001C  mov      x1, xzr                               
+010A0020  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010A0024  adrp     x8, #0x2368000                        
+010A0028  ldr      x8, [x8, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010A002C  mov      x20, x0                               
+010A0030  ldr      x8, [x8]                              
+010A0034  ldr      w9, [x8, #0xe0]                       
+010A0038  cbnz     w9, #0x10a0044                        
+010A003C  mov      x0, x8                                
+010A0040  bl       #0xe61c80                             
+010A0044  mov      x0, x21                               
+010A0048  mov      x1, x20                               
+010A004C  mov      x2, xzr                               
+010A0050  bl       #0x2006e54                             // UnityEngine.Object$$op_Equality
+010A0054  tbz      w0, #0, #0x10a006c                    
+010A0058  strb     wzr, [x19, #0x258]                     // self.triggered
+010A005C  mov      x0, x19                               
+010A0060  ldp      x20, x19, [sp, #0x10]                 
+010A0064  ldp      x30, x21, [sp], #0x20                 
+010A0068  b        #0x109ec2c                             // FuenteTest1$$doExit
+010A006C  ldp      x20, x19, [sp, #0x10]                 
+010A0070  ldp      x30, x21, [sp], #0x20                 
+010A0074  ret                                            
+010A0078  bl       #0xe61da0                             

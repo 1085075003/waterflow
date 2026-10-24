@@ -1,0 +1,149 @@
+{
+    "startedUtc": "2026-10-15T23:06:08.2924673Z",
+    "finishedUtc": "2026-10-15T23:06:09.0738926Z",
+    "unityVersion": "2022.3.28f1",
+    "passed": true,
+    "preferencesRestored": true,
+    "checks": [
+        {
+            "name": "unity-version",
+            "detail": "2022.3.28f1",
+            "passed": true
+        },
+        {
+            "name": "ui-ready-gm1053",
+            "detail": "Original UI adapter starts the native scene.",
+            "passed": true
+        },
+        {
+            "name": "gm1053-original-mechanism-models",
+            "detail": "Observers=2, plates=2",
+            "passed": true
+        },
+        {
+            "name": "original-sw1-rotator",
+            "detail": "gm1053 record6, original rotation action3 and valMove1.",
+            "passed": true
+        },
+        {
+            "name": "original-rotation-binding",
+            "detail": "The original restored observer and action sequence.",
+            "passed": true
+        },
+        {
+            "name": "rotation-all-four-neighbors-clear",
+            "detail": "Native rotation can begin when all four20-unit probes are clear.",
+            "passed": true
+        },
+        {
+            "name": "rotation-original-cardinal-probe-(1, 0, 0)",
+            "detail": "Only the exact original native probe at(60.000, 3.950, 40.000) is obstructed.",
+            "passed": true
+        },
+        {
+            "name": "rotation-original-cardinal-probe-(-1, 0, 0)",
+            "detail": "Only the exact original native probe at(20.000, 3.950, 40.000) is obstructed.",
+            "passed": true
+        },
+        {
+            "name": "rotation-original-cardinal-probe-(0, 0, 1)",
+            "detail": "Only the exact original native probe at(40.000, 3.950, 60.000) is obstructed.",
+            "passed": true
+        },
+        {
+            "name": "rotation-original-cardinal-probe-(0, 0, -1)",
+            "detail": "Only the exact original native probe at(40.000, 3.950, 20.000) is obstructed.",
+            "passed": true
+        },
+        {
+            "name": "rotation-removing-actual-collider-allows-motion",
+            "detail": "The same original actor is accepted after the physical blocker is disabled.",
+            "passed": true
+        },
+        {
+            "name": "original-sw1-slide-binding",
+            "detail": "Original valMove1 configuration.",
+            "passed": true
+        },
+        {
+            "name": "horizontal-valMove1-does-not-wait-for-other-bus",
+            "detail": "Unrelated channel8 busy is not a valMove1 gate.",
+            "passed": true
+        },
+        {
+            "name": "ui-ready-gm1132",
+            "detail": "Original UI adapter starts the native scene.",
+            "passed": true
+        },
+        {
+            "name": "gm1132-original-mechanism-models",
+            "detail": "Observers=3, plates=2",
+            "passed": true
+        },
+        {
+            "name": "original-valMove2-slide",
+            "detail": "gm1132 record19, channel3 horizontal action6 with native valMove2.",
+            "passed": true
+        },
+        {
+            "name": "original-valMove2-binding",
+            "detail": "Original main st3/action6 observer, explicitly distinct from the first-registered <v47v> extra channel4/action7 observer.",
+            "passed": true
+        },
+        {
+            "name": "valMove2-all-channels-idle-allows",
+            "detail": "No native busy channel: horizontal action accepted.",
+            "passed": true
+        },
+        {
+            "name": "valMove2-own-channel-busy-exemption",
+            "detail": "The original check explicitly exempts its own selected conResor channel3.",
+            "passed": true
+        },
+        {
+            "name": "valMove2-other-channel-busy-1",
+            "detail": "Original doValidarMovimientos0 rejects unrelated activadoRes1.",
+            "passed": true
+        },
+        {
+            "name": "valMove2-other-channel-busy-2",
+            "detail": "Original doValidarMovimientos0 rejects unrelated activadoRes2.",
+            "passed": true
+        },
+        {
+            "name": "valMove2-other-channel-busy-4",
+            "detail": "Original doValidarMovimientos0 rejects unrelated activadoRes4.",
+            "passed": true
+        },
+        {
+            "name": "valMove2-other-channel-busy-5",
+            "detail": "Original doValidarMovimientos0 rejects unrelated activadoRes5.",
+            "passed": true
+        },
+        {
+            "name": "valMove2-other-channel-busy-6",
+            "detail": "Original doValidarMovimientos0 rejects unrelated activadoRes6.",
+            "passed": true
+        },
+        {
+            "name": "valMove2-other-channel-busy-7",
+            "detail": "Original doValidarMovimientos0 rejects unrelated activadoRes7.",
+            "passed": true
+        },
+        {
+            "name": "valMove2-other-channel-busy-8",
+            "detail": "Original doValidarMovimientos0 rejects unrelated activadoRes8.",
+            "passed": true
+        },
+        {
+            "name": "valMove2-cleared-bus-retry-allows",
+            "detail": "Clearing the injected busy state re-enables the exact original move.",
+            "passed": true
+        }
+    ],
+    "runtimeErrors": [],
+    "screenshots": [],
+    "notes": [
+        "Controlled negative-input tests use original gm1053/gm1132 actors, serialized masks and production Prepare/OverlapSphere. Other authored actors are temporarily inactive and explicit temporary blockers or native busy flags isolate one rule at a time. Every active state, native snapshot and injected object is restored in finally. These tests do not claim normal recorded level completion."
+    ]
+}

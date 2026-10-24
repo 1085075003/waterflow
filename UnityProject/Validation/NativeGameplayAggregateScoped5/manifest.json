@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "createdUtc": "2026-10-16T08:07:11.451527+00:00",
+  "purpose": "Add exact closed-report scoping to nonphysics source approvals; retain all prior strict physics/UV/gameplay verdict checks. Existing old UV fixture side effect is narrowly reviewed only for seven immutable closed mode0 reports.",
+  "baseAggregator": {
+    "path": "Validation/NativeGameplayAggregateBatch4/aggregate_native_gameplay.py",
+    "sha256": "cc42f00e4473d6dd73bf9ade14278e76c96f2af5580908a985391e07f3a9d6a3"
+  },
+  "stagedAggregator": {
+    "path": "Validation/NativeGameplayAggregateScoped5/aggregate_native_gameplay.py",
+    "sha256": "1376fce6aae8cecf99cc3821ccb897368c67ed8fffd6303db9168e26985926fc"
+  },
+  "files": {
+    "aggregate_native_gameplay.py": "1376fce6aae8cecf99cc3821ccb897368c67ed8fffd6303db9168e26985926fc",
+    "aggregator-scoped.diff": "af242139ef5a9abaaab6e31f8b6c6db8320cc119032c5d1a9350aa3c26d216a9",
+    "boundary-tests.json": "f1fa9f70e33c62f96e7b504e686553afa7de98437086b47158b5ff7847a5195f",
+    "build_scoped_review.py": "6edb0b1de4a1effee9ed6e6bc2b98a196e78f53bc451de396ce608fc01aa8a42",
+    "exact-uv-approval.json": "20b09629b4bf4c5245a96090ea0faa897d7d966315e53b233fd5cd0059e8568f",
+    "test_aggregate_native_gameplay.py": "bf6e5305a7927ca905b4d772b86201e1a6413d7c6487791aac283e937552ed99",
+    "uv-editor-save1-scoped-approval.json": "6edfc4333869b418572765176f057cc598a5292ba8f590899b29fb7cddb97394",
+    "uv-editor-save1-scoped-review.json": "71a89819ab36b9a19f356007565a54b180021b4c73835f3f3f793ea099c16fdb"
+  },
+  "actualOfflineTests": {
+    "passed": true,
+    "count": 35,
+    "report": "Validation/NativeGameplayAggregateScoped5/boundary-tests.json"
+  },
+  "usage": [
+    "Use this staged aggregator path directly; no Assets import or overwrite of prior aggregate script/report is required.",
+    "Append uv-editor-save1-scoped-approval.json as one approvedNonPhysicsDifferences element in the eventual final compatibility JSON. The added onlyReportSha256 field is enforced by this version; Batch4 does not enforce it.",
+    "The seven report hashes must all be present in run bindings. An actual difference comparison outside that report set, including post-import-Input61, is rejected.",
+    "Earlier broad withheld review remains immutable historical evidence; this narrow later review does not call the old Editor fully dormant.",
+    "Future new guard, Geometry JSON, water VM and final Input source pairs need independent actual executed source review. No final 800 coverage artifact has been generated."
+  ],
+  "unityLaunched": false,
+  "assetsModified": false
+}

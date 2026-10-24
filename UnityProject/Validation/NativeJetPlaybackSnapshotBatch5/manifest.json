@@ -1,0 +1,53 @@
+{
+  "batch": "NativeJetPlaybackSnapshotBatch5",
+  "immutable": true,
+  "createdUtc": "2026-10-16T04:29:32.827497+00:00",
+  "dependsOn": [
+    "NativeJetLifetimeBatch3",
+    "NativeJetPopulationFixtureBatch4"
+  ],
+  "status": "Full runtime+Editor csc0; actual native particle playback-state restoration validation pending root",
+  "entry": "Recovered.FlowWater.Editor.FlowWaterJetLifetimeValidation.Run",
+  "files": [
+    {
+      "source": "Validation/NativeJetPlaybackSnapshotBatch5/Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs",
+      "target": "Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs",
+      "sha256": "266f1c86244667024c1e167ca09dd7ccc62588edb02815a65e11762d796939cf",
+      "previousSha256": "55b1c532683b62c0eb9ecb85d76f1526c78adff8b2bc7f7ffd86fea064893658"
+    },
+    {
+      "source": "Validation/NativeJetPlaybackSnapshotBatch5/Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs.meta",
+      "target": "Assets/Scripts/RecoveryRuntime/RecoveredNativeJetCache.cs.meta",
+      "sha256": "bc23d265d53461407ce622c336d92ee575573f9b2cb053fa09af59032744dc89",
+      "previousSha256": "bc23d265d53461407ce622c336d92ee575573f9b2cb053fa09af59032744dc89"
+    },
+    {
+      "source": "Validation/NativeJetPlaybackSnapshotBatch5/Assets/Editor/RecoveredTools/FlowWaterJetLifetimeValidation.cs",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterJetLifetimeValidation.cs",
+      "sha256": "b224939a54daa0ed019255b2b71aaf451a0905eb19505dd06f88c8b2ec68955e",
+      "previousSha256": "5b09ca23d5a6349a45f51635dc97f85e61a971cda1a40a5dc003d9253b5a3d7e"
+    },
+    {
+      "source": "Validation/NativeJetPlaybackSnapshotBatch5/Assets/Editor/RecoveredTools/FlowWaterJetLifetimeValidation.cs.meta",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterJetLifetimeValidation.cs.meta",
+      "sha256": "08c0290c9430c8ee989fa51ece8b823d3ecade41f6752bfdd3205e1e0e4336f4",
+      "previousSha256": "08c0290c9430c8ee989fa51ece8b823d3ecade41f6752bfdd3205e1e0e4336f4"
+    }
+  ],
+  "cause": "Actual Batch4Population captured119 particles and restored0 although clock,seed,auto andpaused flags matched; Simulate on a stopped emitter advances time without emitting original particles.",
+  "changes": [
+    "Capture Unity2022.3 public ParticleSystem.PlaybackState, live Particle[] and enabled Trails/CustomData snapshots for each original cached jet model child PS",
+    "Restore StopAndClear -> seed/auto policy -> saved play/pause/stop flags -> SetPlaybackState -> SetParticles/Trails/CustomData; no seed setter runs after particles exist",
+    "Keep original live same-instance visual rebuild and ordinary native reentry paths unchanged; only pending Undo snapshot enters native state restore",
+    "Require exact restored particleCount, random seeds, positions, velocities and remaining lifetimes in the original real model fixture, plus all prior seed/time/auto/playing checks"
+  ],
+  "checks": [
+    "runtime.rsp exit0",
+    "editor.rsp exit0"
+  ],
+  "apiSources": [
+    "https://raw.githubusercontent.com/Unity-Technologies/UnityCsReference/2022.3/Modules/ParticleSystem/ScriptBindings/ParticleSystem.bindings.cs",
+    "https://raw.githubusercontent.com/Unity-Technologies/UnityCsReference/2022.3/Modules/ParticleSystem/Managed/ParticleSystemStructs.cs"
+  ],
+  "actualStatus": "NOT YET RUN; population/kinematic claims must be established by actual Unity fixture"
+}

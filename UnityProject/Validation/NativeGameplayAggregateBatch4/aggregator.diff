@@ -1,0 +1,158 @@
+--- Validation/aggregate_native_gameplay.py
++++ NativeGameplayAggregateBatch4/aggregate_native_gameplay.py
+@@ -25,6 +25,7 @@
+ from __future__ import annotations
+ 
+ import argparse
++import difflib
+ from dataclasses import dataclass, field
+ from datetime import datetime, timezone
+ import hashlib
+@@ -348,6 +349,90 @@
+     return data
+ 
+ 
++# This is a single reviewed source pair, not a general visual-code waiver.
++# WaterMotion stays in STRICT_FILES. Any other source pair remains forbidden.
++UV_RULE = "native-scrollTest1-exact-uv-20261016"
++UV_PATH = RUNTIME_DIR + "RecoveredWaterMotion.cs"
++UV_BASE_SHA = "13b47273ac1e8ec45c749a86454ee157507c5f9b740670675406e684ca9e142c"
++UV_OTHER_SHA = "e73aaf4d9964cb9e63e8cbd62bd98b3a13b80f9ef6775a897b53b3dd65088a05"
++UV_ACTUAL_REPORT_SHA = "e208e89ba164cf09cd7a3838dc7f158dec7009b21ed8e99b423599e7a6290d36"
++UV_ASM_SHA = {
++    "nativeStartAsm": "582aeac74443e3958021335ab9e610a1366b3d46c4a810406ed4c9e0fec2142c",
++    "nativeUpdateAsm": "c1c6929e81662a17ef7eb56461291c6ffb355ace1f6e84aadafe1dd57e49fb0c",
++}
++
++
++def exact_visual_scroll_approval(approval: Any, parent: Path) -> dict[str, Any]:
++    """Verify the complete reviewed hunk and the already actual-passed UV run."""
++    ensure(isinstance(approval, dict), "Invalid exact UV evidence")
++    ensure(approval.get("ruleId") == UV_RULE and approval.get("path") == UV_PATH
++           and approval.get("baseSha256") == UV_BASE_SHA
++           and approval.get("otherSha256") == UV_OTHER_SHA
++           and approval.get("mode0Unchanged") is True,
++           "Exact UV exception only accepts the reviewed WaterMotion source pair")
++    def blob(key: str, expected: str | None = None) -> tuple[Path, str]:
++        item = approval.get(key)
++        evidence_blob(item, parent)
++        path = (parent / item["path"]).resolve()
++        digest = hashlib.sha256(path.read_bytes()).hexdigest()
++        ensure(expected is None or digest == expected, "Exact UV " + key + " is not reviewed evidence")
++        return path, path.read_text("utf-8-sig")
++    before_path, before = blob("baseSource", UV_BASE_SHA)
++    after_path, after = blob("otherSource", UV_OTHER_SHA)
++    # Reconstruct the only permitted source transformation. This also excludes
++    # edits to LateUpdate timing, animator, particle, water or gameplay behavior.
++    begin = "                Material material = renderer.sharedMaterial;\n"
++    added = ("                // Original scrollTest1.Start1060C98 and Update1060CC0:\n"
++             "                // Start resolves Y; Update replaces, rather than adds to, the material offset.\n"
++             "                if (original.tipoOffset == 1) original.offsetInicialY = 0f;\n"
++             "                else if (original.tipoOffset == 2) original.offsetInicialY = .5f;\n")
++    old_offset = "offset = material.mainTextureOffset + new Vector2(original.offsetInicialX, original.offsetInicialY)"
++    new_offset = "offset = new Vector2(original.offsetInicialX, original.offsetInicialY)"
++    ensure(before.count(begin) == 1 and before.count(old_offset) == 1,
++           "Exact UV base syntax differs")
++    ensure(before.replace(begin, begin + added).replace(old_offset, new_offset) == after,
++           "Exact UV source has edits outside the reviewed scroll hunk")
++    _, diff = blob("fullDiff")
++    expected_diff = "".join(difflib.unified_diff(before.splitlines(True), after.splitlines(True),
++        fromfile=UV_PATH + " (frozen base)", tofile=UV_PATH + " (native UV only)"))
++    ensure(diff == expected_diff, "Exact UV full diff is incomplete or differs")
++    for key, expected_sha in UV_ASM_SHA.items():
++        blob(key, expected_sha)
++    report_path, report, report_sha = evidence_file(approval.get("actualUvValidation"), parent)
++    ensure(report_sha == UV_ACTUAL_REPORT_SHA, "Exact UV requires the reviewed actual passed Unity fixture")
++    started = timestamp(report.get("startedUtc"), "UV startedUtc")
++    finished = timestamp(report.get("finishedUtc"), "UV finishedUtc")
++    ensure(finished >= started and report.get("unityVersion") == UNITY
++           and report.get("runtimeSourceSha256") == UV_OTHER_SHA
++           and report.get("passed") is True and report.get("errors") == []
++           and all(report.get(key) is True for key in ("timeScaleRestored", "preferencesRestored", "enteredEditMode"))
++           and all(report.get(key) == 4 for key in ("originalTimeScale", "restoredTimeScale", "serializedTimeManagerScale")),
++           "Exact UV fixture did not pass and restore actual Editor/time/preferences")
++    checks = report.get("checks")
++    ensure(isinstance(checks, list) and len(checks) == 436
++           and all(isinstance(check, dict) and check.get("passed") is True for check in checks),
++           "Exact UV fixture checks incomplete")
++    names = {check.get("name") for check in checks}
++    ensure({"MatGr16-half-period-material-offset-ignored", "MatGr16_2-half-period-material-offset-ignored",
++            "multiple-rendered-frames-observed", "native-scaled-Time.time-at-scales1-and4",
++            "time-scale-restored-after-EnteredEditMode"} <= names, "Exact UV key coverage absent")
++    samples = report.get("samples")
++    ensure(isinstance(samples, list) and len(samples) == 420, "Exact UV post-render samples incomplete")
++    maximum_error = 0.0
++    for sample in samples:
++        expected_x = sample["initial"]["x"] + sample["speed"]["x"] * sample["time"]
++        expected_y = sample["initial"]["y"] + sample["speed"]["y"] * sample["time"]
++        error = max(abs(sample["actualST"]["z"] - expected_x), abs(sample["actualST"]["w"] - expected_y))
++        ensure(math.isfinite(error) and error <= 1e-4, "Exact UV actual MPB disagrees with original formula")
++        maximum_error = max(maximum_error, error)
++    ensure({sample["timeScale"] for sample in samples} >= {1.0, 4.0}, "Exact UV lacks both actual time scales")
++    return {**approval, "verifiedRuleId": UV_RULE, "actualReportPath": str(report_path),
++            "actualReportSha256": report_sha, "actualReportFinishedUtc": report["finishedUtc"],
++            "actualChecks": len(checks), "actualPostRenderSamples": len(samples),
++            "independentFormulaMaximumError": maximum_error,
++            "scope": "Only the exact scroll visual hunk; all other WaterMotion/source/physics differences stay strict."}
++
++
+ def compatibility(path: Path, base: Run | list[Run], retests: list[Run]) -> dict[str, Any]:
+     bases = base_parts(base)
+     anchor = bases[0]
+@@ -391,6 +476,15 @@
+             if approval.get(hash_key) is not None:
+                 sha(approval[hash_key], f"difference {hash_key}")
+         approval_map[key] = approval
++    visual_map = {}
++    visual_approvals = data.get("exactVisualScrollDifferences", [])
++    ensure(isinstance(visual_approvals, list), "Invalid exact visual differences list")
++    for approval in visual_approvals:
++        verified = exact_visual_scroll_approval(approval, path.parent)
++        key = (verified["path"], verified["baseSha256"], verified["otherSha256"])
++        ensure(key not in visual_map, "Duplicate exact visual approval")
++        visual_map[key] = verified
++    used_visual = set()
+     interaction = data.get("postImportInteraction")
+     ensure(isinstance(interaction, dict), "Final independent Input61 evidence required")
+     input_snapshot_path, input_snapshot_data, input_snapshot_sha = snapshot(interaction.get("runtimeSnapshot"), path.parent)
+@@ -404,12 +498,17 @@
+             before, after = base_files.get(key), other_files.get(key)
+             if before == after:
+                 continue
+-            ensure(key not in STRICT_FILES, f"Incompatible production physics between base and {label}: {key}")
+             approval_key = (key, before, after)
++            if key in STRICT_FILES:
++                ensure(approval_key in visual_map, f"Incompatible production physics between base and {label}: {key}")
++                used_visual.add(approval_key)
++                actual_differences.append({"reportSha256": report_digest, **visual_map[approval_key]})
++                continue
+             ensure(approval_key in approval_map, f"Unreviewed runtime/config difference: {key} ({label})")
+             used_approvals.add(approval_key)
+             actual_differences.append({"reportSha256": report_digest, **approval_map[approval_key]})
+     ensure(used_approvals == set(approval_map), "Unused difference approval: exact current comparisons required")
++    ensure(used_visual == set(visual_map), "Unused exact UV approval: exact current comparisons required")
+     input_path, input_data, input_digest = evidence_file(interaction.get("report"), path.parent)
+     input_finished = timestamp(input_data.get("finishedUtc"), f"{input_path}:finishedUtc")
+     input_started = timestamp(input_data.get("startedUtc"), f"{input_path}:startedUtc")
+@@ -426,15 +525,19 @@
+            "Final Input61 misses independent native motion/snapshot Undo coverage")
+     if retests:
+         ensure(input_started >= max(run.finished for run in retests), "Input61 predates latest retest imports/run")
++    if visual_map:
++        ensure(input_started >= max(timestamp(item["actualReportFinishedUtc"], "UV finishedUtc") for item in visual_map.values()), "Input61 predates exact UV validation/import")
+     return {"passed": True, "evidencePath": str(path), "sha256": digest,
+-            "strictIdenticalFiles": sorted(STRICT_FILES), "runSnapshots": sources,
++            "strictDefaultFiles": sorted(STRICT_FILES),
++            "strictIdenticalFiles": sorted(STRICT_FILES - {key[0] for key in used_visual}),
++            "exactVisualScrollExceptions": list(visual_map.values()), "runSnapshots": sources,
+             "explicitReviewedDifferences": actual_differences,
+             "postImportInteraction": {"path": str(input_path), "sha256": input_digest,
+                                       "finishedUtc": input_data["finishedUtc"], "checks": len(input_checks),
+                                       "runtimeSnapshotPath": str(input_snapshot_path),
+                                       "runtimeSnapshotSha256": input_snapshot_sha,
+                                       "captureBasis": input_snapshot_data["captureBasis"]},
+-            "limitation": "Runtime hash bindings and explicit review notes are input evidence. The aggregator checks hashes and boundaries; it cannot prove semantic equivalence of an approved source diff or infer the executed assembly from current disk files."}
++            "limitation": "Runtime hash bindings and explicit review notes are input evidence. The aggregator checks hashes and boundaries, including the one exact-source visual scroll exception and its actual UV fixture; it cannot infer the executed assembly from current disk files."}
+ 
+ 
+ def aggregate(base: Run | list[Run], retests: list[Run], compat: dict[str, Any]) -> dict[str, Any]:

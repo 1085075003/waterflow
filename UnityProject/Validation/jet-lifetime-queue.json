@@ -1,0 +1,21 @@
+{
+  "continueOnFailure": true,
+  "jobs": [
+    {
+      "name": "jet-lifetime",
+      "method": "Recovered.FlowWater.Editor.FlowWaterJetLifetimeValidation.Run",
+      "reportDirectory": "Validation/JetLifetime",
+      "reportFile": "jet-lifetime-validation.json",
+      "archiveDestination": "JetLifetime/Batch2",
+      "timeoutSeconds": 600
+    },
+    {
+      "name": "jet-gameplay",
+      "method": "Recovered.FlowWater.Editor.FlowWaterNativeJetRotationValidation.Run",
+      "reportDirectory": "Validation/Save1Gameplay",
+      "reportFile": "save1-gameplay-validation.json",
+      "archiveDestination": "NativeJetLifetimeBatch2/ActualGameplay",
+      "timeoutSeconds": 600
+    }
+  ]
+}

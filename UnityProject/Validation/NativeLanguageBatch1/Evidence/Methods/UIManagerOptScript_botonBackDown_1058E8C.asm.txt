@@ -1,0 +1,48 @@
+// UIManagerOptScript$$botonBackDown VA 0x1058E8C, inferred length 184
+void UIManagerOptScript__botonBackDown (UIManagerOptScript_o* __this, const MethodInfo* method);
+01058E8C  str      x30, [sp, #-0x20]!                    
+01058E90  stp      x20, x19, [sp, #0x10]                 
+01058E94  adrp     x20, #0x24fb000                       
+01058E98  ldrb     w8, [x20, #0xe03]                     
+01058E9C  mov      x19, x0                               
+01058EA0  tbnz     w8, #0, #0x1058ed0                    
+01058EA4  adrp     x0, #0x2368000                        
+01058EA8  ldr      x0, [x0, #0xb28]                       // [0x2368B28] UnityEngine.SceneManagement.SceneManager_TypeInfo
+01058EAC  bl       #0xe61b78                             
+01058EB0  adrp     x0, #0x236b000                        
+01058EB4  ldr      x0, [x0, #0xc10]                       // [0x236BC10] UIManagerPortScript_TypeInfo
+01058EB8  bl       #0xe61b78                             
+01058EBC  adrp     x0, #0x236c000                        
+01058EC0  ldr      x0, [x0, #0x250]                       // [0x236C250] 'Portada'
+01058EC4  bl       #0xe61b78                             
+01058EC8  mov      w8, #1                                
+01058ECC  strb     w8, [x20, #0xe03]                     
+01058ED0  ldr      x0, [x19, #0x28]                       // self.audioManager
+01058ED4  cbz      x0, #0x1058f40                        
+01058ED8  ldr      x1, [x19, #0x20]                       // self.click
+01058EDC  adrp     x20, #0x236b000                       
+01058EE0  adrp     x19, #0x2368000                       
+01058EE4  ldr      x20, [x20, #0xc10]                     // [0x236BC10] UIManagerPortScript_TypeInfo
+01058EE8  ldr      x19, [x19, #0xb28]                     // [0x2368B28] UnityEngine.SceneManagement.SceneManager_TypeInfo
+01058EEC  mov      x2, xzr                               
+01058EF0  bl       #0x1037514                             // AudioManager0$$PlaySound
+01058EF4  ldr      x0, [x20]                             
+01058EF8  ldr      w8, [x0, #0xe0]                       
+01058EFC  cbnz     w8, #0x1058f08                        
+01058F00  bl       #0xe61c80                             
+01058F04  ldr      x0, [x20]                             
+01058F08  ldr      x8, [x0, #0xb8]                       
+01058F0C  mov      w9, #1                                
+01058F10  str      w9, [x8, #0x14]                       
+01058F14  ldr      x0, [x19]                             
+01058F18  adrp     x19, #0x236c000                       
+01058F1C  ldr      w8, [x0, #0xe0]                       
+01058F20  ldr      x19, [x19, #0x250]                     // [0x236C250] 'Portada'
+01058F24  cbnz     w8, #0x1058f2c                        
+01058F28  bl       #0xe61c80                             
+01058F2C  ldr      x0, [x19]                             
+01058F30  ldp      x20, x19, [sp, #0x10]                 
+01058F34  mov      x1, xzr                               
+01058F38  ldr      x30, [sp], #0x20                      
+01058F3C  b        #0x2014924                             // UnityEngine.SceneManagement.SceneManager$$LoadScene
+01058F40  bl       #0xe61da0                             

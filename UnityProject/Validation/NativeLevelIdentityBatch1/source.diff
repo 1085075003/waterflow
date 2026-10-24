@@ -1,0 +1,10 @@
+--- original
++++ native-level-identity
+@@ -509,6 +509,7 @@
+         if (part > 0) SelectedPart = part;
+         SelectedTab = TabForPart(SelectedPart);
+         UIManagerSelScript0.parte = SelectedPart;
++        ControladorJuego.nivelActual = id;
+         PlayerPrefs.SetInt("Recovery.LastLevelId", id);
+         PlayerPrefs.Save();
+         string targetScene = OriginalScenePresentation.SceneForLevel(id);

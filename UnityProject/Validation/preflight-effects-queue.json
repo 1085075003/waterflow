@@ -1,0 +1,37 @@
+{
+  "continueOnFailure": true,
+  "jobs": [
+    {
+      "name": "native-pit-final-curves",
+      "method": "Recovered.FlowWater.Editor.FlowWaterDecorativePitValidation.Run",
+      "reportDirectory": "Validation/DecorativePits",
+      "reportFile": "decorative-pit-validation.json",
+      "archiveDestination": "PreflightEffects/DecorativePits",
+      "timeoutSeconds": 600
+    },
+    {
+      "name": "native-arrival-geometry-and-play",
+      "method": "Recovered.FlowWater.Editor.FlowWaterArrivalContinuityValidation.Run",
+      "reportDirectory": "Validation/Save1Gameplay",
+      "reportFile": "save1-gameplay-validation.json",
+      "archiveDestination": "PreflightEffects/ArrivalGameplay",
+      "timeoutSeconds": 600
+    },
+    {
+      "name": "native-front-regression",
+      "method": "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNativeFocused",
+      "reportDirectory": "Validation/Save1Gameplay",
+      "reportFile": "save1-gameplay-validation.json",
+      "archiveDestination": "PreflightEffects/NativeFocused",
+      "timeoutSeconds": 1200
+    },
+    {
+      "name": "native-propagation-regression",
+      "method": "Recovered.FlowWater.Editor.FlowWaterPropagationValidation.Run",
+      "reportDirectory": "Validation/WaterPropagation",
+      "reportFile": "water-propagation-validation.json",
+      "archiveDestination": "PreflightEffects/WaterPropagation",
+      "timeoutSeconds": 600
+    }
+  ]
+}

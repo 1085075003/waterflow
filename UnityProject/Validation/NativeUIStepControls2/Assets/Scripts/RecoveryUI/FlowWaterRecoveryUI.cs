@@ -1,0 +1,1125 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
+using Recovered.FlowWater;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+/// <summary>
+/// Reconnects the extracted scene controls to the local recovered game. Original
+/// MonoBehaviour fields remain intact. Billing and advertising are deliberately
+/// represented as unavailable local services, never as successful transactions.
+/// </summary>
+public sealed class FlowWaterRecoveryUI : MonoBehaviour
+{
+    public static FlowWaterRecoveryUI Instance { get; private set; }
+    public bool IsInGame { get; private set; }
+    public int SelectedPart { get; private set; } = 9;
+    public int SelectedTab { get; private set; } = 1;
+    public string LastAction { get; private set; } = "Ready";
+    public float MusicVolume { get { return musicVolume; } }
+    public float SoundVolume { get { return soundVolume; } }
+    public bool MusicEnabled { get { return PlayerPrefs.GetInt("MusicaON", 1) != 0; } }
+    public bool SoundEnabled { get { return PlayerPrefs.GetInt("Soundlevel", 1) != 0; } }
+    public GameObject OriginalCompletePanel { get { return originalComplete; } }
+    public GameObject OriginalSolutionPanel { get { return originalSolution; } }
+    public string[] VisibleModalNames
+    {
+        get
+        {
+            var seen = new HashSet<GameObject>();
+            var names = new List<string>();
+            foreach (GameObject item in SceneDialogObjects())
+                if (item != null && item.activeInHierarchy && seen.Add(item)) names.Add(item.name);
+            return names.ToArray();
+        }
+    }
+    public int ActiveModalCount { get { return VisibleModalNames.Length; } }
+    public void CaptureBoardFrame(Action capture)
+    {
+        bool wasActive = originalComplete != null && originalComplete.activeSelf;
+        SetActive(originalComplete, false);
+        try { Canvas.ForceUpdateCanvases(); if (capture != null) capture(); }
+        finally { SetActive(originalComplete, wasActive); Canvas.ForceUpdateCanvases(); }
+    }
+
+    public sealed class OriginalControl
+    {
+        public string method;
+        public int argument;
+        public GameObject source;
+        public Button button;
+        public EventTrigger trigger;
+        public EventTriggerType eventType;
+    }
+    readonly List<OriginalControl> originalControls = new List<OriginalControl>();
+    public IReadOnlyList<OriginalControl> OriginalControls { get { return originalControls; } }
+
+    const string MusicKey = "Conf_music";
+    const string SoundKey = "Conf_sound";
+    const string CompletePrefix = "Recovery.Complete.";
+    readonly List<int> levelIds = new List<int>();
+    readonly HashSet<int> available = new HashSet<int>();
+    Canvas overlay;
+    Font font;
+    GameObject dialog;
+    Action dialogConfirm;
+    RectTransform pagingPanels;
+    Vector2 pagingOrigin;
+    int page;
+    int pageCount = 5;
+    bool escapeWasDown;
+    float musicVolume = .3f;
+    float soundVolume = .3f;
+    string settingsReturnScene = "Portada";
+    string storeReturnScene = "SelLevel0";
+    RecoveredFlowGame subscribedGame;
+    int pendingLevelId = -1;
+    GameObject originalSolution;
+    GameObject originalComplete;
+    GameObject originalNext;
+    bool stepPreview;
+    bool finalStepPreview;
+    bool automaticStepPreview;
+    float stepExitAvailableAt;
+    bool completionDismissed;
+    Coroutine delayedLevelMusic;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void Bootstrap()
+    {
+        if (Instance != null) return;
+        var root = new GameObject("RecoveryUI");
+        DontDestroyOnLoad(root);
+        root.AddComponent<FlowWaterRecoveryUI>();
+    }
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        musicVolume = PlayerPrefs.GetFloat(MusicKey, .3f);
+        soundVolume = PlayerPrefs.GetFloat(SoundKey, .3f);
+        SelectedTab = Mathf.Clamp(PlayerPrefs.GetInt("OptionSelLev", 1), 1, 6);
+        // gmNNN is the stable source identifier. Save.level is not unique.
+        AddRange(1, 200); AddRange(251, 300); AddRange(351, 800);
+        AddRange(1001, 1250); AddRange(1651, 2050);
+        BuildOverlay();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (subscribedGame != null) subscribedGame.StateChanged -= RefreshGame;
+        if (Instance == this) Instance = null;
+    }
+
+    void AddRange(int first, int last)
+    {
+        for (int id = first; id <= last; id++) { levelIds.Add(id); available.Add(id); }
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        CancelDelayedLevelMusic();
+        IsInGame = false;
+        dialog.SetActive(false);
+        originalSolution = originalComplete = originalNext = null;
+        completionDismissed = false;
+        pagingPanels = null;
+        page = 0;
+        ConfigureOriginalScene(scene);
+        BindSceneControls(scene);
+        ApplyVolumes();
+        RefreshMenu();
+        // The original loader methods were absent from the export. Direct Play
+        // from any original gameplay scene must enter the recovered loader too.
+        if (OriginalScenePresentation.IsGameplayScene(scene))
+        {
+            int id = pendingLevelId >= 0 ? pendingLevelId : PlayerPrefs.GetInt("Recovery.LastLevelId", 1);
+            pendingLevelId = -1;
+            if (!available.Contains(id) || OriginalScenePresentation.SceneForLevel(id) != scene.name)
+                id = scene.name == "Levely5_basic" ? 401 : scene.name == "Levely5_6x6" ? 251 : scene.name == "Levely5_7x7" ? 351 : 1;
+            SelectedPart = OriginalScenePresentation.PartForLevel(id);
+            SelectedTab = TabForPart(SelectedPart);
+            UIManagerSelScript0.parte = SelectedPart;
+            LoadGameInOriginalScene(available.Contains(id) ? id : 1);
+        }
+        // Canvas layout and animation state are evaluated on the first frame.
+        StartCoroutine(FinalizeScene(scene));
+    }
+
+    IEnumerator FinalizeScene(Scene scene)
+    {
+        yield return null;
+        if (scene == SceneManager.GetActiveScene())
+        {
+            StopBlockingFades(scene);
+            Canvas.ForceUpdateCanvases();
+        }
+    }
+
+    IEnumerable<T> SceneComponents<T>(Scene scene) where T : Component
+    {
+        foreach (var root in scene.GetRootGameObjects())
+            foreach (var component in root.GetComponentsInChildren<T>(true))
+                yield return component;
+    }
+
+    void ConfigureOriginalScene(Scene scene)
+    {
+        foreach (var originalSystem in SceneComponents<EventSystem>(scene))
+            originalSystem.gameObject.SetActive(false);
+        foreach (var canvas in SceneComponents<Canvas>(scene))
+        {
+            if (canvas.transform.parent == null && canvas.renderMode != RenderMode.WorldSpace)
+                canvas.transform.localScale = Vector3.one;
+            // Keep each authored Animator.enabled state. Blocking transition
+            // fades are handled by StopBlockingFades; modal/button/star curves
+            // remain available, while originally disabled Star_D stays disabled.
+        }
+        StopBlockingFades(scene);
+        if (OriginalScenePresentation.IsGameplayScene(scene)) ConfigureGameplayControls(scene);
+        foreach (var port in SceneComponents<UIManagerPortScript>(scene))
+        {
+            SetActive(port.panelExit, false);
+            // Original doDevice: landscape ratio <= 1.7 and short edge >=1200.
+            port.esTablet = Screen.width / (float)Mathf.Max(1, Screen.height) <= 1.7000000476837158f && Mathf.Min(Screen.width, Screen.height) >= 1200 ? 1 : 0;
+            PlayerPrefs.SetInt("esTablet", port.esTablet);
+        }
+        foreach (var options in SceneComponents<UIManagerOptScript>(scene))
+        {
+            SetActive(options.cajaReset, false); SetActive(options.cajaProgress, false);
+            if (options.volumen1 != null)
+            {
+                options.volumen1.onValueChanged = new Slider.SliderEvent();
+                options.volumen1.SetValueWithoutNotify(musicVolume);
+                options.volumen1.onValueChanged.AddListener(SetMusicVolume);
+            }
+            if (options.volumen2 != null)
+            {
+                options.volumen2.onValueChanged = new Slider.SliderEvent();
+                options.volumen2.SetValueWithoutNotify(soundVolume);
+                options.volumen2.onValueChanged.AddListener(SetSoundVolume);
+            }
+        }
+        foreach (var store in SceneComponents<UIManagerStoreScript>(scene))
+        {
+            SetActive(store.cajaError, false);
+            foreach (Text text in SceneComponents<Text>(scene))
+                if (String.Equals(text.text.Trim(), "COMPRAR", StringComparison.OrdinalIgnoreCase)) text.text = "BUY";
+        }
+        foreach (var selector in SceneComponents<UIManagerSelScript0>(scene))
+        {
+            selector.esTablet = Screen.width / (float)Mathf.Max(1, Screen.height) < 1.7000000476837158f && Mathf.Min(Screen.width, Screen.height) >= 1000;
+            SetActive(selector.panelTit1a, !selector.esTablet);
+            SetActive(selector.panelTit1b, selector.esTablet);
+            SetActive(selector.panelDesign0, false); SetActive(selector.panelDesign, false);
+            SetActive(selector.panelUnlock, false); SetActive(selector.popupSpinBall, false);
+            foreach (var field in typeof(UIManagerSelScript0).GetFields(BindingFlags.Instance | BindingFlags.Public))
+            {
+                if (field.FieldType == typeof(GameObject) &&
+                    (field.Name.StartsWith("candado", StringComparison.Ordinal) ||
+                     field.Name.StartsWith("fin", StringComparison.Ordinal)))
+                    SetActive((GameObject)field.GetValue(selector), false);
+            }
+            ShowCategory(SelectedTab);
+        }
+        foreach (var selector in SceneComponents<SelectLevel1>(scene))
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                int id = ResolveLevel(i + 1);
+                bool completed = PlayerPrefs.GetInt(CompletePrefix + id, 0) != 0;
+                SetArrayActive(selector.cuadroNoActivo, i, true);
+                SetArrayActive(selector.cuadroActivo, i, completed);
+                SetArrayActive(selector.candados, i, false);
+                SetArrayActive(selector.checkOk, i, completed);
+                SetArrayText(selector.objNum, i, (i + 1).ToString());
+                SetArrayText(selector.objNum2, i, (i + 1).ToString());
+            }
+            if (selector.animatorPaneles != null)
+                pagingPanels = selector.animatorPaneles.transform as RectTransform;
+        }
+        if (scene.name == "Store")
+        {
+            foreach (var rect in SceneComponents<RectTransform>(scene))
+                if (rect.name == "Paneles") { pagingPanels = rect; break; }
+            pageCount = 2;
+        }
+        else pageCount = 5;
+        if (pagingPanels != null)
+        {
+            pagingOrigin = pagingPanels.anchoredPosition;
+            pagingOrigin.x = 0;
+            UpdatePage();
+        }
+        if (scene.name == "SelLevel1")
+            foreach (var text in SceneComponents<Text>(scene))
+                if (String.Equals(text.text.Trim(), "EASY", StringComparison.OrdinalIgnoreCase))
+                    text.text = SelectedPart == 9 ? "BASIC" : PackName(SelectedPart);
+    }
+
+    void ConfigureGameplayControls(Scene scene)
+    {
+        Camera camera;
+        OriginalScenePresentation.TryPrepareCurrentScene(out camera);
+        foreach (var loader in SceneComponents<SaveLoadManager>(scene))
+        {
+            originalSolution = loader.cajaSolution;
+            originalComplete = loader.cajaComplete;
+            originalNext = loader.NextButton;
+            SetActive(loader.cajaSolution, false); SetActive(loader.cajaComplete, false);
+            SetActive(loader.cajaNoMore, false); SetActive(loader.cajaRate, false);
+            SetActive(loader.MenuButton, true); SetActive(loader.MusicButton, true);
+            SetActive(loader.SoundButton, true); SetActive(loader.RestartButton, true);
+            SetActive(loader.solutionButton, true); SetActive(loader.NextButton, false);
+            SetActive(loader.backButton, false); SetActive(loader.backButton1, false);
+            SetActive(loader.stepsButton, false); SetActive(loader.back1, false);
+            SetActive(loader.steps1, false); SetActive(loader.flecha1, false);
+        }
+        foreach (var ui in SceneComponents<UIManagerScript>(scene))
+        {
+            SetActive(ui.popupSpinBall, false);
+        }
+        foreach (Graphic graphic in SceneComponents<Graphic>(scene))
+            if (graphic.name.StartsWith("fondo", StringComparison.OrdinalIgnoreCase)) graphic.raycastTarget = false;
+        // The shipping controller hid its debug/ad-testing controls at Start.
+        // Their exported initial state otherwise exposes counters and ad SDK names.
+        foreach (Transform item in SceneComponents<Transform>(scene))
+            if (item.name == "Design" && item.GetComponentInParent<Canvas>() != null) item.gameObject.SetActive(false);
+        if (originalSolution != null)
+            foreach (Text text in originalSolution.GetComponentsInChildren<Text>(true))
+                if (text.text.IndexOf("soluci", StringComparison.OrdinalIgnoreCase) >= 0) text.text = "Show the solution?";
+        if (originalComplete != null)
+            foreach (Text text in originalComplete.GetComponentsInChildren<Text>(true))
+                if (!String.IsNullOrWhiteSpace(text.text)) text.text = "LEVEL COMPLETE!";
+    }
+
+    void StopBlockingFades(Scene scene)
+    {
+        foreach (var rect in SceneComponents<RectTransform>(scene))
+            if (rect.name.StartsWith("PanelFade", StringComparison.Ordinal))
+                rect.gameObject.SetActive(false);
+    }
+
+    static void SetActive(GameObject target, bool active)
+    {
+        if (target != null) target.SetActive(active);
+    }
+
+    static void SetArrayActive(GameObject[] items, int index, bool active)
+    {
+        if (items != null && index < items.Length) SetActive(items[index], active);
+    }
+
+    static void SetArrayText(Text[] items, int index, string text)
+    {
+        if (items != null && index < items.Length && items[index] != null)
+            items[index].text = text;
+    }
+
+    void BindSceneControls(Scene scene)
+    {
+        originalControls.Clear();
+        var levelButtons = new Dictionary<GameObject, int>();
+        foreach (var trigger in SceneComponents<EventTrigger>(scene))
+        {
+            if (trigger.triggers == null) continue;
+            foreach (var entry in trigger.triggers)
+            {
+                if (entry.callback == null || entry.callback.GetPersistentEventCount() == 0) continue;
+                string method = entry.callback.GetPersistentMethodName(0);
+                if (String.IsNullOrEmpty(method)) continue;
+                int argument = PersistentInt(entry.callback, 0);
+                var source = trigger.gameObject;
+                originalControls.Add(new OriginalControl { method = method, argument = argument,
+                    source = source, trigger = trigger, eventType = entry.eventID });
+                if (method == "Level") levelButtons[source] = argument;
+                // Replace each original event once; pointer down and pointer up
+                // animation-only entries are not converted into extra clicks.
+                entry.callback = new EventTrigger.TriggerEvent();
+                entry.callback.AddListener(data => Dispatch(method, argument, source));
+            }
+        }
+        foreach (var button in SceneComponents<Button>(scene))
+        {
+            if (button.onClick.GetPersistentEventCount() == 0) continue;
+            string method = button.onClick.GetPersistentMethodName(0);
+            int argument = PersistentInt(button.onClick, 0);
+            var source = button.gameObject;
+            originalControls.Add(new OriginalControl { method = method, argument = argument, source = source, button = button });
+            button.onClick = new Button.ButtonClickedEvent();
+            button.onClick.AddListener(() => Dispatch(method, argument, source));
+        }
+        // The exported level cells contain both a Button with an empty onClick
+        // and an EventTrigger holding Level(N). Reconnect both public controls so
+        // keyboard/submit and direct Button activation work as well as pointer down.
+        foreach (var item in levelButtons)
+        {
+            var source = item.Key;
+            int argument = item.Value;
+            var button = source.GetComponent<Button>();
+            if (button == null) continue;
+            button.onClick = new Button.ButtonClickedEvent();
+            button.onClick.AddListener(() => Dispatch("Level", argument, source));
+        }
+    }
+
+    static int PersistentInt(UnityEventBase unityEvent, int index)
+    {
+        // Unity exposes persistent target/method publicly but not the serialized
+        // integer. Reading it preserves the original scene's pack/level links.
+        const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+        var group = typeof(UnityEventBase).GetField("m_PersistentCalls", flags).GetValue(unityEvent);
+        var calls = (IList)group.GetType().GetField("m_Calls", flags).GetValue(group);
+        var call = calls[index];
+        var arguments = call.GetType().GetField("m_Arguments", flags).GetValue(call);
+        return (int)arguments.GetType().GetField("m_IntArgument", flags).GetValue(arguments);
+    }
+
+    void Dispatch(string method, int argument, GameObject source)
+    {
+        if (method != "iconPressed") PlayClick();
+        LastAction = method + "(" + argument + ")";
+        switch (method)
+        {
+            case "botonPlayDown":
+                // The Settings icon buttons have null serialized targets;
+                // their sliders alone control the independent volume values.
+                if (SceneManager.GetActiveScene().name != "Settings") SceneManager.LoadScene("SelLevel0");
+                break;
+            case "botonOptionsDown": OpenSettings(); break;
+            case "botonTabDown": ShowCategory(argument); break;
+            case "botonPartDown": OpenPack(argument); break;
+            case "Level": OpenLevel(argument); break;
+            case "botonMenuDown":
+                if (IsInGame) ShowLevelSelection();
+                else if (SceneManager.GetActiveScene().name == "SelLevel1") SceneManager.LoadScene("SelLevel0");
+                else GoHome();
+                break;
+            case "botonHomeDown": GoHome(); break;
+            case "botonNextDown": Next(); break;
+            case "doRestartLevel": Restart(); break;
+            case "botonMusicDown": ToggleMusic(); break;
+            case "botonSoundDown": ToggleSound(); break;
+            case "showSolution":
+                SetActive(originalSolution, true);
+                RecoveredOriginalUIAnimation.PlayState(originalSolution, PlayerPrefs.GetInt("esTablet", 0) == 1 ? "an_complete2d" : "an_complete");
+                break;
+            case "cancelSolution": SetActive(originalSolution, false); break;
+            case "okSolution": EnterSolutionPreview(false); break;
+            case "doSolucionLevel":
+                if (RecoveredFlowGame.Instance != null && RecoveredFlowGame.Instance.IsSolutionPreview) ExitSolutionPreview();
+                else EnterSolutionPreview(false);
+                break;
+            case "okSteps":
+                if (finalStepPreview)
+                {
+                    ExitSolutionPreview();
+                    EnterSolutionPreview(true);
+                }
+                else if (RecoveredFlowGame.Instance != null && RecoveredFlowGame.Instance.IsSolutionPreview && stepPreview)
+                    RecoveredFlowGame.Instance.AdvanceSolutionPreview();
+                else EnterSolutionPreview(true);
+                break;
+            case "botonCompleteOff": completionDismissed = true; RefreshGame(); break;
+            case "backbutton": case "backbutton1": case "backbutton2": Undo(); break;
+            case "doNotNow": case "cancelBuy": HideTransientDialogs(); break;
+            case "okBuy": OpenStore(); break;
+            case "doRate": HideTransientDialogs(); Notice("The app store is unavailable."); break;
+            case "botonBackDown":
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name == "Store" ? storeReturnScene : settingsReturnScene);
+                break;
+            case "botonStoreDown": case "botonBuyOff": case "buyOffDown":
+            case "botonOkUnlockDown": OpenStore(); break;
+            case "botonFlechaIzquierda": ShiftPage(-1); break;
+            case "botonFlechaDerecha": ShiftPage(1); break;
+            case "botonExitDown": ShowExitConfirmation(); break;
+            case "botonCheckOkDown": Application.Quit(); break;
+            case "botonResetDown": ShowResetConfirmation(); break;
+            case "botonResetOk": ResetProgress(); break;
+            case "botonCancelDown": case "botonCancelUnlockDown": case "botonResetCancel":
+            case "botonProgressClose": case "botonCloseCajaDown":
+            case "cancelWatch": case "BotonCerrarPopupSpinBall": case "BotonLaterSpinBall": HideTransientDialogs(); break;
+            case "botonLangDown": Notice("Language: English."); break;
+            case "botonRestartDown": if (IsInGame) Restart(); else ShowCatalog(); break;
+            case "botonRateDown": case "BotonInstalarSpinBall":
+                Notice("The app store is unavailable."); break;
+            default:
+                if (method.IndexOf("Buy", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    method.IndexOf("Ads", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    method.IndexOf("Watch", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    method.IndexOf("Reward", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    method.StartsWith("IntNo", StringComparison.Ordinal) || method == "noUnity" || method == "noAdmob")
+                    Notice("Ads and purchases are unavailable.");
+                else if (method.IndexOf("Design", StringComparison.OrdinalIgnoreCase) >= 0 || method == "solu0")
+                    Notice("The level editor is unavailable.");
+                break;
+        }
+        RefreshMenu();
+    }
+
+    public void OpenPack(int part)
+    {
+        if (!HasRecoveredPack(part)) { Notice("This level pack is unavailable."); return; }
+        SelectedPart = part;
+        SelectedTab = TabForPart(part);
+        UIManagerSelScript0.parte = SelectedPart;
+        UIManagerSelScript0.subparte = 1;
+        LastAction = "Open pack " + SelectedPart;
+        SceneManager.LoadScene("SelLevel1");
+    }
+
+    public void OpenLevel(int level)
+    {
+        int id = ResolveLevel(level);
+        if (!available.Contains(id))
+        {
+            Notice("This level is unavailable.");
+            return;
+        }
+        StartGame(id);
+    }
+
+    int ResolveLevel(int level)
+    {
+        return OriginalScenePresentation.AssetForLevel(SelectedPart, level);
+    }
+
+    public void StartGame(int id)
+    {
+        if (!available.Contains(id)) return;
+        int part = OriginalScenePresentation.PartForLevel(id);
+        if (part > 0) SelectedPart = part;
+        SelectedTab = TabForPart(SelectedPart);
+        UIManagerSelScript0.parte = SelectedPart;
+        PlayerPrefs.SetInt("Recovery.LastLevelId", id);
+        PlayerPrefs.Save();
+        string targetScene = OriginalScenePresentation.SceneForLevel(id);
+        if (SceneManager.GetActiveScene().name != targetScene)
+        {
+            ReturnFromGame();
+            pendingLevelId = id;
+            SceneManager.LoadScene(targetScene);
+            return;
+        }
+        LoadGameInOriginalScene(id);
+    }
+
+    void LoadGameInOriginalScene(int id)
+    {
+        var game = RecoveredFlowGame.EnsureCreated();
+        if (subscribedGame != game)
+        {
+            if (subscribedGame != null) subscribedGame.StateChanged -= RefreshGame;
+            subscribedGame = game;
+            game.StateChanged += RefreshGame;
+        }
+        IsInGame = true;
+        completionDismissed = false;
+        stepPreview = false;
+        StopPreviewPlayback();
+        HideTransientDialogs();
+        SetSolutionControls(false, false);
+        dialog.SetActive(false);
+        SetActive(originalComplete, false); SetActive(originalSolution, false);
+        SetActive(originalNext, false);
+        LastAction = "Load gm" + id;
+        PlayerPrefs.SetInt("Recovery.LastLevelId", id);
+        PlayerPrefs.Save();
+        OriginalScenePresentation.ApplyThemeForLevel(id);
+        game.LoadLevel(id);
+        InitializeGameplayAudio(id);
+        RefreshGame();
+    }
+
+    public void ShowLevelSelection()
+    {
+        ReturnFromGame();
+        SceneManager.LoadScene("SelLevel1");
+    }
+
+    public void GoHome()
+    {
+        ReturnFromGame();
+        SceneManager.LoadScene("Portada");
+    }
+
+    public bool HasRecoveredPack(int part)
+    {
+        return part >= 1 && part <= 39 && available.Contains(OriginalScenePresentation.AssetForLevel(part, 1));
+    }
+
+    static int TabForPart(int part)
+    {
+        if (part >= 36) return 6;
+        if (part >= 24) return 5;
+        if (part >= 20) return 4;
+        if (part >= 13 && part <= 16) return 3;
+        if ((part >= 10 && part <= 12) || part == 17) return 2;
+        return 1;
+    }
+
+    void ReturnFromGame()
+    {
+        CancelDelayedLevelMusic();
+        StopPreviewPlayback();
+        if (RecoveredFlowGame.Instance != null) RecoveredFlowGame.Instance.ReturnToOriginalScene();
+        IsInGame = false;
+    }
+
+    void OpenSettings()
+    {
+        settingsReturnScene = SceneManager.GetActiveScene().name;
+        ReturnFromGame();
+        SceneManager.LoadScene("Settings");
+    }
+
+    void OpenStore()
+    {
+        storeReturnScene = SceneManager.GetActiveScene().name;
+        ReturnFromGame();
+        SceneManager.LoadScene("Store");
+    }
+
+    public void ShowCategory(int tab)
+    {
+        SelectedTab = Mathf.Clamp(tab, 1, 6);
+        // Original selector OnEnable resets parte=0 (103E750), and its
+        // Night branch sets subparte=1 (103E7CC). Tab 4 clears subparte
+        // again in botonTabDown (1043E5C). These fields drive original
+        // menu particle palettes independently of the selected level pack.
+        UIManagerSelScript0.parte = 0;
+        if (SelectedTab == 6) UIManagerSelScript0.subparte = 1;
+        else if (SelectedTab == 4) UIManagerSelScript0.subparte = 0;
+        PlayerPrefs.SetInt("OptionSelLev", SelectedTab);
+        foreach (var selector in SceneComponents<UIManagerSelScript0>(SceneManager.GetActiveScene()))
+        {
+            // Native botonTabDown changes the authored background, light and
+            // ambient color with Night, alongside the selected preview prefab.
+            bool night = SelectedTab == 6;
+            SetActive(selector.fondo1, !night); SetActive(selector.fondo2, night);
+            SetActive(selector.dirLight, !night);
+            RenderSettings.ambientLight = night ? new Color(.4000000059604645f, .4000000059604645f, .4000000059604645f, 1) :
+                new Color(.7176470756530762f, .7686274647712708f, .8784313797950745f, 1);
+            // Original doDesactivaChecks followed by the selected part's two
+            // Image writes; the authored highlight has both inner/outer layers.
+            for (int part = 1; part <= 6; part++)
+                for (int layer = 1; layer <= 2; layer++)
+                {
+                    GameObject target = typeof(UIManagerSelScript0).GetField("part" + part + "_" + layer).GetValue(selector) as GameObject;
+                    Image image = target == null ? null : target.GetComponent<Image>();
+                    if (image != null) image.color = new Color(.8352941274642944f, .843137264251709f, .843137264251709f,
+                        part == SelectedTab ? 1 : .7058823704719543f);
+                }
+            var tabs = new[] { selector.grupoTab1, selector.grupoTab2, selector.grupoTab3,
+                selector.grupoTab4, selector.grupoTab5, selector.grupoTab6 };
+            var previews = new[] { selector.panel1, selector.panel2, selector.panel3,
+                selector.panel4, selector.panel5, selector.panel6 };
+            for (int i = 0; i < tabs.Length; i++)
+            {
+                SetActive(tabs[i], i == SelectedTab - 1);
+                SetActive(previews[i], i == SelectedTab - 1);
+            }
+            RestoreCategoryPreview(selector, SelectedTab);
+        }
+        RefreshMenu();
+    }
+
+    void RestoreCategoryPreview(UIManagerSelScript0 selector, int tab)
+    {
+        var prefabs = new[] { selector.prefabGrupo1, selector.prefabGrupo2, selector.prefabGrupo3,
+            selector.prefabGrupo4, selector.prefabGrupo5, selector.prefabGrupo6 };
+        var mounts = new[] { selector.panel1, selector.panel2, selector.panel3,
+            selector.panel4, selector.panel5, selector.panel6 };
+        // Original Start/botonTabDown create only the selected authored model.
+        // Preserve the mount transforms: several include deliberate nonuniform scales.
+        Canvas.ForceUpdateCanvases();
+        for (int i = 0; i < prefabs.Length; i++)
+        {
+            FieldInfo field = typeof(UIManagerSelScript0).GetField("grupo" + (i + 1));
+            GameObject current = field.GetValue(selector) as GameObject;
+            if (i != tab - 1)
+            {
+                if (current != null) { current.SetActive(false); Destroy(current); field.SetValue(selector, null); }
+                continue;
+            }
+            if (current != null) { RestorePreviewMotion(current); continue; }
+            if (prefabs[i] == null || mounts[i] == null) continue;
+            current = Instantiate(prefabs[i], Vector3.zero, Quaternion.identity);
+            current.transform.SetParent(mounts[i].transform, true);
+            current.transform.localPosition = Vector3.zero;
+            current.transform.localScale = Vector3.one;
+            if (i == 2)
+            {
+                current.transform.localPosition = new Vector3(-57.2f, -55f, 63.3f);
+                current.transform.localScale = new Vector3(1.86431098f, 2.20000005f, 1.86431098f);
+                current.transform.localRotation = Quaternion.Euler(new Vector3(-.4571191669f, .6783745885f, -.2294060737f) * Mathf.Rad2Deg);
+            }
+            field.SetValue(selector, current);
+            RestorePreviewMotion(current);
+        }
+    }
+
+    static void RestorePreviewMotion(GameObject preview)
+    {
+        // Replays authored scroll/animation/active particles. This helper has
+        // no SetActive loop and preserves inactive water branches in the prefab.
+        if (preview.GetComponent<RecoveredWaterMotion>() == null)
+            preview.AddComponent<RecoveredWaterMotion>().RestoreAuthoredMotion();
+        // Rebind precedes the demo's native Animator parameter writes.
+        RecoveredPreviewDemoSequence.Attach(preview);
+        RecoveredNativePalette.ApplyHierarchy(preview.transform, preview.GetComponentInChildren<Resorte2d>(true) != null);
+        RecoveredPreviewWater.Attach(preview);
+    }
+
+    void ShiftPage(int direction)
+    {
+        page = Mathf.Clamp(page + direction, 0, pageCount - 1);
+        UpdatePage();
+        RefreshMenu();
+    }
+
+    void UpdatePage()
+    {
+        if (pagingPanels == null) return;
+        pagingPanels.anchoredPosition = pagingOrigin + Vector2.left * (page * 900);
+        for (int i = 0; i < pageCount; i++)
+        {
+            Transform child = pagingPanels.Find("Panel" + (i + 1));
+            if (child != null) child.gameObject.SetActive(i == page);
+        }
+    }
+
+    static string PackName(int part)
+    {
+        switch (part)
+        {
+            case 1: return "EASY";
+            case 2: return "HARD";
+            case 3: return "MASTER";
+            case 4: return "GENIUS";
+            case 6: return "MIX";
+            case 8: return "MANIAC";
+            case 9: return "BASIC";
+            case 10: return "POOLS I";
+            case 11: return "POOLS II";
+            case 12: return "POOLS 7x7";
+            case 13: return "SPRINGS I";
+            case 14: return "SPRINGS III";
+            case 15: return "SPRINGS II";
+            case 16: return "SPRINGS 7x7";
+            case 17: return "POOLS III";
+            case 20: return "MECH I";
+            case 21: return "MECH II";
+            case 22: return "MECH III";
+            case 23: return "MECH 7x7";
+            case 25: return "JETS 6x6";
+            case 32: return "JETS I";
+            case 33: return "JETS II";
+            case 34: return "JETS III";
+            case 35: return "JETS 7x7";
+            case 36: return "NIGHT I";
+            case 37: return "NIGHT II";
+            case 38: return "NIGHT III";
+            case 39: return "NIGHT 7x7";
+            default: return "PACK " + part;
+        }
+    }
+
+    void Restart()
+    {
+        if (RecoveredFlowGame.Instance == null) return;
+        if (RecoveredFlowGame.Instance.IsSolutionPreview) ExitSolutionPreview();
+        RecoveredFlowGame.Instance.RestartLevel();
+    }
+    void Hint() { if (RecoveredFlowGame.Instance != null) RecoveredFlowGame.Instance.ApplyHint(); }
+    void Undo() { if (RecoveredFlowGame.Instance != null) RecoveredFlowGame.Instance.Undo(); }
+    void Next() { if (RecoveredFlowGame.Instance != null) RecoveredFlowGame.Instance.NextLevel(); }
+    void Raise() { if (RecoveredFlowGame.Instance != null) RecoveredFlowGame.Instance.RaiseSelectedPiece(); }
+    void Lower() { if (RecoveredFlowGame.Instance != null) RecoveredFlowGame.Instance.LowerSelectedPiece(); }
+
+    void EnterSolutionPreview(bool steps)
+    {
+        var game = RecoveredFlowGame.Instance;
+        if (game == null || !game.HasSolution) return;
+        SetActive(originalSolution, false);
+        StopPreviewPlayback();
+        stepPreview = game.SolutionStepCount > 0;
+        game.EnterSolutionPreview(steps && stepPreview);
+        automaticStepPreview = steps && stepPreview;
+        stepExitAvailableAt = Time.time + 6f;
+        SetSolutionControls(true, stepPreview);
+        RefreshStepPreviewControls();
+        finalStepPreview = stepPreview && !steps;
+    }
+
+    void ExitSolutionPreview()
+    {
+        var game = RecoveredFlowGame.Instance;
+        if (game == null) return;
+        StopPreviewPlayback();
+        game.ExitSolutionPreview();
+        stepPreview = false;
+        automaticStepPreview = false;
+        SetSolutionControls(false, false);
+        RefreshStepPreviewControls();
+    }
+
+    void StopPreviewPlayback()
+    {
+        finalStepPreview = false;
+    }
+
+    void SetSolutionControls(bool preview, bool steps)
+    {
+        foreach (var loader in SceneComponents<SaveLoadManager>(SceneManager.GetActiveScene()))
+        {
+            SetActive(loader.panel2, !preview || !steps);
+            SetActive(loader.panel3, preview && steps);
+            SetActive(loader.solutionButton, !preview);
+            SetActive(loader.backButton, preview && !steps);
+            SetActive(loader.flecha1, true);
+            SetActive(loader.backButton1, preview && steps);
+            SetActive(loader.stepsButton, preview && steps);
+            SetActive(loader.back1, true);
+            SetActive(loader.steps1, true);
+        }
+    }
+
+    void RefreshStepPreviewControls()
+    {
+        var game = RecoveredFlowGame.Instance;
+        bool active = automaticStepPreview && game != null && game.IsSolutionPreview;
+        foreach (var loader in SceneComponents<SaveLoadManager>(SceneManager.GetActiveScene()))
+        {
+            Button steps = loader.stepsButton == null ? null : loader.stepsButton.GetComponent<Button>();
+            Button back = loader.backButton1 == null ? null : loader.backButton1.GetComponent<Button>();
+            if (steps != null) steps.interactable = !active;
+            if (back != null) back.interactable = !active || Time.time >= stepExitAvailableAt;
+            Image arrow = loader.back1 == null ? null : loader.back1.GetComponent<Image>();
+            if (arrow != null)
+            {
+                Color color = arrow.color;
+                color.a = active && Time.time < stepExitAvailableAt ? .43921568989753723f : 1f;
+                arrow.color = color;
+            }
+        }
+    }
+
+    void RefreshGame()
+    {
+        var game = RecoveredFlowGame.Instance;
+        if (game == null) return;
+        if (!game.IsComplete && !game.IsSolutionPreview) completionDismissed = false;
+        string levelName = "LEVEL " + ((game.CurrentLevelId - 1) % 50 + 1);
+        foreach (Text label in SceneComponents<Text>(SceneManager.GetActiveScene()))
+        {
+            for (Transform parent = label.transform.parent; parent != null; parent = parent.parent)
+                if (parent.name == "Level") { label.text = levelName; break; }
+        }
+        foreach (var loader in SceneComponents<SaveLoadManager>(SceneManager.GetActiveScene()))
+        {
+            if (loader.numSol != null) loader.numSol.text = game.HasSolution ? "1" : "0";
+            if (loader.textNumS != null) loader.textNumS.text = game.HasSolution ? "1" : "0";
+        }
+        bool completed = game.IsComplete && !game.IsSolutionPreview;
+        SetActive(originalNext, completed && completionDismissed);
+        bool showComplete = completed && !completionDismissed;
+        bool completeWasVisible = originalComplete != null && originalComplete.activeSelf;
+        SetActive(originalComplete, showComplete);
+        if (showComplete && !completeWasVisible) RecoveredOriginalUIAnimation.ShowComplete(originalComplete);
+        // Native botonCompleteOff replaces the whole solution/count group with Next.
+        // Keeping its child count active behind Next produced a green badge overlap.
+        if (!game.IsSolutionPreview)
+            foreach (var loader in SceneComponents<SaveLoadManager>(SceneManager.GetActiveScene()))
+            {
+                SetActive(loader.solutionButton, !(completed && completionDismissed));
+                SetActive(loader.botonNumSol, !(completed && completionDismissed));
+                if (completed && completionDismissed) SetActive(loader.backButton, false);
+            }
+        if (game.IsComplete && !game.IsSolutionPreview)
+        {
+            PlayerPrefs.SetInt(CompletePrefix + game.CurrentLevelId, 1);
+            PlayerPrefs.Save();
+        }
+    }
+
+    void RefreshMenu()
+    {
+        foreach (var ui in SceneComponents<UIManagerScript>(SceneManager.GetActiveScene()))
+        {
+            SetActive(ui.soundOff, !SoundEnabled);
+            SetActive(ui.musicFuera, !MusicEnabled);
+        }
+        foreach (var options in SceneComponents<UIManagerOptScript>(SceneManager.GetActiveScene()))
+        {
+            options.valor1 = musicVolume; options.valor2 = soundVolume;
+            if (options.volumen1 != null) options.volumen1.SetValueWithoutNotify(musicVolume);
+            if (options.volumen2 != null) options.volumen2.SetValueWithoutNotify(soundVolume);
+        }
+    }
+
+    void ToggleMusic()
+    {
+        bool enabled = !MusicEnabled;
+        PlayerPrefs.SetInt("MusicaON", enabled ? 1 : 0);
+        PlayerPrefs.Save();
+        UIManagerScript.musicLevel = enabled ? 1 : 0;
+        CancelDelayedLevelMusic();
+        if (AudioManager.instance != null)
+        {
+            if (enabled) AudioManager.instance.PlaySound("MusicaLevel");
+            else AudioManager.instance.StopSound("MusicaLevel");
+        }
+        RefreshMenu();
+    }
+
+    void ToggleSound()
+    {
+        bool enabled = !SoundEnabled;
+        PlayerPrefs.SetInt("Soundlevel", enabled ? 1 : 0);
+        PlayerPrefs.Save();
+        UIManagerScript.sonidoFuen = enabled ? 1 : 0;
+        if (AudioManager.instance != null)
+        {
+            if (enabled)
+            {
+                AudioManager.instance.PlaySound("Chill");
+                if (ControladorJuego.numFuentes >= 1) AudioManager.instance.PlaySound("SonidoFuente");
+            }
+            else
+            {
+                AudioManager.instance.StopSound("Chill");
+                AudioManager.instance.StopSound("SonidoFuente");
+            }
+        }
+        RefreshMenu();
+    }
+
+    void InitializeGameplayAudio(int id)
+    {
+        UIManagerScript.musicLevel = MusicEnabled ? 1 : 0;
+        UIManagerScript.sonidoFuen = SoundEnabled ? 1 : 0;
+        CancelDelayedLevelMusic();
+        if (MusicEnabled) delayedLevelMusic = StartCoroutine(PlayLevelMusicAfterDelay(SceneManager.GetActiveScene().handle, id));
+        else if (AudioManager.instance != null) AudioManager.instance.StopSound("MusicaLevel");
+        RefreshMenu();
+    }
+
+    IEnumerator PlayLevelMusicAfterDelay(int sceneHandle, int id)
+    {
+        yield return new WaitForSeconds(1f);
+        if (IsInGame && MusicEnabled && SceneManager.GetActiveScene().handle == sceneHandle &&
+            RecoveredFlowGame.Instance != null && RecoveredFlowGame.Instance.CurrentLevelId == id && AudioManager.instance != null)
+            AudioManager.instance.PlaySound("MusicaLevel");
+        delayedLevelMusic = null;
+    }
+
+    void CancelDelayedLevelMusic()
+    {
+        if (delayedLevelMusic != null) StopCoroutine(delayedLevelMusic);
+        delayedLevelMusic = null;
+    }
+    public void SetMusicVolume(float value)
+    {
+        musicVolume = Mathf.Clamp01(value); PlayerPrefs.SetFloat(MusicKey, musicVolume);
+        PlayerPrefs.Save(); ApplyVolumes(); RefreshMenu();
+    }
+    public void SetSoundVolume(float value)
+    {
+        soundVolume = Mathf.Clamp01(value); PlayerPrefs.SetFloat(SoundKey, soundVolume);
+        PlayerPrefs.Save(); ApplyVolumes(); RefreshMenu();
+    }
+    void ApplyVolumes()
+    {
+        AudioListener.volume = 1;
+        foreach (var manager in FindObjectsOfType<AudioManager>(true)) manager.RefreshVolumes();
+        foreach (var manager in FindObjectsOfType<AudioManager0>(true)) manager.RefreshVolumes();
+    }
+
+    void PlayClick()
+    {
+        if (IsInGame && AudioManager.instance != null && AudioManager.instance.isActiveAndEnabled)
+            AudioManager.instance.PlaySound("Click");
+        else if (AudioManager0.instance != null && AudioManager0.instance.isActiveAndEnabled)
+            AudioManager0.instance.PlaySound("Click");
+    }
+
+    IEnumerable<GameObject> SceneDialogObjects()
+    {
+        yield return dialog;
+        yield return originalComplete;
+        yield return originalSolution;
+        Scene scene = SceneManager.GetActiveScene();
+        foreach (var loader in SceneComponents<SaveLoadManager>(scene))
+        { yield return loader.cajaNoMore; yield return loader.cajaRate; }
+        foreach (var port in SceneComponents<UIManagerPortScript>(scene)) yield return port.panelExit;
+        foreach (var options in SceneComponents<UIManagerOptScript>(scene))
+        { yield return options.cajaReset; yield return options.cajaProgress; }
+        foreach (var store in SceneComponents<UIManagerStoreScript>(scene)) yield return store.cajaError;
+        foreach (var selector in SceneComponents<UIManagerSelScript0>(scene))
+        { yield return selector.panelUnlock; yield return selector.panelDesign; yield return selector.panelDesign0; yield return selector.popupSpinBall; }
+    }
+
+    void HideTransientDialogs()
+    {
+        foreach (GameObject item in SceneDialogObjects())
+            if (item != originalComplete) SetActive(item, false);
+        dialogConfirm = null;
+    }
+
+    void ResetProgress()
+    {
+        foreach (int id in levelIds)
+        {
+            PlayerPrefs.DeleteKey(CompletePrefix + id);
+            PlayerPrefs.DeleteKey("Recovery.Completed.gm" + id);
+        }
+        PlayerPrefs.Save();
+        HideTransientDialogs();
+        ConfigureOriginalScene(SceneManager.GetActiveScene());
+        foreach (var options in SceneComponents<UIManagerOptScript>(SceneManager.GetActiveScene()))
+            if (options.cajaProgress != null) { options.cajaProgress.SetActive(true); return; }
+    }
+
+    void ShowExitConfirmation()
+    {
+        HideTransientDialogs();
+        foreach (var port in SceneComponents<UIManagerPortScript>(SceneManager.GetActiveScene()))
+            if (port.panelExit != null)
+            {
+                foreach (Text text in port.panelExit.GetComponentsInChildren<Text>(true))
+                    if (!String.IsNullOrWhiteSpace(text.text)) text.text = "Exit the game?";
+                port.panelExit.SetActive(true);
+                RecoveredOriginalUIAnimation.PlayState(port.panelExit, PlayerPrefs.GetInt("esTablet", 0) == 1 ? "an_exit2d" : "an_complete");
+                return;
+            }
+    }
+
+    void ShowResetConfirmation()
+    {
+        HideTransientDialogs();
+        foreach (var options in SceneComponents<UIManagerOptScript>(SceneManager.GetActiveScene()))
+            if (options.cajaReset != null) { options.cajaReset.SetActive(true); return; }
+    }
+
+    void Update()
+    {
+        if (automaticStepPreview) RefreshStepPreviewControls();
+        bool escape = Input.GetKey(KeyCode.Escape);
+        if (escape && !escapeWasDown)
+        {
+            if (dialog.activeSelf) CloseDialog();
+            else if (originalSolution != null && originalSolution.activeSelf) SetActive(originalSolution, false);
+            else if (RecoveredFlowGame.Instance != null && RecoveredFlowGame.Instance.IsSolutionPreview) ExitSolutionPreview();
+            else if (IsInGame) ShowLevelSelection();
+            else if (SceneManager.GetActiveScene().name == "SelLevel1") SceneManager.LoadScene("SelLevel0");
+            else GoHome();
+        }
+        escapeWasDown = escape;
+    }
+
+    void BuildOverlay()
+    {
+        var canvasObject = new GameObject("RecoveryCanvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
+        canvasObject.transform.SetParent(transform, false);
+        overlay = canvasObject.GetComponent<Canvas>();
+        overlay.renderMode = RenderMode.ScreenSpaceOverlay;
+        overlay.sortingOrder = 31000;
+        var scaler = canvasObject.GetComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(800, 600);
+        scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
+        var eventRoot = new GameObject("RecoveryEventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
+        eventRoot.transform.SetParent(transform, false);
+
+        BuildDialog();
+    }
+
+    void BuildDialog()
+    {
+        dialog = Panel("RecoveryDialog", overlay.transform, new Color(0, 0, 0, 0.68f));
+        Stretch(dialog);
+        var body = Panel("RecoveryDialogBody", dialog.transform, new Color(0.07f, 0.15f, 0.20f));
+        Anchor(body, Vector2.one * 0.5f, Vector2.one * 0.5f, Vector2.zero, new Vector2(580, 240));
+        var text = MakeText("RecoveryDialogText", body.transform, "", 19, TextAnchor.MiddleCenter);
+        Anchor(text.gameObject, Vector2.one * 0.5f, Vector2.one * 0.5f, new Vector2(0, 25), new Vector2(520, 145));
+        MakeButton("RecoveryDialogOK", body.transform, "OK", new Vector2(-75, -80), new Vector2(130, 38), () =>
+        {
+            var confirm = dialogConfirm; CloseDialog(); if (confirm != null) confirm();
+        });
+        MakeButton("RecoveryDialogCancel", body.transform, "Close", new Vector2(75, -80), new Vector2(130, 38), CloseDialog);
+        dialog.SetActive(false);
+    }
+
+    public void Notice(string text) { Confirm(text, null); }
+    void Confirm(string text, Action confirmed)
+    {
+        dialogConfirm = confirmed;
+        dialog.GetComponentInChildren<Text>(true).text = text;
+        dialog.SetActive(true);
+        dialog.transform.SetAsLastSibling();
+    }
+    void CloseDialog() { dialog.SetActive(false); dialogConfirm = null; }
+
+    public void ShowCatalog() { ShowLevelSelection(); }
+
+    GameObject Panel(string name, Transform parent, Color color)
+    {
+        var panel = new GameObject(name, typeof(RectTransform), typeof(Image));
+        panel.transform.SetParent(parent, false);
+        panel.GetComponent<Image>().color = color;
+        return panel;
+    }
+    Text MakeText(string name, Transform parent, string text, int size, TextAnchor alignment)
+    {
+        var go = new GameObject(name, typeof(RectTransform), typeof(Text));
+        go.transform.SetParent(parent, false);
+        var label = go.GetComponent<Text>();
+        label.font = font; label.text = text; label.fontSize = size;
+        label.alignment = alignment; label.color = new Color(0.91f, 0.97f, 0.98f);
+        label.raycastTarget = false;
+        return label;
+    }
+    Button MakeButton(string name, Transform parent, string title, Vector2 position, Vector2 size, Action action)
+    {
+        var go = Panel(name, parent, new Color(0.12f, 0.30f, 0.36f));
+        Anchor(go, Vector2.one * 0.5f, Vector2.one * 0.5f, position, size);
+        var button = go.AddComponent<Button>();
+        var colors = button.colors;
+        colors.highlightedColor = new Color(0.50f, 0.95f, 1); colors.pressedColor = new Color(0.25f, 0.68f, 0.75f);
+        button.colors = colors;
+        button.onClick.AddListener(() => { PlayClick(); action(); });
+        var label = MakeText(name + "Label", go.transform, title, 14, TextAnchor.MiddleCenter);
+        Stretch(label.gameObject);
+        return button;
+    }
+    Button MakeButton(string name, Transform parent, string title, Vector2 position, Vector2 size, Action action, bool left)
+    {
+        var button = MakeButton(name, parent, title, position, size, action);
+        var rect = (RectTransform)button.transform;
+        rect.anchorMin = rect.anchorMax = new Vector2(left ? 0 : 1, 0.5f);
+        return button;
+    }
+    static void Anchor(GameObject target, Vector2 min, Vector2 max, Vector2 position, Vector2 size)
+    {
+        var rect = (RectTransform)target.transform;
+        rect.anchorMin = min; rect.anchorMax = max;
+        rect.anchoredPosition = position; rect.sizeDelta = size;
+    }
+    static void Stretch(GameObject target)
+    {
+        var rect = (RectTransform)target.transform;
+        rect.anchorMin = Vector2.zero; rect.anchorMax = Vector2.one;
+        rect.offsetMin = Vector2.zero; rect.offsetMax = Vector2.zero;
+    }
+}

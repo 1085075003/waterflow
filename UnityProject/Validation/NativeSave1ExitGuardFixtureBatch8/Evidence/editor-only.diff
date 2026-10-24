@@ -1,0 +1,14 @@
+--- e69/FlowWaterSave1GameplayValidation.cs
++++ NativeSave1ExitGuardFixtureBatch8
+@@ -1125,6 +1125,11 @@
+         static void ReleaseImports() { if (!importsLocked) return; importsLocked = false; EditorApplication.UnlockReloadAssemblies(); AssetDatabase.AllowAutoRefresh(); }
+         static void OnPlayMode(PlayModeStateChange state)
+         {
++            // Finish clears Active before the actual play-mode exit. Its Exit
++            // or saved Scene key still owns restoration; unrelated suites do not.
++            bool ownSession=SessionState.GetBool(ActiveKey,false) || SessionState.GetInt(ExitKey,-1)>=0 ||
++                !String.IsNullOrEmpty(SessionState.GetString(ScenesKey,""));
++            if(!ownSession) return;
+             if (state == PlayModeStateChange.ExitingPlayMode) ReleaseImports();
+             if (state != PlayModeStateChange.EnteredEditMode) return;
+             if (SessionState.GetBool(ActiveKey, false)) { RestorePreferences(); SessionState.EraseBool(ActiveKey); report = null; routine = null; }

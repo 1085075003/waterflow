@@ -1,0 +1,198 @@
+// FuenteTest3$$doProcessEnter VA 0x10A4C08, inferred length 784
+void FuenteTest3__doProcessEnter (FuenteTest3_o* __this, const MethodInfo* method);
+010A4C08  stp      x30, x23, [sp, #-0x30]!               
+010A4C0C  stp      x22, x21, [sp, #0x10]                 
+010A4C10  stp      x20, x19, [sp, #0x20]                 
+010A4C14  adrp     x20, #0x24fb000                       
+010A4C18  ldrb     w8, [x20, #0xf66]                     
+010A4C1C  mov      x19, x0                               
+010A4C20  tbnz     w8, #0, #0x10a4c80                    
+010A4C24  adrp     x0, #0x2368000                        
+010A4C28  ldr      x0, [x0, #0x2b0]                       // [0x23682B0] UnityEngine.Object_TypeInfo
+010A4C2C  bl       #0xe61b78                             
+010A4C30  adrp     x0, #0x236d000                        
+010A4C34  ldr      x0, [x0, #0x570]                       // [0x236D570] 'doActivarEsfera'
+010A4C38  bl       #0xe61b78                             
+010A4C3C  adrp     x0, #0x236a000                        
+010A4C40  ldr      x0, [x0, #0x5f0]                       // [0x236A5F0] 'color3'
+010A4C44  bl       #0xe61b78                             
+010A4C48  adrp     x0, #0x236a000                        
+010A4C4C  ldr      x0, [x0, #0x5f8]                       // [0x236A5F8] 'color2'
+010A4C50  bl       #0xe61b78                             
+010A4C54  adrp     x0, #0x236a000                        
+010A4C58  ldr      x0, [x0, #0x600]                       // [0x236A600] 'color1'
+010A4C5C  bl       #0xe61b78                             
+010A4C60  adrp     x0, #0x236a000                        
+010A4C64  ldr      x0, [x0, #0x608]                       // [0x236A608] 'color4'
+010A4C68  bl       #0xe61b78                             
+010A4C6C  adrp     x0, #0x236d000                        
+010A4C70  ldr      x0, [x0, #0x4e8]                       // [0x236D4E8] 'FuenteEB6'
+010A4C74  bl       #0xe61b78                             
+010A4C78  mov      w8, #1                                
+010A4C7C  strb     w8, [x20, #0xf66]                     
+010A4C80  ldr      x8, [x19, #0x5a0]                      // self.agscr
+010A4C84  strb     wzr, [x19, #0x604]                     // self.creaAgua
+010A4C88  cbz      x8, #0x10a4f14                        
+010A4C8C  ldr      w9, [x19, #0x3c]                       // self.origen
+010A4C90  adrp     x21, #0x236a000                       
+010A4C94  mov      w22, #1                               
+010A4C98  str      w9, [x8, #0x20]                       
+010A4C9C  ldr      x10, [x19, #0x5d0]                     // self.tagcolor
+010A4CA0  ldr      x21, [x21, #0x600]                     // [0x236A600] 'color1'
+010A4CA4  cmp      w9, #5                                
+010A4CA8  str      x10, [x8, #0x28]                      
+010A4CAC  strb     w22, [x19, #0x5a8]                     // self.triggered
+010A4CB0  b.eq     #0x10a4d04                            
+010A4CB4  adrp     x23, #0x2368000                       
+010A4CB8  ldr      x23, [x23, #0x2b0]                     // [0x23682B0] UnityEngine.Object_TypeInfo
+010A4CBC  ldr      x20, [x19, #0x130]                     // self.Agua2
+010A4CC0  ldr      x0, [x23]                             
+010A4CC4  ldr      w8, [x0, #0xe0]                       
+010A4CC8  cbnz     w8, #0x10a4cd0                        
+010A4CCC  bl       #0xe61c80                             
+010A4CD0  mov      x0, x20                               
+010A4CD4  mov      x1, xzr                               
+010A4CD8  mov      x2, xzr                               
+010A4CDC  bl       #0x20060d8                             // UnityEngine.Object$$op_Inequality
+010A4CE0  tbz      w0, #0, #0x10a4d04                    
+010A4CE4  ldr      x0, [x23]                             
+010A4CE8  ldr      x20, [x19, #0x130]                     // self.Agua2
+010A4CEC  ldr      w8, [x0, #0xe0]                       
+010A4CF0  cbnz     w8, #0x10a4cf8                        
+010A4CF4  bl       #0xe61c80                             
+010A4CF8  mov      x0, x20                               
+010A4CFC  mov      x1, xzr                               
+010A4D00  bl       #0x200a194                             // UnityEngine.Object$$Destroy
+010A4D04  strb     w22, [x19, #0x518]                     // self.ontrigger
+010A4D08  ldr      x0, [x19, #0x5d0]                      // self.tagcolor
+010A4D0C  ldr      x1, [x21]                             
+010A4D10  adrp     x20, #0x236a000                       
+010A4D14  ldr      x20, [x20, #0x5f8]                     // [0x236A5F8] 'color2'
+010A4D18  mov      x2, xzr                               
+010A4D1C  bl       #0x1960c7c                             // System.String$$op_Equality
+010A4D20  tbz      w0, #0, #0x10a4d2c                    
+010A4D24  mov      w8, #1                                
+010A4D28  str      w8, [x19, #0x538]                      // self.color
+010A4D2C  ldr      x0, [x19, #0x5d0]                      // self.tagcolor
+010A4D30  ldr      x1, [x20]                             
+010A4D34  adrp     x20, #0x236a000                       
+010A4D38  ldr      x20, [x20, #0x5f0]                     // [0x236A5F0] 'color3'
+010A4D3C  mov      x2, xzr                               
+010A4D40  bl       #0x1960c7c                             // System.String$$op_Equality
+010A4D44  tbz      w0, #0, #0x10a4d50                    
+010A4D48  mov      w8, #2                                
+010A4D4C  str      w8, [x19, #0x538]                      // self.color
+010A4D50  ldr      x0, [x19, #0x5d0]                      // self.tagcolor
+010A4D54  ldr      x1, [x20]                             
+010A4D58  adrp     x20, #0x236a000                       
+010A4D5C  ldr      x20, [x20, #0x608]                     // [0x236A608] 'color4'
+010A4D60  mov      x2, xzr                               
+010A4D64  bl       #0x1960c7c                             // System.String$$op_Equality
+010A4D68  tbz      w0, #0, #0x10a4d74                    
+010A4D6C  mov      w8, #3                                
+010A4D70  str      w8, [x19, #0x538]                      // self.color
+010A4D74  ldr      x0, [x19, #0x5d0]                      // self.tagcolor
+010A4D78  ldr      x1, [x20]                             
+010A4D7C  mov      x2, xzr                               
+010A4D80  bl       #0x1960c7c                             // System.String$$op_Equality
+010A4D84  tbz      w0, #0, #0x10a4d90                    
+010A4D88  mov      w8, #4                                
+010A4D8C  str      w8, [x19, #0x538]                      // self.color
+010A4D90  ldrb     w8, [x19, #0x51f]                      // self.activarFuente
+010A4D94  cbz      w8, #0x10a4ee4                        
+010A4D98  ldr      w8, [x19, #0x538]                      // self.color
+010A4D9C  sub      w8, w8, #1                            
+010A4DA0  cmp      w8, #3                                
+010A4DA4  b.hi     #0x10a4e44                            
+010A4DA8  adrp     x9, #0x621000                         
+010A4DAC  add      x9, x9, #0xcb2                        
+010A4DB0  adr      x10, #0x10a4dc0                       
+010A4DB4  ldrb     w11, [x9, x8]                         
+010A4DB8  add      x10, x10, x11, lsl #2                 
+010A4DBC  br       x10                                   
+010A4DC0  ldr      x8, [x19, #0x228]                      // self.prefabAgua1
+010A4DC4  ldr      x9, [x19, #0x248]                      // self.prefabAguaB1
+010A4DC8  ldr      x10, [x19, #0x268]                     // self.prefabAguaCAzul
+010A4DCC  str      x8, [x19, #0x4b8]                      // self.prefabAgua
+010A4DD0  str      x9, [x19, #0x4c0]                      // self.prefabAguaB
+010A4DD4  str      x10, [x19, #0x4c8]                     // self.prefabAguaC
+010A4DD8  add      x8, x19, #0x288                       
+010A4DDC  b        #0x10a4e3c                            
+010A4DE0  ldr      x8, [x19, #0x230]                      // self.prefabAgua2
+010A4DE4  ldr      x9, [x19, #0x250]                      // self.prefabAguaB2
+010A4DE8  ldr      x10, [x19, #0x270]                     // self.prefabAguaCVerde
+010A4DEC  str      x8, [x19, #0x4b8]                      // self.prefabAgua
+010A4DF0  str      x9, [x19, #0x4c0]                      // self.prefabAguaB
+010A4DF4  str      x10, [x19, #0x4c8]                     // self.prefabAguaC
+010A4DF8  add      x8, x19, #0x290                       
+010A4DFC  b        #0x10a4e3c                            
+010A4E00  ldr      x8, [x19, #0x238]                      // self.prefabAgua3
+010A4E04  ldr      x9, [x19, #0x258]                      // self.prefabAguaB3
+010A4E08  ldr      x10, [x19, #0x278]                     // self.prefabAguaCZ
+010A4E0C  str      x8, [x19, #0x4b8]                      // self.prefabAgua
+010A4E10  str      x9, [x19, #0x4c0]                      // self.prefabAguaB
+010A4E14  str      x10, [x19, #0x4c8]                     // self.prefabAguaC
+010A4E18  add      x8, x19, #0x298                       
+010A4E1C  b        #0x10a4e3c                            
+010A4E20  ldr      x8, [x19, #0x240]                      // self.prefabAgua4
+010A4E24  ldr      x9, [x19, #0x260]                      // self.prefabAguaB4
+010A4E28  ldr      x10, [x19, #0x280]                     // self.prefabAguaCRo
+010A4E2C  str      x8, [x19, #0x4b8]                      // self.prefabAgua
+010A4E30  add      x8, x19, #0x2a0                       
+010A4E34  str      x9, [x19, #0x4c0]                      // self.prefabAguaB
+010A4E38  str      x10, [x19, #0x4c8]                     // self.prefabAguaC
+010A4E3C  ldr      x8, [x8]                              
+010A4E40  str      x8, [x19, #0x4d0]                      // self.prefabAguaD
+010A4E44  mov      x0, x19                               
+010A4E48  bl       #0x10a5834                             // FuenteTest3$$doInstanciarAgua
+010A4E4C  ldr      w8, [x19, #0x520]                      // self.tipoPieza
+010A4E50  cmp      w8, #2                                
+010A4E54  b.lt     #0x10a4ee4                            
+010A4E58  cmp      w8, #8                                
+010A4E5C  b.eq     #0x10a4ee4                            
+010A4E60  ldr      w8, [x19, #0x614]                      // self.configFuenteB
+010A4E64  cmp      w8, #9                                
+010A4E68  b.eq     #0x10a4edc                            
+010A4E6C  mov      x0, x19                               
+010A4E70  bl       #0x10a6724                             // FuenteTest3$$doInstanciarFuente
+010A4E74  mov      x0, x19                               
+010A4E78  mov      x1, xzr                               
+010A4E7C  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+010A4E80  cbz      x0, #0x10a4f14                        
+010A4E84  mov      x1, xzr                               
+010A4E88  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010A4E8C  cbz      x0, #0x10a4f14                        
+010A4E90  mov      x1, xzr                               
+010A4E94  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010A4E98  cbz      x0, #0x10a4f14                        
+010A4E9C  mov      x1, xzr                               
+010A4EA0  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+010A4EA4  cbz      x0, #0x10a4f14                        
+010A4EA8  mov      x1, xzr                               
+010A4EAC  bl       #0x20099c4                             // UnityEngine.Object$$get_name
+010A4EB0  cbz      x0, #0x10a4f14                        
+010A4EB4  adrp     x8, #0x236d000                        
+010A4EB8  ldr      x8, [x8, #0x4e8]                       // [0x236D4E8] 'FuenteEB6'
+010A4EBC  mov      x2, xzr                               
+010A4EC0  ldr      x1, [x8]                              
+010A4EC4  bl       #0x19651dc                             // System.String$$Contains
+010A4EC8  tbnz     w0, #0, #0x10a4edc                    
+010A4ECC  ldrb     w8, [x19, #0x758]                      // self.night
+010A4ED0  cbz      w8, #0x10a4edc                        
+010A4ED4  mov      x0, x19                               
+010A4ED8  bl       #0x10a6a48                             // FuenteTest3$$doLights
+010A4EDC  mov      x0, x19                               
+010A4EE0  bl       #0x10a6d08                             // FuenteTest3$$doContarFuentes
+010A4EE4  ldr      x8, [x19, #0x5d0]                      // self.tagcolor
+010A4EE8  adrp     x9, #0x236d000                        
+010A4EEC  ldr      x9, [x9, #0x570]                       // [0x236D570] 'doActivarEsfera'
+010A4EF0  ldr      s0, [x19, #0xb4]                       // self.espera
+010A4EF4  str      x8, [x19, #0x530]                      // self.tagName
+010A4EF8  mov      x0, x19                               
+010A4EFC  ldr      x1, [x9]                              
+010A4F00  ldp      x20, x19, [sp, #0x20]                 
+010A4F04  ldp      x22, x21, [sp, #0x10]                 
+010A4F08  mov      x2, xzr                               
+010A4F0C  ldp      x30, x23, [sp], #0x30                 
+010A4F10  b        #0x2007070                             // UnityEngine.MonoBehaviour$$Invoke
+010A4F14  bl       #0xe61da0                             

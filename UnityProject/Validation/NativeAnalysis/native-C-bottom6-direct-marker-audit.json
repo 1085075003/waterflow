@@ -1,0 +1,69 @@
+{
+  "scope": "Original ControlPiezaC bottom6 is a stationary contact marker, unlike ordinary ControlPieza Cascada6 falling delivery. No runtime change made by this audit.",
+  "case": 1236,
+  "actualInputReport": "gm1236-native-input-v7.json",
+  "sourceRecord": 69,
+  "sourcePrefab": "CuFuenteEB6",
+  "sourcePosition": [
+    40,
+    19.15,
+    0
+  ],
+  "incorrectGraphReceiverRecord": 33,
+  "receiverPosition": [
+    40,
+    3.95,
+    0
+  ],
+  "evidence": [
+    {
+      "file": "Assets/GameObject/CuFuenteEB6.prefab",
+      "line": 113,
+      "field": "prefabAguaControl",
+      "guid": "45617a817111b854aa86f80f9ae47007",
+      "asset": "AguaControl5C"
+    },
+    {
+      "file": "Assets/GameObject/AguaControl5C.prefab",
+      "line": 1616,
+      "name": "esfera6",
+      "localPosition": [
+        0,
+        -8,
+        0
+      ],
+      "localScale": [
+        2,
+        2,
+        2
+      ],
+      "collider": "SphereCollider",
+      "radius": 0.1,
+      "useGravity": false,
+      "isKinematic": true,
+      "scriptComponents": [],
+      "worldPositionAtRecord69": [
+        40,
+        11.15,
+        0
+      ],
+      "worldRadiusAtRecord69": 0.2
+    },
+    {
+      "method": "FuenteTest3.doActivarEsfera",
+      "range": "0x10A6FD0..0x10A7010",
+      "behavior": "Set marker tag to current water color and activate esfera6."
+    },
+    {
+      "method": "FuenteTest3.doActivarCascada",
+      "range": "0x10A7080..0x10A72DC",
+      "behavior": "Cascada1..4 only. No Cascada6 exists in FT3 metadata or this prefab."
+    },
+    {
+      "method": "FuenteTest1.OnTriggerEnter",
+      "range": "0x109F408..0x109F458",
+      "behavior": "Existing hayOrigen with a different incoming tag creates union visuals; it does not overwrite hayColor/hayOrigen."
+    }
+  ],
+  "recommendation": "For C bottom6 derive the authored emitter sphere world geometry and only deliver to physically overlapping top5 trigger. Do not reuse unrestricted ordinary Cascada6 FindBottomReceiver. Keep ordinary ControlPieza long falling cascade behavior."
+}

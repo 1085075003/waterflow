@@ -1,0 +1,29 @@
+{
+  "continueOnFailure": true,
+  "jobs": [
+    {
+      "name": "jet-exact-paused-playing",
+      "method": "Recovered.FlowWater.Editor.FlowWaterJetLifetimeValidation.Run",
+      "reportDirectory": "Validation/JetLifetime",
+      "reportFile": "jet-lifetime-validation.json",
+      "archiveDestination": "FinalWaterSnapshots/jet-exact-paused-playing",
+      "timeoutSeconds": 1200
+    },
+    {
+      "name": "standalone-exact-marker",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStandaloneFountainValidation.Run",
+      "reportDirectory": "Validation/StandaloneFountain",
+      "reportFile": "standalone-fountain-validation.json",
+      "archiveDestination": "FinalWaterSnapshots/standalone-exact-marker",
+      "timeoutSeconds": 1200
+    },
+    {
+      "name": "native-zero-preview-evidence",
+      "method": "Recovered.FlowWater.Editor.FlowWaterNativePreviewEvidenceValidation.Run",
+      "reportDirectory": "Validation/Save1Gameplay",
+      "reportFile": "save1-gameplay-validation.json",
+      "archiveDestination": "FinalWaterSnapshots/native-zero-preview-evidence",
+      "timeoutSeconds": 1200
+    }
+  ]
+}

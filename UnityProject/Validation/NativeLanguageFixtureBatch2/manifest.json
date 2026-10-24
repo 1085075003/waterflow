@@ -1,0 +1,50 @@
+{
+  "batch": "NativeLanguageFixtureBatch2",
+  "immutable": true,
+  "createdUtc": "2026-10-16T04:14:52.426576+00:00",
+  "status": "Editor-only 0errors compiled; not imported or Unity executed",
+  "entry": "Recovered.FlowWater.Editor.FlowWaterNativeLanguageValidation.Run",
+  "reportDirectory": "Validation/NativeLanguage",
+  "reportFile": "native-language-validation.json",
+  "runtimeChanges": false,
+  "files": [
+    {
+      "source": "Validation/NativeLanguageFixtureBatch2/Sources/FlowWaterNativeLanguageValidation.cs.src",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterNativeLanguageValidation.cs",
+      "previousSha256": "b8c17bae4ed69e2ee13ff104b0412356d96aeeac56d6d2bf21cd2caed5b6bac7",
+      "sha256": "48e7d948d963c7bce590158c0b356305d2692bca972208ea51460b9f04688bd0"
+    }
+  ],
+  "fixes": [
+    "Clean batchmode zero-length initial scene setup restores a valid fresh untitled scene; dirty scenes still rejected before work.",
+    "Prefs restored before and after Play exit; original Time scale restored after Editor scene restoration and once again on delayed exit.",
+    "Original failure persisted as a closed false report before cleanup; all cleanup exceptions captured; actual self-exit is delayed, with failure preserved.",
+    "Two original language controls are natively hidden (Port Lang active0, selector parent PanelDesign1 active0). Exercise actual rebound hidden callbacks only as a controlled boundary fixture, without changing their visibility. Real Settings/navigation/glyph/water-win checks stay strict.",
+    "Checkpoint language-progress.json makes original first failure readable even if later cleanup fails."
+  ],
+  "evidence": {
+    "nativePortLanguageControl": {
+      "scene": "Assets/Scenes/Portada.unity",
+      "gameObjectID": 25,
+      "name": "Lang",
+      "m_IsActive": 0,
+      "triggerComponentID": 1239
+    },
+    "nativeSelectorLanguageControl": {
+      "scene": "Assets/Scenes/SelLevel0.unity",
+      "gameObjectID": 436,
+      "name": "Lang",
+      "m_IsActive": 1,
+      "parentGameObjectID": 186,
+      "parentName": "PanelDesign1",
+      "parent_m_IsActive": 0,
+      "triggerComponentID": 2626
+    }
+  },
+  "compile": {
+    "response": "Validation/NativeAnalysis/native-language-fixture2-editor-compile.rsp",
+    "sha256": "7975e749cf09f396a4782eb71f4380613dbd06e37ca1274e738fe3e96dfc6767",
+    "exitCode": 0,
+    "unityLaunched": false
+  }
+}

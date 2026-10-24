@@ -1,0 +1,30 @@
+{
+  "level": 1225,
+  "recordedStep": 28,
+  "zeroBasedIndex": 27,
+  "exception": "",
+  "originGrid": [
+    4,
+    2,
+    4
+  ],
+  "destinationGrid": [
+    4,
+    2,
+    4
+  ],
+  "worldOriginAndDestination": [
+    40,
+    11.55,
+    40
+  ],
+  "classification": "native-empty-capture-or-same-position-no-op; not z",
+  "evidence": {
+    "MoveBloque.HandleSolutionTotal1034134..103413C": "Reset piezaCapturada=null and call doCapturarPieza for every entry.",
+    "1034154..1034164": "If the captured object is null, jump directly to103419C.",
+    "1034168..1034198": "Only non-null capture writes parent.position to the recorded destination.",
+    "103419C..10341A4": "Advance the loop unconditionally. Missing capture is legal and does not throw or fail.",
+    "data": "The final original Save1 entry has identical origin/destination and empty excep. If captured, set_position is also a no-op."
+  },
+  "scope": "Native Total-preview static classification only. Do not relabel the original exception as z, alter raw data, create a missing actor, or infer gameplay victory from a no-op."
+}

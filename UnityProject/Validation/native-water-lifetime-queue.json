@@ -1,0 +1,21 @@
+{
+  "continueOnFailure": true,
+  "jobs": [
+    {
+      "name": "jet-lifetime",
+      "method": "Recovered.FlowWater.Editor.FlowWaterJetLifetimeValidation.Run",
+      "reportDirectory": "Validation/JetLifetime",
+      "reportFile": "jet-lifetime-validation.json",
+      "archiveDestination": "JetLifetime/Batch3",
+      "timeoutSeconds": 600
+    },
+    {
+      "name": "pfuente-independent-marker",
+      "method": "Recovered.FlowWater.Editor.FlowWaterPfuenteOcclusionValidation.Run",
+      "reportDirectory": "Validation/PfuenteOcclusion",
+      "reportFile": "pfuente-occlusion-validation.json",
+      "archiveDestination": "PfuenteOcclusion/Batch1",
+      "timeoutSeconds": 600
+    }
+  ]
+}

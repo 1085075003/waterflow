@@ -1,0 +1,47 @@
+{
+  "sources": [
+    "Methods/MoveBloque_doProcess1Solution_103494C.asm.txt",
+    "Methods/MoveBloque_HandleStepsSolution_10341F4.asm.txt",
+    "Methods/MoveBloque_doProcesoEspera_1035210.asm.txt"
+  ],
+  "sequence": [
+    {
+      "address": "1034AEC..4AF0",
+      "operation": "w enables activadaEspera; it does not skip capture"
+    },
+    {
+      "address": "1034BB8..4C00",
+      "operation": "Capture original actor, set exact selected body layer2"
+    },
+    {
+      "address": "1034290..42AC",
+      "operation": "After selected isMouseDragging1, activadaEspera routes to doProcesoEspera before normal phase motion"
+    },
+    {
+      "address": "1035244..5288",
+      "operation": "Read all eight UIManagerScript.activadoRes1..8"
+    },
+    {
+      "address": "103528C..5290",
+      "operation": "If any active, activadoMech=1 and keep waiting"
+    },
+    {
+      "address": "10352A0..52B4",
+      "operation": "Only after prior active1 and all eight idle, set activadoMech2 and clear activadaEspera"
+    }
+  ],
+  "testImplication": "Selecting/layer2 can release a plate, so waiting before pickup is not equivalent. Initial all-idle alone cannot satisfy native w. Existing instant-TryMove baseline only waited while already busy, so it is not complete proof of native w behavior. Native-input variant must select through production camera, observe actual busy->idle, and only then continue through actual target surface ray and release.",
+  "scope": "Player strategy implementation and specific w ordering, not exact original automatic preview three-phase animation timing.",
+  "fullMethodWriteAudit": {
+    "classMethodsScanned": 56,
+    "field": "MoveBloque.activadoMech offset0x3d0",
+    "writersOnly": [
+      "doProcesoEspera1035290=1 when any actual busy",
+      "doProcesoEspera10352B0=2 after prior1 then all idle"
+    ],
+    "constructor": "10356B0..1035798 does not assign activadoMech; default0",
+    "originalScenes": "Levely5,Levely5_basic,Levely5_6x6,Levely5_7x7 serialized activadoMech:0",
+    "repeatedW": "After a completed w, field=2; future idle passes only if field==1, so a new busy observation is necessary. No reset-to1 or alternate class-method writer exists.",
+    "scope": "This scans full MoveBloque native methods and original scene values; hypothetical external method writes were not assumed."
+  }
+}

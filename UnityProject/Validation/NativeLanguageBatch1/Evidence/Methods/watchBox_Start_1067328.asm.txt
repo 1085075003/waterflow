@@ -1,0 +1,41 @@
+// watchBox$$Start VA 0x1067328, inferred length 156
+void watchBox__Start (watchBox_o* __this, const MethodInfo* method);
+01067328  str      x30, [sp, #-0x30]!                    
+0106732C  stp      x22, x21, [sp, #0x10]                 
+01067330  stp      x20, x19, [sp, #0x20]                 
+01067334  adrp     x20, #0x24fb000                       
+01067338  adrp     x21, #0x236b000                       
+0106733C  adrp     x22, #0x236b000                       
+01067340  ldrb     w8, [x20, #0xe60]                     
+01067344  ldr      x21, [x21, #0x208]                     // [0x236B208] 'language'
+01067348  ldr      x22, [x22, #0x210]                     // [0x236B210] 'en'
+0106734C  mov      x19, x0                               
+01067350  tbnz     w8, #0, #0x1067374                    
+01067354  adrp     x0, #0x236b000                        
+01067358  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+0106735C  bl       #0xe61b78                             
+01067360  adrp     x0, #0x236b000                        
+01067364  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+01067368  bl       #0xe61b78                             
+0106736C  mov      w8, #1                                
+01067370  strb     w8, [x20, #0xe60]                     
+01067374  ldr      x0, [x21]                             
+01067378  ldr      x1, [x22]                             
+0106737C  mov      x2, xzr                               
+01067380  bl       #0x2001644                             // UnityEngine.PlayerPrefs$$GetString
+01067384  str      x0, [x19, #0x28]                       // self.idioma
+01067388  mov      x0, x19                               
+0106738C  bl       #0x10673c4                             // watchBox$$ObtenerTexto1
+01067390  ldr      x8, [x19, #0x20]                       // self.texto1
+01067394  str      x0, [x19, #0x30]                       // self.tex1
+01067398  cbz      x8, #0x10673c0                        
+0106739C  ldr      x9, [x8]                              
+010673A0  ldp      x20, x19, [sp, #0x20]                 
+010673A4  ldp      x22, x21, [sp, #0x10]                 
+010673A8  mov      x1, x0                                
+010673AC  ldr      x3, [x9, #0x5e8]                      
+010673B0  ldr      x2, [x9, #0x5f0]                      
+010673B4  mov      x0, x8                                
+010673B8  ldr      x30, [sp], #0x30                      
+010673BC  br       x3                                    
+010673C0  bl       #0xe61da0                             

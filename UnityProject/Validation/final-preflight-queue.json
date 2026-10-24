@@ -1,0 +1,37 @@
+{
+  "continueOnFailure": true,
+  "jobs": [
+    {
+      "name": "stars",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStarAnimationValidation.Run",
+      "reportDirectory": "Validation/UIAnimations",
+      "reportFile": "native-ui-animation-validation.json",
+      "archiveDestination": "FinalPreflight/stars",
+      "timeoutSeconds": 1200
+    },
+    {
+      "name": "languages",
+      "method": "Recovered.FlowWater.Editor.FlowWaterNativeLanguageValidation.Run",
+      "reportDirectory": "Validation/NativeLanguage",
+      "reportFile": "native-language-validation.json",
+      "archiveDestination": "FinalPreflight/languages",
+      "timeoutSeconds": 1200
+    },
+    {
+      "name": "pfuente",
+      "method": "Recovered.FlowWater.Editor.FlowWaterPfuenteOcclusionValidation.Run",
+      "reportDirectory": "Validation/PfuenteOcclusion",
+      "reportFile": "pfuente-occlusion-validation.json",
+      "archiveDestination": "FinalPreflight/pfuente",
+      "timeoutSeconds": 1200
+    },
+    {
+      "name": "standalone-fountain",
+      "method": "Recovered.FlowWater.Editor.FlowWaterStandaloneFountainValidation.Run",
+      "reportDirectory": "Validation/StandaloneFountain",
+      "reportFile": "standalone-fountain-validation.json",
+      "archiveDestination": "FinalPreflight/standalone-fountain",
+      "timeoutSeconds": 1200
+    }
+  ]
+}

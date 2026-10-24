@@ -1,0 +1,21 @@
+{
+  "batch": "WaterDoorFlowBatch1",
+  "status": "Immutable staging final; Assets unchanged",
+  "files": [
+    {
+      "source": "Validation\\WaterDoorFlowBatch1\\RecoveredWaterPropagation.cs.src",
+      "destination": "Assets\\Scripts\\RecoveryRuntime\\RecoveredWaterPropagation.cs",
+      "sha256": "95e0015a8ec041a887857930990dce74f7df9e9034c2bc9b3ababee2c7506045",
+      "baseSha256": "7f931b4a95e45a3638d56060f7ced23fc7116e4fa97f1de1fbe487cdbcdb7a57"
+    },
+    {
+      "source": "Validation\\WaterDoorFlowBatch1\\RecoveredWaterNetwork.cs.src",
+      "destination": "Assets\\Scripts\\RecoveryRuntime\\RecoveredWaterNetwork.cs",
+      "sha256": "7f46e415475cd1e134a4b762e4b987285b347a77a0597761d042677669ea8505",
+      "baseSha256": "067cf8f3523365721a438c4a65098eeb8ddbaa798c0c92c3836b17f710ea3a85"
+    }
+  ],
+  "proof": "Actual gm1140 record25 hole1 repeatedly wets/dries one frame apart every18 scaled seconds. Only gate-node14 signature changes, with byte-identical R-format position/rotation. Opening its west outlet1 invalidated its still-fed north intake2 plus all descendants, immediately drying the hole and closing the gate. The original ObservadorDoor only changes that barrier/outlet; it does not recreate every other intake on the piece.",
+  "change": "Channel signature identifies pose/color/source; current inputMask explicitly validates the actual incoming port. Outlet changes rebuild links and age-preserving visuals while keeping unchanged wet intake ancestry. Closing the actual incoming port still invalidates the node and its supplied branches. No added delay, alignment tolerance or collision exemption.",
+  "validation": "18 standalone state/timing checks (including four door-branch checks), whole-runtime Roslyn compilation, then real mode0 gm1140/1052/1095/1135 plus existing35/full suite."
+}

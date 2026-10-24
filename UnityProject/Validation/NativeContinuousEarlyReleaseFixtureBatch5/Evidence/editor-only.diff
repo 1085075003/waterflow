@@ -1,0 +1,66 @@
+--- BoxSurfaceBatch4/de50
++++ ContinuousEarlyReleaseBatch5
+@@ -50,6 +50,8 @@
+             public bool compressionLanding, retainedOriginalGrabOffset, terminalQuickRelease, ordinaryEarlyRelease;
+             public int heldInputFrames, motionFinishedFrame=-1, compressionSettledFrame=-1, pressurePostMotionFrames;
+             public float compressionWaitRealSeconds;
++            public string postStepPausePolicy;
++            public int postStepCommittedFrame, postStepReadyFrame;
+             public int cameraQuarterTurns, cameraSlowGestures, cameraSlowFrames;
+             public List<float> cameraYawSamples=new List<float>();
+             public List<string> inputDiagnostics=new List<string>();
+@@ -94,7 +96,7 @@
+             public RetestSource retestSource;
+             public ExpectedCatalog expectedCatalog;
+             public string playerReleaseStrategy;
+-            public bool passed, preferencesRestored, ordinaryEarlyRelease;
++            public bool passed, preferencesRestored, ordinaryEarlyRelease, ordinaryContinuousInput;
+             public float simulationTimeScale, originalTimeScale;
+             public int plannedLevels;
+             public List<Check> checks = new List<Check>();
+@@ -140,6 +142,7 @@
+         public static void RunNativeLandingRegression() { Begin(new[] {1187},true); }
+         public static void RunNativePressureReleaseRegression() { Begin(new[] {609,690},true); }
+         public static void RunNativeTerminalQuickRelease() { Begin(new[] {1187},true,null,true); }
++        public static void RunNative1187ContinuousEarlyRelease() { BeginOrdinaryEarlyRelease(new[] {1187},null); }
+         public static void RunNative1105EarlyRelease() { BeginOrdinaryEarlyRelease(new[] {1105},null); }
+         public static void RunNativeBoxSurfaceRegressions() { BeginOrdinaryEarlyRelease(new[] {1187,2033},null); }
+         public static void RunNativeFailedEarlyRelease() { RunNativeFailedWithPolicy(true); }
+@@ -285,8 +288,10 @@
+                     report = new Report { startedUtc = DateTime.UtcNow.ToString("o"), unityVersion = Application.unityVersion, simulationTimeScale = 10, originalTimeScale = SessionState.GetFloat(TimeKey, 1), inputStrategy = NativeReplay ? "production-pointer-drag" : "instant-TryMove-baseline", plannedLevels = Cases.Length };
+                     Time.timeScale = report.simulationTimeScale;
+                     report.ordinaryEarlyRelease=SessionState.GetBool(OrdinaryEarlyKey,false);
+-                    report.playerReleaseStrategy=SessionState.GetBool(OrdinaryEarlyKey,false)?"ordinary-early-release":SessionState.GetBool(TerminalQuickKey,false)?"settled-hover-prefix-and-quick-terminal-ordinary-guide":"settled-hover";
++                    report.ordinaryContinuousInput=report.ordinaryEarlyRelease;
++                    report.playerReleaseStrategy=SessionState.GetBool(OrdinaryEarlyKey,false)?"ordinary-continuous-early-release":SessionState.GetBool(TerminalQuickKey,false)?"settled-hover-prefix-and-quick-terminal-ordinary-guide":"settled-hover";
+                     if(SessionState.GetBool(OrdinaryEarlyKey,false)) report.notes.Add("Independent ordinaryEarlyRelease legal player strategy: after a real Begin/Continue ray resolves the unchanged original recorded guide, keep the pointer held across at least one actual PlayerLoop frame, re-raycast it through production ContinueDrag, then call production EndDrag without waiting for the lifted actor to settle at floatingTarget. Native doEnd/doFijar performs all actual release motion and centering. CuboResorte still uses the separate settled-pointer plus native delayed compression fixture. No piece/guide/source/water/switch or native busy state is written. All original transactions, poses, positive matching-color goals and native victory standards remain exact. This is not the terminal-only release diagnostic or the original automatic-preview timing.");
++                    if(report.ordinaryContinuousInput) report.notes.Add("Continuous ordinary early-release strategy: after each successful native commit and exact recorded-pose assertion, begin the next recorded action without an artificial .18-real-second pause or a global all-springs-idle barrier. Real source/surface queries, one actual held PlayerLoop frame, original End/doFijar completion and compression delay, each w/z action-specific protocol, final positive matching-color targets, native victory and final water/spring settling all remain mandatory. Every step records this post-commit pause policy and actual frames. No runtime or game state is changed by this test policy.");
+                     if(SessionState.GetBool(TerminalQuickKey,false)) report.notes.Add("Legal terminal-release diagnostic strategy: all preceding recorded actions retain the ordinary settled-hover strategy. Only the final recorded ordinary block releases after its exact original guide is resolved and one real held frame has elapsed, without waiting to rise/hover35 high. Original player input has no mandatory hover delay. CuboResorte keeps the settled real pointer and separate native post-release compression checks. Production Begin/Continue/End and actual animations/collisions still run; no actor/guide/water/switch is assigned. Final raw destinations, recorded count, transactions and positive native water/victory criteria remain unchanged.");
+                     string catalogJson=SessionState.GetString(CatalogKey,"");
+                     if(!String.IsNullOrEmpty(catalogJson)) report.expectedCatalog=JsonUtility.FromJson<ExpectedCatalog>(catalogJson);
+@@ -437,9 +442,22 @@
+                 step.waitedSeconds = Time.time - start; step.afterMoves = Game.MoveCount;
+                 Require("gm" + level.id + "-player-step-" + step.number, step.applied && (step.marker || (step.movable && step.afterMoves == step.beforeMoves + 1 && Near(step.actualAfter, step.followsMovingSupport ? step.nativeLanding : step.destination))),
+                     "exception=" + step.exception + ", record=" + step.sourceRecord + ", from=" + step.origin + ", to=" + step.destination + ", actual=" + step.actualAfter + (step.followsMovingSupport ? ", nativeMovingSupport="+step.nativeLanding : "") + "; " + (step.status ?? Game.Status));
+-                foreach (object wait in WaitReal(.18f)) yield return wait;
+-                until = EditorApplication.timeSinceStartup + 35;
+-                while (Springs != null && Springs.IsBusy && EditorApplication.timeSinceStartup < until) yield return null;
++                step.postStepCommittedFrame=Time.frameCount;
++                if(report.ordinaryContinuousInput)
++                {
++                    // A player may begin an original capture while another
++                    // observer is moving. Native CanMove/closest ray and each
++                    // recorded w/z protocol still decide whether it succeeds.
++                    step.postStepPausePolicy="continuous-original-input-no-extra-pause-or-global-busy-barrier";
++                }
++                else
++                {
++                    step.postStepPausePolicy="settled-hover-extra-.18-real-and-global-busy-barrier";
++                    foreach (object wait in WaitReal(.18f)) yield return wait;
++                    until = EditorApplication.timeSinceStartup + 35;
++                    while (Springs != null && Springs.IsBusy && EditorApplication.timeSinceStartup < until) yield return null;
++                }
++                step.postStepReadyFrame=Time.frameCount;
+                 step.switchesAfter = SwitchState();
+             }
+             double finalWaitStarted = EditorApplication.timeSinceStartup;

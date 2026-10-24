@@ -1,0 +1,33 @@
+// Leveltexto2$$doLanguage VA 0x102DB7C, inferred length 124
+void Leveltexto2__doLanguage (Leveltexto2_o* __this, const MethodInfo* method);
+0102DB7C  str      x30, [sp, #-0x30]!                    
+0102DB80  stp      x22, x21, [sp, #0x10]                 
+0102DB84  stp      x20, x19, [sp, #0x20]                 
+0102DB88  adrp     x20, #0x24fb000                       
+0102DB8C  adrp     x21, #0x236b000                       
+0102DB90  adrp     x22, #0x236b000                       
+0102DB94  ldrb     w8, [x20, #0xd0a]                     
+0102DB98  ldr      x21, [x21, #0x208]                     // [0x236B208] 'language'
+0102DB9C  ldr      x22, [x22, #0x210]                     // [0x236B210] 'en'
+0102DBA0  mov      x19, x0                               
+0102DBA4  tbnz     w8, #0, #0x102dbc8                    
+0102DBA8  adrp     x0, #0x236b000                        
+0102DBAC  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+0102DBB0  bl       #0xe61b78                             
+0102DBB4  adrp     x0, #0x236b000                        
+0102DBB8  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+0102DBBC  bl       #0xe61b78                             
+0102DBC0  mov      w8, #1                                
+0102DBC4  strb     w8, [x20, #0xd0a]                     
+0102DBC8  ldr      x0, [x21]                             
+0102DBCC  ldr      x1, [x22]                             
+0102DBD0  mov      x2, xzr                               
+0102DBD4  bl       #0x2001644                             // UnityEngine.PlayerPrefs$$GetString
+0102DBD8  str      x0, [x19, #0x30]                       // self.idiomaActual
+0102DBDC  mov      x0, x19                               
+0102DBE0  bl       #0x102dbf8                             // Leveltexto2$$ObtenerTexto
+0102DBE4  str      x0, [x19, #0x28]                       // self.texto2
+0102DBE8  ldp      x20, x19, [sp, #0x20]                 
+0102DBEC  ldp      x22, x21, [sp, #0x10]                 
+0102DBF0  ldr      x30, [sp], #0x30                      
+0102DBF4  ret                                            

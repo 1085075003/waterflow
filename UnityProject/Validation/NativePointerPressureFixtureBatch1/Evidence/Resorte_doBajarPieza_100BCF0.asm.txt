@@ -1,0 +1,95 @@
+// Resorte$$doBajarPieza VA 0x100BCF0, inferred length 372
+void Resorte__doBajarPieza (Resorte_o* __this, const MethodInfo* method);
+0100BCF0  str      d10, [sp, #-0x30]!                    
+0100BCF4  stp      d9, d8, [sp, #8]                      
+0100BCF8  str      x30, [sp, #0x18]                      
+0100BCFC  stp      x20, x19, [sp, #0x20]                 
+0100BD00  adrp     x20, #0x24fb000                       
+0100BD04  ldrb     w8, [x20, #0xc8a]                     
+0100BD08  mov      x19, x0                               
+0100BD0C  tbnz     w8, #0, #0x100bd30                    
+0100BD10  adrp     x0, #0x236b000                        
+0100BD14  ldr      x0, [x0, #0x498]                       // [0x236B498] MoveBloque_TypeInfo
+0100BD18  bl       #0xe61b78                             
+0100BD1C  adrp     x0, #0x236b000                        
+0100BD20  ldr      x0, [x0, #0x478]                       // [0x236B478] 'boolResorte'
+0100BD24  bl       #0xe61b78                             
+0100BD28  mov      w8, #1                                
+0100BD2C  strb     w8, [x20, #0xc8a]                     
+0100BD30  ldr      x0, [x19, #0x28]                       // self.animResorte
+0100BD34  cbz      x0, #0x100be60                        
+0100BD38  mov      w1, #1                                
+0100BD3C  mov      x2, xzr                               
+0100BD40  bl       #0x2002f88                             // UnityEngine.Behaviour$$set_enabled
+0100BD44  ldr      x0, [x19, #0x28]                       // self.animResorte
+0100BD48  cbz      x0, #0x100be60                        
+0100BD4C  adrp     x8, #0x236b000                        
+0100BD50  ldr      x8, [x8, #0x478]                       // [0x236B478] 'boolResorte'
+0100BD54  mov      w2, #1                                
+0100BD58  mov      x3, xzr                               
+0100BD5C  ldr      x1, [x8]                              
+0100BD60  bl       #0x1fdb11c                             // UnityEngine.Animator$$SetBool
+0100BD64  ldr      x0, [x19, #0xc0]                       // self.otherObject
+0100BD68  cbz      x0, #0x100be60                        
+0100BD6C  mov      x1, xzr                               
+0100BD70  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100BD74  cbz      x0, #0x100be60                        
+0100BD78  mov      x1, xzr                               
+0100BD7C  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+0100BD80  cbz      x0, #0x100be60                        
+0100BD84  mov      x1, xzr                               
+0100BD88  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0100BD8C  mov      x0, x19                               
+0100BD90  mov      x1, xzr                               
+0100BD94  mov      v8.16b, v0.16b                        
+0100BD98  bl       #0x2003a08                             // UnityEngine.Component$$get_transform
+0100BD9C  cbz      x0, #0x100be60                        
+0100BDA0  mov      x1, xzr                               
+0100BDA4  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0100BDA8  ldr      x0, [x19, #0xc0]                       // self.otherObject
+0100BDAC  cbz      x0, #0x100be60                        
+0100BDB0  mov      x1, xzr                               
+0100BDB4  mov      v9.16b, v1.16b                        
+0100BDB8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100BDBC  cbz      x0, #0x100be60                        
+0100BDC0  mov      x1, xzr                               
+0100BDC4  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+0100BDC8  cbz      x0, #0x100be60                        
+0100BDCC  adrp     x20, #0x236b000                       
+0100BDD0  ldr      x20, [x20, #0x498]                     // [0x236B498] MoveBloque_TypeInfo
+0100BDD4  mov      x1, xzr                               
+0100BDD8  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0100BDDC  ldr      x0, [x20]                             
+0100BDE0  mov      v10.16b, v2.16b                       
+0100BDE4  ldr      w8, [x0, #0xe0]                       
+0100BDE8  cbnz     w8, #0x100bdf4                        
+0100BDEC  bl       #0xe61c80                             
+0100BDF0  ldr      x0, [x20]                             
+0100BDF4  ldr      x8, [x0, #0xb8]                       
+0100BDF8  strb     wzr, [x8, #0xb]                       
+0100BDFC  strb     wzr, [x8, #8]                         
+0100BE00  ldr      x0, [x19, #0xc0]                       // self.otherObject
+0100BE04  cbz      x0, #0x100be60                        
+0100BE08  mov      x1, xzr                               
+0100BE0C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+0100BE10  cbz      x0, #0x100be60                        
+0100BE14  mov      x1, xzr                               
+0100BE18  bl       #0x200e8bc                             // UnityEngine.Transform$$get_parent
+0100BE1C  cbz      x0, #0x100be60                        
+0100BE20  mov      v0.16b, v8.16b                        
+0100BE24  mov      v1.16b, v9.16b                        
+0100BE28  mov      v2.16b, v10.16b                       
+0100BE2C  mov      x1, xzr                               
+0100BE30  bl       #0x200ea50                             // UnityEngine.Transform$$set_position
+0100BE34  ldrb     w8, [x19, #0xd9]                       // self.activar
+0100BE38  cbz      w8, #0x100be44                        
+0100BE3C  mov      x0, x19                               
+0100BE40  bl       #0x100be64                             // Resorte$$doActivarMech
+0100BE44  mov      w8, #1                                
+0100BE48  strb     w8, [x19, #0xda]                       // self.chequear
+0100BE4C  ldp      x20, x19, [sp, #0x20]                 
+0100BE50  ldr      x30, [sp, #0x18]                      
+0100BE54  ldp      d9, d8, [sp, #8]                      
+0100BE58  ldr      d10, [sp], #0x30                      
+0100BE5C  ret                                            
+0100BE60  bl       #0xe61da0                             

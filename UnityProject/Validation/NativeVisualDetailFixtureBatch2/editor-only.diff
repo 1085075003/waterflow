@@ -1,0 +1,50 @@
+--- detail1
++++ detail2readonlydiagnostic
+@@ -451,6 +451,7 @@
+                 {
+                     camera.aspect = ratio;
+                     if (framing != null) framing.FitNow();
++                    if (mode == "detail") WriteDetailCamera(camera, entry, solution, ratio, renderers);
+                     foreach (Renderer renderer in renderers)
+                     {
+                         MeshFilter filter = renderer.GetComponent<MeshFilter>();
+@@ -481,6 +482,39 @@
+             { camera.aspect = aspect; if (framing != null) framing.FitNow(); }
+         }
+ 
++        [Serializable] sealed class DetailMesh
++        { public string path; public Vector3 worldCenter,worldSize,localScale; public int vertices,beforeNear,beyondFar,outsideXY; public float minDepth,maxDepth; }
++        [Serializable] sealed class DetailCamera
++        {
++            public int assetId; public bool solution; public float aspect,near,far,fov,backward;
++            public Vector3 position,localPosition,euler,lossyScale; public string parent;
++            public List<string> framingFields=new List<string>(); public List<DetailMesh> meshes=new List<DetailMesh>();
++        }
++        static void WriteDetailCamera(Camera camera,LevelResult entry,bool solution,float ratio,Renderer[] renderers)
++        {
++            var frame=camera.GetComponent<RecoveredBoardFraming>();
++            var result=new DetailCamera {assetId=entry.assetId,solution=solution,aspect=ratio,near=camera.nearClipPlane,far=camera.farClipPlane,fov=camera.fieldOfView,
++                backward=frame==null?0:frame.LastBackwardDistance,position=camera.transform.position,localPosition=camera.transform.localPosition,
++                euler=camera.transform.eulerAngles,lossyScale=camera.transform.lossyScale,parent=camera.transform.parent==null?"":camera.transform.parent.name};
++            if(frame!=null) foreach(string field in new[]{"basePosition","lastAppliedPosition","authoredLocalPosition","authoredLocalRotation","lastAppliedRotation","hasApplied","refreshAt"})
++            { var info=typeof(RecoveredBoardFraming).GetField(field,BindingFlags.Instance|BindingFlags.NonPublic); result.framingFields.Add(field+"="+(info==null?"missing":Convert.ToString(info.GetValue(frame)))); }
++            foreach(Renderer renderer in renderers)
++            {
++                MeshFilter filter=renderer.GetComponent<MeshFilter>(); Mesh mesh=filter.sharedMesh;
++                var item=new DetailMesh {path=renderer.name,worldCenter=renderer.bounds.center,worldSize=renderer.bounds.size,localScale=renderer.transform.lossyScale,minDepth=Single.MaxValue,maxDepth=Single.MinValue};
++                for(Transform parent=renderer.transform.parent;parent!=null;parent=parent.parent) item.path=parent.name+"/"+item.path;
++                foreach(Vector3 vertex in mesh.vertices)
++                {
++                    Vector3 point=camera.WorldToViewportPoint(filter.transform.TransformPoint(vertex));item.vertices++;
++                    item.minDepth=Mathf.Min(item.minDepth,point.z);item.maxDepth=Mathf.Max(item.maxDepth,point.z);
++                    if(point.z<camera.nearClipPlane)item.beforeNear++; if(point.z>camera.farClipPlane)item.beyondFar++;
++                    if(point.x<0||point.x>1||point.y<0||point.y>1)item.outsideXY++;
++                }
++                result.meshes.Add(item);
++            }
++            File.WriteAllText(Path.Combine(Output,"detail-camera-gm"+entry.assetId+"-"+(solution?"solution":"initial")+"-"+Mathf.RoundToInt(ratio*1000)+".json"),JsonUtility.ToJson(result,true));
++        }
++
+         static void FlushSheet()
+         {
+             if (sheet == null) return;

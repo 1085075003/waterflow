@@ -1,0 +1,11 @@
+--- 3d7abada/FlowWaterWaterUVValidation.cs
++++ NativeWaterUVGuardFixtureBatch3
+@@ -51,7 +51,7 @@
+             EditorApplication.update += Update;
+             Camera.onPostRender += PostRender;
+             EditorApplication.playModeStateChanged += state => {
+-                if (state == PlayModeStateChange.ExitingPlayMode) { Cleanup(); Unlock(); }
++                if (state == PlayModeStateChange.ExitingPlayMode && SessionState.GetBool(Key,false)) { Cleanup(); Unlock(); }
+                 if (state == PlayModeStateChange.EnteredEditMode && SessionState.GetBool(Key+".Finished",false)) {
+                     float savedScale=SessionState.GetFloat(Key+".Scale",1);
+                     // Mirror PropagationTimeRestoreBatch2: the play-mode exit

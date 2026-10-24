@@ -1,0 +1,314 @@
+// UIManagerStoreScript$$doLanguage VA 0x105BBB4, inferred length 1248
+void UIManagerStoreScript__doLanguage (UIManagerStoreScript_o* __this, const MethodInfo* method);
+0105BBB4  stp      x29, x30, [sp, #-0x60]!               
+0105BBB8  stp      x28, x27, [sp, #0x10]                 
+0105BBBC  stp      x26, x25, [sp, #0x20]                 
+0105BBC0  stp      x24, x23, [sp, #0x30]                 
+0105BBC4  stp      x22, x21, [sp, #0x40]                 
+0105BBC8  stp      x20, x19, [sp, #0x50]                 
+0105BBCC  adrp     x20, #0x24fb000                       
+0105BBD0  adrp     x21, #0x236b000                       
+0105BBD4  adrp     x22, #0x236b000                       
+0105BBD8  adrp     x29, #0x236c000                       
+0105BBDC  adrp     x28, #0x236c000                       
+0105BBE0  adrp     x27, #0x236c000                       
+0105BBE4  adrp     x26, #0x236c000                       
+0105BBE8  adrp     x25, #0x236c000                       
+0105BBEC  adrp     x24, #0x236c000                       
+0105BBF0  adrp     x23, #0x236a000                       
+0105BBF4  ldr      x21, [x21, #0x208]                     // [0x236B208] 'language'
+0105BBF8  ldr      x22, [x22, #0x210]                     // [0x236B210] 'en'
+0105BBFC  ldr      x29, [x29, #0xc30]                     // [0x236CC30] 'CLASSIC'
+0105BC00  ldr      x28, [x28, #0xc38]                     // [0x236CC38] 'POOLS'
+0105BC04  ldr      x27, [x27, #0xc40]                     // [0x236CC40] 'SPRINGS'
+0105BC08  ldr      x26, [x26, #0xc48]                     // [0x236CC48] 'MECH'
+0105BC0C  ldr      x25, [x25, #0xc50]                     // [0x236CC50] 'JETS'
+0105BC10  ldrb     w8, [x20, #0xe16]                     
+0105BC14  ldr      x24, [x24, #0xc58]                     // [0x236CC58] 'NIGHT'
+0105BC18  ldr      x23, [x23, #0xa60]                     // [0x236AA60] '15'
+0105BC1C  mov      x19, x0                               
+0105BC20  tbnz     w8, #0, #0x105bcbc                    
+0105BC24  adrp     x0, #0x236c000                        
+0105BC28  ldr      x0, [x0, #0xc60]                       // [0x236CC60] '80'
+0105BC2C  bl       #0xe61b78                             
+0105BC30  adrp     x0, #0x236c000                        
+0105BC34  ldr      x0, [x0, #0xc50]                       // [0x236CC50] 'JETS'
+0105BC38  bl       #0xe61b78                             
+0105BC3C  adrp     x0, #0x236c000                        
+0105BC40  ldr      x0, [x0, #0xc38]                       // [0x236CC38] 'POOLS'
+0105BC44  bl       #0xe61b78                             
+0105BC48  adrp     x0, #0x236c000                        
+0105BC4C  ldr      x0, [x0, #0xc58]                       // [0x236CC58] 'NIGHT'
+0105BC50  bl       #0xe61b78                             
+0105BC54  adrp     x0, #0x236c000                        
+0105BC58  ldr      x0, [x0, #0xc30]                       // [0x236CC30] 'CLASSIC'
+0105BC5C  bl       #0xe61b78                             
+0105BC60  adrp     x0, #0x236c000                        
+0105BC64  ldr      x0, [x0, #0xc48]                       // [0x236CC48] 'MECH'
+0105BC68  bl       #0xe61b78                             
+0105BC6C  adrp     x0, #0x236b000                        
+0105BC70  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+0105BC74  bl       #0xe61b78                             
+0105BC78  adrp     x0, #0x236c000                        
+0105BC7C  ldr      x0, [x0, #0xc68]                       // [0x236CC68] '30'
+0105BC80  bl       #0xe61b78                             
+0105BC84  adrp     x0, #0x236b000                        
+0105BC88  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+0105BC8C  bl       #0xe61b78                             
+0105BC90  adrp     x0, #0x236c000                        
+0105BC94  ldr      x0, [x0, #0xc40]                       // [0x236CC40] 'SPRINGS'
+0105BC98  bl       #0xe61b78                             
+0105BC9C  adrp     x0, #0x236a000                        
+0105BCA0  ldr      x0, [x0, #0xa60]                       // [0x236AA60] '15'
+0105BCA4  bl       #0xe61b78                             
+0105BCA8  adrp     x0, #0x236c000                        
+0105BCAC  ldr      x0, [x0, #0xc70]                       // [0x236CC70] '200'
+0105BCB0  bl       #0xe61b78                             
+0105BCB4  mov      w8, #1                                
+0105BCB8  strb     w8, [x20, #0xe16]                     
+0105BCBC  ldr      x0, [x21]                             
+0105BCC0  ldr      x1, [x22]                             
+0105BCC4  mov      x2, xzr                               
+0105BCC8  bl       #0x2001644                             // UnityEngine.PlayerPrefs$$GetString
+0105BCCC  str      x0, [x19, #0x148]                      // self.idiomaActual
+0105BCD0  mov      x0, x19                               
+0105BCD4  bl       #0x105cdb0                             // UIManagerStoreScript$$ObtenerTexto1
+0105BCD8  str      x0, [x19, #0x210]                      // self.tex1
+0105BCDC  mov      x0, x19                               
+0105BCE0  bl       #0x105d474                             // UIManagerStoreScript$$ObtenerTexto2
+0105BCE4  str      x0, [x19, #0x218]                      // self.tex2
+0105BCE8  ldr      x8, [x29]                             
+0105BCEC  mov      x0, x19                               
+0105BCF0  str      x8, [x19, #0x278]                      // self.packName
+0105BCF4  bl       #0x105db60                             // UIManagerStoreScript$$ObtenerTexto3
+0105BCF8  str      x0, [x19, #0x220]                      // self.tex3
+0105BCFC  ldr      x8, [x28]                             
+0105BD00  mov      x0, x19                               
+0105BD04  str      x8, [x19, #0x278]                      // self.packName
+0105BD08  bl       #0x105db60                             // UIManagerStoreScript$$ObtenerTexto3
+0105BD0C  str      x0, [x19, #0x228]                      // self.tex4
+0105BD10  ldr      x8, [x27]                             
+0105BD14  mov      x0, x19                               
+0105BD18  str      x8, [x19, #0x278]                      // self.packName
+0105BD1C  bl       #0x105db60                             // UIManagerStoreScript$$ObtenerTexto3
+0105BD20  str      x0, [x19, #0x230]                      // self.tex5
+0105BD24  ldr      x8, [x26]                             
+0105BD28  mov      x0, x19                               
+0105BD2C  str      x8, [x19, #0x278]                      // self.packName
+0105BD30  bl       #0x105db60                             // UIManagerStoreScript$$ObtenerTexto3
+0105BD34  str      x0, [x19, #0x238]                      // self.tex6
+0105BD38  ldr      x8, [x25]                             
+0105BD3C  mov      x0, x19                               
+0105BD40  str      x8, [x19, #0x278]                      // self.packName
+0105BD44  bl       #0x105db60                             // UIManagerStoreScript$$ObtenerTexto3
+0105BD48  str      x0, [x19, #0x240]                      // self.tex7
+0105BD4C  ldr      x8, [x24]                             
+0105BD50  mov      x0, x19                               
+0105BD54  str      x8, [x19, #0x278]                      // self.packName
+0105BD58  bl       #0x105db60                             // UIManagerStoreScript$$ObtenerTexto3
+0105BD5C  str      x0, [x19, #0x248]                      // self.tex8
+0105BD60  mov      x0, x19                               
+0105BD64  bl       #0x105e408                             // UIManagerStoreScript$$ObtenerTexto4
+0105BD68  str      x0, [x19, #0x250]                      // self.tex9
+0105BD6C  ldr      x8, [x23]                             
+0105BD70  mov      x0, x19                               
+0105BD74  str      x8, [x19, #0x280]                      // self.cantidad
+0105BD78  bl       #0x105eaf4                             // UIManagerStoreScript$$ObtenerTexto5
+0105BD7C  str      x0, [x19, #0x258]                      // self.tex10
+0105BD80  adrp     x8, #0x236c000                        
+0105BD84  ldr      x8, [x8, #0xc68]                       // [0x236CC68] '30'
+0105BD88  mov      x0, x19                               
+0105BD8C  ldr      x8, [x8]                              
+0105BD90  str      x8, [x19, #0x280]                      // self.cantidad
+0105BD94  bl       #0x105eaf4                             // UIManagerStoreScript$$ObtenerTexto5
+0105BD98  str      x0, [x19, #0x260]                      // self.tex11
+0105BD9C  adrp     x8, #0x236c000                        
+0105BDA0  ldr      x8, [x8, #0xc60]                       // [0x236CC60] '80'
+0105BDA4  mov      x0, x19                               
+0105BDA8  ldr      x8, [x8]                              
+0105BDAC  str      x8, [x19, #0x280]                      // self.cantidad
+0105BDB0  bl       #0x105eaf4                             // UIManagerStoreScript$$ObtenerTexto5
+0105BDB4  str      x0, [x19, #0x268]                      // self.tex12
+0105BDB8  adrp     x8, #0x236c000                        
+0105BDBC  ldr      x8, [x8, #0xc70]                       // [0x236CC70] '200'
+0105BDC0  mov      x0, x19                               
+0105BDC4  ldr      x8, [x8]                              
+0105BDC8  str      x8, [x19, #0x280]                      // self.cantidad
+0105BDCC  bl       #0x105eaf4                             // UIManagerStoreScript$$ObtenerTexto5
+0105BDD0  ldr      x8, [x19, #0x150]                      // self.texto1_1
+0105BDD4  str      x0, [x19, #0x270]                      // self.tex13
+0105BDD8  cbz      x8, #0x105c090                        
+0105BDDC  ldr      x9, [x8]                              
+0105BDE0  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BDE4  mov      x0, x8                                
+0105BDE8  ldr      x10, [x9, #0x5e8]                     
+0105BDEC  ldr      x2, [x9, #0x5f0]                      
+0105BDF0  blr      x10                                   
+0105BDF4  ldr      x0, [x19, #0x158]                      // self.texto1_2
+0105BDF8  cbz      x0, #0x105c090                        
+0105BDFC  ldr      x8, [x0]                              
+0105BE00  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BE04  ldr      x9, [x8, #0x5e8]                      
+0105BE08  ldr      x2, [x8, #0x5f0]                      
+0105BE0C  blr      x9                                    
+0105BE10  ldr      x0, [x19, #0x160]                      // self.texto1_3
+0105BE14  cbz      x0, #0x105c090                        
+0105BE18  ldr      x8, [x0]                              
+0105BE1C  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BE20  ldr      x9, [x8, #0x5e8]                      
+0105BE24  ldr      x2, [x8, #0x5f0]                      
+0105BE28  blr      x9                                    
+0105BE2C  ldr      x0, [x19, #0x168]                      // self.texto1_4
+0105BE30  cbz      x0, #0x105c090                        
+0105BE34  ldr      x8, [x0]                              
+0105BE38  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BE3C  ldr      x9, [x8, #0x5e8]                      
+0105BE40  ldr      x2, [x8, #0x5f0]                      
+0105BE44  blr      x9                                    
+0105BE48  ldr      x0, [x19, #0x170]                      // self.texto1_5
+0105BE4C  cbz      x0, #0x105c090                        
+0105BE50  ldr      x8, [x0]                              
+0105BE54  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BE58  ldr      x9, [x8, #0x5e8]                      
+0105BE5C  ldr      x2, [x8, #0x5f0]                      
+0105BE60  blr      x9                                    
+0105BE64  ldr      x0, [x19, #0x178]                      // self.texto1_6
+0105BE68  cbz      x0, #0x105c090                        
+0105BE6C  ldr      x8, [x0]                              
+0105BE70  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BE74  ldr      x9, [x8, #0x5e8]                      
+0105BE78  ldr      x2, [x8, #0x5f0]                      
+0105BE7C  blr      x9                                    
+0105BE80  ldr      x0, [x19, #0x180]                      // self.texto1_7
+0105BE84  cbz      x0, #0x105c090                        
+0105BE88  ldr      x8, [x0]                              
+0105BE8C  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BE90  ldr      x9, [x8, #0x5e8]                      
+0105BE94  ldr      x2, [x8, #0x5f0]                      
+0105BE98  blr      x9                                    
+0105BE9C  ldr      x0, [x19, #0x188]                      // self.texto1_8
+0105BEA0  cbz      x0, #0x105c090                        
+0105BEA4  ldr      x8, [x0]                              
+0105BEA8  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BEAC  ldr      x9, [x8, #0x5e8]                      
+0105BEB0  ldr      x2, [x8, #0x5f0]                      
+0105BEB4  blr      x9                                    
+0105BEB8  ldr      x0, [x19, #0x190]                      // self.texto1_9
+0105BEBC  cbz      x0, #0x105c090                        
+0105BEC0  ldr      x8, [x0]                              
+0105BEC4  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BEC8  ldr      x9, [x8, #0x5e8]                      
+0105BECC  ldr      x2, [x8, #0x5f0]                      
+0105BED0  blr      x9                                    
+0105BED4  ldr      x0, [x19, #0x198]                      // self.texto1_10
+0105BED8  cbz      x0, #0x105c090                        
+0105BEDC  ldr      x8, [x0]                              
+0105BEE0  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BEE4  ldr      x9, [x8, #0x5e8]                      
+0105BEE8  ldr      x2, [x8, #0x5f0]                      
+0105BEEC  blr      x9                                    
+0105BEF0  ldr      x0, [x19, #0x1a0]                      // self.texto1_11
+0105BEF4  cbz      x0, #0x105c090                        
+0105BEF8  ldr      x8, [x0]                              
+0105BEFC  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BF00  ldr      x9, [x8, #0x5e8]                      
+0105BF04  ldr      x2, [x8, #0x5f0]                      
+0105BF08  blr      x9                                    
+0105BF0C  ldr      x0, [x19, #0x1a8]                      // self.texto1_12
+0105BF10  cbz      x0, #0x105c090                        
+0105BF14  ldr      x8, [x0]                              
+0105BF18  ldr      x1, [x19, #0x210]                      // self.tex1
+0105BF1C  ldr      x9, [x8, #0x5e8]                      
+0105BF20  ldr      x2, [x8, #0x5f0]                      
+0105BF24  blr      x9                                    
+0105BF28  ldr      x0, [x19, #0x1b0]                      // self.texto1
+0105BF2C  cbz      x0, #0x105c090                        
+0105BF30  ldr      x8, [x0]                              
+0105BF34  ldr      x1, [x19, #0x218]                      // self.tex2
+0105BF38  ldr      x9, [x8, #0x5e8]                      
+0105BF3C  ldr      x2, [x8, #0x5f0]                      
+0105BF40  blr      x9                                    
+0105BF44  ldr      x0, [x19, #0x1b8]                      // self.texto2
+0105BF48  cbz      x0, #0x105c090                        
+0105BF4C  ldr      x8, [x0]                              
+0105BF50  ldr      x1, [x19, #0x220]                      // self.tex3
+0105BF54  ldr      x9, [x8, #0x5e8]                      
+0105BF58  ldr      x2, [x8, #0x5f0]                      
+0105BF5C  blr      x9                                    
+0105BF60  ldr      x0, [x19, #0x1c0]                      // self.texto3
+0105BF64  cbz      x0, #0x105c090                        
+0105BF68  ldr      x8, [x0]                              
+0105BF6C  ldr      x1, [x19, #0x228]                      // self.tex4
+0105BF70  ldr      x9, [x8, #0x5e8]                      
+0105BF74  ldr      x2, [x8, #0x5f0]                      
+0105BF78  blr      x9                                    
+0105BF7C  ldr      x0, [x19, #0x1c8]                      // self.texto4
+0105BF80  cbz      x0, #0x105c090                        
+0105BF84  ldr      x8, [x0]                              
+0105BF88  ldr      x1, [x19, #0x230]                      // self.tex5
+0105BF8C  ldr      x9, [x8, #0x5e8]                      
+0105BF90  ldr      x2, [x8, #0x5f0]                      
+0105BF94  blr      x9                                    
+0105BF98  ldr      x0, [x19, #0x1d0]                      // self.texto5
+0105BF9C  cbz      x0, #0x105c090                        
+0105BFA0  ldr      x8, [x0]                              
+0105BFA4  ldr      x1, [x19, #0x238]                      // self.tex6
+0105BFA8  ldr      x9, [x8, #0x5e8]                      
+0105BFAC  ldr      x2, [x8, #0x5f0]                      
+0105BFB0  blr      x9                                    
+0105BFB4  ldr      x0, [x19, #0x1d8]                      // self.texto6
+0105BFB8  cbz      x0, #0x105c090                        
+0105BFBC  ldr      x8, [x0]                              
+0105BFC0  ldr      x1, [x19, #0x240]                      // self.tex7
+0105BFC4  ldr      x9, [x8, #0x5e8]                      
+0105BFC8  ldr      x2, [x8, #0x5f0]                      
+0105BFCC  blr      x9                                    
+0105BFD0  ldr      x0, [x19, #0x1e0]                      // self.texto7
+0105BFD4  cbz      x0, #0x105c090                        
+0105BFD8  ldr      x8, [x0]                              
+0105BFDC  ldr      x1, [x19, #0x248]                      // self.tex8
+0105BFE0  ldr      x9, [x8, #0x5e8]                      
+0105BFE4  ldr      x2, [x8, #0x5f0]                      
+0105BFE8  blr      x9                                    
+0105BFEC  ldr      x0, [x19, #0x1e8]                      // self.texto8
+0105BFF0  cbz      x0, #0x105c090                        
+0105BFF4  ldr      x8, [x0]                              
+0105BFF8  ldr      x1, [x19, #0x250]                      // self.tex9
+0105BFFC  ldr      x9, [x8, #0x5e8]                      
+0105C000  ldr      x2, [x8, #0x5f0]                      
+0105C004  blr      x9                                    
+0105C008  ldr      x0, [x19, #0x1f0]                      // self.texto9
+0105C00C  cbz      x0, #0x105c090                        
+0105C010  ldr      x8, [x0]                              
+0105C014  ldr      x1, [x19, #0x258]                      // self.tex10
+0105C018  ldr      x9, [x8, #0x5e8]                      
+0105C01C  ldr      x2, [x8, #0x5f0]                      
+0105C020  blr      x9                                    
+0105C024  ldr      x0, [x19, #0x1f8]                      // self.texto10
+0105C028  cbz      x0, #0x105c090                        
+0105C02C  ldr      x8, [x0]                              
+0105C030  ldr      x1, [x19, #0x260]                      // self.tex11
+0105C034  ldr      x9, [x8, #0x5e8]                      
+0105C038  ldr      x2, [x8, #0x5f0]                      
+0105C03C  blr      x9                                    
+0105C040  ldr      x0, [x19, #0x200]                      // self.texto11
+0105C044  cbz      x0, #0x105c090                        
+0105C048  ldr      x8, [x0]                              
+0105C04C  ldr      x1, [x19, #0x268]                      // self.tex12
+0105C050  ldr      x9, [x8, #0x5e8]                      
+0105C054  ldr      x2, [x8, #0x5f0]                      
+0105C058  blr      x9                                    
+0105C05C  ldr      x0, [x19, #0x208]                      // self.texto12
+0105C060  cbz      x0, #0x105c090                        
+0105C064  ldr      x8, [x0]                              
+0105C068  ldr      x1, [x19, #0x270]                      // self.tex13
+0105C06C  ldp      x20, x19, [sp, #0x50]                 
+0105C070  ldp      x22, x21, [sp, #0x40]                 
+0105C074  ldr      x3, [x8, #0x5e8]                      
+0105C078  ldr      x2, [x8, #0x5f0]                      
+0105C07C  ldp      x24, x23, [sp, #0x30]                 
+0105C080  ldp      x26, x25, [sp, #0x20]                 
+0105C084  ldp      x28, x27, [sp, #0x10]                 
+0105C088  ldp      x29, x30, [sp], #0x60                 
+0105C08C  br       x3                                    
+0105C090  bl       #0xe61da0                             

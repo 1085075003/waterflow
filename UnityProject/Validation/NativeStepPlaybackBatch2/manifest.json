@@ -1,0 +1,78 @@
+{
+  "createdUtc": "2026-10-16T01:27:47.134135+00:00",
+  "scope": "Immutable staging only. Main Assets are untouched. Preserve existing core camera fixes by replacing only exact base 99d31...; reject divergent base and merge explicitly.",
+  "runtimeCompile": "Roslyn full runtime0 errors, native-step-playback-compile.rsp",
+  "editorCompile": "Roslyn editor0 errors, native-step-playback-editor-compile.rsp",
+  "actualUnityValidation": "Not yet run. Root launches isolated clone only.",
+  "files": [
+    {
+      "path": "Assets/Scripts/RecoveryRuntime/RecoveredNativeStepPlayback.cs",
+      "source": "Validation/NativeStepPlaybackBatch2/Assets/Scripts/RecoveryRuntime/RecoveredNativeStepPlayback.cs",
+      "sha256": "3d995b7ea506568386336be5473ac54db7c45c2dfd53e6bf7ceb9fe72eaadcce",
+      "baseSha256": null
+    },
+    {
+      "path": "Assets/Scripts/RecoveryRuntime/RecoveredNativeStepPlayback.cs.meta",
+      "source": "Validation/NativeStepPlaybackBatch2/Assets/Scripts/RecoveryRuntime/RecoveredNativeStepPlayback.cs.meta",
+      "sha256": "c50cfa6a27c7dfc279af4d8e96f87f57499af551c30eede75676d34bb5541722",
+      "baseSha256": null
+    },
+    {
+      "path": "Assets/Scripts/RecoveryRuntime/RecoveredFlowGame.cs",
+      "source": "Validation/NativeStepPlaybackBatch2/Assets/Scripts/RecoveryRuntime/RecoveredFlowGame.cs",
+      "sha256": "8e90f07f9e6c19c347deb6b3f0c90dfb9fbb6715a9fe73fedb4d5e8f0a665bc4",
+      "baseSha256": "99d31d648615ed9e6fe001d41e1d1ec5a0b343491c5222a6a51e1c4bc55ce0bf"
+    },
+    {
+      "path": "Assets/Editor/RecoveredTools/FlowWaterStepPlaybackValidation.cs",
+      "source": "Validation/NativeStepPlaybackBatch2/Assets/Editor/RecoveredTools/FlowWaterStepPlaybackValidation.cs",
+      "sha256": "f27ee5130bd922205764f1540e24e616076d7e7b7a29f98b0cc19bdb8d22c81c",
+      "baseSha256": null
+    },
+    {
+      "path": "Assets/Editor/RecoveredTools/FlowWaterStepPlaybackValidation.cs.meta",
+      "source": "Validation/NativeStepPlaybackBatch2/Assets/Editor/RecoveredTools/FlowWaterStepPlaybackValidation.cs.meta",
+      "sha256": "f6dacf02079cd4aa8a801e40054e7734423766f9b8636cde152d35f64ea9c81c",
+      "baseSha256": null
+    }
+  ],
+  "entrypoints": [
+    "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.Run",
+    "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.RunMechanisms",
+    "Recovered.FlowWater.Editor.FlowWaterStepPlaybackValidation.RunLifts"
+  ],
+  "api": [
+    "Game.IsSolutionStepAnimating",
+    "Game.IsSolutionPlaybackRunning",
+    "Game.NativeSolutionPhase",
+    "Game.EnterSolutionPreview(true): original gm mode0 rebuild +2 scaled second startup +automatic whole Save1 chain",
+    "Game.Undo: cancel current animation and pause recording at original pre-step snapshot",
+    "Game.ExitSolutionPreview: cancel animation then restore pre-preview actors/pose/rotation/history/springs/mechanisms/water and camera hooks",
+    "Playback.CaptureState/RestoreState preserve active phase/route/selected body/guide/water gate + persistent altitude/strict auto-w state"
+  ],
+  "nativeCoverage": {
+    "movement": "MoveBloque.HandleStepsSolution10341F4/doProcess1Solution103494C/doProcess2Solution1034EE8/doProcess3Solution103509C/doProcessMoveSolu10352BC",
+    "normalLerpSpeed": "serialized smoothSpeed3=2.2; body layer12 at distance<.8; ungate phase3 at<.5; exact final snap at<.1",
+    "roofRoute": "doBuscarCamino102F428/doCheckCamino1032BBC/DoMoverArriba10320E0/DoMoverAbajo102F2F8/doMovimiento10332D0; MoveTowards smoothSpeed2=28 except last-down Lerp smoothSpeed1=2.6; original persistent variay, direction priority, fallback hiding",
+    "exceptions": "a/b/c/d persist altitude7/14/21/28. r adds1.2 only phase2+guide; phase3 rereads raw destination. z skipscapture. Same-cell non-z captures normally. w strict busy1->idle2 AFTER selecting layer2 and gating source.",
+    "continuousPlayback": "SaveLoadManager.okSteps1020E98 invokes doMoveBloque2 after2scaled sec. MoveBloque.HandleSolution102E854..8DC advances phase9->next phase1 automatically.",
+    "uiDependency": "Presentation stages original stepsButton disabled; backButton1 disabled initially then restored at6scaled seconds by backbutton2. This batch deliberately contains no UI file."
+  },
+  "tests": [
+    "Run: actual UI showSolution/okSolution/okSteps then frame displacement/cursor phase checks, in-flight Snapshot restore, Undo pause, actual exit, restart and full automatic chain in gm601/1851/1129. No transform/bus/water writes.",
+    "RunMechanisms: same actual input flow in gm1656 covers strict automatic-w. Does not relax wait to mode0 player strategy.",
+    "RunLifts: gm1129(a),1754(b),1961(c); raw data has no d case. d branch still direct native transcription, not claimed actual case coverage."
+  ],
+  "limitations": [
+    "Unity actual result pending; import is reviewable code, not a declaration of completed fidelity.",
+    "Native missing step capture stalls and is reported, never fabricated or silently skipped.",
+    "These are automatic preview tests, not normal gameplay completion proof; NativeAll800 separately tests real legal player dragging."
+  ],
+  "supersedes": "NativeStepPlaybackBatch1; immutable previous batch retained",
+  "additionalFixes": [
+    "Keep native modoSolucion2 throughout automatic phase9/phase1 transitions; final mode3 only after all records.",
+    "Snapshot includes movementMode and restores previous mode on Exit, including native camera drag gate semantics.",
+    "Native final animator original.animBack.enabled=true at recorded completion.",
+    "Editor actual input checks mode2 and restores exact original mode."
+  ]
+}

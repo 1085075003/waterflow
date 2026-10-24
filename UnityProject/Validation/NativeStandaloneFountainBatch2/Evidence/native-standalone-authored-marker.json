@@ -1,0 +1,28 @@
+{
+  "correction": "All four original PiedraFuente7 color prefabs have esferaSalida activeSelf=true and authored tag=color1. Start unconditionally changes tag to colorN without changing activeSelf. Thus default original sources can supply under initial Font visual obstruction. The inactive marker fixture is explicitly a component perturbation, not default original behavior.",
+  "prefabs": {
+    "Azul": {
+      "sourceColor": 1,
+      "markerActiveSelf": true,
+      "authoredTag": "color1"
+    },
+    "Verde": {
+      "sourceColor": 2,
+      "markerActiveSelf": true,
+      "authoredTag": "color1"
+    },
+    "Z": {
+      "sourceColor": 3,
+      "markerActiveSelf": true,
+      "authoredTag": "color1"
+    },
+    "Ro": {
+      "sourceColor": 4,
+      "markerActiveSelf": true,
+      "authoredTag": "color1"
+    }
+  },
+  "nativeStart": "FD4EBC loads esferaSalida; FD4EC4 activa=1; FD4EC8 creada=false; FD4F1C set_tag(colorN); no SetActive(false)",
+  "nativeCreate": "FD51CC SetActive(true) may re-enable previously inactive marker, but is not the only reason default authored marker is active",
+  "runtime": "NativeStandaloneFountainBatch1 actual marker state predicate already accepts authored active default. Batch2 only adds unconditional original Start tag field chain before first Font; it does not force activeSelf."
+}

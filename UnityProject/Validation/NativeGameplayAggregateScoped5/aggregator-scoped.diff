@@ -1,0 +1,30 @@
+--- Batch4/aggregate_native_gameplay.py
++++ Scoped5/aggregate_native_gameplay.py
+@@ -475,6 +475,13 @@
+         for hash_key in ("baseSha256", "otherSha256"):
+             if approval.get(hash_key) is not None:
+                 sha(approval[hash_key], f"difference {hash_key}")
++        if "onlyReportSha256" in approval:
++            scope = approval["onlyReportSha256"]
++            ensure(isinstance(scope, list) and scope and all(isinstance(item, str) for item in scope)
++                   and len(set(scope)) == len(scope), "Invalid report-scoped difference approval")
++            for report_sha in scope:
++                sha(report_sha, "scoped difference report SHA256")
++            ensure(set(scope) <= set(indexed), "Scoped difference approval names an unbound report")
+         approval_map[key] = approval
+     visual_map = {}
+     visual_approvals = data.get("exactVisualScrollDifferences", [])
+@@ -505,8 +512,12 @@
+                 actual_differences.append({"reportSha256": report_digest, **visual_map[approval_key]})
+                 continue
+             ensure(approval_key in approval_map, f"Unreviewed runtime/config difference: {key} ({label})")
++            approval = approval_map[approval_key]
++            if "onlyReportSha256" in approval:
++                ensure(report_digest in approval["onlyReportSha256"],
++                       f"Difference approval is scoped to other closed reports: {key} ({label})")
+             used_approvals.add(approval_key)
+-            actual_differences.append({"reportSha256": report_digest, **approval_map[approval_key]})
++            actual_differences.append({"reportSha256": report_digest, **approval})
+     ensure(used_approvals == set(approval_map), "Unused difference approval: exact current comparisons required")
+     ensure(used_visual == set(visual_map), "Unused exact UV approval: exact current comparisons required")
+     input_path, input_data, input_digest = evidence_file(interaction.get("report"), path.parent)

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "createdUtc": "2026-10-16T09:32:41.273929+00:00",
+  "scope": "Independent strict169 affected recipe plus history coverage, never800 replacement",
+  "script": {
+    "path": "Validation/aggregate_native_recipe_regression.py",
+    "sha256": "21e9fe478b04fc1a8c3f3231892b68f2a3ce4d5a5baa02eb5f9208948c79dbfc"
+  },
+  "tests": {
+    "path": "Validation/test_aggregate_native_recipe_regression.py",
+    "sha256": "f42ebbe7d6a21f33c46db948e730cadc75be948d108f2d62264c4ab83cc60c9b",
+    "kind": "Offline synthetic boundaries plus readonly original raw/decoded data binding",
+    "passed": true,
+    "testsRun": 11,
+    "durationSeconds": 1.03
+  },
+  "dependency": {
+    "path": "Validation/NativeGameplayAggregateScoped5/aggregate_native_gameplay.py",
+    "sha256": "1376fce6aae8cecf99cc3821ccb897368c67ed8fffd6303db9168e26985926fc"
+  },
+  "preparedRequest": {
+    "path": "Validation/FinalValidationPlan/native-recipe-regression-request.json",
+    "sha256": "a20f63421380c5b04b22817346aca77725ba58f7cb8b57b17c0215a8fb2ee994"
+  },
+  "expectedOriginal169RecordedSteps": 2616,
+  "readonlyPriorReportCheck": "Existing two400 reports were read only to verify the exact169 original origin/destination/exception array bindings and2616 original record inventory. This is not new169 runtime coverage.",
+  "canonicalOutput": "Validation/FinalGameplay/native-recipe-regression-coverage.json",
+  "standardOutputFields": [
+    "startedUtc",
+    "finishedUtc",
+    "sourceFinishedUtc",
+    "unityVersion",
+    "passed",
+    "plannedLevels",
+    "levels",
+    "checks",
+    "selectedRecordedSteps",
+    "preferencesRestored",
+    "originalTimeScale",
+    "runtimeErrors"
+  ],
+  "usage": [
+    "No Assets import or Unity launch is required. Run only after base and every supplied failed-source retest report is fully closed.",
+    "python Validation/aggregate_native_recipe_regression.py --request Validation/FinalValidationPlan/native-recipe-regression-request.json --base Validation/FinalGameplay/NativeRecipeRegression1/save1-gameplay-validation.json --retest CLOSED_RETEST_REPORT --bindings BINDINGS_JSON --output Validation/FinalGameplay/native-recipe-regression-coverage.json",
+    "bindings JSON shape: {\"runs\":[{\"reportSha256\":\"EXACT_REPORT_SHA\",\"queueEvidence\":{\"path\":\"ABSOLUTE_OR_BINDINGS_RELATIVE_QUEUE_RUN_JSON\",\"sha256\":\"EXACT_CLOSED_QUEUE_SHA\"}}]}. Bind every base/retest exactly once; no unused entries.",
+    "Each queue must bind the fresh primary report SHA and closed times; source-before/after snapshot hashes must bracket the run and contain identical complete files dictionaries. All supplied runs must use the same complete source file dictionary, including Editor, Runtime, Resources JSON and Settings. No compatibility waiver is supported.",
+    "Retests must be original-base-failed-only and exactly replay the closed failed IDs from their explicit source SHA. A later failed retest is retained as latest; it cannot be hidden by an earlier success.",
+    "The original800/11919 data catalog is pinned. Selected reported step count/actual production transactions/pose/native target victory use Scoped5 unchanged. Every available reported origin/destination/exception is additionally checked against original Save1 decoded data, whose complete hashes match the catalog and whose original bytes provenance SHA matches actual raw bytes.",
+    "This source has no successful fresh169 coverage output yet; the currently running base remains unfinished and cannot be aggregated."
+  ],
+  "unityLaunched": false,
+  "assetsModified": false,
+  "existingReportsModified": false
+}

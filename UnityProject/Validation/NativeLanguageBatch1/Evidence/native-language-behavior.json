@@ -1,0 +1,70 @@
+{
+  "originalLibrarySha256": "cadee25e966aa53892446710207d2048624cc52421d84f6349e0ecb2ab66097a",
+  "startup": {
+    "methodVA": "0x1037378",
+    "condition": "UIManagerPortScript.callingScene == 0",
+    "operation": "doLanguage reads Application.systemLanguage then overwrites and saves PlayerPrefs language",
+    "returnRoutesSetCallingScene": 1,
+    "mappedSystemLanguageTableVA": "0x22537E0",
+    "EnglishBaseline": "Fixture explicitly chooses language=en and callingScene=1; real startup continues native OS mapping."
+  },
+  "buttons": {
+    "Portada": {
+      "methodVA": "0x1038308",
+      "cycle": "20 native codes from old index0..19; old20 sets es and resets index1; others en",
+      "effect": "TxtLang.text and PlayerPrefs.SetString(language,code)+Save only, no invented dropdown or automatic scene reload"
+    },
+    "SelLevel0": {
+      "methodVA": "0x1048584",
+      "tableVA": "0x2253908",
+      "cycle": "20 native codes from old index0..19; old>=20 en forever until new component; native lacks reset",
+      "effect": "same two assignments/save only"
+    }
+  },
+  "fonts": {
+    "allNineScenesFontGuid": "020300d35ea7f0140b1cf91673d8bdad",
+    "asset": "Assets/Font/playtime.ttf",
+    "nativeFontSwaps": "No font-asset selection in extracted language helpers. No English replacement introduced. Unicode OS fallback remains an actual Unity check, not an assumption."
+  },
+  "arabic": {
+    "SolutionLang.Start": "native reverses char sequence before assigning texto1a.text",
+    "noMoreLang.Start": "native reverses char sequence before assigning texto1.text",
+    "HelpRotate": "already restored; reverses getters, whose ar uses English fallback",
+    "rateUsLang/exitLang/Opt/Store": "no added reverse or new Arabic shaping inferred"
+  },
+  "settingsLang": {
+    "sceneInstances": 0,
+    "StartOnlyComputes": [
+      2,
+      3,
+      6
+    ],
+    "unusedNullFields": [
+      1,
+      4,
+      5
+    ],
+    "fontsizeRule": "maximum length of texto4/5 <=6 ->31; <=10 ->27; else24; both fontSize+resizeTextMaxSize",
+    "restoration": "preserves this unused original quirk; actual Settings uses UIManagerOptScript and writes2/3/6/7"
+  },
+  "designer": {
+    "originalBuildScenes": 9,
+    "designerScenePresent": false,
+    "designerComponentsAttached": false,
+    "deadClasses": [
+      "UIManagerScriptDesign",
+      "SaveLoadManagerDesign",
+      "MoveBloqueDesign",
+      "MoveBloqueDesign2"
+    ],
+    "restoredControls": "UIManagerSelScript0 panelDesign toggle, access1/2/3/4 sequence, panelDesign0; UIManagerSelScript simple var_design1/2/3 and var_solucion1/2 selectors",
+    "route": "UIManagerSelScript0.botonPartDown at1041A98 and1042904..2940 routes even nonzero var_design to original SelLevel1. No new editor scene or editing capability invented."
+  },
+  "translationCoverage": {
+    "getterMethods": 29,
+    "evaluatedInputsPerMethod": 22,
+    "strings": 638,
+    "unsupported": 0
+  },
+  "verificationStatus": "Roslyn compilation only so far. Actual Unity glyphs/screenshots/native controls remain to be executed by root."
+}

@@ -1,0 +1,29 @@
+--- Assets/Editor/RecoveredTools/FlowWaterNativeGeometryStackValidation.cs Pose2
++++ Assets/Editor/RecoveredTools/FlowWaterNativeGeometryStackValidation.cs Pose3
+@@ -34,6 +34,8 @@
+             public List<string> errors=new List<string>();
+         }
+         [Serializable] sealed class Request { public int[] ids; }
++        [Serializable] sealed class OriginalLayout { public OriginalData data; }
++        [Serializable] sealed class OriginalData { public string[] pieza,fijo; }
+         static Report report;
+         static readonly HashSet<int> observed=new HashSet<int>();
+         static int waitingLevel=-1,loadedFrame;
+@@ -100,12 +102,14 @@
+         static void ObserveInitialProxyAbsent(RecoveredFlowGame game,int record)
+         {
+             RecoveryPiece piece=game.PieceRoot.GetComponentsInChildren<RecoveryPiece>(true).FirstOrDefault(x=>x.SourceRecordIndex==record);
+-            bool proxy=piece!=null && piece.OriginalConfiguration!=null && piece.OriginalConfiguration.Contains("st9et");
+-            CheckState("634:35:original-st9-preview-proxy-identity",proxy,"Original gm634 record35 Ist9, distinct from active st1 record0 at sameXZ");
++            OriginalLayout original=JsonUtility.FromJson<OriginalLayout>(File.ReadAllText(Path.Combine(Application.dataPath,"RecoveredData/LevelData/01_Layouts/gm634.json")));
++            bool proxy=original!=null && original.data!=null && original.data.pieza.Length>record && original.data.fijo.Length>record &&
++                original.data.pieza[record]=="CuFuenteEB5Col1" && original.data.fijo[record]=="Ist9etsz8ezsr2100305162ersh0000eh";
++            CheckState("634:35:original-st9-preview-proxy-identity",proxy,"Source gm634 layout record35 CuFuenteEB5Col1 Ist9; mode0 legitimately does not instantiate this RecoveryPiece");
+             ControlPiezaC source=piece==null?null:piece.GetComponent<ControlPiezaC>();
+             GameObject instance=source==null?null:source.obj7;
+             CheckState("634:35:native-mode0-does-not-create-preview-Palo",!game.IsSolutionPreview && instance==null,
+-                "Mode0 initial st9 final-preview proxy must not instantiate obj7; active st1 record0 above is separately positively tested");
++                "Mode0 initial st9 final-preview proxy/obj7 absent; active st1 record0 above is separately positively tested; runtimeRecordPresent="+(piece!=null));
+         }
+         static void Observe(RecoveredFlowGame game,int record,string field,Vector3? expectedPosition,Vector3 expectedScale,Quaternion? expectedRotation)
+         {

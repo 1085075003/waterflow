@@ -1,0 +1,47 @@
+{
+  "status": "Native timing evidence; full graph integration pending basic regression",
+  "units": "Unity scaled seconds, matching MonoBehaviour.Invoke",
+  "entry": {
+    "FuenteTest1": {"methodVA":"0x109F54C","action":"Create arrival water immediately; Invoke doActivarEsfera after selected origin.espera","invokeVA":"0x109F8E0"},
+    "FuenteTest3": {"methodVA":"0x10A4C08","action":"Create arrival and configured fountain immediately; count fountain immediately at actual entry; Invoke doActivarEsfera after selected origin.espera","invokeVA":"0x10A4EF0"},
+    "FuenteCubeta2": {"methodVA":"0x109878C","action":"On first nondeferred intake Invoke doActivarEsfera after selected origin.espera","invokeVA":"0x10989C0","activateVA":"0x1098A80","activatedObjects":["esferaFuente1","Fuente1.CascadaTest1.activa=1"]}
+  },
+  "serializedOriginDelays": {
+    "AguaControl5/FuenteTest1": {"sideEspera":1.5,"verticalEspera":0.4,"sideEspera1":1.6,"verticalEspera2":0.5},
+    "AguaControl5C/FuenteTest3": {"sideEspera":1.5,"topEspera":0.4,"bottomEspera":0.4,"sideEspera1":1.5,"topEspera2":0.4,"bottomEspera2":0.5},
+    "AguaControlPFuente/FuenteCubeta2": {"espera":1},
+    "AguaControlCubetaB/FuenteCubetaB": {"sideEspera":2,"topEspera":0.4}
+  },
+  "COutputPhases": {
+    "methodVA":"0x10A6DBC",
+    "invokeSecondaryVA":"0x10A702C",
+    "secondaryMethodVA":"0x10A8AC0",
+    "secondaryDelay":0.1,
+    "initial": {"incoming1or3or5or6":[1,3,6],"incoming2or4":[2,4,6]},
+    "secondary": {"incoming1or3or5or6":[2,4],"incoming2or4":[1,3]},
+    "cascadesAndJets":"After initial output phase; cascades use individual native activation delay, jets callback immediately once checkWater and height<=2"
+  },
+  "cascadeExit": {
+    "CascadaTest2_source": {"methodVA":"0xFD4414","invokeVA":"0xFD48E8","delay":1},
+    "CascadaTest_regular": {"methodVA":"0xFD0D34","invokeVA":"0xFD18F0","tableVA":"0x621140","altura1to5":[1,1,1,1.1,1.2]},
+    "CascadaTest_bottom": {"methodVA":"0xFD09A0","invokeVA":"0xFD0CF8","tableVA":"0x621140","altura1to5":[1,1,1,1.1,1.2]},
+    "CascadaTest_specialFall": {"methodVA":"0xFD0D34","invokeVA":"0xFD1564","altura1to5":[1,1.2,1.4,1.5,1.6]},
+    "warning":"Existing renderer clamps height to1..5; a faithful scheduler must use the actual selected native cascade height branch, not arbitrary per-level delay"
+  },
+  "jetExit": {
+    "CascadaTestE": {"controllerVA":"0xFDA5D4","activateVA":"0xFDBE48","callback":"doControlChorro calls doActivarEsferaSalida directly after doCrearChorro/controlParticle when checkWater=true and altura<=2; no Invoke delay here","unusedForDelivery":"esperaEsfera is assigned by some particle branches but is not consumed by this output callback"}
+  },
+  "sourcePriming": {
+    "activaEsfera":"Original Start schedules activaEsfera1 after0.5s; source entry begins then",
+    "CascadaTest3":"PiedraFuente7 has direct authored emitter; Start sets activa1, no ordinary channel entry delay"
+  },
+  "integrationRequirements": [
+    "Entering actual node starts A mesh and correct target count; graph reachability alone does not count or render it",
+    "Output timers use selected original FuenteTest instance fields and native secondary/cascade callbacks",
+    "Use scaled Time.time; preserve enteredAt on unchanged existing channels so unrelated moves do not restart every waterfall",
+    "Disconnect invalidates pending downstream outputs and hides/uncounts nodes whose original trigger supply exited",
+    "Coincident independent input triggers receive the same event; channels inside a crossing remain separate",
+    "Capture and restore entered state plus timer remaining durations for undo and final-preview return",
+    "Validation must wait for actual pending native output events and native51-frame completion, with a bounded timeout; no forced all-wet shortcut"
+  ]
+}

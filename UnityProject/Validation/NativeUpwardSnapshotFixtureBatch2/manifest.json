@@ -1,0 +1,51 @@
+{
+  "batch": "NativeUpwardSnapshotFixtureBatch2",
+  "immutable": true,
+  "createdUtc": "2026-10-16T04:18:30.677008+00:00",
+  "dependsOn": [
+    "NativePfuenteOcclusionBatch1",
+    "NativeStandaloneFountainBatch1"
+  ],
+  "status": "Both full Editor assemblies Roslyn0errors; actual repeat pending root",
+  "entries": [
+    "Recovered.FlowWater.Editor.FlowWaterPfuenteOcclusionValidation.Run",
+    "Recovered.FlowWater.Editor.FlowWaterStandaloneFountainValidation.Run"
+  ],
+  "files": [
+    {
+      "source": "Validation/NativeUpwardSnapshotFixtureBatch2/Assets/Editor/RecoveredTools/FlowWaterPfuenteOcclusionValidation.cs",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterPfuenteOcclusionValidation.cs",
+      "sha256": "53aae320b595f7fb9da830b8c8cf836b5f90196f1e23f466ab6a36c5edb2fa5b",
+      "previousSha256": "285d35c9bbb2040f79cfff2389ccd252c9b1806415bfc4db934f6bc521f7046e"
+    },
+    {
+      "source": "Validation/NativeUpwardSnapshotFixtureBatch2/Assets/Editor/RecoveredTools/FlowWaterPfuenteOcclusionValidation.cs.meta",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterPfuenteOcclusionValidation.cs.meta",
+      "sha256": "e57e59d8d3a29caa0630f84c2552f08dec3c38dc2b9a6e79e0b72d4d5ce367ad",
+      "previousSha256": "e57e59d8d3a29caa0630f84c2552f08dec3c38dc2b9a6e79e0b72d4d5ce367ad"
+    },
+    {
+      "source": "Validation/NativeUpwardSnapshotFixtureBatch2/Assets/Editor/RecoveredTools/FlowWaterStandaloneFountainValidation.cs",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterStandaloneFountainValidation.cs",
+      "sha256": "8f43ad7ce312851862c337dbbfb3edef9f76d6a2c34950082afe0bf892e7d941",
+      "previousSha256": "d205f6b06dca7e97a0ae0062218bd9d3c99bbe766be25d179db2d4f9b3480365"
+    },
+    {
+      "source": "Validation/NativeUpwardSnapshotFixtureBatch2/Assets/Editor/RecoveredTools/FlowWaterStandaloneFountainValidation.cs.meta",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterStandaloneFountainValidation.cs.meta",
+      "sha256": "f86091f1cffbced97a88d0c24394512ba2995201ceeec3e4c639f657427c2ccd",
+      "previousSha256": "f86091f1cffbced97a88d0c24394512ba2995201ceeec3e4c639f657427c2ccd"
+    }
+  ],
+  "cause": "Production RestoreSnapshot rebuilds only when solutionBoard differs. A same-mode1 restore correctly keeps the original root; Batch1 fixture incorrectly demanded a new root unconditionally. This is not evidence of a production counts failure.",
+  "changes": [
+    "Pfuente validates same-root restore with exact8/8 and root/count/pending values in detail",
+    "Pfuente independently exercises real LoadLevel(mode0) then RestoreSnapshot(mode1), which genuinely reconstructs the original new board",
+    "Standalone born/unborn new-root fixture now likewise calls actual LoadLevel before restoring saved mode1 snapshot",
+    "No production code or water/collision/Snapshot predicates changed"
+  ],
+  "checks": [
+    "Pfuente Editor exit0",
+    "Standalone Editor exit0"
+  ]
+}

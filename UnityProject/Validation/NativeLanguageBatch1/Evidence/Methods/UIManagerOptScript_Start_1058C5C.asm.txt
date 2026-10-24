@@ -1,0 +1,73 @@
+// UIManagerOptScript$$Start VA 0x1058C5C, inferred length 284
+void UIManagerOptScript__Start (UIManagerOptScript_o* __this, const MethodInfo* method);
+01058C5C  str      x30, [sp, #-0x30]!                    
+01058C60  stp      x22, x21, [sp, #0x10]                 
+01058C64  stp      x20, x19, [sp, #0x20]                 
+01058C68  adrp     x21, #0x24fb000                       
+01058C6C  adrp     x22, #0x236a000                       
+01058C70  adrp     x20, #0x236b000                       
+01058C74  ldrb     w8, [x21, #0xe02]                     
+01058C78  ldr      x22, [x22, #0xf40]                     // [0x236AF40] AudioManager0_TypeInfo
+01058C7C  ldr      x20, [x20, #0x18]                      // [0x236B018] 'RemoveAds'
+01058C80  mov      x19, x0                               
+01058C84  tbnz     w8, #0, #0x1058cc0                    
+01058C88  adrp     x0, #0x236a000                        
+01058C8C  ldr      x0, [x0, #0xf40]                       // [0x236AF40] AudioManager0_TypeInfo
+01058C90  bl       #0xe61b78                             
+01058C94  adrp     x0, #0x236b000                        
+01058C98  ldr      x0, [x0, #0x938]                       // [0x236B938] 'Conf_music'
+01058C9C  bl       #0xe61b78                             
+01058CA0  adrp     x0, #0x236b000                        
+01058CA4  ldr      x0, [x0, #0x18]                        // [0x236B018] 'RemoveAds'
+01058CA8  bl       #0xe61b78                             
+01058CAC  adrp     x0, #0x236b000                        
+01058CB0  ldr      x0, [x0, #0x940]                       // [0x236B940] 'Conf_sound'
+01058CB4  bl       #0xe61b78                             
+01058CB8  mov      w8, #1                                
+01058CBC  strb     w8, [x21, #0xe02]                     
+01058CC0  ldr      x8, [x22]                             
+01058CC4  mov      w1, wzr                               
+01058CC8  mov      x2, xzr                               
+01058CCC  ldr      x8, [x8, #0xb8]                       
+01058CD0  ldr      x8, [x8]                              
+01058CD4  str      x8, [x19, #0x28]                       // self.audioManager
+01058CD8  ldr      x0, [x20]                             
+01058CDC  bl       #0x200140c                             // UnityEngine.PlayerPrefs$$GetInt
+01058CE0  ldr      x8, [x19, #0x50]                       // self.BannerManager
+01058CE4  str      w0, [x19, #0x48]                       // self.indicadorAds
+01058CE8  cbz      x8, #0x1058d74                        
+01058CEC  adrp     x20, #0x236b000                       
+01058CF0  ldr      x20, [x20, #0x938]                     // [0x236B938] 'Conf_music'
+01058CF4  cmp      w0, #0                                
+01058CF8  cset     w1, eq                                
+01058CFC  mov      x0, x8                                
+01058D00  mov      x2, xzr                               
+01058D04  bl       #0x2006394                             // UnityEngine.GameObject$$SetActive
+01058D08  ldr      x0, [x20]                             
+01058D0C  mov      x1, xzr                               
+01058D10  bl       #0x2001574                             // UnityEngine.PlayerPrefs$$GetFloat
+01058D14  ldr      x0, [x19, #0x30]                       // self.volumen1
+01058D18  str      s0, [x19, #0x40]                       // self.valor1
+01058D1C  cbz      x0, #0x1058d74                        
+01058D20  ldr      x8, [x0]                              
+01058D24  adrp     x20, #0x236b000                       
+01058D28  ldr      x9, [x8, #0x428]                      
+01058D2C  ldr      x1, [x8, #0x430]                      
+01058D30  ldr      x20, [x20, #0x940]                     // [0x236B940] 'Conf_sound'
+01058D34  blr      x9                                    
+01058D38  ldr      x0, [x20]                             
+01058D3C  mov      x1, xzr                               
+01058D40  bl       #0x2001574                             // UnityEngine.PlayerPrefs$$GetFloat
+01058D44  ldr      x0, [x19, #0x38]                       // self.volumen2
+01058D48  str      s0, [x19, #0x44]                       // self.valor2
+01058D4C  cbz      x0, #0x1058d74                        
+01058D50  ldr      x8, [x0]                              
+01058D54  ldr      x9, [x8, #0x428]                      
+01058D58  ldr      x1, [x8, #0x430]                      
+01058D5C  blr      x9                                    
+01058D60  mov      x0, x19                               
+01058D64  ldp      x20, x19, [sp, #0x20]                 
+01058D68  ldp      x22, x21, [sp, #0x10]                 
+01058D6C  ldr      x30, [sp], #0x30                      
+01058D70  b        #0x1058d78                             // UIManagerOptScript$$doLanguages
+01058D74  bl       #0xe61da0                             

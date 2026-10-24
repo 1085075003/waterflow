@@ -1,0 +1,88 @@
+--- a/Validation/aggregate_native_recipe_regression_v2.py
++++ b/Validation/aggregate_native_recipe_regression_v3.py
+@@ -1,4 +1,4 @@
+-"""Strict independent169-case coverage with exact native post-commit carry evidence.
++"""Strict independent169-case coverage with exact native carry and shader source locks.
+ 
+ This imports the unchanged per-level real-input/native-victory audit from Scoped5.
+ All input reports must already be closed. Nothing launches or controls Unity.
+@@ -40,6 +40,24 @@
+     ensure(set(ids) == set(scope.get("affectedNativeSave1Ids", [])) | set(data.get("historicalFailureIds", [])),
+            "169 request differs from affected166 plus historical failures")
+     return data, digest
++
++
++def shader_files(snapshot_data):
++    shaders = snapshot_data.get("shaderFiles")
++    ensure(isinstance(shaders, dict) and shaders, "Actual source snapshot lacks the complete nonempty shaderFiles dictionary")
++    for path, digest in shaders.items():
++        ensure(isinstance(path, str) and path.startswith("Assets/") and "\\" not in path
++               and ".." not in path.split("/") and Path(path).suffix.lower() in (".shader", ".cginc", ".hlsl"),
++               "Shader source paths must be normalized original Assets shader/include files")
++        audit.sha(digest, "actual shader source:" + path)
++    return shaders
++
++
++def identical_run_sources(locked):
++    ensure(locked and all(item["files"] == locked[0]["files"] for item in locked),
++           "All169 base/retest runtime, Resources JSON, Editor and Settings sources must be byte-identical")
++    ensure(all(item["shaderFiles"] == locked[0]["shaderFiles"] for item in locked),
++           "All169 base/retest shaderFiles source dictionaries must be byte-identical")
+ 
+ 
+ def source_binding(run, item, parent):
+@@ -62,13 +80,15 @@
+     before_path, before, before_sha = audit.snapshot(job.get("beforeSnapshot"), queue_path.parent)
+     after_path, after, after_sha = audit.snapshot(job.get("afterSnapshot"), queue_path.parent)
+     ensure(before["files"] == after["files"], "Source before/after actual run differs")
++    before_shaders, after_shaders = shader_files(before), shader_files(after)
++    ensure(before_shaders == after_shaders, "Shader sources before/after actual run differ")
+     ensure(audit.timestamp(before["capturedUtc"], "before") <= run.started
+            and audit.timestamp(after["capturedUtc"], "after") >= run.finished,
+            "Actual source snapshots do not bracket report")
+     return {"reportSha256": run.digest, "queueEvidence": {"path": str(queue_path), "sha256": queue_sha},
+             "beforeSnapshot": {"path": str(before_path), "sha256": before_sha},
+             "afterSnapshot": {"path": str(after_path), "sha256": after_sha},
+-            "files": before["files"], "processExitCode": job["exitCode"]}
++            "files": before["files"], "shaderFiles": before_shaders, "processExitCode": job["exitCode"]}
+ 
+ 
+ CARRY_EDITOR = "Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs"
+@@ -256,8 +276,7 @@
+     ensure(len(by_sha) == len(entries) and set(by_sha) == {run.digest for run in [base, *retests]},
+            "Source bindings have duplicate, unused or missing run SHA")
+     locked = [source_binding(run, by_sha[run.digest], bindings_path.parent) for run in [base, *retests]]
+-    ensure(all(item["files"] == locked[0]["files"] for item in locked),
+-           "All169 base/retest runtime, Resources JSON, Editor and Settings sources must be byte-identical")
++    identical_run_sources(locked)
+     levels, failed = select_attempts(base, retests, request["ids"], catalog,
+                                      {item["reportSha256"]: item["files"] for item in locked})
+     unresolved = [x["id"] for x in levels if not x["passed"]]
+@@ -269,8 +288,11 @@
+         selected_checks.extend(item["selectedChecks"])
+     for item in locked:
+         item["sourceFileCount"] = len(item.pop("files"))
++        shaders = item.pop("shaderFiles")
++        item["shaderFileCount"] = len(shaders)
++        item["shaderFilesSha256"] = hashlib.sha256(json.dumps(shaders, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+     now = datetime.now(timezone.utc).isoformat()
+-    return {"schemaVersion": 2, "createdUtc": now,
++    return {"schemaVersion": 3, "createdUtc": now,
+             "startedUtc": base.data["startedUtc"], "finishedUtc": now,
+             "sourceFinishedUtc": max([base, *retests], key=lambda run: run.finished).data["finishedUtc"],
+             "scope": "Independent169 affected-native-recipe plus historical-failure normal gameplay regression",
+@@ -287,11 +309,13 @@
+             "actualSourceLocks": locked, "levels": levels, "checks": selected_checks,
+             "auditImplementation": reference(DEPENDENCY),
+             "scopeAuditImplementation": reference(Path(__file__)),
++            "shaderSourceScope": {"capturedSeparatelyFromFiles": True, "completeSnapshotDictionariesRequired": True,
++                "allBaseRetestShadersByteIdentical": True, "shaderDifferencesWaived": False},
+             "nativeCarryEvidenceRule": {"version": 1, "editorPath": CARRY_EDITOR, "editorSha256": CARRY_EDITOR_SHA,
+                 "originalNearBound": .8, "maximumNativeOffsetAndTranslationError": .03,
+                 "onlyException": "Exact production commit followed by observed original carried membership and equal actual carrier displacement"},
+             "originalRecordEvidence": records,
+-            "limitation": "Strict169 independent scope only. This artifact neither replaces original800 evidence nor weakens its400/800 base rule. Latest actual failed retests remain failures. Top finishedUtc is the aggregate creation time; sourceFinishedUtc is the latest actual Unity run finish. Selected checks are copied from actual source reports. Only the pinned Batch11 harness may prove exact normal commit followed by original native carrier translation; final actualAfter is preserved and no tolerance is enlarged. Current source hashes bind queue snapshots; they do not independently infer loaded assembly identity. All raw reports remain unchanged."}
++            "limitation": "Strict169 independent scope only. This artifact neither replaces original800 evidence nor weakens its400/800 base rule. Latest actual failed retests remain failures. Top finishedUtc is the aggregate creation time; sourceFinishedUtc is the latest actual Unity run finish. Selected checks are copied from actual source reports. Only the pinned Batch11 harness may prove exact normal commit followed by original native carrier translation; final actualAfter is preserved and no tolerance is enlarged. Current source hashes bind queue snapshots; they do not independently infer loaded assembly identity. New actual shaderFiles snapshots are additionally mandatory and byte-identical before/after and across every169 base/retest. No shader exception is supported. All raw reports remain unchanged."}
+ 
+ 
+ def main():

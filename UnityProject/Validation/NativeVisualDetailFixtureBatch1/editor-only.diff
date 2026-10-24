@@ -1,0 +1,27 @@
+--- frozenFullValidation
++++ optionalDetailSelector
+@@ -94,6 +94,8 @@
+         [MenuItem("Tools/Flow Water/Validate All 1350 Runtime Layouts")]
+         public static void RunAll() { Start("all"); }
+         public static void RunRepresentative() { Start("representative"); }
++        public static void RunVisualDetails() { Start("detail"); }
++        [Serializable] sealed class DetailRequest { public int[] ids; }
+         public static void RunRegression() { Start("regression"); }
+         public static void RunFailures() { Start("failures"); }
+         static void Start(string requestedMode)
+@@ -114,6 +116,15 @@
+             AssetDatabase.DisallowAutoRefresh(); EditorApplication.LockReloadAssemblies(); importsBlocked = true;
+             RecoveryCatalog catalog = RecoveryCatalog.Load();
+             if (mode == "all") ids = catalog.levels.Select(x => x.assetId).OrderBy(x => x).ToArray();
++            else if (mode == "detail")
++            {
++                string requestPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, "Validation", "VisualReview", "detail-request.json");
++                DetailRequest request = JsonUtility.FromJson<DetailRequest>(File.ReadAllText(requestPath));
++                if (request == null || request.ids == null || request.ids.Length == 0 || request.ids.Length > 100 ||
++                    request.ids.Distinct().Count() != request.ids.Length || request.ids.Any(id => !catalog.levels.Any(level => level.assetId == id)))
++                    throw new InvalidOperationException("Detail request must contain1..100 unique existing original level ids.");
++                ids = request.ids;
++            }
+             else if (mode == "failures")
+             {
+                 Report prior = JsonUtility.FromJson<Report>(File.ReadAllText(Path.Combine(Output, "all-runtime-validation.json")));

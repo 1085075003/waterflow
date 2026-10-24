@@ -1,0 +1,60 @@
+--- Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs
++++ staged/FlowWaterSave1GameplayValidation.cs
+@@ -46,6 +46,8 @@
+             public int pickupFrame, nativeWaitBusyFrame=-1, nativeWaitIdleFrame=-1, releaseFrame, committedFrame;
+             public Vector3 pickScreen, dropScreen, originalGuide, heldPosition, heldFloatingTarget;
+             public bool compressionLanding, retainedOriginalGrabOffset, terminalQuickRelease;
++            public int heldInputFrames, motionFinishedFrame=-1, compressionSettledFrame=-1, pressurePostMotionFrames;
++            public float compressionWaitRealSeconds;
+             public int cameraQuarterTurns, cameraSlowGestures, cameraSlowFrames;
+             public List<float> cameraYawSamples=new List<float>();
+             public List<string> inputDiagnostics=new List<string>();
+@@ -592,8 +594,15 @@
+             // the selected actor is allowed to lag its final guide, as native
+             // doEnd/doFijar expressly animate it after release.
+             if(step.terminalQuickRelease) yield return null;
++            int lastHeldInputFrame=Time.frameCount;
+             while(!step.terminalQuickRelease && EditorApplication.timeSinceStartup<until)
+             {
++                // Editor update may run repeatedly without a PlayerLoop frame.
++                // A held player's pointer is re-raycast once per actual frame;
++                // do not mistake Editor coroutine iterations for native input.
++                if(Time.frameCount==lastHeldInputFrame) { yield return null; continue; }
++                lastHeldInputFrame=Time.frameCount;
++                NativeInput("ContinueDrag",screen); step.heldInputFrames++;
+                 Vector3 target=motion.Target, position=actor.transform.position;
+                 Vector3 floating=(Vector3)Read(motion,"floatingTarget");
+                 bool hovered=step.compressionLanding?new Vector2(position.x-target.x,position.z-target.z).sqrMagnitude<.0004f:(position-floating).sqrMagnitude<.0009f;
+@@ -637,6 +646,32 @@
+                 {
+                     step.inputDiagnostics.Add("native-early-unlock frame="+Read(motion,"nativeWaterRestoreFrame")+",distance="+Read(motion,"nativeWaterRestoreDistance")+",unblocked="+Read(motion,"nativeWaterUnblocked")+",commitFrame="+Time.frameCount);
+                     CaptureLandingContext(step,"after-native-animation",actor);
++                }
++                step.motionFinishedFrame=Time.frameCount;
++                if(step.compressionLanding)
++                {
++                    // Original guide is1.2 above the plate. Motion completion
++                    // and Resorte.Update -> Invoke(doBajarPieza,tiempo1) are
++                    // separate operations. A cold/high-delta frame may finish
++                    // doFijar before the next plate detection/publication frame.
++                    // Wait for the actual native delayed placement, never write
++                    // the actor, guide, animator, bus or pending publication.
++                    double pressureStarted=EditorApplication.timeSinceStartup;
++                    until=pressureStarted+20;
++                    int pressureFrame=Time.frameCount;
++                    while(EditorApplication.timeSinceStartup<until)
++                    {
++                        Vector3 expected=step.followsMovingSupport?motion.Target:step.destination;
++                        if(!motion.IsActive && Near(actor.transform.position,expected))
++                        { step.compressionSettledFrame=Time.frameCount; break; }
++                        if(Time.frameCount!=pressureFrame)
++                        { pressureFrame=Time.frameCount; step.pressurePostMotionFrames++; }
++                        yield return null;
++                    }
++                    step.compressionWaitRealSeconds=(float)(EditorApplication.timeSinceStartup-pressureStarted);
++                    Vector3 compressionExpected=step.followsMovingSupport?motion.Target:step.destination;
++                    step.inputDiagnostics.Add("native-pressure-settle releaseFrame="+step.releaseFrame+",motionFinishedFrame="+step.motionFinishedFrame+",settledFrame="+step.compressionSettledFrame+",postMotionFrames="+step.pressurePostMotionFrames+",heldInputFrames="+step.heldInputFrames+",actor="+actor.transform.position.ToString("F4")+",expected="+compressionExpected.ToString("F4")+",waitReal="+step.compressionWaitRealSeconds);
++                    Require("gm"+level.id+"-native-pressure-delayed-placement-"+step.number,step.compressionSettledFrame>=step.releaseFrame && !motion.IsActive && Near(actor.transform.position,compressionExpected),"Resorte.doBajarPieza must itself lower the released actor from the original raised guide to the unchanged recorded target. "+step.inputDiagnostics.Last());
+                 }
+                 step.committedFrame=Time.frameCount;
+             }

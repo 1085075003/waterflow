@@ -1,0 +1,20 @@
+{
+  "batch": "WaterDoorTimingBatch1",
+  "status": "Immutable staging final; not imported into Assets",
+  "files": [
+    {
+      "source": "Validation\\WaterDoorTimingBatch1\\RuntimeWaterMechanisms.cs.src",
+      "destination": "Assets\\Scripts\\RecoveryRuntime\\RuntimeWaterMechanisms.cs",
+      "sha256": "08b22bb144eeb1d79f6f34c05c783cb45f16e122cc6bfd1c7f096687dcade94f",
+      "baseSha256": "fd1bb2ae52cc9b8834cbc091702c2af59898def3560892d3d60e03db1b0f030f"
+    }
+  ],
+  "nativeEvidence": {
+    "method": "ObservadorDoor.doCheckDoor 0x10C6F24",
+    "open": "Animator.openDoor=true at10C6FA4, then raw float0x60000C=.40000000596 loaded10C6FB4 and Invoke doEstadoAbierto",
+    "close": "Animator.openDoor=false at10C6FE4, then fmov .5 at10C6FF0 and Invoke doEstadoCerrado",
+    "cancellation": "No CancelInvoke in original edge method; independently queued callbacks retained."
+  },
+  "change": "Animator command immediately follows the original switch edge; physical port/barrier changes execute after .4 open/.5 close scaled seconds. Gate snapshots save applied open state, requested state, pending callback remaining durations, and original Animator state/transition progress. Restore replays applied port before water restore. Existing intake/physical/3/5 bus untouched.",
+  "validation": "Whole-runtime Roslyn. Requires next real Unity natural-door opening callback and in-flight snapshot, plus gm1140/full35 regression. No claim of live pass yet."
+}

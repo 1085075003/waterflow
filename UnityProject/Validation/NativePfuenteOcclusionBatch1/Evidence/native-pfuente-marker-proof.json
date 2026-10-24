@@ -1,0 +1,34 @@
+{
+  "scope": "ControlPiezaPfuente/FuenteCubeta2 only; standalone CascadaTest3 behavior deliberately unchanged",
+  "native": [
+    {
+      "method": "FuenteCubeta2.doActivarEsfera",
+      "VA": "0x1098A80",
+      "detail": "triggered && esf5 enables esferaFuente1 at1098ACC and sets CascadaTest1.activa=1; no ObjetoArriba check"
+    },
+    {
+      "method": "FuenteCubeta2.doDesactivar",
+      "VA": "0x1098694",
+      "detail": "actual inlet exit disables independent esferaFuente1 at1098718, then sets CascadaTest1.activa=0"
+    },
+    {
+      "method": "CascadaTest1.Update",
+      "VA": "0xFD39AC",
+      "detail": "blocked branch only Destroy(fuente) atFD3A60, creada=false; it neither disables the independent marker nor writes FuenteCubeta2"
+    },
+    {
+      "method": "CascadaTest3.doCrearFuente",
+      "VA": "0xFD503C",
+      "detail": "standalone marker first enabled together with first visible fountain atFD51CC, so its initial-obstructed lifecycle differs and remains excluded"
+    }
+  ],
+  "geometry": {
+    "prefab": "AguaControlPFuente",
+    "sourceMarker": "esferaFuente1 reference to original esferaFuente; worldY+4.21, originalSphereRadius.5 * worldScale2 =1",
+    "receiver": "upper FuenteCubeta2 Origen6, localY-3.2, worldSphereRadius.5",
+    "adjacentStorey": "rootdy7.6 -> marker/input centers separated.19, less than summed radii1.5",
+    "visual": "original Font prefab contains no Collider; destroying the Font cannot remove output contact"
+  },
+  "fixture": "actual gm1901 solved original pair sourceRecord7 to9, reversible movement of actual original recorded layer9 collider, not claimed legal player motion; production snapshot restores original board",
+  "expected": "already wet stays wet; true inlet exit dries target; fresh inlet under visual obstruction still conducts independent marker; Font remains suppressed until obstruction removed"
+}

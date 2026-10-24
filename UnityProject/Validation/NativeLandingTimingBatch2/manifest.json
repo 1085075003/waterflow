@@ -1,0 +1,66 @@
+{
+  "createdUtc": "2026-10-16T02:34:36.868999+00:00",
+  "scope": "Immutable staging only. Main/clone Assets untouched. Actual Unity validation pending root. This changes critical production DragMotion: do not aggregate its cases with old-motion successes; rerun complete final800 against one compatible physics snapshot.",
+  "files": [
+    {
+      "path": "Assets/Scripts/RecoveryRuntime/RecoveredNativeDragMotion.cs",
+      "source": "Validation/NativeLandingTimingBatch2/Assets/Scripts/RecoveryRuntime/RecoveredNativeDragMotion.cs",
+      "sha256": "0544d23f6194b434429e3645b44c31ebd3560dd68502e2c683a66c521e5dd470",
+      "baseSha256": "2a332c574baee99a2a7479224684d8db1d55593835e6a184ccc424cbe77f13fb"
+    },
+    {
+      "path": "Assets/Scripts/RecoveryRuntime/RecoveredFlowGame.cs",
+      "source": "Validation/NativeLandingTimingBatch2/Assets/Scripts/RecoveryRuntime/RecoveredFlowGame.cs",
+      "sha256": "7896c26cfbe8a11ac028032b1b8e4255c3cc827c50b7f0a476eaf5e81a631178",
+      "baseSha256": "1128317430e4d7e5f2bca260c83a0a61c544e0118ec86b59df1152ba09b44957"
+    },
+    {
+      "path": "Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs",
+      "source": "Validation/NativeLandingTimingBatch2/Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs",
+      "sha256": "22707476b03ad527a2fa3939a0febe223e7b107148e0390e01e7da6d8a01804a",
+      "baseSha256": "a2312072ef7ebc43acba8d7ccd672b58c58b87185e88b3c140af89c882662d84"
+    }
+  ],
+  "entrypoint": "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNativeLandingRegression",
+  "retainedEntrypoint": "RunNativeFailed (same v8 legal pointer/view strategy and original positive native target/completion criteria)",
+  "changes": [
+    "Actual pointer TryMoveCore(nativeLanding=true) accepts the genuine original guide after animation without a second late Occupant rejection. Public TryMove(nativeLanding=false) keeps original destination probing and bounds/finite/actor checks.",
+    "Ordinary released doFijar Lerp restores water once at distance<.5; final fixed-route doMovimiento restores only on its existing <.1 final arrival, after exact final route snap. Subsequent LateUpdate never re-gates. Landing thresholds and speeds unchanged.",
+    "SoundBlock occurs at the exact corresponding native unlock: ordinary<.5, fixed-route final completion. No duplicate private-pointer commit sound; public TryMove sound remains.",
+    "Read-only1187step18 release/notify/early-unlock/after positions, original masks and live overlap owner diagnostics. No actor/switch/guide/water writes by test.",
+    "Core based exactly on112831 native-camera+step Batch3; no preview/lifetime/snapshot fix lost."
+  ],
+  "nativeEvidence": [
+    {
+      "method": "MoveBloque.doEnd",
+      "va": "0x102EC58",
+      "range": "102ED04..7C",
+      "rule": "Copy actual planoGuia to puntoFinal+4.2, restore selected body layer, start fixation; no occupancy reject."
+    },
+    {
+      "method": "MoveBloque.doFijarPieza",
+      "va": "0x102EE14",
+      "range": "102F10C..134",
+      "rule": "distance<.5 and noDesbloqueado: doDesbloquearCascadasTarget, SoundBlock, clear noDesbloqueado."
+    },
+    {
+      "method": "MoveBloque.doFijarPieza",
+      "range": "102F1D0..21C",
+      "rule": "distance<.3: hide guide, directly set parent to puntoFinal; no final Occupant rejection."
+    },
+    {
+      "method": "MoveBloque.doCorregirPuntoFinal",
+      "va": "0x10311B8",
+      "rule": "mascaraSuelo1 support probe only sets checkCollision9 for conResorte-bearing support, follows that original moving support; not final arbitrary occupancy veto."
+    },
+    {
+      "method": "MoveBloque.doMovimiento",
+      "va": "0x10332D0",
+      "range": "1033570..574 then10333710..724",
+      "rule": "Only when route point reaches native .1 threshold, final-down branch clears route and unlocks cascades+SoundBlock. Do not apply ordinary doFijar early.5 to this route."
+    }
+  ],
+  "compile": "Roslyn full runtime and Editor0 errors; native-landing-timing-v2-compile.rsp / native-landing-timing-v2-editor-compile.rsp. Main/clone Assets untouched, no Unity launched.",
+  "actualUnityValidation": "Not run. Need clone1187 and public occupancy/Input61 negative regression before final800.",
+  "supersedes": "NativeLandingTimingBatch1. Do not import Batch1: its final fixed-route unlock was too early; full doMovimiento branch evidence corrects that here."
+}

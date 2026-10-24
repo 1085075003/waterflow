@@ -1,0 +1,40 @@
+{
+  "status": "Transcribed and independently compiled; awaiting Unity Run622 and full interaction/spring regression.",
+  "gm622": {
+    "waterTrigger": "record14 ControlPieza.conOrigen2=2,controllerport2wet=true,watercolor1,globalconResorte2=1",
+    "observerState": "channel2blocked=true,position0,4actors",
+    "actorConfiguration": "records16/18/19/20 all st2/sz8, no valMove or valDebajo tokens",
+    "nativeGates": [
+      {
+        "va": "10CB05C..10CB06C",
+        "condition": "Only valDebajo==1 enters lower collision checks."
+      },
+      {
+        "va": "10CB0CC..10CB104",
+        "condition": "tipoResor8+comprueba1 invokes doCheckCollision4; tipo9+comprueba2 similarly."
+      },
+      {
+        "va": "10CB144..10CB170 and10CB218..10CB244",
+        "condition": "Only valMove1/2 performs guarded movement collision path."
+      }
+    ],
+    "fix": "Apply original optional flags before collision probes; use actual original Collider OverlapSphere when the configured check applies, never treat all actor roots as solid cubes. No specific terrain/prefab name exemption."
+  },
+  "physics": {
+    "general": "ObservadorResorte.doCheckCollision10CD6D8..730 radius=1 mask=observer.mascaraBloque(12289)",
+    "down": "doCheckCollision4 10CCE54..EC4 probeY=currentY-7.6, radius1,maskmascaraBloque3(8193)",
+    "constructor": "10CF1A8 sphereRadius=1",
+    "groupException": "doCheckCollision10CD844..874 /10CD984..99C matching conResorte AND tipoResorte ignores the grouped block",
+    "nativeCollisionScope": "Temporarily enable only original authored-enabled colliders, preserve native layer and active state, disable generic recovery proxies, restore all enabled states after query."
+  },
+  "pressurePlate": {
+    "Start": "Resorte.Start100B650 has no transform writes. Native100B6DC..EC sets objeto layer0 in normal var_design0.",
+    "unpressedLanding": "BloqueResorte CuboResorte authored localY=-.003 with rootScaleY~1000 gives Cubo transformY=plateRootY-3; doEnd102ED60..78 adds4.2, resulting blockroot=plateRootY+1.2. For plate3.95, initial guide result5.15 is authentic.",
+    "compressionDelay": "Resorte.Update100B930..944 invokes doBajarPieza after serializedtiempo1=.2.",
+    "compressionMethod": "Resorte.doBajarPieza100BD30..60 enablesAnimator/boolResorte;100BD9C..BE30 sets pressing actor.parent.worldY=Resorte.root.worldY, thenactivatesmechanism.",
+    "triggerGeometry": "Resorte.doCheckCollision100BA40..4C centerY=Resorte.rootY+altura(-3.2); OverlapSphere radius1/mascaraSuelo4096; native100BB18..38 keeps last non-CuboResorte hit. Root-distance approximation cannot correctly detect the uncompressed5.15 contact.",
+    "fix": "Use original collider trigger probe and delayed compression in PublishPlate, preserving standalone physical landingY in root Motion commit. Normal Save1/TryMove remains compressed-grid3.95.",
+    "interactionRegression": "Captures exact commit via Game.StateChanged to prove5.15 before pressure, then checks delayed3.95,1move,originallayer and Undo. It does not merely alter final expected position."
+  },
+  "unchanged": "No water graph, target count, raw gm/so data or root Game file edited by this agent. Original ProjectTimeScale4 is retained and restored by validators."
+}

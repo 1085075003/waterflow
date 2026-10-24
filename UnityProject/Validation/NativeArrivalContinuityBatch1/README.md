@@ -1,0 +1,9 @@
+# Preserve actual original inlet contact through landing
+
+Depends on NativeFountainDispatchBatch1 Network visual integration. Includes its full stable file plus one small ChannelSignature change. Main/clone Assets untouched by author. Runtime and complete Editor Roslyn0errors.
+
+Actual normal1660 completed all9 pointer moves but6/8. Its15 landing fromY4.44134474 toY3.95 at167.4177 changed only position-based ChannelSignature. Source0's original E north40 output continues touching15, yet the scheduler removed15/19, published A wetfalse, then native.4 delay re-entered19 and toggled manager1 from1 to4, returning platforms and drying2 fountains.
+
+Original E sphere radius.5 atscale3 gives1.5; original CP center input radius.4 gives total1.9. Actual pre-snap separation.509 and final1.0 both overlap, with the whole monotonic landing segment inside. OnTriggerExit does not follow pose assignment when contact persists. Node input identity now excludes pose; recomputed original geometry, parent/link/incoming, expectedcolor, enabled state, inputmask and native moving gates still terminate invalid paths immediately. No delivery tolerance, arrival wait, A semantics, source, collision, jet direction or spring behavior changes.
+
+Entry Recovered.FlowWater.Editor.FlowWaterArrivalContinuityValidation.Run first performs25 actual original sphere Physics.ComputePenetration samples plus a separated negative control in a temporary additive Editor scene, removes it and restores original active scene. This is an isolated geometry check, not claimed gameplay. It then delegates the existing original pointer suite for normal1660/1696/1656, preserving every optional Begin default, noSolve/noquickoverride. Outputs WaterArrivalContinuity/geometry-validation.json and normal Save1Gameplay reports. Run existing full frontier/snapshot suite afterward to verify ongoing-delay/exit semantics. Root owns actual Unity launches.

@@ -1,0 +1,161 @@
+// MoveBloque$$ReturnClickedObject VA 0x10306B4, inferred length 636
+UnityEngine_GameObject_o* MoveBloque__ReturnClickedObject (MoveBloque_o* __this, UnityEngine_RaycastHit_o* hit, const MethodInfo* method);
+010306B4  sub      sp, sp, #0x80                         
+010306B8  stp      d13, d12, [sp, #0x20]                 
+010306BC  stp      d11, d10, [sp, #0x30]                 
+010306C0  stp      d9, d8, [sp, #0x40]                   
+010306C4  str      x30, [sp, #0x50]                      
+010306C8  stp      x22, x21, [sp, #0x60]                 
+010306CC  stp      x20, x19, [sp, #0x70]                 
+010306D0  adrp     x21, #0x24fb000                       
+010306D4  ldrb     w8, [x21, #0xd1b]                     
+010306D8  mov      x19, x1                               
+010306DC  mov      x20, x0                               
+010306E0  tbnz     w8, #0, #0x1030704                    
+010306E4  adrp     x0, #0x2368000                        
+010306E8  ldr      x0, [x0, #0x9b0]                       // [0x23689B0] UnityEngine.Physics_TypeInfo
+010306EC  bl       #0xe61b78                             
+010306F0  adrp     x0, #0x236a000                        
+010306F4  ldr      x0, [x0, #0x618]                       // [0x236A618] 'bloque'
+010306F8  bl       #0xe61b78                             
+010306FC  mov      w8, #1                                
+01030700  strb     w8, [x21, #0xd1b]                     
+01030704  mov      x0, xzr                               
+01030708  bl       #0x1fe21ec                             // UnityEngine.Camera$$get_main
+0103070C  mov      x21, x0                               
+01030710  mov      x0, xzr                               
+01030714  bl       #0x203ab00                             // UnityEngine.Input$$get_mousePosition
+01030718  cbz      x21, #0x103092c                       
+0103071C  adrp     x22, #0x2368000                       
+01030720  ldr      x22, [x22, #0x9b0]                     // [0x23689B0] UnityEngine.Physics_TypeInfo
+01030724  add      x8, sp, #8                            
+01030728  mov      x0, x21                               
+0103072C  mov      x1, xzr                               
+01030730  bl       #0x1fe21a8                             // UnityEngine.Camera$$ScreenPointToRay
+01030734  ldr      x0, [x22]                             
+01030738  ldp      s10, s0, [sp, #0x10]                  
+0103073C  ldp      s1, s2, [sp, #0x18]                   
+01030740  ldp      s8, s9, [sp, #8]                      
+01030744  ldr      w8, [x0, #0xe0]                       
+01030748  fmov     s3, #10.00000000                      
+0103074C  fmul     s13, s0, s3                           
+01030750  fmul     s12, s1, s3                           
+01030754  fmul     s11, s2, s3                           
+01030758  cbnz     w8, #0x1030760                        
+0103075C  bl       #0xe61c80                             
+01030760  mov      v0.16b, v8.16b                        
+01030764  mov      v1.16b, v9.16b                        
+01030768  mov      v2.16b, v10.16b                       
+0103076C  mov      v3.16b, v13.16b                       
+01030770  mov      v4.16b, v12.16b                       
+01030774  mov      v5.16b, v11.16b                       
+01030778  mov      x0, x19                               
+0103077C  mov      x1, xzr                               
+01030780  bl       #0x203e9f4                             // UnityEngine.Physics$$Raycast
+01030784  mov      x21, xzr                              
+01030788  tbz      w0, #0, #0x1030908                    
+0103078C  mov      x0, x19                               
+01030790  mov      x1, xzr                               
+01030794  bl       #0x2041678                             // UnityEngine.RaycastHit$$get_collider
+01030798  cbz      x0, #0x103092c                        
+0103079C  mov      x1, xzr                               
+010307A0  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010307A4  cbz      x0, #0x103092c                        
+010307A8  mov      x1, xzr                               
+010307AC  bl       #0x2006314                             // UnityEngine.GameObject$$get_layer
+010307B0  adrp     x8, #0x236a000                        
+010307B4  ldr      x8, [x8, #0x618]                       // [0x236A618] 'bloque'
+010307B8  mov      w21, w0                               
+010307BC  mov      x1, xzr                               
+010307C0  ldr      x8, [x8]                              
+010307C4  mov      x0, x8                                
+010307C8  bl       #0x2006880                             // UnityEngine.LayerMask$$NameToLayer
+010307CC  cmp      w21, w0                               
+010307D0  mov      x21, xzr                              
+010307D4  b.ne     #0x1030908                            
+010307D8  mov      x0, x19                               
+010307DC  mov      x1, xzr                               
+010307E0  bl       #0x2041678                             // UnityEngine.RaycastHit$$get_collider
+010307E4  cbz      x0, #0x103092c                        
+010307E8  mov      x1, xzr                               
+010307EC  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010307F0  cbz      x0, #0x103092c                        
+010307F4  mov      x1, xzr                               
+010307F8  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+010307FC  cbz      x0, #0x103092c                        
+01030800  mov      x1, xzr                               
+01030804  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+01030808  mov      x0, x19                               
+0103080C  mov      x1, xzr                               
+01030810  mov      v8.16b, v0.16b                        
+01030814  bl       #0x2041678                             // UnityEngine.RaycastHit$$get_collider
+01030818  cbz      x0, #0x103092c                        
+0103081C  mov      x1, xzr                               
+01030820  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+01030824  cbz      x0, #0x103092c                        
+01030828  mov      x1, xzr                               
+0103082C  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01030830  cbz      x0, #0x103092c                        
+01030834  mov      x1, xzr                               
+01030838  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+0103083C  ldr      s11, [x20, #0xe8]                     
+01030840  mov      x0, x19                               
+01030844  mov      x1, xzr                               
+01030848  mov      v9.16b, v1.16b                        
+0103084C  bl       #0x2041678                             // UnityEngine.RaycastHit$$get_collider
+01030850  cbz      x0, #0x103092c                        
+01030854  mov      x1, xzr                               
+01030858  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+0103085C  cbz      x0, #0x103092c                        
+01030860  mov      x1, xzr                               
+01030864  bl       #0x20062d8                             // UnityEngine.GameObject$$get_transform
+01030868  cbz      x0, #0x103092c                        
+0103086C  mov      x1, xzr                               
+01030870  bl       #0x200e9b0                             // UnityEngine.Transform$$get_position
+01030874  ldr      w0, [x20, #0xec]                      
+01030878  fadd     s9, s9, s11                           
+0103087C  ldr      s11, [x20, #0x108]                    
+01030880  mov      x1, xzr                               
+01030884  mov      v10.16b, v2.16b                       
+01030888  str      s8, [x20, #0x10c]                     
+0103088C  str      s9, [x20, #0x110]                     
+01030890  str      s2, [x20, #0x114]                     
+01030894  bl       #0x200686c                             // UnityEngine.LayerMask$$op_Implicit
+01030898  ldr      x8, [x22]                             
+0103089C  mov      w21, w0                               
+010308A0  ldr      w9, [x8, #0xe0]                       
+010308A4  cbnz     w9, #0x10308b0                        
+010308A8  mov      x0, x8                                
+010308AC  bl       #0xe61c80                             
+010308B0  mov      v0.16b, v8.16b                        
+010308B4  mov      v1.16b, v9.16b                        
+010308B8  mov      v2.16b, v10.16b                       
+010308BC  mov      v3.16b, v11.16b                       
+010308C0  mov      w0, w21                               
+010308C4  mov      x1, xzr                               
+010308C8  bl       #0x20409e0                             // UnityEngine.Physics$$CheckSphere
+010308CC  mov      x21, xzr                              
+010308D0  and      w8, w0, #1                            
+010308D4  strb     w8, [x20, #0x130]                     
+010308D8  tbnz     w0, #0, #0x1030908                    
+010308DC  mov      x0, x19                               
+010308E0  mov      x1, xzr                               
+010308E4  bl       #0x2041678                             // UnityEngine.RaycastHit$$get_collider
+010308E8  cbz      x0, #0x103092c                        
+010308EC  mov      x1, xzr                               
+010308F0  bl       #0x2003a44                             // UnityEngine.Component$$get_gameObject
+010308F4  cbz      x0, #0x103092c                        
+010308F8  mov      w1, #2                                
+010308FC  mov      x2, xzr                               
+01030900  mov      x21, x0                               
+01030904  bl       #0x2006350                             // UnityEngine.GameObject$$set_layer
+01030908  mov      x0, x21                               
+0103090C  ldp      x20, x19, [sp, #0x70]                 
+01030910  ldp      x22, x21, [sp, #0x60]                 
+01030914  ldr      x30, [sp, #0x50]                      
+01030918  ldp      d9, d8, [sp, #0x40]                   
+0103091C  ldp      d11, d10, [sp, #0x30]                 
+01030920  ldp      d13, d12, [sp, #0x20]                 
+01030924  add      sp, sp, #0x80                         
+01030928  ret                                            
+0103092C  bl       #0xe61da0                             

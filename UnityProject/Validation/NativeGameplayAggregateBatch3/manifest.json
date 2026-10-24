@@ -1,0 +1,37 @@
+{
+  "createdUtc": "2026-10-16T03:25:40.084152+00:00",
+  "scope": "Offline aggregation only. No Assets/Unity changes, no800 coverage produced.",
+  "files": [
+    {
+      "path": "Validation/aggregate_native_gameplay.py",
+      "source": "Validation/NativeGameplayAggregateBatch3/aggregate_native_gameplay.py",
+      "sha256": "79777635c4c242083f3c66e8735a25b51d4a6b0452804b82c47cb50582a35456"
+    },
+    {
+      "path": "Validation/test_aggregate_native_gameplay.py",
+      "source": "Validation/NativeGameplayAggregateBatch3/test_aggregate_native_gameplay.py",
+      "sha256": "468eb04e3441ace33c6e99e4ab5d4e23d40c5498371468ac6437bad1278d8fbe"
+    },
+    {
+      "path": "Validation/native-gameplay-compatibility.example.json",
+      "source": "Validation/NativeGameplayAggregateBatch3/native-gameplay-compatibility.example.json",
+      "sha256": "9e0ee3bd4026bf119a5be1fcaf137ed5b09502cf1a6932ee35f7a9afab14dd53"
+    }
+  ],
+  "changes": [
+    "Only the exact JsonUtility all-empty RetestSource object is normalized to absent provenance; partially filled claims still fail strictSHA/start/id checks.",
+    "Each source and first-to-selected comparison now discloses playerReleaseStrategy and exact terminalQuickRelease step numbers.",
+    "All strict two400 union800/11919/expectedCatalog/datahash/runtime-critical-hash/victory/input checks fromBatch2 unchanged."
+  ],
+  "tests": "20 aggregator boundary tests PASS +7 fake-process queue tests PASS (no Unity launched).",
+  "actualQuickAudit": {
+    "reportSha256": "d0c324d015032c22628c592ef2d89d162f91e0d61efc5622a407fcca6ba270a2",
+    "id": 1187,
+    "finishedUtc": "2026-10-16T03:08:33.0255284Z",
+    "productionInputSteps": 18,
+    "finalTargets": "7/7",
+    "strictPerLevelAuditIssues": [],
+    "expectedCatalogSha256": "fe00b5eb0a0baa923ee8b520661022046a1ea81cc19fbd1399c8001d47744e85",
+    "scope": "Actual singlecase real-pointer result, not full800 coverage. Future critical physics changes require final sameversion retest; no mixedMotion/Jets acceptance."
+  }
+}

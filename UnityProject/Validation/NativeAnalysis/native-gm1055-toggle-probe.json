@@ -1,0 +1,27 @@
+{
+  "level": 1055,
+  "failure": "step8 occupied because channel1 toggle was incorrectly activated before the first ordinary player press",
+  "rootCause": "PieceAt accepted fixed BloqueFijo record10 above record3 toggle; native source.mascaraBloque=4096 does not query its fixed layer0 collider",
+  "prefab": "Assets/GameObject/Resorte3.prefab",
+  "fields": {
+    "mascaraBloque": 4096,
+    "sphereRadius": 1,
+    "altura": 7.6
+  },
+  "nativeMethods": {
+    "doCheckCollision1": "10CED60..6C /10CEEF8..F00 fixed flag excludes numPiezas",
+    "doNumPiezasEncima": "10CCD0C..10CCDDC only movable collision flag advances count",
+    "doValidarPosActual": "10CB04C count only forsv2, 10CB2FC..35C separate fixed-above gates, 10CB284..2B8 bypass general collision8/9",
+    "rotationProbes": "10CCF0C..7C cardinal sequence, first collision aborts",
+    "otherChannelBusy": "10CCF94..10CD1D4, called only horizontal valMove2 at10CB2C0..D8",
+    "Resorte3Probe": "10283BC..1028410 serialized mask/radius,1028440..1028518 last-hit assignment; prefab mascaraBloque4096; ctor10295DC..E4 radius1",
+    "Resorte3Lower": "1028B70..1028C58 source-parent X/Z, sourceY+7.6; Piezatrans skips reposition"
+  },
+  "authoredSequence": {
+    "record3": "root(0,3.95,80), togglechannel1",
+    "record10": "root(0,11.55,80), fixed moving platform on channel2 with togglechannel2",
+    "step1": "ordinary pipe presses record10; native channel1 must remain inactive",
+    "step3": "ordinary pipe first presses record3 after record10 moved east; channel1 should activate, not reverse"
+  },
+  "runtimeStatus": "staging only; Unity not launched; normal gm1055 regression still required"
+}

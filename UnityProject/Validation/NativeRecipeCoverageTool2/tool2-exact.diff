@@ -1,0 +1,151 @@
+--- a/Validation/aggregate_native_recipe_regression.py
++++ b/Validation/aggregate_native_recipe_regression_v2.py
+@@ -1,4 +1,4 @@
+-"""Strict independent169-case affected-recipe coverage; never substitutes for800.
++"""Strict independent169-case coverage with exact native post-commit carry evidence.
+ 
+ This imports the unchanged per-level real-input/native-victory audit from Scoped5.
+ All input reports must already be closed. Nothing launches or controls Unity.
+@@ -71,7 +71,98 @@
+             "files": before["files"], "processExitCode": job["exitCode"]}
+ 
+ 
+-def select_attempts(base, retests, ids, catalog):
++CARRY_EDITOR = "Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs"
++CARRY_EDITOR_SHA = "31ff8f90ae2ee52803ea34a5425fdd373f11219850cae868bdf5642de2a6b3fc"
++
++
++def original_actor_count(level_id):
++    layout, _ = audit.read_json(ROOT.parent / ("Assets/RecoveredData/LevelData/01_Layouts/gm%d.json" % level_id))
++    pieces = layout.get("data", {}).get("pieza")
++    ensure(isinstance(pieces, list) and pieces, "Original layout actor inventory missing")
++    return len(pieces)
++
++
++def native_commit_carry(step, run, level_id, source_files, actor_count):
++    """Recompute every geometric relation; declared errors/booleans alone never suffice."""
++    ensure(source_files.get(CARRY_EDITOR) == CARRY_EDITOR_SHA, "Carry proof requires the exact executed Batch11 Editor SHA")
++    ensure(step.get("nativeCarryEvidenceVersion") == 1 and step.get("nativeCarryAfterCommit") is True
++           and step.get("marker") is False and step.get("compressionLanding") is False
++           and step.get("followsMovingSupport") is False, "Not the exact ordinary native postcommit-carry branch")
++    for key in ("productionCommitObserved", "nativeCarryMembership", "nativeCarrierMoving", "nativeCarrierCommitObserved"):
++        ensure(step.get(key) is True, "Missing actual native commit/carry observation: " + key)
++    ensure(step.get("nativeCarrierTurning") is False, "Rotating carrier is outside the translating-carrier rule")
++    frames = [step.get(k) for k in ("pickupFrame", "releaseFrame", "productionCommitFrame", "motionFinishedFrame", "committedFrame", "actualAfterFrame")]
++    ensure(all(audit.integer(x, 1) for x in frames) and frames == sorted(frames)
++           and step["actualAfterFrame"] == step["committedFrame"], "Native carry actual frame chain differs")
++    carrier, selected, layer = (step.get(k) for k in ("nativeCarrierRecord", "sourceRecord", "nativeCarryLayer"))
++    ensure(audit.integer(actor_count, 1) and audit.integer(carrier) and audit.integer(selected)
++           and 0 <= carrier < actor_count and 0 <= selected < actor_count and carrier != selected
++           and audit.integer(layer, 1), "Native carry owner/layer is missing, self or outside original layout")
++    for value, target in ((step.get("productionCommitPosition"), step.get("destination")),
++                          (step.get("productionCommitPosition"), step.get("productionCommitTarget")),
++                          (step.get("originalGuide"), step.get("destination"))):
++        ensure(audit.distance_squared(value, target) < .64, "Production commit/guide fails unchanged original Near(.8)")
++    samples = step.get("productionCommitCarriers")
++    ensure(isinstance(samples, list) and samples and all(isinstance(x, dict)
++           and audit.integer(x.get("record")) and 0 <= x["record"] < actor_count
++           and audit.finite_vector(x.get("position")) for x in samples), "Commit callback lacks original observer pose samples")
++    ensure(len({x["record"] for x in samples}) == len(samples), "Duplicate original observer records in commit callback")
++    match = [x for x in samples if x["record"] == carrier]
++    ensure(len(match) == 1 and audit.distance_squared(match[0]["position"], step.get("nativeCarrierCommitPosition")) < 1e-8,
++           "Actual carried owner does not match its synchronous commit sample")
++    vectors = ("actualAfter", "productionCommitPosition", "nativeCarrierPosition", "nativeCarrierCommitPosition",
++               "nativeCarryOffset", "nativeActorTranslation", "nativeCarrierTranslation")
++    ensure(all(audit.finite_vector(step.get(key)) for key in vectors), "Native carry geometry is missing or nonfinite")
++    def difference(a, b):
++        return {key: step[a][key] - step[b][key] for key in ("x", "y", "z")}
++    offset = difference("actualAfter", "nativeCarrierPosition")
++    actor_delta = difference("actualAfter", "productionCommitPosition")
++    carrier_delta = difference("nativeCarrierPosition", "nativeCarrierCommitPosition")
++    ensure(audit.distance_squared(offset, step["nativeCarryOffset"]) < 1e-8
++           and audit.distance_squared(actor_delta, step["nativeActorTranslation"]) < 1e-8
++           and audit.distance_squared(carrier_delta, step["nativeCarrierTranslation"]) < 1e-8,
++           "Declared native offset/translation differs from actual sampled poses")
++    expected_offset = {"x": 0, "y": 7.6 * layer, "z": 0}
++    offset_error = audit.distance_squared(offset, expected_offset) ** .5
++    translation_error = audit.distance_squared(actor_delta, carrier_delta) ** .5
++    ensure(offset_error < .03 and translation_error < .03, "Actual carry offset/displacement does not match original native carrier")
++    for key, computed in (("nativeCarryOffsetError", offset_error), ("nativeCarryTranslationError", translation_error)):
++        declared = step.get(key)
++        ensure(type(declared) in (int, float) and 0 <= declared < .03 and abs(declared - computed) < .0001,
++               "Declared native carry error does not match actual geometry")
++    names = {x.get("name") for x in run.checks_by_level.get(level_id, []) if x.get("passed") is True}
++    n = step.get("number")
++    ensure(all("gm%d-native-input-%s-%s" % (level_id, suffix, n) in names
++               for suffix in ("actual-commit-pose", "actual-postcommit-carry")), "Missing actual commit and native carry check results")
++    return {"step": n, "sourceRecord": selected, "nativeCarrierRecord": carrier, "nativeCarryLayer": layer,
++            "productionCommitFrame": step["productionCommitFrame"], "actualAfterFrame": step["actualAfterFrame"],
++            "productionCommitPosition": step["productionCommitPosition"], "actualAfter": step["actualAfter"],
++            "carrierAtCommit": match[0]["position"], "carrierAfter": step["nativeCarrierPosition"],
++            "recomputedOffsetError": offset_error, "recomputedTranslationError": translation_error,
++            "executedEditorSha256": CARRY_EDITOR_SHA}
++
++
++def audit_level_with_carry(run, level_id, source_files, actor_count):
++    result = audit.audit_level(run, level_id)
++    proofs = []
++    for step in run.levels[level_id].get("steps", []):
++        if not isinstance(step, dict) or step.get("nativeCarryAfterCommit") is not True:
++            continue
++        issue = "Step%s final pose fails unchanged native-validator Near(.8) bound" % step.get("number")
++        try:
++            proof = native_commit_carry(step, run, level_id, source_files, actor_count)
++        except audit.EvidenceError as error:
++            result["auditIssues"].append("Step%s native postcommit-carry rejected: %s" % (step.get("number"), error))
++            continue
++        if issue in result["auditIssues"]:
++            result["auditIssues"].remove(issue)
++        proofs.append(proof)
++    result["nativePostCommitCarryEvidence"] = proofs
++    result["passed"] = not result["auditIssues"]
++    return result
++
++
++def select_attempts(base, retests, ids, catalog, source_files=None):
+     ensure(base.data["plannedLevels"] == 169 and list(base.levels) == ids,
+            "Base must contain all exact169 requested ids in request order")
+     ensure(len({run.digest for run in [base, *retests]}) == 1 + len(retests), "Duplicate run input")
+@@ -95,7 +186,8 @@
+     counts = {x["id"]: x["recordedSteps"] for x in catalog["levels"]}
+     results = []
+     for n in ids:
+-        attempts = [audit.audit_level(run, n) for run in [base, *ordered] if n in run.levels]
++        attempts = [audit_level_with_carry(run, n, (source_files or {}).get(run.digest, {}), original_actor_count(n))
++                    for run in [base, *ordered] if n in run.levels]
+         selected = attempts[-1]
+         if selected["recordedSteps"] != counts[n]:
+             selected["passed"] = False
+@@ -166,7 +258,8 @@
+     locked = [source_binding(run, by_sha[run.digest], bindings_path.parent) for run in [base, *retests]]
+     ensure(all(item["files"] == locked[0]["files"] for item in locked),
+            "All169 base/retest runtime, Resources JSON, Editor and Settings sources must be byte-identical")
+-    levels, failed = select_attempts(base, retests, request["ids"], catalog)
++    levels, failed = select_attempts(base, retests, request["ids"], catalog,
++                                     {item["reportSha256"]: item["files"] for item in locked})
+     unresolved = [x["id"] for x in levels if not x["passed"]]
+     runs_by_sha = {run.digest: run for run in [base, *retests]}
+     selected_checks = [check for check in base.data["checks"] if not check["name"].startswith("gm")]
+@@ -177,7 +270,7 @@
+     for item in locked:
+         item["sourceFileCount"] = len(item.pop("files"))
+     now = datetime.now(timezone.utc).isoformat()
+-    return {"schemaVersion": 1, "createdUtc": now,
++    return {"schemaVersion": 2, "createdUtc": now,
+             "startedUtc": base.data["startedUtc"], "finishedUtc": now,
+             "sourceFinishedUtc": max([base, *retests], key=lambda run: run.finished).data["finishedUtc"],
+             "scope": "Independent169 affected-native-recipe plus historical-failure normal gameplay regression",
+@@ -193,8 +286,12 @@
+             "bindingsEvidence": {"path": str(bindings_path.resolve()), "sha256": bindings_sha},
+             "actualSourceLocks": locked, "levels": levels, "checks": selected_checks,
+             "auditImplementation": reference(DEPENDENCY),
++            "scopeAuditImplementation": reference(Path(__file__)),
++            "nativeCarryEvidenceRule": {"version": 1, "editorPath": CARRY_EDITOR, "editorSha256": CARRY_EDITOR_SHA,
++                "originalNearBound": .8, "maximumNativeOffsetAndTranslationError": .03,
++                "onlyException": "Exact production commit followed by observed original carried membership and equal actual carrier displacement"},
+             "originalRecordEvidence": records,
+-            "limitation": "Strict169 independent scope only. This artifact neither replaces original800 evidence nor weakens its400/800 base rule. Latest actual failed retests remain failures. Top finishedUtc is the aggregate creation time; sourceFinishedUtc is the latest actual Unity run finish. Selected checks are copied from actual source reports. Current source hashes bind queue snapshots; they do not independently infer loaded assembly identity. All raw reports remain unchanged."}
++            "limitation": "Strict169 independent scope only. This artifact neither replaces original800 evidence nor weakens its400/800 base rule. Latest actual failed retests remain failures. Top finishedUtc is the aggregate creation time; sourceFinishedUtc is the latest actual Unity run finish. Selected checks are copied from actual source reports. Only the pinned Batch11 harness may prove exact normal commit followed by original native carrier translation; final actualAfter is preserved and no tolerance is enlarged. Current source hashes bind queue snapshots; they do not independently infer loaded assembly identity. All raw reports remain unchanged."}
+ 
+ 
+ def main():

@@ -1,0 +1,49 @@
+{
+  "createdUtc": "2026-10-16T12:04:58.455982+00:00",
+  "reviewer": "direct_scene_title",
+  "scope": "Read-only code-path audit, not actual Unity verdict",
+  "reviewedSource": "Validation/NativeLevelIdentityCommonEntryBatch2/Sources/FlowWaterRecoveryUI.cs.src",
+  "reviewedSha256": "fb146eb0f33e07a0030f4c98a33abbd3b0a3624dbc504a0a22e22b5cbab4a13b",
+  "commonEntryFirstStatement": "ControladorJuego.nivelActual = id;",
+  "entryCallSites": [
+    {
+      "method": "OnSceneLoaded",
+      "sourceLines": [
+        146,
+        153
+      ],
+      "path": "Recovery.LastLevelId/pending selection -> catalog and scene validation -> fallback -> original pack -> common loader",
+      "fallbacks": {
+        "Levely5_basic": 401,
+        "Levely5_6x6": 251,
+        "Levely5_7x7": 351,
+        "Levely5": 1
+      }
+    },
+    {
+      "method": "StartGame",
+      "sourceLines": [
+        505,
+        522
+      ],
+      "path": "available catalog -> original pack -> same scene common loader; different scene pending ID -> SceneManager.LoadScene -> OnSceneLoaded common loader"
+    }
+  ],
+  "readers": [
+    {
+      "path": "Assets/Scripts/Assembly-CSharp/Leveltexto2.cs",
+      "line": 17,
+      "expression": "ControladorJuego.nivelActual + original part offset",
+      "phase": "Start after sceneLoaded"
+    },
+    {
+      "path": "Assets/Scripts/Assembly-CSharp/ControladorJuego.cs",
+      "line": 11,
+      "usage": "static field declaration"
+    }
+  ],
+  "comparedWithOriginalPatch": "The combined final implementation adds exactly one global assignment at the first line of the common gameplay loader; the Batch1 StartGame-only assignment is removed by Batch2.",
+  "mechanicsScope": "No actor, input, collider, water, physics or scheduler statements changed.",
+  "lifecycleExpectation": "Native Leveltexto2.Start should now consume the current original asset ID for both UI navigation and direct Editor Play. This remains a source-level expectation until the real fixture finishes.",
+  "actualVerified": false
+}

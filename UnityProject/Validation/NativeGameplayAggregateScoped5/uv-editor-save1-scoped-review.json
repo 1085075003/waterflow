@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "reviewedUtc": "2026-10-16T08:04:24.507424+00:00",
+  "decision": "COMPATIBLE_ONLY_FOR_LISTED_CLOSED_MODE0_SAVE1_REPORTS",
+  "sourcePair": {
+    "path": "Assets/Editor/RecoveredTools/FlowWaterWaterUVValidation.cs",
+    "baseSha256": null,
+    "otherSha256": "3d7abadae2d7f79faa5818b22fa39736ac45f32f15594b0f8e5bbbfa75b1f028"
+  },
+  "uvEditorSource": {
+    "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\AggregationDraft\\ExactSourceReviews\\3d7abadae2d7-FlowWaterWaterUVValidation.cs\\after.txt",
+    "sha256": "3d7abadae2d7f79faa5818b22fa39736ac45f32f15594b0f8e5bbbfa75b1f028"
+  },
+  "timeManagerContent": {
+    "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\ProjectSettings\\TimeManager.asset",
+    "sha256": "7c2edc431551c3116fefb9cae01833ec826126bfc3aca54a1121adaf12db83d8"
+  },
+  "onlyReportSha256": [
+    "81a7bdaba84ea2e926c367f1da5caa4f25aee5e002debebb39447952cf21f2f7",
+    "c427303f08e11713c002c5321a1566cf4939e51df29ab9e94c4759512a433fe8",
+    "2bf9314a99fc74d9841885a836b8081fe3946c7c049efa3fb36d82bde85721e0",
+    "b763113d0163358b73c7da68c5afb6805237530a2cd6b141442ac2dba0566ff1",
+    "fa319a3ee8ec874f72835e6f9f9feb4ea1331744ae6e0048114ac8732fb03530",
+    "51f20487c9d143fece317157701d8f72c1afb7ed1f0ca1d97609f1901c9c7710",
+    "f8dee0be031813b7540c9c23cc56baee4f7d37e93e7b16f22bf270d92d16775d"
+  ],
+  "duringPlaySourceReasoning": [
+    "Each actual Unity process command invokes only the Save1 validation method, never UV.Run.",
+    "UV.Update returns while its suite key is false; UV.Run is the only code that sets its key true.",
+    "UV.PostRender is not directly key-guarded: default capturing=false and originals=null prevent work. Only the own UV routine enables capture, and that routine is never started in these processes.",
+    "The UV static constructor only installs callbacks. The unguarded Cleanup occurs at ExitingPlayMode, after Save1 Finish serializes all normal-mode player, target and completion verdicts.",
+    "Save1 Finish restores its saved originalTimeScale=4 and preferences, serializes its closed report, then requests play exit. Its own EnteredEditMode callback restores TimeKey=4 and original scenes and calls process Exit."
+  ],
+  "actualObservations": [
+    {
+      "name": "RetestHalf1Early2",
+      "report": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\RetestHalf1Early2\\save1-gameplay-validation.json",
+        "sha256": "81a7bdaba84ea2e926c367f1da5caa4f25aee5e002debebb39447952cf21f2f7"
+      },
+      "queue": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T055849.179250Z-formal-main-early2\\queue-run.json",
+        "sha256": "e89a9a0439d0a82fc9cdaa643a819333efdbca4bb18938d5672037331589c5c0"
+      },
+      "log": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T055849.179250Z-formal-main-early2\\01-formal-main-failed-ordinary-early2\\unity-2022.3.28f1.log",
+        "sha256": "18cbf6d8d95d769e151d0a73e0b62c2ab9a933f6d1f0f641f06724f7e78a2493"
+      },
+      "beforeSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T055849.179250Z-formal-main-early2\\01-formal-main-failed-ordinary-early2\\sources-before.json",
+        "sha256": "fd4e241e3dd72c6adf7ad58cd9ffccf43101f70f4b9cbd9ddb4a29c4546c35f1"
+      },
+      "afterSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T055849.179250Z-formal-main-early2\\01-formal-main-failed-ordinary-early2\\sources-after.json",
+        "sha256": "cff7ead0e170d9d9b3b3803ffd3ccf34965bddc1eed1c113e618f3a6e316b8e0"
+      },
+      "save1EditorSource": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\AggregationDraft\\ExactSourceReviews\\d85fe7a41ff1-FlowWaterSave1GameplayValidation.cs\\after.txt",
+        "sha256": "d85fe7a41ff1c1e28bfe885d5a18b6375aaa7b8899417dc1110ac8d070653e1d"
+      },
+      "startedUtc": "2026-10-16T05:58:59.0868885Z",
+      "finishedUtc": "2026-10-16T05:59:38.9684641Z",
+      "processObservedFinishedUtc": "2026-10-16T05:59:40.273671+00:00",
+      "processExitCode": 1,
+      "reportPassed": false,
+      "originalTimeScale": 4,
+      "preferencesRestored": true,
+      "runtimeErrors": [],
+      "beforeAfterSourcesIdentical": true,
+      "serializedTimeManagerBeforeAfterSha256": "7c2edc431551c3116fefb9cae01833ec826126bfc3aca54a1121adaf12db83d8",
+      "logLines": {
+        "executeMethod": 29,
+        "save1Finished": 506,
+        "subsequentBackupSceneRestore": 519,
+        "subsequentTimeManagerImport": 529
+      }
+    },
+    {
+      "name": "RetestHalf2Early2",
+      "report": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\RetestHalf2Early2\\save1-gameplay-validation.json",
+        "sha256": "c427303f08e11713c002c5321a1566cf4939e51df29ab9e94c4759512a433fe8"
+      },
+      "queue": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T060115.312951Z-formal-clone-early2\\queue-run.json",
+        "sha256": "24b83bb828eba6096739e891516faf2d7fb4f8c1149d437ad9380a1c1ebd3a90"
+      },
+      "log": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T060115.312951Z-formal-clone-early2\\01-formal-clone-failed-ordinary-early2\\unity-2022.3.28f1.log",
+        "sha256": "d4e8c7315b814e15ff78bd212acae342b7991133995b47fad67a66fec45dab82"
+      },
+      "beforeSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T060115.312951Z-formal-clone-early2\\01-formal-clone-failed-ordinary-early2\\sources-before.json",
+        "sha256": "3a4a16d30ae111c2adf1e1d25472687bf0c11fb45306a9478d8abf6b7ff8f430"
+      },
+      "afterSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T060115.312951Z-formal-clone-early2\\01-formal-clone-failed-ordinary-early2\\sources-after.json",
+        "sha256": "7964d9d5bcf4fe5cd04b8a80548ea36c1d87e9a43f799c6badd6d9448a17639e"
+      },
+      "save1EditorSource": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\AggregationDraft\\ExactSourceReviews\\d85fe7a41ff1-FlowWaterSave1GameplayValidation.cs\\after.txt",
+        "sha256": "d85fe7a41ff1c1e28bfe885d5a18b6375aaa7b8899417dc1110ac8d070653e1d"
+      },
+      "startedUtc": "2026-10-16T06:01:25.5323702Z",
+      "finishedUtc": "2026-10-16T06:01:43.2748324Z",
+      "processObservedFinishedUtc": "2026-10-16T06:01:44.441540+00:00",
+      "processExitCode": 1,
+      "reportPassed": false,
+      "originalTimeScale": 4,
+      "preferencesRestored": true,
+      "runtimeErrors": [],
+      "beforeAfterSourcesIdentical": true,
+      "serializedTimeManagerBeforeAfterSha256": "7c2edc431551c3116fefb9cae01833ec826126bfc3aca54a1121adaf12db83d8",
+      "logLines": {
+        "executeMethod": 29,
+        "save1Finished": 453,
+        "subsequentBackupSceneRestore": 465,
+        "subsequentTimeManagerImport": 475
+      }
+    },
+    {
+      "name": "RetestHalf1Box3",
+      "report": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\RetestHalf1Box3\\save1-gameplay-validation.json",
+        "sha256": "2bf9314a99fc74d9841885a836b8081fe3946c7c049efa3fb36d82bde85721e0"
+      },
+      "queue": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T062302.855568Z-formal-main-box3\\queue-run.json",
+        "sha256": "43aac1045c9e1f7a761df14bfceb9ebba70141b07357f9bff54237bb2610d5e4"
+      },
+      "log": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T062302.855568Z-formal-main-box3\\01-formal-main-box3\\unity-2022.3.28f1.log",
+        "sha256": "75e711fa5397f46673c8dc4dc812f09bd12f5b1feaab8beb84babfd7e14384e9"
+      },
+      "beforeSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T062302.855568Z-formal-main-box3\\01-formal-main-box3\\sources-before.json",
+        "sha256": "ddae7be66b3f75868f3d41d465681d97fbef531a21a99cfc6aad25e19d64563e"
+      },
+      "afterSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T062302.855568Z-formal-main-box3\\01-formal-main-box3\\sources-after.json",
+        "sha256": "0cc488746e779625b2f80e4c65820d004f4148d98601888a0bed4e20a5725c27"
+      },
+      "save1EditorSource": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\AggregationDraft\\ExactSourceReviews\\de50c1cbbcc9-FlowWaterSave1GameplayValidation.cs\\after.txt",
+        "sha256": "de50c1cbbcc9241af0d07236398becbf1c543ac533a832544493b76058805c39"
+      },
+      "startedUtc": "2026-10-16T06:23:15.9130222Z",
+      "finishedUtc": "2026-10-16T06:23:34.2112562Z",
+      "processObservedFinishedUtc": "2026-10-16T06:23:35.106445+00:00",
+      "processExitCode": 1,
+      "reportPassed": false,
+      "originalTimeScale": 4,
+      "preferencesRestored": true,
+      "runtimeErrors": [],
+      "beforeAfterSourcesIdentical": true,
+      "serializedTimeManagerBeforeAfterSha256": "7c2edc431551c3116fefb9cae01833ec826126bfc3aca54a1121adaf12db83d8",
+      "logLines": {
+        "executeMethod": 29,
+        "save1Finished": 531,
+        "subsequentBackupSceneRestore": 543,
+        "subsequentTimeManagerImport": 553
+      }
+    },
+    {
+      "name": "RetestHalf2Box3",
+      "report": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\RetestHalf2Box3\\save1-gameplay-validation.json",
+        "sha256": "b763113d0163358b73c7da68c5afb6805237530a2cd6b141442ac2dba0566ff1"
+      },
+      "queue": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T062944.085551Z-formal-clone-box3\\queue-run.json",
+        "sha256": "e09a542829a43fb1fa667261efb62b90a1fc26948c919b8d8c951071c34190a5"
+      },
+      "log": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T062944.085551Z-formal-clone-box3\\01-formal-clone-box3\\unity-2022.3.28f1.log",
+        "sha256": "d1abd30816c66aa89abfd568e9699813ffaa97a0e811f96959cd9f22ad9ed56c"
+      },
+      "beforeSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T062944.085551Z-formal-clone-box3\\01-formal-clone-box3\\sources-before.json",
+        "sha256": "5db5ed136a71eb49ac695e7d10a694f87669a6838b63d810663c401dd487a258"
+      },
+      "afterSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T062944.085551Z-formal-clone-box3\\01-formal-clone-box3\\sources-after.json",
+        "sha256": "93820d986a11e6fcce47867d88f970484424b068083980c0d68a81e0bd95193f"
+      },
+      "save1EditorSource": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\AggregationDraft\\ExactSourceReviews\\de50c1cbbcc9-FlowWaterSave1GameplayValidation.cs\\after.txt",
+        "sha256": "de50c1cbbcc9241af0d07236398becbf1c543ac533a832544493b76058805c39"
+      },
+      "startedUtc": "2026-10-16T06:29:54.0149938Z",
+      "finishedUtc": "2026-10-16T06:30:11.8472178Z",
+      "processObservedFinishedUtc": "2026-10-16T06:30:12.832375+00:00",
+      "processExitCode": 1,
+      "reportPassed": false,
+      "originalTimeScale": 4,
+      "preferencesRestored": true,
+      "runtimeErrors": [],
+      "beforeAfterSourcesIdentical": true,
+      "serializedTimeManagerBeforeAfterSha256": "7c2edc431551c3116fefb9cae01833ec826126bfc3aca54a1121adaf12db83d8",
+      "logLines": {
+        "executeMethod": 29,
+        "save1Finished": 533,
+        "subsequentBackupSceneRestore": 545,
+        "subsequentTimeManagerImport": 555
+      }
+    },
+    {
+      "name": "RetestHalf1Continuous4",
+      "report": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\RetestHalf1Continuous4\\save1-gameplay-validation.json",
+        "sha256": "fa319a3ee8ec874f72835e6f9f9feb4ea1331744ae6e0048114ac8732fb03530"
+      },
+      "queue": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T071206.920129Z-RetestHalf1Continuous4\\queue-run.json",
+        "sha256": "42a5e2a5d3e6a9aac9e0f79f48c591466716b88c9610f5c5040b622db9890eca"
+      },
+      "log": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T071206.920129Z-RetestHalf1Continuous4\\01-RetestHalf1Continuous4\\unity-2022.3.28f1.log",
+        "sha256": "e2af3cb740ab3cc7dc09dee335fabb740bede5696e3e69fdfed4d2ef0741bf0b"
+      },
+      "beforeSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T071206.920129Z-RetestHalf1Continuous4\\01-RetestHalf1Continuous4\\sources-before.json",
+        "sha256": "169d1092a5511639a142dd087917df671da87b90b32ba9ff405fc881fcf5b758"
+      },
+      "afterSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T071206.920129Z-RetestHalf1Continuous4\\01-RetestHalf1Continuous4\\sources-after.json",
+        "sha256": "e9021225cecb603024ec196b0ff44448406645f2cd27bdddf05ddaa4ad0672b0"
+      },
+      "save1EditorSource": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\AggregationDraft\\ExactSourceReviews\\b9cb27c60597-FlowWaterSave1GameplayValidation.cs\\after.txt",
+        "sha256": "b9cb27c605975e264ed1409c93f0937879313e46c5e52e9a948ced471cbbc767"
+      },
+      "startedUtc": "2026-10-16T07:12:16.9911201Z",
+      "finishedUtc": "2026-10-16T07:12:22.4156414Z",
+      "processObservedFinishedUtc": "2026-10-16T07:12:23.523500+00:00",
+      "processExitCode": 0,
+      "reportPassed": true,
+      "originalTimeScale": 4,
+      "preferencesRestored": true,
+      "runtimeErrors": [],
+      "beforeAfterSourcesIdentical": true,
+      "serializedTimeManagerBeforeAfterSha256": "7c2edc431551c3116fefb9cae01833ec826126bfc3aca54a1121adaf12db83d8",
+      "logLines": {
+        "executeMethod": 29,
+        "save1Finished": 531,
+        "subsequentBackupSceneRestore": 543,
+        "subsequentTimeManagerImport": 553
+      }
+    },
+    {
+      "name": "RetestHalf2Continuous4",
+      "report": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\RetestHalf2Continuous4\\save1-gameplay-validation.json",
+        "sha256": "51f20487c9d143fece317157701d8f72c1afb7ed1f0ca1d97609f1901c9c7710"
+      },
+      "queue": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T071453.902217Z-RetestHalf2Continuous4\\queue-run.json",
+        "sha256": "65724de2d78881c6e6ef241dbd2aeffc8c49c86d5777b4be840e169f449d2fa2"
+      },
+      "log": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T071453.902217Z-RetestHalf2Continuous4\\01-RetestHalf2Continuous4\\unity-2022.3.28f1.log",
+        "sha256": "d094c1269bbe55b89ce915f91b98f2ba29be2dbce40947f88e9b294483e0159e"
+      },
+      "beforeSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T071453.902217Z-RetestHalf2Continuous4\\01-RetestHalf2Continuous4\\sources-before.json",
+        "sha256": "d150eb807184b0ab9deadda6db09321aec3bdeeeee8f776af1e6ae904c21741b"
+      },
+      "afterSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T071453.902217Z-RetestHalf2Continuous4\\01-RetestHalf2Continuous4\\sources-after.json",
+        "sha256": "746d22ba5b874526079caad00f3a9682b22f1e13e2cf0510af854019430df584"
+      },
+      "save1EditorSource": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\AggregationDraft\\ExactSourceReviews\\b9cb27c60597-FlowWaterSave1GameplayValidation.cs\\after.txt",
+        "sha256": "b9cb27c605975e264ed1409c93f0937879313e46c5e52e9a948ced471cbbc767"
+      },
+      "startedUtc": "2026-10-16T07:15:04.6179375Z",
+      "finishedUtc": "2026-10-16T07:15:20.2013743Z",
+      "processObservedFinishedUtc": "2026-10-16T07:15:21.161064+00:00",
+      "processExitCode": 1,
+      "reportPassed": false,
+      "originalTimeScale": 4,
+      "preferencesRestored": true,
+      "runtimeErrors": [],
+      "beforeAfterSourcesIdentical": true,
+      "serializedTimeManagerBeforeAfterSha256": "7c2edc431551c3116fefb9cae01833ec826126bfc3aca54a1121adaf12db83d8",
+      "logLines": {
+        "executeMethod": 29,
+        "save1Finished": 533,
+        "subsequentBackupSceneRestore": 545,
+        "subsequentTimeManagerImport": 555
+      }
+    },
+    {
+      "name": "RetestHalf2Scene5",
+      "report": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\RetestHalf2Scene5\\save1-gameplay-validation.json",
+        "sha256": "f8dee0be031813b7540c9c23cc56baee4f7d37e93e7b16f22bf270d92d16775d"
+      },
+      "queue": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T072854.913725Z-RetestHalf2Scene5\\queue-run.json",
+        "sha256": "427fcb1edbc6c219b17cade5152bae829352374dbcc70761777cd2b30a4239aa"
+      },
+      "log": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T072854.913725Z-RetestHalf2Scene5\\01-RetestHalf2Scene5\\unity-2022.3.28f1.log",
+        "sha256": "9fc697b3f1f9912682efbf244d123e5cb08405c5be8090aed1d83ba85a889e2b"
+      },
+      "beforeSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T072854.913725Z-RetestHalf2Scene5\\01-RetestHalf2Scene5\\sources-before.json",
+        "sha256": "e8d2b41d89477df340b4fe5c945c7eaaf700af160d8fe98b16d54fec1217a5cd"
+      },
+      "afterSnapshot": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\UnityQueueRuns\\20261016T072854.913725Z-RetestHalf2Scene5\\01-RetestHalf2Scene5\\sources-after.json",
+        "sha256": "4f831c64888c75883d2ba5f362909bc09b86c4da03b28c3edc8d989e1aeb5450"
+      },
+      "save1EditorSource": {
+        "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalGameplay\\AggregationDraft\\ExactSourceReviews\\2c1762df0ae8-FlowWaterSave1GameplayValidation.cs\\after.txt",
+        "sha256": "2c1762df0ae8cdf8de2efe56e5e50e1ceb955bee194ac19b05486df392882987"
+      },
+      "startedUtc": "2026-10-16T07:29:05.9132036Z",
+      "finishedUtc": "2026-10-16T07:29:17.4737147Z",
+      "processObservedFinishedUtc": "2026-10-16T07:29:18.512935+00:00",
+      "processExitCode": 0,
+      "reportPassed": true,
+      "originalTimeScale": 4,
+      "preferencesRestored": true,
+      "runtimeErrors": [],
+      "beforeAfterSourcesIdentical": true,
+      "serializedTimeManagerBeforeAfterSha256": "7c2edc431551c3116fefb9cae01833ec826126bfc3aca54a1121adaf12db83d8",
+      "logLines": {
+        "executeMethod": 29,
+        "save1Finished": 1019,
+        "subsequentBackupSceneRestore": 1031,
+        "subsequentTimeManagerImport": 1041
+      }
+    }
+  ],
+  "knownDefectRetained": {
+    "description": "Old3d7 has real unconditional ExitingPlayMode Cleanup. In an unstarted UV process its static originalTimeScale defaults0, so it can transiently set Time.timeScale=0 after the Save1 report is already closed.",
+    "fixedSourceSha256": "bafc6e168fa383c641e46d9e30a28d05d5ba303db15aa3a372e3c86ce010f085",
+    "notClaimed": [
+      "No direct runtime Time.timeScale sample was taken after ExitingPlayMode or immediately before process Exit in these seven old runs.",
+      "Identical TimeManager hashes prove serialized scale4 remained intact; they alone do not measure transient in-memory scale.",
+      "This is not approval of old3d7 as fully dormant or safe for unrelated suites, future reports, or future Input61.",
+      "These seven reports include failed attempts; compatibility never converts their failure into a pass."
+    ]
+  },
+  "approvalBoundary": "Exact source pair and only the seven listed immutable report SHA256s. No future report or post-import Input61 is covered. Existing earlier withheld blanket review remains correct for its broader dormant-Editor claim."
+}

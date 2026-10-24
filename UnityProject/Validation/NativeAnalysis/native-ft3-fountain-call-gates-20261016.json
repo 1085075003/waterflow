@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "reviewedUtc": "2026-10-16T08:53:27.367965+00:00",
+  "scope": "Read-only ARM high-level calling gates only. No pose/parent, shader/Animator, runtime modification or Unity execution.",
+  "conclusion": "The gm2050 q19/q20 surfaces are not extra primary/border/center fountain-family instances. The proposed high-level family gate explanation is falsified for the actual records13/42/55.",
+  "nativeMethods": [
+    {
+      "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\NativeAnalysis\\Methods\\FuenteTest3_Start_10A3DA4.asm.txt",
+      "sha256": "955488b4be167a51a221ec498c714fc4e73d2716b78c3948b89a1b84a6386c19"
+    },
+    {
+      "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\NativeAnalysis\\Methods\\FuenteTest3_doProcessEnter_10A4C08.asm.txt",
+      "sha256": "52ed70c61444ab23fd22cd379eec3b07087bd1ac5ee636974a3566e34829bfca"
+    },
+    {
+      "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\NativeAnalysis\\Methods\\FuenteTest3_doInstanciarAgua_10A5834.asm.txt",
+      "sha256": "1eab4d6a183d4e6a6e2b06ef244e13b4eb81bc5c86ce418c8d7a5e59e2ecbd56"
+    },
+    {
+      "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\NativeAnalysis\\Methods\\FuenteTest3_doInstanciarAgua1_10B1F24.asm.txt",
+      "sha256": "3e7685f361af6ecdb734dc1c0c07f6740d2a36e7152fc61a2a55f29c3da84a50"
+    },
+    {
+      "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\NativeAnalysis\\Methods\\FuenteTest3_doInstanciarFuente_10A6724.asm.txt",
+      "sha256": "e9c647b1e6e38a538e084830594ed485634964a567b8162d6cfd13aa35fa7d29"
+    },
+    {
+      "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\NativeAnalysis\\Methods\\FuenteTest3_doConfigFuentes_10A969C.asm.txt",
+      "sha256": "98ab20be7c16ad6890b2babff7ddf896773a6fb3ffccb280c283f04c0aff347d"
+    },
+    {
+      "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\NativeAnalysis\\Methods\\FuenteTest3_doConfigFuentesB_10A989C.asm.txt",
+      "sha256": "3b51ddc8d0af74e934deb8b835ce4143d60517a674ea1347f8c0206957663c3d"
+    },
+    {
+      "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\NativeAnalysis\\Methods\\FuenteTest3_doConfigFuentesCentro_10A9C6C.asm.txt",
+      "sha256": "20eccb16f2f02688c980ac2ba692d352dd32802977499f940a83e5923911326f"
+    }
+  ],
+  "gates": [
+    {
+      "method": "FuenteTest3.Start",
+      "rva": "0x10A3DA4",
+      "facts": "Initializes creaAgua=false,numOrigen5=0,contador=0,audioManager,night. No flow or fountain calls."
+    },
+    {
+      "method": "FuenteTest3.doProcessEnter",
+      "rva": "0x10A4C08",
+      "facts": [
+        {
+          "range": "0x10A4D90..0x10A4D94",
+          "condition": "activarFuente must be true to reach flow/fountain block."
+        },
+        {
+          "range": "0x10A4E44..0x10A4E48",
+          "call": "doInstanciarAgua before any tipoPieza/configFuenteB fountain gates."
+        },
+        {
+          "range": "0x10A4E4C..0x10A4E70",
+          "condition": "Only tipoPieza>=2 && tipoPieza!=8 && configFuenteB!=9 calls doInstanciarFuente."
+        }
+      ]
+    },
+    {
+      "method": "FuenteTest3.doInstanciarFuente",
+      "rva": "0x10A6724",
+      "facts": [
+        {
+          "range": "0x10A67CC..0x10A67E8",
+          "call": "tipoPieza==2 && configFuente!=0 -> doConfigFuentes (primary)"
+        },
+        {
+          "range": "0x10A67F8..0x10A6814",
+          "call": "tipoPieza==2 && configFuenteB!=0 && configFuenteB!=9 -> doConfigFuentesB (border)"
+        },
+        {
+          "range": "0x10A6824..0x10A6838",
+          "call": "tipoPieza==2 && configFuenteCentro!=0 -> doConfigFuentesCentro (center)"
+        }
+      ],
+      "absence": "No origen5/origen6, configFuenteCentro8, or water-column-animation suppression surrounds these three independent calls."
+    },
+    {
+      "method": "FuenteTest3.doConfigFuentesCentro",
+      "rva": "0x10A9C6C",
+      "facts": "With configAnim empty, dispatches Centro1/6->doFuente1Centro,2->doFuente2Centro,3..5->doFuente3Centro. With nonempty configAnim, only Centro1->doFuente1Centro and2->doFuente3Centro. Centro7/8/9 has no creation dispatch in either branch. This does not suppress primary/border."
+    },
+    {
+      "method": "FuenteTest3.doInstanciarAgua",
+      "rva": "0x10A5834",
+      "facts": "Branches on origen1..6, creates inlet flow and schedules doInstanciarAgua1 with espera1 for1..4 or espera2 for5/6. Does not call any configured fountain family. Vertical5 branch0x10A645C..0x10A65AC; vertical6 branch0x10A65B0..0x10A6700."
+    },
+    {
+      "method": "FuenteTest3.doInstanciarAgua1",
+      "rva": "0x10B1F24",
+      "facts": "triggered required at0x10B1F74..78; creaAgua determines replacement-flow creation at0x10B1F7C..80. Branches on origen1..6, clears creaAgua, origins1..4 schedule doDestroyAgua after2s;5/6 do not. Never invokes primary/border/center configuration."
+    }
+  ],
+  "currentRuntimeEvidence": [
+    {
+      "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Assets\\Scripts\\RecoveryRuntime\\RecoveredWaterNetwork.cs",
+      "sha256": "cfb6652554d1e5774115f99cd01a5bc5d21859514f1bddb20c0fb0bc44aefa57"
+    },
+    {
+      "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Assets\\Scripts\\RecoveryRuntime\\RecoveredNativeWaterAssets.cs",
+      "sha256": "8498e30f30453877714b11cd88968c953200515a4cb8080c040c7e85a18156e3"
+    },
+    {
+      "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Assets\\Resources\\RecoveredNativeWaterRecipes.json",
+      "sha256": "af2db29faa4e0ab60e7b33c7813b5a6ae3c5353083699edb41e7fc38251e9f70"
+    }
+  ],
+  "runtimeComparison": "RestoreConfiguredFountains already returns for B9. RestoreFountains invokes each family but ApplyFamily returns for configuration<=0, and center7/8/9 entries are empty. Thus the three actual renderer records cannot originate in these family calls. All6032 actual C contexts have activarFuente1; the native activarFuente gate does not explain these cases.",
+  "centerRecipeCounts": {
+    "7": {
+      "entries": 8,
+      "nonemptyRecipes": 0
+    },
+    "8": {
+      "entries": 8,
+      "nonemptyRecipes": 0
+    },
+    "9": {
+      "entries": 8,
+      "nonemptyRecipes": 0
+    }
+  },
+  "observedMeshEvidence": {
+    "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalRender\\NativeGeometryRegression1\\gm2050-water-mesh-diagnostics.json",
+    "sha256": "d25963d8fcc349fab3519a4d30150b1b222ee2511d45efb28a1a9f31b0df52e1"
+  },
+  "observedGraphEvidence": {
+    "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\FinalRender\\NativeGeometryRegression1\\gm2050-water-graph.json",
+    "sha256": "f134493c44aab96246b692e2dba8c223710df31a25ea5782d5d436e5522d32f8"
+  },
+  "exactConfigurationContextEvidence": {
+    "path": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\NativeAnalysis\\native-C-actual-config-contexts.json",
+    "sha256": "1fb4be478fcb47acd61abe54b0cde0ca8d654f95937ea71b6b17338774dd6c2d"
+  },
+  "observedRecords": [
+    {
+      "sourceRecord": 13,
+      "rendererPath": "[013] CuFuenteEB6Col4/Original water · ControlPiezaC/Aguas/Origen6/Original Fuente5Color4/water1/q20",
+      "incoming": 6,
+      "prefab": "CuFuenteEB6",
+      "configuration": "Qsr777900ersd2ed<z2z><j11j>",
+      "originalCStartFinalFields": {
+        "tipoPieza": 2,
+        "activarFuente": 1,
+        "configFuente": 0,
+        "configFuenteB": 9,
+        "configFuenteCentro": 0,
+        "configPit1": "",
+        "configAnim": ""
+      },
+      "familyCreationVerdict": "No primary/border/center instance: all zero (record42), or entire doInstanciarFuente skipped by B9 (records13/55).",
+      "attribution": "The observed Fuente5Color4 is the vertical doInstanciarAgua flow prefab, independently of the three configured fountain families."
+    },
+    {
+      "sourceRecord": 42,
+      "rendererPath": "[042] CuFuenteEB5Col4/Original water · ControlPiezaC/Aguas/OrigenCentro/Original Fuente5Color4/water1/q19",
+      "incoming": 5,
+      "prefab": "CuFuenteEB5",
+      "configuration": "Psr101100ersd2ed",
+      "originalCStartFinalFields": {
+        "tipoPieza": 2,
+        "activarFuente": 1,
+        "configFuente": 0,
+        "configFuenteB": 0,
+        "configFuenteCentro": 0,
+        "configPit1": "",
+        "configAnim": ""
+      },
+      "familyCreationVerdict": "No primary/border/center instance: all zero (record42), or entire doInstanciarFuente skipped by B9 (records13/55).",
+      "attribution": "The observed Fuente5Color4 is the vertical doInstanciarAgua flow prefab, independently of the three configured fountain families."
+    },
+    {
+      "sourceRecord": 55,
+      "rendererPath": "[055] CuFuenteEB6Col4/Original water · ControlPiezaC/Aguas/Origen6/Original Fuente5Color4/water1/q20",
+      "incoming": 6,
+      "prefab": "CuFuenteEB6",
+      "configuration": "Qsr797700ersd2ed<z2z><j22j>",
+      "originalCStartFinalFields": {
+        "tipoPieza": 2,
+        "activarFuente": 1,
+        "configFuente": 0,
+        "configFuenteB": 9,
+        "configFuenteCentro": 0,
+        "configPit1": "",
+        "configAnim": ""
+      },
+      "familyCreationVerdict": "No primary/border/center instance: all zero (record42), or entire doInstanciarFuente skipped by B9 (records13/55).",
+      "attribution": "The observed Fuente5Color4 is the vertical doInstanciarAgua flow prefab, independently of the three configured fountain families."
+    }
+  ],
+  "limits": [
+    "This does not certify original model pose, material, clipping or Animator behavior. Those are separately assigned to other agents.",
+    "This does not permit removing primary/border families based on Centro8 or vertical inlet direction.",
+    "No production change recommended from this specific high-level gate audit."
+  ]
+}

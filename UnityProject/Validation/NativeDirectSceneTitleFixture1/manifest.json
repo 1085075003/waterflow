@@ -1,0 +1,83 @@
+{
+  "createdUtc": "2026-10-16T12:04:58.455982+00:00",
+  "immutable": true,
+  "runtimeChanges": false,
+  "files": [
+    {
+      "target": "Assets/Editor/RecoveredTools/FlowWaterDirectSceneTitleValidation.cs",
+      "source": "Validation/NativeDirectSceneTitleFixture1/Sources/FlowWaterDirectSceneTitleValidation.cs.src",
+      "previousSha256": null,
+      "sha256": "7ece63603ee7bde703b5d8c1696f721f0e81a0b69e4b0e3da2843cc012fe0db4"
+    },
+    {
+      "target": "Assets/Editor/RecoveredTools/FlowWaterDirectSceneTitleValidation.cs.meta",
+      "source": "Validation/NativeDirectSceneTitleFixture1/Sources/FlowWaterDirectSceneTitleValidation.cs.meta.src",
+      "previousSha256": null,
+      "sha256": "0ed4e8c89ef822f53ede897bf70611fa3cd3a3f94cccab06c2d0a44c7d5de283"
+    }
+  ],
+  "entry": "Recovered.FlowWater.Editor.FlowWaterDirectSceneTitleValidation.Run",
+  "reportDirectory": "Validation/DirectSceneTitle",
+  "reportFile": "direct-scene-title-validation.json",
+  "timeoutSeconds": 900,
+  "scope": "Eight independent fresh Editor Play lifecycles across all four original gameplay scenes. Edit mode OpenScene + EnterPlaymode only. No UI StartGame, RefreshGame, capture wrapper or game-state calls. Read original active Leveltexto2.texto1 after at least 16 actual Time.frameCount frames; require exactly one signed integer equal positive original local number, native global/current asset IDs, original pack, exact scene and Time 4.",
+  "cases": [
+    {
+      "scene": "Assets/Scenes/Levely5_basic.unity",
+      "storedLastLevelId": 421,
+      "expectedAssetId": 421,
+      "expectedLocalNumber": 21
+    },
+    {
+      "scene": "Assets/Scenes/Levely5_basic.unity",
+      "storedLastLevelId": 2050,
+      "expectedAssetId": 401,
+      "expectedLocalNumber": 1
+    },
+    {
+      "scene": "Assets/Scenes/Levely5_6x6.unity",
+      "storedLastLevelId": 282,
+      "expectedAssetId": 282,
+      "expectedLocalNumber": 32
+    },
+    {
+      "scene": "Assets/Scenes/Levely5_6x6.unity",
+      "storedLastLevelId": 2050,
+      "expectedAssetId": 251,
+      "expectedLocalNumber": 1
+    },
+    {
+      "scene": "Assets/Scenes/Levely5_7x7.unity",
+      "storedLastLevelId": 366,
+      "expectedAssetId": 366,
+      "expectedLocalNumber": 16
+    },
+    {
+      "scene": "Assets/Scenes/Levely5_7x7.unity",
+      "storedLastLevelId": 421,
+      "expectedAssetId": 351,
+      "expectedLocalNumber": 1
+    },
+    {
+      "scene": "Assets/Scenes/Levely5z/Levely5.unity",
+      "storedLastLevelId": 13,
+      "expectedAssetId": 13,
+      "expectedLocalNumber": 13
+    },
+    {
+      "scene": "Assets/Scenes/Levely5z/Levely5.unity",
+      "storedLastLevelId": 2050,
+      "expectedAssetId": 1,
+      "expectedLocalNumber": 1
+    }
+  ],
+  "restoreScope": "Typed preferences (all catalog completion keys, startup preferences, language/helpRotation/Recovery.LastLevelId), full original SceneSetup, and final Edit-mode original time speed. SessionState report/FSM persists through each actual domain reload. All callbacks return immediately unless ownActive.",
+  "sourcePatchDependency": {
+    "manifest": "Validation/NativeLevelIdentityCommonEntryBatch2/manifest.json",
+    "runtimeUiSha256": "fb146eb0f33e07a0030f4c98a33abbd3b0a3624dbc504a0a22e22b5cbab4a13b"
+  },
+  "compileEvidenceSha256": "fd102b081902bb9e4b52f2d5991bf6036478bd491c96b6b4ab0cab54f78131c6",
+  "independentReviewSha256": "2e5bc767bfdbfc791c7a47831d94cc28beefc0101089156b6b5a4622c3d515cc",
+  "actualStatus": "Staged and full Editor compile successful only. No Unity process launched, no actual cases sampled, no restoration pass claimed.",
+  "coverageRestriction": "Independent direct scene title lifecycle suite; cannot substitute for ordinary native 800 or affected 169 movement regressions."
+}

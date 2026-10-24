@@ -1,0 +1,30 @@
+// scrollTest1$$Update VA 0x1060CC0, inferred length 112
+void scrollTest1__Update (scrollTest1_o* __this, const MethodInfo* method);
+01060CC0  stp      d9, d8, [sp, #-0x20]!                 
+01060CC4  stp      x30, x19, [sp, #0x10]                 
+01060CC8  ldr      s8, [x0, #0x40]                       
+01060CCC  mov      x19, x0                               
+01060CD0  mov      x0, xzr                               
+01060CD4  bl       #0x200c4fc                             // UnityEngine.Time$$get_time
+01060CD8  ldr      s1, [x19, #0x20]                       // self.scrollSpeed_X
+01060CDC  ldr      s9, [x19, #0x44]                       // self.offsetInicialY
+01060CE0  mov      x0, xzr                               
+01060CE4  fmul     s0, s0, s1                            
+01060CE8  fadd     s0, s8, s0                            
+01060CEC  str      s0, [x19, #0x38]                       // self.offsetX
+01060CF0  bl       #0x200c4fc                             // UnityEngine.Time$$get_time
+01060CF4  ldr      s1, [x19, #0x24]                       // self.scrollSpeed_Y
+01060CF8  ldr      x0, [x19, #0x30]                       // self.rend
+01060CFC  fmul     s0, s0, s1                            
+01060D00  fadd     s0, s9, s0                            
+01060D04  str      s0, [x19, #0x3c]                       // self.offsetY
+01060D08  cbz      x0, #0x1060d2c                        
+01060D0C  mov      x1, xzr                               
+01060D10  bl       #0x1fec4e4                             // UnityEngine.Renderer$$get_material
+01060D14  cbz      x0, #0x1060d2c                        
+01060D18  ldp      s0, s1, [x19, #0x38]                   // self.offsetX
+01060D1C  ldp      x30, x19, [sp, #0x10]                 
+01060D20  mov      x1, xzr                               
+01060D24  ldp      d9, d8, [sp], #0x20                   
+01060D28  b        #0x1fed1cc                             // UnityEngine.Material$$set_mainTextureOffset
+01060D2C  bl       #0xe61da0                             

@@ -1,0 +1,64 @@
+{
+  "source": "Original Flow Water 2.18 ARM64 libil2cpp.so and exported authored scene/prefab fields",
+  "scope": "Verified native behavior, separated from the remaining drag animation/state-machine work",
+  "selection": {
+    "method": "MoveBloque.ReturnClickedObject VA 0x10306B4",
+    "ray": "Camera.main.ScreenPointToRay(pointer), closest unmasked Physics.Raycast",
+    "requiredHitLayer": "bloque (12)",
+    "overheadQuery": { "position": "hit.collider.transform.position + Vector3.up * distancia", "distancia": 2, "radius": 1, "mask": 4096 },
+    "rejectIfOverheadOccupied": true,
+    "selectedLayerChange": { "target": "Only the exact hit.collider.gameObject", "from": 12, "duringDrag": 2, "onEnd": 12, "endEvidence": "MoveBloque.doEnd 0x102ECD8..0x102ED00" },
+    "fixedOcclusionNote": "Fixed pieces can have independent child colliders remaining on layer12. Preserve individual native layer changes; do not recursively change every fixed child to layer0. Closest physical hit must prevent picking a movable actor behind it."
+  },
+  "landing": {
+    "method": "MoveBloque.doProcessMove VA 0x102FA9C",
+    "acceptedSurface": "(hit.collider.tag.Contains(\"Map\") && tag != \"Map1\") || hit.collider.name.Contains(\"Origen\")",
+    "acceptedSurfaceEvidence": "0x102FDB8..0x102FE08",
+    "guideCoordinates": "hit.collider.transform.position, not RaycastHit.point",
+    "guideEvidence": "0x102FF38..0x102FF9C",
+    "minimumClamp": "original scene minX2/minZ2",
+    "maximumClamp": "If greater than original maxX2/maxZ2, native writes literal80 for the corresponding axis",
+    "clampEvidence": "0x102FFB8..0x103006C",
+    "finalRoot": "guide + Vector3.up * 4.199999809265137",
+    "finalRootEvidence": "MoveBloque.doEnd 0x102ED60..0x102ED78; float VA 0x5FFC78",
+    "originalStartGuide": "selectedParent.position + Vector3.up * -4.199999809265137",
+    "ordinaryColumn": {
+      "method": "MoveBloque.doCheckTarget1 VA 0x1031C30",
+      "probeMethod": "MoveBloque.doCheckCollResorte VA 0x10322EC",
+      "query": "OverlapSphere(guide + up*subeRayo, sphereRadius, mascaraSuelo)",
+      "subeRayo": 2,
+      "sphereRadius": 1,
+      "mask": 4097,
+      "occupancyExclusions": ["name.Contains(OrigenCentro)", "name.Contains(Origen6)"],
+      "maximumQueries": 7,
+      "onOccupied": "guide.y += arribay (7.6); query again, up to seven rises",
+      "onCuboResorte": "For each matching overlap collider guide.y += 1.2000000476837158; stop rising",
+      "springOffsetFloatVA": "0x5FFD68"
+    },
+    "configuredOuterColumn": {
+      "condition": "Original MoveBloque.config && original target.transform.position is outside inner bounds",
+      "configSource": "SaveLoadManager.doProcesoPiezas 0x1019188 writes static MoveBloque.config when processing ConfigLevel",
+      "method": "MoveBloque.doCheckTarget2 VA 0x1031B94",
+      "probeMethod": "MoveBloque.doCheckColl2 VA 0x10324CC",
+      "initialGuideY": -30.649999618530273,
+      "maximumQueries": 12,
+      "query": "Before every query guide.y += 7.6; OverlapSphere(guide + up*2, 1, mascaraSuelo2)",
+      "mask": 4609,
+      "occupied": "If collider layer is Suelo, only tag Map1 counts; on other layers every collider except name.Contains(Origen6) counts",
+      "stop": "After any occupied level, stop at the next unoccupied level; CuboResorte after an occupied level adds1.2 and stops"
+    },
+    "ordinaryGuideHeightGate": "For hits outside Suelo1, guide.y >= 53 only updates the secondary guide, not a new ordinary landing guide"
+  },
+  "authoredBounds": {
+    "Levely5": { "outerX": [-20,80], "outerZ": [-20,120], "innerX": [0,80], "innerZ": [0,80] },
+    "Levely5_basic": { "outerX": [-20,100], "outerZ": [-20,120], "innerX": [0,80], "innerZ": [0,80] },
+    "Levely5_6x6": { "outerX": [-60,100], "outerZ": [-40,120], "innerX": [-20,80], "innerZ": [-20,80] },
+    "Levely5_7x7": { "outerX": [-80,100], "outerZ": [-60,120], "innerX": [-40,80], "innerZ": [-40,80] }
+  },
+  "remainingNativeDragState": [
+    { "behavior": "Guide transition offsets +0.5, spring1.2 or1.7 and moving up/over/down route while dragging", "evidence": "doProcessMove 0x1030330..0x10303DC; DoMoverArriba; DoMoverAbajo; doMovimiento", "runtimeStatus": "Transcribed in RecoveredNativeDragMotion; new native-motion Unity validation pending" },
+    { "behavior": "Moving mechanism targetDebajo tracking / conRes3_8 special extra0.4", "evidence": "doProcessMove 0x10301D0..0x10302C4; doCheckDebajo; doCorregirPuntoFinal", "runtimeStatus": "Transcribed initial conResorte3 support detection and dynamic conResorte final support tracking in RecoveredNativeDragMotion; dedicated moving-support Unity validation pending" },
+    { "behavior": "Route under fixed overhead geometry", "evidence": "doCheckArribaFija 0x103288C; doBuscarCamino 0x102F428; doCheckCamino; doMovimiento 0x10332D0", "runtimeStatus": "Transcribed four original camera-yaw neighbor orders,8-level fixed and5-level neighbor probes, waypoint sequence/reversal and camino5 Renderer-hidden fallback in RecoveredNativeDragMotion; gm1057 real-roof Unity validation pending" },
+    { "behavior": "Native final interpolation", "evidence": "doFijarPieza 0x102EFF8..0x102F064 and0x102F1BC..0x102F21C", "runtimeStatus": "Transcribed Lerp smoothSpeed2.6, exact snap below0.3; route phases MoveTowards smoothSpeed2=28 with0.1 snap, final phase Lerp smoothSpeed1=2.6. Root commits after completion and records the pre-pickup snapshot for Undo." }
+  ]
+}

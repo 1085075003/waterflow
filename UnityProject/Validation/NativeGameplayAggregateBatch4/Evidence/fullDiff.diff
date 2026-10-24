@@ -1,0 +1,16 @@
+--- Assets/Scripts/RecoveryRuntime/RecoveredWaterMotion.cs (frozen base)
++++ Assets/Scripts/RecoveryRuntime/RecoveredWaterMotion.cs (native UV only)
+@@ -25,8 +25,12 @@
+                 Renderer renderer = original.rend != null ? original.rend : original.GetComponent<Renderer>();
+                 if (renderer == null || renderer.sharedMaterial == null) continue;
+                 Material material = renderer.sharedMaterial;
++                // Original scrollTest1.Start1060C98 and Update1060CC0:
++                // Start resolves Y; Update replaces, rather than adds to, the material offset.
++                if (original.tipoOffset == 1) original.offsetInicialY = 0f;
++                else if (original.tipoOffset == 2) original.offsetInicialY = .5f;
+                 surfaces.Add(new Surface { renderer = renderer, speed = new Vector2(original.scrollSpeed_X, original.scrollSpeed_Y),
+-                    offset = material.mainTextureOffset + new Vector2(original.offsetInicialX, original.offsetInicialY), scale = material.mainTextureScale });
++                    offset = new Vector2(original.offsetInicialX, original.offsetInicialY), scale = material.mainTextureScale });
+                 original.enabled = false;
+             }
+             foreach (Animator animator in GetComponentsInChildren<Animator>(true))

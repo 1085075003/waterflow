@@ -1,0 +1,70 @@
+// SolutionLang$$Start VA 0x1061690, inferred length 272
+void SolutionLang__Start (SolutionLang_o* __this, const MethodInfo* method);
+01061690  stp      x30, x23, [sp, #-0x30]!               
+01061694  stp      x22, x21, [sp, #0x10]                 
+01061698  stp      x20, x19, [sp, #0x20]                 
+0106169C  adrp     x21, #0x24fb000                       
+010616A0  adrp     x22, #0x236b000                       
+010616A4  adrp     x23, #0x236b000                       
+010616A8  adrp     x20, #0x236b000                       
+010616AC  ldrb     w8, [x21, #0xe29]                     
+010616B0  ldr      x22, [x22, #0x208]                     // [0x236B208] 'language'
+010616B4  ldr      x23, [x23, #0x210]                     // [0x236B210] 'en'
+010616B8  ldr      x20, [x20, #0x9d8]                     // [0x236B9D8] 'ar'
+010616BC  mov      x19, x0                               
+010616C0  tbnz     w8, #0, #0x1061708                    
+010616C4  adrp     x0, #0x236d000                        
+010616C8  ldr      x0, [x0, #0x50]                        // [0x236D050] Method$System.Linq.Enumerable.Reverse<char>()
+010616CC  bl       #0xe61b78                             
+010616D0  adrp     x0, #0x236d000                        
+010616D4  ldr      x0, [x0, #0x58]                        // [0x236D058] Method$System.Linq.Enumerable.ToArray<char>()
+010616D8  bl       #0xe61b78                             
+010616DC  adrp     x0, #0x236b000                        
+010616E0  ldr      x0, [x0, #0x9d8]                       // [0x236B9D8] 'ar'
+010616E4  bl       #0xe61b78                             
+010616E8  adrp     x0, #0x236b000                        
+010616EC  ldr      x0, [x0, #0x210]                       // [0x236B210] 'en'
+010616F0  bl       #0xe61b78                             
+010616F4  adrp     x0, #0x236b000                        
+010616F8  ldr      x0, [x0, #0x208]                       // [0x236B208] 'language'
+010616FC  bl       #0xe61b78                             
+01061700  mov      w8, #1                                
+01061704  strb     w8, [x21, #0xe29]                     
+01061708  ldr      x0, [x22]                             
+0106170C  ldr      x1, [x23]                             
+01061710  mov      x2, xzr                               
+01061714  bl       #0x2001644                             // UnityEngine.PlayerPrefs$$GetString
+01061718  str      x0, [x19, #0x28]                       // self.idioma
+0106171C  mov      x0, x19                               
+01061720  bl       #0x10617a0                             // SolutionLang$$ObtenerTexto
+01061724  str      x0, [x19, #0x30]                       // self.texto1
+01061728  ldr      x0, [x19, #0x28]                       // self.idioma
+0106172C  ldr      x1, [x20]                             
+01061730  mov      x2, xzr                               
+01061734  bl       #0x1960c7c                             // System.String$$op_Equality
+01061738  tbz      w0, #0, #0x1061774                    
+0106173C  adrp     x8, #0x236d000                        
+01061740  ldr      x0, [x19, #0x30]                       // self.texto1
+01061744  ldr      x8, [x8, #0x50]                        // [0x236D050] Method$System.Linq.Enumerable.Reverse<char>()
+01061748  ldr      x1, [x8]                              
+0106174C  bl       #0x1151338                             // System.Linq.Enumerable$$Reverse<char>
+01061750  adrp     x8, #0x236d000                        
+01061754  ldr      x8, [x8, #0x58]                        // [0x236D058] Method$System.Linq.Enumerable.ToArray<char>()
+01061758  ldr      x1, [x8]                              
+0106175C  bl       #0x1157170                             // System.Linq.Enumerable$$ToArray<char>
+01061760  mov      x1, x0                                
+01061764  mov      x0, xzr                               
+01061768  mov      x2, xzr                               
+0106176C  bl       #0x195f5a0                             // System.String$$CreateString
+01061770  str      x0, [x19, #0x30]                       // self.texto1
+01061774  ldr      x0, [x19, #0x20]                       // self.texto1a
+01061778  cbz      x0, #0x106179c                        
+0106177C  ldr      x8, [x0]                              
+01061780  ldr      x1, [x19, #0x30]                       // self.texto1
+01061784  ldp      x20, x19, [sp, #0x20]                 
+01061788  ldp      x22, x21, [sp, #0x10]                 
+0106178C  ldr      x3, [x8, #0x5e8]                      
+01061790  ldr      x2, [x8, #0x5f0]                      
+01061794  ldp      x30, x23, [sp], #0x30                 
+01061798  br       x3                                    
+0106179C  bl       #0xe61da0                             

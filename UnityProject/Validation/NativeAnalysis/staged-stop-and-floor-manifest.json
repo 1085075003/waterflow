@@ -1,0 +1,22 @@
+{
+  "status": "Staging only during RunFailuresAndFocused35",
+  "baseFile": "UnityProject\\Assets\\Scripts\\RecoveryRuntime\\RecoveredNativeSprings.cs",
+  "baseSHA256": "605ce9a6f286d1ebe70118fd3ad6b07fa6a5730c66086a5f27a32cad110de67b",
+  "sourceFile": "UnityProject\\Validation\\NativeAnalysis\\RecoveredNativeSprings.pending-stop-and-floor.cs.src",
+  "sourceSHA256": "56dee0e06edf09db99de4f8018d6f48ffe5fbec1e369e1d637398ae0bc31d551",
+  "changes": {
+    "gm1079": "ControlFijo Piezatrans1 Resorte3.localY=-4.5, native10787D0..10788C4",
+    "gm746": "Native blocked forward publishesmanager3/reverse5 and waits for manager change; remove any-piece-position retry; manager state included in Capture/Restore"
+  },
+  "evidence": {
+    "doPrevio": "10C8B34..54 exact previous/current positionRes and manager compare",
+    "blockedForward": "10C9FC4..FCC ->10CA51C..554 managerResorte3 ->doChangeManager10CC074",
+    "blockedReverse": "10CA774..7A0 managerResorte5 ->doChangeManager",
+    "globalChannelWrite": "10CC15C..164 writes conResorte3, analogous1..8"
+  },
+  "limits": [
+    "No original target/water/collision tolerance changes.",
+    "No main source import while current Unity snapshot is running.",
+    "Requires independent actual gm746/1079 regression and native spring/Input regressions."
+  ]
+}

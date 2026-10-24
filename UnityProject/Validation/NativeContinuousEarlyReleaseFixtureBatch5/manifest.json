@@ -1,0 +1,53 @@
+{
+  "batch": "NativeContinuousEarlyReleaseFixtureBatch5",
+  "immutable": true,
+  "createdUtc": "2026-10-16T07:03:08.066135+00:00",
+  "status": "Complete stable Editor-only; Unity2022.3 fullEditor csc exit0; actual test pending root",
+  "runtimeChanges": false,
+  "files": [
+    {
+      "source": "Validation/NativeContinuousEarlyReleaseFixtureBatch5/Sources/FlowWaterSave1GameplayValidation.cs.src",
+      "target": "Assets/Editor/RecoveredTools/FlowWaterSave1GameplayValidation.cs",
+      "previousSha256": "de50c1cbbcc9241af0d07236398becbf1c543ac533a832544493b76058805c39",
+      "sha256": "b9cb27c605975e264ed1409c93f0937879313e46c5e52e9a948ced471cbbc767"
+    }
+  ],
+  "entries": {
+    "formalExactFailedRetest": "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNativeFailedEarlyRelease",
+    "diagnostic1187Only": "Recovered.FlowWater.Editor.FlowWaterSave1GameplayValidation.RunNative1187ContinuousEarlyRelease"
+  },
+  "reportDirectory": "Validation/Save1Gameplay",
+  "reportFile": "save1-gameplay-validation.json",
+  "formalSourceSnapshot": "Validation/Save1Gameplay/native-retest-source.json",
+  "sourceBinding": "Unchanged exact nonpassed closed-failure selector; source SHA/start/finish and closedFailedIds retained; no extra calibration cases.",
+  "strategy": {
+    "ordinaryEarlyRelease": true,
+    "ordinaryContinuousInput": true,
+    "playerReleaseStrategy": "ordinary-continuous-early-release",
+    "stepFields": [
+      "postStepPausePolicy",
+      "postStepCommittedFrame",
+      "postStepReadyFrame"
+    ]
+  },
+  "changes": [
+    "Only ordinaryEarlyRelease test runs skip artificial post-commit WaitReal(.18) and unrelated all-global-Springs.IsBusy barrier. Other strategies keep old behavior.",
+    "Every successful transaction and exact native recorded pose is checked before next action. Each original w/z action, capture CanMove, closest native surface guide, one actual held PlayerLoop frame, native release and complete doFijar motion, delayed pressure target, final water/spring settling and positive matching-color goals/native victory remain unchanged.",
+    "Retains six-face original BoxCollider real-ray fallback de50. No held-wait compound strategy added.",
+    "No runtime, actor/guide transform, source, switch, data, water or camera transform writes."
+  ],
+  "causeEvidence": "Closed1187 step17 commit followed by15.port2 A reentry and channel1 return across final surface; old validator inserted .18real unconditional idle after every commit. This test-only delay is not a normal-player protocol. Actual continuous replay remains unproven until root runs it.",
+  "compile": {
+    "response": "Validation/NativeContinuousEarlyReleaseFixtureBatch5/continuous-fixture-compile.rsp",
+    "responseSha256": "1128bdc7d2d7d076f35a8e6a76082f1f42efe54051c9572a2bd57778a599438f",
+    "assembly": "Validation/NativeContinuousEarlyReleaseFixtureBatch5/continuous-fixture-check.dll",
+    "assemblySha256": "07f49f9ac6825d9769d7bb7e72d97326fe7a0b05cc84fc54a2c14cee406f2e12",
+    "exitCode": 0,
+    "cwd": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\.validation-project"
+  },
+  "evidenceDiff": "Evidence/editor-only.diff",
+  "requirements": [
+    "Root schedules import/Unity run; this batch did not touch Assets or launch Unity.",
+    "Preserve prior base/retest failures; do not relabel old source as a single-run pass."
+  ]
+}

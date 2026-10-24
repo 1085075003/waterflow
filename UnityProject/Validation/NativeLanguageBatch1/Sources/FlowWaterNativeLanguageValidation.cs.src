@@ -1,0 +1,317 @@
+#if UNITY_EDITOR
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+namespace Recovered.FlowWater.Editor
+{
+    // Actual original controls, scene reloads, serialized Texts and font glyphs.
+    [InitializeOnLoad]
+    public static class FlowWaterNativeLanguageValidation
+    {
+        const string ActiveKey="FlowWater.NativeLanguage.Active", BackupKey="FlowWater.NativeLanguage.Backup", ScenesKey="FlowWater.NativeLanguage.Scenes", FinishKey="FlowWater.NativeLanguage.Finishing", ReportKey="FlowWater.NativeLanguage.Report";
+        const BindingFlags Fields=BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance;
+        [Serializable] public sealed class Check { public string name,detail; public bool passed; }
+        [Serializable] public sealed class Glyph { public string language,path,font,text,missingCharacters; public int requested,generatedVertices,fontSize; public bool visible; }
+        [Serializable] public sealed class Preference { public string key,kind,text; public bool existed; public int integer; public float number; }
+        [Serializable] public sealed class Backup { public float timeScale; public List<Preference> values=new List<Preference>(); }
+        [Serializable] public sealed class SavedScene { public string path; public bool loaded,active; }
+        [Serializable] public sealed class SavedScenes { public SavedScene[] scenes; }
+        [Serializable] public sealed class GoldenCase { public string method,language,value; }
+        [Serializable] public sealed class Golden { public string originalLibrarySha256; public GoldenCase[] cases; }
+        [Serializable] public sealed class Report
+        {
+            public string startedUtc,finishedUtc,unityVersion,originalLibrarySha256;
+            public bool passed,preferencesRestored,editorScenesRestored;
+            public float originalTimeScale;
+            public int originalControlInvocations,nativeGetterCases,realSettingsReloads;
+            public List<Check> checks=new List<Check>(); public List<Glyph> glyphs=new List<Glyph>();
+            public List<string> runtimeErrors=new List<string>(),screenshots=new List<string>(),notes=new List<string>();
+        }
+        static Report report; static Golden golden; static IEnumerator routine;
+        static bool busy,locked,finishing; static int resumeFrame; static double deadline;
+        static string Project { get { return Directory.GetParent(Application.dataPath).FullName; } }
+        static string Output { get { return Path.Combine(Project,"Validation","NativeLanguage"); } }
+        static FlowWaterRecoveryUI UI { get { return FlowWaterRecoveryUI.Instance; } }
+        static RecoveredFlowGame Game { get { return RecoveredFlowGame.Instance; } }
+        static FlowWaterNativeLanguageValidation()
+        { EditorApplication.update+=Update; EditorApplication.playModeStateChanged+=Mode; Application.logMessageReceived+=Log; EditorApplication.delayCall+=TryFinishAfterReload; }
+        public static void Run()
+        {
+            if(EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Start language validation from Edit mode.");
+            for(int i=0;i<SceneManager.sceneCount;i++) if(SceneManager.GetSceneAt(i).isDirty) throw new InvalidOperationException("Save existing scene edits before language validation.");
+            Directory.CreateDirectory(Output); SavePreferences();
+            SessionState.SetString(ScenesKey,JsonUtility.ToJson(new SavedScenes { scenes=EditorSceneManager.GetSceneManagerSetup().Select(x=>new SavedScene { path=x.path,loaded=x.isLoaded,active=x.isActive }).ToArray() }));
+            SessionState.SetBool(ActiveKey,true);
+            try
+            {
+                // Explicit English visual baseline; native startup-system mapping is checked separately.
+                PlayerPrefs.SetString("language","en"); PlayerPrefs.Save();
+                EditorSceneManager.OpenScene("Assets/Scenes/Portada.unity",OpenSceneMode.Single);
+                EditorApplication.EnterPlaymode();
+            }
+            catch { RestorePreferences(); RestoreScenes(); SessionState.EraseBool(ActiveKey); throw; }
+        }
+        static void Update()
+        {
+            if(busy||finishing||!SessionState.GetBool(ActiveKey,false)||!EditorApplication.isPlaying||EditorApplication.isCompiling) return;
+            busy=true;
+            try
+            {
+                if(report==null)
+                {
+                    AssetDatabase.DisallowAutoRefresh(); EditorApplication.LockReloadAssemblies(); locked=true;
+                    Backup b=JsonUtility.FromJson<Backup>(SessionState.GetString(BackupKey,"{}"));
+                    report=new Report { startedUtc=DateTime.UtcNow.ToString("o"),unityVersion=Application.unityVersion,originalTimeScale=b.timeScale };
+                    string path=Path.Combine(Project,"Validation","NativeLanguageBatch1","Evidence","native-language-golden.json");
+                    golden=JsonUtility.FromJson<Golden>(File.ReadAllText(path)); report.originalLibrarySha256=golden.originalLibrarySha256;
+                    report.notes.Add("Original language controls persist native codes. Golden strings are extracted by read-only ARM64 evaluation, not translated or invented.");
+                    report.notes.Add("29 getter methods include unattached settingsLang as a clearly controlled component fixture. Actual Settings uses UIManagerOptScript.");
+                    report.notes.Add("Ratings/no-more modal visibility is an isolated visual fixture using original serialized panels; no rating, ad or purchase success is claimed.");
+                    report.notes.Add("Completion is actual normal-mode gm1 public TryMove plus original matching-water/native mission polling; no mission flag or wet state is assigned.");
+                    report.notes.Add("English retains authored Playtime. Every tested Text requests its real string and checks GetCharacterInfo; unsupported glyphs fail and are recorded.");
+                    UIManagerPortScript.callingScene=1; PlayerPrefs.SetString("language","en"); PlayerPrefs.Save();
+                    RecoveredNativeLocalization.ApplyScene(SceneManager.GetActiveScene());
+                    routine=Exercise();resumeFrame=Time.frameCount+8;deadline=EditorApplication.timeSinceStartup+600;
+                }
+                if(EditorApplication.timeSinceStartup>deadline) throw new TimeoutException("Language validation exceeded 600 real seconds.");
+                if(Time.frameCount<resumeFrame) return;
+                if(!routine.MoveNext()) { Finish();return; }
+                resumeFrame=Time.frameCount+(routine.Current is int ? (int)routine.Current : 1);
+            }
+            catch(Exception e) { if(report!=null) report.runtimeErrors.Add(e.ToString()); Finish(); }
+            finally { busy=false; }
+        }
+        static IEnumerator Exercise()
+        {
+            Require("unity-version",Application.unityVersion=="2022.3.28f1",Application.unityVersion);
+            VerifyGetters(); VerifySystemLanguage();
+            Capture("en-home.png");
+            var port=Components<UIManagerPortScript>().First(); typeof(UIManagerPortScript).GetField("lang",Fields).SetValue(port,0);
+            for(int i=0;i<23;i++)
+            {
+                int before=(int)typeof(UIManagerPortScript).GetField("lang",Fields).GetValue(port);
+                Invoke("botonLangDown");yield return 1;
+                string expected=before==20?"es":before>=0&&before<20?RecoveredNativeLocalization.PortCycle[before]:"en";
+                Require("port-language-cycle-"+i,PlayerPrefs.GetString("language")==expected&&port.TxtLang.text==expected,
+                    before+" -> "+port.TxtLang.text+"; persisted="+PlayerPrefs.GetString("language"));
+            }
+            Invoke("botonPlayDown");yield return 6;
+            var selector=Components<UIManagerSelScript0>().First();
+            for(int i=0;i<22;i++)
+            {
+                Invoke("botonLangDown");yield return 1;
+                string expected=i<20?RecoveredNativeLocalization.SelectorCycle[i]:"en";
+                Require("selector-language-cycle-"+i,PlayerPrefs.GetString("language")==expected&&selector.TxtLang.text==expected,selector.TxtLang.text);
+            }
+            // Serialized original hidden design controls are a controlled negative boundary fixture.
+            int design=UIManagerSelScript0.var_design; bool panel=selector.panelDesign.activeSelf,panel0=selector.panelDesign0.activeSelf;
+            selector.botonDesign0Down(); Require("native-designer-panel-toggle",UIManagerSelScript0.var_design!=design&&selector.panelDesign.activeSelf==(UIManagerSelScript0.var_design!=0),"Native panel/static control; original bundle has no designer scene.");
+            selector.accesoDesign=1; selector.botonDesign1Down();selector.botonDesign2Down();selector.botonDesign3Down();selector.botonDesign4Down();
+            Require("native-designer-four-step-panel",selector.accesoDesign==4&&selector.panelDesign0.activeSelf==(UIManagerSelScript0.var_design==0),"Only the native panel/static sequence is restored.");
+            UIManagerSelScript0.var_design=design;selector.panelDesign.SetActive(panel);selector.panelDesign0.SetActive(panel0);
+            UI.GoHome();yield return 6;
+            string[] languages={"en","es","fr","de","pt","zh","hi","ar","ru","ja","it","ko","nl","tr","pl","th","vi","sv","el","id","zh-TW"};
+            string[] pictured={"en","de","zh","ja","ar"};
+            foreach(string language in languages)
+            {
+                PlayerPrefs.SetString("language",language);PlayerPrefs.Save();
+                Invoke("botonOptionsDown");yield return 7;report.realSettingsReloads++;
+                Require("real-settings-reload-"+language,SceneManager.GetActiveScene().name=="Settings"&&PlayerPrefs.GetString("language")==language,SceneManager.GetActiveScene().name);
+                var options=Components<UIManagerOptScript>().First();
+                foreach(int i in new[]{2,3,6,7})
+                {
+                    Text text=typeof(UIManagerOptScript).GetField("texto"+i).GetValue(options) as Text;
+                    CheckText("settings-"+i,language,text,Expected("UIManagerOptScript$$ObtenerTexto"+i,language));
+                }
+                if(pictured.Contains(language)) Capture(language+"-settings.png");
+                Invoke("botonResetDown");yield return 3;
+                CheckState("real-reset-modal-"+language,options.cajaReset.activeInHierarchy,"Original Settings reset panel.");
+                if(pictured.Contains(language)) Capture(language+"-reset.png");
+                Invoke("botonResetCancel");yield return 2;
+                Invoke("botonBackDown");yield return 6;
+                Require("settings-return-keeps-selected-language-"+language,PlayerPrefs.GetString("language")==language,PlayerPrefs.GetString("language"));
+                Invoke("botonExitDown");yield return 4;
+                var exit=Components<exitLang>().First();CheckText("exit",language,exit.mensajeTexto,Expected("exitLang$$ObtenerTextoTraducido",language));
+                CheckState("exit-native-size-"+language,exit.mensajeTexto.fontSize==(language=="ko"?45:65),exit.mensajeTexto.fontSize.ToString());
+                Capture(language+"-exit.png");Invoke("botonCancelDown");yield return 2;
+                UI.StartGame(1);yield return 8;
+                Require("normal-gameplay-language-fixture-"+language,Game!=null&&Game.CurrentLevelId==1&&!Game.IsSolutionPreview,"Real gm1 normal mode.");
+                var loader=Components<SaveLoadManager>().First();
+                Invoke("showSolution");yield return 4;
+                foreach(var text in Components<SolutionLang>()) CheckText("solution",language,text.texto1a,Display("SolutionLang$$ObtenerTexto",language,true));
+                Capture(language+"-hint.png");Invoke("cancelSolution");yield return 2;
+                loader.cajaRate.SetActive(true);yield return 4;
+                foreach(var rate in Components<rateUsLang>())
+                    for(int i=1;i<=3;i++) CheckText("rate-"+i,language,typeof(rateUsLang).GetField("texto"+i).GetValue(rate) as Text,Expected("rateUsLang$$ObtenerTexto"+i,language));
+                Capture(language+"-rating-visual-fixture.png");loader.cajaRate.SetActive(false);
+                loader.cajaNoMore.SetActive(true);yield return 3;
+                foreach(var no in Components<noMoreLang>()) CheckText("no-more",language,no.texto1,Display("noMoreLang$$ObtenerTexto",language,true));
+                Capture(language+"-no-more-visual-fixture.png");loader.cajaNoMore.SetActive(false);
+                int moves=0;
+                for(int round=0;round<8;round++)
+                {
+                    bool moved=false;
+                    foreach(var piece in Game.Pieces.ToArray())
+                        if(piece.CanMove&&piece.HasGoal&&(piece.transform.position-piece.GoalPosition).sqrMagnitude>.01f)
+                            if(Game.TryMove(piece.Index,piece.GoalPosition)) { moved=true;moves++;yield return 2; }
+                    if(!moved) break;
+                }
+                double end=EditorApplication.timeSinceStartup+25;
+                while(EditorApplication.timeSinceStartup<end&&(!Game.IsComplete||RecoveredWaterNetwork.Instance.HasPendingPropagation)) yield return 1;
+                var water=RecoveredWaterNetwork.Instance;
+                Require("real-positive-water-completion-"+language,Game.IsComplete&&!Game.IsSolutionPreview&&ControladorJuego.misionComplete&&water.RequiredFountainCount>0&&water.ActiveFountainCount>=water.RequiredFountainCount&&!water.HasPendingPropagation,
+                    "moves="+moves+"; water="+water.ActiveFountainCount+"/"+water.RequiredFountainCount+"; mission="+ControladorJuego.misionComplete);
+                foreach(var complete in Components<CajaComplete>()) CheckText("complete",language,complete.text2,Expected("CajaComplete$$ObtenerTexto2",language));
+                yield return 4;Capture(language+"-completion.png");
+                UI.GoHome();yield return 6;Invoke("botonOptionsDown");yield return 6;Invoke("botonStoreDown");yield return 7;
+                var store=Components<UIManagerStoreScript>().First();
+                CheckText("store-buy",language,store.texto1_1,Expected("UIManagerStoreScript$$ObtenerTexto1",language));
+                CheckText("store-classic",language,store.texto2,Expected("UIManagerStoreScript$$ObtenerTexto3",language).Replace("{0}","CLASSIC"));
+                CheckText("store-extras",language,store.texto9,Expected("UIManagerStoreScript$$ObtenerTexto5",language).Replace("{0}","15"));
+                Capture(language+"-store.png");
+                Invoke("botonBackDown");yield return 6;Invoke("botonBackDown");yield return 6;
+            }
+        }
+        static string Display(string method,string language,bool reverseArabic)
+        { string value=Expected(method,language);return reverseArabic&&language=="ar"?new string(value.Reverse().ToArray()):value; }
+        static string Expected(string method,string language)
+        { return golden.cases.First(x=>x.method==method&&x.language==language).value; }
+        static void VerifyGetters()
+        {
+            var fixtures=new Dictionary<string,MonoBehaviour>(); var root=new GameObject("Controlled native localization getter fixtures");root.SetActive(false);
+            try
+            {
+                foreach(var entry in golden.cases)
+                {
+                    string[] parts=entry.method.Split(new[]{"$$"},StringSplitOptions.None); MonoBehaviour owner;
+                    if(!fixtures.TryGetValue(parts[0],out owner)) { owner=(MonoBehaviour)root.AddComponent(typeof(UIManagerOptScript).Assembly.GetType(parts[0],true));fixtures.Add(parts[0],owner); }
+                    string fieldName=parts[0]=="UIManagerStoreScript"||parts[0]=="Leveltexto2"?"idiomaActual":"idioma";
+                    var field=owner.GetType().GetField(fieldName,Fields);if(field!=null) field.SetValue(owner,entry.language);
+                    foreach(string argument in new[]{"packName","cantidad"}) { var f=owner.GetType().GetField(argument,Fields);if(f!=null) f.SetValue(owner,"{0}"); }
+                    MethodInfo method=owner.GetType().GetMethod(parts[1],Fields);
+                    object[] args=parts[0]=="exitLang"?new object[]{entry.language}:parts[0]=="UIManagerSelScript0"?new object[]{entry.language,"{0}"}:null;
+                    string actual=(string)method.Invoke(owner,args);
+                    CheckState("native-getter-"+entry.method+"-"+entry.language,actual==entry.value,"Actual original MonoBehaviour method; controlled locale field; nativeVA extraction golden.");report.nativeGetterCases++;
+                }
+            }
+            finally { UnityEngine.Object.Destroy(root); }
+        }
+        static void VerifySystemLanguage()
+        {
+            var port=Components<UIManagerPortScript>().First();
+            CheckState("native-system-language-mapping",port.ObtenerIdiomaDelSistema()==RecoveredNativeLocalization.SystemLanguageCode(Application.systemLanguage),Application.systemLanguage+" -> "+port.ObtenerIdiomaDelSistema());
+        }
+        static void CheckText(string name,string language,Text text,string expected)
+        {
+            CheckState(name+"-native-text-"+language,text!=null&&text.text==expected,text==null?"Missing serialized Text":text.text);
+            if(text==null) return;
+            string missing="";int requested=0;int size=Math.Max(1,text.fontSize);Font font=text.font;
+            if(font!=null)
+            {
+                font.RequestCharactersInTexture(text.text,size,text.fontStyle);
+                foreach(char c in text.text.Distinct())
+                {
+                    UnicodeCategory category=CharUnicodeInfo.GetUnicodeCategory(c);
+                    if(char.IsWhiteSpace(c)||char.IsControl(c)||category==UnicodeCategory.Format) continue;
+                    requested++;CharacterInfo info;
+                    if(!font.GetCharacterInfo(c,out info,size,text.fontStyle)) missing+=c;
+                }
+            }
+            Canvas.ForceUpdateCanvases(); bool visible=text.isActiveAndEnabled;
+            report.glyphs.Add(new Glyph { language=language,path=PathOf(text.transform),font=font==null?"null":font.name,text=text.text,missingCharacters=missing,
+                requested=requested,fontSize=size,visible=visible,generatedVertices=text.cachedTextGenerator.vertexCount });
+            CheckState(name+"-actual-font-glyphs-"+language,font!=null&&requested>0&&missing.Length==0,"font="+(font==null?"null":font.name)+"; missing="+missing+"; requested="+requested);
+            if(visible)
+            {
+                CheckState(name+"-generated-visible-text-"+language,text.cachedTextGenerator.vertexCount>4,"vertices="+text.cachedTextGenerator.vertexCount);
+                Vector3[] corners=new Vector3[4];text.rectTransform.GetWorldCorners(corners);
+                CheckState(name+"-finite-native-layout-"+language,corners.All(p=>!float.IsNaN(p.x)&&!float.IsInfinity(p.x)&&!float.IsNaN(p.y)&&!float.IsInfinity(p.y)),text.rectTransform.rect.ToString());
+            }
+        }
+        static string PathOf(Transform t) { string p=t.name;while(t.parent!=null) {t=t.parent;p=t.name+"/"+p;}return p; }
+        static IEnumerable<T> Components<T>() where T:Component { return OriginalScenePresentation.Components<T>(SceneManager.GetActiveScene()); }
+        static void Invoke(string method)
+        {
+            var control=UI.OriginalControls.FirstOrDefault(x=>x.method==method&&x.source!=null&&x.source.activeInHierarchy&&(x.button==null||x.button.interactable));
+            Require("real-control-"+method,control!=null,"Original active control, no replacement dropdown.");
+            if(control.button!=null) control.button.onClick.Invoke();
+            else control.trigger.triggers.First(x=>x.eventID==control.eventType).callback.Invoke(new PointerEventData(EventSystem.current));
+            report.originalControlInvocations++;
+        }
+        static void Capture(string file) { if(!new[]{"en-","de-","zh-","ja-","ar-"}.Any(prefix=>file.StartsWith(prefix,StringComparison.Ordinal))) return; string path=Path.Combine(Output,file);FlowWaterValidation.SaveVisibleFrame(path);report.screenshots.Add(path); }
+        static void CheckState(string name,bool passed,string detail) { report.checks.Add(new Check {name=name,passed=passed,detail=detail}); }
+        static void Require(string name,bool passed,string detail) { CheckState(name,passed,detail);if(!passed) throw new InvalidOperationException(name+": "+detail); }
+        static void SavePreferences()
+        {
+            var b=new Backup {timeScale=Time.timeScale};
+            Action<string,string> add=(key,kind)=>b.values.Add(new Preference {key=key,kind=kind,existed=PlayerPrefs.HasKey(key),text=PlayerPrefs.GetString(key,""),integer=PlayerPrefs.GetInt(key,0),number=PlayerPrefs.GetFloat(key,0)});
+            add("language","string");foreach(string key in new[]{"Conf_music","Conf_sound"}) add(key,"float");
+            foreach(string key in new[]{"Recovery.LastLevelId","Soundlevel","MusicaON","primeraVez","esTablet","OptionSelLev","helpRotation"}) add(key,"int");
+            foreach(var e in RecoveryCatalog.Load().levels) {add("Recovery.Complete."+e.assetId,"int");add("Recovery.Completed.gm"+e.assetId,"int");}
+            string json=JsonUtility.ToJson(b,true);SessionState.SetString(BackupKey,json);File.WriteAllText(Path.Combine(Output,"preference-backup.json"),json);
+        }
+        static bool RestorePreferences()
+        {
+            string json=SessionState.GetString(BackupKey,"");if(string.IsNullOrEmpty(json)) return false;Backup b=JsonUtility.FromJson<Backup>(json);
+            foreach(var v in b.values) { if(!v.existed) PlayerPrefs.DeleteKey(v.key);else if(v.kind=="string")PlayerPrefs.SetString(v.key,v.text);else if(v.kind=="float")PlayerPrefs.SetFloat(v.key,v.number);else PlayerPrefs.SetInt(v.key,v.integer); }
+            PlayerPrefs.Save();Time.timeScale=b.timeScale;
+            bool exact=b.values.All(v=>PlayerPrefs.HasKey(v.key)==v.existed&&(!v.existed||(v.kind=="string"?PlayerPrefs.GetString(v.key)==v.text:v.kind=="float"?Mathf.Abs(PlayerPrefs.GetFloat(v.key)-v.number)<.000001f:PlayerPrefs.GetInt(v.key)==v.integer)));
+            return exact;
+        }
+        static bool RestoreScenes()
+        {
+            string json=SessionState.GetString(ScenesKey,"");if(string.IsNullOrEmpty(json))return false;
+            var saved=JsonUtility.FromJson<SavedScenes>(json);if(saved.scenes.Any(x=>string.IsNullOrEmpty(x.path))) {EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects,NewSceneMode.Single);return saved.scenes.Length==1;}
+            EditorSceneManager.RestoreSceneManagerSetup(saved.scenes.Select(x=>new SceneSetup {path=x.path,isLoaded=x.loaded,isActive=x.active}).ToArray());
+            var now=EditorSceneManager.GetSceneManagerSetup();return now.Length==saved.scenes.Length&&now.Zip(saved.scenes,(a,b)=>a.path==b.path&&a.isLoaded==b.loaded&&a.isActive==b.active).All(x=>x);
+        }
+        static void Log(string message,string stack,LogType type) { if(report!=null&&(type==LogType.Error||type==LogType.Exception||type==LogType.Assert)) report.runtimeErrors.Add(message+"\n"+stack); }
+        static void Mode(PlayModeStateChange state)
+        {
+            if(state==PlayModeStateChange.ExitingPlayMode && locked) {EditorApplication.UnlockReloadAssemblies();AssetDatabase.AllowAutoRefresh();locked=false;}
+            if(state==PlayModeStateChange.EnteredEditMode&&SessionState.GetBool(ActiveKey,false))
+            {
+                if(SessionState.GetBool(FinishKey,false)) {TryFinishAfterReload();return;}
+                RestorePreferences();RestoreScenes();SessionState.EraseBool(ActiveKey);SessionState.EraseString(BackupKey);SessionState.EraseString(ScenesKey);
+            }
+        }
+        static void WriteReport()
+        {
+            report.passed=report.preferencesRestored&&report.editorScenesRestored&&report.checks.Count>0&&report.checks.All(x=>x.passed)&&report.runtimeErrors.Count==0;
+            File.WriteAllText(Path.Combine(Output,"native-language-validation.json"),JsonUtility.ToJson(report,true));
+        }
+        static void Finish()
+        {
+            if(finishing) return;finishing=true;
+            try
+            {
+                if(report==null) report=new Report {startedUtc=DateTime.UtcNow.ToString("o"),unityVersion=Application.unityVersion};
+                if(Game!=null) Game.ReturnToOriginalScene();report.preferencesRestored=RestorePreferences();
+                SessionState.SetString(ReportKey,JsonUtility.ToJson(report));SessionState.SetBool(FinishKey,true);
+                EditorApplication.ExitPlaymode();
+            }
+            catch(Exception e) {report.runtimeErrors.Add(e.ToString());WriteReport();if(Application.isBatchMode)EditorApplication.Exit(1);}
+        }
+        static void TryFinishAfterReload()
+        {
+            if(EditorApplication.isPlayingOrWillChangePlaymode||!SessionState.GetBool(ActiveKey,false)||!SessionState.GetBool(FinishKey,false))return;
+            string json=SessionState.GetString(ReportKey,"");report=string.IsNullOrEmpty(json)?new Report():JsonUtility.FromJson<Report>(json);
+            report.preferencesRestored=RestorePreferences();report.editorScenesRestored=RestoreScenes();report.finishedUtc=DateTime.UtcNow.ToString("o");WriteReport();
+            SessionState.EraseBool(ActiveKey);SessionState.EraseBool(FinishKey);SessionState.EraseString(ReportKey);SessionState.EraseString(BackupKey);SessionState.EraseString(ScenesKey);
+            bool passed=report!=null&&report.passed;Debug.Log("Native language validation: "+(passed?"PASS":"FAIL")+"; checks="+(report==null?0:report.checks.Count));
+            if(Application.isBatchMode) EditorApplication.Exit(passed?0:1);else {report=null;routine=null;finishing=false;}
+        }
+    }
+}
+#endif

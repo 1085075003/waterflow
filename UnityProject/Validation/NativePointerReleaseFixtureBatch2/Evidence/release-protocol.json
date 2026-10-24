@@ -1,0 +1,126 @@
+{
+  "failureReport": "D:\\chromeDownload\\FlowWater_2.18_资源与还原工程\\FlowWater_2.18\\UnityProject\\Validation\\Save1Gameplay\\NativeCases\\gm690.json",
+  "failureReportSha256": "97cf6e41787d508d09961aeeea7ffb5926114441990fd5277d74a736ff27dae3",
+  "capturedUtc": "2026-10-16T04:52:10.4265737Z",
+  "step9": {
+    "number": 9,
+    "sourceRecord": 44,
+    "actorIndex": 44,
+    "beforeMoves": 8,
+    "afterMoves": 0,
+    "exception": "r",
+    "actor": "sq79eq",
+    "status": "",
+    "switchesAfter": "",
+    "origin": {
+      "x": 80.0,
+      "y": 3.950000047683716,
+      "z": -20.0
+    },
+    "destination": {
+      "x": 40.0,
+      "y": -3.6499998569488525,
+      "z": 0.0
+    },
+    "actualBefore": {
+      "x": 80.0,
+      "y": 3.950002431869507,
+      "z": -20.0
+    },
+    "actualAfter": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "nativeLanding": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "applied": false,
+    "marker": false,
+    "movable": true,
+    "sameCellPickup": false,
+    "followsMovingSupport": false,
+    "waitedSeconds": 0.0,
+    "productionInput": true,
+    "nativeWaitObservedBusy": false,
+    "waterPendingBefore": true,
+    "waterPendingAtRelease": false,
+    "pickupFrame": 494416,
+    "nativeWaitBusyFrame": -1,
+    "nativeWaitIdleFrame": -1,
+    "releaseFrame": 0,
+    "committedFrame": 0,
+    "pickScreen": {
+      "x": 519.9931030273438,
+      "y": 254.26100158691406,
+      "z": 361.7365417480469
+    },
+    "dropScreen": {
+      "x": 435.7283020019531,
+      "y": 197.22964477539062,
+      "z": 356.4554748535156
+    },
+    "originalGuide": {
+      "x": 40.0,
+      "y": -2.4499950408935547,
+      "z": 0.0
+    },
+    "heldPosition": {
+      "x": 51.25486373901367,
+      "y": 31.980134963989258,
+      "z": -4.223708629608154
+    },
+    "heldFloatingTarget": {
+      "x": 51.25486373901367,
+      "y": 31.980134963989258,
+      "z": -4.223708629608154
+    },
+    "compressionLanding": true,
+    "retainedOriginalGrabOffset": true,
+    "terminalQuickRelease": false,
+    "cameraQuarterTurns": 0,
+    "cameraSlowGestures": 0,
+    "cameraSlowFrames": 0,
+    "cameraYawSamples": [],
+    "inputDiagnostics": [
+      "source-near Recovery Runtime/RECOVERED Board gm690/RECOVERED Original Prefab Pieces/[044] sq79eq/Cube_001 (1) pos=(80.000, 7.350, -20.000) bounds=Center: (79.98, 3.55, -20.00), Extents: (10.00, 3.80, 10.00) candidates=14"
+    ]
+  },
+  "actualHeldToFloatingDistance": 0.0,
+  "finding": "The selected actor has reached its real original grab-offset floatingTarget. The fixture alone required held XZ to equal the independent guide only for a compression surface, although original release centers all axes after doEnd.",
+  "native": [
+    {
+      "method": "MoveBloque.ReturnClickedObject",
+      "VA": "0x10306B4",
+      "range": "0x10308F8..0x1030904",
+      "effect": "Set picked collider GameObject.layer=2 before held motion"
+    },
+    {
+      "method": "MoveBloque.doEnd",
+      "VA": "0x102EC58",
+      "range": "0x102ECEC..0x102ED78",
+      "effect": "Restore selected collider to bloque; copy planoGuia world XYZ to puntoFinal without held-XZ condition"
+    },
+    {
+      "method": "MoveBloque.doFijarPieza",
+      "VA": "0x102EE14",
+      "range": "0x102F004..0x102F064 and0x102F214..0x102F21C",
+      "effect": "Lerp released parent in all three axes to puntoFinal; snap exact XYZ only when sufficiently close"
+    },
+    {
+      "method": "Resorte.doCheckCollision",
+      "VA": "0x100B9C0",
+      "range": "0x100BA70..0x100BAC0",
+      "effect": "Original serialized mascaraSuelo4096 only checks layer12, excluding selected layer2"
+    },
+    {
+      "method": "Resorte.Update/doBajarPieza",
+      "VA": "0x100B870/0x100BCF0",
+      "effect": "After actual press detection Invoke with authored tiempo1=.2; callback retains pressing actor X/Z and sets Y to original Resorte Y"
+    }
+  ],
+  "scope": "Editor fixture only; actual camera ray, selected actor/guide/water runtime are never assigned by this change; the original delayed compression final position and matching-color native victory requirements remain unchanged.",
+  "expectedRetest": "Run actual production pointer609cold first and690second; retain strict MoveCount+1, recorded final destination, original positive target counts, native completion."
+}

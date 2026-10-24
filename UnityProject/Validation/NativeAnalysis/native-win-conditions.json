@@ -1,0 +1,50 @@
+{
+  "scope": "Verified original ARM64 comparison/counting paths; this file is evidence, not a claim that all water propagation is restored.",
+  "completion": {
+    "method": "ControladorJuego.Update",
+    "VA": "0x1074920",
+    "enabledBy": "ControladorJuego.chequearFuentes",
+    "checkAfterCounterAtLeast": 51,
+    "comparison": "ControladorJuego.numFuentes >= ControladorJuego.requiredFuentes",
+    "successAssignments": ["misionComplete=true", "misionCompleteAd=true"],
+    "normalGameAction": "If UIManagerSelScript.var_design==0 and primeraVez==false, call doLevelComplete and set primeraVez=true.",
+    "savedSolutionLayoutIsNotUsed": true
+  },
+  "requiredCount": {
+    "method": "SaveLoadManager.Start + doProcesoPiezas",
+    "assignVA": "0x10137DC",
+    "source": "SaveLoadManager.contadorFuentes",
+    "resetVA": "0x1013634",
+    "firstPredicate": "name.Contains(\"Cu\") && (name.Contains(\"CubaFuente\") || name.Contains(\"CuFuente\") || name.Contains(\"CubFuente\")) && resorte != \"9\"",
+    "firstIncrementVA": "0x1019240",
+    "secondPredicate": "name.Contains(\"BloqueChorro1\") && resorte != \"9\"",
+    "secondIncrementVA": "0x1019318",
+    "name": "Resolved prefab/display piece name, after compact sq-code and Col suffix processing.",
+    "resorte": "Value extracted from st...et token. This is independent of the first fijo character."
+  },
+  "wetCounters": [
+    {
+      "component": "FuenteCubetaB",
+      "entry": "OnTriggerEnter",
+      "acceptance": "Incoming GameObject tag color1..4 maps to colorCubeta1 1..4; require colorCubeta1==colorCubeta before activar=true and water instantiation.",
+      "increment": "doInstanciarAgua, VA 0x109B7AC: numFuentes++ and numFuentesSon++ when chequearFuentes=true.",
+      "decrement": "doExit subtracts both wet counters."
+    },
+    {
+      "component": "FuenteCubetaC",
+      "entry": "OnTriggerEnter",
+      "acceptance": "Incoming GameObject tag color1..4 must match the serialized colorCubeta.",
+      "increment": "doInstanciarAgua, VA 0x109D108: numFuentes++ and numFuentesSon++ when chequearFuentes=true.",
+      "decrement": "doExit subtracts both wet counters."
+    },
+    {
+      "component": "FuenteTest3",
+      "entry": "doProcessEnter, VA 0x10A4C08",
+      "incrementCondition": "activarFuente==true && tipoPieza>=2 && tipoPieza!=8",
+      "incrementCallVA": "0x10A4EE0",
+      "incrementMethod": "doContarFuentes, VA0x10A6D08",
+      "increment": "If chequearFuentes=true, always numFuentes++; also numFuentesSon++ unless tipoPieza==2 && pieza2confuentes==false.",
+      "decrement": "doExit, VA0x10A3F70 subtracts wet counters on loss of accepted flow."
+    }
+  ]
+}

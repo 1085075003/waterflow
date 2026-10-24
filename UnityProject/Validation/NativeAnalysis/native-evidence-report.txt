@@ -1,0 +1,40 @@
+Flow Water 2.18 original native-code evidence
+Analysis date: 2026-10-16 (Asia/Shanghai)
+
+Scope and reproducibility
+- Read original raw Android ARM64 libil2cpp.so and metadata. No runtime/UI/water source edits, and no Unity launches were performed by this analysis task.
+- Original libil2cpp.so SHA256: CADEE25E966AA53892446710207D2048624CC52421D84F6349E0ECB2AB66097A
+- Original global-metadata.dat SHA256: 3E21547E701C25759BD0AC370786177DBAD1C8EE907EA0332B40654446D3AB7D
+- Metadata version 31, CodeRegistration 0x2253AE0, MetadataRegistration 0x22F7088.
+- Il2CppDumper v6.7.46 (https://github.com/Perfare/Il2CppDumper/releases/tag/v6.7.46), portable .NET6 files run with local .NET10 major roll-forward. The tool completed dump.cs/script.json/stringliteral.json/il2cpp.h/DummyDll generation; its optional final ReadKey failed because stdin was redirected. The generated analysis outputs were independently consumed successfully.
+- Portable Capstone 5.0.9 and pyelftools 0.33 wheels are extracted under Tools/python. No system installation was performed.
+- disassemble.py annotates original ARM64 call targets, GOT relocations to string/type metadata, and instance field offsets. Branches and field assignments are evidence from the original binary, not recovered original C# source text.
+
+Verified and exported
+1. native-scene-map.json: exact parte -> asset offset -> scene mapping from original UIManagerSelScript.Level and doCallGame. The old formula (parte-1)*50 is invalid for parte17 and20..39. parte18/19 have no assignment branch. No geometrical scene guessing is used in this table.
+2. all-component-prefix-dispatch.json: every observed prefix equality branch and packed bool assignments in SaveLoadManager.doProcesoPiezas and doControlPieza, for 10 component types. Each entry retains its original call/store VA and instructions. N performs no assignment; prefab defaults remain significant. Ordinary ControlPieza and ControlPiezaC have different state alphabets.
+3. configuration-tokens.json and token-component-field-dispatch.json: actual token delimiters, truncation rules, and field assignments. Packed 4-int/2-string writes are expanded. <p uses an original mismatched >p end literal but its final extraction reads only the character after <p, so closing-tag spelling is unused by that extraction.
+4. native-presentation-map.json: original per-parte backgrounds, ground material fields, Night greys/ambient values and directional-light disabling. ConfigSuelo uses its own Renderer; if its own local Y is below -0.1 it destroys its tierra reference.
+5. native-confColor-palette.json: all 18 exact ControlPiezaC confColor palettes, computed by a restricted static constant evaluator. Three RGBA colors, confC, original equality branch and assignment trace are retained. This proves original material colors; renderer usage determines which of the three is appropriate.
+6. native-win-conditions.json: completion checks active water-goal count against required count. The original does not compare the board to a saved solution layout. Required goals are counted from resolved piece names excluding resorte token9. Wet counters include FuenteCubetaB/C and activated FuenteTest3 target types.
+7. native-spring-actions.json: exact action alphabet0..9 and translation/rotation values from doCalPuntoNext, plus channel and sequence splitting. This is not a complete restoration of its collision/carrying/state algorithm.
+8. native-light-prefab-recipes.json: 22 original doLight helpers with prefab field, final local position, original Euler rotation, and original VA. Symbolic self fields remain symbolic. controlpieza-light-selection.json supplies the independently read ordinary ControlPieza light preset dispatch.
+
+Static checks on analysis outputs
+- 8812 distinct state strings classified by their first character. Across the component-specific native dispatch tables every observed prefix has a known branch or the N/default convention. This does not establish complete behavior implementation.
+- All emitted prefix-assignment fields and token target fields exist in the metadata class identified by their dispatch branch. No unresolved field-offset placeholders remain in those tables.
+- All 18 palette entries contain12 finite channel values in[0,1]. All 22 light recipe outputs resolve without unknown register values.
+
+Important remaining work
+- Assigning recovered serialized fields does not recreate code that originally instantiated vegetation, lights, springs, walls, doors or hole visuals in Start. Only the separate doLight helper transforms and ordinary ControlPieza preset selection are normalized here; full vegetation and scene-mechanism creation still require reconstruction and Unity screenshots.
+- Spring action coordinates are proven; collision validation, payload transport, multi-action/multi-channel scheduling and animation are substantially more complex than the action table.
+- Exact water routing, vertical port6, fountain color acceptance, mixing and jets require their own implementation and runtime tests. The companion water analysis has received the source methods and field/token tables.
+- The six previously reported anomalous solution records were not repaired by editing source level data. No original record was silently changed to fit the reconstruction.
+- Native evidence can support a reconstruction, but these outputs do not certify that all original gameplay, visual effects, UI flows, external SDK behavior or1350 levels are restored. Unity2022.3.28f1 validation remains the responsibility of the main task.
+
+Entry points for further analysis
+Tools/Il2CppDumper/dump.cs: all method addresses and field declarations.
+Tools/Il2CppDumper/script.json: call names and signatures.
+Methods/*.asm.txt: original annotated ARM64 disassembly.
+Python: C:/Users/10850/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe
+Example: python disassemble.py 'ObservadorResorte$$doMove'
