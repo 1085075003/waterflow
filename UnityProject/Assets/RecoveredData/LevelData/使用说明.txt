@@ -1,0 +1,27 @@
+关卡数据（来自 APK 原始资源的静态解码）
+
+01_Layouts：1350 份 gm 初始布局。
+02_Solutions：1350 份 so 解答数据。
+关卡编号不连续，具体范围见 summary.json 和 index.csv。
+gs0.json：额外的原始 Save 数据。
+
+每个 JSON 的 data 完整保留原始序列化字段。
+Save 类（全部 gm、550 份 so、gs0）：
+level：资源内的关卡编号。
+pieza：拼块/对象名称数组。
+positionx、positiony、positionz：与 pieza 一一对应的世界坐标数组。
+fijo：与 pieza 一一对应的原始固定标记字符串；其枚举含义需以原始游戏逻辑确认，未擅自改成布尔值。
+
+Save1 类（800 份 so）：
+move：原始移动编号数组。
+orix、oriy、oriz：每步起点坐标。
+desx、desy、desz：每步终点坐标。
+excep：额外字符串标记，如 r、空字符串。其具体行为需结合游戏逻辑确认。
+
+gm/so 名称和成对坐标变化支持“初始布局/解答布局或步骤”的解释，此用途属于根据数据推断；源代码的方法体未恢复验证。名称中的 (Clone) 以及所有浮点值均保留。
+
+每个文件记录原始资源位置及 SHA-256。index.csv 可检索全部资源。对应原始 .bytes 文件仍位于 unity/TextAsset/resources.assets，可作复核。
+
+这些 JSON 为纯数据，无需也不应执行原始 BinaryFormatter 反序列化。
+
+索引注意：699 份 gm 的内部 Save.level 与资源名编号不同，应以 gmNNN/soNNN 资源名定位，勿按内部 level 去重。
